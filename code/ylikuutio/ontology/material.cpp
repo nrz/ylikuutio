@@ -47,7 +47,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> Material::bind_to_new_ecosystem_parent(
+    std::optional<data::AnyValue> Material::bind_to_new_ecosystem_parent(
             Material& material,
             Ecosystem& new_parent)
     {
@@ -81,7 +81,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Material::bind_to_new_scene_parent(
+    std::optional<data::AnyValue> Material::bind_to_new_scene_parent(
             Material& material,
             Scene& new_parent)
     {
@@ -115,7 +115,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Material::bind_to_new_pipeline(
+    std::optional<data::AnyValue> Material::bind_to_new_pipeline(
             Material& material,
             Pipeline& new_pipeline) noexcept
     {
@@ -139,7 +139,7 @@ namespace yli::ontology
     }
 
     Material::Material(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const MaterialStruct& material_struct,
             GenericParentModule* const ecosystem_or_scene_parent_module,
@@ -163,7 +163,7 @@ namespace yli::ontology
                 &this->registry,
                 material_struct.texture_filename,
                 material_struct.texture_file_format,
-                yli::load::ImageLoaderStruct(),
+                load::ImageLoaderStruct(),
                 "texture")
     {
         if (this->texture.get_is_texture_loaded() && this->get_pipeline() != nullptr)
@@ -195,14 +195,14 @@ namespace yli::ontology
 
         const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
-        yli::render::RenderSystem& render_system = this->universe.get_render_system();
+        render::RenderSystem& render_system = this->universe.get_render_system();
 
         // Bind our texture in Texture Unit 0.
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, this->texture.get_texture());
 
         // Set our "texture_sampler" sampler to use Texture Unit 0.
-        yli::opengl::uniform_1i(this->opengl_texture_id, 0);
+        opengl::uniform_1i(this->opengl_texture_id, 0);
 
         render_system.render_species(this->master_of_species, new_target_scene);
         render_system.render_vector_fonts(this->parent_of_vector_fonts, new_target_scene);
@@ -231,8 +231,8 @@ namespace yli::ontology
 
     std::size_t Material::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_shapeshifter_transformations.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_vector_fonts.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_shapeshifter_transformations.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_vector_fonts.child_pointer_vector);
     }
 
     std::size_t Material::get_number_of_apprentices() const

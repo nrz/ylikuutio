@@ -32,7 +32,7 @@ namespace yli::ontology
     {
         PrintConsoleStruct(
                 const std::span<const std::string> buffer_text,
-                const yli::console::TextInput* const text_input,
+                const console::TextInput* const text_input,
                 const std::uint32_t font_size,
                 const std::uint32_t n_columns)
             : buffer_text { buffer_text },
@@ -43,7 +43,7 @@ namespace yli::ontology
         }
 
         const std::span<const std::string> buffer_text;
-        const yli::console::TextInput* const text_input;
+        const console::TextInput* const text_input;
         std::string prompt;
         PositionStruct position;
         std::uint32_t font_size;

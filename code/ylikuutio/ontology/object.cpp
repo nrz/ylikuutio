@@ -67,7 +67,7 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
 
-    std::optional<yli::data::AnyValue> Object::bind_to_new_scene_parent(
+    std::optional<data::AnyValue> Object::bind_to_new_scene_parent(
             Object& object,
             Scene& new_parent)
     {
@@ -98,7 +98,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Object::bind_to_new_species_master(
+    std::optional<data::AnyValue> Object::bind_to_new_species_master(
             Object& object,
             Species& new_species) noexcept
     {
@@ -123,7 +123,7 @@ namespace yli::ontology
     }
 
     Object::Object(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ObjectStruct& object_struct,
             GenericParentModule* const scene_parent_module,
@@ -206,11 +206,11 @@ namespace yli::ontology
         {
             // Send our transformation to the uniform buffer object (UBO).
             glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
-            glBufferSubData(GL_UNIFORM_BUFFER, yli::opengl::movable_ubo::MovableUboBlockOffsets::MVP, sizeof(glm::mat4), glm::value_ptr(this->mvp_matrix)); // mat4
-            glBufferSubData(GL_UNIFORM_BUFFER, yli::opengl::movable_ubo::MovableUboBlockOffsets::M, sizeof(glm::mat4), glm::value_ptr(this->model_matrix)); // mat4
+            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::MVP, sizeof(glm::mat4), glm::value_ptr(this->mvp_matrix)); // mat4
+            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::M, sizeof(glm::mat4), glm::value_ptr(this->model_matrix)); // mat4
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-            glBindBufferBase(GL_UNIFORM_BUFFER, yli::opengl::UboBlockIndices::MOVABLE, this->movable_uniform_block);
+            glBindBufferBase(GL_UNIFORM_BUFFER, opengl::UboBlockIndices::MOVABLE, this->movable_uniform_block);
         }
         else if (this->universe.get_is_vulkan_in_use())
         {
@@ -250,7 +250,7 @@ namespace yli::ontology
                     0,                             // stride
                     nullptr                        // array buffer offset
                     );
-            yli::opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
+            opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
             glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
@@ -262,7 +262,7 @@ namespace yli::ontology
                     0,            // stride
                     nullptr       // array buffer offset
                     );
-            yli::opengl::enable_vertex_attrib_array(vertex_uv_id);
+            opengl::enable_vertex_attrib_array(vertex_uv_id);
 
             // 3rd attribute buffer: normals.
             glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
@@ -274,7 +274,7 @@ namespace yli::ontology
                     0,                           // stride
                     nullptr                      // array buffer offset
                     );
-            yli::opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
+            opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
 
             // Index buffer.
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
@@ -287,9 +287,9 @@ namespace yli::ontology
                     nullptr          // element array buffer offset
                     );
 
-            yli::opengl::disable_vertex_attrib_array(vertex_position_modelspace_id);
-            yli::opengl::disable_vertex_attrib_array(vertex_uv_id);
-            yli::opengl::disable_vertex_attrib_array(vertex_normal_modelspace_id);
+            opengl::disable_vertex_attrib_array(vertex_position_modelspace_id);
+            opengl::disable_vertex_attrib_array(vertex_uv_id);
+            opengl::disable_vertex_attrib_array(vertex_normal_modelspace_id);
         }
         else if (this->universe.get_is_vulkan_in_use() && master_model != nullptr)
         {
@@ -324,7 +324,7 @@ namespace yli::ontology
 
     // Public callbacks.
 
-    std::optional<yli::data::AnyValue> Object::with_parent_name_x_y_z(
+    std::optional<data::AnyValue> Object::with_parent_name_x_y_z(
             Scene& parent,
             Species& species,
             const std::string& object_name,
@@ -332,10 +332,10 @@ namespace yli::ontology
             const std::string& y,
             const std::string& z)
     {
-        return Object::with_parent_name_x_y_z_yaw_pitch(parent, species, object_name, x, y, z, "0.0", "0.0");
+        return with_parent_name_x_y_z_yaw_pitch(parent, species, object_name, x, y, z, "0.0", "0.0");
     }
 
-    std::optional<yli::data::AnyValue> Object::with_parent_name_x_y_z_yaw_pitch(
+    std::optional<data::AnyValue> Object::with_parent_name_x_y_z_yaw_pitch(
             Scene& parent,
             Species& species,
             const std::string& object_name,
@@ -345,10 +345,10 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        return Object::with_parent_name_x_y_z_roll_yaw_pitch(parent, species, object_name, x, y, z, "0.0", yaw, pitch);
+        return with_parent_name_x_y_z_roll_yaw_pitch(parent, species, object_name, x, y, z, "0.0", yaw, pitch);
     }
 
-    std::optional<yli::data::AnyValue> Object::with_parent_name_x_y_z_roll_yaw_pitch(
+    std::optional<data::AnyValue> Object::with_parent_name_x_y_z_roll_yaw_pitch(
             Scene& parent,
             Species& species,
             const std::string& object_name,
@@ -361,12 +361,12 @@ namespace yli::ontology
     {
         GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
 
-        yli::data::AnyValue x_any_value("float", x);
-        yli::data::AnyValue y_any_value("float", y);
-        yli::data::AnyValue z_any_value("float", z);
-        yli::data::AnyValue roll_any_value("float", roll);
-        yli::data::AnyValue yaw_any_value("float", yaw);
-        yli::data::AnyValue pitch_any_value("float", pitch);
+        data::AnyValue x_any_value("float", x);
+        data::AnyValue y_any_value("float", y);
+        data::AnyValue z_any_value("float", z);
+        data::AnyValue roll_any_value("float", roll);
+        data::AnyValue yaw_any_value("float", yaw);
+        data::AnyValue pitch_any_value("float", pitch);
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {

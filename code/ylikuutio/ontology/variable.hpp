@@ -68,11 +68,11 @@ namespace yli::ontology
     {
         private:
             Variable(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const VariableStruct& variable_struct,
                     GenericParentModule* const entity_parent_module,
-                    yli::data::AnyValue&& any_value);
+                    data::AnyValue&& any_value);
 
             ~Variable() override = default;
 
@@ -88,69 +88,69 @@ namespace yli::ontology
 
             std::string help() const override;
 
-            std::optional<yli::data::AnyValue> get() const;
-            void set(const yli::data::AnyValue& new_value);
+            std::optional<data::AnyValue> get() const;
+            void set(const data::AnyValue& new_value);
             void set(const std::string& new_value);
 
             // Public callbacks.
 
-            static std::optional<yli::data::AnyValue> set_variable_const_std_string(
+            static std::optional<data::AnyValue> set_variable_const_std_string(
                     Variable& variable,
                     const std::string& new_value);
 
-            static std::optional<yli::data::AnyValue> set_variable_variable(
+            static std::optional<data::AnyValue> set_variable_variable(
                     Variable& dest_variable,
                     const Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
                     const Variable& src_variable);
 
-            static std::optional<yli::data::AnyValue> print_value1(
+            static std::optional<data::AnyValue> print_value1(
                     Console& console,
                     const Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
                     const Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_framebuffer_width(
+            static std::optional<data::AnyValue> activate_framebuffer_width(
                     Entity& entity,
                     Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_framebuffer_height(
+            static std::optional<data::AnyValue> activate_framebuffer_height(
                     Entity& entity,
                     Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_background_color(
+            static std::optional<data::AnyValue> activate_background_color(
                     Entity& entity,
                     Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_wireframe(
+            static std::optional<data::AnyValue> activate_wireframe(
                     Entity& entity,
                     Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_speed(
+            static std::optional<data::AnyValue> activate_speed(
                     Entity& entity,
                     Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_turbo_factor(
+            static std::optional<data::AnyValue> activate_turbo_factor(
                     Entity& entity,
                     Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_twin_turbo_factor(
+            static std::optional<data::AnyValue> activate_twin_turbo_factor(
                     Entity& entity,
                     Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_mouse_speed(
+            static std::optional<data::AnyValue> activate_mouse_speed(
                     Entity& entity,
                     Variable& variable);
 
-            static std::optional<yli::data::AnyValue> activate_is_flight_mode_in_use(
+            static std::optional<data::AnyValue> activate_is_flight_mode_in_use(
                     Entity& entity,
                     Variable& variable);
 
-            static std::optional<yli::data::AnyValue> read_is_flight_mode_in_use(
+            static std::optional<data::AnyValue> read_is_flight_mode_in_use(
                     Entity& entity);
 
             // Public callbacks and here.
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_entity;
 
@@ -158,7 +158,7 @@ namespace yli::ontology
 
         public:
             // The variable value (may be a pointer a some datatype).
-            yli::data::AnyValue variable_value;
+            data::AnyValue variable_value;
 
         private:
             // pointer to `ActivateCallback` used to activate the new value after variable it.

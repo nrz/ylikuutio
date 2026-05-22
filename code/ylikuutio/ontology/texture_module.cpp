@@ -38,7 +38,7 @@ namespace yli::ontology
             Registry* const /* registry */,
             const std::string& texture_filename,
             const TextureFileFormat texture_file_format,
-            const yli::load::ImageLoaderStruct& image_loader_struct,
+            const load::ImageLoaderStruct& image_loader_struct,
             const std::string& /* name */)
         : texture_filename { texture_filename },
         texture_file_format { texture_file_format },
@@ -83,7 +83,7 @@ namespace yli::ontology
             Universe& universe,
             Registry* const /* registry */,
             const ofbx::Texture* ofbx_texture,
-            const yli::load::ImageLoaderStruct& /* image_loader_struct */,
+            const load::ImageLoaderStruct& /* image_loader_struct */,
             const std::string& /* name */)
         : ofbx_texture { ofbx_texture }
     {
@@ -96,7 +96,7 @@ namespace yli::ontology
 
         if (should_load_texture)
         {
-            bool is_texture_loading_successful = yli::load::load_fbx_texture(
+            bool is_texture_loading_successful = load::load_fbx_texture(
                     this->ofbx_texture,
                     this->image_width,
                     this->image_height,

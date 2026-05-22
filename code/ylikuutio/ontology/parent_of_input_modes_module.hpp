@@ -48,14 +48,14 @@ namespace yli::ontology
 
             void pop_input_mode();
 
-            yli::input::InputMethod get_input_method() const;
+            input::InputMethod get_input_method() const;
 
         private:
             InputMode* active_input_mode { nullptr };
 
             std::stack<InputMode*> input_mode_stack;
 
-            yli::input::InputMethod input_method { yli::input::InputMethod::KEYBOARD };
+            input::InputMethod input_method { input::InputMethod::KEYBOARD };
     };
 }
 

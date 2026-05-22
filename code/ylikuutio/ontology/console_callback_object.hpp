@@ -55,7 +55,7 @@ namespace yli::ontology
             ~ConsoleCallbackObject() override = default;
 
             ConsoleCallbackObject(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const ConsoleCallbackObjectStruct& console_callback_object_struct,
                     GenericParentModule* const console_callback_engine_parent_module);
@@ -72,12 +72,12 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             // execute this callback.
-            std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue&);
+            std::optional<data::AnyValue> execute(const data::AnyValue&);
 
             friend class ConsoleCallbackEngine;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_console_callback_engine;
             GenericParentModule parent_of_console_callback_parameters;

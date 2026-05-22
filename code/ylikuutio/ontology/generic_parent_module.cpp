@@ -125,7 +125,7 @@ namespace yli::ontology
 
     std::size_t GenericParentModule::get_number_of_descendants() const noexcept
     {
-        return yli::ontology::get_number_of_descendants(this->child_pointer_vector);
+        return ontology::get_number_of_descendants(this->child_pointer_vector);
     }
 
     Scene* GenericParentModule::get_scene() const noexcept

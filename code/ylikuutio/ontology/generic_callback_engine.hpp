@@ -38,7 +38,7 @@ namespace yli::ontology
     {
         public:
             GenericCallbackEngine(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const GenericCallbackEngineStruct& generic_callback_engine_struct);
 

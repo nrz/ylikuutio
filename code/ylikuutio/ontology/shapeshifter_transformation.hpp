@@ -57,13 +57,13 @@ namespace yli::ontology
         public:
             // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_material_parent(
+            static std::optional<data::AnyValue> bind_to_new_material_parent(
                     ShapeshifterTransformation& shapeshifter_transformation,
                     Material& new_parent);
 
         private:
             ShapeshifterTransformation(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
                     GenericParentModule* const material_parent_module);
@@ -74,7 +74,7 @@ namespace yli::ontology
             Entity* get_parent() const override;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_material;
             GenericParentModule parent_of_shapeshifter_forms;

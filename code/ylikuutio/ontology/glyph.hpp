@@ -60,7 +60,7 @@ namespace yli::ontology
     {
         private:
             Glyph(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const GlyphStruct& glyph_struct,
                     GenericParentModule* const vector_font_parent_module,
@@ -98,7 +98,7 @@ namespace yli::ontology
             GenericMasterModule* get_renderables_container();
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
         private:
             ChildModule child_of_vector_font;

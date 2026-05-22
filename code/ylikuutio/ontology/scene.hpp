@@ -87,7 +87,7 @@ namespace yli::ontology
     {
         private:
             Scene(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const SceneStruct& scene_struct,
                     GenericParentModule* const universe_parent_module);
@@ -137,7 +137,7 @@ namespace yli::ontology
                 GenericParentModule* get_generic_parent_module() = delete;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_universe;
             GenericParentModule parent_of_movable_controllers;

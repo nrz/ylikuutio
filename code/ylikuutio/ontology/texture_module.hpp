@@ -44,14 +44,14 @@ namespace yli::ontology
                     Registry* const registry,
                     const std::string& texture_filename,
                     const TextureFileFormat texture_file_format,
-                    const yli::load::ImageLoaderStruct& image_loader_struct,
+                    const load::ImageLoaderStruct& image_loader_struct,
                     const std::string& name);
 
             TextureModule(
                     Universe& universe,
                     Registry* const registry,
                     const ofbx::Texture* ofbx_texture,
-                    const yli::load::ImageLoaderStruct& image_loader_struct,
+                    const load::ImageLoaderStruct& image_loader_struct,
                     const std::string& name);
 
             TextureModule(const TextureModule&) = delete;            // Delete copy constructor.

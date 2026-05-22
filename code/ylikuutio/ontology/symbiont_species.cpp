@@ -36,7 +36,7 @@ namespace yli::ontology
     class Scene;
 
     SymbiontSpecies::SymbiontSpecies(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const SymbiontSpeciesStruct& symbiont_species_struct,
             GenericParentModule* const symbiont_material_parent_module)

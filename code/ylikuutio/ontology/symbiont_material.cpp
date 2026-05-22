@@ -41,7 +41,7 @@ namespace yli::ontology
     class Scene;
 
     SymbiontMaterial::SymbiontMaterial(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const SymbiontMaterialStruct& symbiont_material_struct,
             GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
@@ -55,7 +55,7 @@ namespace yli::ontology
                 universe,
                 &this->registry,
                 symbiont_material_struct.ofbx_texture,
-                yli::load::ImageLoaderStruct(),
+                load::ImageLoaderStruct(),
                 "texture")
     {
         if (this->texture.get_is_texture_loaded())
@@ -108,7 +108,7 @@ namespace yli::ontology
 
     std::size_t SymbiontMaterial::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_symbiont_species.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_symbiont_species.child_pointer_vector);
     }
 
     GLint SymbiontMaterial::get_openGL_textureID() const

@@ -65,7 +65,7 @@ namespace yli::ontology
     class Scene;
 
     Biont::Biont(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const BiontStruct& biont_struct,
             GenericParentModule* const holobiont_parent_module,
@@ -177,7 +177,7 @@ namespace yli::ontology
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, symbiosis_master_of_holobiont->get_texture(this->biontID));
             // Set our "texture_sampler" sampler to user Texture Unit 0.
-            yli::opengl::uniform_1i(symbiosis_master_of_holobiont->get_openGL_textureID(this->biontID), 0);
+            opengl::uniform_1i(symbiosis_master_of_holobiont->get_openGL_textureID(this->biontID), 0);
 
             // '`Material`' part ends here.
 
@@ -186,13 +186,13 @@ namespace yli::ontology
             const MeshModule& mesh = symbiont_species_master->mesh;
 
             // 1st attribute buffer : vertices.
-            yli::opengl::enable_vertex_attrib_array(mesh.get_vertex_position_modelspace_id());
+            opengl::enable_vertex_attrib_array(mesh.get_vertex_position_modelspace_id());
 
             // 2nd attribute buffer : UVs.
-            yli::opengl::enable_vertex_attrib_array(mesh.get_vertex_uv_id());
+            opengl::enable_vertex_attrib_array(mesh.get_vertex_uv_id());
 
             // 3rd attribute buffer : normals.
-            yli::opengl::enable_vertex_attrib_array(mesh.get_vertex_normal_modelspace_id());
+            opengl::enable_vertex_attrib_array(mesh.get_vertex_normal_modelspace_id());
 
             // '`Species`' part ends here.
 
@@ -252,7 +252,7 @@ namespace yli::ontology
                     0,                            // stride
                     nullptr                       // array buffer offset
                     );
-            yli::opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
+            opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
 
             // Index buffer.
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
@@ -265,12 +265,12 @@ namespace yli::ontology
                     nullptr                       // element array buffer offset
                     );
 
-            yli::opengl::disable_vertex_attrib_array(mesh.get_vertex_position_modelspace_id());
-            yli::opengl::disable_vertex_attrib_array(mesh.get_vertex_uv_id());
-            yli::opengl::disable_vertex_attrib_array(mesh.get_vertex_normal_modelspace_id());
-            yli::opengl::disable_vertex_attrib_array(vertex_position_modelspace_id);
-            yli::opengl::disable_vertex_attrib_array(vertex_uv_id);
-            yli::opengl::disable_vertex_attrib_array(vertex_normal_modelspace_id);
+            opengl::disable_vertex_attrib_array(mesh.get_vertex_position_modelspace_id());
+            opengl::disable_vertex_attrib_array(mesh.get_vertex_uv_id());
+            opengl::disable_vertex_attrib_array(mesh.get_vertex_normal_modelspace_id());
+            opengl::disable_vertex_attrib_array(vertex_position_modelspace_id);
+            opengl::disable_vertex_attrib_array(vertex_uv_id);
+            opengl::disable_vertex_attrib_array(vertex_normal_modelspace_id);
         }
         else if (this->universe.get_is_vulkan_in_use())
         {

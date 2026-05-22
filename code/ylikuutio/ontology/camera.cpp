@@ -56,7 +56,7 @@ namespace yli::ontology
     class Entity;
 
     Camera::Camera(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const CameraStruct& camera_struct,
             GenericParentModule* const scene_parent_module,
@@ -73,7 +73,7 @@ namespace yli::ontology
             // Uniform block for this `Camera`.
             glGenBuffers(1, &this->camera_uniform_block);
             glBindBuffer(GL_UNIFORM_BUFFER, this->camera_uniform_block);
-            glBufferData(GL_UNIFORM_BUFFER, yli::opengl::camera_ubo::CameraUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
+            glBufferData(GL_UNIFORM_BUFFER, opengl::camera_ubo::CameraUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
         }
         else if (this->universe.get_is_vulkan_in_use())
@@ -107,7 +107,7 @@ namespace yli::ontology
         // Set the uniform values specific to a `Camera`.
         // This is a work in progress.
 
-        glBindBufferBase(GL_UNIFORM_BUFFER, yli::opengl::UboBlockIndices::CAMERA, this->camera_uniform_block);
+        glBindBufferBase(GL_UNIFORM_BUFFER, opengl::UboBlockIndices::CAMERA, this->camera_uniform_block);
     }
 
     Scene* Camera::get_scene() const
@@ -129,7 +129,7 @@ namespace yli::ontology
     {
         // Compute the projection matrix.
         this->set_projection_matrix(glm::perspective(
-                    yli::geometry::degrees_to_radians(initial_fov),
+                    geometry::degrees_to_radians(initial_fov),
                     aspect_ratio,
                     znear,
                     zfar));

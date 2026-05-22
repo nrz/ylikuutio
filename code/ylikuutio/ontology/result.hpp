@@ -39,7 +39,7 @@ namespace yli::ontology
         //
         // For unsuccessful function call (binding failed):
         // `bool` contains `false`.
-        explicit Result(std::optional<yli::data::AnyValue>&& any_value)
+        explicit Result(std::optional<data::AnyValue>&& any_value)
             : data { std::move(any_value) }
         {
         }
@@ -51,7 +51,7 @@ namespace yli::ontology
 
         explicit operator bool()
         {
-            if (std::holds_alternative<std::optional<yli::data::AnyValue>>(this->data))
+            if (std::holds_alternative<std::optional<data::AnyValue>>(this->data))
             {
                 return true;
             }
@@ -59,7 +59,7 @@ namespace yli::ontology
             return std::get<bool>(this->data);
         }
 
-        std::variant<std::optional<yli::data::AnyValue>, bool> data {};
+        std::variant<std::optional<data::AnyValue>, bool> data {};
     };
 }
 

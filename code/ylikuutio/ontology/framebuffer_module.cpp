@@ -57,7 +57,7 @@ namespace yli::ontology
         if (this->in_use)
         {
             // Bind the offscreen buffer.
-            yli::opengl::bind_gl_framebuffer(this->framebuffer);
+            opengl::bind_gl_framebuffer(this->framebuffer);
         }
     }
 
@@ -72,7 +72,7 @@ namespace yli::ontology
             // Define the texture.
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->texture_width, this->texture_height, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 
-            yli::opengl::set_filtering_parameters();
+            opengl::set_filtering_parameters();
 
             // Attach the texture.
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->texture, 0);
@@ -89,7 +89,7 @@ namespace yli::ontology
             }
 
             // Set background color for the framebuffer.
-            yli::opengl::set_background_color(red, green, blue, alpha);
+            opengl::set_background_color(red, green, blue, alpha);
 
             this->is_initialized = true;
         }

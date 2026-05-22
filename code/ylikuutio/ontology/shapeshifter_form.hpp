@@ -52,7 +52,7 @@ namespace yli::ontology
     {
         private:
             ShapeshifterForm(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const ShapeshifterFormStruct& shapeshifter_form_struct,
                     GenericParentModule* const shapeshifter_transformation_parent_module);
@@ -63,7 +63,7 @@ namespace yli::ontology
             Entity* get_parent() const override;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
         private:
             ChildModule child_of_shapeshifter_transformation;

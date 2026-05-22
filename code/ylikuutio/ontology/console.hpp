@@ -83,24 +83,24 @@ namespace yli::ontology
     class ConsoleCallbackEngine;
     struct ConsoleStruct;
 
-    using yli::console::TextInput;
-    using yli::console::TextInputHistory;
-    using yli::console::ScrollbackBuffer;
-    using yli::console::ConsoleLogicModule;
-    using yli::console::CompletionModule;
+    using console::TextInput;
+    using console::TextInputHistory;
+    using console::ScrollbackBuffer;
+    using console::ConsoleLogicModule;
+    using console::CompletionModule;
 
     class Console final : public LispContext
     {
         public:
             // Set pointer to `console` to `nullptr`, set font according to the input,
             // and request a new apprenticeID from `new_font_2d`.
-            static std::optional<yli::data::AnyValue> bind_to_new_font_2d(
+            static std::optional<data::AnyValue> bind_to_new_font_2d(
                     Console& console,
                     Font2d& new_font_2d) noexcept;
 
         private:
             Console(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const ConsoleStruct& console_struct,
                     GenericParentModule* const universe_parent_module,
@@ -130,7 +130,7 @@ namespace yli::ontology
                 GenericMasterModule* get_generic_master_module() = delete;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_universe;
             GenericParentModule parent_of_console_callback_engines;
@@ -141,7 +141,7 @@ namespace yli::ontology
             friend class GenericMasterModule;
 
             template<typename T1>
-                friend void yli::hierarchy::bind_apprentice_to_master(
+                friend void hierarchy::bind_apprentice_to_master(
                         T1& apprentice,
                         std::vector<T1*>& apprentice_pointer_vector,
                         std::queue<std::size_t>& free_apprenticeID_queue,

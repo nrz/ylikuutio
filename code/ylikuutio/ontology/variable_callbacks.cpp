@@ -30,12 +30,12 @@
 
 namespace yli::ontology
 {
-    std::optional<yli::data::AnyValue> Variable::activate_framebuffer_width(
+    std::optional<data::AnyValue> Variable::activate_framebuffer_width(
             Entity& entity,
             Variable& variable)
     {
         // framebuffer width.
-        const yli::data::AnyValue& framebuffer_width_any_value = variable.variable_value;
+        const data::AnyValue& framebuffer_width_any_value = variable.variable_value;
 
         if (!std::holds_alternative<std::uint32_t>(framebuffer_width_any_value.data))
         {
@@ -56,12 +56,12 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_framebuffer_height(
+    std::optional<data::AnyValue> Variable::activate_framebuffer_height(
             Entity& entity,
             Variable& variable)
     {
         // framebuffer height.
-        const yli::data::AnyValue& framebuffer_height_any_value = variable.variable_value;
+        const data::AnyValue& framebuffer_height_any_value = variable.variable_value;
 
         if (!std::holds_alternative<std::uint32_t>(framebuffer_height_any_value.data))
         {
@@ -82,7 +82,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_background_color(
+    std::optional<data::AnyValue> Variable::activate_background_color(
             Entity& entity,
             Variable& /* variable */)
     {
@@ -95,7 +95,7 @@ namespace yli::ontology
         }
 
         // red.
-        const yli::data::AnyValue& red_any_value = entity.get_variable("red")->variable_value;
+        const data::AnyValue& red_any_value = entity.get_variable("red")->variable_value;
 
         if (!std::holds_alternative<float>(red_any_value.data))
         {
@@ -105,7 +105,7 @@ namespace yli::ontology
         const float red = std::get<float>(red_any_value.data);
 
         // green.
-        const yli::data::AnyValue& green_any_value = entity.get_variable("green")->variable_value;
+        const data::AnyValue& green_any_value = entity.get_variable("green")->variable_value;
 
         if (!std::holds_alternative<float>(green_any_value.data))
         {
@@ -115,7 +115,7 @@ namespace yli::ontology
         const float green = std::get<float>(green_any_value.data);
 
         // blue.
-        const yli::data::AnyValue& blue_any_value = entity.get_variable("blue")->variable_value;
+        const data::AnyValue& blue_any_value = entity.get_variable("blue")->variable_value;
 
         if (!std::holds_alternative<float>(blue_any_value.data))
         {
@@ -125,7 +125,7 @@ namespace yli::ontology
         const float blue = std::get<float>(blue_any_value.data);
 
         // alpha.
-        const yli::data::AnyValue& alpha_any_value = entity.get_variable("alpha")->variable_value;
+        const data::AnyValue& alpha_any_value = entity.get_variable("alpha")->variable_value;
 
         if (!std::holds_alternative<float>(alpha_any_value.data))
         {
@@ -134,7 +134,7 @@ namespace yli::ontology
 
         const float alpha = std::get<float>(alpha_any_value.data);
 
-        yli::opengl::set_background_color(red, green, blue, alpha);
+        opengl::set_background_color(red, green, blue, alpha);
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
@@ -149,21 +149,21 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_wireframe(
+    std::optional<data::AnyValue> Variable::activate_wireframe(
             Entity& /* entity */,
             Variable& variable)
     {
-        const yli::data::AnyValue& wireframe_any_value = variable.variable_value;
+        const data::AnyValue& wireframe_any_value = variable.variable_value;
 
         if (std::holds_alternative<bool>(wireframe_any_value.data))
         {
-            yli::opengl::set_wireframe(std::get<bool>(wireframe_any_value.data));
+            opengl::set_wireframe(std::get<bool>(wireframe_any_value.data));
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_speed(
+    std::optional<data::AnyValue> Variable::activate_speed(
             Entity& entity,
             Variable& variable)
     {
@@ -171,7 +171,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& speed_any_value = variable.variable_value;
+            const data::AnyValue& speed_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(speed_any_value.data))
             {
@@ -189,7 +189,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& speed_any_value = variable.variable_value;
+        const data::AnyValue& speed_any_value = variable.variable_value;
 
         if (std::holds_alternative<float>(speed_any_value.data))
         {
@@ -199,7 +199,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_turbo_factor(
+    std::optional<data::AnyValue> Variable::activate_turbo_factor(
             Entity& entity,
             Variable& variable)
     {
@@ -210,7 +210,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& turbo_factor_any_value = variable.variable_value;
+        const data::AnyValue& turbo_factor_any_value = variable.variable_value;
 
         if (std::holds_alternative<float>(turbo_factor_any_value.data))
         {
@@ -220,7 +220,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_twin_turbo_factor(
+    std::optional<data::AnyValue> Variable::activate_twin_turbo_factor(
             Entity& entity,
             Variable& variable)
     {
@@ -231,7 +231,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& twin_turbo_factor_any_value = variable.variable_value;
+        const data::AnyValue& twin_turbo_factor_any_value = variable.variable_value;
 
         if (std::holds_alternative<float>(twin_turbo_factor_any_value.data))
         {
@@ -241,7 +241,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_mouse_speed(
+    std::optional<data::AnyValue> Variable::activate_mouse_speed(
             Entity& entity,
             Variable& variable)
     {
@@ -252,7 +252,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& mouse_speed_any_value = variable.variable_value;
+        const data::AnyValue& mouse_speed_any_value = variable.variable_value;
 
         if (std::holds_alternative<float>(mouse_speed_any_value.data))
         {
@@ -262,7 +262,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::activate_is_flight_mode_in_use(
+    std::optional<data::AnyValue> Variable::activate_is_flight_mode_in_use(
             Entity& entity,
             Variable& variable)
     {
@@ -273,7 +273,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& is_flight_mode_in_use_any_value = variable.variable_value;
+        const data::AnyValue& is_flight_mode_in_use_any_value = variable.variable_value;
 
         if (std::holds_alternative<bool>(is_flight_mode_in_use_any_value.data))
         {
@@ -283,13 +283,13 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::read_is_flight_mode_in_use(Entity& entity)
+    std::optional<data::AnyValue> Variable::read_is_flight_mode_in_use(Entity& entity)
     {
         Scene* const scene = dynamic_cast<Scene*>(&entity);
 
         if (scene != nullptr)
         {
-            return yli::data::AnyValue(scene->get_is_flight_mode_in_use());
+            return data::AnyValue(scene->get_is_flight_mode_in_use());
         }
 
         return std::nullopt;

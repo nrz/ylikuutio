@@ -49,10 +49,10 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    using yli::console::TextInput;
-    using yli::console::TextInputType;
+    using console::TextInput;
+    using console::TextInputType;
 
-    std::optional<yli::data::AnyValue> Console::bind_to_new_font_2d(
+    std::optional<data::AnyValue> Console::bind_to_new_font_2d(
             Console& console,
             Font2d& new_font_2d) noexcept
     {
@@ -77,7 +77,7 @@ namespace yli::ontology
     }
 
     Console::Console(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ConsoleStruct& console_struct,
             GenericParentModule* const universe_parent_module,
@@ -167,7 +167,7 @@ namespace yli::ontology
             return;
         }
 
-        const yli::console::TextInput* const visible_input = this->console_logic_module.get_visible_input();
+        const TextInput* const visible_input = this->console_logic_module.get_visible_input();
 
         if (visible_input == nullptr)
         {
@@ -189,7 +189,7 @@ namespace yli::ontology
         const std::size_t n_lines_of_scrollback_buffer_view = this->n_rows - n_lines_of_visible_input;
 
         // Draw the console to screen using `font_2d::print_console`.
-        const bool is_in_scrollback_buffer = this->console_logic_module.get() & yli::console::in_scrollback_buffer;
+        const bool is_in_scrollback_buffer = this->console_logic_module.get() & console::in_scrollback_buffer;
         PrintConsoleStruct print_console_struct(
                 (is_in_scrollback_buffer ?
                  (this->scrollback_buffer.get_view(this->scrollback_buffer.get_buffer_index(), this->n_rows)) :
@@ -201,8 +201,8 @@ namespace yli::ontology
                 this->n_columns);
         print_console_struct.position.x = 0;
         print_console_struct.position.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());
-        print_console_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
-        print_console_struct.position.vertical_alignment = VerticalAlignment::TOP;
+        print_console_struct.position.horizontal_alignment = LEFT;
+        print_console_struct.position.vertical_alignment = TOP;
         print_console_struct.prompt = this->get_prompt();
 
         font_2d->print_console(print_console_struct);
@@ -232,8 +232,8 @@ namespace yli::ontology
 
     std::size_t Console::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_console_callback_engines.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_console_lisp_functions.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_console_callback_engines.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_console_lisp_functions.child_pointer_vector);
     }
 
     bool Console::enter_console()

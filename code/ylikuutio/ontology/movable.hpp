@@ -70,16 +70,16 @@ namespace yli::ontology
         public:
             // Set pointer to `movable` to `nullptr`, set movable_controller according to the input,
             // and request a new apprenticeID from `new_movable_controller`.
-            static std::optional<yli::data::AnyValue> bind_to_new_movable_controller(
+            static std::optional<data::AnyValue> bind_to_new_movable_controller(
                     Movable& movable,
                     MovableController& new_movable_controller) noexcept;
 
-            static std::optional<yli::data::AnyValue> unbind_from_movable_controller(
+            static std::optional<data::AnyValue> unbind_from_movable_controller(
                     Movable& movable) noexcept;
 
         protected:
             Movable(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const MovableStruct& movable_struct,
                     GenericMasterModule* const movable_controller_master_module);

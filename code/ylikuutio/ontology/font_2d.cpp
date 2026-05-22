@@ -66,7 +66,7 @@ namespace yli::ontology
     class Scene;
 
     Font2d::Font2d(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const FontStruct& font_struct,
             GenericParentModule* const universe_parent_module)
@@ -82,7 +82,7 @@ namespace yli::ontology
                 &this->registry,
                 font_struct.texture_filename,
                 font_struct.font_texture_file_format,
-                yli::load::ImageLoaderStruct({ std::pair(yli::load::ImageLoadingFlags::SHOULD_CONVERT_GRAYSCALE_TO_RGB, true) }),
+                load::ImageLoaderStruct({ std::pair(load::ImageLoadingFlags::SHOULD_CONVERT_GRAYSCALE_TO_RGB, true) }),
                 "texture"),
         screen_width  { font_struct.screen_width },
         screen_height { font_struct.screen_height },
@@ -101,7 +101,7 @@ namespace yli::ontology
                 glGenBuffers(1, &this->uv_buffer);
 
                 // Initialize `Pipeline`.
-                this->program_id = yli::load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
+                this->program_id = load::load_shaders("text_vertex_shader.vert", "text_vertex_shader.frag");
                 glUseProgram(this->program_id);
 
                 // Get a handle for our buffers.
@@ -113,11 +113,11 @@ namespace yli::ontology
 
                 // Initialize uniform window width.
                 this->screen_width_uniform_id = glGetUniformLocation(this->program_id, "screen_width");
-                yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
+                opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
 
                 // Initialize uniform window height.
                 this->screen_height_uniform_id = glGetUniformLocation(this->program_id, "screen_height");
-                yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
+                opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
             }
             else if (this->universe.get_is_vulkan_in_use())
             {
@@ -162,15 +162,15 @@ namespace yli::ontology
         const std::string& string = print_text_struct.text;
         const std::size_t length = string.size();
 
-        if (print_text_struct.position.horizontal_alignment == HorizontalAlignment::LEFT)
+        if (print_text_struct.position.horizontal_alignment == LEFT)
         {
             return print_text_struct.position.x;
         }
-        else if (print_text_struct.position.horizontal_alignment == HorizontalAlignment::HORIZONTAL_CENTER)
+        else if (print_text_struct.position.horizontal_alignment == HORIZONTAL_CENTER)
         {
             return print_text_struct.position.x - 0.5f * length * text_size;
         }
-        else if (print_text_struct.position.horizontal_alignment == HorizontalAlignment::RIGHT)
+        else if (print_text_struct.position.horizontal_alignment == RIGHT)
         {
             return print_text_struct.position.x - length * text_size;
         }
@@ -186,15 +186,15 @@ namespace yli::ontology
         const std::string& string = print_text_struct.text;
         const std::size_t number_of_lines = std::count(string.begin(), string.end(), '\n') + 1;
 
-        if (print_text_struct.position.vertical_alignment == VerticalAlignment::TOP)
+        if (print_text_struct.position.vertical_alignment == TOP)
         {
             return print_text_struct.position.y;
         }
-        else if (print_text_struct.position.vertical_alignment == VerticalAlignment::VERTICAL_CENTER)
+        else if (print_text_struct.position.vertical_alignment == VERTICAL_CENTER)
         {
             return print_text_struct.position.y + 0.5f * number_of_lines * text_size;
         }
-        else if (print_text_struct.position.vertical_alignment == VerticalAlignment::BOTTOM)
+        else if (print_text_struct.position.vertical_alignment == BOTTOM)
         {
             return print_text_struct.position.y + number_of_lines * text_size;
         }
@@ -232,7 +232,7 @@ namespace yli::ontology
 
     std::size_t Font2d::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_text_2ds.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_text_2ds.child_pointer_vector);
     }
 
     std::uint32_t Font2d::get_text_size() const
@@ -262,13 +262,13 @@ namespace yli::ontology
             glBindTexture(GL_TEXTURE_2D, this->texture.get_texture());
 
             // Set our "texture_sampler" sampler to user Material Unit 0
-            yli::opengl::uniform_1i(this->text_2d_uniform_id, 0);
+            opengl::uniform_1i(this->text_2d_uniform_id, 0);
 
             // Set screen width.
-            yli::opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
+            opengl::uniform_1i(this->screen_width_uniform_id, this->screen_width);
 
             // Set screen height.
-            yli::opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
+            opengl::uniform_1i(this->screen_height_uniform_id, this->screen_height);
 
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -363,7 +363,7 @@ namespace yli::ontology
             column_i++;
         }
 
-        yli::render::render_text(
+        render::render_text(
                 vertices,
                 uvs,
                 this->vao,
@@ -425,7 +425,7 @@ namespace yli::ontology
             current_top_y -= text_size;
         }
 
-        yli::render::render_text(
+        render::render_text(
                 vertices,
                 uvs,
                 this->vao,
@@ -439,8 +439,8 @@ namespace yli::ontology
             PrintTextStruct print_text_struct { print_console_struct.font_size, this->universe.get_window_width() / this->text_size };
             print_text_struct.position.x = current_left_x;
             print_text_struct.position.y = current_top_y;
-            print_text_struct.position.horizontal_alignment = HorizontalAlignment::LEFT;
-            print_text_struct.position.vertical_alignment = VerticalAlignment::TOP;
+            print_text_struct.position.horizontal_alignment = LEFT;
+            print_text_struct.position.vertical_alignment = TOP;
             print_text_struct.text = print_console_struct.prompt + print_console_struct.text_input->data();
             this->print_text_2d(print_text_struct);
         }

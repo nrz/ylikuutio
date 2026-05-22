@@ -40,7 +40,7 @@ namespace yli::ontology
     class Entity;
 
     MovableController::MovableController(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const MovableControllerStruct& movable_controller_struct,
             GenericParentModule* const scene_parent_module,

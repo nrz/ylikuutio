@@ -93,15 +93,15 @@ namespace yli::ontology
             void render(const Scene* const);
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
         private:
             std::string texture_file_format; // Type of the texture file. Supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
             std::string texture_filename;    // Filename of the model file.
             std::string output_filename;     // Filename of the output file.
 
-            yli::data::AnyValue left_filler_vector_any_value;
-            yli::data::AnyValue right_filler_vector_any_value;
+            data::AnyValue left_filler_vector_any_value;
+            data::AnyValue right_filler_vector_any_value;
 
             std::shared_ptr<std::vector<std::uint8_t>> result_vector { nullptr };
 

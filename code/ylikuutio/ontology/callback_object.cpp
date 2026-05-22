@@ -40,7 +40,7 @@ namespace yli::ontology
     class Universe;
 
     CallbackObject::CallbackObject(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const CallbackObjectStruct& callback_object_struct,
             GenericParentModule* const callback_engine_parent_module)
@@ -56,7 +56,7 @@ namespace yli::ontology
     }
 
     CallbackObject::CallbackObject(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const CallbackObjectStruct& callback_object_struct,
             const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
@@ -75,7 +75,7 @@ namespace yli::ontology
 
     CallbackParameter* CallbackObject::create_callback_parameter(
             const std::string& name,
-            yli::data::AnyValue&& any_value)
+            data::AnyValue&& any_value)
     {
         const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
@@ -86,7 +86,7 @@ namespace yli::ontology
     }
 
     // getter function for callbacks and callback objects.
-    std::optional<yli::data::AnyValue> CallbackObject::get_any_value(const std::string& name) const
+    std::optional<data::AnyValue> CallbackObject::get_any_value(const std::string& name) const
     {
         Entity* const named_entity = this->registry.get_entity(name);
 
@@ -102,10 +102,10 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        return yli::data::AnyValue(callback_parameter->get_any_value());
+        return data::AnyValue(callback_parameter->get_any_value());
     }
 
-    std::optional<yli::data::AnyValue> CallbackObject::get_arg(const std::size_t arg_i) const
+    std::optional<data::AnyValue> CallbackObject::get_arg(const std::size_t arg_i) const
     {
         if (arg_i >= this->parent_of_callback_parameters.child_pointer_vector.size())
         {
@@ -122,7 +122,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        return yli::data::AnyValue(callback_parameter->any_value);
+        return data::AnyValue(callback_parameter->any_value);
     }
 
     void CallbackObject::set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
@@ -130,7 +130,7 @@ namespace yli::ontology
         this->callback = callback;
     }
 
-    std::optional<yli::data::AnyValue> CallbackObject::execute(const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> CallbackObject::execute(const data::AnyValue& any_value)
     {
         if (this->get_parent() != nullptr && this->callback != nullptr)
         {
@@ -161,6 +161,6 @@ namespace yli::ontology
 
     std::size_t CallbackObject::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_callback_parameters.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_callback_parameters.child_pointer_vector);
     }
 }

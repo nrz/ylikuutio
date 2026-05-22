@@ -76,7 +76,7 @@ namespace yli::ontology
 
         private:
             Pipeline(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const PipelineStruct& pipeline_struct,
                     GenericParentModule* const ecosystem_or_scene_parent_module);
@@ -108,10 +108,10 @@ namespace yli::ontology
             friend class PipelineCompare;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             template<typename T1>
-                friend void yli::hierarchy::bind_child_to_parent(const T1& child, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
+                friend void hierarchy::bind_child_to_parent(const T1& child, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
 
             ChildModule child_of_ecosystem_or_scene;
             GenericParentModule parent_of_compute_tasks;

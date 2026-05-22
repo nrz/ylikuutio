@@ -56,7 +56,7 @@ namespace yli::ontology
             // `GlyphObject`s of `text_3d`.
             // TODO: implement creation and enabling the `GlyphObject`s!
             // Note: different fonts may provide glyphs for different Unicode code points!
-            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
+            static std::optional<data::AnyValue> bind_to_new_scene_parent(
                     Text3d& text_3d,
                     Scene& new_parent);
 
@@ -66,12 +66,12 @@ namespace yli::ontology
             // `GlyphObject`s of `text_3d`.
             // TODO: implement creation and enabling the `GlyphObject`s!
             // Note: different fonts may provide glyphs for different Unicode code points!
-            static std::optional<yli::data::AnyValue> bind_to_new_vector_font_master(
+            static std::optional<data::AnyValue> bind_to_new_vector_font_master(
                     Text3d& text_3d,
                     VectorFont& new_master);
 
             Text3d(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const Text3dStruct& text_3d_struct,
                     GenericParentModule* const scene_parent_module,

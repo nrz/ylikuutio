@@ -39,7 +39,7 @@ namespace yli::ontology
     class Pipeline;
 
     ShapeshifterSequence::ShapeshifterSequence(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
             GenericParentModule* const shapeshifter_transformation_parent_module)

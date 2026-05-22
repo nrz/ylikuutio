@@ -37,7 +37,7 @@ namespace yli::ontology
     class Universe;
 
     ConsoleCallbackObject::ConsoleCallbackObject(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ConsoleCallbackObjectStruct& console_callback_object_struct,
             GenericParentModule* const console_callback_engine_parent_module)
@@ -66,7 +66,7 @@ namespace yli::ontology
 
     Console* ConsoleCallbackObject::get_console() const
     {
-        auto* const console_callback_engine = static_cast<yli::ontology::ConsoleCallbackEngine*>(this->get_parent());
+        auto* const console_callback_engine = static_cast<ConsoleCallbackEngine*>(this->get_parent());
 
         if (console_callback_engine != nullptr)
         {
@@ -83,16 +83,16 @@ namespace yli::ontology
 
     std::size_t ConsoleCallbackObject::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_console_callback_parameters.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_console_callback_parameters.child_pointer_vector);
     }
 
-    std::optional<yli::data::AnyValue> ConsoleCallbackObject::execute(const yli::data::AnyValue&)
+    std::optional<data::AnyValue> ConsoleCallbackObject::execute(const data::AnyValue&)
     {
         // `ConsoleCallbackObject::get_console` returns `nullptr` if
         // `ConsoleCallbackEngine` is `nullptr` or if `Console` is `nullptr`.
         if (Console* const console = this->get_console(); console != nullptr && this->console_callback != nullptr)
         {
-            return yli::data::AnyValue(
+            return data::AnyValue(
                     this->console_callback(
                         static_cast<ConsoleCallbackEngine*>(this->get_parent()),
                         this,

@@ -55,19 +55,19 @@ namespace yli::ontology
         public:
             // Set pointer to `object` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
+            static std::optional<data::AnyValue> bind_to_new_scene_parent(
                     Object& object,
                     Scene& new_parent);
 
             // Set pointer to `object` to `nullptr`, set mesh according to the input,
             // and request a new apprenticeID from `new_species`.
-            static std::optional<yli::data::AnyValue> bind_to_new_species_master(
+            static std::optional<data::AnyValue> bind_to_new_species_master(
                     Object& object,
                     Species& new_species) noexcept;
 
         protected:
             Object(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const ObjectStruct& object_struct,
                     GenericParentModule* const scene_parent_module,
@@ -84,7 +84,7 @@ namespace yli::ontology
 
             // Public callbacks.
 
-            static std::optional<yli::data::AnyValue> with_parent_name_x_y_z(
+            static std::optional<data::AnyValue> with_parent_name_x_y_z(
                     Scene& parent,
                     Species& species,
                     const std::string& object_name,
@@ -92,7 +92,7 @@ namespace yli::ontology
                     const std::string& y,
                     const std::string& z);
 
-            static std::optional<yli::data::AnyValue> with_parent_name_x_y_z_yaw_pitch(
+            static std::optional<data::AnyValue> with_parent_name_x_y_z_yaw_pitch(
                     Scene& parent,
                     Species& species,
                     const std::string& object_name,
@@ -102,7 +102,7 @@ namespace yli::ontology
                     const std::string& yaw,
                     const std::string& pitch);
 
-            static std::optional<yli::data::AnyValue> with_parent_name_x_y_z_roll_yaw_pitch(
+            static std::optional<data::AnyValue> with_parent_name_x_y_z_roll_yaw_pitch(
                     Scene& parent,
                     Species& species,
                     const std::string& object_name,
@@ -131,7 +131,7 @@ namespace yli::ontology
             void render_this_object(Pipeline* const pipeline);
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
         public:
             ChildModule child_of_scene;

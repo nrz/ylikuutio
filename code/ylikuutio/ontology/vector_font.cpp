@@ -48,7 +48,7 @@ namespace yli::ontology
     class Text3d;
     class Glyph;
 
-    std::optional<yli::data::AnyValue> VectorFont::bind_to_new_material_parent(
+    std::optional<data::AnyValue> VectorFont::bind_to_new_material_parent(
             VectorFont& vector_font,
             Material& new_parent)
     {
@@ -86,7 +86,7 @@ namespace yli::ontology
     }
 
     VectorFont::VectorFont(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const VectorFontStruct& vector_font_struct,
             GenericParentModule* const material_parent_module)
@@ -183,7 +183,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderSystem& render_system = this->universe.get_render_system();
+        render::RenderSystem& render_system = this->universe.get_render_system();
 
         Scene* const scene = this->get_scene();
 
@@ -234,6 +234,6 @@ namespace yli::ontology
 
     std::size_t VectorFont::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_glyphs.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_glyphs.child_pointer_vector);
     }
 }

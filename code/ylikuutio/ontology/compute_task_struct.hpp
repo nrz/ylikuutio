@@ -45,8 +45,8 @@ namespace yli::ontology
         std::string texture_file_format; // Type of the texture file. supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
         std::string texture_filename;    // Filename of the model file.
         std::string output_filename;     // Filename of the output file.
-        yli::data::AnyValue left_filler_vector_any_value;
-        yli::data::AnyValue right_filler_vector_any_value;
+        data::AnyValue left_filler_vector_any_value;
+        data::AnyValue right_filler_vector_any_value;
         std::size_t n_max_iterations   { 1 }; // By default execute GLSL pipeline exactly once (do not iterate further).
         std::size_t compute_taskID     { std::numeric_limits<std::size_t>::max() };
         std::uint32_t texture_width      { 0 };

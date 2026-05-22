@@ -49,7 +49,7 @@ namespace yli::core
 
 namespace yli::ontology
 {
-    std::optional<yli::data::AnyValue> Movable::bind_to_new_movable_controller(
+    std::optional<data::AnyValue> Movable::bind_to_new_movable_controller(
             Movable& movable,
             MovableController& new_movable_controller) noexcept
     {
@@ -73,14 +73,14 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Movable::unbind_from_movable_controller(Movable& movable) noexcept
+    std::optional<data::AnyValue> Movable::unbind_from_movable_controller(Movable& movable) noexcept
     {
         movable.apprentice_of_movable_controller.unbind_and_bind_to_new_generic_master_module(nullptr);
         return std::nullopt;
     }
 
     Movable::Movable(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const MovableStruct& movable_struct,
             GenericMasterModule* const movable_controller_master_module)
@@ -104,7 +104,7 @@ namespace yli::ontology
 
             glGenBuffers(1, &this->movable_uniform_block);
             glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
-            glBufferData(GL_UNIFORM_BUFFER, yli::opengl::movable_ubo::MovableUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
+            glBufferData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
         }
 
@@ -242,42 +242,42 @@ namespace yli::ontology
         x_variable_struct.activate_callback = &activate_x;
         x_variable_struct.read_callback = &read_x;
         x_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(x_variable_struct, yli::data::AnyValue(float_x));
+        this->create_variable(x_variable_struct, data::AnyValue(float_x));
 
         VariableStruct y_variable_struct(this->get_universe(), this);
         y_variable_struct.local_name = "y";
         y_variable_struct.activate_callback = &activate_y;
         y_variable_struct.read_callback = &read_y;
         y_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(y_variable_struct, yli::data::AnyValue(float_y));
+        this->create_variable(y_variable_struct, data::AnyValue(float_y));
 
         VariableStruct z_variable_struct(this->get_universe(), this);
         z_variable_struct.local_name = "z";
         z_variable_struct.activate_callback = &activate_z;
         z_variable_struct.read_callback = &read_z;
         z_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(z_variable_struct, yli::data::AnyValue(float_z));
+        this->create_variable(z_variable_struct, data::AnyValue(float_z));
 
         VariableStruct roll_variable_struct(this->get_universe(), this);
         roll_variable_struct.local_name = "roll";
         roll_variable_struct.activate_callback = &activate_roll;
         roll_variable_struct.read_callback = &read_roll;
         roll_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(roll_variable_struct, yli::data::AnyValue(this->orientation.roll));
+        this->create_variable(roll_variable_struct, data::AnyValue(this->orientation.roll));
 
         VariableStruct yaw_variable_struct(this->get_universe(), this);
         yaw_variable_struct.local_name = "yaw";
         yaw_variable_struct.activate_callback = &activate_yaw;
         yaw_variable_struct.read_callback = &read_yaw;
         yaw_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(yaw_variable_struct, yli::data::AnyValue(this->orientation.yaw));
+        this->create_variable(yaw_variable_struct, data::AnyValue(this->orientation.yaw));
 
         VariableStruct pitch_variable_struct(this->get_universe(), this);
         pitch_variable_struct.local_name = "pitch";
         pitch_variable_struct.activate_callback = &activate_pitch;
         pitch_variable_struct.read_callback = &read_pitch;
         pitch_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(pitch_variable_struct, yli::data::AnyValue(this->orientation.pitch));
+        this->create_variable(pitch_variable_struct, data::AnyValue(this->orientation.pitch));
 
         const float azimuth = 0.0f;
         VariableStruct azimuth_variable_struct(this->get_universe(), this);
@@ -285,20 +285,20 @@ namespace yli::ontology
         azimuth_variable_struct.activate_callback = &activate_azimuth;
         azimuth_variable_struct.read_callback = &read_azimuth;
         azimuth_variable_struct.should_call_activate_callback_now = false;
-        this->create_variable(azimuth_variable_struct, yli::data::AnyValue(azimuth));
+        this->create_variable(azimuth_variable_struct, data::AnyValue(azimuth));
 
         const float scale = this->scale;
         VariableStruct scale_variable_struct(this->get_universe(), this);
         scale_variable_struct.local_name = "scale";
         scale_variable_struct.activate_callback = &activate_scale;
         scale_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(scale_variable_struct, yli::data::AnyValue(scale));
+        this->create_variable(scale_variable_struct, data::AnyValue(scale));
 
         const float speed = this->speed;
         VariableStruct speed_variable_struct(this->get_universe(), this);
         speed_variable_struct.local_name = "speed";
         speed_variable_struct.activate_callback = &Variable::activate_speed;
         speed_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(speed_variable_struct, yli::data::AnyValue(speed));
+        this->create_variable(speed_variable_struct, data::AnyValue(speed));
     }
 }

@@ -56,13 +56,13 @@ namespace yli::ontology
 
         protected:
             CallbackObject(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const CallbackObjectStruct& callback_object_struct,
                     GenericParentModule* const callback_engine_parent_module);
 
             CallbackObject(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const CallbackObjectStruct& callback_object_struct,
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
@@ -72,13 +72,13 @@ namespace yli::ontology
         public:
             CallbackParameter* create_callback_parameter(
                     const std::string& name,
-                    yli::data::AnyValue&& any_value);
+                    data::AnyValue&& any_value);
 
             // this method changes the callback without changing the parameters of CallbackObject.
             void set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
-            std::optional<yli::data::AnyValue> get_any_value(const std::string& name) const;
-            std::optional<yli::data::AnyValue> get_arg(const std::size_t arg_i) const;
+            std::optional<data::AnyValue> get_any_value(const std::string& name) const;
+            std::optional<data::AnyValue> get_arg(const std::size_t arg_i) const;
 
             template<typename ChildType>
                 GenericParentModule* get_generic_parent_module() = delete;
@@ -89,7 +89,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_callback_engine;
             GenericParentModule parent_of_callback_parameters;
@@ -101,7 +101,7 @@ namespace yli::ontology
 
         private:
             // execute this callback with a parameter.
-            virtual std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value);
+            virtual std::optional<data::AnyValue> execute(const data::AnyValue& any_value);
     };
 
     template<>

@@ -41,7 +41,7 @@ namespace yli::ontology
     {
         public:
             AudioTrack(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const AudioTrackStruct& audio_track_struct,
                     GenericParentModule* const universe_parent_module);

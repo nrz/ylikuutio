@@ -36,7 +36,7 @@ namespace yli::ontology
     struct CallbackEngineStruct;
 
     CallbackEngine::CallbackEngine(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const CallbackEngineStruct&,
             GenericParentModule* const entity_parent_module)
@@ -112,7 +112,7 @@ namespace yli::ontology
         return this->return_values.size();
     }
 
-    std::optional<yli::data::AnyValue> CallbackEngine::get_nth_return_value(const std::size_t n) const
+    std::optional<data::AnyValue> CallbackEngine::get_nth_return_value(const std::size_t n) const
     {
         // note: indexing of `n` begins from 0.
 
@@ -126,7 +126,7 @@ namespace yli::ontology
         return this->return_values.at(n_of_return_values - 1);
     }
 
-    std::optional<yli::data::AnyValue> CallbackEngine::get_previous_return_value() const
+    std::optional<data::AnyValue> CallbackEngine::get_previous_return_value() const
     {
         const std::size_t n_of_return_values = this->get_n_of_return_values();
 
@@ -155,6 +155,6 @@ namespace yli::ontology
 
     std::size_t CallbackEngine::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_callback_objects.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_callback_objects.child_pointer_vector);
     }
 }

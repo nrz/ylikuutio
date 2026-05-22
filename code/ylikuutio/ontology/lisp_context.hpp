@@ -39,7 +39,7 @@ namespace yli::ontology
     {
         public:
             LispContext(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const LispContextStruct& lisp_context_struct);
 

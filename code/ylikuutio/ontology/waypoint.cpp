@@ -40,7 +40,7 @@ namespace yli::ontology
     }
 
     Waypoint::Waypoint(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const WaypointStruct& waypoint_struct,
             GenericParentModule* const parent_module,

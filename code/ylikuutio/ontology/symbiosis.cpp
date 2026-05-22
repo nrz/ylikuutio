@@ -61,7 +61,7 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
 
-    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_ecosystem_parent(
+    std::optional<data::AnyValue> Symbiosis::bind_to_new_ecosystem_parent(
             Symbiosis& symbiosis,
             Ecosystem& new_parent)
     {
@@ -95,7 +95,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_scene_parent(
+    std::optional<data::AnyValue> Symbiosis::bind_to_new_scene_parent(
             Symbiosis& symbiosis,
             Scene& new_parent)
     {
@@ -128,7 +128,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Symbiosis::bind_to_new_pipeline(
+    std::optional<data::AnyValue> Symbiosis::bind_to_new_pipeline(
             Symbiosis& symbiosis,
             Pipeline& new_pipeline) noexcept
     {
@@ -152,7 +152,7 @@ namespace yli::ontology
     }
 
     Symbiosis::Symbiosis(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const SymbiosisStruct& symbiosis_struct,
             GenericParentModule* const ecosystem_or_scene_parent_module,
@@ -196,7 +196,7 @@ namespace yli::ontology
 
         const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
-        yli::render::RenderSystem& render_system = this->universe.get_render_system();
+        render::RenderSystem& render_system = this->universe.get_render_system();
 
         render_system.render_holobionts(this->master_of_holobionts, new_target_scene);
     }
@@ -241,8 +241,8 @@ namespace yli::ontology
 
     std::size_t Symbiosis::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_symbiont_materials.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_abilities.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_symbiont_materials.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_abilities.child_pointer_vector);
     }
 
     const std::string& Symbiosis::get_model_file_format() const
@@ -252,11 +252,11 @@ namespace yli::ontology
 
     void Symbiosis::create_symbionts()
     {
-        yli::load::SymbiosisLoaderStruct symbiosis_loader_struct(this->model_filename, model_file_format);
+        load::SymbiosisLoaderStruct symbiosis_loader_struct(this->model_filename, model_file_format);
 
         const bool is_debug_mode = true;
 
-        if (yli::load::load_symbiosis(
+        if (load::load_symbiosis(
                     symbiosis_loader_struct,
                     this->vertices,
                     this->uvs,
@@ -295,7 +295,7 @@ namespace yli::ontology
                 memory_address_stringstream << "0x" << std::hex << memory_address;
 
                 std::cout << "Creating `SymbiontMaterial*` based on `ofbx::Texture*` at 0x" << memory_address_stringstream.str() << " ...\n";
-                SymbiontMaterialStruct symbiont_material_struct { yli::ontology::Request(this) };
+                SymbiontMaterialStruct symbiont_material_struct { Request(this) };
                 symbiont_material_struct.ofbx_texture = ofbx_texture;
 
                 GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();

@@ -63,25 +63,25 @@ namespace yli::ontology
         public:
             // Set pointer to `material` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(
+            static std::optional<data::AnyValue> bind_to_new_ecosystem_parent(
                     Material& material,
                     Ecosystem& new_parent);
 
             // Set pointer to `material` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
+            static std::optional<data::AnyValue> bind_to_new_scene_parent(
                     Material& material,
                     Scene& new_parent);
 
             // Set pointer to `material` to `nullptr`, set pipeline according to the input,
             // and request a new apprenticeID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_pipeline(
+            static std::optional<data::AnyValue> bind_to_new_pipeline(
                     Material& material,
                     Pipeline& new_pipeline) noexcept;
 
         private:
             Material(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const MaterialStruct& material_struct,
                     GenericParentModule* const ecosystem_or_scene_parent_module,

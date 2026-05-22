@@ -90,7 +90,7 @@ namespace yli::ontology
     {
         private:
             Camera(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const CameraStruct& camera_struct,
                     GenericParentModule* const scene_parent_module,
@@ -121,7 +121,7 @@ namespace yli::ontology
             friend class Universe;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_scene;
 

@@ -53,7 +53,7 @@ namespace yli::ontology
     class Entity;
 
     Holobiont::Holobiont(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const HolobiontStruct& holobiont_struct,
             GenericParentModule* const scene_parent_module,
@@ -75,9 +75,9 @@ namespace yli::ontology
                 "skills"),
         apprentice_of_symbiosis(symbiosis_master_module, this)
     {
-        if (this->Holobiont::get_parent() != nullptr && this->Holobiont::get_symbiosis() != nullptr)
+        if (this->Holobiont::get_parent() != nullptr && this->get_symbiosis() != nullptr)
         {
-            Holobiont::create_bionts(*this, holobiont_struct.should_render_bionts_vector);
+            create_bionts(*this, holobiont_struct.should_render_bionts_vector);
         }
 
         // `Entity` member variables begin here.
@@ -105,7 +105,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderSystem& render_system = this->universe.get_render_system();
+        render::RenderSystem& render_system = this->universe.get_render_system();
 
         // Every `Biont` is a child of a `Holobiont`, so they reside in the same `Scene`.
         render_system.render_bionts(this->parent_of_bionts);
@@ -252,13 +252,13 @@ namespace yli::ontology
 
     std::size_t Holobiont::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_bionts.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_skills.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_bionts.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_skills.child_pointer_vector);
     }
 
     // Public callbacks.
 
-    std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z(
+    std::optional<data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z(
             Scene& parent,
             Symbiosis& symbiosis,
             const std::string& holobiont_name,
@@ -266,10 +266,10 @@ namespace yli::ontology
             const std::string& y,
             const std::string& z)
     {
-        return Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0", "0.0");
+        return create_holobiont_with_parent_name_x_y_z_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0", "0.0");
     }
 
-    std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(
+    std::optional<data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(
             Scene& parent,
             Symbiosis& symbiosis,
             const std::string& holobiont_name,
@@ -279,10 +279,10 @@ namespace yli::ontology
             const std::string& yaw,
             const std::string& pitch)
     {
-        return Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0", yaw, pitch);
+        return create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0", yaw, pitch);
     }
 
-    std::optional<yli::data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(
+    std::optional<data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(
             Scene& parent,
             Symbiosis& symbiosis,
             const std::string& holobiont_name,
@@ -295,12 +295,12 @@ namespace yli::ontology
     {
         const GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
 
-        yli::data::AnyValue x_any_value("float", x);
-        yli::data::AnyValue y_any_value("float", y);
-        yli::data::AnyValue z_any_value("float", z);
-        yli::data::AnyValue roll_any_value("float", roll);
-        yli::data::AnyValue yaw_any_value("float", yaw);
-        yli::data::AnyValue pitch_any_value("float", pitch);
+        data::AnyValue x_any_value("float", x);
+        data::AnyValue y_any_value("float", y);
+        data::AnyValue z_any_value("float", z);
+        data::AnyValue roll_any_value("float", roll);
+        data::AnyValue yaw_any_value("float", yaw);
+        data::AnyValue pitch_any_value("float", pitch);
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {

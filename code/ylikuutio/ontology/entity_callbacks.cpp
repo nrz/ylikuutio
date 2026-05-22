@@ -30,7 +30,7 @@ namespace yli::ontology
 {
     class Console;
 
-    std::optional<yli::data::AnyValue> Entity::create_variable_with_parent_name_type_value(
+    std::optional<data::AnyValue> Entity::create_variable_with_parent_name_type_value(
             Entity& parent,
             const std::string& variable_name,
             const std::string& variable_type,
@@ -38,21 +38,21 @@ namespace yli::ontology
     {
         VariableStruct variable_struct(parent.get_universe(), &parent);
         variable_struct.local_name = variable_name;
-        parent.create_variable(variable_struct, yli::data::AnyValue(variable_type, variable_value));
+        parent.create_variable(variable_struct, data::AnyValue(variable_type, variable_value));
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Entity::print_children(
+    std::optional<data::AnyValue> Entity::print_children(
             Console& console,
             const Entity& entity)
     {
         // OK, let's print the children of this `Entity`.
-        yli::map::print_keys_to_console(entity.registry.get_entity_map(), console);
+        map::print_keys_to_console(entity.registry.get_entity_map(), console);
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Entity::print_variables0(
+    std::optional<data::AnyValue> Entity::print_variables0(
             const Universe& universe,
             Console& console)
     {
@@ -63,7 +63,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Entity::print_variables1(
+    std::optional<data::AnyValue> Entity::print_variables1(
             const Universe&,
             Console& console,
             const Entity& entity)

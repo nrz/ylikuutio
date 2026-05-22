@@ -38,7 +38,7 @@ namespace yli::ontology
     class Entity;
 
     LispFunction::LispFunction(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const LispFunctionStruct& lisp_function_struct)
         : Entity(application, universe, lisp_function_struct)

@@ -69,10 +69,10 @@ namespace yli::ontology
     {
         private:
             ConsoleLispFunctionOverload(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     GenericParentModule* const console_lisp_function_parent_module,
-                    std::optional<yli::data::AnyValue>(*callback)(Types...))
+                    std::optional<data::AnyValue>(*callback)(Types...))
                 : GenericConsoleLispFunctionOverload(application, universe, console_lisp_function_parent_module),
                 callback(callback)
             {
@@ -108,7 +108,7 @@ namespace yli::ontology
                 std::size_t parameter_i = 0;       // Start from the first parameter.
                 Entity* environment = &this->universe; // `Universe` is the default environment.
 
-                std::optional<std::tuple<typename yli::data::Wrap<Types>::type...>> arg_tuple = this->process_args<
+                std::optional<std::tuple<typename data::Wrap<Types>::type...>> arg_tuple = this->process_args<
                     std::size_t, Types...>(
                             std::size_t {},
                             this->universe,
@@ -149,7 +149,7 @@ namespace yli::ontology
                 }
 
             template<typename Tag, typename T1, typename... RestTypes>
-                std::optional<std::tuple<typename yli::data::WrapAllButStrings<T1>::type, typename yli::data::WrapAllButStrings<RestTypes>::type...>> process_args(
+                std::optional<std::tuple<typename data::WrapAllButStrings<T1>::type, typename data::WrapAllButStrings<RestTypes>::type...>> process_args(
                         std::size_t tag,
                         Universe& universe,
                         Console& context,
@@ -157,7 +157,7 @@ namespace yli::ontology
                         const std::vector<std::string>& parameter_vector,
                         std::size_t& parameter_i)
                 {
-                    std::optional<typename yli::data::WrapAllButStrings<T1>::type> value = yli::lisp::convert_string_to_value_and_advance_index<T1>(
+                    std::optional<typename data::WrapAllButStrings<T1>::type> value = lisp::convert_string_to_value_and_advance_index<T1>(
                         universe, context, environment, parameter_vector, parameter_i);
 
                     if (!value.has_value())
@@ -169,7 +169,7 @@ namespace yli::ontology
                     // OK, binding successful for this argument.
                     // Proceed to the next argument.
 
-                    std::optional<std::tuple<typename yli::data::WrapAllButStrings<RestTypes>::type...>> arg_tuple = this->process_args<
+                    std::optional<std::tuple<typename data::WrapAllButStrings<RestTypes>::type...>> arg_tuple = this->process_args<
                         std::size_t, RestTypes...>(
                                 tag, universe, context, environment, parameter_vector, parameter_i);
 
@@ -183,10 +183,10 @@ namespace yli::ontology
                 }
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryAllocator;
+                friend class memory::MemoryAllocator;
 
             // The callback may receive different kinds of arguments.
-            std::optional<yli::data::AnyValue>(* const callback) (Types...);
+            std::optional<data::AnyValue>(* const callback) (Types...);
     };
 }
 

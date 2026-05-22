@@ -123,7 +123,7 @@ namespace yli::ontology
             void update() const;
 
             // This method renders according to the data given in `render_struct`.
-            void render(const yli::render::RenderStruct& render_struct) const;
+            void render(const render::RenderStruct& render_struct) const;
 
             // This method renders the active `Scene` of this `Universe`.
             void render();

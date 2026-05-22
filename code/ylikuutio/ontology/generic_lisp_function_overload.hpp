@@ -38,7 +38,7 @@ namespace yli::ontology
     class GenericLispFunctionOverload : public Entity
     {
         protected:
-            GenericLispFunctionOverload(yli::core::Application& application, Universe& universe);
+            GenericLispFunctionOverload(core::Application& application, Universe& universe);
 
         public:
             GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.

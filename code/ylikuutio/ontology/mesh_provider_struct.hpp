@@ -42,7 +42,7 @@ namespace yli::ontology
 
     struct MeshProviderStruct : public EntityStruct
     {
-        yli::load::ModelLoaderStruct model_loader_struct;
+        load::ModelLoaderStruct model_loader_struct;
 
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec2> uvs;

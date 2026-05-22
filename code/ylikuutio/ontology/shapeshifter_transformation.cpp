@@ -43,7 +43,7 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
 
-    std::optional<yli::data::AnyValue> ShapeshifterTransformation::bind_to_new_material_parent(
+    std::optional<data::AnyValue> ShapeshifterTransformation::bind_to_new_material_parent(
             ShapeshifterTransformation& shapeshifter_transformation,
             Material& new_parent)
     {
@@ -70,7 +70,7 @@ namespace yli::ontology
     }
 
     ShapeshifterTransformation::ShapeshifterTransformation(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
             GenericParentModule* const material_parent_module)
@@ -107,7 +107,7 @@ namespace yli::ontology
 
         const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
-        yli::render::RenderSystem& render_system = this->universe.get_render_system();
+        render::RenderSystem& render_system = this->universe.get_render_system();
 
         render_system.render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences, new_target_scene);
     }
@@ -149,7 +149,7 @@ namespace yli::ontology
 
     std::size_t ShapeshifterTransformation::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_shapeshifter_forms.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_shapeshifter_sequences.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_shapeshifter_forms.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_shapeshifter_sequences.child_pointer_vector);
     }
 }

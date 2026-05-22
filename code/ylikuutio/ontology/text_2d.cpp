@@ -49,7 +49,7 @@ namespace yli::ontology
     class Entity;
     class Scene;
 
-    std::optional<yli::data::AnyValue> Text2d::bind_to_new_font_2d_parent(
+    std::optional<data::AnyValue> Text2d::bind_to_new_font_2d_parent(
             Text2d& text_2d,
             Font2d& new_parent)
     {
@@ -76,7 +76,7 @@ namespace yli::ontology
     }
 
     Text2d::Text2d(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const TextStruct& text_struct,
             GenericParentModule* const font_2d_parent_module)

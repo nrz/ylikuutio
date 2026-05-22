@@ -29,7 +29,7 @@ namespace yli::ontology
     class Universe;
 
     GenericCallbackEngine::GenericCallbackEngine(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const GenericCallbackEngineStruct& generic_callback_engine_struct)
         : Entity(application, universe, generic_callback_engine_struct)

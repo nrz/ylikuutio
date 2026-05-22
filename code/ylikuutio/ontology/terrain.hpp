@@ -36,7 +36,7 @@ namespace yli::ontology
     {
         public:
             Terrain(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const ObjectStruct& terrain_struct,
                     GenericParentModule* const scene_parent_module,

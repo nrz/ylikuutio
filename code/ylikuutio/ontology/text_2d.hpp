@@ -53,13 +53,13 @@ namespace yli::ontology
         public:
             // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_font_2d_parent(
+            static std::optional<data::AnyValue> bind_to_new_font_2d_parent(
                     Text2d& text_2d,
                     Font2d& new_parent);
 
         private:
             Text2d(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const TextStruct& text_struct,
                     GenericParentModule* const font_2d_parent_module);
@@ -77,7 +77,7 @@ namespace yli::ontology
             void change_string(const std::string& text);
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_font_2d;
 

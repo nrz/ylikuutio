@@ -32,7 +32,7 @@ namespace yli::ontology
     class Universe;
 
     Capability::Capability(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const CapabilityStruct& capability_struct)
         : Entity(application, universe, capability_struct)

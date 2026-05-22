@@ -56,7 +56,7 @@ namespace yli::ontology
     {
         protected:
             Holobiont(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const HolobiontStruct& holobiont_struct,
                     GenericParentModule* const scene_parent_module,
@@ -77,7 +77,7 @@ namespace yli::ontology
 
             // Public callbacks.
 
-            static std::optional<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z(
+            static std::optional<data::AnyValue> create_holobiont_with_parent_name_x_y_z(
                     Scene& parent,
                     Symbiosis& symbiosis,
                     const std::string& holobiont_name,
@@ -85,7 +85,7 @@ namespace yli::ontology
                     const std::string& y,
                     const std::string& z);
 
-            static std::optional<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_yaw_pitch(
+            static std::optional<data::AnyValue> create_holobiont_with_parent_name_x_y_z_yaw_pitch(
                     Scene& parent,
                     Symbiosis& symbiosis,
                     const std::string& holobiont_name,
@@ -95,7 +95,7 @@ namespace yli::ontology
                     const std::string& yaw,
                     const std::string& pitch);
 
-            static std::optional<yli::data::AnyValue> create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(
+            static std::optional<data::AnyValue> create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(
                     Scene& parent,
                     Symbiosis& symbiosis,
                     const std::string& holobiont_name,
@@ -109,7 +109,7 @@ namespace yli::ontology
             // Public callbacks end here.
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_scene;
             GenericParentModule parent_of_bionts;

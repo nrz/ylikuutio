@@ -41,11 +41,11 @@ namespace yli::ontology
     class Scene;
 
     Variable::Variable(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const VariableStruct& variable_struct,
             GenericParentModule* const entity_parent_module,
-            yli::data::AnyValue&& any_value)
+            data::AnyValue&& any_value)
         : Entity(application, universe, variable_struct),
         child_of_entity(entity_parent_module, *this),
         variable_value    { std::move(any_value) },
@@ -91,7 +91,7 @@ namespace yli::ontology
         return help_string;
     }
 
-    std::optional<yli::data::AnyValue> Variable::get() const
+    std::optional<data::AnyValue> Variable::get() const
     {
         Entity* const entity_parent = this->get_parent();
 
@@ -108,7 +108,7 @@ namespace yli::ontology
         return this->read_callback(*entity_parent);
     }
 
-    void Variable::set(const yli::data::AnyValue& new_value)
+    void Variable::set(const data::AnyValue& new_value)
     {
         Entity* const entity_parent = this->get_parent();
 
@@ -144,7 +144,7 @@ namespace yli::ontology
 
     // Public callbacks.
 
-    std::optional<yli::data::AnyValue> Variable::set_variable_const_std_string(
+    std::optional<data::AnyValue> Variable::set_variable_const_std_string(
             Variable& variable,
             const std::string& new_value)
     {
@@ -156,7 +156,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::set_variable_variable(
+    std::optional<data::AnyValue> Variable::set_variable_variable(
             Variable& dest_variable,
             const Universe&,              // A context is needed so that correct `Variable` is bound to the function call.
             const Variable& src_variable)
@@ -166,7 +166,7 @@ namespace yli::ontology
 
         // Set a new value and call activate callback if there is such.
 
-        std::optional<yli::data::AnyValue> any_value = src_variable.get();
+        std::optional<data::AnyValue> any_value = src_variable.get();
 
         if (any_value)
         {
@@ -176,7 +176,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Variable::print_value1(
+    std::optional<data::AnyValue> Variable::print_value1(
             Console& console,
             const Universe&,          // A context is needed so that correct `Variable` is bound to the function call.
             const Variable& variable)
@@ -184,7 +184,7 @@ namespace yli::ontology
         // Usage:
         // to get variable value: get1 <variable-name>
 
-        std::optional<yli::data::AnyValue> variable_value = variable.get();
+        std::optional<data::AnyValue> variable_value = variable.get();
 
         if (variable_value)
         {

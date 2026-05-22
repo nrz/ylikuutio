@@ -40,7 +40,7 @@ namespace yli::ontology
     class Scene;
 
     InputMode::InputMode(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const InputModeStruct& input_mode_struct,
             ParentOfInputModesModule* const parent_module,

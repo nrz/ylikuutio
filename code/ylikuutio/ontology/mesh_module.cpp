@@ -64,7 +64,7 @@ namespace yli::ontology
             this->vertex_uv_id = glGetAttribLocation(pipeline->get_program_id(), "vertex_uv");
             this->vertex_normal_modelspace_id = glGetAttribLocation(pipeline->get_program_id(), "vertex_normal_modelspace");
 
-            yli::load::ModelLoaderStruct model_loader_struct = mesh_provider_struct.model_loader_struct;
+            load::ModelLoaderStruct model_loader_struct = mesh_provider_struct.model_loader_struct;
             model_loader_struct.image_width_pointer           = &this->image_width;
             model_loader_struct.image_height_pointer          = &this->image_height;
 

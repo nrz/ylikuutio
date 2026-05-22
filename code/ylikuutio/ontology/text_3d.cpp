@@ -39,7 +39,7 @@ namespace yli::ontology
     class Entity;
     class Pipeline;
 
-    std::optional<yli::data::AnyValue> Text3d::bind_to_new_scene_parent(
+    std::optional<data::AnyValue> Text3d::bind_to_new_scene_parent(
             Text3d& text_3d,
             Scene& new_parent)
     {
@@ -69,7 +69,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Text3d::bind_to_new_vector_font_master(
+    std::optional<data::AnyValue> Text3d::bind_to_new_vector_font_master(
             Text3d& text_3d,
             VectorFont& new_master)
     {
@@ -100,7 +100,7 @@ namespace yli::ontology
     }
 
     Text3d::Text3d(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const Text3dStruct& text_3d_struct,
             GenericParentModule* const scene_parent_module,

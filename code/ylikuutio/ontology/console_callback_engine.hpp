@@ -53,7 +53,7 @@ namespace yli::ontology
     {
         private:
             ConsoleCallbackEngine(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const ConsoleCallbackEngineStruct&,
                     GenericParentModule* const console_parent_module);
@@ -80,13 +80,13 @@ namespace yli::ontology
                     const InputParametersToAnyValueCallbackWithConsole callback);
 
             // execute all callbacks with a parameter.
-            std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value) override;
+            std::optional<data::AnyValue> execute(const data::AnyValue& any_value) override;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
         private:
-            std::vector<std::optional<yli::data::AnyValue>> return_values;
+            std::vector<std::optional<data::AnyValue>> return_values;
     };
 
     template<>

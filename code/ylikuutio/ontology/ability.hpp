@@ -42,7 +42,7 @@ namespace yli::ontology
     {
         public:
             Ability(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const AbilityStruct& ability_struct,
                     GenericParentModule* const parent_module);

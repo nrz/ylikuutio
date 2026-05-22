@@ -41,7 +41,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> activate_cartesian_coordinates(
+    std::optional<data::AnyValue> activate_cartesian_coordinates(
             Entity& entity,
             Variable& variable)
     {
@@ -49,7 +49,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& cartesian_coordinates_any_value = variable.variable_value;
+            const data::AnyValue& cartesian_coordinates_any_value = variable.variable_value;
 
             if (std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data))
             {
@@ -78,7 +78,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `activate_cartesian_coordinates`: `universe` is `nullptr`!");
         }
 
-        const yli::data::AnyValue& cartesian_coordinates_any_value = variable.variable_value;
+        const data::AnyValue& cartesian_coordinates_any_value = variable.variable_value;
 
         if (std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data))
         {
@@ -100,7 +100,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_x(
+    std::optional<data::AnyValue> activate_x(
             Entity& entity,
             Variable& variable)
     {
@@ -108,7 +108,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& x_any_value = variable.variable_value;
+            const data::AnyValue& x_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(x_any_value.data))
             {
@@ -136,7 +136,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `activate_x`: `universe` is `nullptr`!");
         }
 
-        const yli::data::AnyValue& x_any_value = variable.variable_value;
+        const data::AnyValue& x_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
@@ -148,7 +148,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_y(
+    std::optional<data::AnyValue> activate_y(
             Entity& entity,
             Variable& variable)
     {
@@ -156,7 +156,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& y_any_value = variable.variable_value;
+            const data::AnyValue& y_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(y_any_value.data))
             {
@@ -184,7 +184,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `activate_y`: `universe` is `nullptr`!");
         }
 
-        const yli::data::AnyValue& y_any_value = variable.variable_value;
+        const data::AnyValue& y_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(y_any_value.data))
         {
@@ -196,7 +196,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_z(
+    std::optional<data::AnyValue> activate_z(
             Entity& entity,
             Variable& variable)
     {
@@ -204,7 +204,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& z_any_value = variable.variable_value;
+            const data::AnyValue& z_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(z_any_value.data))
             {
@@ -232,7 +232,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `activate_z`: `universe` is `nullptr`!");
         }
 
-        const yli::data::AnyValue& z_any_value = variable.variable_value;
+        const data::AnyValue& z_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(z_any_value.data))
         {
@@ -244,7 +244,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_roll(
+    std::optional<data::AnyValue> activate_roll(
             Entity& entity,
             Variable& variable)
     {
@@ -252,7 +252,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& roll_any_value = variable.variable_value;
+            const data::AnyValue& roll_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(roll_any_value.data))
             {
@@ -270,7 +270,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& roll_any_value = variable.variable_value;
+        const data::AnyValue& roll_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(roll_any_value.data))
         {
@@ -281,7 +281,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_yaw(
+    std::optional<data::AnyValue> activate_yaw(
             Entity& entity,
             Variable& variable)
     {
@@ -289,7 +289,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& yaw_any_value = variable.variable_value;
+            const data::AnyValue& yaw_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(yaw_any_value.data))
             {
@@ -307,7 +307,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& yaw_any_value = variable.variable_value;
+        const data::AnyValue& yaw_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(yaw_any_value.data))
         {
@@ -318,7 +318,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_pitch(
+    std::optional<data::AnyValue> activate_pitch(
             Entity& entity,
             Variable& variable)
     {
@@ -326,7 +326,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& pitch_any_value = variable.variable_value;
+            const data::AnyValue& pitch_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(pitch_any_value.data))
             {
@@ -344,7 +344,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& pitch_any_value = variable.variable_value;
+        const data::AnyValue& pitch_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(pitch_any_value.data))
         {
@@ -355,7 +355,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_azimuth(
+    std::optional<data::AnyValue> activate_azimuth(
             Entity& entity,
             Variable& variable)
     {
@@ -363,7 +363,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& azimuth_any_value = variable.variable_value;
+            const data::AnyValue& azimuth_any_value = variable.variable_value;
 
             if (!std::holds_alternative<float>(azimuth_any_value.data))
             {
@@ -381,7 +381,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        const yli::data::AnyValue& azimuth_any_value = variable.variable_value;
+        const data::AnyValue& azimuth_any_value = variable.variable_value;
 
         if (!std::holds_alternative<float>(azimuth_any_value.data))
         {
@@ -392,7 +392,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> activate_scale(
+    std::optional<data::AnyValue> activate_scale(
             Entity& entity,
             Variable& variable)
     {
@@ -400,7 +400,7 @@ namespace yli::ontology
 
         if (movable != nullptr)
         {
-            const yli::data::AnyValue& scale_any_value = variable.variable_value;
+            const data::AnyValue& scale_any_value = variable.variable_value;
 
             if (std::holds_alternative<float>(scale_any_value.data))
             {

@@ -75,7 +75,7 @@ namespace yli::ontology
 
         protected:
             CallbackEngine(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const CallbackEngineStruct&,
                     GenericParentModule* const entity_parent_module);
@@ -87,11 +87,11 @@ namespace yli::ontology
                     const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // execute all callbacks with a parameter.
-            std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value) override;
+            std::optional<data::AnyValue> execute(const data::AnyValue& any_value) override;
 
             std::size_t get_n_of_return_values() const;
-            std::optional<yli::data::AnyValue> get_nth_return_value(const std::size_t n) const;
-            std::optional<yli::data::AnyValue> get_previous_return_value() const;
+            std::optional<data::AnyValue> get_nth_return_value(const std::size_t n) const;
+            std::optional<data::AnyValue> get_previous_return_value() const;
 
             template<typename ChildType>
                 GenericParentModule* get_generic_parent_module() = delete;
@@ -106,14 +106,14 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_entity;
             GenericParentModule parent_of_callback_objects;
             GenericMasterModule master_of_movable_controllers;
 
         private:
-            std::vector<std::optional<yli::data::AnyValue>> return_values;
+            std::vector<std::optional<data::AnyValue>> return_values;
     };
 
     template<>

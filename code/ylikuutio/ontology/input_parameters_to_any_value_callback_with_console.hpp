@@ -30,7 +30,7 @@ namespace yli::ontology
     class ConsoleCallbackEngine;
     class ConsoleCallbackObject;
 
-    typedef std::optional<yli::data::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
+    typedef std::optional<data::AnyValue> (*InputParametersToAnyValueCallbackWithConsole) (
             ConsoleCallbackEngine*,
             ConsoleCallbackObject*,
             GenericParentModule&,

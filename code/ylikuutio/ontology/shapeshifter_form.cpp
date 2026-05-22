@@ -36,7 +36,7 @@ namespace yli::ontology
     class Pipeline;
 
     ShapeshifterForm::ShapeshifterForm(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ShapeshifterFormStruct& shapeshifter_form_struct,
             GenericParentModule* const shapeshifter_transformation_parent_module)

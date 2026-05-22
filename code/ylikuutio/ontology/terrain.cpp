@@ -31,7 +31,7 @@ namespace yli::ontology
     struct HolobiontStruct;
 
     Terrain::Terrain(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ObjectStruct& terrain_struct,
             GenericParentModule* const scene_parent_module,

@@ -43,11 +43,11 @@ namespace yli::ontology
     struct EntityStruct;
 
     CallbackParameter::CallbackParameter(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const CallbackParameterStruct& callback_parameter_struct,
             GenericParentModule* const callback_object_parent_module,
-            yli::data::AnyValue&& any_value)
+            data::AnyValue&& any_value)
         : Entity(application, universe, callback_parameter_struct),
         child_of_callback_object(callback_object_parent_module, *this),
         any_value { std::move(any_value) }
@@ -56,7 +56,7 @@ namespace yli::ontology
         this->type_string = "yli::ontology::CallbackParameter*";
     }
 
-    const yli::data::AnyValue& CallbackParameter::get_any_value() const
+    const data::AnyValue& CallbackParameter::get_any_value() const
     {
         return this->any_value;
     }

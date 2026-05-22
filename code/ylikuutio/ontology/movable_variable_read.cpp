@@ -34,185 +34,185 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> read_cartesian_coordinates(Entity& entity)
+    std::optional<data::AnyValue> read_cartesian_coordinates(Entity& entity)
     {
         Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->location.xyz);
+            return data::AnyValue(movable->location.xyz);
         }
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->get_xyz());
+            return data::AnyValue(universe->get_xyz());
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_x(Entity& entity)
+    std::optional<data::AnyValue> read_x(Entity& entity)
     {
         Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->location.get_x());
+            return data::AnyValue(movable->location.get_x());
         }
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->get_x());
+            return data::AnyValue(universe->get_x());
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_y(Entity& entity)
+    std::optional<data::AnyValue> read_y(Entity& entity)
     {
         Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->location.get_y());
+            return data::AnyValue(movable->location.get_y());
         }
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->get_y());
+            return data::AnyValue(universe->get_y());
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_z(Entity& entity)
+    std::optional<data::AnyValue> read_z(Entity& entity)
     {
         Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->location.get_z());
+            return data::AnyValue(movable->location.get_z());
         }
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->get_z());
+            return data::AnyValue(universe->get_z());
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_up(Entity& entity)
+    std::optional<data::AnyValue> read_up(Entity& entity)
     {
         Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->up);
+            return data::AnyValue(movable->up);
         }
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->get_up());
+            return data::AnyValue(universe->get_up());
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_right(Entity& entity)
+    std::optional<data::AnyValue> read_right(Entity& entity)
     {
         Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->right);
+            return data::AnyValue(movable->right);
         }
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->get_right());
+            return data::AnyValue(universe->get_right());
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_roll(Entity& entity)
+    std::optional<data::AnyValue> read_roll(Entity& entity)
     {
         Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->orientation.roll);
+            return data::AnyValue(movable->orientation.roll);
         }
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->get_roll());
+            return data::AnyValue(universe->get_roll());
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_yaw(Entity& entity)
+    std::optional<data::AnyValue> read_yaw(Entity& entity)
     {
         Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->orientation.yaw);
+            return data::AnyValue(movable->orientation.yaw);
         }
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->get_yaw());
+            return data::AnyValue(universe->get_yaw());
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_pitch(Entity& entity)
+    std::optional<data::AnyValue> read_pitch(Entity& entity)
     {
         Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
-            return yli::data::AnyValue(movable->orientation.pitch);
+            return data::AnyValue(movable->orientation.pitch);
         }
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
 
         if (universe != nullptr)
         {
-            return yli::data::AnyValue(universe->get_pitch());
+            return data::AnyValue(universe->get_pitch());
         }
 
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> read_azimuth(Entity& entity)
+    std::optional<data::AnyValue> read_azimuth(Entity& entity)
     {
         Movable* const movable = dynamic_cast<Movable*>(&entity);
 
         if (movable != nullptr)
         {
             const float azimuth = 0.5f * static_cast<float>(std::numbers::pi) - movable->orientation.yaw;
-            return yli::data::AnyValue(azimuth);
+            return data::AnyValue(azimuth);
         }
 
         Universe* const universe = dynamic_cast<Universe*>(&entity);
@@ -220,7 +220,7 @@ namespace yli::ontology
         if (universe != nullptr)
         {
             const float azimuth = 0.5f * static_cast<float>(std::numbers::pi) - universe->get_yaw();
-            return yli::data::AnyValue(azimuth);
+            return data::AnyValue(azimuth);
         }
 
         return std::nullopt;

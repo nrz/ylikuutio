@@ -28,18 +28,18 @@ namespace yli::ontology
     class Entity;
     class Variable;
 
-    std::optional<yli::data::AnyValue> activate_cartesian_coordinates(Entity& entity, Variable& variable);
-    std::optional<yli::data::AnyValue> activate_x(Entity& entity, Variable& variable);
-    std::optional<yli::data::AnyValue> activate_y(Entity& entity, Variable& variable);
-    std::optional<yli::data::AnyValue> activate_z(Entity& entity, Variable& variable);
+    std::optional<data::AnyValue> activate_cartesian_coordinates(Entity& entity, Variable& variable);
+    std::optional<data::AnyValue> activate_x(Entity& entity, Variable& variable);
+    std::optional<data::AnyValue> activate_y(Entity& entity, Variable& variable);
+    std::optional<data::AnyValue> activate_z(Entity& entity, Variable& variable);
 
-    std::optional<yli::data::AnyValue> activate_roll(Entity& entity, Variable& variable);
-    std::optional<yli::data::AnyValue> activate_yaw(Entity& entity, Variable& variable);
-    std::optional<yli::data::AnyValue> activate_pitch(Entity& entity, Variable& variable);
+    std::optional<data::AnyValue> activate_roll(Entity& entity, Variable& variable);
+    std::optional<data::AnyValue> activate_yaw(Entity& entity, Variable& variable);
+    std::optional<data::AnyValue> activate_pitch(Entity& entity, Variable& variable);
 
-    std::optional<yli::data::AnyValue> activate_azimuth(Entity& entity, Variable& variable);
+    std::optional<data::AnyValue> activate_azimuth(Entity& entity, Variable& variable);
 
-    std::optional<yli::data::AnyValue> activate_scale(Entity& entity, Variable& variable);
+    std::optional<data::AnyValue> activate_scale(Entity& entity, Variable& variable);
 }
 
 #endif

@@ -57,9 +57,9 @@ namespace yli::ontology
             // master-apprentice relationships, must be implemented
             // using `bind_apprentice_to_master`, not this function.
 
-            child.set_childID(yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue));
+            child.set_childID(hierarchy::request_childID(child_pointer_vector, free_childID_queue));
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-            yli::hierarchy::set_child_pointer(child.get_childID(), &child, child_pointer_vector, free_childID_queue, number_of_children);
+            hierarchy::set_child_pointer(child.get_childID(), &child, child_pointer_vector, free_childID_queue, number_of_children);
 
             const std::string& name = child.get_local_name();
 
@@ -92,9 +92,9 @@ namespace yli::ontology
             // master-apprentice relationships, must be implemented
             // using `bind_apprentice_to_master`, not this function.
 
-            child.set_childID(yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue));
+            child.set_childID(hierarchy::request_childID(child_pointer_vector, free_childID_queue));
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-            yli::hierarchy::set_child_pointer(child.get_childID(), &child, child_pointer_vector, free_childID_queue, number_of_children);
+            hierarchy::set_child_pointer(child.get_childID(), &child, child_pointer_vector, free_childID_queue, number_of_children);
 
             const std::string& name = child->get_local_name();
 
@@ -130,7 +130,7 @@ namespace yli::ontology
             }
 
             // Set pointer to this child to `nullptr` in the old parent.
-            yli::hierarchy::set_child_pointer(
+            hierarchy::set_child_pointer(
                     childID,
                     static_cast<T1>(nullptr),
                     child_pointer_vector,

@@ -40,7 +40,7 @@ namespace yli::ontology
     class Pipeline;
 
     Glyph::Glyph(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const GlyphStruct& glyph_struct,
             GenericParentModule* const vector_font_parent_module,
@@ -124,7 +124,7 @@ namespace yli::ontology
 
         const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
-        yli::render::RenderSystem& render_system = this->universe.get_render_system();
+        render::RenderSystem& render_system = this->universe.get_render_system();
 
         render_system.render_glyph(this, new_target_scene);
     }

@@ -50,7 +50,7 @@ namespace yli::ontology
     {
         private:
             SymbiontMaterial(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const SymbiontMaterialStruct& symbiont_material_struct,
                     GenericParentModule* const symbiosis_parent_module); // Parent is a `Symbiosis`.
@@ -71,7 +71,7 @@ namespace yli::ontology
             GLint get_openGL_textureID() const;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_symbiosis;
             GenericParentModule parent_of_symbiont_species;

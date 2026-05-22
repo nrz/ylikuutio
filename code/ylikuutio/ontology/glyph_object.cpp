@@ -40,7 +40,7 @@ namespace yli::ontology
     }
 
     GlyphObject::GlyphObject(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const GlyphObjectStruct& glyph_object_struct,
             GenericParentModule* const scene_parent_module,

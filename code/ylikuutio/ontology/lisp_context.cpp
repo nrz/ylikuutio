@@ -29,7 +29,7 @@ namespace yli::ontology
     class Entity;
 
     LispContext::LispContext(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const LispContextStruct& lisp_context_struct)
         : Entity(application, universe, lisp_context_struct)

@@ -35,7 +35,7 @@ namespace yli::ontology
     class Scene;
 
     GenericConsoleLispFunctionOverload::GenericConsoleLispFunctionOverload(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             GenericParentModule* const console_lisp_function_parent_module)
         : GenericLispFunctionOverload(application, universe),

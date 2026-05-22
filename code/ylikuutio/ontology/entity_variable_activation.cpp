@@ -26,11 +26,11 @@
 
 namespace yli::ontology
 {
-    std::optional<yli::data::AnyValue> activate_should_render(
+    std::optional<data::AnyValue> activate_should_render(
             Entity& entity,
             Variable& variable)
     {
-        const yli::data::AnyValue& should_render_any_value = variable.variable_value;
+        const data::AnyValue& should_render_any_value = variable.variable_value;
 
         if (std::holds_alternative<bool>(should_render_any_value.data))
         {

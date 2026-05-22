@@ -55,7 +55,7 @@ namespace yli::ontology
     {
         private:
             Font2d(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const FontStruct& font_struct,
                     GenericParentModule* const universe_parent_module);
@@ -86,7 +86,7 @@ namespace yli::ontology
                 GenericMasterModule* get_generic_master_module() = delete;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_universe;
             GenericParentModule parent_of_text_2ds;

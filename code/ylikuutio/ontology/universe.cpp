@@ -399,7 +399,7 @@ namespace yli::ontology
                 // Reset mouse position for next frame.
                 if (has_mouse_focus)
                 {
-                    yli::input::set_cursor_position(
+                    input::set_cursor_position(
                             this->window,
                             static_cast<float>(this->window_width) / 2,
                             static_cast<float>(this->window_height) / 2);
@@ -457,8 +457,8 @@ namespace yli::ontology
                     angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
                         this->get_yaw() << "," <<
                         this->get_pitch() << " rad; " <<
-                        yli::geometry::radians_to_degrees(this->get_yaw()) << "," <<
-                        yli::geometry::radians_to_degrees(this->get_pitch()) << " deg\n" <<
+                        geometry::radians_to_degrees(this->get_yaw()) << "," <<
+                        geometry::radians_to_degrees(this->get_pitch()) << " deg\n" <<
                         "(" <<
                         this->get_x() << "," <<
                         this->get_y() << "," <<
@@ -543,7 +543,7 @@ namespace yli::ontology
         this->is_exit_requested = true;
     }
 
-    void Universe::render(const yli::render::RenderStruct& render_struct) const
+    void Universe::render(const render::RenderStruct& render_struct) const
     {
         // Used `RenderSystem` rendering implementation depends of the graphics API.
         // Software rendering renders to a CPU memory region or to file.

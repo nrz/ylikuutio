@@ -40,7 +40,7 @@ namespace yli::ontology
     {
         private:
             Mission(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const MissionStruct& mission_struct,
                     GenericParentModule* const universe_parent_module);

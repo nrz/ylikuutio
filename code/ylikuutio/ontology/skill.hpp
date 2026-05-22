@@ -42,7 +42,7 @@ namespace yli::ontology
     {
         public:
             Skill(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const SkillStruct& skill_struct,
                     GenericParentModule* const parent_module);

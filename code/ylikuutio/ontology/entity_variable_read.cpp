@@ -24,8 +24,8 @@
 
 namespace yli::ontology
 {
-    std::optional<yli::data::AnyValue> read_should_render(Entity& entity)
+    std::optional<data::AnyValue> read_should_render(Entity& entity)
     {
-        return yli::data::AnyValue(entity.should_render);
+        return data::AnyValue(entity.should_render);
     }
 }

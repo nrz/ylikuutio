@@ -59,7 +59,7 @@ namespace yli::ontology
         }
     }
 
-    yli::input::InputMethod ParentOfInputModesModule::get_input_method() const
+    input::InputMethod ParentOfInputModesModule::get_input_method() const
     {
         return this->input_method;
     }

@@ -73,7 +73,7 @@ namespace yli::ontology
                 friend class MasterModule;
 
             template<typename T1>
-                friend void yli::hierarchy::set_child_pointer(
+                friend void hierarchy::set_child_pointer(
                         const std::size_t childID,
                         const T1 child_pointer,
                         std::vector<T1>& child_pointer_vector,
@@ -81,10 +81,10 @@ namespace yli::ontology
                         std::size_t& number_of_children) noexcept;
 
             template<typename T1>
-                friend std::size_t yli::hierarchy::request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue) noexcept;
+                friend std::size_t hierarchy::request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue) noexcept;
 
             template<typename T1>
-                friend void yli::hierarchy::bind_apprentice_to_master(
+                friend void hierarchy::bind_apprentice_to_master(
                         T1& apprentice,
                         std::vector<T1*>& apprentice_pointer_vector,
                         std::queue<std::size_t>& free_apprenticeID_queue,

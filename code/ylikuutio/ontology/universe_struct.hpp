@@ -31,7 +31,7 @@ namespace yli::ontology
 {
     struct UniverseStruct : public EntityStruct
     {
-        explicit UniverseStruct(const yli::render::GraphicsApiBackend graphics_api_backend) noexcept
+        explicit UniverseStruct(const render::GraphicsApiBackend graphics_api_backend) noexcept
             : graphics_api_backend { graphics_api_backend }
         {
             this->is_universe = true;
@@ -55,11 +55,11 @@ namespace yli::ontology
         float mouse_speed          { 0.005f };
         float znear                { 1.0f };    // Visibility: from 1 to 5000 units.
         float zfar                 { 5000.0f }; // Visibility: from 1 to 5000 units.
-        yli::render::GraphicsApiBackend graphics_api_backend;
+        render::GraphicsApiBackend graphics_api_backend;
         bool is_silent             { false };
         bool is_physical           { true };    // Physics simulation in use.
         bool is_fullscreen         { false };   // Windowed mode in use.
-        yli::input::InputMethod input_method { yli::input::InputMethod::KEYBOARD };
+        input::InputMethod input_method { input::InputMethod::KEYBOARD };
         FramebufferModuleStruct framebuffer_module_struct;
     };
 }

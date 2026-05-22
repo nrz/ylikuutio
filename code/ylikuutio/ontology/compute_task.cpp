@@ -54,7 +54,7 @@ namespace yli::ontology
     class Scene;
 
     ComputeTask::ComputeTask(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ComputeTaskStruct& compute_task_struct,
             GenericParentModule* const pipeline_parent_module)
@@ -102,7 +102,7 @@ namespace yli::ontology
 
             if (!yli::load::load_common_texture(
                         this->texture_filename,
-                        yli::load::ImageLoaderStruct(),
+                        load::ImageLoaderStruct(),
                         this->texture_width,
                         this->texture_height,
                         this->texture_size,
@@ -119,7 +119,7 @@ namespace yli::ontology
         }
         else if (pipeline_parent != nullptr && should_load_texture && (this->texture_file_format == "csv" || this->texture_file_format == "CSV"))
         {
-            if (!yli::load::load_csv_texture(
+            if (!load::load_csv_texture(
                         this->texture_filename,
                         this->format,
                         this->internal_format,
@@ -311,16 +311,16 @@ namespace yli::ontology
             glBindTexture(GL_TEXTURE_2D, this->source_texture);
 
             // Set our "texture_sampler" sampler to use Texture Unit 0.
-            yli::opengl::uniform_1i(this->opengl_texture_id, 0);
+            opengl::uniform_1i(this->opengl_texture_id, 0);
 
             // Bind VAO.
             glBindVertexArray(this->vao);
 
             // 1st attribute buffer: vertices.
-            yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
+            opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
-            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
+            opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
             // 1st attribute buffer: vertices.
             glBindBuffer(GL_ARRAY_BUFFER, this->vertex_buffer);
@@ -345,13 +345,13 @@ namespace yli::ontology
                     0,                // stride
                     nullptr           // array buffer offset
                     );
-            yli::opengl::enable_vertex_attrib_array(this->vertex_uv_id);
+            opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
             // Draw the triangles!
             glDrawArrays(GL_TRIANGLE_STRIP, 0, this->vertices_size); // Draw 2 triangles (6 vertices).
 
-            yli::opengl::disable_vertex_attrib_array(this->vertex_position_modelspace_id);
-            yli::opengl::disable_vertex_attrib_array(this->vertex_uv_id);
+            opengl::disable_vertex_attrib_array(this->vertex_position_modelspace_id);
+            opengl::disable_vertex_attrib_array(this->vertex_uv_id);
 
             if (this->should_save_intermediate_results && !this->output_filename.empty())
             {
@@ -362,7 +362,7 @@ namespace yli::ontology
                 if (this->output_format == GL_INVALID_ENUM)
                 {
                     // Output format not defined, use format as output format.
-                    yli::opengl::save_data_from_gpu_texture_into_file(
+                    opengl::save_data_from_gpu_texture_into_file(
                             this->format,
                             this->type,
                             this->texture_width,
@@ -373,7 +373,7 @@ namespace yli::ontology
                 else
                 {
                     // Output format is defined.
-                    yli::opengl::save_data_from_gpu_texture_into_file(
+                    opengl::save_data_from_gpu_texture_into_file(
                             this->output_format,
                             this->type,
                             this->texture_width,
@@ -386,7 +386,7 @@ namespace yli::ontology
             // Ping pong.
             std::swap(this->source_texture, this->target_texture);
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->target_texture, 0);
-            yli::opengl::print_opengl_errors("glFramebufferTexture2D");
+            opengl::print_opengl_errors("glFramebufferTexture2D");
         }
 
         // Ping pong once more, so that last output target texture gets saved to file.
@@ -397,7 +397,7 @@ namespace yli::ontology
         if (this->output_format == GL_INVALID_ENUM)
         {
             // Output format not defined, use format as output format.
-            yli::opengl::save_data_from_gpu_texture_into_file(
+            opengl::save_data_from_gpu_texture_into_file(
                     this->format,
                     this->type,
                     this->texture_width,
@@ -408,7 +408,7 @@ namespace yli::ontology
         else
         {
             // Output format is defined.
-            yli::opengl::save_data_from_gpu_texture_into_file(
+            opengl::save_data_from_gpu_texture_into_file(
                     this->output_format,
                     this->type,
                     this->texture_width,

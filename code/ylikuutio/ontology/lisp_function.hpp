@@ -37,7 +37,7 @@ namespace yli::ontology
     {
         public:
             LispFunction(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const LispFunctionStruct& lisp_function_struct);
 

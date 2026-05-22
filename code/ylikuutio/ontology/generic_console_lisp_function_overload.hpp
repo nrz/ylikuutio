@@ -46,7 +46,7 @@ namespace yli::ontology
     {
         public:
             GenericConsoleLispFunctionOverload(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     GenericParentModule* const console_lisp_function_parent_module);
 
@@ -56,7 +56,7 @@ namespace yli::ontology
             ~GenericConsoleLispFunctionOverload() override = default;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryAllocator;
+                friend class memory::MemoryAllocator;
 
             Entity* get_parent() const override;
 

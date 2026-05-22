@@ -40,7 +40,7 @@ namespace yli::ontology
     }
 
     Shapeshifter::Shapeshifter(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ShapeshifterStruct& shapeshifter_struct,
             GenericParentModule* const scene_parent_module,

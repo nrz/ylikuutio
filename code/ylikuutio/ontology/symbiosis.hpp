@@ -78,25 +78,25 @@ namespace yli::ontology
         public:
             // Set pointer to `species` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(
+            static std::optional<data::AnyValue> bind_to_new_ecosystem_parent(
                     Symbiosis& symbiosis,
                     Ecosystem& new_parent);
 
             // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
+            static std::optional<data::AnyValue> bind_to_new_scene_parent(
                     Symbiosis& symbiosis,
                     Scene& new_parent);
 
             // Set pointer to `symbiosis` to `nullptr`, set pipeline according to the input,
             // and request a new apprenticeID from `new_pipeline`.
-            static std::optional<yli::data::AnyValue> bind_to_new_pipeline(
+            static std::optional<data::AnyValue> bind_to_new_pipeline(
                     Symbiosis& symbiosis,
                     Pipeline& new_pipeline) noexcept;
 
         private:
             Symbiosis(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const SymbiosisStruct& symbiosis_struct,
                     GenericParentModule* const ecosystem_or_scene_parent_module,
@@ -147,7 +147,7 @@ namespace yli::ontology
             static void create_ability(Symbiosis& symbiosis, const std::string& ability_name);
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_ecosystem_or_scene;
             GenericParentModule parent_of_symbiont_materials;

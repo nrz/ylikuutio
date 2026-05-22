@@ -52,7 +52,7 @@ namespace yli::ontology
     }
 
     ConsoleLispFunction::ConsoleLispFunction(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ConsoleLispFunctionStruct& console_lisp_function_struct,
             GenericParentModule* const console_parent_module)
@@ -74,7 +74,7 @@ namespace yli::ontology
 
     std::size_t ConsoleLispFunction::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_generic_console_lisp_function_overloads.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_generic_console_lisp_function_overloads.child_pointer_vector);
     }
 
     Scene* ConsoleLispFunction::get_scene() const
@@ -83,7 +83,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLispFunction::execute(const std::vector<std::string>& parameter_vector)
+    std::optional<data::AnyValue> ConsoleLispFunction::execute(const std::vector<std::string>& parameter_vector)
     {
         // The execution of a `ConsoleLispFunction` proceeds as follows:
         // The execution of `GenericConsoleLispFunctionOverload` children of
@@ -112,7 +112,7 @@ namespace yli::ontology
 
             if (result)
             {
-                return std::get<std::optional<yli::data::AnyValue>>(result.data);
+                return std::get<std::optional<data::AnyValue>>(result.data);
             }
         }
 

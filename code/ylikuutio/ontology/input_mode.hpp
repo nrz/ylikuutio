@@ -85,7 +85,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             InputModeChildModule child_of_universe;
             InputModeApprenticeModule apprentice_of_console;

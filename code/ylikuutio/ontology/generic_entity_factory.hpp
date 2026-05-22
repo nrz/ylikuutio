@@ -109,7 +109,7 @@ namespace yli::ontology
         public:
             virtual Variable* create_variable(
                     const VariableStruct& variable_struct,
-                    yli::data::AnyValue&& any_value) const = 0;
+                    data::AnyValue&& any_value) const = 0;
 
             virtual CallbackEngine* create_callback_engine(
                     const CallbackEngineStruct& callback_engine_struct) const = 0;
@@ -119,7 +119,7 @@ namespace yli::ontology
 
             virtual CallbackParameter* create_callback_parameter(
                     const CallbackParameterStruct& callback_parameter_struct,
-                    yli::data::AnyValue&& any_value) const = 0;
+                    data::AnyValue&& any_value) const = 0;
 
             virtual Ecosystem* create_ecosystem(const EcosystemStruct& ecosystem_struct) const = 0;
             virtual Scene* create_scene(const SceneStruct& scene_struct) const = 0;
@@ -161,7 +161,7 @@ namespace yli::ontology
                     const ConsoleCallbackObjectStruct& console_callback_object_struct) const = 0;
             virtual ConsoleCallbackParameter* create_console_callback_parameter(
                     const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
-                    const yli::data::AnyValue& any_value) const = 0;
+                    const data::AnyValue& any_value) const = 0;
             virtual ConsoleLispFunction* create_console_lisp_function(const ConsoleLispFunctionStruct& console_lisp_function_struct) const = 0;
             virtual ComputeTask* create_compute_task(const ComputeTaskStruct& compute_task_struct) const = 0;
     };

@@ -43,7 +43,7 @@ namespace yli::ontology
     class Universe;
     class Pipeline;
 
-    std::optional<yli::data::AnyValue> Species::bind_to_new_ecosystem_parent(
+    std::optional<data::AnyValue> Species::bind_to_new_ecosystem_parent(
             Species& species,
             Ecosystem& new_parent)
     {
@@ -77,7 +77,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Species::bind_to_new_scene_parent(
+    std::optional<data::AnyValue> Species::bind_to_new_scene_parent(
             Species& species,
             Scene& new_parent)
     {
@@ -111,7 +111,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Species::bind_to_new_material(
+    std::optional<data::AnyValue> Species::bind_to_new_material(
             Species& species,
             Material& new_material) noexcept
     {
@@ -136,7 +136,7 @@ namespace yli::ontology
     }
 
     Species::Species(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const SpeciesStruct& species_struct,
             GenericParentModule* const ecosystem_or_scene_parent_module,

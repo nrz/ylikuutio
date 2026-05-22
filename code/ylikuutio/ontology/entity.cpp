@@ -44,7 +44,7 @@ namespace yli::ontology
         return this == &rhs;
     }
 
-    yli::core::Application& Entity::get_application() const
+    core::Application& Entity::get_application() const
     {
         return this->application;
     }
@@ -126,7 +126,7 @@ namespace yli::ontology
         this->constructible_module.alive = false;
     }
 
-    yli::memory::ConstructibleModule Entity::get_constructible_module() const
+    memory::ConstructibleModule Entity::get_constructible_module() const
     {
         return this->constructible_module;
     }
@@ -232,7 +232,7 @@ namespace yli::ontology
         this->registry.erase_entity(name);
     }
 
-    void Entity::create_variable(const VariableStruct& variable_struct, yli::data::AnyValue&& any_value)
+    void Entity::create_variable(const VariableStruct& variable_struct, data::AnyValue&& any_value)
     {
         GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
@@ -250,7 +250,7 @@ namespace yli::ontology
         return dynamic_cast<Variable*>(this->registry.get_entity(variable_name));
     }
 
-    bool Entity::set_variable(const std::string& variable_name, const yli::data::AnyValue& variable_new_any_value)
+    bool Entity::set_variable(const std::string& variable_name, const data::AnyValue& variable_new_any_value)
     {
         Variable* const variable = this->get_variable(variable_name);
 
@@ -298,7 +298,7 @@ namespace yli::ontology
 
     std::size_t Entity::get_number_of_all_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_variables.child_pointer_vector) +
+        return ontology::get_number_of_descendants(this->parent_of_variables.child_pointer_vector) +
             this->get_number_of_descendants();
     }
 

@@ -52,7 +52,7 @@ namespace yli::ontology
     {
         public:
             ConsoleLispFunction(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const ConsoleLispFunctionStruct& console_lisp_function_struct,
                     GenericParentModule* const console_parent_module);
@@ -70,10 +70,10 @@ namespace yli::ontology
 
             Scene* get_scene() const override;
 
-            std::optional<yli::data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
+            std::optional<data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_console;
             GenericParentModule parent_of_generic_console_lisp_function_overloads;

@@ -34,7 +34,7 @@ namespace yli::ontology
     {
         public:
             Capability(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const CapabilityStruct& capability_struct);
 

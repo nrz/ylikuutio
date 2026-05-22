@@ -57,25 +57,25 @@ namespace yli::ontology
         public:
             // Set pointer to `species` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_ecosystem_parent(
+            static std::optional<data::AnyValue> bind_to_new_ecosystem_parent(
                     Species& species,
                     Ecosystem& new_parent);
 
             // Set pointer to `species` to `nullptr`, set parent according to the input,
             // and request a new childID from `new_parent`.
-            static std::optional<yli::data::AnyValue> bind_to_new_scene_parent(
+            static std::optional<data::AnyValue> bind_to_new_scene_parent(
                     Species& species,
                     Scene& new_parent);
 
             // Set pointer to `species` to `nullptr`, set material according to the input,
             // and request a new apprenticeID from `new_material`.
-            static std::optional<yli::data::AnyValue> bind_to_new_material(
+            static std::optional<data::AnyValue> bind_to_new_material(
                     Species& species,
                     Material& new_material) noexcept;
 
         private:
             Species(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const SpeciesStruct& species_struct,
                     GenericParentModule* const ecosystem_or_scene_parent_module,
@@ -108,7 +108,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_ecosystem_or_scene;
 

@@ -75,7 +75,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Pipeline::bind_to_new_scene_parent(
+    std::optional<data::AnyValue> Pipeline::bind_to_new_scene_parent(
             Pipeline& pipeline,
             Scene& new_parent)
     {
@@ -112,7 +112,7 @@ namespace yli::ontology
     }
 
     Pipeline::Pipeline(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const PipelineStruct& pipeline_struct,
             GenericParentModule* const ecosystem_or_scene_parent_module)
@@ -142,15 +142,15 @@ namespace yli::ontology
         if (this->universe.get_is_opengl_in_use())
         {
             // Create and compile our GLSL program from the shaders.
-            this->program_id = yli::load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
+            this->program_id = load::load_shaders(this->char_vertex_shader, this->char_fragment_shader);
 
             this->scene_uniform_block_index = glGetUniformBlockIndex(this->program_id, "scene_uniform_block");
             this->movable_uniform_block_index = glGetUniformBlockIndex(this->program_id, "movable_uniform_block");
             this->camera_uniform_block_index = glGetUniformBlockIndex(this->program_id, "camera_uniform_block");
 
-            glUniformBlockBinding(this->program_id, this->scene_uniform_block_index, yli::opengl::UboBlockIndices::SCENE);
-            glUniformBlockBinding(this->program_id, this->movable_uniform_block_index, yli::opengl::UboBlockIndices::MOVABLE);
-            glUniformBlockBinding(this->program_id, this->camera_uniform_block_index, yli::opengl::UboBlockIndices::CAMERA);
+            glUniformBlockBinding(this->program_id, this->scene_uniform_block_index, opengl::UboBlockIndices::SCENE);
+            glUniformBlockBinding(this->program_id, this->movable_uniform_block_index, opengl::UboBlockIndices::MOVABLE);
+            glUniformBlockBinding(this->program_id, this->camera_uniform_block_index, opengl::UboBlockIndices::CAMERA);
         }
 
         // `Entity` member variables begin here.
@@ -210,7 +210,7 @@ namespace yli::ontology
 
     std::size_t Pipeline::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_compute_tasks.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_compute_tasks.child_pointer_vector);
     }
 
     std::size_t Pipeline::get_number_of_apprentices() const

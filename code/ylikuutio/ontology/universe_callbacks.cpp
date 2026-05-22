@@ -43,7 +43,7 @@ namespace yli::ontology
 
     // Public `Entity` delete callbacks.
 
-    std::optional<yli::data::AnyValue> Universe::delete_entity(
+    std::optional<data::AnyValue> Universe::delete_entity(
             Universe& universe,
             Entity& entity)
     {
@@ -69,7 +69,7 @@ namespace yli::ontology
 
     // Public `Entity` naming callbacks.
 
-    std::optional<yli::data::AnyValue> Universe::set_global_name_for_entity(
+    std::optional<data::AnyValue> Universe::set_global_name_for_entity(
             Entity& entity,
             const std::string& global_name)
     {
@@ -78,7 +78,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Universe::set_local_name_for_entity(
+    std::optional<data::AnyValue> Universe::set_local_name_for_entity(
             Entity& entity,
             const std::string& local_name)
     {
@@ -89,7 +89,7 @@ namespace yli::ontology
 
     // Public `Entity` activate callbacks.
 
-    std::optional<yli::data::AnyValue> Universe::activate_entity(Entity& entity)
+    std::optional<data::AnyValue> Universe::activate_entity(Entity& entity)
     {
         entity.activate();
 
@@ -98,7 +98,7 @@ namespace yli::ontology
 
     // Public YliLisp-related callbacks.
 
-    std::optional<yli::data::AnyValue> Universe::eval(
+    std::optional<data::AnyValue> Universe::eval(
             Console& console,
             Universe& universe,
             const std::vector<std::string>& command_parameters)
@@ -125,16 +125,16 @@ namespace yli::ontology
 
     // Public data printing callbacks.
 
-    std::optional<yli::data::AnyValue> Universe::info0(
+    std::optional<data::AnyValue> Universe::info0(
             const Universe& universe,
             Console& console)
     {
         // Print names of named entities.
-        yli::map::print_keys_to_console(universe.registry.get_entity_map(), console);
+        map::print_keys_to_console(universe.registry.get_entity_map(), console);
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Universe::info1(
+    std::optional<data::AnyValue> Universe::info1(
             const Universe& /* universe */,
             Console& console,
             const Entity& entity)
@@ -184,11 +184,11 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Universe::print_entities(
+    std::optional<data::AnyValue> Universe::print_entities(
             const Universe& universe,
             Console& console)
     {
-        std::vector<std::pair<std::string, Entity*>> key_and_value_vector = yli::map::get_keys_and_values(universe.registry.get_entity_map());
+        std::vector<std::pair<std::string, Entity*>> key_and_value_vector = map::get_keys_and_values(universe.registry.get_entity_map());
 
         for (auto& [key, value] : key_and_value_vector)
         {
@@ -203,7 +203,7 @@ namespace yli::ontology
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> Universe::print_parent(
+    std::optional<data::AnyValue> Universe::print_parent(
             const Universe&,
             Console& console,
             const Entity& entity)
@@ -230,7 +230,7 @@ namespace yli::ontology
 
     // Other public callbacks.
 
-    std::optional<yli::data::AnyValue> Universe::screenshot(
+    std::optional<data::AnyValue> Universe::screenshot(
             Universe& universe,
             const std::string& filename)
     {
@@ -265,7 +265,7 @@ namespace yli::ontology
 
         // Transfer data from the GPU texture to a CPU array and save into a file.
         const bool should_flip_texture = true;
-        yli::opengl::save_data_from_gpu_texture_into_file(
+        opengl::save_data_from_gpu_texture_into_file(
                 GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height, filename, should_flip_texture);
 
         universe.restore_onscreen_rendering();

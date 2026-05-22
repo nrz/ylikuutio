@@ -59,13 +59,13 @@ namespace yli::ontology
             bool operator==(const Entity& rhs) const noexcept;
             bool operator!=(const Entity& rhs) const = default;
 
-            yli::core::Application& get_application() const;
+            core::Application& get_application() const;
 
             void bind_to_universe() noexcept;
 
         protected:
             Entity(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const EntityStruct& entity_struct);
 
@@ -78,7 +78,7 @@ namespace yli::ontology
             virtual void activate();                   // Activation functions should be idempotent.
 
             void terminate();
-            yli::memory::ConstructibleModule get_constructible_module() const;
+            memory::ConstructibleModule get_constructible_module() const;
 
             void set_childID(const std::size_t childID);
             std::size_t get_childID() const;
@@ -113,10 +113,10 @@ namespace yli::ontology
             void add_entity(const std::string& name, Entity& entity);
             void erase_entity(const std::string& name);
 
-            void create_variable(const VariableStruct& variable_struct, yli::data::AnyValue&& any_value);
+            void create_variable(const VariableStruct& variable_struct, data::AnyValue&& any_value);
             bool has_variable(const std::string& variable_name) const;
             Variable* get_variable(const std::string& variable_name) const;
-            bool set_variable(const std::string& variable_name, const yli::data::AnyValue& variable_new_any_value);
+            bool set_variable(const std::string& variable_name, const data::AnyValue& variable_new_any_value);
 
             virtual std::string help() const;                         // this function returns general help string.
             virtual std::string help_for_variable(const std::string& variable_name) const; // this function returns the help string for the `Variable`.
@@ -125,7 +125,7 @@ namespace yli::ontology
 
             // Public `Entity` creation callbacks.
 
-            static std::optional<yli::data::AnyValue> create_variable_with_parent_name_type_value(
+            static std::optional<data::AnyValue> create_variable_with_parent_name_type_value(
                     Entity& parent,
                     const std::string& variable_name,
                     const std::string& variable_type,
@@ -133,15 +133,15 @@ namespace yli::ontology
 
             // Public data printing callbacks.
 
-            static std::optional<yli::data::AnyValue> print_children(
+            static std::optional<data::AnyValue> print_children(
                     Console& console,
                     const Entity& entity);
 
-            static std::optional<yli::data::AnyValue> print_variables0(
+            static std::optional<data::AnyValue> print_variables0(
                     const Universe& universe,
                     Console& console);
 
-            static std::optional<yli::data::AnyValue> print_variables1(
+            static std::optional<data::AnyValue> print_variables1(
                     const Universe&,
                     Console& console,
                     const Entity& entity);
@@ -154,15 +154,15 @@ namespace yli::ontology
             friend class Universe;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryAllocator;
+                friend class memory::MemoryAllocator;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
         private:
-            yli::memory::ConstructibleModule constructible_module;
+            memory::ConstructibleModule constructible_module;
 
-            yli::core::Application& application;
+            core::Application& application;
 
             std::size_t childID { std::numeric_limits<std::size_t>::max() };
 

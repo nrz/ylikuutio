@@ -48,16 +48,16 @@ namespace yli::ontology
     {
         private:
             CallbackParameter(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const CallbackParameterStruct& callback_parameter_struct,
                     GenericParentModule* const callback_object_parent_module,
-                    yli::data::AnyValue&& any_value);
+                    data::AnyValue&& any_value);
 
             ~CallbackParameter() override = default;
 
         public:
-            const yli::data::AnyValue& get_any_value() const;
+            const data::AnyValue& get_any_value() const;
 
             Entity* get_parent() const override;
             Scene* get_scene() const override;
@@ -72,7 +72,7 @@ namespace yli::ontology
             friend class CallbackObject;
 
         private:
-            yli::data::AnyValue any_value;  // this is `private` to make sure that someone does not overwrite it.
+            data::AnyValue any_value;  // this is `private` to make sure that someone does not overwrite it.
     };
 }
 

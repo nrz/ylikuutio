@@ -30,12 +30,12 @@ namespace yli::ontology
     class CallbackEngine;
     class CallbackObject;
 
-    typedef std::optional<yli::data::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (
+    typedef std::optional<data::AnyValue> (*InputParametersAndAnyValueToAnyValueCallbackWithUniverse) (
             Universe&,
             CallbackEngine*,
             CallbackObject*,
             GenericParentModule&,
-            const yli::data::AnyValue&);
+            const data::AnyValue&);
 }
 
 #endif

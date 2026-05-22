@@ -29,7 +29,7 @@ namespace yli::ontology
 {
     class Universe;
 
-    GenericLispFunctionOverload::GenericLispFunctionOverload(yli::core::Application& application, Universe& universe)
+    GenericLispFunctionOverload::GenericLispFunctionOverload(core::Application& application, Universe& universe)
         : Entity(application, universe, EntityStruct())
     {
         // `Entity` member variables begin here.

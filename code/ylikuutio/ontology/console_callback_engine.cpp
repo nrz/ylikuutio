@@ -38,7 +38,7 @@ namespace yli::ontology
     struct ConsoleCallbackEngineStruct;
 
     ConsoleCallbackEngine::ConsoleCallbackEngine(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const ConsoleCallbackEngineStruct&,
             GenericParentModule* const console_parent_module)
@@ -76,7 +76,7 @@ namespace yli::ontology
 
     std::size_t ConsoleCallbackEngine::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_console_callback_objects.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_console_callback_objects.child_pointer_vector);
     }
 
     ConsoleCallbackObject* ConsoleCallbackEngine::create_console_callback_object(
@@ -84,14 +84,14 @@ namespace yli::ontology
     {
         GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
-        ConsoleCallbackObjectStruct console_callback_object_struct { yli::ontology::Request(this) };
+        ConsoleCallbackObjectStruct console_callback_object_struct { Request(this) };
         console_callback_object_struct.console_callback = callback;
         return entity_factory.create_console_callback_object(console_callback_object_struct);
     }
 
-    std::optional<yli::data::AnyValue> ConsoleCallbackEngine::execute(const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> ConsoleCallbackEngine::execute(const data::AnyValue& any_value)
     {
-        std::optional<yli::data::AnyValue> return_any_value;
+        std::optional<data::AnyValue> return_any_value;
         bool is_any_console_callback_object_executed { false };
 
         // execute all callbacks.

@@ -50,7 +50,7 @@ namespace yli::ontology
     {
         private:
             Biont(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const BiontStruct& biont_struct,
                     GenericParentModule* const holobiont_parent_module,
@@ -65,7 +65,7 @@ namespace yli::ontology
             Entity* get_parent() const override;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_holobiont;
             ApprenticeModule apprentice_of_symbiont_species;

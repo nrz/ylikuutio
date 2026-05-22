@@ -33,7 +33,7 @@ namespace yli::ontology
     class Scene;
 
     Ecosystem::Ecosystem(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const EcosystemStruct& ecosystem_struct,
             GenericParentModule* const universe_parent_module)
@@ -82,9 +82,9 @@ namespace yli::ontology
 
     std::size_t Ecosystem::get_number_of_descendants() const
     {
-        return yli::ontology::get_number_of_descendants(this->parent_of_pipelines.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
-            yli::ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_pipelines.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
+            ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector);
     }
 }
