@@ -31,8 +31,7 @@ namespace yli::ontology
     struct AbilityStruct final : CapabilityStruct
     {
         explicit AbilityStruct(Request<Symbiosis>&& symbiosis_parent)
-            : CapabilityStruct(),
-            symbiosis_parent { std::move(symbiosis_parent) }
+            : symbiosis_parent { std::move(symbiosis_parent) }
         {
         }
 

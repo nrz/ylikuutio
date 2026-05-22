@@ -31,8 +31,7 @@ namespace yli::ontology
     struct SkillStruct final : CapabilityStruct
     {
         explicit SkillStruct(Request<Holobiont>&& holobiont_parent)
-            : CapabilityStruct(),
-            holobiont_parent { std::move(holobiont_parent) }
+            : holobiont_parent { std::move(holobiont_parent) }
         {
         }
 
