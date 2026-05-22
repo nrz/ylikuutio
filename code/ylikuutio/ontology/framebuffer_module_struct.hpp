@@ -27,7 +27,7 @@ namespace yli::ontology
     {
         std::uint32_t texture_width  { 800 };
         std::uint32_t texture_height { 450 };
-        bool in_use             { true };
+        bool in_use                  { true };
     };
 }
 
