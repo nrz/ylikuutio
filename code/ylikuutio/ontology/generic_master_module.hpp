@@ -33,10 +33,10 @@
 // different types.
 //
 // If the master of a master-apprentice relation dies,
-// the apprentice will survice.
+// the apprentice will survive.
 //
 // If the apprentice of a master-apprentice relation dies,
-// the master will survice.
+// the master will survive.
 
 #include "indexable.hpp"
 #include "apprentice_iterator.hpp"
