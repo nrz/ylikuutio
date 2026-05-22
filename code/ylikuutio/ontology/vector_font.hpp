@@ -96,7 +96,6 @@ namespace yli::ontology
             GenericParentModule parent_of_glyphs;
             GenericMasterModule master_of_text_3ds;
 
-        public:
             Scene* get_scene() const override;
             Pipeline* get_pipeline() const;
 

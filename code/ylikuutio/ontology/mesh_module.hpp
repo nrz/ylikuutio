@@ -73,7 +73,6 @@ namespace yli::ontology
             void set_vertex_uv_id(GLint vertex_uv_id);
             void set_vertex_normal_modelspace_id(GLint vertex_normal_modelspace_id);
 
-        public:
             std::uint32_t image_width  { 0 };
             std::uint32_t image_height { 0 };
 
