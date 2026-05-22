@@ -103,8 +103,8 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const ConsoleStruct& console_struct,
-                    GenericParentModule* const universe_parent_module,
-                    GenericMasterModule* const font_2d_master_module);
+                    GenericParentModule* universe_parent_module,
+                    GenericMasterModule* font_2d_master_module);
 
             ~Console() override;
 
@@ -114,10 +114,10 @@ namespace yli::ontology
 
             void activate() override;
 
-            void set_input_mode(InputMode* const input_mode);
+            void set_input_mode(InputMode* input_mode);
             void print_text(const std::string& text);
             void print_help();
-            void render(const Scene* const) const;
+            void render(const Scene*) const;
 
             bool enter_console();
             bool exit_console();

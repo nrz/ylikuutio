@@ -70,9 +70,9 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const ObjectStruct& object_struct,
-                    GenericParentModule* const scene_parent_module,
-                    GenericMasterModule* const movable_controller_master_module,
-                    GenericMasterModule* const species_master_module);
+                    GenericParentModule* scene_parent_module,
+                    GenericMasterModule* movable_controller_master_module,
+                    GenericMasterModule* species_master_module);
 
             ~Object() override = default;
 
@@ -125,10 +125,10 @@ namespace yli::ontology
 
         public:
             // this method renders this `Object`.
-            void render(const Scene* const target_scene);
+            void render(const Scene* target_scene);
 
         private:
-            void render_this_object(Pipeline* const pipeline);
+            void render_this_object(Pipeline* pipeline);
 
             template<typename T1, std::size_t DataSize>
                 friend class memory::MemoryStorage;

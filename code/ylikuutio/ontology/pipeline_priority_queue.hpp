@@ -37,7 +37,7 @@ namespace yli::ontology
     class PipelinePriorityQueue final : public std::priority_queue<Pipeline*, std::vector<Pipeline*>>
     {
         public:
-            bool remove(const std::size_t childID);
+            bool remove(std::size_t childID);
     };
 }
 

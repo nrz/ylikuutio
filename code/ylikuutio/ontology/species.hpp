@@ -78,8 +78,8 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const SpeciesStruct& species_struct,
-                    GenericParentModule* const ecosystem_or_scene_parent_module,
-                    GenericMasterModule* const material_master_module);
+                    GenericParentModule* ecosystem_or_scene_parent_module,
+                    GenericMasterModule* material_master_module);
 
             ~Species() override = default;
 
@@ -94,7 +94,7 @@ namespace yli::ontology
             std::uint32_t get_image_width() const;
             std::uint32_t get_image_height() const;
 
-            void render(const Scene* const target_scene);
+            void render(const Scene* target_scene);
 
             Scene* get_scene() const override;
 

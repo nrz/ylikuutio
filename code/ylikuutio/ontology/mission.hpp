@@ -43,7 +43,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const MissionStruct& mission_struct,
-                    GenericParentModule* const universe_parent_module);
+                    GenericParentModule* universe_parent_module);
 
             Scene* get_scene() const override;
 

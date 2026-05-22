@@ -48,7 +48,7 @@ namespace yli::ontology
             GenericConsoleLispFunctionOverload(
                     core::Application& application,
                     Universe& universe,
-                    GenericParentModule* const console_lisp_function_parent_module);
+                    GenericParentModule* console_lisp_function_parent_module);
 
             GenericConsoleLispFunctionOverload(const GenericConsoleLispFunctionOverload&) = delete;            // Delete copy constructor.
             GenericConsoleLispFunctionOverload &operator=(const GenericConsoleLispFunctionOverload&) = delete; // Delete copy assignment.

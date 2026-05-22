@@ -58,7 +58,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const FontStruct& font_struct,
-                    GenericParentModule* const universe_parent_module);
+                    GenericParentModule* universe_parent_module);
 
             ~Font2d() override;
 

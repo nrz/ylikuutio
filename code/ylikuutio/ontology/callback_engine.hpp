@@ -78,19 +78,19 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const CallbackEngineStruct&,
-                    GenericParentModule* const entity_parent_module);
+                    GenericParentModule* entity_parent_module);
             ~CallbackEngine() override = default;
 
         public:
             CallbackObject* create_callback_object();
             CallbackObject* create_callback_object(
-                    const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
+                    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             // execute all callbacks with a parameter.
             std::optional<data::AnyValue> execute(const data::AnyValue& any_value) override;
 
             std::size_t get_n_of_return_values() const;
-            std::optional<data::AnyValue> get_nth_return_value(const std::size_t n) const;
+            std::optional<data::AnyValue> get_nth_return_value(std::size_t n) const;
             std::optional<data::AnyValue> get_previous_return_value() const;
 
             template<typename ChildType>

@@ -62,7 +62,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const TextStruct& text_struct,
-                    GenericParentModule* const font_2d_parent_module);
+                    GenericParentModule* font_2d_parent_module);
 
             ~Text2d() override;
 

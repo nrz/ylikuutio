@@ -55,7 +55,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const ShapeshifterFormStruct& shapeshifter_form_struct,
-                    GenericParentModule* const shapeshifter_transformation_parent_module);
+                    GenericParentModule* shapeshifter_transformation_parent_module);
 
             ~ShapeshifterForm() override = default;
 

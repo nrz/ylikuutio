@@ -35,7 +35,7 @@ namespace yli::ontology
         public:
             MasterOfInputModesModule(
                     Entity& generic_master,
-                    Registry* const registry,
+                    Registry* registry,
                     const std::string& name) noexcept;
 
             MasterOfInputModesModule(const MasterOfInputModesModule&) = delete;            // Delete copy constructor.
@@ -44,7 +44,7 @@ namespace yli::ontology
             ~MasterOfInputModesModule() override = default;
 
             bool has_current_input_mode() const;
-            void set_current_input_mode(InputMode* const input_mode);
+            void set_current_input_mode(InputMode* input_mode);
             InputMode* get_current_input_mode() const;
             void activate_current_input_mode();
             void deactivate_current_input_mode();

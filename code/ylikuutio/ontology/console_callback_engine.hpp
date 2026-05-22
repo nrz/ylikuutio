@@ -56,7 +56,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const ConsoleCallbackEngineStruct&,
-                    GenericParentModule* const console_parent_module);
+                    GenericParentModule* console_parent_module);
 
             ~ConsoleCallbackEngine() override = default;
 

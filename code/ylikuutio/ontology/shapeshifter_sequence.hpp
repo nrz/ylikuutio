@@ -59,7 +59,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
-                    GenericParentModule* const shapeshifter_transformation_parent_module);
+                    GenericParentModule* shapeshifter_transformation_parent_module);
 
             ~ShapeshifterSequence() override = default;
 

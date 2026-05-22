@@ -37,19 +37,19 @@ namespace yli::ontology
 
             explicit CartesianCoordinatesModule(const glm::vec3& xyz) noexcept;
 
-            CartesianCoordinatesModule(const float x, const float y, const float z) noexcept;
+            CartesianCoordinatesModule(float x, float y, float z) noexcept;
 
             ~CartesianCoordinatesModule() = default;
 
             void update_xyz(const glm::vec3& xyz);
 
-            void set_x(const float x) noexcept;
+            void set_x(float x) noexcept;
             float get_x() const noexcept;
 
-            void set_y(const float y) noexcept;
+            void set_y(float y) noexcept;
             float get_y() const noexcept;
 
-            void set_z(const float z) noexcept;
+            void set_z(float z) noexcept;
             float get_z() const noexcept;
 
             glm::vec3 xyz;

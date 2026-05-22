@@ -71,7 +71,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const VariableStruct& variable_struct,
-                    GenericParentModule* const entity_parent_module,
+                    GenericParentModule* entity_parent_module,
                     data::AnyValue&& any_value);
 
             ~Variable() override = default;

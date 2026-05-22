@@ -46,9 +46,9 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const ShapeshifterStruct& shapeshifter_struct,
-                    GenericParentModule* const scene_parent_module,
-                    GenericMasterModule* const movable_controller_master_module,
-                    GenericMasterModule* const shapeshifter_sequence_master_module);
+                    GenericParentModule* scene_parent_module,
+                    GenericMasterModule* movable_controller_master_module,
+                    GenericMasterModule* shapeshifter_sequence_master_module);
 
             Shapeshifter(const Shapeshifter&) = delete;            // Delete copy constructor.
             Shapeshifter &operator=(const Shapeshifter&) = delete; // Delete copy assignment.

@@ -55,7 +55,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const ConsoleLispFunctionStruct& console_lisp_function_struct,
-                    GenericParentModule* const console_parent_module);
+                    GenericParentModule* console_parent_module);
 
             ConsoleLispFunction(const ConsoleLispFunction&) = delete;            // Delete copy constructor.
             ConsoleLispFunction &operator=(const ConsoleLispFunction&) = delete; // Delete copy assignment.

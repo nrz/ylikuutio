@@ -58,7 +58,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const ConsoleCallbackObjectStruct& console_callback_object_struct,
-                    GenericParentModule* const console_callback_engine_parent_module);
+                    GenericParentModule* console_callback_engine_parent_module);
 
             template<typename ChildType>
                 GenericParentModule* get_generic_parent_module() = delete;

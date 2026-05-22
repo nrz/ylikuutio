@@ -55,7 +55,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const EcosystemStruct& ecosystem_struct,
-                    GenericParentModule* const universe_parent_module);
+                    GenericParentModule* universe_parent_module);
 
             ~Ecosystem() override = default;
 

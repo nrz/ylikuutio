@@ -46,9 +46,9 @@ namespace yli::ontology
                     yli::core::Application& application,
                     Universe& universe,
                     const GlyphObjectStruct& glyph_object_struct,
-                    GenericParentModule* const scene_parent_module,
-                    GenericMasterModule* const glyph_master_module,
-                    GenericMasterModule* const text_3d_master_module);
+                    GenericParentModule* scene_parent_module,
+                    GenericMasterModule* glyph_master_module,
+                    GenericMasterModule* text_3d_master_module);
 
             GlyphObject(const GlyphObject&) = delete;            // Delete copy constructor.
             GlyphObject &operator=(const GlyphObject&) = delete; // Delete copy assignment.

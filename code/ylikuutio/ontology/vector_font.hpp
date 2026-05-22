@@ -73,7 +73,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const VectorFontStruct& vector_font_struct,
-                    GenericParentModule* const material_parent_module);
+                    GenericParentModule* material_parent_module);
 
             ~VectorFont() override = default;
 
@@ -85,7 +85,7 @@ namespace yli::ontology
 
             // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
             // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-            Glyph* get_glyph_pointer(const std::int32_t unicode_value) const;
+            Glyph* get_glyph_pointer(std::int32_t unicode_value) const;
 
             // The rest fields are created in the constructor.
 
@@ -112,7 +112,7 @@ namespace yli::ontology
 
         public:
             // This method renders all `Glyph`s of this `VectorFont`.
-            void render(const Scene* const target_scene);
+            void render(const Scene* target_scene);
 
         private:
             std::string font_file_format; // Type of the model file, eg. `"png"`.

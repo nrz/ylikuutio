@@ -45,7 +45,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const SkillStruct& skill_struct,
-                    GenericParentModule* const parent_module);
+                    GenericParentModule* parent_module);
 
             Skill(const Skill&) = delete;            // Delete copy constructor.
             Skill &operator=(const Skill&) = delete; // Delete copy assignment.

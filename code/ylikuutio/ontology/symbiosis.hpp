@@ -99,8 +99,8 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const SymbiosisStruct& symbiosis_struct,
-                    GenericParentModule* const ecosystem_or_scene_parent_module,
-                    GenericMasterModule* const pipeline_master_module);
+                    GenericParentModule* ecosystem_or_scene_parent_module,
+                    GenericMasterModule* pipeline_master_module);
 
             ~Symbiosis() override = default;
 
@@ -126,23 +126,23 @@ namespace yli::ontology
 
             const std::string& get_model_file_format() const;
 
-            SymbiontMaterial* get_symbiont_material(const std::size_t symbiont_material_i) const;
-            SymbiontSpecies* get_symbiont_species(const std::size_t biontID) const;
-            GLint get_vertex_position_modelspace_id(const std::size_t biontID) const;
-            GLint get_vertex_uv_id(const std::size_t biontID) const;
-            GLint get_vertex_normal_modelspace_id(const std::size_t biontID) const;
+            SymbiontMaterial* get_symbiont_material(std::size_t symbiont_material_i) const;
+            SymbiontSpecies* get_symbiont_species(std::size_t biontID) const;
+            GLint get_vertex_position_modelspace_id(std::size_t biontID) const;
+            GLint get_vertex_uv_id(std::size_t biontID) const;
+            GLint get_vertex_normal_modelspace_id(std::size_t biontID) const;
 
-            std::uint32_t get_vertex_buffer(const std::size_t biontID) const;
-            std::uint32_t get_uv_buffer(const std::size_t biontID) const;
-            std::uint32_t get_normal_buffer(const std::size_t biontID) const;
-            std::uint32_t get_element_buffer(const std::size_t biontID) const;
+            std::uint32_t get_vertex_buffer(std::size_t biontID) const;
+            std::uint32_t get_uv_buffer(std::size_t biontID) const;
+            std::uint32_t get_normal_buffer(std::size_t biontID) const;
+            std::uint32_t get_element_buffer(std::size_t biontID) const;
 
-            std::vector<std::uint32_t> get_indices(const std::size_t biontID) const;
-            std::size_t get_indices_size(const std::size_t biontID) const;
+            std::vector<std::uint32_t> get_indices(std::size_t biontID) const;
+            std::size_t get_indices_size(std::size_t biontID) const;
             std::size_t get_number_of_ofbx_meshes() const;
-            bool has_texture(const std::size_t biontID) const;
-            std::uint32_t get_texture(const std::size_t biontID) const;
-            GLint get_openGL_textureID(const std::size_t biontID) const;
+            bool has_texture(std::size_t biontID) const;
+            std::uint32_t get_texture(std::size_t biontID) const;
+            GLint get_openGL_textureID(std::size_t biontID) const;
 
             static void create_ability(Symbiosis& symbiosis, const std::string& ability_name);
 

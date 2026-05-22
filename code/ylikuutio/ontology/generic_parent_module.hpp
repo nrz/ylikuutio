@@ -41,7 +41,7 @@ namespace yli::ontology
             typedef ChildIterator const_iterator;
 
             virtual void bind_child(Entity& child) noexcept;
-            virtual void unbind_child(const std::size_t childID) noexcept;
+            virtual void unbind_child(std::size_t childID) noexcept;
 
             GenericParentModule(
                     Entity& entity,
@@ -62,7 +62,7 @@ namespace yli::ontology
 
             Scene* get_scene() const noexcept;
 
-            Entity* get(const std::size_t index) const noexcept override;
+            Entity* get(std::size_t index) const noexcept override;
 
             // Iterator functions.
             iterator begin()

@@ -79,7 +79,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const PipelineStruct& pipeline_struct,
-                    GenericParentModule* const ecosystem_or_scene_parent_module);
+                    GenericParentModule* ecosystem_or_scene_parent_module);
 
             ~Pipeline() override;
 
@@ -126,7 +126,7 @@ namespace yli::ontology
 
         public:
             // This method renders all materials using this `Pipeline`.
-            void render(const Scene* const target_scene);
+            void render(const Scene* target_scene);
 
         private:
             GLuint program_id                  { 0 }; // This `Pipeline`'s `program_id`, returned by `load_shaders`. Dummy value.

@@ -53,8 +53,8 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const BiontStruct& biont_struct,
-                    GenericParentModule* const holobiont_parent_module,
-                    GenericMasterModule* const symbiont_species_master_module);
+                    GenericParentModule* holobiont_parent_module,
+                    GenericMasterModule* symbiont_species_master_module);
 
             ~Biont() override = default;
 

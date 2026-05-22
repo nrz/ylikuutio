@@ -39,9 +39,9 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const ObjectStruct& terrain_struct,
-                    GenericParentModule* const scene_parent_module,
-                    GenericMasterModule* const species_master_module,
-                    GenericMasterModule* const /* movable_controller_master_module */);
+                    GenericParentModule* scene_parent_module,
+                    GenericMasterModule* species_master_module,
+                    GenericMasterModule* /* movable_controller_master_module */);
 
             ~Terrain() override = default;
 

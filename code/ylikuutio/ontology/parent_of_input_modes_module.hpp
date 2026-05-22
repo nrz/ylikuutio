@@ -43,7 +43,7 @@ namespace yli::ontology
 
             ~ParentOfInputModesModule() override = default;
 
-            void set_active_input_mode(InputMode* const input_mode);
+            void set_active_input_mode(InputMode* input_mode);
             InputMode* get_active_input_mode() const;
 
             void pop_input_mode();

@@ -90,7 +90,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const SceneStruct& scene_struct,
-                    GenericParentModule* const universe_parent_module);
+                    GenericParentModule* universe_parent_module);
 
             ~Scene() override;
 
@@ -123,7 +123,7 @@ namespace yli::ontology
             void set_twin_turbo_factor(const float turbo_factor);
 
             float get_gravity() const;
-            void set_gravity(const float gravity);
+            void set_gravity(float gravity);
 
             void add_rigid_body_module(const RigidBodyModule& rigid_body_module, Scene& scene);
 
@@ -131,7 +131,7 @@ namespace yli::ontology
             float get_water_level() const;
 
             bool get_is_flight_mode_in_use() const;
-            void set_is_flight_mode_in_use(const bool is_flight_mode_in_use);
+            void set_is_flight_mode_in_use(bool is_flight_mode_in_use);
 
             template<typename ChildType>
                 GenericParentModule* get_generic_parent_module() = delete;

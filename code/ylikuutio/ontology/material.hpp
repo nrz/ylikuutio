@@ -84,8 +84,8 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const MaterialStruct& material_struct,
-                    GenericParentModule* const ecosystem_or_scene_parent_module,
-                    GenericMasterModule* const pipeline_master_module);
+                    GenericParentModule* ecosystem_or_scene_parent_module,
+                    GenericMasterModule* pipeline_master_module);
 
             ~Material() override = default;
 
@@ -134,7 +134,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
         public:
-            void render(const Scene* const target_scene);
+            void render(const Scene* target_scene);
     };
 
     template<>

@@ -44,7 +44,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const AudioTrackStruct& audio_track_struct,
-                    GenericParentModule* const universe_parent_module);
+                    GenericParentModule* universe_parent_module);
 
             AudioTrack(const AudioTrack&) = delete;            // Delete copy constructor.
             AudioTrack &operator=(const AudioTrack&) = delete; // Delete copy assignment.

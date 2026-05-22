@@ -51,7 +51,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
-                    GenericParentModule* const console_callback_object_parent_module,
+                    GenericParentModule* console_callback_object_parent_module,
                     const data::AnyValue& any_value);
 
             ~ConsoleCallbackParameter() override = default;

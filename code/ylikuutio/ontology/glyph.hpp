@@ -63,8 +63,8 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const GlyphStruct& glyph_struct,
-                    GenericParentModule* const vector_font_parent_module,
-                    GenericMasterModule* const material_master_module);
+                    GenericParentModule* vector_font_parent_module,
+                    GenericMasterModule* material_master_module);
 
             // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
             ~Glyph() override = default;
@@ -93,7 +93,7 @@ namespace yli::ontology
             std::size_t get_number_of_descendants() const override;
 
         public:
-            void render(const Scene* const target_scene);
+            void render(const Scene* target_scene);
 
             GenericMasterModule* get_renderables_container();
 

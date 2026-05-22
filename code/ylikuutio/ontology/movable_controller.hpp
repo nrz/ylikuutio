@@ -78,8 +78,8 @@ namespace yli::ontology
                     yli::core::Application& application,
                     Universe& universe,
                     const MovableControllerStruct& movable_controller_struct,
-                    GenericParentModule* const scene_parent_module,
-                    GenericMasterModule* const callback_engine_master_module);
+                    GenericParentModule* scene_parent_module,
+                    GenericMasterModule* callback_engine_master_module);
 
             ~MovableController() override = default;
 

@@ -53,7 +53,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const SymbiontMaterialStruct& symbiont_material_struct,
-                    GenericParentModule* const symbiosis_parent_module); // Parent is a `Symbiosis`.
+                    GenericParentModule* symbiosis_parent_module); // Parent is a `Symbiosis`.
 
             ~SymbiontMaterial() override = default;
 

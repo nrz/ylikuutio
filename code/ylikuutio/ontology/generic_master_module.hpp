@@ -62,10 +62,10 @@ namespace yli::ontology
             typedef ApprenticeIterator const_iterator;
 
             void bind_apprentice_module(ApprenticeModule& apprentice_module);
-            void unbind_apprentice_module(const std::size_t apprenticeID) noexcept;
-            void unbind_all_apprentice_modules_belonging_to_other_scenes(const Scene* const scene) noexcept;
+            void unbind_apprentice_module(std::size_t apprenticeID) noexcept;
+            void unbind_all_apprentice_modules_belonging_to_other_scenes(const Scene* scene) noexcept;
 
-            GenericMasterModule(Entity& generic_master, Registry* const registry, const std::string& name) noexcept;
+            GenericMasterModule(Entity& generic_master, Registry* registry, const std::string& name) noexcept;
 
             GenericMasterModule(const GenericMasterModule&) = delete;            // Delete copy constructor.
             GenericMasterModule& operator=(const GenericMasterModule&) = delete; // Delete copy assignment.
@@ -79,7 +79,7 @@ namespace yli::ontology
 
             std::size_t get_number_of_apprentices() const noexcept;
 
-            Entity* get(const std::size_t index) const noexcept override;
+            Entity* get(std::size_t index) const noexcept override;
 
             // Iterator functions.
             iterator begin()

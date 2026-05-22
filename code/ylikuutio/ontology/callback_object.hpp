@@ -59,14 +59,14 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const CallbackObjectStruct& callback_object_struct,
-                    GenericParentModule* const callback_engine_parent_module);
+                    GenericParentModule* callback_engine_parent_module);
 
             CallbackObject(
                     core::Application& application,
                     Universe& universe,
                     const CallbackObjectStruct& callback_object_struct,
-                    const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
-                    GenericParentModule* const callback_engine_parent_module);
+                    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
+                    GenericParentModule* callback_engine_parent_module);
             ~CallbackObject() override = default;
 
         public:
@@ -78,7 +78,7 @@ namespace yli::ontology
             void set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
             std::optional<data::AnyValue> get_any_value(const std::string& name) const;
-            std::optional<data::AnyValue> get_arg(const std::size_t arg_i) const;
+            std::optional<data::AnyValue> get_arg(std::size_t arg_i) const;
 
             template<typename ChildType>
                 GenericParentModule* get_generic_parent_module() = delete;

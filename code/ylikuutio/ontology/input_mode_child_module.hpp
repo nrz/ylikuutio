@@ -29,7 +29,7 @@ namespace yli::ontology
     {
         public:
             InputModeChildModule(
-                    ParentOfInputModesModule* const parent_module,
+                    ParentOfInputModesModule* parent_module,
                     Entity& entity) noexcept;
     };
 }

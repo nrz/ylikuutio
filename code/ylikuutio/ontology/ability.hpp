@@ -45,7 +45,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const AbilityStruct& ability_struct,
-                    GenericParentModule* const parent_module);
+                    GenericParentModule* parent_module);
 
             Ability(const Ability&) = delete;            // Delete copy constructor.
             Ability &operator=(const Ability&) = delete; // Delete copy assignment.

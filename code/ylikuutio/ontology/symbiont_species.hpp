@@ -58,7 +58,7 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const SymbiontSpeciesStruct& symbiont_species_struct,
-                    GenericParentModule* const symbiont_material_parent_module);
+                    GenericParentModule* symbiont_material_parent_module);
 
             ~SymbiontSpecies() override = default;
 

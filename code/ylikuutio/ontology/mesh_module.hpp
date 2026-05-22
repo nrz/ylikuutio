@@ -44,7 +44,7 @@ namespace yli::ontology
             MeshModule(
                     Universe& universe,
                     const MeshProviderStruct& mesh_provider_struct,
-                    Pipeline* const pipeline);
+                    Pipeline* pipeline);
 
             MeshModule(const MeshModule&) = delete;            // Delete copy constructor.
             MeshModule& operator=(const MeshModule&) = delete; // Delete copy assignment.
@@ -69,9 +69,9 @@ namespace yli::ontology
             GLuint get_normal_buffer() const;
             GLuint get_element_buffer() const;
 
-            void set_vertex_position_modelspace_id(const GLint vertex_position_modelspace_id);
-            void set_vertex_uv_id(const GLint vertex_uv_id);
-            void set_vertex_normal_modelspace_id(const GLint vertex_normal_modelspace_id);
+            void set_vertex_position_modelspace_id(GLint vertex_position_modelspace_id);
+            void set_vertex_uv_id(GLint vertex_uv_id);
+            void set_vertex_normal_modelspace_id(GLint vertex_normal_modelspace_id);
 
         public:
             std::uint32_t image_width  { 0 };

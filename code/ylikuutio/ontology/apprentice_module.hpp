@@ -43,18 +43,18 @@ namespace yli::ontology
 
         private:
             void bind_to_new_generic_master_module(
-                    GenericMasterModule* const new_generic_master) noexcept;
+                    GenericMasterModule* new_generic_master) noexcept;
 
         public:
             void unbind_from_any_master_belonging_to_other_scene(
                     const Scene& scene) noexcept;
 
             void unbind_and_bind_to_new_generic_master_module(
-                    GenericMasterModule* const new_generic_master) noexcept;
+                    GenericMasterModule* new_generic_master) noexcept;
 
             ApprenticeModule(
-                    GenericMasterModule* const generic_master_module,
-                    Entity* const apprentice) noexcept;
+                    GenericMasterModule* generic_master_module,
+                    Entity* apprentice) noexcept;
 
             virtual ~ApprenticeModule();
 
@@ -74,8 +74,8 @@ namespace yli::ontology
 
             template<typename T1>
                 friend void hierarchy::set_child_pointer(
-                        const std::size_t childID,
-                        const T1 child_pointer,
+                        std::size_t childID,
+                        T1 child_pointer,
                         std::vector<T1>& child_pointer_vector,
                         std::queue<std::size_t>& free_childID_queue,
                         std::size_t& number_of_children) noexcept;

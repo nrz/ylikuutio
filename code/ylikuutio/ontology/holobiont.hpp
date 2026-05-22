@@ -59,9 +59,9 @@ namespace yli::ontology
                     core::Application& application,
                     Universe& universe,
                     const HolobiontStruct& holobiont_struct,
-                    GenericParentModule* const scene_parent_module,
-                    GenericMasterModule* const movable_controller_master_module,
-                    GenericMasterModule* const symbiosis_master_module);
+                    GenericParentModule* scene_parent_module,
+                    GenericMasterModule* movable_controller_master_module,
+                    GenericMasterModule* symbiosis_master_module);
 
         public:
             Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
@@ -71,9 +71,9 @@ namespace yli::ontology
 
             Entity* get_parent() const final;
 
-            void update_x(const float x);
-            void update_y(const float y);
-            void update_z(const float z);
+            void update_x(float x);
+            void update_y(float y);
+            void update_z(float z);
 
             // Public callbacks.
 
@@ -129,7 +129,7 @@ namespace yli::ontology
 
         public:
             // this method renders this `Holobiont`.
-            void render(const Scene* const target_scene);
+            void render(const Scene* target_scene);
 
             static void create_skill(Holobiont& holobiont, const std::string& skill_name);
 

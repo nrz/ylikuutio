@@ -40,19 +40,19 @@ namespace yli::ontology
             void create_framebuffer_object();
             void bind() const;
             bool get_is_initialized() const;
-            void initialize(const float red, const float green, const float blue, const float alpha);
+            void initialize(float red, float green, float blue, float alpha);
 
             // This method returns current `texture_width`.
             std::uint32_t get_texture_width() const;
 
             // This method sets `texture_width`.
-            void set_texture_width(const std::uint32_t texture_width);
+            void set_texture_width(std::uint32_t texture_width);
 
             // This method returns current `texture_height`.
             std::uint32_t get_texture_height() const;
 
             // This method sets `texture_height`.
-            void set_texture_height(const std::uint32_t texture_height);
+            void set_texture_height(std::uint32_t texture_height);
 
             bool get_in_use() const;
 

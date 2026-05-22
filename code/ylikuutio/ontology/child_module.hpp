@@ -52,11 +52,11 @@ namespace yli::ontology
         private:
             void unbind_child() const noexcept;
             void set_parent_module_and_bind_to_new_parent(
-                    GenericParentModule* const new_parent_module) noexcept;
+                    GenericParentModule* new_parent_module) noexcept;
 
         public:
             void unbind_and_bind_to_new_parent(
-                    GenericParentModule* const new_parent_module) noexcept;
+                    GenericParentModule* new_parent_module) noexcept;
 
         private:
             void bind_to_parent_module() noexcept;

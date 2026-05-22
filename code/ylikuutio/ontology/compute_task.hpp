@@ -69,7 +69,7 @@ namespace yli::ontology
                     yli::core::Application& application,
                     Universe& universe,
                     const ComputeTaskStruct& compute_task_struct,
-                    GenericParentModule* const pipeline_parent_module);
+                    GenericParentModule* pipeline_parent_module);
 
             ~ComputeTask() override;
 
@@ -90,7 +90,7 @@ namespace yli::ontology
 
         public:
             // This method renders this `ComputeTask`, that is, computes this task.
-            void render(const Scene* const);
+            void render(const Scene*);
 
             template<typename T1, std::size_t DataSize>
                 friend class memory::MemoryStorage;
