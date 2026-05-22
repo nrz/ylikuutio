@@ -39,7 +39,7 @@ namespace yli::ontology
     class Scene;
     struct ShapeshifterStruct;
 
-    class Shapeshifter final : public Movable
+    class Shapeshifter : public Movable
     {
         public:
             Shapeshifter(
