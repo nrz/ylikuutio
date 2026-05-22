@@ -22,7 +22,7 @@
 
 namespace yli::ontology
 {
-    struct LispContextStruct : public EntityStruct
+    struct LispContextStruct : EntityStruct
     {
         LispContextStruct()
         {

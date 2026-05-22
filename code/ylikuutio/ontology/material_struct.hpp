@@ -33,7 +33,7 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
 
-    struct MaterialStruct : public EntityStruct
+    struct MaterialStruct : EntityStruct
     {
         MaterialStruct(
                 Request<Ecosystem>&& ecosystem_parent,

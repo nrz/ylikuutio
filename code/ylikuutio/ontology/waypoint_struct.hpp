@@ -29,7 +29,7 @@ namespace yli::ontology
     class Scene;
     class MovableController;
 
-    struct WaypointStruct final : public MovableStruct
+    struct WaypointStruct final : MovableStruct
     {
         WaypointStruct(
                 Request<Scene>&& scene_parent,

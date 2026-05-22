@@ -29,7 +29,7 @@
 
 namespace yli::ontology
 {
-    struct UniverseStruct : public EntityStruct
+    struct UniverseStruct : EntityStruct
     {
         explicit UniverseStruct(const render::GraphicsApiBackend graphics_api_backend) noexcept
             : graphics_api_backend { graphics_api_backend }

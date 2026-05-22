@@ -31,7 +31,7 @@ namespace yli::ontology
     class Holobiont;
     class SymbiontSpecies;
 
-    struct BiontStruct : public MovableStruct
+    struct BiontStruct : MovableStruct
     {
         BiontStruct(
                 Request<Holobiont>&& holobiont_parent,

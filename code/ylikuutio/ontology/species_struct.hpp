@@ -31,7 +31,7 @@ namespace yli::ontology
     class Scene;
     class Material;
 
-    struct SpeciesStruct final : public MeshProviderStruct
+    struct SpeciesStruct final : MeshProviderStruct
     {
         SpeciesStruct(
                 Request<Ecosystem>&& ecosystem_parent,

@@ -28,7 +28,7 @@ namespace yli::ontology
 {
     class CallbackEngine;
 
-    struct CallbackObjectStruct : public EntityStruct
+    struct CallbackObjectStruct : EntityStruct
     {
         explicit CallbackObjectStruct(Request<CallbackEngine>&& callback_engine_parent)
             : callback_engine_parent { std::move(callback_engine_parent) }

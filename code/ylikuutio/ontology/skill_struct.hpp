@@ -28,7 +28,7 @@ namespace yli::ontology
 {
     class Holobiont;
 
-    struct SkillStruct final : public CapabilityStruct
+    struct SkillStruct final : CapabilityStruct
     {
         explicit SkillStruct(Request<Holobiont>&& holobiont_parent)
             : CapabilityStruct(),

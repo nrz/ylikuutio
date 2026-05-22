@@ -34,7 +34,7 @@ namespace yli::ontology
 {
     class Pipeline;
 
-    struct ComputeTaskStruct : public EntityStruct
+    struct ComputeTaskStruct : EntityStruct
     {
         explicit ComputeTaskStruct(Request<Pipeline>&& pipeline_parent)
             : pipeline_parent { std::move(pipeline_parent) }

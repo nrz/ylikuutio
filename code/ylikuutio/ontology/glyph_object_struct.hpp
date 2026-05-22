@@ -30,7 +30,7 @@ namespace yli::ontology
     class Glyph;
     class Text3d;
 
-    struct GlyphObjectStruct final : public MovableStruct
+    struct GlyphObjectStruct final : MovableStruct
     {
         GlyphObjectStruct(
                 Request<Scene>&& scene_parent,

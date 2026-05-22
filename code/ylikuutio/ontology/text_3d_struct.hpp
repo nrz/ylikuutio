@@ -30,7 +30,7 @@ namespace yli::ontology
     class Scene;
     class VectorFont;
 
-    struct Text3dStruct final : public MovableStruct
+    struct Text3dStruct final : MovableStruct
     {
         explicit Text3dStruct(
                 Request<Scene>&& scene_parent,

@@ -30,7 +30,7 @@ namespace yli::ontology
     class MovableController;
     class Species;
 
-    struct ObjectStruct : public MovableStruct
+    struct ObjectStruct : MovableStruct
     {
         explicit ObjectStruct(Request<Scene>&& scene_parent)
             : MovableStruct(std::move(scene_parent))

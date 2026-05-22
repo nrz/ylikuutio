@@ -28,7 +28,7 @@ namespace yli::ontology
 {
     class Material;
 
-    struct ShapeshifterTransformationStruct final : public EntityStruct
+    struct ShapeshifterTransformationStruct final : EntityStruct
     {
         explicit ShapeshifterTransformationStruct(Request<Material>&& material_parent)
             : material_parent { std::move(material_parent) }

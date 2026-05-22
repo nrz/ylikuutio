@@ -28,7 +28,7 @@ namespace yli::ontology
 {
     class ConsoleCallbackObject;
 
-    struct ConsoleCallbackParameterStruct final : public EntityStruct
+    struct ConsoleCallbackParameterStruct final : EntityStruct
     {
         explicit ConsoleCallbackParameterStruct(
                 Request<ConsoleCallbackObject>&& console_callback_object_parent)

@@ -29,7 +29,7 @@ namespace yli::ontology
     class Scene;
     class ShapeshifterSequence;
 
-    struct ShapeshifterStruct final : public MovableStruct
+    struct ShapeshifterStruct final : MovableStruct
     {
         ShapeshifterStruct(
                 Request<Scene>&& scene_parent,

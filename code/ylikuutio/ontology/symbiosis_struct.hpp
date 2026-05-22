@@ -32,7 +32,7 @@ namespace yli::ontology
     class Scene;
     class Pipeline;
 
-    struct SymbiosisStruct final : public EntityStruct
+    struct SymbiosisStruct final : EntityStruct
     {
         SymbiosisStruct(
                 Request<Ecosystem>&& ecosystem_parent,

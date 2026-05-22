@@ -29,7 +29,7 @@ namespace yli::ontology
 {
     class Material;
 
-    struct VectorFontStruct final : public EntityStruct
+    struct VectorFontStruct final : EntityStruct
     {
         explicit VectorFontStruct(Request<Material>&& material_parent)
             : material_parent { std::move(material_parent) }

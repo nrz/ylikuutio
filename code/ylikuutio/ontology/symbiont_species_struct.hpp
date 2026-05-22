@@ -28,7 +28,7 @@ namespace yli::ontology
 {
     class SymbiontMaterial;
 
-    struct SymbiontSpeciesStruct final : public MeshProviderStruct
+    struct SymbiontSpeciesStruct final : MeshProviderStruct
     {
         explicit SymbiontSpeciesStruct(Request<SymbiontMaterial>&& symbiont_material_parent)
             : symbiont_material_parent { std::move(symbiont_material_parent) }

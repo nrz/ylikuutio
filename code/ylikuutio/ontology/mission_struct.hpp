@@ -22,7 +22,7 @@
 
 namespace yli::ontology
 {
-    struct MissionStruct final : public EntityStruct
+    struct MissionStruct final : EntityStruct
     {
     };
 }

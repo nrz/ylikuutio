@@ -40,7 +40,7 @@ namespace yli::ontology
     class ShapeshifterTransformation;
     class VectorFont;
 
-    struct MeshProviderStruct : public EntityStruct
+    struct MeshProviderStruct : EntityStruct
     {
         load::ModelLoaderStruct model_loader_struct;
 

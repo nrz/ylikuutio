@@ -22,7 +22,7 @@
 
 namespace yli::ontology
 {
-    struct LispFunctionStruct : public EntityStruct
+    struct LispFunctionStruct : EntityStruct
     {
     };
 }

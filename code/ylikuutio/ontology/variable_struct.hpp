@@ -31,7 +31,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
 
-    struct VariableStruct final : public EntityStruct
+    struct VariableStruct final : EntityStruct
     {
         // The `Universe&` needs to be stored into `VariableStruct`
         // because `Universe` constructor creates its `Variable`

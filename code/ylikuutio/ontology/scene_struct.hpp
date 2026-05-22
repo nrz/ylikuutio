@@ -29,7 +29,7 @@
 
 namespace yli::ontology
 {
-    struct SceneStruct : public EntityStruct
+    struct SceneStruct : EntityStruct
     {
         CameraStruct default_camera_struct;      // Parameters of the default `Camera`.
 

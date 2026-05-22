@@ -31,7 +31,7 @@ namespace yli::ontology
     class MovableController;
     class Symbiosis;
 
-    struct HolobiontStruct : public MovableStruct
+    struct HolobiontStruct : MovableStruct
     {
         HolobiontStruct(
                 Request<Scene>&& scene_parent,

@@ -25,7 +25,7 @@
 
 namespace yli::ontology
 {
-    struct AudioTrackStruct final : public EntityStruct
+    struct AudioTrackStruct final : EntityStruct
     {
         explicit AudioTrackStruct(const std::string& filename)
             : filename { filename }

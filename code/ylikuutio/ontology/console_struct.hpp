@@ -28,7 +28,7 @@ namespace yli::ontology
 {
     class Font2d;
 
-    struct ConsoleStruct : public LispContextStruct
+    struct ConsoleStruct : LispContextStruct
     {
         ConsoleStruct(const std::uint32_t left_x, const std::uint32_t right_x, const std::uint32_t top_y, const std::uint32_t bottom_y)
         : left_x   { left_x },

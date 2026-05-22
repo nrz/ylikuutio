@@ -22,7 +22,7 @@
 
 namespace yli::ontology
 {
-    struct CapabilityStruct : public EntityStruct
+    struct CapabilityStruct : EntityStruct
     {
         CapabilityStruct()
         {

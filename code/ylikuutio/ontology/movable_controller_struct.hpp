@@ -29,7 +29,7 @@ namespace yli::ontology
     class CallbackEngine;
     class Scene;
 
-    struct MovableControllerStruct : public EntityStruct
+    struct MovableControllerStruct : EntityStruct
     {
         MovableControllerStruct(
                 Request<Scene>&& scene_parent,

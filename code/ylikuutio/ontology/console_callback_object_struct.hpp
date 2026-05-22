@@ -29,7 +29,7 @@ namespace yli::ontology
 {
     class ConsoleCallbackEngine;
 
-    struct ConsoleCallbackObjectStruct final : public EntityStruct
+    struct ConsoleCallbackObjectStruct final : EntityStruct
     {
         explicit ConsoleCallbackObjectStruct(Request<ConsoleCallbackEngine>&& console_callback_engine_parent)
             : console_callback_engine_parent { std::move(console_callback_engine_parent) }

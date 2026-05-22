@@ -43,7 +43,7 @@ namespace yli::ontology
     class Scene;
     class MovableController;
 
-    struct MovableStruct : public EntityStruct
+    struct MovableStruct : EntityStruct
     {
         // Default constructor of `MovableStruct` is used
         // for the default `Camera` in each `Scene`.

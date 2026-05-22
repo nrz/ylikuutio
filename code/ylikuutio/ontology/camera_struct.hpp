@@ -29,7 +29,7 @@ namespace yli::ontology
     class Scene;
     class MovableController;
 
-    struct CameraStruct : public MovableStruct
+    struct CameraStruct : MovableStruct
     {
         CameraStruct() = default;
 

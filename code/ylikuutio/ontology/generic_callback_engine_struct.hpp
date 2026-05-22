@@ -22,7 +22,7 @@
 
 namespace yli::ontology
 {
-    struct GenericCallbackEngineStruct final : public EntityStruct
+    struct GenericCallbackEngineStruct final : EntityStruct
     {
     };
 }

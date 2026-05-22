@@ -28,7 +28,7 @@ namespace yli::ontology
 {
     class Console;
 
-    struct ConsoleLispFunctionStruct : public LispFunctionStruct
+    struct ConsoleLispFunctionStruct : LispFunctionStruct
     {
         explicit ConsoleLispFunctionStruct(Request<Console>&& console_parent)
             : console_parent { std::move(console_parent) }
