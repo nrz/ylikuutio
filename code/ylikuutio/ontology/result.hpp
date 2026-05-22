@@ -49,7 +49,7 @@ namespace yli::ontology
         {
         }
 
-        explicit operator bool()
+        explicit operator bool() const
         {
             if (std::holds_alternative<std::optional<data::AnyValue>>(this->data))
             {
