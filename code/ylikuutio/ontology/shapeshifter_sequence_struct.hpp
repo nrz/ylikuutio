@@ -37,8 +37,8 @@ namespace yli::ontology
         }
 
         Request<ShapeshifterTransformation> shapeshifter_transformation_parent {};
-        float transformation_speed                        { 0.0f };    // Negative speed means inverse initial transition direction.
-        std::size_t initial_offset                        { 0 };       // Index of the `ShapeshifterForm` from which to begin the transition.
+        float transformation_speed { 0.0f }; // Negative speed means inverse initial transition direction.
+        std::size_t initial_offset { 0 };    // Index of the `ShapeshifterForm` from which to begin the transition.
 
         // Repeating transitions begin from the `initial_offset`
         // endlessly in the same initial transition direction,

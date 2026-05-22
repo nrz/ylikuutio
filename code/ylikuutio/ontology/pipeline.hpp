@@ -140,7 +140,7 @@ namespace yli::ontology
             const char* char_vertex_shader;
             const char* char_fragment_shader;
 
-            bool is_gpgpu_pipeline;               // TODO: GPGPU `Pipeline`s are not rendered on screen but their result `ComputeTask`s can be used by `Material`s.
+            bool is_gpgpu_pipeline; // TODO: GPGPU `Pipeline`s are not rendered on screen but their result `ComputeTask`s can be used by `Material`s.
     };
 
     template<>
