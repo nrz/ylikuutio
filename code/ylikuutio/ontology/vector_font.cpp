@@ -143,7 +143,7 @@ namespace yli::ontology
 
                 if (!unicode_value.has_value())
                 {
-                    std::cerr << "ERROR: `VectorFont::VectorFont`: exctracting Unicode value failed!\n";
+                    std::cerr << "ERROR: `VectorFont::VectorFont`: extracting Unicode value failed!\n";
                     continue;
                 }
 

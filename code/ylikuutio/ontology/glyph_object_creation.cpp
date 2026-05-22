@@ -57,7 +57,7 @@ namespace yli::ontology
 
             if (!unicode_value.has_value())
             {
-                throw std::runtime_error("ERROR: `create_glyph_objects`: exctracting Unicode value failed!");
+                throw std::runtime_error("ERROR: `create_glyph_objects`: extracting Unicode value failed!");
             }
 
             Glyph* glyph_pointer = vector_font_master_of_text_3d->get_glyph_pointer(*unicode_value);
