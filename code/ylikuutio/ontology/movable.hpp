@@ -129,10 +129,10 @@ namespace yli::ontology
             static float get_dest_x(const Movable* movable);
 
             // Get y destination coordinate of `movable`.
-            static float get_dest_y(const Movable* const movable);
+            static float get_dest_y(const Movable* movable);
 
             // Get z coordinate of `movable`.
-            static float get_dest_z(const Movable* const movable);
+            static float get_dest_z(const Movable* movable);
 
             // Allied-movable-centric path and map information callbacks.
 

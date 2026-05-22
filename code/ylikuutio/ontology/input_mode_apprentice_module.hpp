@@ -29,8 +29,8 @@ namespace yli::ontology
     {
         public:
             InputModeApprenticeModule(
-                    MasterOfInputModesModule* const master_of_input_modes_module,
-                    Entity* const apprentice);
+                    MasterOfInputModesModule* master_of_input_modes_module,
+                    Entity* apprentice);
     };
 }
 
