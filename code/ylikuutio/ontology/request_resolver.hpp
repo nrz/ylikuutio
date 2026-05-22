@@ -35,7 +35,7 @@ namespace yli::ontology
             {
                 return std::get<Type*>(entity_request.data);
             }
-            else if (std::holds_alternative<std::string>(entity_request.data))
+            if (std::holds_alternative<std::string>(entity_request.data))
             {
                 const std::string& entity_string = std::get<std::string>(entity_request.data);
                 return dynamic_cast<Type*>(registry.get_entity(entity_string));
@@ -56,7 +56,7 @@ namespace yli::ontology
 
                 throw std::runtime_error("ERROR: `yli::ontology::resolve_request_or_throw`: `nullptr` requested!");
             }
-            else if (std::holds_alternative<std::string>(entity_request.data))
+            if (std::holds_alternative<std::string>(entity_request.data))
             {
                 const std::string& entity_string = std::get<std::string>(entity_request.data);
                 auto* entity = dynamic_cast<Type*>(registry.get_entity(entity_string));
