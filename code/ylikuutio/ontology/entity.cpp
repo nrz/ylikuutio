@@ -194,8 +194,8 @@ namespace yli::ontology
 
         // OK, assumedly we have a multi-part name.
 
-        const std::string first = std::string(name, 0, first_dot_pos);
-        const std::string rest = std::string(name, ++first_dot_pos);
+        const auto first = std::string(name, 0, first_dot_pos);
+        const auto rest = std::string(name, ++first_dot_pos);
 
         if (!this->registry.is_entity(first))
         {

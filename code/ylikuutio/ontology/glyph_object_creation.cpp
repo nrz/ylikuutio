@@ -40,7 +40,7 @@ namespace yli::ontology
 
     void create_glyph_objects(const std::string& text_string, Text3d& text_3d)
     {
-        Scene* const scene_parent_of_text_3d = static_cast<Scene*>(text_3d.get_parent());
+        auto* const scene_parent_of_text_3d = static_cast<Scene*>(text_3d.get_parent());
 
         const VectorFont* const vector_font_master_of_text_3d = text_3d.get_vector_font_master();
 

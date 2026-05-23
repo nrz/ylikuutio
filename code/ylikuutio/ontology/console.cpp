@@ -159,7 +159,7 @@ namespace yli::ontology
             return;
         }
 
-        Font2d* const font_2d = static_cast<Font2d*>(
+        const auto font_2d = static_cast<Font2d*>(
                 this->apprentice_of_font_2d.get_master());
 
         if (font_2d == nullptr)

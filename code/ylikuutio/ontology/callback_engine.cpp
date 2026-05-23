@@ -69,7 +69,7 @@ namespace yli::ontology
         const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
         const CallbackObjectStruct callback_object_struct { Request(this) };
-        auto callback_object = entity_factory.create_callback_object(callback_object_struct);
+        const auto callback_object = entity_factory.create_callback_object(callback_object_struct);
         callback_object->set_new_callback(callback);
         return callback_object;
     }
@@ -82,7 +82,7 @@ namespace yli::ontology
         // execute all callbacks.
         for (std::size_t child_i = 0; child_i < this->parent_of_callback_objects.child_pointer_vector.size(); child_i++)
         {
-            CallbackObject* callback_object_pointer = static_cast<CallbackObject*>(
+            const auto callback_object_pointer = static_cast<CallbackObject*>(
                     this->parent_of_callback_objects.child_pointer_vector.at(child_i));
 
             if (callback_object_pointer != nullptr)

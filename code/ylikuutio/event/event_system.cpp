@@ -47,7 +47,7 @@ namespace yli::event
             }
             else if (sdl_event.type == SDL_EVENT_KEY_DOWN)
             {
-                const std::uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
+                const auto scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
                 ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keypress_callback_engine(scancode);
 
@@ -65,7 +65,7 @@ namespace yli::event
             }
             else if (sdl_event.type == SDL_EVENT_KEY_UP)
             {
-                const std::uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
+                const auto scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
                 ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keyrelease_callback_engine(scancode);
 

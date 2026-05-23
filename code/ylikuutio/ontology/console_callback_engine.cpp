@@ -97,7 +97,7 @@ namespace yli::ontology
         // execute all callbacks.
         for (std::size_t child_i = 0; child_i < this->parent_of_console_callback_objects.child_pointer_vector.size(); child_i++)
         {
-            ConsoleCallbackObject* console_callback_object_pointer = static_cast<ConsoleCallbackObject*>(
+            const auto console_callback_object_pointer = static_cast<ConsoleCallbackObject*>(
                     this->parent_of_console_callback_objects.child_pointer_vector.at(child_i));
 
             if (console_callback_object_pointer != nullptr)

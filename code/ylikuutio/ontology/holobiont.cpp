@@ -140,7 +140,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Holobiont::create_bionts`: `symbiosis` is `nullptr`!");
         }
 
-        const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>(&holobiont);
+        const auto memory_address = reinterpret_cast<std::uintptr_t>(&holobiont);
         std::stringstream memory_address_stringstream;
         memory_address_stringstream << "0x" << std::hex << memory_address;
 
