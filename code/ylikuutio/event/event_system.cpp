@@ -29,12 +29,12 @@
 
 namespace yli::event
 {
-    EventSystem::EventSystem(yli::ontology::Universe& universe)
+    EventSystem::EventSystem(ontology::Universe& universe)
         : universe { universe }
     {
     }
 
-    void EventSystem::poll_events(const yli::ontology::InputMode& input_mode)
+    void EventSystem::poll_events(const ontology::InputMode& input_mode)
     {
         SDL_Event sdl_event;
 
@@ -49,15 +49,15 @@ namespace yli::event
             {
                 const std::uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
-                yli::ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keypress_callback_engine(scancode);
+                ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keypress_callback_engine(scancode);
 
                 if (generic_callback_engine != nullptr)
                 {
-                    const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
+                    const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue());
 
                     if (any_value &&
                             std::holds_alternative<std::uint32_t>(any_value->data) &&
-                            std::get<std::uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                            std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)
                     {
                         this->universe.request_exit();
                     }
@@ -67,25 +67,25 @@ namespace yli::event
             {
                 const std::uint32_t scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
-                yli::ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keyrelease_callback_engine(scancode);
+                ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keyrelease_callback_engine(scancode);
 
                 if (generic_callback_engine == nullptr)
                 {
                     continue;
                 }
 
-                const std::optional<yli::data::AnyValue> any_value = generic_callback_engine->execute(yli::data::AnyValue());
+                const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue());
 
                 if (any_value &&
                         std::holds_alternative<std::uint32_t>(any_value->data) &&
-                        std::get<std::uint32_t>(any_value->data) == yli::ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                        std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)
                 {
                     this->universe.request_exit();
                 }
             }
             else if (sdl_event.type == SDL_EVENT_TEXT_INPUT)
             {
-                yli::ontology::Console* const active_console = this->universe.get_active_console();
+                ontology::Console* const active_console = this->universe.get_active_console();
 
                 if (active_console != nullptr && sdl_event.text.text != nullptr)
                 {

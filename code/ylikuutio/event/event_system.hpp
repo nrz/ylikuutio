@@ -40,19 +40,19 @@ namespace yli::event
     class EventSystem
     {
         public:
-            explicit EventSystem(yli::ontology::Universe& universe);
+            explicit EventSystem(ontology::Universe& universe);
 
-            void poll_events(const yli::ontology::InputMode& input_mode);
+            void poll_events(const ontology::InputMode& input_mode);
 
             EventSystem& get();
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
         private:
-            yli::memory::ConstructibleModule constructible_module;
+            memory::ConstructibleModule constructible_module;
 
-            yli::ontology::Universe& universe;
+            ontology::Universe& universe;
     };
 }
 
