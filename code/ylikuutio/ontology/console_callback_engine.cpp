@@ -82,7 +82,7 @@ namespace yli::ontology
     ConsoleCallbackObject* ConsoleCallbackEngine::create_console_callback_object(
             const InputParametersToAnyValueCallbackWithConsole callback)
     {
-        GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
         ConsoleCallbackObjectStruct console_callback_object_struct { Request(this) };
         console_callback_object_struct.console_callback = callback;

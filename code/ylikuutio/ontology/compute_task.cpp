@@ -84,7 +84,7 @@ namespace yli::ontology
             this->universe.get_is_opengl_in_use() ||
             this->universe.get_is_vulkan_in_use();
 
-        Pipeline* const pipeline_parent = static_cast<Pipeline*>(this->get_parent());
+        const Pipeline* const pipeline_parent = static_cast<Pipeline*>(this->get_parent());
 
         if (pipeline_parent != nullptr && should_load_texture && this->universe.get_is_opengl_in_use())
         {

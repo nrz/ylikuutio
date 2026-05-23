@@ -169,7 +169,7 @@ namespace yli::ontology
         if (this->texture.get_is_texture_loaded() && this->get_pipeline() != nullptr)
         {
             // Get a handle for our "texture_sampler" uniform.
-            Pipeline* const pipeline = this->get_pipeline();
+            const Pipeline* const pipeline = this->get_pipeline();
             this->opengl_texture_id = glGetUniformLocation(pipeline->get_program_id(), "texture_sampler");
         }
 
@@ -185,7 +185,7 @@ namespace yli::ontology
             return;
         }
 
-        Scene* const scene = this->get_scene();
+        const Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {

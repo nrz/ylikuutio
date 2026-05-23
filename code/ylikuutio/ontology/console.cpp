@@ -375,7 +375,7 @@ namespace yli::ontology
     {
         if (registry.get_number_of_completions(input) > 1)
         {
-            TextInput* const active_input = this->console_logic_module.edit_input();
+            const TextInput* const active_input = this->console_logic_module.edit_input();
 
             if (active_input == nullptr) [[unlikely]]
             {

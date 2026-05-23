@@ -159,9 +159,9 @@ namespace yli::ontology
         }
 
         this->model_matrix = glm::scale(this->model_matrix, holobiont_parent->get_scale() * this->original_scale_vector);
-        glm::vec3 euler_angles { holobiont_parent->orientation.roll, -holobiont_parent->orientation.pitch, holobiont_parent->orientation.yaw };
-        glm::quat my_quaternion = glm::quat(euler_angles);
-        glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
+        const glm::vec3 euler_angles { holobiont_parent->orientation.roll, -holobiont_parent->orientation.pitch, holobiont_parent->orientation.yaw };
+        const glm::quat my_quaternion = glm::quat(euler_angles);
+        const glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
         this->model_matrix = rotation_matrix * this->model_matrix;
         this->model_matrix[3][0] = holobiont_parent->location.get_x();
         this->model_matrix[3][1] = holobiont_parent->location.get_y();
@@ -206,15 +206,15 @@ namespace yli::ontology
 
             glBindBufferBase(GL_UNIFORM_BUFFER, opengl::UboBlockIndices::MOVABLE, this->movable_uniform_block);
 
-            GLuint vao                             = mesh.get_vao();
-            GLuint vertex_buffer                   = mesh.get_vertex_buffer();
-            std::uint32_t vertex_position_modelspace_id = mesh.get_vertex_position_modelspace_id();
-            GLuint uv_buffer                       = mesh.get_uv_buffer();
-            std::uint32_t vertex_uv_id             = mesh.get_vertex_uv_id();
-            GLuint normal_buffer                   = mesh.get_normal_buffer();
-            std::uint32_t vertex_normal_modelspace_id = mesh.get_vertex_normal_modelspace_id();
-            GLuint element_buffer                  = mesh.get_element_buffer();
-            std::uint32_t indices_size             = mesh.get_indices_size();
+            const GLuint vao                             = mesh.get_vao();
+            const GLuint vertex_buffer                   = mesh.get_vertex_buffer();
+            const std::uint32_t vertex_position_modelspace_id = mesh.get_vertex_position_modelspace_id();
+            const GLuint uv_buffer                       = mesh.get_uv_buffer();
+            const std::uint32_t vertex_uv_id             = mesh.get_vertex_uv_id();
+            const GLuint normal_buffer                   = mesh.get_normal_buffer();
+            const std::uint32_t vertex_normal_modelspace_id = mesh.get_vertex_normal_modelspace_id();
+            const GLuint element_buffer                  = mesh.get_element_buffer();
+            const std::uint32_t indices_size             = mesh.get_indices_size();
 
             glBindVertexArray(vao);
 

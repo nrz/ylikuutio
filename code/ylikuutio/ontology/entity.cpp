@@ -234,7 +234,7 @@ namespace yli::ontology
 
     void Entity::create_variable(const VariableStruct& variable_struct, data::AnyValue&& any_value)
     {
-        GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
+        const GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
         const VariableStruct new_variable_struct(this, variable_struct);
         entity_factory.create_variable(new_variable_struct, std::move(any_value));

@@ -116,7 +116,7 @@ namespace yli::ontology
         SkillStruct skill_struct { Request(&holobiont) };
         skill_struct.local_name = skill_name;
 
-        GenericEntityFactory& entity_factory = holobiont.get_application().get_generic_entity_factory();
+        const GenericEntityFactory& entity_factory = holobiont.get_application().get_generic_entity_factory();
         entity_factory.create_skill(skill_struct);
     }
 

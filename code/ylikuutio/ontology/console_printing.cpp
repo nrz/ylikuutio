@@ -38,7 +38,7 @@ namespace yli::ontology
     {
         const Universe& universe = console.get_universe();
 
-        std::size_t characters_for_line = universe.get_window_width() / universe.get_text_size();
+        const std::size_t characters_for_line = universe.get_window_width() / universe.get_text_size();
 
         std::string keys_text;
 
