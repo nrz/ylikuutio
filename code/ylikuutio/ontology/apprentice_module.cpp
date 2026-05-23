@@ -48,7 +48,7 @@ namespace yli::ontology
             if (master_scene != nullptr && master_scene != &scene)
             {
                 // Master belongs to a different `Scene` compared to what apprentice plans to bind to.
-                // Therefore apprentice will unbind from master.
+                // Therefore, apprentice will unbind from master.
                 this->unbind_from_generic_master_module();
             }
         }
