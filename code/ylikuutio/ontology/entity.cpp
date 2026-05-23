@@ -56,7 +56,7 @@ namespace yli::ontology
     }
 
     Entity::Entity(
-            yli::core::Application& application,
+            core::Application& application,
             Universe& universe,
             const EntityStruct& entity_struct)
         : application { application },

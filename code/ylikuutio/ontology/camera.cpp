@@ -129,10 +129,10 @@ namespace yli::ontology
     {
         // Compute the projection matrix.
         this->set_projection_matrix(glm::perspective(
-                    geometry::degrees_to_radians(initial_fov),
-                    aspect_ratio,
-                    znear,
-                    zfar));
+            geometry::degrees_to_radians(initial_fov),
+            aspect_ratio,
+            znear,
+            zfar));
 
         // Compute the view matrix.
         this->set_view_matrix(glm::lookAt(

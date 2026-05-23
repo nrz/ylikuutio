@@ -74,9 +74,9 @@ namespace yli::ontology
         return callback_object;
     }
 
-    std::optional<yli::data::AnyValue> CallbackEngine::execute(const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> CallbackEngine::execute(const data::AnyValue& any_value)
     {
-        std::optional<yli::data::AnyValue> return_any_value;
+        std::optional<data::AnyValue> return_any_value;
         bool is_any_callback_object_executed { false };
 
         // execute all callbacks.

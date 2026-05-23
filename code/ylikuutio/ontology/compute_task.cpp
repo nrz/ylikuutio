@@ -152,16 +152,16 @@ namespace yli::ontology
             // Initialize uniform window width.
             // This is named `screen_width` instead of `texture_width` for compatibility with other shaders.
             this->screen_width_uniform_id = glGetUniformLocation(pipeline_parent->get_program_id(), "screen_width");
-            yli::opengl::uniform_1i(this->screen_width_uniform_id, this->texture_width);
+            opengl::uniform_1i(this->screen_width_uniform_id, this->texture_width);
 
             // Initialize uniform window height.
             // This is named `screen_height` instead of `texture_height` for compatibility with other shaders.
             this->screen_height_uniform_id = glGetUniformLocation(pipeline_parent->get_program_id(), "screen_height");
-            yli::opengl::uniform_1i(this->screen_height_uniform_id, this->texture_height);
+            opengl::uniform_1i(this->screen_height_uniform_id, this->texture_height);
 
             // Initialize uniform iteration index.
             this->iteration_i_uniform_id = glGetUniformLocation(pipeline_parent->get_program_id(), "iteration_i");
-            yli::opengl::uniform_1i(this->iteration_i_uniform_id, 0);
+            opengl::uniform_1i(this->iteration_i_uniform_id, 0);
 
             // Create model (a square which consists of 2 triangles).
             // *---*
@@ -246,7 +246,7 @@ namespace yli::ontology
         }
 
         // Bind the offscreen buffer.
-        yli::opengl::bind_gl_framebuffer(this->framebuffer);
+        opengl::bind_gl_framebuffer(this->framebuffer);
 
         if (!this->is_framebuffer_initialized)
         {
@@ -284,7 +284,7 @@ namespace yli::ontology
                         nullptr);
             }
 
-            yli::opengl::set_nearest_filtering_parameters();
+            opengl::set_nearest_filtering_parameters();
 
             // Attach the texture.
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->target_texture, 0);
@@ -304,7 +304,7 @@ namespace yli::ontology
         for (std::size_t iteration_i = 0; iteration_i < n_max_iterations; iteration_i++)
         {
             // Update the value of `uniform` variable `iteration_i`.
-            yli::opengl::uniform_1i(this->iteration_i_uniform_id, iteration_i);
+            opengl::uniform_1i(this->iteration_i_uniform_id, iteration_i);
 
             // Bind our texture in Texture Unit 0.
             glActiveTexture(GL_TEXTURE0);

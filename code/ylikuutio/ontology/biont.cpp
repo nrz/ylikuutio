@@ -200,11 +200,11 @@ namespace yli::ontology
 
             // Matrices' uniform block gets updated by `Object`s and `Biont`s.
             glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
-            glBufferSubData(GL_UNIFORM_BUFFER, yli::opengl::movable_ubo::MovableUboBlockOffsets::MVP, sizeof(glm::mat4), glm::value_ptr(this->mvp_matrix)); // mat4
-            glBufferSubData(GL_UNIFORM_BUFFER, yli::opengl::movable_ubo::MovableUboBlockOffsets::M, sizeof(glm::mat4), glm::value_ptr(this->model_matrix)); // mat4
+            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::MVP, sizeof(glm::mat4), glm::value_ptr(this->mvp_matrix)); // mat4
+            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::M, sizeof(glm::mat4), glm::value_ptr(this->model_matrix)); // mat4
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-            glBindBufferBase(GL_UNIFORM_BUFFER, yli::opengl::UboBlockIndices::MOVABLE, this->movable_uniform_block);
+            glBindBufferBase(GL_UNIFORM_BUFFER, opengl::UboBlockIndices::MOVABLE, this->movable_uniform_block);
 
             GLuint vao                             = mesh.get_vao();
             GLuint vertex_buffer                   = mesh.get_vertex_buffer();
@@ -240,7 +240,7 @@ namespace yli::ontology
                     0,                            // stride
                     nullptr                       // array buffer offset
                     );
-            yli::opengl::enable_vertex_attrib_array(vertex_uv_id);
+            opengl::enable_vertex_attrib_array(vertex_uv_id);
 
             // 3rd attribute buffer : normals.
             glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
