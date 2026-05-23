@@ -20,9 +20,6 @@
 
 #include "entity.hpp"
 
-// Include standard headers
-#include <cstddef> // std::size_t
-
 namespace yli::core
 {
     class Application;
