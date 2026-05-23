@@ -85,7 +85,7 @@ namespace yli::ontology
         return this->master_of_movables.get_number_of_apprentices(); // `Movable`s controlled by `MovableController` are its apprentices.
     }
 
-    void MovableController::update()
+    void MovableController::update() const
     {
         CallbackEngine* const callback_engine_master = this->get_callback_engine_master();
 

@@ -46,8 +46,8 @@ namespace yli::ontology
             bool has_current_input_mode() const;
             void set_current_input_mode(InputMode* input_mode);
             InputMode* get_current_input_mode() const;
-            void activate_current_input_mode();
-            void deactivate_current_input_mode();
+            void activate_current_input_mode() const;
+            void deactivate_current_input_mode() const;
 
         private:
             InputMode* current_input_mode { nullptr };

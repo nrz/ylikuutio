@@ -250,7 +250,7 @@ namespace yli::ontology
         return dynamic_cast<Variable*>(this->registry.get_entity(variable_name));
     }
 
-    bool Entity::set_variable(const std::string& variable_name, const data::AnyValue& variable_new_any_value)
+    bool Entity::set_variable(const std::string& variable_name, const data::AnyValue& variable_new_any_value) const
     {
         Variable* const variable = this->get_variable(variable_name);
 

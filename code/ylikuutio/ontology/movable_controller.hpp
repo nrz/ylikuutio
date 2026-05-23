@@ -93,7 +93,7 @@ namespace yli::ontology
 
             std::size_t get_number_of_apprentices() const;
 
-            void update();
+            void update() const;
 
             template<typename T1, std::size_t DataSize>
                 friend class memory::MemoryStorage;

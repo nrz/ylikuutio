@@ -116,7 +116,7 @@ namespace yli::ontology
             void create_variable(const VariableStruct& variable_struct, data::AnyValue&& any_value);
             bool has_variable(const std::string& variable_name) const;
             Variable* get_variable(const std::string& variable_name) const;
-            bool set_variable(const std::string& variable_name, const data::AnyValue& variable_new_any_value);
+            bool set_variable(const std::string& variable_name, const data::AnyValue& variable_new_any_value) const;
 
             virtual std::string help() const;                         // this function returns general help string.
             virtual std::string help_for_variable(const std::string& variable_name) const; // this function returns the help string for the `Variable`.

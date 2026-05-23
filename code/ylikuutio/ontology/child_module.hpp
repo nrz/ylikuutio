@@ -59,7 +59,7 @@ namespace yli::ontology
                     GenericParentModule* new_parent_module) noexcept;
 
         private:
-            void bind_to_parent_module() noexcept;
+            void bind_to_parent_module() const noexcept;
 
             GenericParentModule* parent_module;
             Entity& entity;

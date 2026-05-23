@@ -51,7 +51,7 @@ namespace yli::ontology
         return this->current_input_mode;
     }
 
-    void MasterOfInputModesModule::activate_current_input_mode()
+    void MasterOfInputModesModule::activate_current_input_mode() const
     {
         if (this->current_input_mode == nullptr) [[unlikely]]
         {
@@ -64,7 +64,7 @@ namespace yli::ontology
         }
     }
 
-    void MasterOfInputModesModule::deactivate_current_input_mode()
+    void MasterOfInputModesModule::deactivate_current_input_mode() const
     {
         if (this->current_input_mode == nullptr) [[unlikely]]
         {

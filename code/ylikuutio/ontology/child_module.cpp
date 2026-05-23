@@ -28,7 +28,7 @@ namespace yli::ontology
 {
     class Scene;
 
-    void ChildModule::bind_to_parent_module() noexcept
+    void ChildModule::bind_to_parent_module() const noexcept
     {
         // requirements:
         // `this->parent` must not be `nullptr`.

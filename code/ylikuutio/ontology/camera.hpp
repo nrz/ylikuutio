@@ -106,7 +106,7 @@ namespace yli::ontology
 
             void activate() override;
 
-            void render();
+            void render() const;
 
             void compute_and_update_matrices_from_inputs(float initial_fov, float aspect_ratio, float znear, float zfar);
 

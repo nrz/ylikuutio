@@ -102,7 +102,7 @@ namespace yli::ontology
         }
     }
 
-    void Camera::render()
+    void Camera::render() const
     {
         // Set the uniform values specific to a `Camera`.
         // This is a work in progress.
