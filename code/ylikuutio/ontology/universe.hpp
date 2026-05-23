@@ -141,7 +141,7 @@ namespace yli::ontology
             static void set_active_camera(Camera* camera);
 
             const glm::vec3& get_xyz() const;
-            void set_xyz(glm::vec3&& xyz) const;
+            void set_xyz(const glm::vec3 &xyz) const;
             void update_xyz(const glm::vec3& xyz) const;
 
             float get_x() const;

@@ -652,7 +652,7 @@ namespace yli::ontology
         return camera->location.xyz;
     }
 
-    void Universe::set_xyz(glm::vec3&& xyz) const
+    void Universe::set_xyz(const glm::vec3& xyz) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -661,7 +661,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Universe::set_xyz`: `camera` is `nullptr`!");
         }
 
-        camera->location.xyz = std::move(xyz);
+        camera->location.xyz = xyz;
     }
 
     void Universe::update_xyz(const glm::vec3& xyz) const
