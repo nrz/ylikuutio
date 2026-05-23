@@ -37,7 +37,7 @@ namespace yli::ontology
     }
 
     void ApprenticeModule::unbind_from_any_master_belonging_to_other_scene(
-            const Scene& scene) noexcept
+            const Scene& scene) const noexcept
     {
         Entity* const master = this->get_master();
 
@@ -54,7 +54,7 @@ namespace yli::ontology
         }
     }
 
-    void ApprenticeModule::unbind_from_generic_master_module() noexcept
+    void ApprenticeModule::unbind_from_generic_master_module() const noexcept
     {
         if (this->generic_master_module != nullptr && this->apprenticeID != std::numeric_limits<std::size_t>::max())
         {

@@ -39,7 +39,7 @@ namespace yli::ontology
     {
         public:
             void bind_to_generic_master_module() noexcept;
-            void unbind_from_generic_master_module() noexcept;
+            void unbind_from_generic_master_module() const noexcept;
 
         private:
             void bind_to_new_generic_master_module(
@@ -47,7 +47,7 @@ namespace yli::ontology
 
         public:
             void unbind_from_any_master_belonging_to_other_scene(
-                    const Scene& scene) noexcept;
+                    const Scene& scene) const noexcept;
 
             void unbind_and_bind_to_new_generic_master_module(
                     GenericMasterModule* new_generic_master) noexcept;
