@@ -136,9 +136,9 @@ namespace yli::ontology
 
         // Compute the view matrix.
         this->set_view_matrix(glm::lookAt(
-                    this->location.xyz,                   // Camera coordinates.
-                    this->location.xyz + this->direction, // Camera looks here: at the same position, plus "current_camera_direction".
-                    this->up));                           // Head is up (set to 0,-1,0 to look upside-down).
+            this->location.xyz,                   // Camera coordinates.
+            this->location.xyz + this->direction, // Camera looks here: at the same position, plus "current_camera_direction".
+            this->up));                           // Head is up (set to 0,-1,0 to look upside-down).
     }
 
     const glm::mat4& Camera::get_projection_matrix() const
