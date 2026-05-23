@@ -110,7 +110,7 @@ namespace yli::ontology
                         this->source_texture,
                         this->universe.get_graphics_api_backend()))
             {
-                std::cerr << "ERROR: loading PNG texture failed!\n";
+                std::cerr << "ERROR: `ComputeTask::ComputeTask`: loading PNG texture failed!\n";
             }
             else
             {
@@ -131,7 +131,7 @@ namespace yli::ontology
                         this->texture_size,
                         this->source_texture))
             {
-                std::cerr << "ERROR: loading CSV texture failed!\n";
+                std::cerr << "ERROR: `ComputeTask::ComputeTask`: loading CSV texture failed!\n";
             }
             else
             {

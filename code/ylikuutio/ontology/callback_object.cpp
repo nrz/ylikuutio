@@ -109,7 +109,7 @@ namespace yli::ontology
     {
         if (arg_i >= this->parent_of_callback_parameters.child_pointer_vector.size())
         {
-            std::cerr << "error #1 in CallbackObject code.\n";
+            std::cerr << "ERROR: `CallbackObject::get_arg`: `arg_i` is out of bounds.\n";
             return std::nullopt;
         }
 
@@ -118,7 +118,7 @@ namespace yli::ontology
 
         if (callback_parameter == nullptr)
         {
-            std::cerr << "error #2 in CallbackObject code.\n";
+            std::cerr << "ERROR: `CallbackObject::get_arg`: `callback_parameter` is `nullptr`.\n";
             return std::nullopt;
         }
 
