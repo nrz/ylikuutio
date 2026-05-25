@@ -44,10 +44,10 @@ namespace yli::ontology
     ConsoleCallbackParameter::ConsoleCallbackParameter(
             core::Application& application,
             Universe& universe,
-            const ConsoleCallbackParameterStruct& callback_parameter_struct,
+            const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
             GenericParentModule* const console_callback_object_parent_module,
             const data::AnyValue& any_value)
-        : Entity(application, universe, callback_parameter_struct),
+        : Entity(application, universe, console_callback_parameter_struct),
         child_of_console_callback_object(console_callback_object_parent_module, *this),
         any_value { any_value }
     {
