@@ -80,7 +80,7 @@ namespace yli::ontology
             void terminate();
             memory::ConstructibleModule get_constructible_module() const;
 
-            void set_childID(const std::size_t childID);
+            void set_childID(std::size_t childID);
             std::size_t get_childID() const;
             void release();
             std::string get_type() const;
