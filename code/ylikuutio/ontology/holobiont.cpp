@@ -108,7 +108,7 @@ namespace yli::ontology
         render::RenderSystem& render_system = this->universe.get_render_system();
 
         // Every `Biont` is a child of a `Holobiont`, so they reside in the same `Scene`.
-        render_system.render_bionts(this->parent_of_bionts);
+        render::RenderSystem::render_bionts(this->parent_of_bionts);
     }
 
     void Holobiont::create_skill(Holobiont& holobiont, const std::string& skill_name)
