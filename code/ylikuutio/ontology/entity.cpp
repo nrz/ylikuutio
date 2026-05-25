@@ -60,7 +60,6 @@ namespace yli::ontology
             Universe& universe,
             const EntityStruct& entity_struct)
         : application { application },
-        registry(),
         parent_of_variables(
                 *this,
                 this->registry,

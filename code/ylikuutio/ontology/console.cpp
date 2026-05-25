@@ -102,7 +102,6 @@ namespace yli::ontology
         n_rows           { this->console_top_y - this->console_bottom_y + 1 },
         new_input            { TextInputType::NEW_INPUT },
         temp_input           { TextInputType::TEMP_INPUT },
-        command_history      {},
         scrollback_buffer    { this->n_columns, this->n_rows },
         console_logic_module { this->new_input, this->temp_input, this->command_history, this->scrollback_buffer, this->n_columns, this->n_rows },
         completion_module    { *this }
