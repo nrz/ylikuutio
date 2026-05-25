@@ -42,12 +42,9 @@
 #include <iostream>   // std::cout, std::cerr
 #include <numbers>    // std::numbers::pi
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        class Entity;
-    }
+    class Entity;
 }
 
 namespace ajokki

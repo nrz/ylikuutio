@@ -38,12 +38,9 @@
 #include <iostream>   // std::cout, std::cerr
 #include <sstream>    // std::stringstream
 
-namespace yli
+namespace yli::ontology
 {
-    namespace ontology
-    {
-        class Entity;
-    }
+    class Entity;
 }
 
 namespace gpgpu_test
