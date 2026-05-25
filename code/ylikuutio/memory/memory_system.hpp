@@ -156,7 +156,7 @@ namespace yli::memory
                             return this->get_generic_allocator(type);
                         }
 
-                        this->create_allocator<T1, Args...>(type, std::forward<Args>(args)...);
+                        this->template create_allocator<T1, Args...>(type, std::forward<Args>(args)...);
                         return this->get_generic_allocator(type);
                     }
 
