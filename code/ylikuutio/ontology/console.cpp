@@ -166,9 +166,7 @@ namespace yli::ontology
             return;
         }
 
-        const TextInput* const visible_input = this->console_logic_module.get_visible_input();
-
-        if (visible_input == nullptr)
+        if (const TextInput* const visible_input = this->console_logic_module.get_visible_input(); visible_input == nullptr)
         {
             return;
         }
@@ -309,9 +307,7 @@ namespace yli::ontology
     {
         if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            TextInput* const active_input = this->console_logic_module.edit_input();
-
-            if (active_input != nullptr) [[likely]]
+            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr) [[likely]]
             {
                 active_input->delete_character();
             }
@@ -322,9 +318,7 @@ namespace yli::ontology
     {
         if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            TextInput* const active_input = this->console_logic_module.edit_input();
-
-            if (active_input != nullptr) [[likely]]
+            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr) [[likely]]
             {
                 active_input->move_cursor_left();
             }
@@ -335,9 +329,7 @@ namespace yli::ontology
     {
         if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            TextInput* const active_input = this->console_logic_module.edit_input();
-
-            if (active_input != nullptr) [[likely]]
+            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr) [[likely]]
             {
                 active_input->move_cursor_right();
             }
@@ -348,9 +340,7 @@ namespace yli::ontology
     {
         if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            TextInput* const active_input = this->console_logic_module.edit_input();
-
-            if (active_input != nullptr) [[likely]]
+            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr) [[likely]]
             {
                 active_input->move_cursor_to_start_of_line();
             }
@@ -361,9 +351,7 @@ namespace yli::ontology
     {
         if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            TextInput* const active_input = this->console_logic_module.edit_input();
-
-            if (active_input != nullptr) [[likely]]
+            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr) [[likely]]
             {
                 active_input->move_cursor_to_end_of_line();
             }
@@ -383,9 +371,7 @@ namespace yli::ontology
 
             this->print_text(active_input->data());
 
-            const std::vector<std::string> completions = registry.get_completions(input);
-
-            for (const std::string& completion : completions)
+            for (const std::vector<std::string> completions = registry.get_completions(input); const std::string& completion : completions)
             {
                 this->print_text(completion);
             }

@@ -101,11 +101,9 @@ namespace yli::ontology
                 continue;
             }
 
-            Movable* movable = static_cast<Movable*>(movable_apprentice_module->get_apprentice());
-
-            if (movable != nullptr)
+            if (auto* movable = static_cast<Movable*>(movable_apprentice_module->get_apprentice()); movable != nullptr)
             {
-                callback_engine_master->execute(yli::data::AnyValue(*movable));
+                callback_engine_master->execute(data::AnyValue(*movable));
             }
         }
     }

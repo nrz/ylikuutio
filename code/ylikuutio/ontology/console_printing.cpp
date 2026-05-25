@@ -42,9 +42,9 @@ namespace yli::ontology
 
         std::string keys_text;
 
-        for (std::string key : words)
+        for (const std::string& key : words)
         {
-            if (keys_text.size() > 0 &&
+            if (!keys_text.empty() &&
                     keys_text.size() + key.size() >= characters_for_line)
             {
                 // Not enough space for this key on this line.
@@ -52,7 +52,7 @@ namespace yli::ontology
                 console.print_text(keys_text);
                 keys_text = key;
             }
-            else if (keys_text.size() > 0)
+            else if (!keys_text.empty())
             {
                 // There is space, and this is not the first key on this line.
                 keys_text += " " + key;
@@ -63,7 +63,7 @@ namespace yli::ontology
                 keys_text += key;
             }
         }
-        if (keys_text.size() > 0)
+        if (!keys_text.empty())
         {
             // Print the last line.
             console.print_text(keys_text);

@@ -1337,7 +1337,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Universe::get_render_system`: `this->render_system` is `nullptr`!");
         }
 
-        return *this->render_system.get();
+        return *this->render_system;
     }
 
     audio::AudioSystem* Universe::get_audio_system() const

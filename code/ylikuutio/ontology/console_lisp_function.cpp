@@ -103,12 +103,10 @@ namespace yli::ontology
         // If there are no `GenericConsoleLispFunctionOverload`s,
         // then `std::nullopt` is returned as well.
 
-        for (std::vector<Entity*>::const_iterator it = this->parent_of_generic_console_lisp_function_overloads.child_pointer_vector.begin();
-                it != this->parent_of_generic_console_lisp_function_overloads.child_pointer_vector.end();
-                ++it)
+        for (const auto it : this->parent_of_generic_console_lisp_function_overloads.child_pointer_vector)
         {
             Result result =
-                static_cast<GenericConsoleLispFunctionOverload*>(*it)->execute(parameter_vector);
+                static_cast<GenericConsoleLispFunctionOverload*>(it)->execute(parameter_vector);
 
             if (result)
             {

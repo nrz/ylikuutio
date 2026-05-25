@@ -287,18 +287,16 @@ namespace yli::ontology
         azimuth_variable_struct.should_call_activate_callback_now = false;
         this->create_variable(azimuth_variable_struct, data::AnyValue(azimuth));
 
-        const float scale = this->scale;
         VariableStruct scale_variable_struct(this->get_universe(), this);
         scale_variable_struct.local_name = "scale";
         scale_variable_struct.activate_callback = &activate_scale;
         scale_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(scale_variable_struct, data::AnyValue(scale));
+        this->create_variable(scale_variable_struct, data::AnyValue(this->scale));
 
-        const float speed = this->speed;
         VariableStruct speed_variable_struct(this->get_universe(), this);
         speed_variable_struct.local_name = "speed";
         speed_variable_struct.activate_callback = &Variable::activate_speed;
         speed_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(speed_variable_struct, data::AnyValue(speed));
+        this->create_variable(speed_variable_struct, data::AnyValue(this->speed));
     }
 }

@@ -39,13 +39,9 @@ namespace yli::ontology
     void ApprenticeModule::unbind_from_any_master_belonging_to_other_scene(
             const Scene& scene) const noexcept
     {
-        Entity* const master = this->get_master();
-
-        if (master != nullptr)
+        if (const Entity* const master = this->get_master(); master != nullptr)
         {
-            const Scene* const master_scene = master->get_scene();
-
-            if (master_scene != nullptr && master_scene != &scene)
+            if (const Scene* const master_scene = master->get_scene(); master_scene != nullptr && master_scene != &scene)
             {
                 // Master belongs to a different `Scene` compared to what apprentice plans to bind to.
                 // Therefore, apprentice will unbind from master.

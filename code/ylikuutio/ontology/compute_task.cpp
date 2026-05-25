@@ -98,9 +98,7 @@ namespace yli::ontology
         // Load the source texture, just like in `Material` constructor.
         if (pipeline_parent != nullptr && should_load_texture && (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
         {
-            std::uint32_t n_color_channels = 0;
-
-            if (!yli::load::load_common_texture(
+            if (std::uint32_t n_color_channels = 0; !yli::load::load_common_texture(
                         this->texture_filename,
                         load::ImageLoaderStruct(),
                         this->texture_width,

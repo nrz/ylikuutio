@@ -93,9 +93,7 @@ namespace yli::ontology
 
     void Camera::activate()
     {
-        Scene* const scene = this->get_scene();
-
-        if (scene != nullptr)
+        if (Scene* const scene = this->get_scene(); scene != nullptr)
         {
             scene->set_active_camera(this);
         }

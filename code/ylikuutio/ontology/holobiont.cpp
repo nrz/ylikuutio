@@ -97,9 +97,7 @@ namespace yli::ontology
             return;
         }
 
-        Scene* const scene = this->get_scene();
-
-        if (target_scene != nullptr && scene != nullptr && scene != target_scene)
+        if (Scene* const scene = this->get_scene(); target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
             // Different `Scene`s, do not render.
             return;
@@ -190,9 +188,7 @@ namespace yli::ontology
 
         for (Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            Biont* const biont = static_cast<Biont*>(biont_entity);
-
-            if (biont != nullptr)
+            if (auto* const biont = static_cast<Biont*>(biont_entity); biont != nullptr)
             {
                 biont->location.set_x(x);
                 biont->model_matrix[3][0] = x;
@@ -207,9 +203,7 @@ namespace yli::ontology
 
         for (Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            Biont* const biont = static_cast<Biont*>(biont_entity);
-
-            if (biont != nullptr)
+            if (auto* const biont = static_cast<Biont*>(biont_entity); biont != nullptr)
             {
                 biont->location.set_y(y);
                 biont->model_matrix[3][1] = y;
@@ -224,9 +218,7 @@ namespace yli::ontology
 
         for (Entity* const biont_entity : this->parent_of_bionts.child_pointer_vector)
         {
-            Biont* const biont = static_cast<Biont*>(biont_entity);
-
-            if (biont != nullptr)
+            if (auto* const biont = static_cast<Biont*>(biont_entity); biont != nullptr)
             {
                 biont->location.set_z(z);
                 biont->model_matrix[3][2] = z;

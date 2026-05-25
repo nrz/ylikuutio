@@ -49,15 +49,13 @@ namespace yli::event
             {
                 const auto scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
-                ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keypress_callback_engine(scancode);
-
-                if (generic_callback_engine != nullptr)
+                if (ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keypress_callback_engine(scancode);
+                    generic_callback_engine != nullptr)
                 {
-                    const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue());
-
-                    if (any_value &&
-                            std::holds_alternative<std::uint32_t>(any_value->data) &&
-                            std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                    if (const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue());
+                        any_value &&
+                        std::holds_alternative<std::uint32_t>(any_value->data) &&
+                        std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)
                     {
                         this->universe.request_exit();
                     }
@@ -74,11 +72,10 @@ namespace yli::event
                     continue;
                 }
 
-                const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue());
-
-                if (any_value &&
-                        std::holds_alternative<std::uint32_t>(any_value->data) &&
-                        std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                if (const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue());
+                    any_value &&
+                    std::holds_alternative<std::uint32_t>(any_value->data) &&
+                    std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)
                 {
                     this->universe.request_exit();
                 }
