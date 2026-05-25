@@ -34,7 +34,7 @@ namespace yli::event
     {
     }
 
-    void EventSystem::poll_events(const ontology::InputMode& input_mode)
+    void EventSystem::poll_events(const ontology::InputMode& input_mode) const
     {
         SDL_Event sdl_event;
 

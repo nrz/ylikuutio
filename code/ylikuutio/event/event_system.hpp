@@ -42,7 +42,7 @@ namespace yli::event
         public:
             explicit EventSystem(ontology::Universe& universe);
 
-            void poll_events(const ontology::InputMode& input_mode);
+            void poll_events(const ontology::InputMode& input_mode) const;
 
             EventSystem& get();
 
