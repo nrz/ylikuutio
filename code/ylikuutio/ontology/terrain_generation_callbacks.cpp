@@ -28,7 +28,7 @@ namespace yli::ontology
         FastNoiseSIMD* myNoise = FastNoiseSIMD::NewFastNoiseSIMD();
 
         // Get a set of 16 x 16 x 16 Simplex Fractal noise
-        float* noiseSet = myNoise->GetSimplexFractalSet(x_start, y_start, z_start, x_size, y_size, z_size, scale_modifier);    
+        float* noiseSet = myNoise->GetSimplexFractalSet(x_start, y_start, z_start, x_size, y_size, z_size, scale_modifier);
 
         FastNoiseSIMD::FreeNoiseSet(noiseSet);
 

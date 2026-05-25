@@ -45,7 +45,7 @@ namespace yli::lisp
         // 4. Upon ( , initialize a new list of tokens and push it to the top of the stack.
         // 5. Upon bar,  push bar to the list of tokens.
         // 6. Upon bar,  push bar to the list of tokens.
-        // 7. Upon ) , 
+        // 7. Upon ) ,
         //
         // foo
         // + bar

@@ -73,7 +73,7 @@ namespace yli::graph
                     const float distance_i_k = (*distance_matrix)[i][k];
                     const float distance_j_k = (*distance_matrix)[j][k];
 
-                    if (distance_i_k == std::numeric_limits<float>::infinity() || 
+                    if (distance_i_k == std::numeric_limits<float>::infinity() ||
                             distance_j_k == std::numeric_limits<float>::infinity())
                     {
                         // This can not be a shorter path, as at least 1 of these paths has infinite length.

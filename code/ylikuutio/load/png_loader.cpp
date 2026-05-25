@@ -140,7 +140,7 @@ namespace yli::load
                 fclose(fp);
                 return nullptr;
             }
-                
+
             std::copy(row_pointer, row_pointer + line_width_in_bytes, image_data_pointer);
             image_data_pointer += line_width_in_bytes;
         }

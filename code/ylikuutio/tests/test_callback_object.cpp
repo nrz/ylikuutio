@@ -82,7 +82,7 @@ TEST(callback_object_must_be_initialized_appropriately, headless_with_parent_pro
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
-    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1); // `callback_engine`.   
+    ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 1); // `callback_engine`.
 
     // `Entity` member functions of `CallbackEngine`.
     ASSERT_EQ(callback_engine->get_scene(), nullptr);
