@@ -345,7 +345,7 @@ namespace yli::ontology
         const float float_yaw = std::get<float>(yaw_any_value.data);
         const float float_pitch = std::get<float>(pitch_any_value.data);
 
-        HolobiontStruct holobiont_struct { Request<Scene>(&parent), Request<Symbiosis>(&symbiosis) };
+        HolobiontStruct holobiont_struct { Request(&parent), Request(&symbiosis) };
         holobiont_struct.cartesian_coordinates = CartesianCoordinatesModule(float_x, float_y, float_z);
         holobiont_struct.orientation = OrientationModule(float_roll, float_yaw, float_pitch);
         holobiont_struct.local_name = holobiont_name;
