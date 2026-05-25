@@ -1067,173 +1067,173 @@ namespace yli::data
     // Strings.
 
     AnyValue::AnyValue(std::string& std_string_ref)
-        : data(std::reference_wrapper<std::string>(std_string_ref))
+        : data(std::reference_wrapper(std_string_ref))
     {
     }
 
     AnyValue::AnyValue(const std::string& const_std_string_ref)
-        : data(std::reference_wrapper<const std::string>(const_std_string_ref))
+        : data(std::reference_wrapper(const_std_string_ref))
     {
     }
 
     // Variable-size vectors.
 
     AnyValue::AnyValue(std::vector<std::int8_t>& std_vector_int8_t_ref)
-        : data(std::reference_wrapper<std::vector<std::int8_t>>(std_vector_int8_t_ref))
+        : data(std::reference_wrapper(std_vector_int8_t_ref))
     {
     }
 
     AnyValue::AnyValue(std::vector<std::uint8_t>& std_vector_uint8_t_ref)
-        : data(std::reference_wrapper<std::vector<std::uint8_t>>(std_vector_uint8_t_ref))
+        : data(std::reference_wrapper(std_vector_uint8_t_ref))
     {
     }
 
     AnyValue::AnyValue(std::vector<std::int16_t>& std_vector_int16_t_ref)
-        : data(std::reference_wrapper<std::vector<std::int16_t>>(std_vector_int16_t_ref))
+        : data(std::reference_wrapper(std_vector_int16_t_ref))
     {
     }
 
     AnyValue::AnyValue(std::vector<std::uint16_t>& std_vector_uint16_t_ref)
-        : data(std::reference_wrapper<std::vector<std::uint16_t>>(std_vector_uint16_t_ref))
+        : data(std::reference_wrapper(std_vector_uint16_t_ref))
     {
     }
 
     AnyValue::AnyValue(std::vector<std::int32_t>& std_vector_int32_t_ref)
-        : data(std::reference_wrapper<std::vector<std::int32_t>>(std_vector_int32_t_ref))
+        : data(std::reference_wrapper(std_vector_int32_t_ref))
     {
     }
 
     AnyValue::AnyValue(std::vector<std::uint32_t>& std_vector_uint32_t_ref)
-        : data(std::reference_wrapper<std::vector<std::uint32_t>>(std_vector_uint32_t_ref))
+        : data(std::reference_wrapper(std_vector_uint32_t_ref))
     {
     }
 
     AnyValue::AnyValue(std::vector<std::int64_t>& std_vector_int64_t_ref)
-        : data(std::reference_wrapper<std::vector<std::int64_t>>(std_vector_int64_t_ref))
+        : data(std::reference_wrapper(std_vector_int64_t_ref))
     {
     }
 
     AnyValue::AnyValue(std::vector<std::uint64_t>& std_vector_uint64_t_ref)
-        : data(std::reference_wrapper<std::vector<std::uint64_t>>(std_vector_uint64_t_ref))
+        : data(std::reference_wrapper(std_vector_uint64_t_ref))
     {
     }
 
     AnyValue::AnyValue(std::vector<float>& std_vector_float_ref)
-        : data(std::reference_wrapper<std::vector<float>>(std_vector_float_ref))
+        : data(std::reference_wrapper(std_vector_float_ref))
     {
     }
 
     // Fixed-size vectors.
 
     AnyValue::AnyValue(glm::vec3& glm_vec3_ref)
-        : data(std::reference_wrapper<glm::vec3>(glm_vec3_ref))
+        : data(std::reference_wrapper(glm_vec3_ref))
     {
     }
 
     AnyValue::AnyValue(const glm::vec3& const_glm_vec3_ref)
-        : data(std::reference_wrapper<const glm::vec3>(const_glm_vec3_ref))
+        : data(std::reference_wrapper(const_glm_vec3_ref))
     {
     }
 
     AnyValue::AnyValue(glm::vec4& glm_vec4_ref)
-        : data(std::reference_wrapper<glm::vec4>(glm_vec4_ref))
+        : data(std::reference_wrapper(glm_vec4_ref))
     {
     }
 
     AnyValue::AnyValue(const glm::vec4& const_glm_vec4_ref)
-        : data(std::reference_wrapper<const glm::vec4>(const_glm_vec4_ref))
+        : data(std::reference_wrapper(const_glm_vec4_ref))
     {
     }
 
     // Ontology.
 
     AnyValue::AnyValue(ontology::Entity& entity_ref)
-        : data(std::reference_wrapper<yli::ontology::Entity>(entity_ref))
+        : data(std::reference_wrapper(entity_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Movable& movable_ref)
-        : data(std::reference_wrapper<yli::ontology::Movable>(movable_ref))
+        : data(std::reference_wrapper(movable_ref))
     {
     }
 
     AnyValue::AnyValue(const ontology::Movable& const_movable_ref)
-        : data(std::reference_wrapper<const yli::ontology::Movable>(const_movable_ref))
+        : data(std::reference_wrapper(const_movable_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Universe& universe_ref)
-        : data(std::reference_wrapper<yli::ontology::Universe>(universe_ref))
+        : data(std::reference_wrapper(universe_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Ecosystem& ecosystem_ref)
-        : data(std::reference_wrapper<yli::ontology::Ecosystem>(ecosystem_ref))
+        : data(std::reference_wrapper(ecosystem_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Scene& scene_ref)
-        : data(std::reference_wrapper<yli::ontology::Scene>(scene_ref))
+        : data(std::reference_wrapper(scene_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Pipeline& pipeline_ref)
-        : data(std::reference_wrapper<yli::ontology::Pipeline>(pipeline_ref))
+        : data(std::reference_wrapper(pipeline_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Material& material_ref)
-        : data(std::reference_wrapper<yli::ontology::Material>(material_ref))
+        : data(std::reference_wrapper(material_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Species& species_ref)
-        : data(std::reference_wrapper<yli::ontology::Species>(species_ref))
+        : data(std::reference_wrapper(species_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Object& object_ref)
-        : data(std::reference_wrapper<yli::ontology::Object>(object_ref))
+        : data(std::reference_wrapper(object_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Symbiosis& symbiosis_ref)
-        : data(std::reference_wrapper<yli::ontology::Symbiosis>(symbiosis_ref))
+        : data(std::reference_wrapper(symbiosis_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Holobiont& holobiont_ref)
-        : data(std::reference_wrapper<yli::ontology::Holobiont>(holobiont_ref))
+        : data(std::reference_wrapper(holobiont_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Font2d& font_2d_ref)
-        : data(std::reference_wrapper<yli::ontology::Font2d>(font_2d_ref))
+        : data(std::reference_wrapper(font_2d_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Text2d& text_2d_ref)
-        : data(std::reference_wrapper<yli::ontology::Text2d>(text_2d_ref))
+        : data(std::reference_wrapper(text_2d_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::VectorFont& vector_font_ref)
-        : data(std::reference_wrapper<yli::ontology::VectorFont>(vector_font_ref))
+        : data(std::reference_wrapper(vector_font_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Text3d& text_3d_ref)
-        : data(std::reference_wrapper<yli::ontology::Text3d>(text_3d_ref))
+        : data(std::reference_wrapper(text_3d_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::Console& console_ref)
-        : data(std::reference_wrapper<yli::ontology::Console>(console_ref))
+        : data(std::reference_wrapper(console_ref))
     {
     }
 
     AnyValue::AnyValue(ontology::ComputeTask& compute_task_ref)
-        : data(std::reference_wrapper<yli::ontology::ComputeTask>(compute_task_ref))
+        : data(std::reference_wrapper(compute_task_ref))
     {
     }
 }
