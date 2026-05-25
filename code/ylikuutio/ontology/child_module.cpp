@@ -53,20 +53,17 @@ namespace yli::ontology
             this->parent_module = nullptr; // Clean up by setting parent to `nullptr`.
             return;
         }
-        else if (this->parent_module == nullptr) [[unlikely]]
+        if (this->parent_module == nullptr) [[unlikely]]
         {
             std::cerr << "ERROR: `ChildModule::~ChildModule`: `ChildModule` has no parent but `childID` is not properly released!\n";
             this->release();
             return;
         }
-        else [[likely]]
-        {
-            // OK, this `ChildModule` has not been released yet.
+        // OK, this `ChildModule` has not been released yet.
 
-            // Set pointer to this `Entity` to `nullptr`.
-            this->parent_module->unbind_child(this->get_childID());
-            this->release();
-        }
+        // Set pointer to this `Entity` to `nullptr`.
+        this->parent_module->unbind_child(this->get_childID());
+        this->release();
     }
 
     Entity* ChildModule::get_parent() const noexcept

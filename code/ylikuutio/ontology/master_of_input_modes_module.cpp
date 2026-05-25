@@ -58,10 +58,8 @@ namespace yli::ontology
             throw std::runtime_error(
                     "ERROR: `MasterOfInputModesModule::activate_current_input_mode`: `this->current_input_mode` is `nullptr`!");
         }
-        else
-        {
-            this->current_input_mode->activate();
-        }
+
+        this->current_input_mode->activate();
     }
 
     void MasterOfInputModesModule::deactivate_current_input_mode() const
@@ -71,9 +69,7 @@ namespace yli::ontology
             throw std::runtime_error(
                     "ERROR: `MasterOfInputModesModule::deactivate_current_input_mode`: `this->current_input_mode` is `nullptr`!");
         }
-        else
-        {
-            this->current_input_mode->deactivate();
-        }
+
+        this->current_input_mode->deactivate();
     }
 }
