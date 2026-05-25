@@ -154,13 +154,13 @@ namespace yli::ontology
             void set_z(float z) const;
 
             const glm::vec3& get_direction() const;
-            void set_direction(glm::vec3&& direction) const;
+            void set_direction(const glm::vec3 &direction) const;
 
             const glm::vec3& get_right() const;
-            void set_right(glm::vec3&& right) const;
+            void set_right(const glm::vec3 &right) const;
 
             const glm::vec3& get_up() const;
-            void set_up(glm::vec3&& up) const;
+            void set_up(const glm::vec3 &up) const;
 
             float get_roll() const;
             void set_roll(float roll) const;
@@ -254,7 +254,7 @@ namespace yli::ontology
             void reset_number_of_frames();
 
             const glm::mat4& get_projection_matrix() const;
-            void set_projection_matrix(glm::mat4&& projection_matrix) const;
+            void set_projection_matrix(const glm::mat4 &projection_matrix) const;
 
             const glm::mat4& get_view_matrix() const;
             void set_view_matrix(glm::mat4&& view_matrix) const;

@@ -760,7 +760,7 @@ namespace yli::ontology
         return camera->direction;
     }
 
-    void Universe::set_direction(glm::vec3&& direction) const
+    void Universe::set_direction(const glm::vec3& direction) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -769,7 +769,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Universe::set_direction`: `camera` is `nullptr`!");
         }
 
-        camera->direction = std::move(direction);
+        camera->direction = direction;
     }
 
     const glm::vec3& Universe::get_right() const
@@ -784,7 +784,7 @@ namespace yli::ontology
         return camera->right;
     }
 
-    void Universe::set_right(glm::vec3&& right) const
+    void Universe::set_right(const glm::vec3& right) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -793,7 +793,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Universe::set_right`: `camera` is `nullptr`!");
         }
 
-        camera->right = std::move(right);
+        camera->right = right;
     }
 
     const glm::vec3& Universe::get_up() const
@@ -808,7 +808,7 @@ namespace yli::ontology
         return camera->up;
     }
 
-    void Universe::set_up(glm::vec3&& up) const
+    void Universe::set_up(const glm::vec3& up) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -817,7 +817,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Universe::set_up`: `camera` is `nullptr`!");
         }
 
-        camera->up = std::move(up);
+        camera->up = up;
     }
 
     float Universe::get_roll() const
@@ -1362,7 +1362,7 @@ namespace yli::ontology
         return camera->get_projection_matrix();
     }
 
-    void Universe::set_projection_matrix(glm::mat4&& projection_matrix) const
+    void Universe::set_projection_matrix(const glm::mat4& projection_matrix) const
     {
         Camera* const camera = this->get_active_camera();
 
@@ -1371,7 +1371,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Universe::set_projection_matrix`: `camera` is `nullptr`!");
         }
 
-        camera->set_projection_matrix(std::move(projection_matrix));
+        camera->set_projection_matrix(projection_matrix);
     }
 
     const glm::mat4& Universe::get_view_matrix() const

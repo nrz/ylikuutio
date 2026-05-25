@@ -111,10 +111,10 @@ namespace yli::ontology
             void compute_and_update_matrices_from_inputs(float initial_fov, float aspect_ratio, float znear, float zfar);
 
             const glm::mat4& get_projection_matrix() const;
-            void set_projection_matrix(glm::mat4&& projection_matrix);
+            void set_projection_matrix(const glm::mat4 &projection_matrix);
 
             const glm::mat4& get_view_matrix() const;
-            void set_view_matrix(glm::mat4&& view_matrix);
+            void set_view_matrix(const glm::mat4 &view_matrix);
 
             GLuint get_camera_uniform_block() const;
 
