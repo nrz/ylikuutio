@@ -279,7 +279,7 @@ namespace yli::ontology
         pitch_variable_struct.should_call_activate_callback_now = true;
         this->create_variable(pitch_variable_struct, data::AnyValue(this->orientation.pitch));
 
-        const float azimuth = 0.0f;
+        constexpr float azimuth = 0.0f;
         VariableStruct azimuth_variable_struct(this->get_universe(), this);
         azimuth_variable_struct.local_name = "azimuth";
         azimuth_variable_struct.activate_callback = &activate_azimuth;
