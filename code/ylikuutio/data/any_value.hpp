@@ -64,12 +64,12 @@ namespace yli::data
             std::string get_datatype() const noexcept;
             std::string get_string() const;
             const std::string& get_const_std_string_ref() const;
-            yli::ontology::Entity& get_entity_ref() const;
-            const yli::ontology::Entity& get_const_entity_ref() const;
+            ontology::Entity& get_entity_ref() const;
+            const ontology::Entity& get_const_entity_ref() const;
             bool has_movable_ref() const;
             bool has_const_movable_ref() const;
-            yli::ontology::Movable& get_movable_ref() const;
-            const yli::ontology::Movable& get_const_movable_ref() const;
+            ontology::Movable& get_movable_ref() const;
+            const ontology::Movable& get_const_movable_ref() const;
             bool set_new_value(const std::string& value_string);
 
             // copy constructor.
@@ -110,24 +110,24 @@ namespace yli::data
             explicit AnyValue(glm::vec4& glm_vec4_ref);
             explicit AnyValue(const glm::vec4& const_glm_vec4_ref);
             // Ontology.
-            explicit AnyValue(yli::ontology::Entity& entity_ref);
-            explicit AnyValue(yli::ontology::Movable& movable_ref);
-            explicit AnyValue(const yli::ontology::Movable& const_movable_ref);
-            explicit AnyValue(yli::ontology::Universe& universe_ref);
-            explicit AnyValue(yli::ontology::Ecosystem& ecosystem_ref);
-            explicit AnyValue(yli::ontology::Scene& scene_ref);
-            explicit AnyValue(yli::ontology::Pipeline& pipeline_ref);
-            explicit AnyValue(yli::ontology::Material& material_ref);
-            explicit AnyValue(yli::ontology::Species& species_ref);
-            explicit AnyValue(yli::ontology::Object& object_ref);
-            explicit AnyValue(yli::ontology::Symbiosis& symbiosis_ref);
-            explicit AnyValue(yli::ontology::Holobiont& holobiont_ref);
-            explicit AnyValue(yli::ontology::Font2d& font_2d_ref);
-            explicit AnyValue(yli::ontology::Text2d& text_2d_ref);
-            explicit AnyValue(yli::ontology::VectorFont& vector_font_ref);
-            explicit AnyValue(yli::ontology::Text3d& text_3d_ref);
-            explicit AnyValue(yli::ontology::Console& console_ref);
-            explicit AnyValue(yli::ontology::ComputeTask& compute_task_ref);
+            explicit AnyValue(ontology::Entity& entity_ref);
+            explicit AnyValue(ontology::Movable& movable_ref);
+            explicit AnyValue(const ontology::Movable& const_movable_ref);
+            explicit AnyValue(ontology::Universe& universe_ref);
+            explicit AnyValue(ontology::Ecosystem& ecosystem_ref);
+            explicit AnyValue(ontology::Scene& scene_ref);
+            explicit AnyValue(ontology::Pipeline& pipeline_ref);
+            explicit AnyValue(ontology::Material& material_ref);
+            explicit AnyValue(ontology::Species& species_ref);
+            explicit AnyValue(ontology::Object& object_ref);
+            explicit AnyValue(ontology::Symbiosis& symbiosis_ref);
+            explicit AnyValue(ontology::Holobiont& holobiont_ref);
+            explicit AnyValue(ontology::Font2d& font_2d_ref);
+            explicit AnyValue(ontology::Text2d& text_2d_ref);
+            explicit AnyValue(ontology::VectorFont& vector_font_ref);
+            explicit AnyValue(ontology::Text3d& text_3d_ref);
+            explicit AnyValue(ontology::Console& console_ref);
+            explicit AnyValue(ontology::ComputeTask& compute_task_ref);
 
             std::variant<
                 // Uninitialized state.
@@ -161,37 +161,37 @@ namespace yli::data
                 std::reference_wrapper<const glm::vec4>,
                 // Ontology.
                 // `yli::ontology` datatypes, 'entity' path.
-                std::reference_wrapper<yli::ontology::Entity>,
-                std::reference_wrapper<yli::ontology::Movable>,
+                std::reference_wrapper<ontology::Entity>,
+                std::reference_wrapper<ontology::Movable>,
                 std::reference_wrapper<const yli::ontology::Movable>,
                 // `yli::ontology` datatypes, 'universe' path.
-                std::reference_wrapper<yli::ontology::Universe>,
+                std::reference_wrapper<ontology::Universe>,
                 // `yli::ontology` datatypes, 'ecosystem' path.
-                std::reference_wrapper<yli::ontology::Ecosystem>,
+                std::reference_wrapper<ontology::Ecosystem>,
                 // `yli::ontology` datatypes, 'simple' path.
-                std::reference_wrapper<yli::ontology::Scene>,
-                std::reference_wrapper<yli::ontology::Pipeline>,
-                std::reference_wrapper<yli::ontology::Material>,
-                std::reference_wrapper<yli::ontology::Species>,
-                std::reference_wrapper<yli::ontology::Object>,
+                std::reference_wrapper<ontology::Scene>,
+                std::reference_wrapper<ontology::Pipeline>,
+                std::reference_wrapper<ontology::Material>,
+                std::reference_wrapper<ontology::Species>,
+                std::reference_wrapper<ontology::Object>,
                 // `yli::ontology` datatypes, 'heightmap' path.
                 // TODO
                 // `yli::ontology` datatypes, 'symbiont' path.
-                std::reference_wrapper<yli::ontology::Symbiosis>,
+                std::reference_wrapper<ontology::Symbiosis>,
                 // `yli::ontology` datatypes, 'holobiont' path.
-                std::reference_wrapper<yli::ontology::Holobiont>,
+                std::reference_wrapper<ontology::Holobiont>,
                 // `yli::ontology` datatypes, 'shapeshifter' path.
                 // TODO
                 // `yli::ontology` datatypes, 'text 2D' path.
-                std::reference_wrapper<yli::ontology::Font2d>,
-                std::reference_wrapper<yli::ontology::Text2d>,
+                std::reference_wrapper<ontology::Font2d>,
+                std::reference_wrapper<ontology::Text2d>,
                 // `yli::ontology` datatypes, 'text 3D' path.
-                std::reference_wrapper<yli::ontology::VectorFont>,
-                std::reference_wrapper<yli::ontology::Text3d>,
+                std::reference_wrapper<ontology::VectorFont>,
+                std::reference_wrapper<ontology::Text3d>,
                 // `yli::ontology` datatypes, 'console' path.
-                std::reference_wrapper<yli::ontology::Console>,
+                std::reference_wrapper<ontology::Console>,
                 // `yli::ontology` datatypes, 'compute' path.
-                std::reference_wrapper<yli::ontology::ComputeTask>> data;
+                std::reference_wrapper<ontology::ComputeTask>> data;
     };
 }
 

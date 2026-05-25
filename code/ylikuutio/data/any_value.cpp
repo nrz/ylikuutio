@@ -194,113 +194,113 @@ namespace yli::data
                 std::get<std::reference_wrapper<const glm::vec4>>(rhs.data).get();
         }
         // Ontology.
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Entity>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Entity>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Entity>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Entity>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Entity>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Entity>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Movable>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Movable>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Movable>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Movable>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Movable>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<const yli::ontology::Movable>>(this->data).get() ==
-                std::get<std::reference_wrapper<const yli::ontology::Movable>>(rhs.data).get();
+            return std::get<std::reference_wrapper<const ontology::Movable>>(this->data).get() ==
+                std::get<std::reference_wrapper<const ontology::Movable>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Universe>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Universe>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Universe>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Universe>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Universe>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Universe>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Universe>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Universe>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Ecosystem>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Ecosystem>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Ecosystem>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Ecosystem>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Ecosystem>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Ecosystem>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Ecosystem>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Ecosystem>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Scene>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Scene>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Scene>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Scene>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Scene>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Scene>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Scene>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Scene>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Pipeline>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Pipeline>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Pipeline>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Pipeline>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Pipeline>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Pipeline>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Material>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Material>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Material>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Material>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Material>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Material>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Species>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Species>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Species>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Species>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Species>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Species>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Species>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Species>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Object>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Object>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Object>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Object>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Object>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Object>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Object>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Object>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Symbiosis>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Symbiosis>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Symbiosis>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Symbiosis>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Symbiosis>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Symbiosis>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Symbiosis>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Symbiosis>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Holobiont>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Holobiont>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Holobiont>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Holobiont>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Holobiont>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Holobiont>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Holobiont>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Holobiont>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Font2d>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Font2d>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Font2d>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Font2d>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Font2d>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Font2d>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Text2d>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Text2d>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Text2d>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Text2d>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Text2d>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Text2d>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::VectorFont>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::VectorFont>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::VectorFont>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::VectorFont>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::VectorFont>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::VectorFont>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::VectorFont>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::VectorFont>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Text3d>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Text3d>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Text3d>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Text3d>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Text3d>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Text3d>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Console>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::Console>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Console>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::Console>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::Console>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::Console>>(rhs.data).get();
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::ComputeTask>>(this->data) &&
-                std::holds_alternative<std::reference_wrapper<yli::ontology::ComputeTask>>(rhs.data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::ComputeTask>>(this->data) &&
+                std::holds_alternative<std::reference_wrapper<ontology::ComputeTask>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::ComputeTask>>(this->data).get() ==
-                std::get<std::reference_wrapper<yli::ontology::ComputeTask>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::ComputeTask>>(this->data).get() ==
+                std::get<std::reference_wrapper<ontology::ComputeTask>>(rhs.data).get();
         }
 
         return false;
@@ -405,75 +405,75 @@ namespace yli::data
             return "const glm::vec4&";
         }
         // Ontology.
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Entity>>(this->data))
         {
             return "yli::ontology::Entity&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
         {
             return "yli::ontology::Movable&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
         {
             return "const yli::ontology::Movable&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Universe>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Universe>>(this->data))
         {
             return "yli::ontology::Universe&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Ecosystem>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Ecosystem>>(this->data))
         {
             return "yli::ontology::Ecosystem&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Scene>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Scene>>(this->data))
         {
             return "yli::ontology::Scene&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Pipeline>>(this->data))
         {
             return "yli::ontology::Pipeline&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Material>>(this->data))
         {
             return "yli::ontology::Material&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Species>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Species>>(this->data))
         {
             return "yli::ontology::Species&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Object>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Object>>(this->data))
         {
             return "yli::ontology::Object&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Symbiosis>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Symbiosis>>(this->data))
         {
             return "yli::ontology::Symbiosis&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Holobiont>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Holobiont>>(this->data))
         {
             return "yli::ontology::Holobiont&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Font2d>>(this->data))
         {
             return "yli::ontology::Font2d&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Text2d>>(this->data))
         {
             return "yli::ontology::Text2d&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::VectorFont>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::VectorFont>>(this->data))
         {
             return "yli::ontology::VectorFont&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Text3d>>(this->data))
         {
             return "yli::ontology::Text3d&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Console>>(this->data))
         {
             return "yli::ontology::Console&";
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::ComputeTask>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::ComputeTask>>(this->data))
         {
             return "yli::ontology::ComputeTask&";
         }
@@ -609,77 +609,77 @@ namespace yli::data
                 << " }";
         }
         // Ontology.
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Entity>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Entity>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Entity>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Movable>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Movable>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<const yli::ontology::Movable>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<const ontology::Movable>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Universe>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Universe>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Universe>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Universe>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Ecosystem>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Ecosystem>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Ecosystem>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Ecosystem>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Scene>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Scene>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Scene>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Scene>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Pipeline>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Pipeline>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Pipeline>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Material>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Material>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Material>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Species>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Species>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Species>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Species>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Object>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Object>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Object>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Object>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Symbiosis>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Symbiosis>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Symbiosis>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Symbiosis>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Holobiont>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Holobiont>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Holobiont>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Holobiont>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Font2d>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Font2d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Font2d>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Text2d>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Text2d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Text2d>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::VectorFont>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::VectorFont>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::VectorFont>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::VectorFont>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Text3d>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Text3d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Text3d>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Console>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::Console>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Console>>(this->data) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::ComputeTask>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::ComputeTask>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<yli::ontology::ComputeTask>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::ComputeTask>>(this->data) << std::dec;
         }
         else
         {
@@ -705,77 +705,77 @@ namespace yli::data
 
     yli::ontology::Entity& AnyValue::get_entity_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<ontology::Entity>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Entity>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Entity>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Universe>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Universe>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Universe>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Universe>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Movable>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Movable>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
         {
             throw std::runtime_error("Requested `Entity&` for `AnyValue` that holds `const Movable` reference!");
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Ecosystem>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Ecosystem>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Ecosystem>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Ecosystem>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Scene>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Scene>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Scene>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Scene>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Pipeline>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Pipeline>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Pipeline>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Material>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Material>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Material>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Species>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Species>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Species>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Species>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Object>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Object>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Object>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Object>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Symbiosis>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Symbiosis>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Symbiosis>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Symbiosis>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Holobiont>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Holobiont>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Holobiont>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Holobiont>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Font2d>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Font2d>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Font2d>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Text2d>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Text2d>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Text2d>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::VectorFont>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::VectorFont>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::VectorFont>>(this->data);
+            return std::get<std::reference_wrapper<ontology::VectorFont>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Text3d>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Text3d>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Text3d>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Console>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Console>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Console>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::ComputeTask>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::ComputeTask>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::ComputeTask>>(this->data);
+            return std::get<std::reference_wrapper<ontology::ComputeTask>>(this->data);
         }
 
         throw std::runtime_error("Requested `Entity&` for `AnyValue` that didn't hold `Entity` reference!");
@@ -783,9 +783,9 @@ namespace yli::data
 
     const yli::ontology::Entity& AnyValue::get_const_entity_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
         {
-            return std::get<std::reference_wrapper<const yli::ontology::Movable>>(this->data);
+            return std::get<std::reference_wrapper<const ontology::Movable>>(this->data);
         }
 
         return this->get_entity_ref();
@@ -793,15 +793,15 @@ namespace yli::data
 
     bool AnyValue::has_movable_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
         {
             return true;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Object>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Object>>(this->data))
         {
             return true;
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Holobiont>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Holobiont>>(this->data))
         {
             return true;
         }
@@ -811,7 +811,7 @@ namespace yli::data
 
     bool AnyValue::has_const_movable_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
         {
             return true;
         }
@@ -821,31 +821,31 @@ namespace yli::data
 
     yli::ontology::Movable& AnyValue::get_movable_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Movable>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Movable>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
         {
             throw std::runtime_error("Requested `Movable&` for `AnyValue` that holds `const Movable` reference!");
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Object>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Object>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Object>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Object>>(this->data);
         }
-        else if (std::holds_alternative<std::reference_wrapper<yli::ontology::Holobiont>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::Holobiont>>(this->data))
         {
-            return std::get<std::reference_wrapper<yli::ontology::Holobiont>>(this->data);
+            return std::get<std::reference_wrapper<ontology::Holobiont>>(this->data);
         }
 
         throw std::runtime_error("Requested `Movable&` for `AnyValue` that didn't hold `Movable` reference!");
     }
 
-    const yli::ontology::Movable& AnyValue::get_const_movable_ref() const
+    const ontology::Movable& AnyValue::get_const_movable_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
         {
-            return std::get<std::reference_wrapper<const yli::ontology::Movable>>(this->data);
+            return std::get<std::reference_wrapper<const ontology::Movable>>(this->data);
         }
 
         return this->get_movable_ref();
@@ -1001,24 +1001,24 @@ namespace yli::data
                 std::reference_wrapper<glm::vec4>,
                 std::reference_wrapper<const glm::vec4>,
                 // Ontology.
-                std::reference_wrapper<yli::ontology::Entity>,
-                std::reference_wrapper<yli::ontology::Movable>,
-                std::reference_wrapper<const yli::ontology::Movable>,
-                std::reference_wrapper<yli::ontology::Universe>,
-                std::reference_wrapper<yli::ontology::Ecosystem>,
-                std::reference_wrapper<yli::ontology::Scene>,
-                std::reference_wrapper<yli::ontology::Pipeline>,
-                std::reference_wrapper<yli::ontology::Material>,
-                std::reference_wrapper<yli::ontology::Species>,
-                std::reference_wrapper<yli::ontology::Object>,
-                std::reference_wrapper<yli::ontology::Symbiosis>,
-                std::reference_wrapper<yli::ontology::Holobiont>,
-                std::reference_wrapper<yli::ontology::Font2d>,
-                std::reference_wrapper<yli::ontology::Text2d>,
-                std::reference_wrapper<yli::ontology::VectorFont>,
-                std::reference_wrapper<yli::ontology::Text3d>,
-                std::reference_wrapper<yli::ontology::Console>,
-                std::reference_wrapper<yli::ontology::ComputeTask>>(type, value_string))
+                std::reference_wrapper<ontology::Entity>,
+                std::reference_wrapper<ontology::Movable>,
+                std::reference_wrapper<const ontology::Movable>,
+                std::reference_wrapper<ontology::Universe>,
+                std::reference_wrapper<ontology::Ecosystem>,
+                std::reference_wrapper<ontology::Scene>,
+                std::reference_wrapper<ontology::Pipeline>,
+                std::reference_wrapper<ontology::Material>,
+                std::reference_wrapper<ontology::Species>,
+                std::reference_wrapper<ontology::Object>,
+                std::reference_wrapper<ontology::Symbiosis>,
+                std::reference_wrapper<ontology::Holobiont>,
+                std::reference_wrapper<ontology::Font2d>,
+                std::reference_wrapper<ontology::Text2d>,
+                std::reference_wrapper<ontology::VectorFont>,
+                std::reference_wrapper<ontology::Text3d>,
+                std::reference_wrapper<ontology::Console>,
+                std::reference_wrapper<ontology::ComputeTask>>(type, value_string))
     {
     }
 
@@ -1147,92 +1147,92 @@ namespace yli::data
 
     // Ontology.
 
-    AnyValue::AnyValue(yli::ontology::Entity& entity_ref)
+    AnyValue::AnyValue(ontology::Entity& entity_ref)
         : data(std::reference_wrapper<yli::ontology::Entity>(entity_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Movable& movable_ref)
+    AnyValue::AnyValue(ontology::Movable& movable_ref)
         : data(std::reference_wrapper<yli::ontology::Movable>(movable_ref))
     {
     }
 
-    AnyValue::AnyValue(const yli::ontology::Movable& const_movable_ref)
+    AnyValue::AnyValue(const ontology::Movable& const_movable_ref)
         : data(std::reference_wrapper<const yli::ontology::Movable>(const_movable_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Universe& universe_ref)
+    AnyValue::AnyValue(ontology::Universe& universe_ref)
         : data(std::reference_wrapper<yli::ontology::Universe>(universe_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Ecosystem& ecosystem_ref)
+    AnyValue::AnyValue(ontology::Ecosystem& ecosystem_ref)
         : data(std::reference_wrapper<yli::ontology::Ecosystem>(ecosystem_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Scene& scene_ref)
+    AnyValue::AnyValue(ontology::Scene& scene_ref)
         : data(std::reference_wrapper<yli::ontology::Scene>(scene_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Pipeline& pipeline_ref)
+    AnyValue::AnyValue(ontology::Pipeline& pipeline_ref)
         : data(std::reference_wrapper<yli::ontology::Pipeline>(pipeline_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Material& material_ref)
+    AnyValue::AnyValue(ontology::Material& material_ref)
         : data(std::reference_wrapper<yli::ontology::Material>(material_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Species& species_ref)
+    AnyValue::AnyValue(ontology::Species& species_ref)
         : data(std::reference_wrapper<yli::ontology::Species>(species_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Object& object_ref)
+    AnyValue::AnyValue(ontology::Object& object_ref)
         : data(std::reference_wrapper<yli::ontology::Object>(object_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Symbiosis& symbiosis_ref)
+    AnyValue::AnyValue(ontology::Symbiosis& symbiosis_ref)
         : data(std::reference_wrapper<yli::ontology::Symbiosis>(symbiosis_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Holobiont& holobiont_ref)
+    AnyValue::AnyValue(ontology::Holobiont& holobiont_ref)
         : data(std::reference_wrapper<yli::ontology::Holobiont>(holobiont_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Font2d& font_2d_ref)
+    AnyValue::AnyValue(ontology::Font2d& font_2d_ref)
         : data(std::reference_wrapper<yli::ontology::Font2d>(font_2d_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Text2d& text_2d_ref)
+    AnyValue::AnyValue(ontology::Text2d& text_2d_ref)
         : data(std::reference_wrapper<yli::ontology::Text2d>(text_2d_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::VectorFont& vector_font_ref)
+    AnyValue::AnyValue(ontology::VectorFont& vector_font_ref)
         : data(std::reference_wrapper<yli::ontology::VectorFont>(vector_font_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Text3d& text_3d_ref)
+    AnyValue::AnyValue(ontology::Text3d& text_3d_ref)
         : data(std::reference_wrapper<yli::ontology::Text3d>(text_3d_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::Console& console_ref)
+    AnyValue::AnyValue(ontology::Console& console_ref)
         : data(std::reference_wrapper<yli::ontology::Console>(console_ref))
     {
     }
 
-    AnyValue::AnyValue(yli::ontology::ComputeTask& compute_task_ref)
+    AnyValue::AnyValue(ontology::ComputeTask& compute_task_ref)
         : data(std::reference_wrapper<yli::ontology::ComputeTask>(compute_task_ref))
     {
     }
