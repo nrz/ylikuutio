@@ -31,9 +31,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <cstdint>  // std::uint32_t
-#include <iostream> // std::cerr
-#include <variant>  // std::holds_alternative
 #include <vector>   // std::vector
 
 namespace yli::ontology
