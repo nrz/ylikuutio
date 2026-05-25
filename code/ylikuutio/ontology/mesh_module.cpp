@@ -65,7 +65,7 @@ namespace yli::ontology
             model_loader_struct.image_width_pointer           = &this->image_width;
             model_loader_struct.image_height_pointer          = &this->image_height;
 
-            const bool is_debug_mode = true;
+            constexpr bool is_debug_mode = true;
 
             yli::load::load_model(
                     model_loader_struct,
