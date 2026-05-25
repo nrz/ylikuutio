@@ -81,8 +81,7 @@ namespace yli::ontology
 
         CallbackParameterStruct callback_parameter_struct { Request(this) };
         callback_parameter_struct.local_name = name;
-        return static_cast<CallbackParameter*>(
-                entity_factory.create_callback_parameter(callback_parameter_struct, std::move(any_value)));
+        return entity_factory.create_callback_parameter(callback_parameter_struct, std::move(any_value));
     }
 
     // getter function for callbacks and callback objects.
