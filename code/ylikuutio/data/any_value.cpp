@@ -703,7 +703,7 @@ namespace yli::data
         throw std::runtime_error("Requested `const std::string&` for `AnyValue` that didn't hold `std::string` or `const std::string` reference!");
     }
 
-    yli::ontology::Entity& AnyValue::get_entity_ref() const
+    ontology::Entity& AnyValue::get_entity_ref() const
     {
         if (std::holds_alternative<std::reference_wrapper<ontology::Entity>>(this->data))
         {
@@ -819,7 +819,7 @@ namespace yli::data
         return this->has_movable_ref();
     }
 
-    yli::ontology::Movable& AnyValue::get_movable_ref() const
+    ontology::Movable& AnyValue::get_movable_ref() const
     {
         if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
         {
