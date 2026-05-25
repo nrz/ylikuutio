@@ -404,7 +404,7 @@ namespace yli::ontology
             // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
             CartesianCoordinatesModule location;
 
-            glm::vec3 dest_cartesian_coordinates;                  // cartesian destination coordinates.
+            glm::vec3 dest_cartesian_coordinates {};                  // cartesian destination coordinates.
 
             // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
             glm::vec3 direction { glm::vec3(NAN, NAN, NAN) };
