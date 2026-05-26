@@ -46,7 +46,6 @@ namespace yli::ontology
 
     class ConsoleCallbackParameter final : public Entity
     {
-        private:
             ConsoleCallbackParameter(
                     core::Application& application,
                     Universe& universe,

@@ -64,7 +64,6 @@ namespace yli::ontology
 
     class ComputeTask final : public Entity
     {
-        private:
             ComputeTask(
                     core::Application& application,
                     Universe& universe,
