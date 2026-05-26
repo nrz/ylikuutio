@@ -425,7 +425,6 @@ namespace yli::ontology
 
             // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
             // If `input_method` is `MOVABLE_CONTROLLER`, then the chosen `MovableController` controls this `Movable`.
-            // If `input_method` is `BRAIN`, then the chosen `Brain` controls this `Movable`.
             yli::input::InputMethod input_method;
     };
 }
