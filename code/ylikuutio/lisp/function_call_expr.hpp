@@ -27,7 +27,7 @@ namespace yli::lisp
     class FunctionCallExpr final : public Expr
     {
         public:
-            explicit FunctionCallExpr(const Token& expr);
+            explicit FunctionCallExpr(const Token& token);
 
             void accept(ExprVisitor& visitor) override;
     };
