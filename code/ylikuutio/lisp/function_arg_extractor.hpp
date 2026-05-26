@@ -31,7 +31,7 @@ namespace yli::lisp
     template<typename R, typename... Args>
         struct FunctionArgExtractor<R(Args...)>
         {
-            using ArgTuple = std::tuple<typename yli::data::Wrap<Args>::type...>;
+            using ArgTuple = std::tuple<typename data::Wrap<Args>::type...>;
         };
 }
 

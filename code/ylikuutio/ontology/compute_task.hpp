@@ -66,7 +66,7 @@ namespace yli::ontology
     {
         private:
             ComputeTask(
-                    yli::core::Application& application,
+                    core::Application& application,
                     Universe& universe,
                     const ComputeTaskStruct& compute_task_struct,
                     GenericParentModule* pipeline_parent_module);
