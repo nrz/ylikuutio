@@ -18,7 +18,6 @@
 #ifndef YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_ARG_EXTRACTOR_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_LISP_FUNCTION_ARG_EXTRACTOR_HPP_INCLUDED
 
-#include "function_arg_extractor.hpp"
 #include "code/ylikuutio/data/wrap.hpp"
 
 // Include standard headers
