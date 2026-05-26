@@ -105,11 +105,9 @@ namespace yli::ontology
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-        public:
             // This method renders all `Glyph`s of this `VectorFont`.
             void render(const Scene* target_scene);
 

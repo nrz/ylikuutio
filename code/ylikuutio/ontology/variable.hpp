@@ -66,7 +66,6 @@ namespace yli::ontology
 
     class Variable final : public Entity
     {
-        private:
             Variable(
                     core::Application& application,
                     Universe& universe,

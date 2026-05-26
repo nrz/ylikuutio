@@ -81,14 +81,11 @@ namespace yli::ontology
 
             ChildModule child_of_pipeline;
 
-        public:
             Scene* get_scene() const override;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-        public:
             // This method renders this `ComputeTask`, that is, computes this task.
             void render(const Scene*);
 

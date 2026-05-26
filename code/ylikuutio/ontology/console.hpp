@@ -147,19 +147,15 @@ namespace yli::ontology
                         std::queue<std::size_t>& free_apprenticeID_queue,
                         std::size_t& number_of_apprentices) noexcept;
 
-        private:
             Entity* get_parent() const override;
 
-        public:
             std::size_t get_number_of_apprentices() const;
 
             Scene* get_scene() const override;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-        public:
             void copy_historical_input_into_temp_input();
             void delete_character();
             void move_cursor_left();
@@ -170,7 +166,6 @@ namespace yli::ontology
 
             // Getters for unit tests and for building upon `Console`.
 
-        public:
             const std::string& get_prompt() const;
 
             InputMode* get_input_mode() const;

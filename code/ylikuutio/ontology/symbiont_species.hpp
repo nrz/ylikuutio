@@ -82,11 +82,9 @@ namespace yli::ontology
 
             Pipeline* get_pipeline() const;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-        public:
             template<typename T1, std::size_t DataSize>
                 friend class memory::MemoryStorage;
 

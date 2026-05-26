@@ -38,16 +38,15 @@ namespace yli::ontology
 
     class Mission final : public Entity
     {
-        private:
             Mission(
                     core::Application& application,
                     Universe& universe,
                     const MissionStruct& mission_struct,
                     GenericParentModule* universe_parent_module);
 
+        public:
             Scene* get_scene() const override;
 
-        public:
             Mission(const Mission&) = delete;            // Delete copy constructor.
             Mission &operator=(const Mission&) = delete; // Delete copy assignment.
 

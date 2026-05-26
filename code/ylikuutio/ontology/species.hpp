@@ -103,10 +103,10 @@ namespace yli::ontology
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        private:
             template<typename T1, std::size_t DataSize>
                 friend class memory::MemoryStorage;
 

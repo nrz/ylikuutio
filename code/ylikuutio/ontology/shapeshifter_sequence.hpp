@@ -54,7 +54,6 @@ namespace yli::ontology
 
     class ShapeshifterSequence final : public Entity
     {
-        private:
             ShapeshifterSequence(
                     core::Application& application,
                     Universe& universe,
@@ -86,7 +85,6 @@ namespace yli::ontology
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 

@@ -78,7 +78,7 @@ namespace yli::ontology
 
             std::size_t biontID { std::numeric_limits<std::size_t>::max() };
 
-        private:
+        public:
             Scene* get_scene() const override;
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;

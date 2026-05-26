@@ -100,10 +100,10 @@ namespace yli::ontology
             ApprenticeModule apprentice_of_vector_font;
             GenericMasterModule master_of_glyph_objects;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        private:
             std::string text_string;
     };
 

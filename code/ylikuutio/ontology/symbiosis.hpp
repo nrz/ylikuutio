@@ -157,10 +157,10 @@ namespace yli::ontology
 
             Scene* get_scene() const override;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        private:
             void create_symbionts();
 
             std::string model_filename;     // filename of the model file.

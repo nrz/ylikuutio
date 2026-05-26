@@ -48,7 +48,6 @@ namespace yli::ontology
 
     class SymbiontMaterial final : public Entity
     {
-        private:
             SymbiontMaterial(
                     core::Application& application,
                     Universe& universe,
@@ -80,7 +79,7 @@ namespace yli::ontology
         protected:
             GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
 
-        private:
+        public:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
     };

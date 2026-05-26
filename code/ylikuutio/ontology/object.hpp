@@ -119,7 +119,6 @@ namespace yli::ontology
 
             Pipeline* get_pipeline() const;
 
-        private:
             std::size_t get_number_of_children() const final;
             std::size_t get_number_of_descendants() const final;
 

@@ -53,7 +53,6 @@ namespace yli::ontology
 
     class Font2d final : public Entity
     {
-        private:
             Font2d(
                     core::Application& application,
                     Universe& universe,
@@ -103,9 +102,11 @@ namespace yli::ontology
                     const std::uint32_t vertex_left_x,
                     const std::uint32_t vertex_top_y) const;
 
+        public:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
+        private:
             GLuint vao                               { 0 };
             GLuint vertex_buffer                     { 0 }; // Buffer containing the vertices.
             GLuint uv_buffer                         { 0 }; // Buffer containing the UVs.

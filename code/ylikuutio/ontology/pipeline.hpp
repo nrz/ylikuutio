@@ -120,11 +120,9 @@ namespace yli::ontology
             GenericMasterModule master_of_shapeshifter_forms;
             GenericMasterModule master_of_glyphs;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-        public:
             // This method renders all materials using this `Pipeline`.
             void render(const Scene* target_scene);
 

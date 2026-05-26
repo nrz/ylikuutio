@@ -73,7 +73,6 @@ namespace yli::ontology
 
     class MovableController final : public Entity
     {
-        private:
             MovableController(
                     core::Application& application,
                     Universe& universe,
@@ -104,7 +103,6 @@ namespace yli::ontology
 
             Scene* get_scene() const override;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
     };

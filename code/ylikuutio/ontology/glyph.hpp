@@ -58,7 +58,6 @@ namespace yli::ontology
 
     class Glyph final : public Entity
     {
-        private:
             Glyph(
                     core::Application& application,
                     Universe& universe,
@@ -88,11 +87,9 @@ namespace yli::ontology
             template<typename ApprenticeType>
                 GenericMasterModule* get_generic_master_module() = delete;
 
-        private:
             std::size_t get_number_of_children() const override;
             std::size_t get_number_of_descendants() const override;
 
-        public:
             void render(const Scene* target_scene);
 
             GenericMasterModule* get_renderables_container();
