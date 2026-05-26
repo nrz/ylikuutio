@@ -25,8 +25,6 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <cstdint>  // std::uint32_t
-#include <limits>   // std::numeric_limits
-#include <queue>    // std::queue
 #include <vector>   // std::vector
 
 namespace yli::core
