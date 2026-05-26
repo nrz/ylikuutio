@@ -69,7 +69,6 @@ namespace yli::ontology
     class CallbackEngine;
     class Scene;
     struct MovableControllerStruct;
-    class GenericMasterModule;
 
     class MovableController final : public Entity
     {
