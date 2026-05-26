@@ -70,7 +70,7 @@ namespace yli::ontology
 
             Scene* get_scene() const override;
 
-            std::optional<data::AnyValue> execute(const std::vector<std::string>& parameter_vector);
+            std::optional<data::AnyValue> execute(const std::vector<std::string>& parameter_vector) const;
 
             template<typename T1, std::size_t DataSize>
                 friend class memory::MemoryStorage;

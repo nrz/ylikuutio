@@ -83,7 +83,7 @@ namespace yli::ontology
         return nullptr;
     }
 
-    std::optional<data::AnyValue> ConsoleLispFunction::execute(const std::vector<std::string>& parameter_vector)
+    std::optional<data::AnyValue> ConsoleLispFunction::execute(const std::vector<std::string>& parameter_vector) const
     {
         // The execution of a `ConsoleLispFunction` proceeds as follows:
         // The execution of `GenericConsoleLispFunctionOverload` children of
