@@ -66,7 +66,8 @@ namespace yli::ontology
 
     Console* ConsoleCallbackObject::get_console() const
     {
-        if (const auto* const console_callback_engine = static_cast<ConsoleCallbackEngine*>(this->get_parent()); console_callback_engine != nullptr)
+        if (const auto* const console_callback_engine = static_cast<ConsoleCallbackEngine*>(this->get_parent());
+            console_callback_engine != nullptr)
         {
             return console_callback_engine->get_console();
         }
