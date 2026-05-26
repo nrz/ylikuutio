@@ -112,7 +112,7 @@ namespace yli::ontology
             std::uint32_t get_image_size() const;
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
             ChildModule child_of_ecosystem_or_scene;
             GenericParentModule parent_of_shapeshifter_transformations;

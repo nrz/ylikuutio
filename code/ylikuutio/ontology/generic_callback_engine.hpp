@@ -48,7 +48,7 @@ namespace yli::ontology
             ~GenericCallbackEngine() override = default;
 
             // execute all callbacks with a parameter.
-            virtual std::optional<yli::data::AnyValue> execute(const yli::data::AnyValue& any_value) = 0;
+            virtual std::optional<data::AnyValue> execute(const data::AnyValue& any_value) = 0;
     };
 }
 
