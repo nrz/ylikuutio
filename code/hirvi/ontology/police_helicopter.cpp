@@ -42,7 +42,13 @@ namespace hirvi
             yli::ontology::GenericMasterModule* const symbiosis_master,
             yli::ontology::GenericMasterModule* const movable_controller_master,
             const yli::ontology::LocomotionModuleStruct& fly_struct)
-        : yli::ontology::Holobiont(application, universe, police_helicopter_struct, scene_parent, symbiosis_master, movable_controller_master),
+        : yli::ontology::Holobiont(
+            application,
+            universe,
+            police_helicopter_struct,
+            scene_parent,
+            symbiosis_master,
+            movable_controller_master),
         fly(fly_struct)
     {
         // `yli::ontology::Entity` member variables begin here.

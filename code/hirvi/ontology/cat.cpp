@@ -46,7 +46,13 @@ namespace hirvi
             const yli::ontology::LocomotionModuleStruct& canter_struct,
             const yli::ontology::LocomotionModuleStruct& gallop_struct,
             const yli::ontology::LocomotionModuleStruct& climb_struct)
-        : yli::ontology::Object(application, universe, cat_struct, scene_parent, species_master, movable_controller_master),
+        : yli::ontology::Object(
+            application,
+            universe,
+            cat_struct,
+            scene_parent,
+            species_master,
+            movable_controller_master),
         walk(walk_struct),
         trot(trot_struct),
         canter(canter_struct),
