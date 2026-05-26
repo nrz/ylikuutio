@@ -57,141 +57,141 @@ namespace yli::data
     };
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Universe>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Universe>()
         {
-            return Datatype::UNIVERSE;
+            return UNIVERSE;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Variable>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Variable>()
         {
-            return Datatype::VARIABLE;
+            return VARIABLE;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::MovableController>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::MovableController>()
         {
-            return Datatype::MOVABLE_CONTROLLER;
+            return MOVABLE_CONTROLLER;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Ecosystem>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Ecosystem>()
         {
-            return Datatype::ECOSYSTEM;
+            return ECOSYSTEM;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Scene>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Scene>()
         {
-            return Datatype::SCENE;
+            return SCENE;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Pipeline>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Pipeline>()
         {
-            return Datatype::PIPELINE;
+            return PIPELINE;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Material>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Material>()
         {
-            return Datatype::MATERIAL;
+            return MATERIAL;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Species>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Species>()
         {
-            return Datatype::SPECIES;
+            return SPECIES;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Object>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Object>()
         {
-            return Datatype::OBJECT;
+            return OBJECT;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Symbiosis>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Symbiosis>()
         {
-            return Datatype::SYMBIOSIS;
+            return SYMBIOSIS;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::SymbiontMaterial>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::SymbiontMaterial>()
         {
-            return Datatype::SYMBIONT_MATERIAL;
+            return SYMBIONT_MATERIAL;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::SymbiontSpecies>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::SymbiontSpecies>()
         {
-            return Datatype::SYMBIONT_SPECIES;
+            return SYMBIONT_SPECIES;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Holobiont>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Holobiont>()
         {
-            return Datatype::HOLOBIONT;
+            return HOLOBIONT;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Biont>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Biont>()
         {
-            return Datatype::BIONT;
+            return BIONT;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::ShapeshifterTransformation>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::ShapeshifterTransformation>()
         {
-            return Datatype::SHAPESHIFTER_TRANSFORMATION;
+            return SHAPESHIFTER_TRANSFORMATION;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::ShapeshifterSequence>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::ShapeshifterSequence>()
         {
-            return Datatype::SHAPESHIFTER_SEQUENCE;
+            return SHAPESHIFTER_SEQUENCE;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::ShapeshifterForm>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::ShapeshifterForm>()
         {
-            return Datatype::SHAPESHIFTER_FORM;
+            return SHAPESHIFTER_FORM;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Font2d>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Font2d>()
         {
-            return Datatype::FONT_2D;
+            return FONT_2D;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Text2d>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Text2d>()
         {
-            return Datatype::TEXT_2D;
+            return TEXT_2D;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::VectorFont>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::VectorFont>()
         {
-            return Datatype::VECTOR_FONT;
+            return VECTOR_FONT;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Glyph>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Glyph>()
         {
-            return Datatype::GLYPH;
+            return GLYPH;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Text3d>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Text3d>()
         {
-            return Datatype::TEXT_3D;
+            return TEXT_3D;
         }
 
     template<>
-        inline Datatype TypeEnumProvider::get_type_enum<yli::ontology::Console>()
+        inline Datatype TypeEnumProvider::get_type_enum<ontology::Console>()
         {
-            return Datatype::CONSOLE;
+            return CONSOLE;
         }
 }
 
