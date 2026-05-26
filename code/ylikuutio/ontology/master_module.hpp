@@ -70,11 +70,12 @@ namespace yli::ontology
 
             ~MasterModule() override
             {
-                for (std::size_t apprentice_i = 0; apprentice_i < this->apprentice_module_pointer_vector.size(); apprentice_i++)
+                for (std::size_t apprentice_i = 0;
+                    apprentice_i < this->apprentice_module_pointer_vector.size();
+                    apprentice_i++)
                 {
-                    ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprentice_i);
-
-                    if (apprentice_module != nullptr)
+                    if (const ApprenticeModule* const apprentice_module = this->apprentice_module_pointer_vector.at(apprentice_i);
+                        apprentice_module != nullptr)
                     {
                         // Call the unbind callback.
                         this->unbind_apprentice_module(apprentice_module->apprenticeID);
