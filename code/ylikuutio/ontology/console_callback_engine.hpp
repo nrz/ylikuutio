@@ -77,7 +77,7 @@ namespace yli::ontology
             GenericParentModule parent_of_console_callback_objects;
 
             ConsoleCallbackObject* create_console_callback_object(
-                    const InputParametersToAnyValueCallbackWithConsole callback);
+                InputParametersToAnyValueCallbackWithConsole callback);
 
             // execute all callbacks with a parameter.
             std::optional<data::AnyValue> execute(const data::AnyValue& any_value) override;
