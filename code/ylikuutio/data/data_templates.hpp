@@ -106,133 +106,133 @@ namespace yli::data
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Entity*)
+        std::string get_type_string(ontology::Entity*)
         {
             return "yli::ontology::Entity*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Movable*)
+        std::string get_type_string(ontology::Movable*)
         {
             return "yli::ontology::Movable*";
         }
 
     template<>
-        std::string get_type_string(const yli::ontology::Movable*)
+        std::string get_type_string(const ontology::Movable*)
         {
             return "const yli::ontology::Movable*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Universe*)
+        std::string get_type_string(ontology::Universe*)
         {
             return "yli::ontology::Universe*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Ecosystem*)
+        std::string get_type_string(ontology::Ecosystem*)
         {
             return "yli::ontology::Ecosystem*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Scene*)
+        std::string get_type_string(ontology::Scene*)
         {
             return "yli::ontology::Scene*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Pipeline*)
+        std::string get_type_string(ontology::Pipeline*)
         {
             return "yli::ontology::Pipeline*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Material*)
+        std::string get_type_string(ontology::Material*)
         {
             return "yli::ontology::Material*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Species*)
+        std::string get_type_string(ontology::Species*)
         {
             return "yli::ontology::Species*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Object*)
+        std::string get_type_string(ontology::Object*)
         {
             return "yli::ontology::Object*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Symbiosis*)
+        std::string get_type_string(ontology::Symbiosis*)
         {
             return "yli::ontology::Symbiosis*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::SymbiontMaterial*)
+        std::string get_type_string(ontology::SymbiontMaterial*)
         {
             return "yli::ontology::SymbiontMaterial*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::SymbiontSpecies*)
+        std::string get_type_string(ontology::SymbiontSpecies*)
         {
             return "yli::ontology::SymbiontSpecies*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Holobiont*)
+        std::string get_type_string(ontology::Holobiont*)
         {
             return "yli::ontology::Holobiont*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Biont*)
+        std::string get_type_string(ontology::Biont*)
         {
             return "yli::ontology::Biont*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Font2d*)
+        std::string get_type_string(ontology::Font2d*)
         {
             return "yli::ontology::Font2d*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Text2d*)
+        std::string get_type_string(ontology::Text2d*)
         {
             return "yli::ontology::Text2d*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::VectorFont*)
+        std::string get_type_string(ontology::VectorFont*)
         {
             return "yli::ontology::VectorFont*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Glyph*)
+        std::string get_type_string(ontology::Glyph*)
         {
             return "yli::ontology::Glyph*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Text3d*)
+        std::string get_type_string(ontology::Text3d*)
         {
             return "yli::ontology::Text3d*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::Console*)
+        std::string get_type_string(ontology::Console*)
         {
             return "yli::ontology::Console*";
         }
 
     template<>
-        std::string get_type_string(yli::ontology::ComputeTask*)
+        std::string get_type_string(ontology::ComputeTask*)
         {
             return "yli::ontology::ComputeTask*";
         }
