@@ -126,11 +126,9 @@ namespace yli::lisp
                 return std::nullopt;
             }
 
-            const std::string& my_string = parameter_vector.at(parameter_i++);
-
-            if (my_string.size() == 1)
+            if (const std::string& my_string = parameter_vector.at(parameter_i++); my_string.size() == 1)
             {
-                return yli::data::WrapAllButStrings<char>::type(my_string[0]);
+                return my_string[0];
             }
 
             return std::nullopt;
