@@ -35,9 +35,9 @@ namespace yli::lisp
     {
         public:
             Token(TokenType type, std::string&& lexeme, const TextPosition& text_position);
-            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const std::int64_t value);
-            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const std::uint64_t value);
-            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const double value);
+            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, std::int64_t value);
+            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, std::uint64_t value);
+            Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, double value);
 
             bool operator==(const Token& other) const; // Equal `Token`s have identical type and identical lexeme.
             bool operator!=(const Token& other) const; // Line numbers may differ.

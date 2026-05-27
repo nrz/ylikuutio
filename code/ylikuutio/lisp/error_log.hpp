@@ -34,7 +34,7 @@ namespace yli::lisp
         public:
             void add_error(const TextPosition& text_position, ErrorType error_type);
 
-            const Error& at(const std::size_t index) const;
+            const Error& at(std::size_t index) const;
 
             bool empty() const;
             std::size_t size() const;

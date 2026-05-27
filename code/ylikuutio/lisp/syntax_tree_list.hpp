@@ -34,7 +34,7 @@ namespace yli::lisp
 
             const std::vector<std::unique_ptr<Expr>>& data() const;
 
-            const Expr& at(const std::size_t i) const;
+            const Expr& at(std::size_t i) const;
             Expr& last();
 
             bool empty() const;
