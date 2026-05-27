@@ -77,18 +77,18 @@ namespace yli::lisp
     // 8. If the callback has `std::uint32_t` as an argument, then the string will be converted into that.
 
     template<typename T1>
-        std::optional<typename yli::data::WrapAllButStrings<T1>::type> convert_string_to_value_and_advance_index(
-                yli::ontology::Universe&,
-                yli::ontology::Console&,
-                yli::ontology::Entity*&,         // environment.
+        std::optional<typename data::WrapAllButStrings<T1>::type> convert_string_to_value_and_advance_index(
+                ontology::Universe&,
+                ontology::Console&,
+                ontology::Entity*&,         // environment.
                 const std::vector<std::string>&, // parameter vector.
                 std::size_t&) = delete;          // parameter_i.
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<bool>::type> convert_string_to_value_and_advance_index<bool>(
-                yli::ontology::Universe&,
-                yli::ontology::Console&,
-                yli::ontology::Entity*&, // environment.
+        inline std::optional<typename data::WrapAllButStrings<bool>::type> convert_string_to_value_and_advance_index<bool>(
+                ontology::Universe&,
+                ontology::Console&,
+                ontology::Entity*&, // environment.
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i)
         {
@@ -114,10 +114,10 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename yli::data::WrapAllButStrings<char>::type> convert_string_to_value_and_advance_index<char>(
-                yli::ontology::Universe&,
-                yli::ontology::Console&,
-                yli::ontology::Entity*&, // environment.
+        inline std::optional<typename data::WrapAllButStrings<char>::type> convert_string_to_value_and_advance_index<char>(
+                ontology::Universe&,
+                ontology::Console&,
+                ontology::Entity*&, // environment.
                 const std::vector<std::string>& parameter_vector,
                 std::size_t& parameter_i)
         {
