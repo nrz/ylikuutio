@@ -112,7 +112,7 @@ namespace yli::lisp
             ExprType get_type() const;
             const Token& get_token() const;
             const Expr& at(const std::size_t index) const;
-            Expr& last();
+            Expr& last() const;
 
             std::size_t get_number_of_children() const;
 

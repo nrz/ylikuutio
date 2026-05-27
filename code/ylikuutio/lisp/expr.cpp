@@ -63,7 +63,7 @@ namespace yli::lisp
         return *this->children.at(index);
     }
 
-    Expr& Expr::last()
+    Expr& Expr::last() const
     {
         return *this->children.back();
     }
