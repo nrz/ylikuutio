@@ -83,14 +83,14 @@ namespace yli::data
             AnyValue() = default;
             AnyValue(const std::string& type, const std::string& value_string); // This constructor takes also the value as a string.
             // Fundamental types.
-            explicit AnyValue(const bool bool_value);
-            explicit AnyValue(const char char_value);
-            explicit AnyValue(const float float_value);
-            explicit AnyValue(const double double_value);
-            explicit AnyValue(const std::int32_t int32_t_value);
-            explicit AnyValue(const std::uint32_t uint32_t_value);
-            explicit AnyValue(const std::int64_t int64_t_value);
-            explicit AnyValue(const std::uint64_t uint64_t_value);
+            explicit AnyValue(bool bool_value);
+            explicit AnyValue(char char_value);
+            explicit AnyValue(float float_value);
+            explicit AnyValue(double double_value);
+            explicit AnyValue(std::int32_t int32_t_value);
+            explicit AnyValue(std::uint32_t uint32_t_value);
+            explicit AnyValue(std::int64_t int64_t_value);
+            explicit AnyValue(std::uint64_t uint64_t_value);
             // Strings.
             explicit AnyValue(std::string& std_string_ref);
             explicit AnyValue(const std::string& const_std_string_ref);
