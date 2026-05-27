@@ -28,7 +28,7 @@ namespace yli::lisp
     {
         public:
             // Terminal expression.
-            explicit FloatingPointExpr(const Token& expr);
+            explicit FloatingPointExpr(const Token& token);
     };
 }
 

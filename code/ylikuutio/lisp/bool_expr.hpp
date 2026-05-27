@@ -28,7 +28,7 @@ namespace yli::lisp
     {
         public:
             // Terminal expression.
-            explicit BoolExpr(const Token& expr);
+            explicit BoolExpr(const Token& token);
     };
 }
 
