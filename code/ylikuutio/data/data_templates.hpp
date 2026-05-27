@@ -24,8 +24,35 @@
 #include <string>   // std::string
 #include <vector>   // std::vector
 
+namespace yli::ontology
+{
+    class Entity;
+    class Movable;
+    class Universe;
+    class Ecosystem;
+    class Scene;
+    class Pipeline;
+    class Material;
+    class Species;
+    class Object;
+    class Symbiosis;
+    class SymbiontMaterial;
+    class SymbiontSpecies;
+    class Holobiont;
+    class Biont;
+    class Font2d;
+    class Text2d;
+    class VectorFont;
+    class Glyph;
+    class Text3d;
+    class Console;
+    class ComputeTask;
+}
+
 namespace yli::data
 {
+    class AnyValue;
+
     // Get the datatype of a variable.
     template<typename T1>
         std::string get_type_string(T1)
