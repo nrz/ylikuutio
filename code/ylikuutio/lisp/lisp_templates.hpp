@@ -402,7 +402,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Movable* const value = dynamic_cast<ontology::Movable*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Movable*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -473,7 +473,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Variable* const value = dynamic_cast<ontology::Variable*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Variable*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -499,7 +499,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Variable* const value = dynamic_cast<ontology::Variable*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Variable*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -525,7 +525,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Variable* const value = dynamic_cast<ontology::Variable*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Variable*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -551,7 +551,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Ecosystem* const value = dynamic_cast<ontology::Ecosystem*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Ecosystem*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -577,7 +577,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Scene* const value = dynamic_cast<ontology::Scene*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Scene*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -603,7 +603,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::MovableController* const value = dynamic_cast<ontology::MovableController*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::MovableController*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -629,7 +629,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Pipeline* const value = dynamic_cast<ontology::Pipeline*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Pipeline*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -655,7 +655,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Material* const value = dynamic_cast<ontology::Material*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Material*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -681,7 +681,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Species* const value = dynamic_cast<ontology::Species*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Species*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -707,7 +707,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Species* const value = dynamic_cast<ontology::Species*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Species*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -733,7 +733,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Object* const value = dynamic_cast<ontology::Object*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Object*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -759,7 +759,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Symbiosis* const value = dynamic_cast<ontology::Symbiosis*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Symbiosis*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -785,7 +785,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Symbiosis* const value = dynamic_cast<ontology::Symbiosis*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Symbiosis*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -811,7 +811,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::ShapeshifterTransformation* const value = dynamic_cast<ontology::ShapeshifterTransformation*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::ShapeshifterTransformation*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -837,7 +837,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::ShapeshifterSequence* const value = dynamic_cast<ontology::ShapeshifterSequence*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::ShapeshifterSequence*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -863,7 +863,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Font2d* const value = dynamic_cast<ontology::Font2d*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Font2d*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -889,7 +889,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Text2d* const value = dynamic_cast<ontology::Text2d*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Text2d*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -915,7 +915,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::VectorFont* const value = dynamic_cast<ontology::VectorFont*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::VectorFont*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -941,7 +941,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            ontology::Text3d* const value = dynamic_cast<ontology::Text3d*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::Text3d*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
