@@ -19,10 +19,8 @@
 #include "expr_type.hpp"
 
 // Include standard headers
-#include <stdexcept> // std::runtime_error
 #include <memory>    // std::make_unique, std::unique_ptr
 #include <utility>   // std::move
-#include <variant>   // std::holds_alternative, std::monostate
 
 namespace yli::lisp
 {

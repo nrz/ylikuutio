@@ -22,7 +22,6 @@
 
 // Include standard headers
 #include <optional>      // std::optional
-#include <string_view>   // std::string_view
 #include <unordered_set> // std::unordered_set
 
 namespace yli::lisp
