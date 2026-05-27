@@ -85,7 +85,7 @@ namespace yli::lisp
                 std::size_t&) = delete;          // parameter_i.
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<bool>::type> convert_string_to_value_and_advance_index<bool>(
+        inline std::optional<data::WrapAllButStrings<bool>::type> convert_string_to_value_and_advance_index<bool>(
                 ontology::Universe&,
                 ontology::Console&,
                 ontology::Entity*&, // environment.
@@ -114,7 +114,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<char>::type> convert_string_to_value_and_advance_index<char>(
+        inline std::optional<data::WrapAllButStrings<char>::type> convert_string_to_value_and_advance_index<char>(
                 ontology::Universe&,
                 ontology::Console&,
                 ontology::Entity*&, // environment.
@@ -135,7 +135,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<float>::type> convert_string_to_value_and_advance_index<float>(
+        inline std::optional<data::WrapAllButStrings<float>::type> convert_string_to_value_and_advance_index<float>(
                 ontology::Universe&,
                 ontology::Console&,
                 ontology::Entity*&, // environment.
@@ -162,7 +162,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<double>::type> convert_string_to_value_and_advance_index<double>(
+        inline std::optional<data::WrapAllButStrings<double>::type> convert_string_to_value_and_advance_index<double>(
                 ontology::Universe&,
                 ontology::Console&,
                 ontology::Entity*&, // environment.
@@ -189,7 +189,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<std::int32_t>::type> convert_string_to_value_and_advance_index<std::int32_t>(
+        inline std::optional<data::WrapAllButStrings<std::int32_t>::type> convert_string_to_value_and_advance_index<std::int32_t>(
                 ontology::Universe&,
                 ontology::Console&,
                 ontology::Entity*&, // environment.
@@ -216,7 +216,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<std::uint32_t>::type> convert_string_to_value_and_advance_index<std::uint32_t>(
+        inline std::optional<data::WrapAllButStrings<std::uint32_t>::type> convert_string_to_value_and_advance_index<std::uint32_t>(
                 ontology::Universe&,
                 ontology::Console&,
                 ontology::Entity*&, // environment.
@@ -243,7 +243,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<std::int64_t>::type> convert_string_to_value_and_advance_index<std::int64_t>(
+        inline std::optional<data::WrapAllButStrings<std::int64_t>::type> convert_string_to_value_and_advance_index<std::int64_t>(
                 ontology::Universe&,
                 ontology::Console&,
                 ontology::Entity*&, // environment.
@@ -270,7 +270,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<std::uint64_t>::type> convert_string_to_value_and_advance_index<std::uint64_t>(
+        inline std::optional<data::WrapAllButStrings<std::uint64_t>::type> convert_string_to_value_and_advance_index<std::uint64_t>(
                 ontology::Universe&,
                 ontology::Console&,
                 ontology::Entity*&, // environment.
@@ -297,7 +297,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<const std::string&>::type> convert_string_to_value_and_advance_index<const std::string&>(
+        inline std::optional<data::WrapAllButStrings<const std::string&>::type> convert_string_to_value_and_advance_index<const std::string&>(
                 ontology::Universe&,
                 ontology::Console&,
                 ontology::Entity*&, // environment.
@@ -313,7 +313,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Entity&>::type> convert_string_to_value_and_advance_index<ontology::Entity&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Entity&>::type> convert_string_to_value_and_advance_index<ontology::Entity&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -339,7 +339,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Entity*>::type> convert_string_to_value_and_advance_index<ontology::Entity*>(
+        inline std::optional<data::WrapAllButStrings<ontology::Entity*>::type> convert_string_to_value_and_advance_index<ontology::Entity*>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -365,7 +365,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<const ontology::Entity&>::type> convert_string_to_value_and_advance_index<const ontology::Entity&>(
+        inline std::optional<data::WrapAllButStrings<const ontology::Entity&>::type> convert_string_to_value_and_advance_index<const ontology::Entity&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -391,7 +391,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Movable&>::type> convert_string_to_value_and_advance_index<ontology::Movable&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Movable&>::type> convert_string_to_value_and_advance_index<ontology::Movable&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -417,7 +417,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Universe&>::type> convert_string_to_value_and_advance_index<ontology::Universe&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Universe&>::type> convert_string_to_value_and_advance_index<ontology::Universe&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -432,7 +432,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Universe*>::type> convert_string_to_value_and_advance_index<ontology::Universe*>(
+        inline std::optional<data::WrapAllButStrings<ontology::Universe*>::type> convert_string_to_value_and_advance_index<ontology::Universe*>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -447,7 +447,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<const ontology::Universe&>::type> convert_string_to_value_and_advance_index<const ontology::Universe&>(
+        inline std::optional<data::WrapAllButStrings<const ontology::Universe&>::type> convert_string_to_value_and_advance_index<const ontology::Universe&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -462,7 +462,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Variable&>::type> convert_string_to_value_and_advance_index<ontology::Variable&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Variable&>::type> convert_string_to_value_and_advance_index<ontology::Variable&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -488,7 +488,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Variable*>::type> convert_string_to_value_and_advance_index<ontology::Variable*>(
+        inline std::optional<data::WrapAllButStrings<ontology::Variable*>::type> convert_string_to_value_and_advance_index<ontology::Variable*>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -514,7 +514,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<const ontology::Variable&>::type> convert_string_to_value_and_advance_index<const ontology::Variable&>(
+        inline std::optional<data::WrapAllButStrings<const ontology::Variable&>::type> convert_string_to_value_and_advance_index<const ontology::Variable&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -540,7 +540,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Ecosystem&>::type> convert_string_to_value_and_advance_index<ontology::Ecosystem&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Ecosystem&>::type> convert_string_to_value_and_advance_index<ontology::Ecosystem&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -566,7 +566,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Scene&>::type> convert_string_to_value_and_advance_index<ontology::Scene&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Scene&>::type> convert_string_to_value_and_advance_index<ontology::Scene&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -592,7 +592,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::MovableController&>::type> convert_string_to_value_and_advance_index<ontology::MovableController&>(
+        inline std::optional<data::WrapAllButStrings<ontology::MovableController&>::type> convert_string_to_value_and_advance_index<ontology::MovableController&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -618,7 +618,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Pipeline&>::type> convert_string_to_value_and_advance_index<ontology::Pipeline&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Pipeline&>::type> convert_string_to_value_and_advance_index<ontology::Pipeline&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -644,7 +644,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Material&>::type> convert_string_to_value_and_advance_index<ontology::Material&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Material&>::type> convert_string_to_value_and_advance_index<ontology::Material&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -670,7 +670,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Species&>::type> convert_string_to_value_and_advance_index<ontology::Species&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Species&>::type> convert_string_to_value_and_advance_index<ontology::Species&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -696,7 +696,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Species*>::type> convert_string_to_value_and_advance_index<ontology::Species*>(
+        inline std::optional<data::WrapAllButStrings<ontology::Species*>::type> convert_string_to_value_and_advance_index<ontology::Species*>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -722,7 +722,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Object&>::type> convert_string_to_value_and_advance_index<ontology::Object&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Object&>::type> convert_string_to_value_and_advance_index<ontology::Object&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -748,7 +748,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Symbiosis&>::type> convert_string_to_value_and_advance_index<ontology::Symbiosis&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Symbiosis&>::type> convert_string_to_value_and_advance_index<ontology::Symbiosis&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -774,7 +774,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Symbiosis*>::type> convert_string_to_value_and_advance_index<ontology::Symbiosis*>(
+        inline std::optional<data::WrapAllButStrings<ontology::Symbiosis*>::type> convert_string_to_value_and_advance_index<ontology::Symbiosis*>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -800,7 +800,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::ShapeshifterTransformation&>::type> convert_string_to_value_and_advance_index<ontology::ShapeshifterTransformation&>(
+        inline std::optional<data::WrapAllButStrings<ontology::ShapeshifterTransformation&>::type> convert_string_to_value_and_advance_index<ontology::ShapeshifterTransformation&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -826,7 +826,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::ShapeshifterSequence&>::type> convert_string_to_value_and_advance_index<ontology::ShapeshifterSequence&>(
+        inline std::optional<data::WrapAllButStrings<ontology::ShapeshifterSequence&>::type> convert_string_to_value_and_advance_index<ontology::ShapeshifterSequence&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -852,7 +852,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Font2d&>::type> convert_string_to_value_and_advance_index<ontology::Font2d&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Font2d&>::type> convert_string_to_value_and_advance_index<ontology::Font2d&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -878,7 +878,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Text2d&>::type> convert_string_to_value_and_advance_index<ontology::Text2d&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Text2d&>::type> convert_string_to_value_and_advance_index<ontology::Text2d&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -904,7 +904,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::VectorFont&>::type> convert_string_to_value_and_advance_index<ontology::VectorFont&>(
+        inline std::optional<data::WrapAllButStrings<ontology::VectorFont&>::type> convert_string_to_value_and_advance_index<ontology::VectorFont&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -930,7 +930,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Text3d&>::type> convert_string_to_value_and_advance_index<ontology::Text3d&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Text3d&>::type> convert_string_to_value_and_advance_index<ontology::Text3d&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -956,7 +956,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Console&>::type> convert_string_to_value_and_advance_index<ontology::Console&>(
+        inline std::optional<data::WrapAllButStrings<ontology::Console&>::type> convert_string_to_value_and_advance_index<ontology::Console&>(
                 ontology::Universe&,
                 ontology::Console& context,
                 ontology::Entity*& environment,
@@ -971,7 +971,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<typename data::WrapAllButStrings<ontology::Console*>::type> convert_string_to_value_and_advance_index<ontology::Console*>(
+        inline std::optional<data::WrapAllButStrings<ontology::Console*>::type> convert_string_to_value_and_advance_index<ontology::Console*>(
                 ontology::Universe&,
                 ontology::Console& context,
                 ontology::Entity*& environment,
