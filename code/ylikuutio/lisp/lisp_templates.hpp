@@ -158,7 +158,7 @@ namespace yli::lisp
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return data::WrapAllButStrings<float>::type(value);
+            return value;
         }
 
     template<>
@@ -185,7 +185,7 @@ namespace yli::lisp
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return data::WrapAllButStrings<double>::type(value);
+            return value;
         }
 
     template<>
@@ -212,7 +212,7 @@ namespace yli::lisp
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return data::WrapAllButStrings<std::int32_t>::type(value);
+            return value;
         }
 
     template<>
@@ -239,7 +239,7 @@ namespace yli::lisp
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return data::WrapAllButStrings<std::uint32_t>::type(value);
+            return value;
         }
 
     template<>
@@ -266,7 +266,7 @@ namespace yli::lisp
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return data::WrapAllButStrings<std::int64_t>::type(value);
+            return value;
         }
 
     template<>
@@ -293,7 +293,7 @@ namespace yli::lisp
             std::stringstream my_stringstream;
             my_stringstream << my_string;
             my_stringstream >> value;
-            return data::WrapAllButStrings<std::uint64_t>::type(value);
+            return value;
         }
 
     template<>
@@ -361,7 +361,7 @@ namespace yli::lisp
             }
 
             environment = value;
-            return data::WrapAllButStrings<ontology::Entity*>::type(value);
+            return value;
         }
 
     template<>
@@ -510,7 +510,7 @@ namespace yli::lisp
             }
 
             environment = value;
-            return data::WrapAllButStrings<ontology::Variable*>::type(value);
+            return value;
         }
 
     template<>
@@ -718,7 +718,7 @@ namespace yli::lisp
             }
 
             environment = value;
-            return data::WrapAllButStrings<ontology::Species*>::type(value);
+            return value;
         }
 
     template<>
@@ -796,7 +796,7 @@ namespace yli::lisp
             }
 
             environment = value;
-            return data::WrapAllButStrings<ontology::Symbiosis*>::type(value);
+            return value;
         }
 
     template<>
@@ -982,7 +982,7 @@ namespace yli::lisp
             // and does not do a lookup.
 
             environment = &context;
-            return data::WrapAllButStrings<ontology::Console*>::type(&context);
+            return &context;
         }
 }
 
