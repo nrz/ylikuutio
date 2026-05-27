@@ -103,14 +103,11 @@ namespace yli::lisp
             {
                 return true; // OK, true.
             }
-            else if (my_string == "false") // Ylikuutio is case sensitive!
+            if (my_string == "false") // Ylikuutio is case sensitive!
             {
                 return false; // OK, false.
             }
-            else
-            {
-                return std::nullopt;
-            }
+            return std::nullopt;
         }
 
     template<>
