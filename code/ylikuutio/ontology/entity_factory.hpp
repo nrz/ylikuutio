@@ -134,754 +134,780 @@ namespace yli::ontology
     struct UniverseStruct;
 
     template<typename T>
-        concept EntityNotUniverse =
-        std::derived_from<T, Entity> && (!std::same_as<T, Universe>);
+    concept EntityNotUniverse =
+            std::derived_from<T, Entity> && (!std::same_as<T, Universe>);
 
     template<typename TypeEnumType>
-        class EntityFactory : public GenericEntityFactory
+    class EntityFactory : public GenericEntityFactory
     {
-        public:
-            EntityFactory(
-                    core::Application& application,
-                    memory::MemorySystem<TypeEnumType>& memory_system)
-                : application { application },
-                memory_system { memory_system }
+    public:
+        EntityFactory(
+            core::Application &application,
+            memory::MemorySystem<TypeEnumType> &memory_system)
+            : application{application},
+              memory_system{memory_system}
+        {}
+
+        virtual ~EntityFactory() = default;
+
+        EntityFactory<TypeEnumType> &get() const
+        {
+            return const_cast<EntityFactory<TypeEnumType> &>(*this);
+        }
+
+        template<EntityNotUniverse ChildType, EntityNotUniverse ParentType>
+        GenericParentModule *get_generic_parent_module(const Request<ParentType> &entity_request) const
+        {
+            ParentType *const parent = resolve_request<ParentType>(entity_request, this->get_universe().registry);
+
+            if (parent != nullptr) [[likely]]
             {
+                return parent->template get_generic_parent_module<ChildType>();
             }
 
-            virtual ~EntityFactory() = default;
+            return nullptr;
+        }
 
-            EntityFactory<TypeEnumType>& get() const
+        template<EntityNotUniverse ApprenticeType, EntityNotUniverse MasterType>
+        GenericMasterModule *get_generic_master_module(const Request<MasterType> &entity_request) const
+        {
+            MasterType *const master = resolve_request<MasterType>(entity_request, this->get_universe().registry);
+
+            if (master != nullptr) [[likely]]
             {
-                return const_cast<EntityFactory<TypeEnumType>&>(*this);
+                return master->template get_generic_master_module<ApprenticeType>();
             }
 
-            template<EntityNotUniverse ChildType, EntityNotUniverse ParentType>
-                GenericParentModule* get_generic_parent_module(const Request<ParentType>& entity_request) const
-                {
-                    ParentType* const parent = resolve_request<ParentType>(entity_request, this->get_universe().registry);
+            return nullptr;
+        }
 
-                    if (parent != nullptr) [[likely]]
-                    {
-                        return parent->template get_generic_parent_module<ChildType>();
-                    }
-
-                    return nullptr;
-                }
-
-            template<EntityNotUniverse ApprenticeType, EntityNotUniverse MasterType>
-                GenericMasterModule* get_generic_master_module(const Request<MasterType>& entity_request) const
-                {
-                    MasterType* const master = resolve_request<MasterType>(entity_request, this->get_universe().registry);
-
-                    if (master != nullptr) [[likely]]
-                    {
-                        return master->template get_generic_master_module<ApprenticeType>();
-                    }
-
-                    return nullptr;
-                }
-
-            template<typename ChildType, typename... Requests>
-                GenericParentModule* get_generic_parent_module_from_variant(const std::variant<Requests...>& variant) const
-                {
-                    auto lambda = [this](const auto& request){ return this->template get_generic_parent_module<ChildType>(request); };
-                    return std::visit(lambda, variant);
-                }
-
-            template<typename ApprenticeType, typename... Requests>
-                GenericMasterModule* get_generic_master_module_from_variant(const std::variant<Requests...>& variant) const
-                {
-                    auto lambda = [this](const auto& request){ return this->template get_generic_master_module<ApprenticeType>(request); };
-                    return std::visit(lambda, variant);
-                }
-
-            Universe* create_universe(const UniverseStruct& universe_struct)
+        template<typename ChildType, typename... Requests>
+        GenericParentModule *get_generic_parent_module_from_variant(const std::variant<Requests...> &variant) const
+        {
+            auto lambda = [this](const auto &request)
             {
-                memory::GenericMemoryAllocator& generic_allocator =
+                return this->template get_generic_parent_module<ChildType>(request);
+            };
+            return std::visit(lambda, variant);
+        }
+
+        template<typename ApprenticeType, typename... Requests>
+        GenericMasterModule *get_generic_master_module_from_variant(const std::variant<Requests...> &variant) const
+        {
+            auto lambda = [this](const auto &request)
+            {
+                return this->template get_generic_master_module<ApprenticeType>(request);
+            };
+            return std::visit(lambda, variant);
+        }
+
+        Universe *create_universe(const UniverseStruct &universe_struct)
+        {
+            memory::GenericMemoryAllocator &generic_allocator =
                     this->memory_system.template get_or_create_allocator<memory::UniverseMemoryAllocator>(
-                            static_cast<int>(data::Datatype::UNIVERSE));
-                auto& allocator = static_cast<memory::UniverseMemoryAllocator&>(generic_allocator);
+                        static_cast<int>(data::Datatype::UNIVERSE));
+            auto &allocator = static_cast<memory::UniverseMemoryAllocator &>(generic_allocator);
 
-                Universe* const universe = allocator.build_in(
-                        this->application,
-                        universe_struct);
+            Universe *const universe = allocator.build_in(
+                this->application,
+                universe_struct);
 
-                this->universe = universe;
-                return universe;
+            this->universe = universe;
+            return universe;
+        }
+
+        Universe &get_universe() const
+        {
+            if (this->universe == nullptr) [[unlikely]]
+            {
+                throw std::runtime_error("ERROR: `EntityFactory::get_universe`: `this->universe` is `nullptr`!");
             }
 
-            Universe& get_universe() const
-            {
-                if (this->universe == nullptr) [[unlikely]]
-                {
-                    throw std::runtime_error("ERROR: `EntityFactory::get_universe`: `this->universe` is `nullptr`!");
-                }
+            return *this->universe;
+        }
 
-                return *this->universe;
-            }
-
-            Variable* create_variable(
-                    const VariableStruct& variable_struct,
-                    data::AnyValue&& any_value) const final
-            {
-                memory::GenericMemoryAllocator& generic_allocator =
+        Variable *create_variable(
+            const VariableStruct &variable_struct,
+            data::AnyValue &&any_value) const final
+        {
+            memory::GenericMemoryAllocator &generic_allocator =
                     this->memory_system.template get_or_create_allocator<memory::VariableMemoryAllocator>(
-                            static_cast<int>(data::Datatype::VARIABLE));
-                auto& allocator = static_cast<memory::VariableMemoryAllocator&>(generic_allocator);
+                        static_cast<int>(data::Datatype::VARIABLE));
+            auto &allocator = static_cast<memory::VariableMemoryAllocator &>(generic_allocator);
 
-                Entity* entity_parent { nullptr };
-                if (std::holds_alternative<Entity*>(variable_struct.entity_parent))
+            Entity *entity_parent{nullptr};
+            if (std::holds_alternative<Entity *>(variable_struct.entity_parent))
+            {
+                entity_parent = std::get<Entity *>(variable_struct.entity_parent);
+            }
+            else if (std::holds_alternative<std::string>(variable_struct.entity_parent))
+            {
+                entity_parent = this->get_universe().registry.get_entity(
+                    std::get<std::string>(variable_struct.entity_parent));
+            }
+
+            // The `Universe&` needs to be taken from `VariableStruct`
+            // because `Universe` constructor creates its `Variable`
+            // instances using `EntityFactory` before `EntityFactory::create_universe`
+            // has initialized `universe` member variable of `EntityFactory`.
+            Variable *const variable = allocator.build_in(
+                this->application,
+                variable_struct.universe,
+                variable_struct,
+                ((entity_parent != nullptr) ? &entity_parent->parent_of_variables : nullptr),
+                std::move(any_value));
+
+            if (variable_struct.is_variable_of_universe)
+            {
+                // OK, this is a `Variable` of the `Universe`.
+
+                if (!variable_struct.global_name.empty() && variable_struct.local_name.empty())
                 {
-                    entity_parent = std::get<Entity*>(variable_struct.entity_parent);
-                }
-                else if (std::holds_alternative<std::string>(variable_struct.entity_parent))
-                {
-                    entity_parent = this->get_universe().registry.get_entity(std::get<std::string>(variable_struct.entity_parent));
-                }
-
-                // The `Universe&` needs to be taken from `VariableStruct`
-                // because `Universe` constructor creates its `Variable`
-                // instances using `EntityFactory` before `EntityFactory::create_universe`
-                // has initialized `universe` member variable of `EntityFactory`.
-                Variable* const variable = allocator.build_in(
-                        this->application,
-                        variable_struct.universe,
-                        variable_struct,
-                        ((entity_parent != nullptr) ? &entity_parent->parent_of_variables : nullptr),
-                        std::move(any_value));
-
-                if (variable_struct.is_variable_of_universe)
-                {
-                    // OK, this is a `Variable` of the `Universe`.
-
-                    if (!variable_struct.global_name.empty() && variable_struct.local_name.empty())
-                    {
-                        // Only `global_name` given, OK.
-                        variable->set_global_name(variable_struct.global_name);
-                    }
-                    else if (variable_struct.global_name.empty() && !variable_struct.local_name.empty())
-                    {
-                        // Only `local_name` given, OK.
-                        variable->set_local_name(variable_struct.local_name);
-                    }
-                    else if (!variable_struct.global_name.empty() && !variable_struct.local_name.empty())
-                    {
-                        std::cerr << "ERROR: `EntityFactory::create_variable`: both global and local names given for a `Variable`\n";
-                        std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                        std::cerr << "are the same and only 1 of them can be given. No name given to this `Variable`!\n";
-                    }
-                }
-                else
-                {
-                    // This is not a `Variable` of the `Universe`.
-
+                    // Only `global_name` given, OK.
                     variable->set_global_name(variable_struct.global_name);
+                }
+                else if (variable_struct.global_name.empty() && !variable_struct.local_name.empty())
+                {
+                    // Only `local_name` given, OK.
                     variable->set_local_name(variable_struct.local_name);
                 }
-
-                if (variable_struct.should_call_activate_callback_now)
+                else if (!variable_struct.global_name.empty() && !variable_struct.local_name.empty())
                 {
-                    variable->activate();
+                    std::cerr <<
+                            "ERROR: `EntityFactory::create_variable`: both global and local names given for a `Variable`\n";
+                    std::cerr <<
+                            "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+                    std::cerr << "are the same and only 1 of them can be given. No name given to this `Variable`!\n";
                 }
+            }
+            else
+            {
+                // This is not a `Variable` of the `Universe`.
 
-                return variable;
+                variable->set_global_name(variable_struct.global_name);
+                variable->set_local_name(variable_struct.local_name);
             }
 
-            CallbackEngine* create_callback_engine(
-                    const CallbackEngineStruct& callback_engine_struct) const final
+            if (variable_struct.should_call_activate_callback_now)
             {
-                return this->create_child_of_universe<
-                    CallbackEngine, GenericParentModule, memory::CallbackEngineMemoryAllocator, CallbackEngineStruct>(
-                            data::Datatype::CALLBACK_ENGINE,
-                            callback_engine_struct,
-                            &this->get_universe().parent_of_callback_engines);
+                variable->activate();
             }
 
-            CallbackObject* create_callback_object(
-                    const CallbackObjectStruct& callback_object_struct) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    CallbackObject, CallbackEngine, memory::CallbackObjectMemoryAllocator, CallbackObjectStruct>(
-                            data::Datatype::CALLBACK_OBJECT,
-                            callback_object_struct.callback_engine_parent,
-                            callback_object_struct);
-            }
+            return variable;
+        }
 
-            CallbackParameter* create_callback_parameter(
-                    const CallbackParameterStruct& callback_parameter_struct,
-                    data::AnyValue&& any_value) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    CallbackParameter, CallbackObject, memory::CallbackParameterMemoryAllocator, CallbackParameterStruct>(
-                            data::Datatype::CALLBACK_PARAMETER,
-                            callback_parameter_struct.callback_object_parent,
-                            callback_parameter_struct,
-                            std::move(any_value));
-            }
+        CallbackEngine *create_callback_engine(
+            const CallbackEngineStruct &callback_engine_struct) const final
+        {
+            return this->create_child_of_universe<
+                CallbackEngine, GenericParentModule, memory::CallbackEngineMemoryAllocator, CallbackEngineStruct>(
+                data::Datatype::CALLBACK_ENGINE,
+                callback_engine_struct,
+                &this->get_universe().parent_of_callback_engines);
+        }
 
-            // TODO: implement `create_window` here!
+        CallbackObject *create_callback_object(
+            const CallbackObjectStruct &callback_object_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                CallbackObject, CallbackEngine, memory::CallbackObjectMemoryAllocator, CallbackObjectStruct>(
+                data::Datatype::CALLBACK_OBJECT,
+                callback_object_struct.callback_engine_parent,
+                callback_object_struct);
+        }
 
-            // TODO: implement `create_widget` here!
+        CallbackParameter *create_callback_parameter(
+            const CallbackParameterStruct &callback_parameter_struct,
+            data::AnyValue &&any_value) const final
+        {
+            return this->create_child_of_known_parent_type<
+                CallbackParameter, CallbackObject, memory::CallbackParameterMemoryAllocator, CallbackParameterStruct>(
+                data::Datatype::CALLBACK_PARAMETER,
+                callback_parameter_struct.callback_object_parent,
+                callback_parameter_struct,
+                std::move(any_value));
+        }
 
-            Ecosystem* create_ecosystem(const EcosystemStruct& ecosystem_struct) const final
-            {
-                return this->create_child_of_universe<
-                    Ecosystem, GenericParentModule, memory::EcosystemMemoryAllocator, EcosystemStruct>(
-                            data::Datatype::ECOSYSTEM,
-                            ecosystem_struct,
-                            &this->get_universe().parent_of_ecosystems);
-            }
+        // TODO: implement `create_window` here!
 
-            Scene* create_scene(const SceneStruct& scene_struct) const final
-            {
-                return this->create_child_of_universe<
-                    Scene, GenericParentModule, memory::SceneMemoryAllocator, SceneStruct>(
-                            data::Datatype::SCENE,
-                            scene_struct,
-                            &this->get_universe().parent_of_scenes);
-            }
+        // TODO: implement `create_widget` here!
 
-            MovableController* create_movable_controller(const MovableControllerStruct& movable_controller_struct) const final
-            {
-                return this->template create_child_of_known_parent_type<
-                    MovableController, Scene, memory::MovableControllerMemoryAllocator, MovableControllerStruct>(
-                            data::Datatype::MOVABLE_CONTROLLER,
-                            movable_controller_struct.scene_parent,
-                            movable_controller_struct,
-                            this->get_generic_master_module<MovableController, CallbackEngine>(movable_controller_struct.callback_engine_master));
-            }
+        Ecosystem *create_ecosystem(const EcosystemStruct &ecosystem_struct) const final
+        {
+            return this->create_child_of_universe<
+                Ecosystem, GenericParentModule, memory::EcosystemMemoryAllocator, EcosystemStruct>(
+                data::Datatype::ECOSYSTEM,
+                ecosystem_struct,
+                &this->get_universe().parent_of_ecosystems);
+        }
 
-            Waypoint* create_waypoint(const WaypointStruct& waypoint_struct) const final
-            {
-                return this->template create_child_of_known_parent_type<
-                    Waypoint, Scene, memory::WaypointMemoryAllocator, WaypointStruct>(
-                            data::Datatype::WAYPOINT,
-                            waypoint_struct.scene,
-                            waypoint_struct,
-                            this->get_generic_master_module<Movable, MovableController>(waypoint_struct.movable_controller_master));
-            }
+        Scene *create_scene(const SceneStruct &scene_struct) const final
+        {
+            return this->create_child_of_universe<
+                Scene, GenericParentModule, memory::SceneMemoryAllocator, SceneStruct>(
+                data::Datatype::SCENE,
+                scene_struct,
+                &this->get_universe().parent_of_scenes);
+        }
 
-            Camera* create_camera(const CameraStruct& camera_struct) const final
-            {
-                return this->template create_child_of_known_parent_type<
-                    Camera, Scene, memory::CameraMemoryAllocator, CameraStruct>(
-                            data::Datatype::CAMERA,
-                            camera_struct.scene,
-                            camera_struct,
-                            this->get_generic_master_module<Movable, MovableController>(camera_struct.movable_controller_master));
-            }
+        MovableController *
+        create_movable_controller(const MovableControllerStruct &movable_controller_struct) const final
+        {
+            return this->template create_child_of_known_parent_type<
+                MovableController, Scene, memory::MovableControllerMemoryAllocator, MovableControllerStruct>(
+                data::Datatype::MOVABLE_CONTROLLER,
+                movable_controller_struct.scene_parent,
+                movable_controller_struct,
+                this->get_generic_master_module<MovableController, CallbackEngine>(
+                    movable_controller_struct.callback_engine_master));
+        }
 
-            Camera* create_default_camera(const CameraStruct& camera_struct) const final
-            {
-                return this->template create_child_of_known_parent_type<
-                    Camera, Scene, memory::CameraMemoryAllocator, CameraStruct>(
-                            data::Datatype::CAMERA,
-                            camera_struct.scene,
-                            camera_struct,
-                            this->get_generic_master_module<Movable, MovableController>(camera_struct.movable_controller_master));
-            }
+        Waypoint *create_waypoint(const WaypointStruct &waypoint_struct) const final
+        {
+            return this->template create_child_of_known_parent_type<
+                Waypoint, Scene, memory::WaypointMemoryAllocator, WaypointStruct>(
+                data::Datatype::WAYPOINT,
+                waypoint_struct.scene,
+                waypoint_struct,
+                this->get_generic_master_module<Movable, MovableController>(waypoint_struct.movable_controller_master));
+        }
 
-            // TODO: implement `create_camera_widget` here!
+        Camera *create_camera(const CameraStruct &camera_struct) const final
+        {
+            return this->template create_child_of_known_parent_type<
+                Camera, Scene, memory::CameraMemoryAllocator, CameraStruct>(
+                data::Datatype::CAMERA,
+                camera_struct.scene,
+                camera_struct,
+                this->get_generic_master_module<Movable, MovableController>(camera_struct.movable_controller_master));
+        }
 
-            Pipeline* create_pipeline(const PipelineStruct& pipeline_struct) const final
-            {
-                return this->create_child_of_ecosystem_or_scene<
-                    Pipeline, memory::PipelineMemoryAllocator, PipelineStruct>(
-                            data::Datatype::PIPELINE,
-                            pipeline_struct);
-            }
+        Camera *create_default_camera(const CameraStruct &camera_struct) const final
+        {
+            return this->template create_child_of_known_parent_type<
+                Camera, Scene, memory::CameraMemoryAllocator, CameraStruct>(
+                data::Datatype::CAMERA,
+                camera_struct.scene,
+                camera_struct,
+                this->get_generic_master_module<Movable, MovableController>(camera_struct.movable_controller_master));
+        }
 
-            Material* create_material(const MaterialStruct& material_struct) const final
-            {
-                return this->template create_child_of_ecosystem_or_scene<
-                    Material, memory::MaterialMemoryAllocator, MaterialStruct>(
-                            data::Datatype::MATERIAL,
-                            material_struct,
-                            this->get_generic_master_module<Material, Pipeline>(material_struct.pipeline_master));
-            }
+        // TODO: implement `create_camera_widget` here!
 
-            Species* create_species(const SpeciesStruct& species_struct) const final
-            {
-                return this->template create_child_of_ecosystem_or_scene<
-                    Species, memory::SpeciesMemoryAllocator, SpeciesStruct>(
-                            data::Datatype::SPECIES,
-                            species_struct,
-                            this->get_generic_master_module<Species, Material>(species_struct.material_master));
-            }
+        Pipeline *create_pipeline(const PipelineStruct &pipeline_struct) const final
+        {
+            return this->create_child_of_ecosystem_or_scene<
+                Pipeline, memory::PipelineMemoryAllocator, PipelineStruct>(
+                data::Datatype::PIPELINE,
+                pipeline_struct);
+        }
 
-            Object* create_object(const ObjectStruct& object_struct) const final
-            {
-                return this->create_object_derivative<
-                    Object, memory::ObjectMemoryAllocator>(
-                            data::Datatype::OBJECT,
-                            object_struct);
-            }
+        Material *create_material(const MaterialStruct &material_struct) const final
+        {
+            return this->template create_child_of_ecosystem_or_scene<
+                Material, memory::MaterialMemoryAllocator, MaterialStruct>(
+                data::Datatype::MATERIAL,
+                material_struct,
+                this->get_generic_master_module<Material, Pipeline>(material_struct.pipeline_master));
+        }
 
-            // TODO: implement `create_heightmap` here!
+        Species *create_species(const SpeciesStruct &species_struct) const final
+        {
+            return this->template create_child_of_ecosystem_or_scene<
+                Species, memory::SpeciesMemoryAllocator, SpeciesStruct>(
+                data::Datatype::SPECIES,
+                species_struct,
+                this->get_generic_master_module<Species, Material>(species_struct.material_master));
+        }
 
-            // TODO: implement `create_heightmap_sheet` here!
+        Object *create_object(const ObjectStruct &object_struct) const final
+        {
+            return this->create_object_derivative<
+                Object, memory::ObjectMemoryAllocator>(
+                data::Datatype::OBJECT,
+                object_struct);
+        }
 
-            Symbiosis* create_symbiosis(const SymbiosisStruct& symbiosis_struct) const final
-            {
-                return this->template create_child_of_ecosystem_or_scene<
-                    Symbiosis, memory::SymbiosisMemoryAllocator, SymbiosisStruct>(
-                            data::Datatype::SYMBIOSIS,
-                            symbiosis_struct,
-                            this->get_generic_master_module<Symbiosis, Pipeline>(symbiosis_struct.pipeline_master));
-            }
+        // TODO: implement `create_heightmap` here!
 
-            SymbiontMaterial* create_symbiont_material(const SymbiontMaterialStruct& symbiont_material_struct) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    SymbiontMaterial,
-                    Symbiosis,
-                    memory::SymbiontMaterialMemoryAllocator,
-                    SymbiontMaterialStruct>(
-                            data::Datatype::SYMBIONT_MATERIAL,
-                            symbiont_material_struct.symbiosis_parent,
-                            symbiont_material_struct);
-            }
+        // TODO: implement `create_heightmap_sheet` here!
 
-            SymbiontSpecies* create_symbiont_species(const SymbiontSpeciesStruct& symbiont_species_struct) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    SymbiontSpecies, SymbiontMaterial, memory::SymbiontSpeciesMemoryAllocator, SymbiontSpeciesStruct>(
-                            data::Datatype::SYMBIONT_SPECIES,
-                            symbiont_species_struct.symbiont_material_parent,
-                            symbiont_species_struct);
-            }
+        Symbiosis *create_symbiosis(const SymbiosisStruct &symbiosis_struct) const final
+        {
+            return this->template create_child_of_ecosystem_or_scene<
+                Symbiosis, memory::SymbiosisMemoryAllocator, SymbiosisStruct>(
+                data::Datatype::SYMBIOSIS,
+                symbiosis_struct,
+                this->get_generic_master_module<Symbiosis, Pipeline>(symbiosis_struct.pipeline_master));
+        }
 
-            Ability* create_ability(const AbilityStruct& ability_struct) const final
-            {
-                memory::GenericMemoryAllocator& generic_allocator =
+        SymbiontMaterial *create_symbiont_material(const SymbiontMaterialStruct &symbiont_material_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                SymbiontMaterial,
+                Symbiosis,
+                memory::SymbiontMaterialMemoryAllocator,
+                SymbiontMaterialStruct>(
+                data::Datatype::SYMBIONT_MATERIAL,
+                symbiont_material_struct.symbiosis_parent,
+                symbiont_material_struct);
+        }
+
+        SymbiontSpecies *create_symbiont_species(const SymbiontSpeciesStruct &symbiont_species_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                SymbiontSpecies, SymbiontMaterial, memory::SymbiontSpeciesMemoryAllocator, SymbiontSpeciesStruct>(
+                data::Datatype::SYMBIONT_SPECIES,
+                symbiont_species_struct.symbiont_material_parent,
+                symbiont_species_struct);
+        }
+
+        Ability *create_ability(const AbilityStruct &ability_struct) const final
+        {
+            memory::GenericMemoryAllocator &generic_allocator =
                     this->memory_system.template get_or_create_allocator<memory::AbilityMemoryAllocator>(
-                            static_cast<int>(data::Datatype::ABILITY));
-                auto& allocator = static_cast<memory::AbilityMemoryAllocator&>(generic_allocator);
+                        static_cast<int>(data::Datatype::ABILITY));
+            auto &allocator = static_cast<memory::AbilityMemoryAllocator &>(generic_allocator);
 
-                return allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        ability_struct,
-                        this->get_generic_parent_module<Ability, Symbiosis>(ability_struct.symbiosis_parent));
-            }
+            return allocator.build_in(
+                this->application,
+                this->get_universe(),
+                ability_struct,
+                this->get_generic_parent_module<Ability, Symbiosis>(ability_struct.symbiosis_parent));
+        }
 
-            Holobiont* create_holobiont(const HolobiontStruct& holobiont_struct) const final
-            {
-                return this->create_holobiont_derivative<
-                    Holobiont, memory::HolobiontMemoryAllocator>(
-                            data::Datatype::HOLOBIONT,
-                            holobiont_struct);
-            }
+        Holobiont *create_holobiont(const HolobiontStruct &holobiont_struct) const final
+        {
+            return this->create_holobiont_derivative<
+                Holobiont, memory::HolobiontMemoryAllocator>(
+                data::Datatype::HOLOBIONT,
+                holobiont_struct);
+        }
 
-            Biont* create_biont(const BiontStruct& biont_struct) const final
-            {
-                memory::GenericMemoryAllocator& generic_allocator =
+        Biont *create_biont(const BiontStruct &biont_struct) const final
+        {
+            memory::GenericMemoryAllocator &generic_allocator =
                     this->memory_system.template get_or_create_allocator<memory::BiontMemoryAllocator>(
-                            static_cast<int>(data::Datatype::BIONT));
-                auto& allocator = static_cast<memory::BiontMemoryAllocator&>(generic_allocator);
+                        static_cast<int>(data::Datatype::BIONT));
+            auto &allocator = static_cast<memory::BiontMemoryAllocator &>(generic_allocator);
 
-                return allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        biont_struct,
-                        this->get_generic_parent_module<Biont, Holobiont>(biont_struct.holobiont_parent),
-                        this->get_generic_master_module<Biont, SymbiontSpecies>(biont_struct.symbiont_species_master));
-            }
+            return allocator.build_in(
+                this->application,
+                this->get_universe(),
+                biont_struct,
+                this->get_generic_parent_module<Biont, Holobiont>(biont_struct.holobiont_parent),
+                this->get_generic_master_module<Biont, SymbiontSpecies>(biont_struct.symbiont_species_master));
+        }
 
-            Skill* create_skill(const SkillStruct& skill_struct) const final
-            {
-                memory::GenericMemoryAllocator& generic_allocator =
+        Skill *create_skill(const SkillStruct &skill_struct) const final
+        {
+            memory::GenericMemoryAllocator &generic_allocator =
                     this->memory_system.template get_or_create_allocator<memory::SkillMemoryAllocator>(
-                            static_cast<int>(data::Datatype::SKILL));
-                auto& allocator = static_cast<memory::SkillMemoryAllocator&>(generic_allocator);
+                        static_cast<int>(data::Datatype::SKILL));
+            auto &allocator = static_cast<memory::SkillMemoryAllocator &>(generic_allocator);
 
-                return allocator.build_in(
-                        this->application,
-                        this->get_universe(),
-                        skill_struct,
-                        this->get_generic_parent_module<Skill, Holobiont>(skill_struct.holobiont_parent));
-            }
+            return allocator.build_in(
+                this->application,
+                this->get_universe(),
+                skill_struct,
+                this->get_generic_parent_module<Skill, Holobiont>(skill_struct.holobiont_parent));
+        }
 
-            ShapeshifterTransformation* create_shapeshifter_transformation(
-                    const ShapeshifterTransformationStruct& shapeshifter_transformation_struct) const final
+        ShapeshifterTransformation *create_shapeshifter_transformation(
+            const ShapeshifterTransformationStruct &shapeshifter_transformation_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                ShapeshifterTransformation, Material, memory::ShapeshifterTransformationMemoryAllocator,
+                ShapeshifterTransformationStruct>(
+                data::Datatype::SHAPESHIFTER_TRANSFORMATION,
+                shapeshifter_transformation_struct.material_parent,
+                shapeshifter_transformation_struct);
+        }
+
+        ShapeshifterSequence *create_shapeshifter_sequence(
+            const ShapeshifterSequenceStruct &shapeshifter_sequence_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                ShapeshifterSequence, ShapeshifterTransformation, memory::ShapeshifterSequenceMemoryAllocator,
+                ShapeshifterSequenceStruct>(
+                data::Datatype::SHAPESHIFTER_SEQUENCE,
+                shapeshifter_sequence_struct.shapeshifter_transformation_parent,
+                shapeshifter_sequence_struct);
+        }
+
+        ShapeshifterForm *create_shapeshifter_form(
+            const ShapeshifterFormStruct &shapeshifter_form_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                ShapeshifterForm, ShapeshifterTransformation, memory::ShapeshifterFormMemoryAllocator,
+                ShapeshifterFormStruct>(
+                data::Datatype::SHAPESHIFTER_FORM,
+                shapeshifter_form_struct.shapeshifter_transformation_parent,
+                shapeshifter_form_struct);
+        }
+
+        Shapeshifter *create_shapeshifter(const ShapeshifterStruct &shapeshifter_struct) const final
+        {
+            return this->template create_child_of_known_parent_type<
+                Shapeshifter, Scene, memory::ShapeshifterMemoryAllocator, ShapeshifterStruct>(
+                data::Datatype::SHAPESHIFTER,
+                shapeshifter_struct.scene,
+                shapeshifter_struct,
+                // `MovableController` master.
+                this->get_generic_master_module<Movable, MovableController>(
+                    shapeshifter_struct.movable_controller_master),
+                // `ShapeshifterSequence` master.
+                this->get_generic_master_module<Shapeshifter, ShapeshifterSequence>(
+                    shapeshifter_struct.shapeshifter_sequence_master));
+        }
+
+        Font2d *create_font_2d(const FontStruct &font_struct) const final
+        {
+            return this->create_child_of_universe<
+                Font2d, GenericParentModule, memory::Font2dMemoryAllocator, FontStruct>(
+                data::Datatype::FONT_2D,
+                font_struct,
+                &this->get_universe().parent_of_font_2ds);
+        }
+
+        Text2d *create_text_2d(const TextStruct &text_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                Text2d, Font2d, memory::Text2dMemoryAllocator, TextStruct>(
+                data::Datatype::TEXT_2D,
+                text_struct.font_2d_parent,
+                text_struct);
+        }
+
+        VectorFont *create_vector_font(const VectorFontStruct &vector_font_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                VectorFont, Material, memory::VectorFontMemoryAllocator, VectorFontStruct>(
+                data::Datatype::VECTOR_FONT,
+                vector_font_struct.material_parent,
+                vector_font_struct);
+        }
+
+        Glyph *create_glyph(const GlyphStruct &glyph_struct) const final
+        {
+            return this->template create_child_of_known_parent_type<
+                Glyph, VectorFont, memory::GlyphMemoryAllocator, GlyphStruct>(
+                data::Datatype::GLYPH,
+                glyph_struct.vector_font_parent,
+                glyph_struct,
+                this->get_generic_master_module<Glyph, Material>(glyph_struct.material_master));
+        }
+
+        GlyphObject *create_glyph_object(const GlyphObjectStruct &glyph_object_struct) const final
+        {
+            return this->template create_child_of_known_parent_type<
+                GlyphObject, Scene, memory::GlyphObjectMemoryAllocator, GlyphObjectStruct>(
+                data::Datatype::GLYPH_OBJECT,
+                glyph_object_struct.scene_parent,
+                glyph_object_struct,
+                this->get_generic_master_module<GlyphObject, Glyph>(glyph_object_struct.glyph_master),
+                this->get_generic_master_module<GlyphObject, Text3d>(glyph_object_struct.text_3d_master));
+        }
+
+        Text3d *create_text_3d(const Text3dStruct &text_3d_struct) const final
+        {
+            return this->template create_child_of_known_parent_type<
+                Text3d, Scene, memory::Text3dMemoryAllocator, Text3dStruct>(
+                data::Datatype::TEXT_3D,
+                text_3d_struct.scene,
+                text_3d_struct,
+                this->get_generic_master_module<Movable, MovableController>(text_3d_struct.movable_controller_master),
+                this->get_generic_master_module<Text3d, VectorFont>(text_3d_struct.vector_font_master));
+        }
+
+        InputMode *create_input_mode(const InputModeStruct &input_mode_struct) const final
+        {
+            return this->template create_child_of_universe<
+                InputMode, ParentOfInputModesModule, memory::InputModeMemoryAllocator, InputModeStruct>(
+                data::Datatype::INPUT_MODE,
+                input_mode_struct,
+                &this->get_universe().parent_of_input_modes,
+                this->get_generic_master_module<InputMode, Console>(input_mode_struct.console_master));
+        }
+
+        // TODO: implement `create_key_binding` here!
+
+        // TODO: implement `create_playlist` here!
+
+        AudioTrack *create_audio_track(const AudioTrackStruct &audio_track_struct) const final
+        {
+            return this->create_child_of_universe<
+                AudioTrack, GenericParentModule, memory::AudioTrackMemoryAllocator, AudioTrackStruct>(
+                data::Datatype::AUDIO_TRACK,
+                audio_track_struct,
+                &this->get_universe().parent_of_audio_tracks);
+        }
+
+        Console *create_console(const ConsoleStruct &console_struct) const final
+        {
+            return this->template create_child_of_universe<
+                Console, GenericParentModule, memory::ConsoleMemoryAllocator, ConsoleStruct>(
+                data::Datatype::CONSOLE,
+                console_struct,
+                &this->get_universe().parent_of_consoles,
+                this->get_generic_master_module<Console, Font2d>(console_struct.font_2d_master));
+        }
+
+        ConsoleCallbackEngine *create_console_callback_engine(
+            const ConsoleCallbackEngineStruct &console_callback_engine_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                ConsoleCallbackEngine, Console, memory::ConsoleCallbackEngineMemoryAllocator,
+                ConsoleCallbackEngineStruct>(
+                data::Datatype::CONSOLE_CALLBACK_ENGINE,
+                console_callback_engine_struct.console_parent,
+                console_callback_engine_struct);
+        }
+
+        ConsoleCallbackObject *create_console_callback_object(
+            const ConsoleCallbackObjectStruct &console_callback_object_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                ConsoleCallbackObject, ConsoleCallbackEngine, memory::ConsoleCallbackObjectMemoryAllocator,
+                ConsoleCallbackObjectStruct>(
+                data::Datatype::CONSOLE_CALLBACK_OBJECT,
+                console_callback_object_struct.console_callback_engine_parent,
+                console_callback_object_struct);
+        }
+
+        ConsoleCallbackParameter *create_console_callback_parameter(
+            const ConsoleCallbackParameterStruct &console_callback_parameter_struct,
+            const yli::data::AnyValue &any_value) const final
+        {
+            return this->create_child_of_known_parent_type<
+                ConsoleCallbackParameter, ConsoleCallbackObject, memory::ConsoleCallbackParameterMemoryAllocator,
+                ConsoleCallbackParameterStruct>(
+                data::Datatype::CONSOLE_CALLBACK_PARAMETER,
+                console_callback_parameter_struct.console_callback_object_parent,
+                console_callback_parameter_struct,
+                any_value);
+        }
+
+        // TODO: implement `create_graph` here!
+
+        // TODO: implement `create_node` here!
+
+        ComputeTask *create_compute_task(const ComputeTaskStruct &compute_task_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                ComputeTask, Pipeline, memory::ComputeTaskMemoryAllocator, ComputeTaskStruct>(
+                data::Datatype::COMPUTE_TASK,
+                compute_task_struct.pipeline_parent,
+                compute_task_struct);
+        }
+
+        ConsoleLispFunction *create_console_lisp_function(
+            const ConsoleLispFunctionStruct &console_lisp_function_struct) const final
+        {
+            return this->create_child_of_known_parent_type<
+                ConsoleLispFunction, Console, memory::ConsoleLispFunctionMemoryAllocator, ConsoleLispFunctionStruct>(
+                data::Datatype::CONSOLE_LISP_FUNCTION,
+                console_lisp_function_struct.console_parent,
+                console_lisp_function_struct);
+        }
+
+        template<typename... Args>
+        GenericConsoleLispFunctionOverload *create_console_lisp_function_overload(
+            const std::string &name,
+            const Request<Console> &console_request,
+            std::optional<data::AnyValue> (*callback)(Args...))
+        {
+            Console *const console = resolve_request<Console>(console_request, this->get_universe().registry);
+
+            if (console == nullptr)
             {
-                return this->create_child_of_known_parent_type<
-                    ShapeshifterTransformation, Material, memory::ShapeshifterTransformationMemoryAllocator, ShapeshifterTransformationStruct>(
-                            data::Datatype::SHAPESHIFTER_TRANSFORMATION,
-                            shapeshifter_transformation_struct.material_parent,
-                            shapeshifter_transformation_struct);
+                std::cerr << "ERROR: `EntityFactory::create_console_lisp_function_overload`: `console` is `nullptr`!\n";
+                return nullptr;
             }
 
-            ShapeshifterSequence* create_shapeshifter_sequence(
-                    const ShapeshifterSequenceStruct& shapeshifter_sequence_struct) const final
+            Entity *const console_lisp_function_entity = this->get_universe().get_entity(name);
+
+            ConsoleLispFunction *console_lisp_function = nullptr;
+
+            if (console_lisp_function_entity == nullptr)
             {
-                return this->create_child_of_known_parent_type<
-                    ShapeshifterSequence, ShapeshifterTransformation, memory::ShapeshifterSequenceMemoryAllocator, ShapeshifterSequenceStruct>(
-                            data::Datatype::SHAPESHIFTER_SEQUENCE,
-                            shapeshifter_sequence_struct.shapeshifter_transformation_parent,
-                            shapeshifter_sequence_struct);
-            }
+                // There was not any `Entity` with that name.
+                ConsoleLispFunctionStruct console_lisp_function_struct{Request(console)};
+                console_lisp_function = this->create_console_lisp_function(console_lisp_function_struct);
 
-            ShapeshifterForm* create_shapeshifter_form(
-                    const ShapeshifterFormStruct& shapeshifter_form_struct) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    ShapeshifterForm, ShapeshifterTransformation, memory::ShapeshifterFormMemoryAllocator, ShapeshifterFormStruct>(
-                            data::Datatype::SHAPESHIFTER_FORM,
-                            shapeshifter_form_struct.shapeshifter_transformation_parent,
-                            shapeshifter_form_struct);
-            }
-
-            Shapeshifter* create_shapeshifter(const ShapeshifterStruct& shapeshifter_struct) const final
-            {
-                return this->template create_child_of_known_parent_type<
-                    Shapeshifter, Scene, memory::ShapeshifterMemoryAllocator, ShapeshifterStruct>(
-                            data::Datatype::SHAPESHIFTER,
-                            shapeshifter_struct.scene,
-                            shapeshifter_struct,
-                            // `MovableController` master.
-                            this->get_generic_master_module<Movable, MovableController>(shapeshifter_struct.movable_controller_master),
-                            // `ShapeshifterSequence` master.
-                            this->get_generic_master_module<Shapeshifter, ShapeshifterSequence>(shapeshifter_struct.shapeshifter_sequence_master));
-            }
-
-            Font2d* create_font_2d(const FontStruct& font_struct) const final
-            {
-                return this->create_child_of_universe<
-                    Font2d, GenericParentModule, memory::Font2dMemoryAllocator, FontStruct>(
-                            data::Datatype::FONT_2D,
-                            font_struct,
-                            &this->get_universe().parent_of_font_2ds);
-            }
-
-            Text2d* create_text_2d(const TextStruct& text_struct) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    Text2d, Font2d, memory::Text2dMemoryAllocator, TextStruct>(
-                            data::Datatype::TEXT_2D,
-                            text_struct.font_2d_parent,
-                            text_struct);
-            }
-
-            VectorFont* create_vector_font(const VectorFontStruct& vector_font_struct) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    VectorFont, Material, memory::VectorFontMemoryAllocator, VectorFontStruct>(
-                            data::Datatype::VECTOR_FONT,
-                            vector_font_struct.material_parent,
-                            vector_font_struct);
-            }
-
-            Glyph* create_glyph(const GlyphStruct& glyph_struct) const final
-            {
-                return this->template create_child_of_known_parent_type<
-                    Glyph, VectorFont, memory::GlyphMemoryAllocator, GlyphStruct>(
-                            data::Datatype::GLYPH,
-                            glyph_struct.vector_font_parent,
-                            glyph_struct,
-                            this->get_generic_master_module<Glyph, Material>(glyph_struct.material_master));
-            }
-
-            GlyphObject* create_glyph_object(const GlyphObjectStruct& glyph_object_struct) const final
-            {
-                return this->template create_child_of_known_parent_type<
-                    GlyphObject, Scene, memory::GlyphObjectMemoryAllocator, GlyphObjectStruct>(
-                            data::Datatype::GLYPH_OBJECT,
-                            glyph_object_struct.scene_parent,
-                            glyph_object_struct,
-                            this->get_generic_master_module<GlyphObject, Glyph>(glyph_object_struct.glyph_master),
-                            this->get_generic_master_module<GlyphObject, Text3d>(glyph_object_struct.text_3d_master));
-            }
-
-            Text3d* create_text_3d(const Text3dStruct& text_3d_struct) const final
-            {
-                return this->template create_child_of_known_parent_type<
-                    Text3d, Scene, memory::Text3dMemoryAllocator, Text3dStruct>(
-                            data::Datatype::TEXT_3D,
-                            text_3d_struct.scene,
-                            text_3d_struct,
-                            this->get_generic_master_module<Movable, MovableController>(text_3d_struct.movable_controller_master),
-                            this->get_generic_master_module<Text3d, VectorFont>(text_3d_struct.vector_font_master));
-            }
-
-            InputMode* create_input_mode(const InputModeStruct& input_mode_struct) const final
-            {
-                return this->template create_child_of_universe<
-                    InputMode, ParentOfInputModesModule, memory::InputModeMemoryAllocator, InputModeStruct>(
-                            data::Datatype::INPUT_MODE,
-                            input_mode_struct,
-                            &this->get_universe().parent_of_input_modes,
-                            this->get_generic_master_module<InputMode, Console>(input_mode_struct.console_master));
-            }
-
-            // TODO: implement `create_key_binding` here!
-
-            // TODO: implement `create_playlist` here!
-
-            AudioTrack* create_audio_track(const AudioTrackStruct& audio_track_struct) const final
-            {
-                return this->create_child_of_universe<
-                    AudioTrack, GenericParentModule, memory::AudioTrackMemoryAllocator, AudioTrackStruct>(
-                            data::Datatype::AUDIO_TRACK,
-                            audio_track_struct,
-                            &this->get_universe().parent_of_audio_tracks);
-            }
-
-            Console* create_console(const ConsoleStruct& console_struct) const final
-            {
-                return this->template create_child_of_universe<
-                    Console, GenericParentModule, memory::ConsoleMemoryAllocator, ConsoleStruct>(
-                            data::Datatype::CONSOLE,
-                            console_struct,
-                            &this->get_universe().parent_of_consoles,
-                            this->get_generic_master_module<Console, Font2d>(console_struct.font_2d_master));
-            }
-
-            ConsoleCallbackEngine* create_console_callback_engine(
-                    const ConsoleCallbackEngineStruct& console_callback_engine_struct) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    ConsoleCallbackEngine, Console, memory::ConsoleCallbackEngineMemoryAllocator, ConsoleCallbackEngineStruct>(
-                            data::Datatype::CONSOLE_CALLBACK_ENGINE,
-                            console_callback_engine_struct.console_parent,
-                            console_callback_engine_struct);
-            }
-
-            ConsoleCallbackObject* create_console_callback_object(
-                    const ConsoleCallbackObjectStruct& console_callback_object_struct) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    ConsoleCallbackObject, ConsoleCallbackEngine, memory::ConsoleCallbackObjectMemoryAllocator, ConsoleCallbackObjectStruct>(
-                            data::Datatype::CONSOLE_CALLBACK_OBJECT,
-                            console_callback_object_struct.console_callback_engine_parent,
-                            console_callback_object_struct);
-            }
-
-            ConsoleCallbackParameter* create_console_callback_parameter(
-                    const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
-                    const yli::data::AnyValue& any_value) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    ConsoleCallbackParameter, ConsoleCallbackObject, memory::ConsoleCallbackParameterMemoryAllocator, ConsoleCallbackParameterStruct>(
-                            data::Datatype::CONSOLE_CALLBACK_PARAMETER,
-                            console_callback_parameter_struct.console_callback_object_parent,
-                            console_callback_parameter_struct,
-                            any_value);
-            }
-
-            // TODO: implement `create_graph` here!
-
-            // TODO: implement `create_node` here!
-
-            ComputeTask* create_compute_task(const ComputeTaskStruct& compute_task_struct) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    ComputeTask, Pipeline, memory::ComputeTaskMemoryAllocator, ComputeTaskStruct>(
-                            data::Datatype::COMPUTE_TASK,
-                            compute_task_struct.pipeline_parent,
-                            compute_task_struct);
-            }
-
-            ConsoleLispFunction* create_console_lisp_function(const ConsoleLispFunctionStruct& console_lisp_function_struct) const final
-            {
-                return this->create_child_of_known_parent_type<
-                    ConsoleLispFunction, Console, memory::ConsoleLispFunctionMemoryAllocator, ConsoleLispFunctionStruct>(
-                            data::Datatype::CONSOLE_LISP_FUNCTION,
-                            console_lisp_function_struct.console_parent,
-                            console_lisp_function_struct);
-            }
-
-            template<typename... Args>
-                GenericConsoleLispFunctionOverload* create_console_lisp_function_overload(
-                        const std::string& name,
-                        const Request<Console>& console_request,
-                        std::optional<data::AnyValue>(*callback)(Args...))
+                if (console_lisp_function == nullptr)
                 {
-                    Console* const console = resolve_request<Console>(console_request, this->get_universe().registry);
-
-                    if (console == nullptr)
-                    {
-                        std::cerr << "ERROR: `EntityFactory::create_console_lisp_function_overload`: `console` is `nullptr`!\n";
-                        return nullptr;
-                    }
-
-                    Entity* const console_lisp_function_entity = this->get_universe().get_entity(name);
-
-                    ConsoleLispFunction* console_lisp_function = nullptr;
-
-                    if (console_lisp_function_entity == nullptr)
-                    {
-                        // There was not any `Entity` with that name.
-                        ConsoleLispFunctionStruct console_lisp_function_struct { Request(console) };
-                        console_lisp_function = this->create_console_lisp_function(console_lisp_function_struct);
-
-                        if (console_lisp_function == nullptr)
-                        {
-                            // Creating `ConsoleLispFunction` failed.
-                            std::cerr << "ERROR: `EntityFactory::create_console_lisp_function_overload`: creating `ConsoleLispFunction` failed!\n";
-                            return nullptr;
-                        }
-
-                        // OK, set a name for the newly created `ConsoleLispFunction`.
-                        console_lisp_function->set_global_name(name);
-                    }
-                    else
-                    {
-                        console_lisp_function = dynamic_cast<ConsoleLispFunction*>(console_lisp_function_entity);
-
-                        if (console_lisp_function == nullptr)
-                        {
-                            // The name is in use and the `Entity` is not a `ConsoleLispFunction`.
-                            std::cerr << "ERROR: `EntityFactory::create_console_lisp_function_overload`: referred `Entity` is not a `ConsoleLispFunction`!\n";
-                            return nullptr;
-                        }
-                    }
-
-                    memory::GenericMemoryAllocator& generic_allocator =
-                        this->memory_system.template get_or_create_allocator<memory::GenericConsoleLispFunctionOverloadMemoryAllocator>(
-                                static_cast<int>(data::Datatype::GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD));
-
-                    auto& allocator =
-                        static_cast<memory::GenericConsoleLispFunctionOverloadMemoryAllocator&>(generic_allocator);
-
-                    GenericConsoleLispFunctionOverload* const generic_console_lisp_function_overload = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
-                            &console_lisp_function->parent_of_generic_console_lisp_function_overloads,
-                            callback);
-                    generic_console_lisp_function_overload->set_global_name(name);
-                    return generic_console_lisp_function_overload;
+                    // Creating `ConsoleLispFunction` failed.
+                    std::cerr <<
+                            "ERROR: `EntityFactory::create_console_lisp_function_overload`: creating `ConsoleLispFunction` failed!\n";
+                    return nullptr;
                 }
 
-            template<typename T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
-                T* create_object_derivative(
-                        int object_derivative_type,
-                        const ObjectStruct& object_struct,
-                        ModuleArgs&&... module_args) const
+                // OK, set a name for the newly created `ConsoleLispFunction`.
+                console_lisp_function->set_global_name(name);
+            }
+            else
+            {
+                console_lisp_function = dynamic_cast<ConsoleLispFunction *>(console_lisp_function_entity);
+
+                if (console_lisp_function == nullptr)
                 {
-                    return static_cast<T*>(this->template create_child_of_known_parent_type<
-                        Object, Scene, ObjectDerivativeMemoryAllocator, ObjectStruct>(
-                                object_derivative_type,
-                                object_struct.scene,
-                                object_struct,
-                                // `MovableController` master.
-                                this->get_generic_master_module<Movable, MovableController>(object_struct.movable_controller_master),
-                                // `Species` master.
-                                this->get_generic_master_module<Object, Species>(object_struct.species_master),
-                                // Skill modules.
-                                std::forward<ModuleArgs>(module_args)...));
+                    // The name is in use and the `Entity` is not a `ConsoleLispFunction`.
+                    std::cerr <<
+                            "ERROR: `EntityFactory::create_console_lisp_function_overload`: referred `Entity` is not a `ConsoleLispFunction`!\n";
+                    return nullptr;
                 }
+            }
 
-            template<typename T, typename HolobiontDerivativeMemoryAllocator, typename... ModuleArgs>
-                T* create_holobiont_derivative(
-                        int holobiont_derivative_type,
-                        const HolobiontStruct& holobiont_struct,
-                        ModuleArgs&&... module_args) const
-                {
-                    return static_cast<T*>(this->template create_child_of_known_parent_type<
-                        Holobiont, Scene, HolobiontDerivativeMemoryAllocator, HolobiontStruct>(
-                                holobiont_derivative_type,
-                                holobiont_struct.scene,
-                                holobiont_struct,
-                                this->get_generic_master_module<Movable, MovableController>(holobiont_struct.movable_controller_master),
-                                this->get_generic_master_module<Holobiont, Symbiosis>(holobiont_struct.symbiosis_master),
-                                std::forward<ModuleArgs>(module_args)...));
-                }
+            memory::GenericMemoryAllocator &generic_allocator =
+                    this->memory_system.template get_or_create_allocator<
+                        memory::GenericConsoleLispFunctionOverloadMemoryAllocator>(
+                        static_cast<int>(data::Datatype::GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD));
 
-        private:
-            template<typename T, typename ParentModuleType, typename TypeAllocator, typename DataStruct, typename... Args>
-                T* create_child_of_universe(
-                        const int type,
-                        const DataStruct& data_struct,
-                        ParentModuleType* const parent_module,
-                        Args&&... args) const
-                {
-                    memory::GenericMemoryAllocator& generic_allocator =
-                        this->memory_system.template get_or_create_allocator<TypeAllocator>(type);
-                    auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
+            auto &allocator =
+                    static_cast<memory::GenericConsoleLispFunctionOverloadMemoryAllocator &>(generic_allocator);
 
-                    T* const instance = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
-                            data_struct,
-                            parent_module,
-                            std::forward<Args>(args)...);
+            GenericConsoleLispFunctionOverload *const generic_console_lisp_function_overload = allocator.build_in(
+                this->application,
+                this->get_universe(),
+                &console_lisp_function->parent_of_generic_console_lisp_function_overloads,
+                callback);
+            generic_console_lisp_function_overload->set_global_name(name);
+            return generic_console_lisp_function_overload;
+        }
 
-                    if (!data_struct.global_name.empty() && data_struct.local_name.empty())
-                    {
-                        // Only `global_name` given, OK.
-                        instance->set_global_name(data_struct.global_name);
-                    }
-                    else if (data_struct.global_name.empty() && !data_struct.local_name.empty())
-                    {
-                        // Only `local_name` given, OK.
-                        instance->set_local_name(data_struct.local_name);
-                    }
-                    else if (!data_struct.global_name.empty() && !data_struct.local_name.empty())
-                    {
-                        std::cerr << "ERROR: `EntityFactory::create_child_of_universe`: both global and local names given for type: " << instance->get_type() << "\n";
-                        std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                        std::cerr << "are the same and only 1 of them can be given. No name given to this instance of type: " << instance->get_type() << " !\n";
-                    }
+        template<typename T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
+        T *create_object_derivative(
+            int object_derivative_type,
+            const ObjectStruct &object_struct,
+            ModuleArgs &&... module_args) const
+        {
+            return static_cast<T *>(this->template create_child_of_known_parent_type<
+                Object, Scene, ObjectDerivativeMemoryAllocator, ObjectStruct>(
+                object_derivative_type,
+                object_struct.scene,
+                object_struct,
+                // `MovableController` master.
+                this->get_generic_master_module<Movable, MovableController>(object_struct.movable_controller_master),
+                // `Species` master.
+                this->get_generic_master_module<Object, Species>(object_struct.species_master),
+                // Skill modules.
+                std::forward<ModuleArgs>(module_args)...));
+        }
 
-                    return instance;
-                }
+        template<typename T, typename HolobiontDerivativeMemoryAllocator, typename... ModuleArgs>
+        T *create_holobiont_derivative(
+            int holobiont_derivative_type,
+            const HolobiontStruct &holobiont_struct,
+            ModuleArgs &&... module_args) const
+        {
+            return static_cast<T *>(this->template create_child_of_known_parent_type<
+                Holobiont, Scene, HolobiontDerivativeMemoryAllocator, HolobiontStruct>(
+                holobiont_derivative_type,
+                holobiont_struct.scene,
+                holobiont_struct,
+                this->get_generic_master_module<Movable, MovableController>(holobiont_struct.movable_controller_master),
+                this->get_generic_master_module<Holobiont, Symbiosis>(holobiont_struct.symbiosis_master),
+                std::forward<ModuleArgs>(module_args)...));
+        }
 
-            template<EntityNotUniverse T, typename TypeAllocator, typename DataStruct, typename... Args>
-                T* create_child_of_ecosystem_or_scene(
-                        const int type,
-                        const DataStruct& data_struct,
-                        Args&&... args) const
-                {
-                    memory::GenericMemoryAllocator& generic_allocator =
-                        this->memory_system.template get_or_create_allocator<TypeAllocator>(
-                                static_cast<int>(type));
-                    auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
+    private:
+        template<typename T, typename ParentModuleType, typename TypeAllocator, typename DataStruct, typename... Args>
+        T *create_child_of_universe(
+            const int type,
+            const DataStruct &data_struct,
+            ParentModuleType *const parent_module,
+            Args &&... args) const
+        {
+            memory::GenericMemoryAllocator &generic_allocator =
+                    this->memory_system.template get_or_create_allocator<TypeAllocator>(type);
+            auto &allocator = static_cast<TypeAllocator &>(generic_allocator);
 
-                    T* instance = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
-                            data_struct,
-                            this->template get_generic_parent_module_from_variant<T>(data_struct.parent),
-                            std::forward<Args>(args)...);
+            T *const instance = allocator.build_in(
+                this->application,
+                this->get_universe(),
+                data_struct,
+                parent_module,
+                std::forward<Args>(args)...);
 
-                    instance->set_global_name(data_struct.global_name);
-                    instance->set_local_name(data_struct.local_name);
-                    return instance;
-                }
+            if (!data_struct.global_name.empty() && data_struct.local_name.empty())
+            {
+                // Only `global_name` given, OK.
+                instance->set_global_name(data_struct.global_name);
+            }
+            else if (data_struct.global_name.empty() && !data_struct.local_name.empty())
+            {
+                // Only `local_name` given, OK.
+                instance->set_local_name(data_struct.local_name);
+            }
+            else if (!data_struct.global_name.empty() && !data_struct.local_name.empty())
+            {
+                std::cerr <<
+                        "ERROR: `EntityFactory::create_child_of_universe`: both global and local names given for type: "
+                        << instance->get_type() << "\n";
+                std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+                std::cerr << "are the same and only 1 of them can be given. No name given to this instance of type: " <<
+                        instance->get_type() << " !\n";
+            }
 
-            template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct, typename... Types, typename... Args>
-                Type* create_child_of_known_parent_type(
-                        const int allocator_type,
-                        const Request<ParentType>& parent,
-                        const DataStruct& data_struct,
-                        Args&&... args) const
-                {
-                    // Create an instance of a derived class of `Entity`.
-                    // The type of the `Entity` must not be `Universe`.
-                    // The type of the parent of the `Entity` must not be `Universe`.
+            return instance;
+        }
 
-                    memory::GenericMemoryAllocator& generic_allocator =
-                        this->memory_system.template get_or_create_allocator<TypeAllocator>(
-                                static_cast<int>(allocator_type));
-                    auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
+        template<EntityNotUniverse T, typename TypeAllocator, typename DataStruct, typename... Args>
+        T *create_child_of_ecosystem_or_scene(
+            const int type,
+            const DataStruct &data_struct,
+            Args &&... args) const
+        {
+            memory::GenericMemoryAllocator &generic_allocator =
+                    this->memory_system.template get_or_create_allocator<TypeAllocator>(
+                        static_cast<int>(type));
+            auto &allocator = static_cast<TypeAllocator &>(generic_allocator);
 
-                    Type* const instance = allocator.build_in(
-                            this->application,
-                            this->get_universe(),
-                            data_struct,
-                            this->get_generic_parent_module<Type, ParentType>(parent),
-                            std::forward<Args>(args)...);
+            T *instance = allocator.build_in(
+                this->application,
+                this->get_universe(),
+                data_struct,
+                this->template get_generic_parent_module_from_variant<T>(data_struct.parent),
+                std::forward<Args>(args)...);
 
-                    instance->set_global_name(data_struct.global_name);
-                    instance->set_local_name(data_struct.local_name);
-                    return instance;
-                }
+            instance->set_global_name(data_struct.global_name);
+            instance->set_local_name(data_struct.local_name);
+            return instance;
+        }
 
-            core::Application& application;
-            memory::MemorySystem<TypeEnumType>& memory_system;
-            Universe* universe { nullptr };
+        template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct,
+            typename... Types, typename... Args>
+        Type *create_child_of_known_parent_type(
+            const int allocator_type,
+            const Request<ParentType> &parent,
+            const DataStruct &data_struct,
+            Args &&... args) const
+        {
+            // Create an instance of a derived class of `Entity`.
+            // The type of the `Entity` must not be `Universe`.
+            // The type of the parent of the `Entity` must not be `Universe`.
+
+            memory::GenericMemoryAllocator &generic_allocator =
+                    this->memory_system.template get_or_create_allocator<TypeAllocator>(
+                        static_cast<int>(allocator_type));
+            auto &allocator = static_cast<TypeAllocator &>(generic_allocator);
+
+            Type *const instance = allocator.build_in(
+                this->application,
+                this->get_universe(),
+                data_struct,
+                this->get_generic_parent_module<Type, ParentType>(parent),
+                std::forward<Args>(args)...);
+
+            instance->set_global_name(data_struct.global_name);
+            instance->set_local_name(data_struct.local_name);
+            return instance;
+        }
+
+        core::Application &application;
+        memory::MemorySystem<TypeEnumType> &memory_system;
+        Universe *universe{nullptr};
     };
 }
 
