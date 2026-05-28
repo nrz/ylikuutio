@@ -56,20 +56,20 @@ namespace yli::ontology
     }
 
     Entity::Entity(
-            core::Application& application,
-            Universe& universe,
-            const EntityStruct& entity_struct)
+        core::Application& application,
+        Universe& universe,
+        const EntityStruct& entity_struct)
         : application { application },
-        parent_of_variables(
-                *this,
-                this->registry,
-                ""), // Do not index `parent_of_variables`, index only the variables.
-        parent_of_callback_engines(
-                *this,
-                this->registry,
-                "callback_engines"),
-        universe { universe },
-        is_universe { entity_struct.is_universe }
+          parent_of_variables(
+              *this,
+              this->registry,
+              ""), // Do not index `parent_of_variables`, index only the variables.
+          parent_of_callback_engines(
+              *this,
+              this->registry,
+              "callback_engines"),
+          universe { universe },
+          is_universe { entity_struct.is_universe }
     {
         // Get `entityID` from `Universe` and set pointer to this `Entity`.
         this->bind_to_universe();
@@ -292,13 +292,13 @@ namespace yli::ontology
     std::size_t Entity::get_number_of_all_children() const
     {
         return this->parent_of_variables.get_number_of_children() +
-            this->get_number_of_non_variable_children();
+               this->get_number_of_non_variable_children();
     }
 
     std::size_t Entity::get_number_of_all_descendants() const
     {
         return ontology::get_number_of_descendants(this->parent_of_variables.child_pointer_vector) +
-            this->get_number_of_descendants();
+               this->get_number_of_descendants();
     }
 
     std::size_t Entity::get_number_of_variables() const
