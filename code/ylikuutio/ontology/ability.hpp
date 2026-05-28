@@ -52,7 +52,7 @@ namespace yli::ontology
 
             ~Ability() override = default;
 
-            Symbiosis* get_symbiosis() const;
+            virtual Symbiosis* get_symbiosis() const;
 
             Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;
