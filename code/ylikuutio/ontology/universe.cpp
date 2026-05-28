@@ -416,7 +416,7 @@ namespace yli::ontology
                     const float yaw = this->get_yaw();
                     const float pitch = this->get_pitch();
 
-                    glm::vec3 direction = glm::vec3(
+                    auto direction = glm::vec3(
                         std::cos(pitch) * std::cos(yaw),
                         std::cos(pitch) * std::sin(yaw),
                         std::sin(pitch));
