@@ -26,7 +26,6 @@
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t
