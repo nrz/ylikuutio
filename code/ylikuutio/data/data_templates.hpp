@@ -335,5 +335,6 @@ namespace yli::data
         {
             return "std::shared_ptr<glm::vec4>";
         }
+}
 
 #endif
