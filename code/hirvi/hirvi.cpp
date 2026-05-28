@@ -111,7 +111,7 @@ namespace hirvi
         return this->core.memory_system.get();
     }
 
-    yli::memory::MemorySystem<hirvi::Datatype>& HirviApplication::get_memory_system() const
+    yli::memory::MemorySystem<Datatype>& HirviApplication::get_memory_system() const
     {
         return this->core.memory_system.get();
     }
@@ -249,7 +249,7 @@ namespace hirvi
 
 namespace yli::core
 {
-    std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[])
+    std::unique_ptr<Application> create_application(const int argc, const char* const argv[])
     {
         return std::make_unique<hirvi::HirviApplication>(argc, argv);
     }

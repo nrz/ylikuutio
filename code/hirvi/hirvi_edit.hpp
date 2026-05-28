@@ -76,7 +76,7 @@ namespace hirvi
 
             yli::memory::GenericMemorySystem& get_generic_memory_system() const override;
 
-            yli::memory::MemorySystem<hirvi::Datatype>& get_memory_system() const;
+            yli::memory::MemorySystem<Datatype>& get_memory_system() const;
 
             yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const override;
 
@@ -93,7 +93,7 @@ namespace hirvi
 
             yli::ontology::GenericEntityFactory& get_generic_entity_factory() const override;
 
-            yli::ontology::EntityFactory<hirvi::Datatype>& get_entity_factory() const
+            yli::ontology::EntityFactory<Datatype>& get_entity_factory() const
             {
                 return this->core.entity_factory.get();
             }
@@ -115,14 +115,14 @@ namespace hirvi
             static void customize(HirviCore& hirvi_core);
 
         private:
-            hirvi::HirviCore core;
+            HirviCore core;
             yli::edit::EditCore edit;
     };
 }
 
 namespace yli::core
 {
-    std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[]);
+    std::unique_ptr<Application> create_application(const int argc, const char* const argv[]);
 }
 
 #endif
