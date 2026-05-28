@@ -334,9 +334,9 @@ namespace yli::ontology
             // 3. Process physics.
             // 4. Update information about current location and orientation (for rendering).
             // 5. Render.
-            const double current_time_in_main_loop = time::get_time();
 
-            if (current_time_in_main_loop - this->last_time_for_display_sync >= (1.0 / this->max_fps))
+            if (const double current_time_in_main_loop = time::get_time();
+                current_time_in_main_loop - this->last_time_for_display_sync >= (1.0 / this->max_fps))
             {
                 this->update_last_time_for_display_sync();
 
