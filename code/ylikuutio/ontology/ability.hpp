@@ -42,25 +42,25 @@ namespace yli::ontology
     {
     public:
         Ability(
-            core::Application &application,
-            Universe &universe,
-            const AbilityStruct &ability_struct,
-            GenericParentModule *parent_module);
+            core::Application& application,
+            Universe& universe,
+            const AbilityStruct& ability_struct,
+            GenericParentModule* parent_module);
 
-        Ability(const Ability &) = delete; // Delete copy constructor.
-        Ability &operator=(const Ability &) = delete; // Delete copy assignment.
+        Ability(const Ability&) = delete; // Delete copy constructor.
+        Ability& operator=(const Ability&) = delete; // Delete copy assignment.
 
         ~Ability() override = default;
 
-        virtual Symbiosis *get_symbiosis() const;
+        virtual Symbiosis* get_symbiosis() const;
 
-        Entity *get_parent() const override;
+        Entity* get_parent() const override;
 
         std::size_t get_number_of_children() const override;
 
         std::size_t get_number_of_descendants() const override;
 
-        Scene *get_scene() const override;
+        Scene* get_scene() const override;
 
         ChildModule child_of_symbiosis;
     };
