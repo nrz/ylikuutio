@@ -315,7 +315,7 @@ namespace yli::ontology
 
         static std::optional<data::AnyValue> delete_entity(
             Universe& universe,
-            Entity& entity);
+            const Entity& entity);
 
         // Public `Entity` naming callbacks.
 

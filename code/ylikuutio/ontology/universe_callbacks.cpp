@@ -45,7 +45,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> Universe::delete_entity(
         Universe& universe,
-        Entity& entity)
+        const Entity& entity)
     {
         if (entity.get_can_be_erased())
         {
