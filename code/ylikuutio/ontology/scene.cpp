@@ -22,7 +22,6 @@
 #include "scene.hpp"
 #include "universe.hpp"
 #include "pipeline.hpp"
-#include "material.hpp"
 #include "camera.hpp"
 #include "movable_controller.hpp"
 #include "generic_entity_factory.hpp"
