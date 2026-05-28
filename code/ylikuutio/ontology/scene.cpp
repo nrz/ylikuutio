@@ -58,64 +58,64 @@ namespace yli::ontology
     class Entity;
 
     Scene::Scene(
-            core::Application& application,
-            Universe& universe,
-            const SceneStruct& scene_struct,
-            GenericParentModule* const universe_parent_module)
-    : Entity(application, universe, scene_struct),
-        child_of_universe(universe_parent_module, *this),
-        parent_of_movable_controllers(
-                *this,
-                this->registry,
-                "movable_controllers"),
-        parent_of_waypoints(
-                *this,
-                this->registry,
-                "waypoints"),
-        parent_of_cameras(
-                *this,
-                this->registry,
-                "cameras"),
-        parent_of_pipelines(
-                *this,
-                this->registry,
-                "pipelines"),
-        parent_of_materials(
-                *this,
-                this->registry,
-                "materials"),
-        parent_of_species(
-                *this,
-                this->registry,
-                "species"),
-        parent_of_objects(
-                *this,
-                this->registry,
-                "objects"),
-        parent_of_symbioses(
-                *this,
-                this->registry,
-                "symbioses"),
-        parent_of_holobionts(
-                *this,
-                this->registry,
-                "holobionts"),
-        parent_of_shapeshifters(
-                *this,
-                this->registry,
-                "shapeshifters"),
-        parent_of_text_3ds(
-                *this,
-                this->registry,
-                "text_3ds"),
-        parent_of_glyph_objects(
-                *this,
-                this->registry,
-                "glyph_objects"),
-        gravity               { scene_struct.gravity },
-        light_position        { scene_struct.light_position },
-        water_level           { scene_struct.water_level },
-        is_flight_mode_in_use { scene_struct.is_flight_mode_in_use }
+        core::Application& application,
+        Universe& universe,
+        const SceneStruct& scene_struct,
+        GenericParentModule* const universe_parent_module)
+        : Entity(application, universe, scene_struct),
+          child_of_universe(universe_parent_module, *this),
+          parent_of_movable_controllers(
+              *this,
+              this->registry,
+              "movable_controllers"),
+          parent_of_waypoints(
+              *this,
+              this->registry,
+              "waypoints"),
+          parent_of_cameras(
+              *this,
+              this->registry,
+              "cameras"),
+          parent_of_pipelines(
+              *this,
+              this->registry,
+              "pipelines"),
+          parent_of_materials(
+              *this,
+              this->registry,
+              "materials"),
+          parent_of_species(
+              *this,
+              this->registry,
+              "species"),
+          parent_of_objects(
+              *this,
+              this->registry,
+              "objects"),
+          parent_of_symbioses(
+              *this,
+              this->registry,
+              "symbioses"),
+          parent_of_holobionts(
+              *this,
+              this->registry,
+              "holobionts"),
+          parent_of_shapeshifters(
+              *this,
+              this->registry,
+              "shapeshifters"),
+          parent_of_text_3ds(
+              *this,
+              this->registry,
+              "text_3ds"),
+          parent_of_glyph_objects(
+              *this,
+              this->registry,
+              "glyph_objects"),
+          gravity { scene_struct.gravity },
+          light_position { scene_struct.light_position },
+          water_level { scene_struct.water_level },
+          is_flight_mode_in_use { scene_struct.is_flight_mode_in_use }
     {
         if (this->universe.get_is_opengl_in_use())
         {
@@ -125,7 +125,8 @@ namespace yli::ontology
             // TODO: add support for using multiple `Camera`s in the same frame!
             glGenBuffers(1, &this->scene_uniform_block);
             glBindBuffer(GL_UNIFORM_BUFFER, this->scene_uniform_block);
-            glBufferData(GL_UNIFORM_BUFFER, opengl::scene_ubo::SceneUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
+            glBufferData(GL_UNIFORM_BUFFER, opengl::scene_ubo::SceneUboBlockOffsets::TOTAL_SIZE, nullptr,
+                         GL_STATIC_DRAW);
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
         }
         else if (this->universe.get_is_vulkan_in_use())
@@ -195,8 +196,10 @@ namespace yli::ontology
         {
             // Set the uniform values specific to a `Scene`.
             glBindBuffer(GL_UNIFORM_BUFFER, this->scene_uniform_block);
-            glBufferSubData(GL_UNIFORM_BUFFER, opengl::scene_ubo::SceneUboBlockOffsets::LIGHT_POSITION_WORLDSPACE, sizeof(glm::vec4), glm::value_ptr(this->light_position));
-            glBufferSubData(GL_UNIFORM_BUFFER, opengl::scene_ubo::SceneUboBlockOffsets::WATER_LEVEL, sizeof(float), &this->water_level);
+            glBufferSubData(GL_UNIFORM_BUFFER, opengl::scene_ubo::SceneUboBlockOffsets::LIGHT_POSITION_WORLDSPACE,
+                            sizeof(glm::vec4), glm::value_ptr(this->light_position));
+            glBufferSubData(GL_UNIFORM_BUFFER, opengl::scene_ubo::SceneUboBlockOffsets::WATER_LEVEL, sizeof(float),
+                            &this->water_level);
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
             glBindBufferBase(GL_UNIFORM_BUFFER, opengl::UboBlockIndices::SCENE, this->scene_uniform_block);
@@ -256,31 +259,31 @@ namespace yli::ontology
     std::size_t Scene::get_number_of_children() const
     {
         return this->parent_of_movable_controllers.get_number_of_children() +
-            this->parent_of_waypoints.get_number_of_children() +
-            this->parent_of_cameras.get_number_of_children() +
-            this->parent_of_pipelines.get_number_of_children() +
-            this->parent_of_materials.get_number_of_children() +
-            this->parent_of_species.get_number_of_children() +
-            this->parent_of_objects.get_number_of_children() +
-            this->parent_of_symbioses.get_number_of_children() +
-            this->parent_of_holobionts.get_number_of_children() +
-            this->parent_of_shapeshifters.get_number_of_children() +
-            this->parent_of_text_3ds.get_number_of_children();
+               this->parent_of_waypoints.get_number_of_children() +
+               this->parent_of_cameras.get_number_of_children() +
+               this->parent_of_pipelines.get_number_of_children() +
+               this->parent_of_materials.get_number_of_children() +
+               this->parent_of_species.get_number_of_children() +
+               this->parent_of_objects.get_number_of_children() +
+               this->parent_of_symbioses.get_number_of_children() +
+               this->parent_of_holobionts.get_number_of_children() +
+               this->parent_of_shapeshifters.get_number_of_children() +
+               this->parent_of_text_3ds.get_number_of_children();
     }
 
     std::size_t Scene::get_number_of_descendants() const
     {
         return ontology::get_number_of_descendants(this->parent_of_movable_controllers.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_waypoints.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_pipelines.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_holobionts.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_shapeshifters.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_text_3ds.child_pointer_vector);
+               ontology::get_number_of_descendants(this->parent_of_waypoints.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_cameras.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_pipelines.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_holobionts.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_shapeshifters.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_text_3ds.child_pointer_vector);
     }
 
     float Scene::get_turbo_factor() const
@@ -333,7 +336,7 @@ namespace yli::ontology
         this->gravity = gravity;
     }
 
-    void Scene::add_rigid_body_module(const RigidBodyModule& /* rigid_body_module */, Scene& /* scene */ )
+    void Scene::add_rigid_body_module(const RigidBodyModule& /* rigid_body_module */, Scene& /* scene */)
     {
         // TODO: implement!
     }

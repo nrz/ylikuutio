@@ -62,7 +62,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -85,181 +85,189 @@ namespace yli::ontology
 
     class Scene final : public Entity
     {
-            Scene(
-                    core::Application& application,
-                    Universe& universe,
-                    const SceneStruct& scene_struct,
-                    GenericParentModule* universe_parent_module);
+        Scene(
+            core::Application& application,
+            Universe& universe,
+            const SceneStruct& scene_struct,
+            GenericParentModule* universe_parent_module);
 
-            ~Scene() override;
+        ~Scene() override;
 
-        public:
-            Scene(const Scene&) = delete;            // Delete copy constructor.
-            Scene& operator=(const Scene&) = delete; // Delete copy assignment.
+    public:
+        Scene(const Scene&) = delete; // Delete copy constructor.
+        Scene& operator=(const Scene&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            // this method processes the physics.
-            void do_physics();
+        // this method processes the physics.
+        void do_physics();
 
-            // Intentional actors (AIs and keyboard controlled ones).
-            void update();
+        // Intentional actors (AIs and keyboard controlled ones).
+        void update();
 
-            void activate() override;
+        void activate() override;
 
-            // this method renders all `Pipeline`s of this `Scene`.
-            void render();
+        // this method renders all `Pipeline`s of this `Scene`.
+        void render();
 
-            Camera* get_default_camera() const;
+        Camera* get_default_camera() const;
 
-            Camera* get_active_camera() const;
-            void set_active_camera(Camera* camera);
+        Camera* get_active_camera() const;
 
-            // this method returns a pointer to `yli::data::AnyValue` corresponding to the given `key`.
-            float get_turbo_factor() const;
-            void set_turbo_factor(const float turbo_factor);
-            float get_twin_turbo_factor() const;
-            void set_twin_turbo_factor(const float turbo_factor);
+        void set_active_camera(Camera* camera);
 
-            float get_gravity() const;
-            void set_gravity(float gravity);
+        // this method returns a pointer to `yli::data::AnyValue` corresponding to the given `key`.
+        float get_turbo_factor() const;
 
-            void add_rigid_body_module(const RigidBodyModule& rigid_body_module, Scene& scene);
+        void set_turbo_factor(const float turbo_factor);
 
-            const glm::vec4& get_light_position() const;
-            float get_water_level() const;
+        float get_twin_turbo_factor() const;
 
-            bool get_is_flight_mode_in_use() const;
-            void set_is_flight_mode_in_use(bool is_flight_mode_in_use);
+        void set_twin_turbo_factor(const float turbo_factor);
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        float get_gravity() const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        void set_gravity(float gravity);
 
-            ChildModule child_of_universe;
-            GenericParentModule parent_of_movable_controllers;
-            GenericParentModule parent_of_waypoints;
-            GenericParentModule parent_of_cameras;
-            ParentOfPipelinesModule parent_of_pipelines;
-            GenericParentModule parent_of_materials;
-            GenericParentModule parent_of_species;
-            GenericParentModule parent_of_objects;
-            GenericParentModule parent_of_symbioses;
-            GenericParentModule parent_of_holobionts;
-            GenericParentModule parent_of_shapeshifters;
-            GenericParentModule parent_of_text_3ds;
-            GenericParentModule parent_of_glyph_objects;
+        void add_rigid_body_module(const RigidBodyModule& rigid_body_module, Scene& scene);
 
-            Scene* get_scene() const override;
+        const glm::vec4& get_light_position() const;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        float get_water_level() const;
 
-        private:
-            Camera* active_camera { nullptr };
+        bool get_is_flight_mode_in_use() const;
 
-            // Variables related to location and orientation.
+        void set_is_flight_mode_in_use(bool is_flight_mode_in_use);
 
-            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            glm::vec3* cartesian_coordinates { nullptr };
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
-            glm::vec3 direction;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            glm::vec3 right; // note: `right` can not be set directly using console.
-            glm::vec3 up;    // note: `up` can not be set directly using console.
+        ChildModule child_of_universe;
+        GenericParentModule parent_of_movable_controllers;
+        GenericParentModule parent_of_waypoints;
+        GenericParentModule parent_of_cameras;
+        ParentOfPipelinesModule parent_of_pipelines;
+        GenericParentModule parent_of_materials;
+        GenericParentModule parent_of_species;
+        GenericParentModule parent_of_objects;
+        GenericParentModule parent_of_symbioses;
+        GenericParentModule parent_of_holobionts;
+        GenericParentModule parent_of_shapeshifters;
+        GenericParentModule parent_of_text_3ds;
+        GenericParentModule parent_of_glyph_objects;
 
-            GLuint scene_uniform_block { 0 };
+        Scene* get_scene() const override;
 
-            float roll  { NAN };
-            float yaw   { NAN };
-            float pitch { NAN };
+        std::size_t get_number_of_children() const override;
 
-            float turbo_factor      { 1.0f };
-            float twin_turbo_factor { 1.0f };
+        std::size_t get_number_of_descendants() const override;
 
-            // Variables related to physics.
-            float gravity;
+    private:
+        Camera* active_camera { nullptr };
 
-            glm::vec4 light_position;
-            float water_level;
+        // Variables related to location and orientation.
 
-            bool is_flight_mode_in_use;
+        // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
+        glm::vec3* cartesian_coordinates { nullptr };
+
+        // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
+        glm::vec3 direction;
+
+        glm::vec3 right; // note: `right` can not be set directly using console.
+        glm::vec3 up; // note: `up` can not be set directly using console.
+
+        GLuint scene_uniform_block { 0 };
+
+        float roll { NAN };
+        float yaw { NAN };
+        float pitch { NAN };
+
+        float turbo_factor { 1.0f };
+        float twin_turbo_factor { 1.0f };
+
+        // Variables related to physics.
+        float gravity;
+
+        glm::vec4 light_position;
+        float water_level;
+
+        bool is_flight_mode_in_use;
     };
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<MovableController>()
-        {
-            return &this->parent_of_movable_controllers;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<MovableController>()
+    {
+        return &this->parent_of_movable_controllers;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Waypoint>()
-        {
-            return &this->parent_of_waypoints;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<Waypoint>()
+    {
+        return &this->parent_of_waypoints;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Camera>()
-        {
-            return &this->parent_of_cameras;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<Camera>()
+    {
+        return &this->parent_of_cameras;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Pipeline>()
-        {
-            return &this->parent_of_pipelines;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<Pipeline>()
+    {
+        return &this->parent_of_pipelines;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Material>()
-        {
-            return &this->parent_of_materials;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<Material>()
+    {
+        return &this->parent_of_materials;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Species>()
-        {
-            return &this->parent_of_species;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<Species>()
+    {
+        return &this->parent_of_species;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Object>()
-        {
-            return &this->parent_of_objects;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<Object>()
+    {
+        return &this->parent_of_objects;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Symbiosis>()
-        {
-            return &this->parent_of_symbioses;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<Symbiosis>()
+    {
+        return &this->parent_of_symbioses;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Holobiont>()
-        {
-            return &this->parent_of_holobionts;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<Holobiont>()
+    {
+        return &this->parent_of_holobionts;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Shapeshifter>()
-        {
-            return &this->parent_of_shapeshifters;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<Shapeshifter>()
+    {
+        return &this->parent_of_shapeshifters;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<Text3d>()
-        {
-            return &this->parent_of_text_3ds;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<Text3d>()
+    {
+        return &this->parent_of_text_3ds;
+    }
 
     template<>
-        inline GenericParentModule* Scene::get_generic_parent_module<GlyphObject>()
-        {
-            return &this->parent_of_glyph_objects;
-        }
+    inline GenericParentModule* Scene::get_generic_parent_module<GlyphObject>()
+    {
+        return &this->parent_of_glyph_objects;
+    }
 }
 
 #endif
