@@ -468,7 +468,7 @@ namespace yli::ontology
                 if (time_text_2d != nullptr)
                 {
                     std::stringstream time_stringstream;
-                    time_stringstream << std::fixed << std::setprecision(2) << yli::time::get_time() << " sec";
+                    time_stringstream << std::fixed << std::setprecision(2) << time::get_time() << " sec";
                     const std::string time_string = time_stringstream.str();
                     time_text_2d->change_string(time_string);
                 }
