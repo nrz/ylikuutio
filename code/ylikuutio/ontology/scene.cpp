@@ -20,7 +20,6 @@
 #endif
 
 #include "scene.hpp"
-#include "rigid_body_module.hpp"
 #include "universe.hpp"
 #include "pipeline.hpp"
 #include "material.hpp"
@@ -56,6 +55,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class RigidBodyModule;
 
     Scene::Scene(
         core::Application& application,
