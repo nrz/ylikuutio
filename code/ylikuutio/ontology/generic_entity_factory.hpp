@@ -107,6 +107,8 @@ namespace yli::ontology
     class GenericEntityFactory
     {
         public:
+            virtual ~GenericEntityFactory() = default;
+
             virtual Variable* create_variable(
                     const VariableStruct& variable_struct,
                     data::AnyValue&& any_value) const = 0;
