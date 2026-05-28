@@ -144,8 +144,8 @@ namespace yli::ontology
         EntityFactory(
             core::Application &application,
             memory::MemorySystem<TypeEnumType> &memory_system)
-            : application{application},
-              memory_system{memory_system}
+            : application { application },
+              memory_system { memory_system }
         {}
 
         virtual ~EntityFactory() = default;
@@ -235,7 +235,7 @@ namespace yli::ontology
                         static_cast<int>(data::Datatype::VARIABLE));
             auto &allocator = static_cast<memory::VariableMemoryAllocator &>(generic_allocator);
 
-            Entity *entity_parent{nullptr};
+            Entity *entity_parent { nullptr };
             if (std::holds_alternative<Entity *>(variable_struct.entity_parent))
             {
                 entity_parent = std::get<Entity *>(variable_struct.entity_parent);
@@ -732,7 +732,7 @@ namespace yli::ontology
             if (console_lisp_function_entity == nullptr)
             {
                 // There was not any `Entity` with that name.
-                ConsoleLispFunctionStruct console_lisp_function_struct{Request(console)};
+                ConsoleLispFunctionStruct console_lisp_function_struct { Request(console) };
                 console_lisp_function = this->create_console_lisp_function(console_lisp_function_struct);
 
                 if (console_lisp_function == nullptr)
@@ -907,7 +907,7 @@ namespace yli::ontology
 
         core::Application &application;
         memory::MemorySystem<TypeEnumType> &memory_system;
-        Universe *universe{nullptr};
+        Universe *universe { nullptr };
     };
 }
 
