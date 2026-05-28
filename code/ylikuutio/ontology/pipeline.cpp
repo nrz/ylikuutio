@@ -42,8 +42,8 @@ namespace yli::ontology
     class Entity;
 
     std::optional<yli::data::AnyValue> Pipeline::bind_to_new_ecosystem_parent(
-            Pipeline& pipeline,
-            Ecosystem& new_parent)
+        Pipeline& pipeline,
+        Ecosystem& new_parent)
     {
         // Set pointer to `Pipeline` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -52,7 +52,8 @@ namespace yli::ontology
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Pipeline::bind_to_new_ecosystem_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `Pipeline::bind_to_new_ecosystem_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_ecosystem_or_scene_parent)
@@ -70,14 +71,14 @@ namespace yli::ontology
         // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
         // so binding to an `Ecosystem` does not unbind any apprentices.
         pipeline.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_pipelines);
+            &new_parent.parent_of_pipelines);
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> Pipeline::bind_to_new_scene_parent(
-            Pipeline& pipeline,
-            Scene& new_parent)
+        Pipeline& pipeline,
+        Scene& new_parent)
     {
         // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -86,7 +87,8 @@ namespace yli::ontology
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Pipeline::bind_to_new_scene_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `Pipeline::bind_to_new_scene_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_ecosystem_or_scene_parent)
@@ -106,38 +108,38 @@ namespace yli::ontology
         pipeline.master_of_shapeshifter_forms.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         pipeline.master_of_glyphs.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         pipeline.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_pipelines);
+            &new_parent.parent_of_pipelines);
 
         return std::nullopt;
     }
 
     Pipeline::Pipeline(
-            core::Application& application,
-            Universe& universe,
-            const PipelineStruct& pipeline_struct,
-            GenericParentModule* const ecosystem_or_scene_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const PipelineStruct& pipeline_struct,
+        GenericParentModule* const ecosystem_or_scene_parent_module)
         : Entity(application, universe, pipeline_struct),
-        child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
-        parent_of_compute_tasks(
-                *this,
-                this->registry,
-                "compute_tasks"),
-        master_of_materials(*this, &this->registry, "materials", nullptr),
-        master_of_symbioses(*this, &this->registry, "symbioses"),
-        master_of_shapeshifter_forms(*this, &this->registry, "shapeshifter_forms"),
-        master_of_glyphs(*this, &this->registry, "glyphs")
+          child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
+          parent_of_compute_tasks(
+              *this,
+              this->registry,
+              "compute_tasks"),
+          master_of_materials(*this, &this->registry, "materials", nullptr),
+          master_of_symbioses(*this, &this->registry, "symbioses"),
+          master_of_shapeshifter_forms(*this, &this->registry, "shapeshifter_forms"),
+          master_of_glyphs(*this, &this->registry, "glyphs")
     {
-        this->vertex_shader        = pipeline_struct.vertex_shader;
-        this->fragment_shader      = pipeline_struct.fragment_shader;
+        this->vertex_shader = pipeline_struct.vertex_shader;
+        this->fragment_shader = pipeline_struct.fragment_shader;
 
-        this->char_vertex_shader   = this->vertex_shader.c_str();
+        this->char_vertex_shader = this->vertex_shader.c_str();
         this->char_fragment_shader = this->fragment_shader.c_str();
 
         // Each GPGPU `Pipeline` owns 0 or more output `ComputeTask`s.
         // Each `Material` rendered after a given GPGPU `Pipeline`
         // may also use the output `ComputeTask`s offered by
         // a given GPGPU `Pipeline` as its texture.
-        this->is_gpgpu_pipeline    = pipeline_struct.is_gpgpu_pipeline;
+        this->is_gpgpu_pipeline = pipeline_struct.is_gpgpu_pipeline;
 
         if (this->universe.get_is_opengl_in_use())
         {
@@ -149,7 +151,8 @@ namespace yli::ontology
             this->camera_uniform_block_index = glGetUniformBlockIndex(this->program_id, "camera_uniform_block");
 
             glUniformBlockBinding(this->program_id, this->scene_uniform_block_index, opengl::UboBlockIndices::SCENE);
-            glUniformBlockBinding(this->program_id, this->movable_uniform_block_index, opengl::UboBlockIndices::MOVABLE);
+            glUniformBlockBinding(this->program_id, this->movable_uniform_block_index,
+                                  opengl::UboBlockIndices::MOVABLE);
             glUniformBlockBinding(this->program_id, this->camera_uniform_block_index, opengl::UboBlockIndices::CAMERA);
         }
 
@@ -216,7 +219,7 @@ namespace yli::ontology
     std::size_t Pipeline::get_number_of_apprentices() const
     {
         return this->master_of_materials.get_number_of_apprentices() +
-            this->master_of_symbioses.get_number_of_apprentices();
+               this->master_of_symbioses.get_number_of_apprentices();
     }
 
     GLuint Pipeline::get_program_id() const

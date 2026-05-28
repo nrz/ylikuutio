@@ -44,7 +44,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -61,115 +61,120 @@ namespace yli::ontology
 
     class Pipeline final : public Entity
     {
-        public:
-            // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
-            // and request a new childID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_ecosystem_parent(
-                    Pipeline& pipeline,
-                    Ecosystem& new_parent);
+    public:
+        // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_ecosystem_parent(
+            Pipeline& pipeline,
+            Ecosystem& new_parent);
 
-            // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
-            // and request a new childID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_scene_parent(
-                    Pipeline& pipeline,
-                    Scene& new_parent);
+        // Set pointer to `pipeline` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_scene_parent(
+            Pipeline& pipeline,
+            Scene& new_parent);
 
-        private:
-            Pipeline(
-                    core::Application& application,
-                    Universe& universe,
-                    const PipelineStruct& pipeline_struct,
-                    GenericParentModule* ecosystem_or_scene_parent_module);
+    private:
+        Pipeline(
+            core::Application& application,
+            Universe& universe,
+            const PipelineStruct& pipeline_struct,
+            GenericParentModule* ecosystem_or_scene_parent_module);
 
-            ~Pipeline() override;
+        ~Pipeline() override;
 
-        public:
-            Pipeline(const Pipeline&) = delete;            // Delete copy constructor.
-            Pipeline& operator=(const Pipeline&) = delete; // Delete copy assignment.
+    public:
+        Pipeline(const Pipeline&) = delete; // Delete copy constructor.
+        Pipeline& operator=(const Pipeline&) = delete; // Delete copy assignment.
 
-            Scene* get_scene() const override;
-            Entity* get_parent() const override;
+        Scene* get_scene() const override;
 
-            std::size_t get_number_of_apprentices() const;
+        Entity* get_parent() const override;
 
-            GLuint get_program_id() const;
+        std::size_t get_number_of_apprentices() const;
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        GLuint get_program_id() const;
 
-            MasterModule<Pipeline>* get_master_module() const
-            {
-                return const_cast<MasterModule<Pipeline>*>(&this->master_of_materials);
-            }
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        MasterModule<Pipeline>* get_master_module() const
+        {
+            return const_cast<MasterModule<Pipeline>*>(&this->master_of_materials);
+        }
 
-            friend class PipelineCompare;
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        friend class PipelineCompare;
 
-            template<typename T1>
-                friend void hierarchy::bind_child_to_parent(const T1& child, std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue, std::size_t& number_of_children) noexcept;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            ChildModule child_of_ecosystem_or_scene;
-            GenericParentModule parent_of_compute_tasks;
-            MasterModule<Pipeline> master_of_materials;
-            GenericMasterModule master_of_symbioses;
-            GenericMasterModule master_of_shapeshifter_forms;
-            GenericMasterModule master_of_glyphs;
+        template<typename T1>
+        friend void hierarchy::bind_child_to_parent(const T1& child, std::vector<T1>& child_pointer_vector,
+                                                    std::queue<std::size_t>& free_childID_queue,
+                                                    std::size_t& number_of_children) noexcept;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        ChildModule child_of_ecosystem_or_scene;
+        GenericParentModule parent_of_compute_tasks;
+        MasterModule<Pipeline> master_of_materials;
+        GenericMasterModule master_of_symbioses;
+        GenericMasterModule master_of_shapeshifter_forms;
+        GenericMasterModule master_of_glyphs;
 
-            // This method renders all materials using this `Pipeline`.
-            void render(const Scene* target_scene);
+        std::size_t get_number_of_children() const override;
 
-        private:
-            GLuint program_id                  { 0 }; // This `Pipeline`'s `program_id`, returned by `load_shaders`. Dummy value.
-            GLuint scene_uniform_block_index   { 0 }; // Dummy value.
-            GLuint movable_uniform_block_index { 0 }; // Dummy value.
-            GLuint camera_uniform_block_index  { 0 }; // Dummy value.
+        std::size_t get_number_of_descendants() const override;
 
-            std::string vertex_shader;            // Filename of vertex shader.
-            std::string fragment_shader;          // Filename of fragment shader.
+        // This method renders all materials using this `Pipeline`.
+        void render(const Scene* target_scene);
 
-            const char* char_vertex_shader;
-            const char* char_fragment_shader;
+    private:
+        GLuint program_id { 0 }; // This `Pipeline`'s `program_id`, returned by `load_shaders`. Dummy value.
+        GLuint scene_uniform_block_index { 0 }; // Dummy value.
+        GLuint movable_uniform_block_index { 0 }; // Dummy value.
+        GLuint camera_uniform_block_index { 0 }; // Dummy value.
 
-            bool is_gpgpu_pipeline; // TODO: GPGPU `Pipeline`s are not rendered on screen but their result `ComputeTask`s can be used by `Material`s.
+        std::string vertex_shader; // Filename of vertex shader.
+        std::string fragment_shader; // Filename of fragment shader.
+
+        const char* char_vertex_shader;
+        const char* char_fragment_shader;
+
+        bool is_gpgpu_pipeline;
+        // TODO: GPGPU `Pipeline`s are not rendered on screen but their result `ComputeTask`s can be used by `Material`s.
     };
 
     template<>
-        inline GenericParentModule* Pipeline::get_generic_parent_module<ComputeTask>()
-        {
-            return &this->parent_of_compute_tasks;
-        }
+    inline GenericParentModule* Pipeline::get_generic_parent_module<ComputeTask>()
+    {
+        return &this->parent_of_compute_tasks;
+    }
 
     template<>
-        inline GenericMasterModule* Pipeline::get_generic_master_module<Material>()
-        {
-            return &this->master_of_materials;
-        }
+    inline GenericMasterModule* Pipeline::get_generic_master_module<Material>()
+    {
+        return &this->master_of_materials;
+    }
 
     template<>
-        inline GenericMasterModule* Pipeline::get_generic_master_module<Symbiosis>()
-        {
-            return &this->master_of_symbioses;
-        }
+    inline GenericMasterModule* Pipeline::get_generic_master_module<Symbiosis>()
+    {
+        return &this->master_of_symbioses;
+    }
 
     template<>
-        inline GenericMasterModule* Pipeline::get_generic_master_module<ShapeshifterForm>()
-        {
-            return &this->master_of_shapeshifter_forms;
-        }
+    inline GenericMasterModule* Pipeline::get_generic_master_module<ShapeshifterForm>()
+    {
+        return &this->master_of_shapeshifter_forms;
+    }
 
     template<>
-        inline GenericMasterModule* Pipeline::get_generic_master_module<Glyph>()
-        {
-            return &this->master_of_glyphs;
-        }
+    inline GenericMasterModule* Pipeline::get_generic_master_module<Glyph>()
+    {
+        return &this->master_of_glyphs;
+    }
 }
 
 #endif
