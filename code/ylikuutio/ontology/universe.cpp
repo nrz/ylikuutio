@@ -118,70 +118,71 @@ namespace yli::ontology
         // `entity` must not be `nullptr` (use `this` as the first argument).
         entity->entityID = hierarchy::request_childID(this->entity_pointer_vector, this->free_entityID_queue);
         // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-        hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue, this->number_of_entities);
+        hierarchy::set_child_pointer(entity->entityID, entity, this->entity_pointer_vector, this->free_entityID_queue,
+                                     this->number_of_entities);
     }
 
     void Universe::unbind_entity(const std::size_t entityID) noexcept
     {
         hierarchy::unbind_child_from_parent(
-                entityID,
-                this->entity_pointer_vector,
-                this->free_entityID_queue,
-                this->number_of_entities);
+            entityID,
+            this->entity_pointer_vector,
+            this->free_entityID_queue,
+            this->number_of_entities);
     }
 
     Universe::Universe(
-            core::Application& application,
-            const UniverseStruct& universe_struct)
+        core::Application& application,
+        const UniverseStruct& universe_struct)
         : Entity(application, *this, universe_struct), // `Universe` has no parent.
-        parent_of_ecosystems(
-                *this,
-                this->registry,
-                "ecosystems"),
-        parent_of_scenes(
-                *this,
-                this->registry,
-                "scenes"),
-        parent_of_audio_tracks(
-                *this,
-                this->registry,
-                "audio_tracks"),
-        parent_of_font_2ds(
-                *this,
-                this->registry,
-                "font_2ds"),
-        parent_of_input_modes(
-                *this,
-                this->registry,
-                "input_modes"),
-        parent_of_consoles(
-                *this,
-                this->registry,
-                "consoles"),
-        framebuffer_module(universe_struct.framebuffer_module_struct),
-        application_name      { universe_struct.application_name },
-        graphics_api_backend  { sdl::init_sdl(universe_struct.graphics_api_backend) },
-        display_modes         { sdl::get_display_modes(this->graphics_api_backend) },
-        n_displays            { static_cast<std::uint32_t>(this->display_modes.size()) },
-        display_mode          { this->get_preferred_display_mode() },
-        is_silent             { !(this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) || universe_struct.is_silent },
-        is_physical           { universe_struct.is_physical },
-        is_fullscreen         { universe_struct.is_fullscreen },
-        window_width          { universe_struct.window_width },
-        window_height         { universe_struct.window_height },
-        window_title          { universe_struct.window_title },
-        mouse_x               { static_cast<std::int32_t>(this->window_width / 2) },
-        mouse_y               { static_cast<std::int32_t>(this->window_height / 2) },
-        speed                 { universe_struct.speed },
-        turbo_factor          { universe_struct.turbo_factor },
-        twin_turbo_factor     { universe_struct.twin_turbo_factor },
-        mouse_speed           { universe_struct.mouse_speed },
-        znear                 { universe_struct.znear },
-        zfar                  { universe_struct.zfar },
-        aspect_ratio          { static_cast<float>(this->window_width) / static_cast<float>(this->window_height) },
-        text_size             { universe_struct.text_size },
-        font_size             { universe_struct.font_size },
-        max_fps               { universe_struct.max_fps }
+          parent_of_ecosystems(
+              *this,
+              this->registry,
+              "ecosystems"),
+          parent_of_scenes(
+              *this,
+              this->registry,
+              "scenes"),
+          parent_of_audio_tracks(
+              *this,
+              this->registry,
+              "audio_tracks"),
+          parent_of_font_2ds(
+              *this,
+              this->registry,
+              "font_2ds"),
+          parent_of_input_modes(
+              *this,
+              this->registry,
+              "input_modes"),
+          parent_of_consoles(
+              *this,
+              this->registry,
+              "consoles"),
+          framebuffer_module(universe_struct.framebuffer_module_struct),
+          application_name { universe_struct.application_name },
+          graphics_api_backend { sdl::init_sdl(universe_struct.graphics_api_backend) },
+          display_modes { sdl::get_display_modes(this->graphics_api_backend) },
+          n_displays { static_cast<std::uint32_t>(this->display_modes.size()) },
+          display_mode { this->get_preferred_display_mode() },
+          is_silent { !(this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) || universe_struct.is_silent },
+          is_physical { universe_struct.is_physical },
+          is_fullscreen { universe_struct.is_fullscreen },
+          window_width { universe_struct.window_width },
+          window_height { universe_struct.window_height },
+          window_title { universe_struct.window_title },
+          mouse_x { static_cast<std::int32_t>(this->window_width / 2) },
+          mouse_y { static_cast<std::int32_t>(this->window_height / 2) },
+          speed { universe_struct.speed },
+          turbo_factor { universe_struct.turbo_factor },
+          twin_turbo_factor { universe_struct.twin_turbo_factor },
+          mouse_speed { universe_struct.mouse_speed },
+          znear { universe_struct.znear },
+          zfar { universe_struct.zfar },
+          aspect_ratio { static_cast<float>(this->window_width) / static_cast<float>(this->window_height) },
+          text_size { universe_struct.text_size },
+          font_size { universe_struct.font_size },
+          max_fps { universe_struct.max_fps }
     {
         // call `set_global_name` here because it can't be done in `Entity` constructor.
         this->set_global_name(universe_struct.global_name);
@@ -255,9 +256,9 @@ namespace yli::ontology
         GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
 
         auto* const font_2d = static_cast<Font2d*>(
-                hierarchy::get_first_child(
-                    this->parent_of_font_2ds.child_pointer_vector,
-                    this->parent_of_font_2ds.get_number_of_children()));
+            hierarchy::get_first_child(
+                this->parent_of_font_2ds.child_pointer_vector,
+                this->parent_of_font_2ds.get_number_of_children()));
 
         if (font_2d == nullptr)
         {
@@ -353,8 +354,8 @@ namespace yli::ontology
                     {
                         std::stringstream ms_frame_text_stringstream;
                         ms_frame_text_stringstream << std::fixed << std::setprecision(2) <<
-                            1000.0f / static_cast<float>(this->number_of_frames) << " ms/frame; " <<
-                            this->number_of_frames << " Hz";
+                                1000.0f / static_cast<float>(this->number_of_frames) << " ms/frame; " <<
+                                this->number_of_frames << " Hz";
                         const std::string ms_frame_text = ms_frame_text_stringstream.str();
                         frame_rate_text_2d->change_string(ms_frame_text);
                         this->reset_number_of_frames();
@@ -400,9 +401,9 @@ namespace yli::ontology
                 if (has_mouse_focus)
                 {
                     input::set_cursor_position(
-                            this->window,
-                            static_cast<float>(this->window_width) / 2,
-                            static_cast<float>(this->window_height) / 2);
+                        this->window,
+                        static_cast<float>(this->window_width) / 2,
+                        static_cast<float>(this->window_height) / 2);
 
                     if (this->has_mouse_ever_moved || (std::abs(xpos) > 0.0001) || (std::abs(ypos) > 0.0001))
                     {
@@ -420,12 +421,13 @@ namespace yli::ontology
                     const float pitch = this->get_pitch();
 
                     glm::vec3 direction = glm::vec3(
-                            std::cos(pitch) * std::cos(yaw),
-                            std::cos(pitch) * std::sin(yaw),
-                            std::sin(pitch));
+                        std::cos(pitch) * std::cos(yaw),
+                        std::cos(pitch) * std::sin(yaw),
+                        std::sin(pitch));
 
                     const float neg_roll = -roll;
-                    auto right = glm::vec3(std::sin(yaw) * std::cos(neg_roll), -1.0f * std::cos(yaw) * std::cos(neg_roll), std::sin(neg_roll));
+                    auto right = glm::vec3(std::sin(yaw) * std::cos(neg_roll),
+                                           -1.0f * std::cos(yaw) * std::cos(neg_roll), std::sin(neg_roll));
 
                     // Up vector.
                     this->set_up(glm::cross(right, direction));
@@ -455,14 +457,14 @@ namespace yli::ontology
                 {
                     std::stringstream angles_and_coordinates_stringstream;
                     angles_and_coordinates_stringstream << std::fixed << std::setprecision(2) <<
-                        this->get_yaw() << "," <<
-                        this->get_pitch() << " rad; " <<
-                        geometry::radians_to_degrees(this->get_yaw()) << "," <<
-                        geometry::radians_to_degrees(this->get_pitch()) << " deg\n" <<
-                        "(" <<
-                        this->get_x() << "," <<
-                        this->get_y() << "," <<
-                        this->get_z() << ")";
+                            this->get_yaw() << "," <<
+                            this->get_pitch() << " rad; " <<
+                            geometry::radians_to_degrees(this->get_yaw()) << "," <<
+                            geometry::radians_to_degrees(this->get_pitch()) << " deg\n" <<
+                            "(" <<
+                            this->get_x() << "," <<
+                            this->get_y() << "," <<
+                            this->get_z() << ")";
                     const std::string angles_and_coordinates_string = angles_and_coordinates_stringstream.str();
                     angles_and_coordinates_text_2d->change_string(angles_and_coordinates_string);
                 }
@@ -484,23 +486,26 @@ namespace yli::ontology
                     {
                         Scene* const scene = this->active_scene;
                         const std::string help_text_string =
-                            (this->application_name.empty() ? "Ylikuutio" : this->application_name) + " " + version + "\n"
-                            "\n"
-                            "arrow keys\n"
-                            "space jump\n"
-                            "enter duck\n"
-                            "F1 help mode\n"
-                            "`  enter console\n"
-                            "I  invert mouse (" + (this->is_invert_mouse_in_use ? on_string : off_string) + ")\n"
-                            "F  flight mode (" + (scene == nullptr || scene->get_is_flight_mode_in_use() ? on_string : off_string) + ")\n"
-                            "Ctrl      turbo\n"
-                            "Ctrl+Ctrl extra turbo\n"
-                            "for debugging:\n"
-                            "G  grass texture\n"
-                            "O  orange fur texture\n"
-                            "P  pink geometric tiles texture\n"
-                            "T  terrain species\n"
-                            "A  suzanne species\n";
+                                (this->application_name.empty() ? "Ylikuutio" : this->application_name) + " " + version
+                                + "\n"
+                                "\n"
+                                "arrow keys\n"
+                                "space jump\n"
+                                "enter duck\n"
+                                "F1 help mode\n"
+                                "`  enter console\n"
+                                "I  invert mouse (" + (this->is_invert_mouse_in_use ? on_string : off_string) + ")\n"
+                                "F  flight mode (" + (scene == nullptr || scene->get_is_flight_mode_in_use()
+                                                          ? on_string
+                                                          : off_string) + ")\n"
+                                "Ctrl      turbo\n"
+                                "Ctrl+Ctrl extra turbo\n"
+                                "for debugging:\n"
+                                "G  grass texture\n"
+                                "O  orange fur texture\n"
+                                "P  pink geometric tiles texture\n"
+                                "T  terrain species\n"
+                                "A  suzanne species\n";
                         help_text_2d->change_string(help_text_string);
                     }
                     else
@@ -567,10 +572,10 @@ namespace yli::ontology
                 // Send our view matrix to the uniform buffer object (UBO).
                 glBindBuffer(GL_UNIFORM_BUFFER, this->get_active_camera()->get_camera_uniform_block());
                 glBufferSubData(
-                        GL_UNIFORM_BUFFER,
-                        opengl::camera_ubo::CameraUboBlockOffsets::V,
-                        sizeof(glm::mat4),
-                        glm::value_ptr(this->get_view_matrix())); // mat4
+                    GL_UNIFORM_BUFFER,
+                    opengl::camera_ubo::CameraUboBlockOffsets::V,
+                    sizeof(glm::mat4),
+                    glm::value_ptr(this->get_view_matrix())); // mat4
                 glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
                 this->get_active_camera()->render();
@@ -871,7 +876,7 @@ namespace yli::ontology
     void Universe::update_yaw(const float x_position) const
     {
         const float temp_yaw = this->get_yaw() +
-            (this->mouse_speed * (static_cast<float>(this->window_width) / 2 - x_position));
+                               (this->mouse_speed * (static_cast<float>(this->window_width) / 2 - x_position));
         this->set_yaw(static_cast<float>(remainder(temp_yaw, (2.0f * std::numbers::pi))));
     }
 
@@ -901,9 +906,11 @@ namespace yli::ontology
 
     void Universe::update_pitch(const float y_position) const
     {
-        const float temp_pitch = (this->is_invert_mouse_in_use) ?
-            (this->get_pitch() - this->mouse_speed * (static_cast<float>(this->window_height) / 2 - y_position)) :
-            (this->get_pitch() + this->mouse_speed * (static_cast<float>(this->window_height) / 2 - y_position));
+        const float temp_pitch = (this->is_invert_mouse_in_use)
+                                     ? (this->get_pitch() - this->mouse_speed * (
+                                            static_cast<float>(this->window_height) / 2 - y_position))
+                                     : (this->get_pitch() + this->mouse_speed * (
+                                            static_cast<float>(this->window_height) / 2 - y_position));
         this->set_pitch(static_cast<float>(remainder(temp_pitch, (2.0f * std::numbers::pi))));
     }
 
@@ -1012,23 +1019,23 @@ namespace yli::ontology
     std::size_t Universe::get_number_of_children() const
     {
         return this->parent_of_callback_engines.get_number_of_children() +
-            this->parent_of_ecosystems.get_number_of_children() +
-            this->parent_of_scenes.get_number_of_children() +
-            this->parent_of_audio_tracks.get_number_of_children() +
-            this->parent_of_font_2ds.get_number_of_children() +
-            this->parent_of_input_modes.get_number_of_children() +
-            this->parent_of_consoles.get_number_of_children();
+               this->parent_of_ecosystems.get_number_of_children() +
+               this->parent_of_scenes.get_number_of_children() +
+               this->parent_of_audio_tracks.get_number_of_children() +
+               this->parent_of_font_2ds.get_number_of_children() +
+               this->parent_of_input_modes.get_number_of_children() +
+               this->parent_of_consoles.get_number_of_children();
     }
 
     std::size_t Universe::get_number_of_descendants() const
     {
         return ontology::get_number_of_descendants(this->parent_of_callback_engines.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_ecosystems.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_audio_tracks.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_input_modes.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector);
+               ontology::get_number_of_descendants(this->parent_of_ecosystems.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_scenes.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_audio_tracks.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_font_2ds.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_input_modes.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_consoles.child_pointer_vector);
     }
 
     std::optional<SDL_DisplayMode> Universe::get_preferred_display_mode() const
@@ -1045,14 +1052,15 @@ namespace yli::ontology
             std::cout << "Height:        " << current_display_mode.h << "\n";
             std::cout << "Pixel density: " << current_display_mode.pixel_density << "\n";
 
-            if (current_display_mode.w <= 0 || current_display_mode.h <= 0 || current_display_mode.pixel_density <= 0.0f)
+            if (current_display_mode.w <= 0 || current_display_mode.h <= 0 || current_display_mode.pixel_density <=
+                0.0f)
             {
                 continue;
             }
 
             const std::size_t resolution = current_display_mode.pixel_density * current_display_mode.w *
                                            (current_display_mode.pixel_density * current_display_mode.h);
-                std::cout << "Resolution:    " << resolution << "\n";
+            std::cout << "Resolution:    " << resolution << "\n";
 
             if ((!preferred_display_mode_i.has_value()) || resolution > max_resolution)
             {
@@ -1092,21 +1100,21 @@ namespace yli::ontology
             {
                 // Create a window.
                 this->window = sdl::create_window(
-                        this->display_mode->displayID,
-                        static_cast<int>(this->display_mode->pixel_density * this->window_width),
-                        static_cast<int>(this->display_mode->pixel_density * this->window_height),
-                        this->window_title.c_str(),
-                        flags | SDL_WINDOW_OPENGL);
+                    this->display_mode->displayID,
+                    static_cast<int>(this->display_mode->pixel_density * this->window_width),
+                    static_cast<int>(this->display_mode->pixel_density * this->window_height),
+                    this->window_title.c_str(),
+                    flags | SDL_WINDOW_OPENGL);
             }
             else if (this->get_is_vulkan_in_use())
             {
                 // Create a window.
                 this->window = sdl::create_window(
-                        this->display_mode->displayID,
-                        static_cast<int>(this->display_mode->pixel_density * this->window_width),
-                        static_cast<int>(this->display_mode->pixel_density * this->window_height),
-                        this->window_title.c_str(),
-                        flags | SDL_WINDOW_VULKAN);
+                    this->display_mode->displayID,
+                    static_cast<int>(this->display_mode->pixel_density * this->window_width),
+                    static_cast<int>(this->display_mode->pixel_density * this->window_height),
+                    this->window_title.c_str(),
+                    flags | SDL_WINDOW_VULKAN);
             }
 
             if (this->window == nullptr) [[unlikely]]
@@ -1187,21 +1195,22 @@ namespace yli::ontology
     void Universe::set_opengl_background_color() const
     {
         opengl::set_background_color(
-                this->background_red,
-                this->background_green,
-                this->background_blue,
-                this->background_alpha);
+            this->background_red,
+            this->background_green,
+            this->background_blue,
+            this->background_alpha);
     }
 
     void Universe::adjust_opengl_viewport() const
     {
         if (this->window_width <= std::numeric_limits<GLsizei>::max() &&
-                this->window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
+            this->window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
         {
             glViewport(0,
-                0,
-                static_cast<GLsizei>(this->display_mode->pixel_density * static_cast<float>(this->window_width)),
-                static_cast<GLsizei>(this->display_mode->pixel_density * static_cast<float>(this->window_height)));
+                       0,
+                       static_cast<GLsizei>(this->display_mode->pixel_density * static_cast<float>(this->window_width)),
+                       static_cast<GLsizei>(this->display_mode->pixel_density * static_cast<float>(this->
+                                                window_height)));
         }
     }
 
@@ -1312,7 +1321,8 @@ namespace yli::ontology
 
     event::EventSystem& Universe::get_event_system() const
     {
-        if (event::EventSystem* const event_system = this->application.get_event_system(); event_system != nullptr) [[likely]]
+        if (event::EventSystem* const event_system = this->application.get_event_system(); event_system != nullptr) [[
+            likely]]
         {
             return event_system->get();
         }
@@ -1322,7 +1332,8 @@ namespace yli::ontology
 
     input::InputSystem& Universe::get_input_system() const
     {
-        if (input::InputSystem* const input_system = this->application.get_input_system(); input_system != nullptr) [[likely]]
+        if (input::InputSystem* const input_system = this->application.get_input_system(); input_system != nullptr) [[
+            likely]]
         {
             return input_system->get();
         }
@@ -1342,7 +1353,8 @@ namespace yli::ontology
 
     audio::AudioSystem* Universe::get_audio_system() const
     {
-        if (audio::AudioSystem* const audio_system = this->application.get_audio_system(); audio_system != nullptr) [[likely]]
+        if (audio::AudioSystem* const audio_system = this->application.get_audio_system(); audio_system != nullptr) [[
+            likely]]
         {
             return audio_system;
         }

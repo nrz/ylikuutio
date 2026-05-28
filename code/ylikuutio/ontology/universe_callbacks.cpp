@@ -44,8 +44,8 @@ namespace yli::ontology
     // Public `Entity` delete callbacks.
 
     std::optional<data::AnyValue> Universe::delete_entity(
-            Universe& universe,
-            Entity& entity)
+        Universe& universe,
+        Entity& entity)
     {
         if (entity.get_can_be_erased())
         {
@@ -70,8 +70,8 @@ namespace yli::ontology
     // Public `Entity` naming callbacks.
 
     std::optional<data::AnyValue> Universe::set_global_name_for_entity(
-            Entity& entity,
-            const std::string& global_name)
+        Entity& entity,
+        const std::string& global_name)
     {
         entity.set_global_name(global_name);
 
@@ -79,8 +79,8 @@ namespace yli::ontology
     }
 
     std::optional<data::AnyValue> Universe::set_local_name_for_entity(
-            Entity& entity,
-            const std::string& local_name)
+        Entity& entity,
+        const std::string& local_name)
     {
         entity.set_local_name(local_name);
 
@@ -99,15 +99,15 @@ namespace yli::ontology
     // Public YliLisp-related callbacks.
 
     std::optional<data::AnyValue> Universe::eval(
-            Console& console,
-            Universe& universe,
-            const std::vector<std::string>& command_parameters)
+        Console& console,
+        Universe& universe,
+        const std::vector<std::string>& command_parameters)
     {
         // Command parameters must form a valid YliLisp expression.
 
         std::string expression;
 
-        for (std::vector<std::string>::const_iterator it = command_parameters.begin(); it != command_parameters.end(); )
+        for (std::vector<std::string>::const_iterator it = command_parameters.begin(); it != command_parameters.end();)
         {
             expression += *it;
 
@@ -126,8 +126,8 @@ namespace yli::ontology
     // Public data printing callbacks.
 
     std::optional<data::AnyValue> Universe::info0(
-            const Universe& universe,
-            Console& console)
+        const Universe& universe,
+        Console& console)
     {
         // Print names of named entities.
         map::print_keys_to_console(universe.registry.get_entity_map(), console);
@@ -135,9 +135,9 @@ namespace yli::ontology
     }
 
     std::optional<data::AnyValue> Universe::info1(
-            const Universe& /* universe */,
-            Console& console,
-            const Entity& entity)
+        const Universe& /* universe */,
+        Console& console,
+        const Entity& entity)
     {
         // OK, let's find out information about this `Entity`.
 
@@ -185,10 +185,11 @@ namespace yli::ontology
     }
 
     std::optional<data::AnyValue> Universe::print_entities(
-            const Universe& universe,
-            Console& console)
+        const Universe& universe,
+        Console& console)
     {
-        std::vector<std::pair<std::string, Entity*>> key_and_value_vector = map::get_keys_and_values(universe.registry.get_entity_map());
+        std::vector<std::pair<std::string, Entity*>> key_and_value_vector = map::get_keys_and_values(
+            universe.registry.get_entity_map());
 
         for (auto& [key, value] : key_and_value_vector)
         {
@@ -204,9 +205,9 @@ namespace yli::ontology
     }
 
     std::optional<data::AnyValue> Universe::print_parent(
-            const Universe&,
-            Console& console,
-            const Entity& entity)
+        const Universe&,
+        Console& console,
+        const Entity& entity)
     {
         // OK, let's find out the parent of this `Entity`.
 
@@ -231,8 +232,8 @@ namespace yli::ontology
     // Other public callbacks.
 
     std::optional<data::AnyValue> Universe::screenshot(
-            Universe& universe,
-            const std::string& filename)
+        Universe& universe,
+        const std::string& filename)
     {
         if (!universe.framebuffer_module.get_in_use())
         {
@@ -253,7 +254,8 @@ namespace yli::ontology
 
         if (!universe.framebuffer_module.get_is_initialized())
         {
-            universe.framebuffer_module.initialize(universe.background_red, universe.background_green, universe.background_blue, universe.background_alpha);
+            universe.framebuffer_module.initialize(universe.background_red, universe.background_green,
+                                                   universe.background_blue, universe.background_alpha);
         }
 
         // Clear the framebuffer.
@@ -266,7 +268,7 @@ namespace yli::ontology
         // Transfer data from the GPU texture to a CPU array and save into a file.
         const bool should_flip_texture = true;
         opengl::save_data_from_gpu_texture_into_file(
-                GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height, filename, should_flip_texture);
+            GL_RGB, GL_UNSIGNED_BYTE, texture_width, texture_height, filename, should_flip_texture);
 
         universe.restore_onscreen_rendering();
 

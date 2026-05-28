@@ -70,7 +70,7 @@ namespace yli::memory
     class GenericMemoryAllocator;
 
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::render
@@ -90,349 +90,395 @@ namespace yli::ontology
 
     class Universe final : public Entity
     {
-        public:
-            void bind_entity(Entity* entity) noexcept;
-            void unbind_entity(std::size_t entityID) noexcept;
+    public:
+        void bind_entity(Entity* entity) noexcept;
 
-        private:
-            Universe(
-                    core::Application& application,
-                    const UniverseStruct& universe_struct);
+        void unbind_entity(std::size_t entityID) noexcept;
 
-            ~Universe() override;
+    private:
+        Universe(
+            core::Application& application,
+            const UniverseStruct& universe_struct);
 
-        public:
-            Universe(const Universe&) = delete;            // Delete copy constructor.
-            Universe& operator=(const Universe&) = delete; // Delete copy assignment.
+        ~Universe() override;
 
-            // This method contains the main loop.
-            void start_simulation();
+    public:
+        Universe(const Universe&) = delete; // Delete copy constructor.
+        Universe& operator=(const Universe&) = delete; // Delete copy assignment.
 
-            void update_mouse_x(std::int32_t x_change);
-            void update_mouse_y(std::int32_t y_change);
-            void gain_focus();
-            void lose_focus();
+        // This method contains the main loop.
+        void start_simulation();
 
-            // This method requests exit.
-            void request_exit();
+        void update_mouse_x(std::int32_t x_change);
 
-            // This method processes the physics.
-            void do_physics() const;
+        void update_mouse_y(std::int32_t y_change);
 
-            // Intentional actors (AIs and keyboard controlled ones).
-            void update() const;
+        void gain_focus();
 
-            // This method renders according to the data given in `render_struct`.
-            void render(const render::RenderStruct& render_struct) const;
+        void lose_focus();
 
-            // This method renders the active `Scene` of this `Universe`.
-            void render();
+        // This method requests exit.
+        void request_exit();
 
-            // This method renders the active `Scene` of this `Universe`.
-            void render_without_changing_depth_test();
+        // This method processes the physics.
+        void do_physics() const;
 
-            // This method sets the active `Scene`.
-            void set_active_scene(Scene* scene);
+        // Intentional actors (AIs and keyboard controlled ones).
+        void update() const;
 
-            Camera* get_active_camera() const;
+        // This method renders according to the data given in `render_struct`.
+        void render(const render::RenderStruct& render_struct) const;
 
-            // This method sets the active `Camera`.
-            // Setting the active `Camera` does not change the active `Scene`!
-            static void set_active_camera(Camera* camera);
+        // This method renders the active `Scene` of this `Universe`.
+        void render();
 
-            const glm::vec3& get_xyz() const;
-            void set_xyz(const glm::vec3 &xyz) const;
-            void update_xyz(const glm::vec3& xyz) const;
+        // This method renders the active `Scene` of this `Universe`.
+        void render_without_changing_depth_test();
 
-            float get_x() const;
-            void set_x(float x) const;
+        // This method sets the active `Scene`.
+        void set_active_scene(Scene* scene);
 
-            float get_y() const;
-            void set_y(float y) const;
+        Camera* get_active_camera() const;
 
-            float get_z() const;
-            void set_z(float z) const;
+        // This method sets the active `Camera`.
+        // Setting the active `Camera` does not change the active `Scene`!
+        static void set_active_camera(Camera* camera);
 
-            const glm::vec3& get_direction() const;
-            void set_direction(const glm::vec3 &direction) const;
+        const glm::vec3& get_xyz() const;
 
-            const glm::vec3& get_right() const;
-            void set_right(const glm::vec3 &right) const;
+        void set_xyz(const glm::vec3& xyz) const;
 
-            const glm::vec3& get_up() const;
-            void set_up(const glm::vec3 &up) const;
+        void update_xyz(const glm::vec3& xyz) const;
 
-            float get_roll() const;
-            void set_roll(float roll) const;
+        float get_x() const;
 
-            float get_yaw() const;
-            void set_yaw(float yaw) const;
-            void update_yaw(float x_position) const;
+        void set_x(float x) const;
 
-            float get_pitch() const;
-            void set_pitch(float pitch) const;
-            void update_pitch(float y_position) const;
+        float get_y() const;
 
-            float get_azimuth() const;
+        void set_y(float y) const;
 
-            Console* get_active_console() const;
-            void set_active_console(Console* console);
+        float get_z() const;
 
-            input::InputMethod get_input_method() const;
+        void set_z(float z) const;
 
-            render::GraphicsApiBackend get_graphics_api_backend() const;
-            bool get_is_opengl_in_use() const;
-            bool get_is_vulkan_in_use() const;
-            bool get_is_software_rendering_in_use() const;
-            bool get_is_headless() const;
-            bool get_is_silent() const;
-            bool get_is_physical() const;
+        const glm::vec3& get_direction() const;
 
-            static std::string eval_string(const std::string& my_string);
+        void set_direction(const glm::vec3& direction) const;
 
-            memory::GenericMemoryAllocator& get_generic_memory_allocator(int type) const;
+        const glm::vec3& get_right() const;
 
-            event::EventSystem& get_event_system() const;
-            input::InputSystem& get_input_system() const;
-            render::RenderSystem& get_render_system() const;
-            audio::AudioSystem* get_audio_system() const;
+        void set_right(const glm::vec3& right) const;
 
-            GenericParentModule& get_parent_of_ecosystems();
-            Scene* get_scene() const override;
-            std::size_t get_number_of_ecosystems() const;
-            std::size_t get_number_of_scenes() const;
+        const glm::vec3& get_up() const;
 
-            Scene* get_active_scene() const;
+        void set_up(const glm::vec3& up) const;
 
-            Entity* get_parent() const override;
+        float get_roll() const;
 
-            std::optional<SDL_DisplayMode> get_preferred_display_mode() const;
-            [[nodiscard]] bool create_window();
-            [[nodiscard]] bool setup_context() const;
-            [[nodiscard]] bool create_window_and_setup_context();
+        void set_roll(float roll) const;
 
-            static void set_swap_interval(std::int32_t interval);
-            void restore_onscreen_rendering() const;
-            void set_opengl_background_color() const;
-            void adjust_opengl_viewport() const;
+        float get_yaw() const;
 
-            bool get_is_exit_requested() const;
+        void set_yaw(float yaw) const;
 
-            // This method returns current `window`.
-            SDL_Window* get_window() const;
+        void update_yaw(float x_position) const;
 
-            // This method returns current `window_width`.
-            std::uint32_t get_window_width() const;
+        float get_pitch() const;
 
-            // This method returns current `window_height`.
-            std::uint32_t get_window_height() const;
+        void set_pitch(float pitch) const;
 
-            // This method returns current `text_size`.
-            std::uint32_t get_text_size() const;
+        void update_pitch(float y_position) const;
 
-            // This method returns current `font_size`.
-            std::uint32_t get_font_size() const;
+        float get_azimuth() const;
 
-            // This method computes the new delta time and returns it.
-            double compute_delta_time();
+        Console* get_active_console() const;
 
-            // This method returns the last computed delta time.
-            double get_delta_time() const;
+        void set_active_console(Console* console);
 
-            // This method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
-            void finalize_delta_time_loop();
+        input::InputMethod get_input_method() const;
 
-            // This method returns current `max_fps`.
-            std::uint32_t get_max_fps() const;
-            double get_last_time_to_display_fps() const;
-            double get_last_time_for_display_sync() const;
-            std::int32_t get_number_of_frames() const;
+        render::GraphicsApiBackend get_graphics_api_backend() const;
 
-            void increment_last_time_to_display_fps();
-            void update_last_time_for_display_sync();
-            void increment_number_of_frames();
-            void reset_number_of_frames();
+        bool get_is_opengl_in_use() const;
 
-            const glm::mat4& get_projection_matrix() const;
-            void set_projection_matrix(const glm::mat4 &projection_matrix) const;
+        bool get_is_vulkan_in_use() const;
 
-            const glm::mat4& get_view_matrix() const;
-            void set_view_matrix(glm::mat4&& view_matrix) const;
+        bool get_is_software_rendering_in_use() const;
 
-            float get_aspect_ratio() const;
-            float get_initial_fov() const;
+        bool get_is_headless() const;
 
-            // Public callbacks.
+        bool get_is_silent() const;
 
-            // Public `Entity` create callbacks.
+        bool get_is_physical() const;
 
-            // Public `Entity` delete callbacks.
+        static std::string eval_string(const std::string& my_string);
 
-            static std::optional<data::AnyValue> delete_entity(
-                    Universe& universe,
-                    Entity& entity);
+        memory::GenericMemoryAllocator& get_generic_memory_allocator(int type) const;
 
-            // Public `Entity` naming callbacks.
+        event::EventSystem& get_event_system() const;
 
-            static std::optional<data::AnyValue> set_global_name_for_entity(
-                    Entity& entity,
-                    const std::string& new_value);
+        input::InputSystem& get_input_system() const;
 
-            static std::optional<data::AnyValue> set_local_name_for_entity(
-                    Entity& entity,
-                    const std::string& new_value);
+        render::RenderSystem& get_render_system() const;
 
-            // Public `Entity` activate callbacks.
+        audio::AudioSystem* get_audio_system() const;
 
-            static std::optional<data::AnyValue> activate_entity(Entity& entity);
+        GenericParentModule& get_parent_of_ecosystems();
 
-            // Public YliLisp-related callbacks.
+        Scene* get_scene() const override;
 
-            static std::optional<data::AnyValue> eval(
-                    Console& console,
-                    Universe& universe,
-                    const std::vector<std::string>& command_parameters);
+        std::size_t get_number_of_ecosystems() const;
 
-            // Public data printing callbacks.
+        std::size_t get_number_of_scenes() const;
 
-            static std::optional<data::AnyValue> info0(
-                    const Universe& universe,
-                    Console& console);
+        Scene* get_active_scene() const;
 
-            static std::optional<data::AnyValue> info1(
-                    const Universe& universe,
-                    Console& console,
-                    const Entity& entity);
+        Entity* get_parent() const override;
 
-            static std::optional<data::AnyValue> print_entities(
-                    const Universe& universe,
-                    Console& console);
+        std::optional<SDL_DisplayMode> get_preferred_display_mode() const;
 
-            static std::optional<data::AnyValue> print_parent(
-                    const Universe&,
-                    Console& console,
-                    const Entity& entity);
+        [[nodiscard]] bool create_window();
 
-            // Other public callbacks.
+        [[nodiscard]] bool setup_context() const;
 
-            static std::optional<data::AnyValue> screenshot(
-                    Universe& universe,
-                    const std::string& filename);
+        [[nodiscard]] bool create_window_and_setup_context();
 
-            // Public callbacks end here.
+        static void set_swap_interval(std::int32_t interval);
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        void restore_onscreen_rendering() const;
 
-            // Ylikuutio version.
-            static const std::string version;
+        void set_opengl_background_color() const;
 
-            // Variables related to location and orientation.
+        void adjust_opengl_viewport() const;
 
-            // 'can toggle'-type of boolean keypress control variables
-            // should all be stored in the `Universe` to avoid locking.
-            bool can_toggle_invert_mouse { false };
-            bool can_toggle_flight_mode  { false };
-            bool can_toggle_help_mode    { false };
+        bool get_is_exit_requested() const;
 
-            bool is_invert_mouse_in_use  { false };
-            bool is_first_turbo_pressed  { false };
-            bool is_second_turbo_pressed { false };
-            bool is_exit_requested       { false };
+        // This method returns current `window`.
+        SDL_Window* get_window() const;
 
-            // Variables related to `Console`s.
-            bool in_console { false };
+        // This method returns current `window_width`.
+        std::uint32_t get_window_width() const;
 
-            // Variables related to help mode.
-            bool in_help_mode            { true };
-            bool can_display_help_screen { true };
+        // This method returns current `window_height`.
+        std::uint32_t get_window_height() const;
 
-            float background_red   { NAN };
-            float background_green { NAN };
-            float background_blue  { NAN };
-            float background_alpha { NAN };
+        // This method returns current `text_size`.
+        std::uint32_t get_text_size() const;
 
-            GenericParentModule parent_of_ecosystems;
-            GenericParentModule parent_of_scenes;
-            GenericParentModule parent_of_audio_tracks;
-            GenericParentModule parent_of_font_2ds;
-            ParentOfInputModesModule parent_of_input_modes;
-            GenericParentModule parent_of_consoles;
+        // This method returns current `font_size`.
+        std::uint32_t get_font_size() const;
 
-            FramebufferModule framebuffer_module;
+        // This method computes the new delta time and returns it.
+        double compute_delta_time();
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        // This method returns the last computed delta time.
+        double get_delta_time() const;
 
-        private:
-            void create_should_render_variable();
+        // This method stores `current_time_before_reading_keyboard` into `last_time_before_reading_keyboard`.
+        void finalize_delta_time_loop();
 
-            std::vector<Entity*> entity_pointer_vector;
-            std::queue<std::size_t> free_entityID_queue;
-            std::size_t number_of_entities { 0 };
+        // This method returns current `max_fps`.
+        std::uint32_t get_max_fps() const;
 
-            Scene* active_scene     { nullptr };
-            Console* active_console { nullptr };
+        double get_last_time_to_display_fps() const;
 
-            std::unique_ptr<render::RenderSystem> render_system { nullptr };
+        double get_last_time_for_display_sync() const;
 
-            const std::string application_name;
+        std::int32_t get_number_of_frames() const;
 
-            const render::GraphicsApiBackend graphics_api_backend;
-            const std::vector<SDL_DisplayMode> display_modes;
-            const std::uint32_t n_displays;
+        void increment_last_time_to_display_fps();
 
-        public:
-            const std::optional<SDL_DisplayMode> display_mode;
+        void update_last_time_for_display_sync();
 
-        private:
-            const bool is_silent;
-            const bool is_physical;
-            bool is_fullscreen;
+        void increment_number_of_frames();
 
-            // variables related to the window.
-            SDL_Window* window { nullptr };
-            std::uint32_t window_width;
-            std::uint32_t window_height;
-            std::string window_title { "Ylikuutio " + version };
+        void reset_number_of_frames();
 
-            bool has_mouse_focus { true };
-            std::int32_t mouse_x;
-            std::int32_t mouse_y;
+        const glm::mat4& get_projection_matrix() const;
 
-        public:
-            float speed;
-            float turbo_factor;
-            float twin_turbo_factor;
-            float mouse_speed;
+        void set_projection_matrix(const glm::mat4& projection_matrix) const;
 
-        private:
-            bool has_mouse_ever_moved { false };
+        const glm::mat4& get_view_matrix() const;
 
-            // Variables related to graphics.
-            float znear;
-            float zfar;
+        void set_view_matrix(glm::mat4&& view_matrix) const;
 
-            // variables related to `Camera` (projection).
-            float aspect_ratio;          // At the moment all `Camera`s use the same aspect ratio.
-            float initial_fov { 60.0f }; // At the moment all `Camera`s use the same FoV.
+        float get_aspect_ratio() const;
 
-            // variables related to the fonts and texts used.
-            std::uint32_t text_size;
-            std::uint32_t font_size;
+        float get_initial_fov() const;
 
-            // variables related to timing of events.
-            std::uint32_t max_fps;
-            double last_time_to_display_fps   { time::get_time() };
-            double last_time_for_display_sync { time::get_time() };
-            double delta_time                 { NAN };
-            std::int32_t number_of_frames     { 0 };
+        // Public callbacks.
 
-            // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
-            std::uint32_t last_time_before_reading_keyboard    { std::numeric_limits<std::uint32_t>::max() };
+        // Public `Entity` create callbacks.
 
-            // `std::numeric_limits<std::size_t>::max()` means that `current_time_before_reading_keyboard` is not defined.
-            std::uint32_t current_time_before_reading_keyboard { std::numeric_limits<std::uint32_t>::max() };
+        // Public `Entity` delete callbacks.
+
+        static std::optional<data::AnyValue> delete_entity(
+            Universe& universe,
+            Entity& entity);
+
+        // Public `Entity` naming callbacks.
+
+        static std::optional<data::AnyValue> set_global_name_for_entity(
+            Entity& entity,
+            const std::string& new_value);
+
+        static std::optional<data::AnyValue> set_local_name_for_entity(
+            Entity& entity,
+            const std::string& new_value);
+
+        // Public `Entity` activate callbacks.
+
+        static std::optional<data::AnyValue> activate_entity(Entity& entity);
+
+        // Public YliLisp-related callbacks.
+
+        static std::optional<data::AnyValue> eval(
+            Console& console,
+            Universe& universe,
+            const std::vector<std::string>& command_parameters);
+
+        // Public data printing callbacks.
+
+        static std::optional<data::AnyValue> info0(
+            const Universe& universe,
+            Console& console);
+
+        static std::optional<data::AnyValue> info1(
+            const Universe& universe,
+            Console& console,
+            const Entity& entity);
+
+        static std::optional<data::AnyValue> print_entities(
+            const Universe& universe,
+            Console& console);
+
+        static std::optional<data::AnyValue> print_parent(
+            const Universe&,
+            Console& console,
+            const Entity& entity);
+
+        // Other public callbacks.
+
+        static std::optional<data::AnyValue> screenshot(
+            Universe& universe,
+            const std::string& filename);
+
+        // Public callbacks end here.
+
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+        // Ylikuutio version.
+        static const std::string version;
+
+        // Variables related to location and orientation.
+
+        // 'can toggle'-type of boolean keypress control variables
+        // should all be stored in the `Universe` to avoid locking.
+        bool can_toggle_invert_mouse { false };
+        bool can_toggle_flight_mode { false };
+        bool can_toggle_help_mode { false };
+
+        bool is_invert_mouse_in_use { false };
+        bool is_first_turbo_pressed { false };
+        bool is_second_turbo_pressed { false };
+        bool is_exit_requested { false };
+
+        // Variables related to `Console`s.
+        bool in_console { false };
+
+        // Variables related to help mode.
+        bool in_help_mode { true };
+        bool can_display_help_screen { true };
+
+        float background_red { NAN };
+        float background_green { NAN };
+        float background_blue { NAN };
+        float background_alpha { NAN };
+
+        GenericParentModule parent_of_ecosystems;
+        GenericParentModule parent_of_scenes;
+        GenericParentModule parent_of_audio_tracks;
+        GenericParentModule parent_of_font_2ds;
+        ParentOfInputModesModule parent_of_input_modes;
+        GenericParentModule parent_of_consoles;
+
+        FramebufferModule framebuffer_module;
+
+        std::size_t get_number_of_children() const override;
+
+        std::size_t get_number_of_descendants() const override;
+
+    private:
+        void create_should_render_variable();
+
+        std::vector<Entity*> entity_pointer_vector;
+        std::queue<std::size_t> free_entityID_queue;
+        std::size_t number_of_entities { 0 };
+
+        Scene* active_scene { nullptr };
+        Console* active_console { nullptr };
+
+        std::unique_ptr<render::RenderSystem> render_system { nullptr };
+
+        const std::string application_name;
+
+        const render::GraphicsApiBackend graphics_api_backend;
+        const std::vector<SDL_DisplayMode> display_modes;
+        const std::uint32_t n_displays;
+
+    public:
+        const std::optional<SDL_DisplayMode> display_mode;
+
+    private:
+        const bool is_silent;
+        const bool is_physical;
+        bool is_fullscreen;
+
+        // variables related to the window.
+        SDL_Window* window { nullptr };
+        std::uint32_t window_width;
+        std::uint32_t window_height;
+        std::string window_title { "Ylikuutio " + version };
+
+        bool has_mouse_focus { true };
+        std::int32_t mouse_x;
+        std::int32_t mouse_y;
+
+    public:
+        float speed;
+        float turbo_factor;
+        float twin_turbo_factor;
+        float mouse_speed;
+
+    private:
+        bool has_mouse_ever_moved { false };
+
+        // Variables related to graphics.
+        float znear;
+        float zfar;
+
+        // variables related to `Camera` (projection).
+        float aspect_ratio; // At the moment all `Camera`s use the same aspect ratio.
+        float initial_fov { 60.0f }; // At the moment all `Camera`s use the same FoV.
+
+        // variables related to the fonts and texts used.
+        std::uint32_t text_size;
+        std::uint32_t font_size;
+
+        // variables related to timing of events.
+        std::uint32_t max_fps;
+        double last_time_to_display_fps { time::get_time() };
+        double last_time_for_display_sync { time::get_time() };
+        double delta_time { NAN };
+        std::int32_t number_of_frames { 0 };
+
+        // `std::numeric_limits<std::size_t>::max()` means that `last_time_before_reading_keyboard` is not defined.
+        std::uint32_t last_time_before_reading_keyboard { std::numeric_limits<std::uint32_t>::max() };
+
+        // `std::numeric_limits<std::size_t>::max()` means that `current_time_before_reading_keyboard` is not defined.
+        std::uint32_t current_time_before_reading_keyboard { std::numeric_limits<std::uint32_t>::max() };
     };
 }
 
