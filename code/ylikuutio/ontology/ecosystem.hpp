@@ -38,7 +38,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -50,62 +50,63 @@ namespace yli::ontology
 
     class Ecosystem final : public Entity
     {
-        private:
-            Ecosystem(
-                    core::Application& application,
-                    Universe& universe,
-                    const EcosystemStruct& ecosystem_struct,
-                    GenericParentModule* universe_parent_module);
+    private:
+        Ecosystem(
+            core::Application& application,
+            Universe& universe,
+            const EcosystemStruct& ecosystem_struct,
+            GenericParentModule* universe_parent_module);
 
-            ~Ecosystem() override = default;
+        ~Ecosystem() override = default;
 
-        public:
-            Ecosystem(const Ecosystem&) = delete;            // Delete copy constructor.
-            Ecosystem& operator=(const Ecosystem&) = delete; // Delete copy assignment.
+    public:
+        Ecosystem(const Ecosystem&) = delete; // Delete copy constructor.
+        Ecosystem& operator=(const Ecosystem&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            ChildModule child_of_universe;
-            ParentOfPipelinesModule parent_of_pipelines;
-            GenericParentModule parent_of_materials;
-            GenericParentModule parent_of_species;
-            GenericParentModule parent_of_symbioses;
+        ChildModule child_of_universe;
+        ParentOfPipelinesModule parent_of_pipelines;
+        GenericParentModule parent_of_materials;
+        GenericParentModule parent_of_species;
+        GenericParentModule parent_of_symbioses;
 
-            Scene* get_scene() const override;
+        Scene* get_scene() const override;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        std::size_t get_number_of_children() const override;
+
+        std::size_t get_number_of_descendants() const override;
     };
 
     template<>
-        inline GenericParentModule* Ecosystem::get_generic_parent_module<Pipeline>()
-        {
-            return &this->parent_of_pipelines;
-        }
+    inline GenericParentModule* Ecosystem::get_generic_parent_module<Pipeline>()
+    {
+        return &this->parent_of_pipelines;
+    }
 
     template<>
-        inline GenericParentModule* Ecosystem::get_generic_parent_module<Material>()
-        {
-            return &this->parent_of_materials;
-        }
+    inline GenericParentModule* Ecosystem::get_generic_parent_module<Material>()
+    {
+        return &this->parent_of_materials;
+    }
 
     template<>
-        inline GenericParentModule* Ecosystem::get_generic_parent_module<Species>()
-        {
-            return &this->parent_of_species;
-        }
+    inline GenericParentModule* Ecosystem::get_generic_parent_module<Species>()
+    {
+        return &this->parent_of_species;
+    }
 
     template<>
-        inline GenericParentModule* Ecosystem::get_generic_parent_module<Symbiosis>()
-        {
-            return &this->parent_of_symbioses;
-        }
+    inline GenericParentModule* Ecosystem::get_generic_parent_module<Symbiosis>()
+    {
+        return &this->parent_of_symbioses;
+    }
 }
 
 #endif
