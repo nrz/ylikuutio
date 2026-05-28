@@ -45,12 +45,12 @@ namespace yli::ontology
     }
 
     Ability::Ability(
-            core::Application& application,
-            Universe& universe,
-            const AbilityStruct& ability_struct,
-            GenericParentModule* const parent_module)
+        core::Application& application,
+        Universe& universe,
+        const AbilityStruct& ability_struct,
+        GenericParentModule* const parent_module)
         : Capability(application, universe, ability_struct),
-        child_of_symbiosis(parent_module, *this)
+          child_of_symbiosis(parent_module, *this)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Ability*";
