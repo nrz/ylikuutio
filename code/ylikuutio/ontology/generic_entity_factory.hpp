@@ -109,101 +109,101 @@ namespace yli::ontology
         public:
                 virtual ~GenericEntityFactory() = default;
 
-                virtual Variable *create_variable(
-                        const VariableStruct &variable_struct,
-                        data::AnyValue &&any_value) const = 0;
+                virtual Variable* create_variable(
+                        const VariableStruct& variable_struct,
+                        data::AnyValue&& any_value) const = 0;
 
-                virtual CallbackEngine *create_callback_engine(
-                        const CallbackEngineStruct &callback_engine_struct) const = 0;
+                virtual CallbackEngine* create_callback_engine(
+                        const CallbackEngineStruct& callback_engine_struct) const = 0;
 
-                virtual CallbackObject *create_callback_object(
-                        const CallbackObjectStruct &callback_object_struct) const = 0;
+                virtual CallbackObject* create_callback_object(
+                        const CallbackObjectStruct& callback_object_struct) const = 0;
 
-                virtual CallbackParameter *create_callback_parameter(
-                        const CallbackParameterStruct &callback_parameter_struct,
-                        data::AnyValue &&any_value) const = 0;
+                virtual CallbackParameter* create_callback_parameter(
+                        const CallbackParameterStruct& callback_parameter_struct,
+                        data::AnyValue&& any_value) const = 0;
 
-                virtual Ecosystem *create_ecosystem(const EcosystemStruct &ecosystem_struct) const = 0;
+                virtual Ecosystem* create_ecosystem(const EcosystemStruct& ecosystem_struct) const = 0;
 
-                virtual Scene *create_scene(const SceneStruct &scene_struct) const = 0;
+                virtual Scene* create_scene(const SceneStruct& scene_struct) const = 0;
 
-                virtual MovableController *create_movable_controller(
-                        const MovableControllerStruct &movable_controller_struct) const = 0;
+                virtual MovableController* create_movable_controller(
+                        const MovableControllerStruct& movable_controller_struct) const = 0;
 
-                virtual Waypoint *create_waypoint(const WaypointStruct &waypoint_struct) const = 0;
+                virtual Waypoint* create_waypoint(const WaypointStruct& waypoint_struct) const = 0;
 
-                virtual Camera *create_camera(const CameraStruct &camera_struct) const = 0;
+                virtual Camera* create_camera(const CameraStruct& camera_struct) const = 0;
 
-                virtual Camera *create_default_camera(const CameraStruct &camera_struct) const = 0;
+                virtual Camera* create_default_camera(const CameraStruct& camera_struct) const = 0;
 
-                virtual Pipeline *create_pipeline(const PipelineStruct &pipeline_struct) const = 0;
+                virtual Pipeline* create_pipeline(const PipelineStruct& pipeline_struct) const = 0;
 
-                virtual Material *create_material(const MaterialStruct &material_struct) const = 0;
+                virtual Material* create_material(const MaterialStruct& material_struct) const = 0;
 
-                virtual Species *create_species(const SpeciesStruct &species_struct) const = 0;
+                virtual Species* create_species(const SpeciesStruct& species_struct) const = 0;
 
-                virtual Object *create_object(const ObjectStruct &object_struct) const = 0;
+                virtual Object* create_object(const ObjectStruct& object_struct) const = 0;
 
-                virtual Symbiosis *create_symbiosis(const SymbiosisStruct &symbiosis_struct) const = 0;
+                virtual Symbiosis* create_symbiosis(const SymbiosisStruct& symbiosis_struct) const = 0;
 
-                virtual SymbiontMaterial *create_symbiont_material(
-                        const SymbiontMaterialStruct &symbiont_material_struct) const = 0;
+                virtual SymbiontMaterial* create_symbiont_material(
+                        const SymbiontMaterialStruct& symbiont_material_struct) const = 0;
 
-                virtual SymbiontSpecies *create_symbiont_species(
-                        const SymbiontSpeciesStruct &symbiont_species_struct) const = 0;
+                virtual SymbiontSpecies* create_symbiont_species(
+                        const SymbiontSpeciesStruct& symbiont_species_struct) const = 0;
 
-                virtual Ability *create_ability(const AbilityStruct &ability_struct) const = 0;
+                virtual Ability* create_ability(const AbilityStruct& ability_struct) const = 0;
 
-                virtual Holobiont *create_holobiont(const HolobiontStruct &holobiont_struct) const = 0;
+                virtual Holobiont* create_holobiont(const HolobiontStruct& holobiont_struct) const = 0;
 
-                virtual Biont *create_biont(const BiontStruct &biont_struct) const = 0;
+                virtual Biont* create_biont(const BiontStruct& biont_struct) const = 0;
 
-                virtual Skill *create_skill(const SkillStruct &skill_struct) const = 0;
+                virtual Skill* create_skill(const SkillStruct& skill_struct) const = 0;
 
-                virtual ShapeshifterTransformation *create_shapeshifter_transformation(
-                        const ShapeshifterTransformationStruct &shapeshifter_transformation_struct) const = 0;
+                virtual ShapeshifterTransformation* create_shapeshifter_transformation(
+                        const ShapeshifterTransformationStruct& shapeshifter_transformation_struct) const = 0;
 
-                virtual ShapeshifterSequence *create_shapeshifter_sequence(
-                        const ShapeshifterSequenceStruct &shapeshifter_sequence_struct) const = 0;
+                virtual ShapeshifterSequence* create_shapeshifter_sequence(
+                        const ShapeshifterSequenceStruct& shapeshifter_sequence_struct) const = 0;
 
-                virtual ShapeshifterForm *create_shapeshifter_form(
-                        const ShapeshifterFormStruct &shapeshifter_form_struct) const = 0;
+                virtual ShapeshifterForm* create_shapeshifter_form(
+                        const ShapeshifterFormStruct& shapeshifter_form_struct) const = 0;
 
-                virtual Shapeshifter *create_shapeshifter(
-                        const ShapeshifterStruct &shapeshifter_struct) const = 0;
+                virtual Shapeshifter* create_shapeshifter(
+                        const ShapeshifterStruct& shapeshifter_struct) const = 0;
 
-                virtual VectorFont *create_vector_font(const VectorFontStruct &vector_font_struct) const = 0;
+                virtual VectorFont* create_vector_font(const VectorFontStruct& vector_font_struct) const = 0;
 
-                virtual Glyph *create_glyph(const GlyphStruct &glyph_struct) const = 0;
+                virtual Glyph* create_glyph(const GlyphStruct& glyph_struct) const = 0;
 
-                virtual Text2d *create_text_2d(const TextStruct &text_struct) const = 0;
+                virtual Text2d* create_text_2d(const TextStruct& text_struct) const = 0;
 
-                virtual Text3d *create_text_3d(const Text3dStruct &text_3d_struct) const = 0;
+                virtual Text3d* create_text_3d(const Text3dStruct& text_3d_struct) const = 0;
 
-                virtual GlyphObject *create_glyph_object(const GlyphObjectStruct &glyph_object_struct) const = 0;
+                virtual GlyphObject* create_glyph_object(const GlyphObjectStruct& glyph_object_struct) const = 0;
 
-                virtual Font2d *create_font_2d(const FontStruct &font_struct) const = 0;
+                virtual Font2d* create_font_2d(const FontStruct& font_struct) const = 0;
 
-                virtual InputMode *create_input_mode(const InputModeStruct &input_mode_struct) const = 0;
+                virtual InputMode* create_input_mode(const InputModeStruct& input_mode_struct) const = 0;
 
-                virtual AudioTrack *create_audio_track(const AudioTrackStruct &audio_track_struct) const = 0;
+                virtual AudioTrack* create_audio_track(const AudioTrackStruct& audio_track_struct) const = 0;
 
-                virtual Console *create_console(const ConsoleStruct &console_struct) const = 0;
+                virtual Console* create_console(const ConsoleStruct& console_struct) const = 0;
 
-                virtual ConsoleCallbackEngine *create_console_callback_engine(
-                        const ConsoleCallbackEngineStruct &console_callback_engine_struct) const = 0;
+                virtual ConsoleCallbackEngine* create_console_callback_engine(
+                        const ConsoleCallbackEngineStruct& console_callback_engine_struct) const = 0;
 
-                virtual ConsoleCallbackObject *create_console_callback_object(
-                        const ConsoleCallbackObjectStruct &console_callback_object_struct) const = 0;
+                virtual ConsoleCallbackObject* create_console_callback_object(
+                        const ConsoleCallbackObjectStruct& console_callback_object_struct) const = 0;
 
-                virtual ConsoleCallbackParameter *create_console_callback_parameter(
-                        const ConsoleCallbackParameterStruct &console_callback_parameter_struct,
-                        const data::AnyValue &any_value) const = 0;
+                virtual ConsoleCallbackParameter* create_console_callback_parameter(
+                        const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
+                        const data::AnyValue& any_value) const = 0;
 
-                virtual ConsoleLispFunction *create_console_lisp_function(
-                        const ConsoleLispFunctionStruct &console_lisp_function_struct) const = 0;
+                virtual ConsoleLispFunction* create_console_lisp_function(
+                        const ConsoleLispFunctionStruct& console_lisp_function_struct) const = 0;
 
-                virtual ComputeTask *create_compute_task(const ComputeTaskStruct &compute_task_struct) const = 0;
+                virtual ComputeTask* create_compute_task(const ComputeTaskStruct& compute_task_struct) const = 0;
         };
 }
 
