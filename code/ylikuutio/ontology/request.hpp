@@ -26,27 +26,24 @@
 namespace yli::ontology
 {
     template<typename Type>
-        struct Request
-        {
-            Request() = default;
+    struct Request
+    {
+        Request() = default;
 
-            explicit Request(Type* pointer)
-                : data { pointer }
-            {
-            }
+        explicit Request(Type* pointer)
+            : data { pointer }
+        { }
 
-            explicit Request(std::string&& name)
-                : data { std::move(name) }
-            {
-            }
+        explicit Request(std::string&& name)
+            : data { std::move(name) }
+        { }
 
-            explicit Request(const std::string& name)
-                : data { name }
-            {
-            }
+        explicit Request(const std::string& name)
+            : data { name }
+        { }
 
-            std::variant<std::monostate, Type*, std::string> data;
-        };
+        std::variant<std::monostate, Type*, std::string> data;
+    };
 }
 
 #endif
