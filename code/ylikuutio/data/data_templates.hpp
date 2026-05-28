@@ -55,286 +55,286 @@ namespace yli::data
 
     // Get the datatype of a variable.
     template<typename T1>
-        std::string get_type_string(T1)
-        {
-            return "unknown";
-        }
+    std::string get_type_string(T1)
+    {
+        return "unknown";
+    }
 
     template<>
-        inline std::string get_type_string(bool)
-        {
-            return "bool";
-        }
+    inline std::string get_type_string(bool)
+    {
+        return "bool";
+    }
 
     template<>
-        inline std::string get_type_string(char)
-        {
-            return "char";
-        }
+    inline std::string get_type_string(char)
+    {
+        return "char";
+    }
 
     template<>
-        inline std::string get_type_string(float)
-        {
-            return "float";
-        }
+    inline std::string get_type_string(float)
+    {
+        return "float";
+    }
 
     template<>
-        inline std::string get_type_string(double)
-        {
-            return "double";
-        }
+    inline std::string get_type_string(double)
+    {
+        return "double";
+    }
 
     template<>
-        inline std::string get_type_string(std::int32_t)
-        {
-            return "std::int32_t";
-        }
+    inline std::string get_type_string(std::int32_t)
+    {
+        return "std::int32_t";
+    }
 
     template<>
-        inline std::string get_type_string(std::uint32_t)
-        {
-            return "std::uint32_t";
-        }
+    inline std::string get_type_string(std::uint32_t)
+    {
+        return "std::uint32_t";
+    }
 
     template<>
-        inline std::string get_type_string(bool*)
-        {
-            return "bool*";
-        }
+    inline std::string get_type_string(bool *)
+    {
+        return "bool*";
+    }
 
     template<>
-        inline std::string get_type_string(char*)
-        {
-            return "char*";
-        }
+    inline std::string get_type_string(char *)
+    {
+        return "char*";
+    }
 
     template<>
-        inline std::string get_type_string(float*)
-        {
-            return "float*";
-        }
+    inline std::string get_type_string(float *)
+    {
+        return "float*";
+    }
 
     template<>
-        inline std::string get_type_string(double*)
-        {
-            return "double*";
-        }
+    inline std::string get_type_string(double *)
+    {
+        return "double*";
+    }
 
     template<>
-        inline std::string get_type_string(std::int32_t*)
-        {
-            return "std::int32_t*";
-        }
+    inline std::string get_type_string(std::int32_t *)
+    {
+        return "std::int32_t*";
+    }
 
     template<>
-        inline std::string get_type_string(std::uint32_t*)
-        {
-            return "std::uint32_t*";
-        }
+    inline std::string get_type_string(std::uint32_t *)
+    {
+        return "std::uint32_t*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Entity*)
-        {
-            return "yli::ontology::Entity*";
-        }
+    inline std::string get_type_string(ontology::Entity *)
+    {
+        return "yli::ontology::Entity*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Movable*)
-        {
-            return "yli::ontology::Movable*";
-        }
+    inline std::string get_type_string(ontology::Movable *)
+    {
+        return "yli::ontology::Movable*";
+    }
 
     template<>
-        inline std::string get_type_string(const ontology::Movable*)
-        {
-            return "const yli::ontology::Movable*";
-        }
+    inline std::string get_type_string(const ontology::Movable *)
+    {
+        return "const yli::ontology::Movable*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Universe*)
-        {
-            return "yli::ontology::Universe*";
-        }
+    inline std::string get_type_string(ontology::Universe *)
+    {
+        return "yli::ontology::Universe*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Ecosystem*)
-        {
-            return "yli::ontology::Ecosystem*";
-        }
+    inline std::string get_type_string(ontology::Ecosystem *)
+    {
+        return "yli::ontology::Ecosystem*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Scene*)
-        {
-            return "yli::ontology::Scene*";
-        }
+    inline std::string get_type_string(ontology::Scene *)
+    {
+        return "yli::ontology::Scene*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Pipeline*)
-        {
-            return "yli::ontology::Pipeline*";
-        }
+    inline std::string get_type_string(ontology::Pipeline *)
+    {
+        return "yli::ontology::Pipeline*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Material*)
-        {
-            return "yli::ontology::Material*";
-        }
+    inline std::string get_type_string(ontology::Material *)
+    {
+        return "yli::ontology::Material*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Species*)
-        {
-            return "yli::ontology::Species*";
-        }
+    inline std::string get_type_string(ontology::Species *)
+    {
+        return "yli::ontology::Species*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Object*)
-        {
-            return "yli::ontology::Object*";
-        }
+    inline std::string get_type_string(ontology::Object *)
+    {
+        return "yli::ontology::Object*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Symbiosis*)
-        {
-            return "yli::ontology::Symbiosis*";
-        }
+    inline std::string get_type_string(ontology::Symbiosis *)
+    {
+        return "yli::ontology::Symbiosis*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::SymbiontMaterial*)
-        {
-            return "yli::ontology::SymbiontMaterial*";
-        }
+    inline std::string get_type_string(ontology::SymbiontMaterial *)
+    {
+        return "yli::ontology::SymbiontMaterial*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::SymbiontSpecies*)
-        {
-            return "yli::ontology::SymbiontSpecies*";
-        }
+    inline std::string get_type_string(ontology::SymbiontSpecies *)
+    {
+        return "yli::ontology::SymbiontSpecies*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Holobiont*)
-        {
-            return "yli::ontology::Holobiont*";
-        }
+    inline std::string get_type_string(ontology::Holobiont *)
+    {
+        return "yli::ontology::Holobiont*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Biont*)
-        {
-            return "yli::ontology::Biont*";
-        }
+    inline std::string get_type_string(ontology::Biont *)
+    {
+        return "yli::ontology::Biont*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Font2d*)
-        {
-            return "yli::ontology::Font2d*";
-        }
+    inline std::string get_type_string(ontology::Font2d *)
+    {
+        return "yli::ontology::Font2d*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Text2d*)
-        {
-            return "yli::ontology::Text2d*";
-        }
+    inline std::string get_type_string(ontology::Text2d *)
+    {
+        return "yli::ontology::Text2d*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::VectorFont*)
-        {
-            return "yli::ontology::VectorFont*";
-        }
+    inline std::string get_type_string(ontology::VectorFont *)
+    {
+        return "yli::ontology::VectorFont*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Glyph*)
-        {
-            return "yli::ontology::Glyph*";
-        }
+    inline std::string get_type_string(ontology::Glyph *)
+    {
+        return "yli::ontology::Glyph*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Text3d*)
-        {
-            return "yli::ontology::Text3d*";
-        }
+    inline std::string get_type_string(ontology::Text3d *)
+    {
+        return "yli::ontology::Text3d*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::Console*)
-        {
-            return "yli::ontology::Console*";
-        }
+    inline std::string get_type_string(ontology::Console *)
+    {
+        return "yli::ontology::Console*";
+    }
 
     template<>
-        inline std::string get_type_string(ontology::ComputeTask*)
-        {
-            return "yli::ontology::ComputeTask*";
-        }
+    inline std::string get_type_string(ontology::ComputeTask *)
+    {
+        return "yli::ontology::ComputeTask*";
+    }
 
     template<>
-        inline std::string get_type_string(std::shared_ptr<AnyValue>)
-        {
-            return "std::shared_ptr<yli::data::AnyValue>";
-        }
+    inline std::string get_type_string(std::shared_ptr<AnyValue>)
+    {
+        return "std::shared_ptr<yli::data::AnyValue>";
+    }
 
     template<>
-        inline std::string get_type_string(std::string*)
-        {
-            return "std::string*";
-        }
+    inline std::string get_type_string(std::string *)
+    {
+        return "std::string*";
+    }
 
     template<>
-        inline std::string get_type_string(const std::string*)
-        {
-            return "const std::string*";
-        }
+    inline std::string get_type_string(const std::string *)
+    {
+        return "const std::string*";
+    }
 
     template<>
-        inline std::string get_type_string(std::shared_ptr<std::vector<std::int8_t>>)
-        {
-            return "std::shared_ptr<std::vector<std::int8_t>>";
-        }
+    inline std::string get_type_string(std::shared_ptr<std::vector<std::int8_t> >)
+    {
+        return "std::shared_ptr<std::vector<std::int8_t>>";
+    }
 
     template<>
-        inline std::string get_type_string(std::shared_ptr<std::vector<std::uint8_t>>)
-        {
-            return "std::shared_ptr<std::vector<std::uint8_t>>";
-        }
+    inline std::string get_type_string(std::shared_ptr<std::vector<std::uint8_t> >)
+    {
+        return "std::shared_ptr<std::vector<std::uint8_t>>";
+    }
 
     template<>
-        inline std::string get_type_string(std::shared_ptr<std::vector<std::int16_t>>)
-        {
-            return "std::shared_ptr<std::vector<std::int16_t>>";
-        }
+    inline std::string get_type_string(std::shared_ptr<std::vector<std::int16_t> >)
+    {
+        return "std::shared_ptr<std::vector<std::int16_t>>";
+    }
 
     template<>
-        inline std::string get_type_string(std::shared_ptr<std::vector<std::uint16_t>>)
-        {
-            return "std::shared_ptr<std::vector<std::uint16_t>>";
-        }
+    inline std::string get_type_string(std::shared_ptr<std::vector<std::uint16_t> >)
+    {
+        return "std::shared_ptr<std::vector<std::uint16_t>>";
+    }
 
     template<>
-        inline std::string get_type_string(std::shared_ptr<std::vector<std::int32_t>>)
-        {
-            return "std::shared_ptr<std::vector<std::int32_t>>";
-        }
+    inline std::string get_type_string(std::shared_ptr<std::vector<std::int32_t> >)
+    {
+        return "std::shared_ptr<std::vector<std::int32_t>>";
+    }
 
     template<>
-        inline std::string get_type_string(std::shared_ptr<std::vector<std::uint32_t>>)
-        {
-            return "std::shared_ptr<std::vector<std::uint32_t>>";
-        }
+    inline std::string get_type_string(std::shared_ptr<std::vector<std::uint32_t> >)
+    {
+        return "std::shared_ptr<std::vector<std::uint32_t>>";
+    }
 
     template<>
-        inline std::string get_type_string(std::shared_ptr<std::vector<float>>)
-        {
-            return "std::shared_ptr<std::vector<float>>";
-        }
+    inline std::string get_type_string(std::shared_ptr<std::vector<float> >)
+    {
+        return "std::shared_ptr<std::vector<float>>";
+    }
 
     template<>
-        inline std::string get_type_string(std::shared_ptr<glm::vec3>)
-        {
-            return "std::shared_ptr<glm::vec3>";
-        }
+    inline std::string get_type_string(std::shared_ptr<glm::vec3>)
+    {
+        return "std::shared_ptr<glm::vec3>";
+    }
 
     template<>
-        inline std::string get_type_string(std::shared_ptr<glm::vec4>)
-        {
-            return "std::shared_ptr<glm::vec4>";
-        }
+    inline std::string get_type_string(std::shared_ptr<glm::vec4>)
+    {
+        return "std::shared_ptr<glm::vec4>";
+    }
 }
 
 #endif
