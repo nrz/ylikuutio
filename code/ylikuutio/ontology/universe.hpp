@@ -321,11 +321,11 @@ namespace yli::ontology
 
         static std::optional<data::AnyValue> set_global_name_for_entity(
             Entity& entity,
-            const std::string& new_value);
+            const std::string& global_name);
 
         static std::optional<data::AnyValue> set_local_name_for_entity(
             Entity& entity,
-            const std::string& new_value);
+            const std::string& local_name);
 
         // Public `Entity` activate callbacks.
 
