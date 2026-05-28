@@ -37,10 +37,10 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryAllocator;
+    class MemoryAllocator;
 
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -55,138 +55,161 @@ namespace yli::ontology
 
     class Entity
     {
-        public:
-            bool operator==(const Entity& rhs) const noexcept;
-            bool operator!=(const Entity& rhs) const = default;
+    public:
+        bool operator==(const Entity &rhs) const noexcept;
 
-            core::Application& get_application() const;
+        bool operator!=(const Entity &rhs) const = default;
 
-            void bind_to_universe() noexcept;
+        core::Application &get_application() const;
 
-        protected:
-            Entity(
-                    core::Application& application,
-                    Universe& universe,
-                    const EntityStruct& entity_struct);
+        void bind_to_universe() noexcept;
 
-        public:
-            virtual ~Entity();
+    protected:
+        Entity(
+            core::Application &application,
+            Universe &universe,
+            const EntityStruct &entity_struct);
 
-            Entity(const Entity&) = delete;            // Delete copy constructor.
-            Entity& operator=(const Entity&) = delete; // Delete copy assignment.
+    public:
+        virtual ~Entity();
 
-            virtual void activate();                   // Activation functions should be idempotent.
+        Entity(const Entity &) = delete; // Delete copy constructor.
+        Entity &operator=(const Entity &) = delete; // Delete copy assignment.
 
-            void terminate();
-            memory::ConstructibleModule get_constructible_module() const;
+        virtual void activate(); // Activation functions should be idempotent.
 
-            void set_childID(std::size_t childID);
-            std::size_t get_childID() const;
-            void release();
-            std::string get_type() const;
+        void terminate();
 
-            bool get_can_be_erased() const;
+        memory::ConstructibleModule get_constructible_module() const;
 
-            Universe& get_universe() const;
+        void set_childID(std::size_t childID);
 
-            // Different classes are bound to `Scene` in different ways,
-            // so they need to `override` this to provide the functionality.
-            // Note: not all classes have any relation to a specific `Scene`.
-            // E.g. `Universe` may have many `Scene`s, but is descendant of none.
-            virtual Scene* get_scene() const = 0;
+        std::size_t get_childID() const;
 
-            virtual Entity* get_parent() const = 0;
-            std::size_t get_number_of_all_children() const;
-            std::size_t get_number_of_all_descendants() const;
-            std::size_t get_number_of_variables() const;
-            std::size_t get_number_of_non_variable_children() const;
+        void release();
 
-            std::string get_global_name() const;
-            std::string get_local_name() const;
-            void set_global_name(const std::string& global_name);
-            void set_local_name(const std::string& local_name);
+        std::string get_type() const;
 
-            bool has_child(const std::string& name) const;
-            Entity* get_entity(const std::string& name) const;
-            std::string get_entity_names() const;
-            std::string complete(const std::string& input) const;
-            void add_entity(const std::string& name, Entity& entity);
-            void erase_entity(const std::string& name);
+        bool get_can_be_erased() const;
 
-            void create_variable(const VariableStruct& variable_struct, data::AnyValue&& any_value);
-            bool has_variable(const std::string& variable_name) const;
-            Variable* get_variable(const std::string& variable_name) const;
-            bool set_variable(const std::string& variable_name, const data::AnyValue& variable_new_any_value) const;
+        Universe &get_universe() const;
 
-            virtual std::string help() const;                         // this function returns general help string.
-            virtual std::string help_for_variable(const std::string& variable_name) const; // this function returns the help string for the `Variable`.
+        // Different classes are bound to `Scene` in different ways,
+        // so they need to `override` this to provide the functionality.
+        // Note: not all classes have any relation to a specific `Scene`.
+        // E.g. `Universe` may have many `Scene`s, but is descendant of none.
+        virtual Scene *get_scene() const = 0;
 
-            // Public callbacks.
+        virtual Entity *get_parent() const = 0;
 
-            // Public `Entity` creation callbacks.
+        std::size_t get_number_of_all_children() const;
 
-            static std::optional<data::AnyValue> create_variable_with_parent_name_type_value(
-                    Entity& parent,
-                    const std::string& variable_name,
-                    const std::string& variable_type,
-                    const std::string& variable_value);
+        std::size_t get_number_of_all_descendants() const;
 
-            // Public data printing callbacks.
+        std::size_t get_number_of_variables() const;
 
-            static std::optional<data::AnyValue> print_children(
-                    Console& console,
-                    const Entity& entity);
+        std::size_t get_number_of_non_variable_children() const;
 
-            static std::optional<data::AnyValue> print_variables0(
-                    const Universe& universe,
-                    Console& console);
+        std::string get_global_name() const;
 
-            static std::optional<data::AnyValue> print_variables1(
-                    const Universe&,
-                    Console& console,
-                    const Entity& entity);
+        std::string get_local_name() const;
 
-            // Public callbacks end here.
+        void set_global_name(const std::string &global_name);
 
-            bool should_render { false };
+        void set_local_name(const std::string &local_name);
 
-            friend class GenericParentModule;
-            friend class Universe;
+        bool has_child(const std::string &name) const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryAllocator;
+        Entity *get_entity(const std::string &name) const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        std::string get_entity_names() const;
 
-        private:
-            memory::ConstructibleModule constructible_module;
+        std::string complete(const std::string &input) const;
 
-            core::Application& application;
+        void add_entity(const std::string &name, Entity &entity);
 
-            std::size_t childID { std::numeric_limits<std::size_t>::max() };
+        void erase_entity(const std::string &name);
 
-        public:
-            // Named entities are stored here so that they can be recalled, if needed.
-            Registry registry;
-            GenericParentModule parent_of_variables;
-            GenericParentModule parent_of_callback_engines;
+        void create_variable(const VariableStruct &variable_struct, data::AnyValue &&any_value);
 
-        protected:
-            Universe& universe;
-            std::size_t entityID { std::numeric_limits<std::size_t>::max() };
+        bool has_variable(const std::string &variable_name) const;
 
-            std::string type_string;
+        Variable *get_variable(const std::string &variable_name) const;
 
-            std::string global_name; // global name of this `Entity`.
-            std::string local_name;  // local name of this `Entity`.
+        bool set_variable(const std::string &variable_name, const data::AnyValue &variable_new_any_value) const;
 
-            bool can_be_erased { false };
-            const bool is_universe;
+        virtual std::string help() const; // this function returns general help string.
+        virtual std::string help_for_variable(const std::string &variable_name) const;
 
-        public:
-            virtual std::size_t get_number_of_children() const = 0;
-            virtual std::size_t get_number_of_descendants() const = 0;
+        // this function returns the help string for the `Variable`.
+
+        // Public callbacks.
+
+        // Public `Entity` creation callbacks.
+
+        static std::optional<data::AnyValue> create_variable_with_parent_name_type_value(
+            Entity &parent,
+            const std::string &variable_name,
+            const std::string &variable_type,
+            const std::string &variable_value);
+
+        // Public data printing callbacks.
+
+        static std::optional<data::AnyValue> print_children(
+            Console &console,
+            const Entity &entity);
+
+        static std::optional<data::AnyValue> print_variables0(
+            const Universe &universe,
+            Console &console);
+
+        static std::optional<data::AnyValue> print_variables1(
+            const Universe &,
+            Console &console,
+            const Entity &entity);
+
+        // Public callbacks end here.
+
+        bool should_render { false };
+
+        friend class GenericParentModule;
+        friend class Universe;
+
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryAllocator;
+
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+    private:
+        memory::ConstructibleModule constructible_module;
+
+        core::Application &application;
+
+        std::size_t childID { std::numeric_limits<std::size_t>::max() };
+
+    public:
+        // Named entities are stored here so that they can be recalled, if needed.
+        Registry registry;
+        GenericParentModule parent_of_variables;
+        GenericParentModule parent_of_callback_engines;
+
+    protected:
+        Universe &universe;
+        std::size_t entityID { std::numeric_limits<std::size_t>::max() };
+
+        std::string type_string;
+
+        std::string global_name; // global name of this `Entity`.
+        std::string local_name; // local name of this `Entity`.
+
+        bool can_be_erased { false };
+        const bool is_universe;
+
+    public:
+        virtual std::size_t get_number_of_children() const = 0;
+
+        virtual std::size_t get_number_of_descendants() const = 0;
     };
 }
 
