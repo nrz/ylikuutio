@@ -68,7 +68,7 @@ namespace hirvi
     class HirviEditApplication final : public yli::core::Application
     {
         public:
-            HirviEditApplication(const int argc, const char* const argv[]);
+            HirviEditApplication(int argc, const char* const argv[]);
 
             std::string get_name() const override;
 
@@ -78,7 +78,7 @@ namespace hirvi
 
             yli::memory::MemorySystem<Datatype>& get_memory_system() const;
 
-            yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const override;
+            yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(int type) const override;
 
             bool has_memory_allocator(const int type) const
             {
@@ -122,7 +122,7 @@ namespace hirvi
 
 namespace yli::core
 {
-    std::unique_ptr<Application> create_application(const int argc, const char* const argv[]);
+    std::unique_ptr<Application> create_application(int argc, const char* const argv[]);
 }
 
 #endif
