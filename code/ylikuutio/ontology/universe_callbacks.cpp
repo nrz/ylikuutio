@@ -215,7 +215,7 @@ namespace yli::ontology
         }
         else
         {
-            std::uintptr_t parents_memory_address = reinterpret_cast<std::uintptr_t>(entity.get_parent());
+            const std::uintptr_t parents_memory_address = reinterpret_cast<std::uintptr_t>(entity.get_parent());
             std::stringstream parents_memory_address_stringstream;
             parents_memory_address_stringstream << "0x" << std::hex << parents_memory_address;
 
