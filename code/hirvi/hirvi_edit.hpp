@@ -1,4 +1,4 @@
-// Ylikuutio - A 3D game and simulation engine.
+t// Ylikuutio - A 3D game and simulation engine.
 //
 // Copyright (C) 2015-2026 Antti Nuortimo.
 //
@@ -67,62 +67,62 @@ namespace hirvi
 {
     class HirviEditApplication final : public yli::core::Application
     {
-        public:
-            HirviEditApplication(int argc, const char* const argv[]);
+    public:
+        HirviEditApplication(int argc, const char *const argv[]);
 
-            std::string get_name() const override;
+        std::string get_name() const override;
 
-            std::vector<std::string> get_valid_keys() const override;
+        std::vector<std::string> get_valid_keys() const override;
 
-            yli::memory::GenericMemorySystem& get_generic_memory_system() const override;
+        yli::memory::GenericMemorySystem &get_generic_memory_system() const override;
 
-            yli::memory::MemorySystem<Datatype>& get_memory_system() const;
+        yli::memory::MemorySystem<Datatype> &get_memory_system() const;
 
-            yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(int type) const override;
+        yli::memory::GenericMemoryAllocator &get_generic_memory_allocator(int type) const override;
 
-            bool has_memory_allocator(const int type) const
-            {
-                return this->core.memory_system.has_allocator(type);
-            }
+        bool has_memory_allocator(const int type) const
+        {
+            return this->core.memory_system.has_allocator(type);
+        }
 
-            template<typename Type>
-                yli::memory::MemoryAllocator<Type>& get_memory_allocator(const int type) const
-            {
-                return this->core.memory_system.get_allocator<Type>(type);
-            }
+        template<typename Type>
+        yli::memory::MemoryAllocator<Type> &get_memory_allocator(const int type) const
+        {
+            return this->core.memory_system.get_allocator<Type>(type);
+        }
 
-            yli::ontology::GenericEntityFactory& get_generic_entity_factory() const override;
+        yli::ontology::GenericEntityFactory &get_generic_entity_factory() const override;
 
-            yli::ontology::EntityFactory<Datatype>& get_entity_factory() const
-            {
-                return this->core.entity_factory.get();
-            }
+        yli::ontology::EntityFactory<Datatype> &get_entity_factory() const
+        {
+            return this->core.entity_factory.get();
+        }
 
-            yli::event::EventSystem* get_event_system() const override;
+        yli::event::EventSystem *get_event_system() const override;
 
-            yli::input::InputSystem* get_input_system() const override;
+        yli::input::InputSystem *get_input_system() const override;
 
-            yli::audio::AudioSystem* get_audio_system() const override;
+        yli::audio::AudioSystem *get_audio_system() const override;
 
-            bool is_universe(yli::ontology::Entity* entity) const override;
+        bool is_universe(yli::ontology::Entity *entity) const override;
 
-            yli::ontology::Universe& get_universe() const override;
+        yli::ontology::Universe &get_universe() const override;
 
-            yli::ontology::UniverseStruct get_universe_struct() const;
+        yli::ontology::UniverseStruct get_universe_struct() const;
 
-            bool create_and_start_simulation() override;
+        bool create_and_start_simulation() override;
 
-            static void customize(HirviCore& hirvi_core);
+        static void customize(HirviCore &hirvi_core);
 
-        private:
-            HirviCore core;
-            yli::edit::EditCore edit;
+    private:
+        HirviCore core;
+        yli::edit::EditCore edit;
     };
 }
 
 namespace yli::core
 {
-    std::unique_ptr<Application> create_application(int argc, const char* const argv[]);
+    std::unique_ptr<Application> create_application(int argc, const char *const argv[]);
 }
 
 #endif
