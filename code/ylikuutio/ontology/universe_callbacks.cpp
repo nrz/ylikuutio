@@ -49,9 +49,7 @@ namespace yli::ontology
     {
         if (entity.get_can_be_erased())
         {
-            Entity* const entity_parent_of_entity = entity.get_parent();
-
-            if (entity_parent_of_entity != nullptr)
+            if (Entity* const entity_parent_of_entity = entity.get_parent(); entity_parent_of_entity != nullptr)
             {
                 // Erase the local name.
                 entity_parent_of_entity->registry.erase_entity(entity.get_local_name());
@@ -107,7 +105,7 @@ namespace yli::ontology
 
         std::string expression;
 
-        for (std::vector<std::string>::const_iterator it = command_parameters.begin(); it != command_parameters.end();)
+        for (auto it = command_parameters.begin(); it != command_parameters.end();)
         {
             expression += *it;
 
