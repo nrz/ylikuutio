@@ -53,7 +53,6 @@ namespace yli::ontology
 
     class SymbiontSpecies final : public Entity
     {
-        private:
             SymbiontSpecies(
                     core::Application& application,
                     Universe& universe,
