@@ -110,9 +110,8 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Biont::render`: `holobiont_parent` is `nullptr`!");
         }
 
-        const Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
-
-        if (symbiosis_master_of_holobiont == nullptr) [[unlikely]]
+        if (const Symbiosis* const symbiosis_master_of_holobiont = holobiont_parent->get_symbiosis();
+            symbiosis_master_of_holobiont == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Biont::render`: `symbiosis_master_of_holobiont` is `nullptr`!");
         }
