@@ -20,7 +20,6 @@
 
 #include "movable.hpp"
 #include "child_module.hpp"
-#include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
@@ -31,7 +30,6 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <string>   // std::string
 
 // How `Camera` class works:
 //
