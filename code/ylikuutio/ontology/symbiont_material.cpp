@@ -41,22 +41,22 @@ namespace yli::ontology
     class Scene;
 
     SymbiontMaterial::SymbiontMaterial(
-            core::Application& application,
-            Universe& universe,
-            const SymbiontMaterialStruct& symbiont_material_struct,
-            GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
+        core::Application& application,
+        Universe& universe,
+        const SymbiontMaterialStruct& symbiont_material_struct,
+        GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
         : Entity(application, universe, symbiont_material_struct),
-        child_of_symbiosis(symbiosis_parent_module, *this),
-        parent_of_symbiont_species(
-                *this,
-                this->registry,
-                "symbiont_species"),
-        texture(
-                universe,
-                &this->registry,
-                symbiont_material_struct.ofbx_texture,
-                load::ImageLoaderStruct(),
-                "texture")
+          child_of_symbiosis(symbiosis_parent_module, *this),
+          parent_of_symbiont_species(
+              *this,
+              this->registry,
+              "symbiont_species"),
+          texture(
+              universe,
+              &this->registry,
+              symbiont_material_struct.ofbx_texture,
+              load::ImageLoaderStruct(),
+              "texture")
     {
         if (this->texture.get_is_texture_loaded())
         {

@@ -35,7 +35,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -48,47 +48,51 @@ namespace yli::ontology
 
     class SymbiontMaterial final : public Entity
     {
-            SymbiontMaterial(
-                    core::Application& application,
-                    Universe& universe,
-                    const SymbiontMaterialStruct& symbiont_material_struct,
-                    GenericParentModule* symbiosis_parent_module); // Parent is a `Symbiosis`.
+        SymbiontMaterial(
+            core::Application& application,
+            Universe& universe,
+            const SymbiontMaterialStruct& symbiont_material_struct,
+            GenericParentModule* symbiosis_parent_module); // Parent is a `Symbiosis`.
 
-            ~SymbiontMaterial() override = default;
+        ~SymbiontMaterial() override = default;
 
-        public:
-            SymbiontMaterial(const SymbiontMaterial&) = delete;            // Delete copy constructor.
-            SymbiontMaterial& operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
+    public:
+        SymbiontMaterial(const SymbiontMaterial&) = delete; // Delete copy constructor.
+        SymbiontMaterial& operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
 
-            Scene* get_scene() const override;
-            Entity* get_parent() const override;
-            Pipeline* get_pipeline() const;
+        Scene* get_scene() const override;
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        Entity* get_parent() const override;
 
-            GLint get_openGL_textureID() const;
+        Pipeline* get_pipeline() const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            ChildModule child_of_symbiosis;
-            GenericParentModule parent_of_symbiont_species;
-            TextureModule texture;
+        GLint get_openGL_textureID() const;
 
-        protected:
-            GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-        public:
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        ChildModule child_of_symbiosis;
+        GenericParentModule parent_of_symbiont_species;
+        TextureModule texture;
+
+    protected:
+        GLuint opengl_texture_id { 0 };
+        // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
+
+    public:
+        std::size_t get_number_of_children() const override;
+
+        std::size_t get_number_of_descendants() const override;
     };
 
     template<>
-        inline GenericParentModule* SymbiontMaterial::get_generic_parent_module<SymbiontSpecies>()
-        {
-            return &this->parent_of_symbiont_species;
-        }
+    inline GenericParentModule* SymbiontMaterial::get_generic_parent_module<SymbiontSpecies>()
+    {
+        return &this->parent_of_symbiont_species;
+    }
 }
 
 #endif
