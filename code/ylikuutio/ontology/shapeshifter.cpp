@@ -40,19 +40,19 @@ namespace yli::ontology
     }
 
     Shapeshifter::Shapeshifter(
-            core::Application& application,
-            Universe& universe,
-            const ShapeshifterStruct& shapeshifter_struct,
-            GenericParentModule* const scene_parent_module,
-            GenericMasterModule* const movable_controller_master_module,
-            GenericMasterModule* const shapeshifter_sequence_master_module)
+        core::Application& application,
+        Universe& universe,
+        const ShapeshifterStruct& shapeshifter_struct,
+        GenericParentModule* const scene_parent_module,
+        GenericMasterModule* const movable_controller_master_module,
+        GenericMasterModule* const shapeshifter_sequence_master_module)
         : Movable(
-                application,
-                universe,
-                shapeshifter_struct,
-                movable_controller_master_module),
-        child_of_scene(scene_parent_module, *this),
-        apprentice_of_shapeshifter_sequence(shapeshifter_sequence_master_module, this)
+              application,
+              universe,
+              shapeshifter_struct,
+              movable_controller_master_module),
+          child_of_scene(scene_parent_module, *this),
+          apprentice_of_shapeshifter_sequence(shapeshifter_sequence_master_module, this)
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Shapeshifter*";

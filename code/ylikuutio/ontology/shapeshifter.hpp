@@ -41,28 +41,30 @@ namespace yli::ontology
 
     class Shapeshifter : public Movable
     {
-        public:
-            Shapeshifter(
-                    core::Application& application,
-                    Universe& universe,
-                    const ShapeshifterStruct& shapeshifter_struct,
-                    GenericParentModule* scene_parent_module,
-                    GenericMasterModule* movable_controller_master_module,
-                    GenericMasterModule* shapeshifter_sequence_master_module);
+    public:
+        Shapeshifter(
+            core::Application& application,
+            Universe& universe,
+            const ShapeshifterStruct& shapeshifter_struct,
+            GenericParentModule* scene_parent_module,
+            GenericMasterModule* movable_controller_master_module,
+            GenericMasterModule* shapeshifter_sequence_master_module);
 
-            Shapeshifter(const Shapeshifter&) = delete;            // Delete copy constructor.
-            Shapeshifter &operator=(const Shapeshifter&) = delete; // Delete copy assignment.
+        Shapeshifter(const Shapeshifter&) = delete; // Delete copy constructor.
+        Shapeshifter& operator=(const Shapeshifter&) = delete; // Delete copy assignment.
 
-            ~Shapeshifter() override = default;
+        ~Shapeshifter() override = default;
 
-            Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        Entity* get_parent() const override;
 
-            Scene* get_scene() const final;
+        std::size_t get_number_of_children() const override;
 
-            ChildModule child_of_scene;
-            ApprenticeModule apprentice_of_shapeshifter_sequence;
+        std::size_t get_number_of_descendants() const override;
+
+        Scene* get_scene() const final;
+
+        ChildModule child_of_scene;
+        ApprenticeModule apprentice_of_shapeshifter_sequence;
     };
 }
 
