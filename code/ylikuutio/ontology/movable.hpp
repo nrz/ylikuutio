@@ -19,7 +19,6 @@
 #define YLIKUUTIO_ONTOLOGY_MOVABLE_HPP_INCLUDED
 
 #include "entity.hpp"
-#include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "cartesian_coordinates_module.hpp"
 #include "orientation_module.hpp"
