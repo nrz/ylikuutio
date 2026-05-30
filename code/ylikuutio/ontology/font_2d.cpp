@@ -340,10 +340,10 @@ namespace yli::ontology
             const float uv_x = (character % print_text_struct.font_size) / static_cast<float>(print_text_struct.font_size);
             const float uv_y = (character / print_text_struct.font_size) / static_cast<float>(print_text_struct.font_size);
 
-            const glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
-            const glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)), uv_y);
-            const glm::vec2 uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)), (uv_y + 1.0f / static_cast<float>(print_text_struct.font_size)));
-            const glm::vec2 uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(print_text_struct.font_size)));
+            const auto uv_up_left = glm::vec2(uv_x, uv_y);
+            const auto uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)), uv_y);
+            const auto uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)), (uv_y + 1.0f / static_cast<float>(print_text_struct.font_size)));
+            const auto uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(print_text_struct.font_size)));
 
             uvs.emplace_back(uv_up_left);
             uvs.emplace_back(uv_down_left);
@@ -387,9 +387,9 @@ namespace yli::ontology
         // Print to the right side of X (so far there is no check for input length).
         // Print up of Y.
 
-        for (std::span<const std::string>::iterator span_it = view.begin(); span_it != view.end(); ++span_it)
+        for (auto span_it = view.begin(); span_it != view.end(); ++span_it)
         {
-            for (std::string::const_iterator text_line_it = span_it->cbegin(); text_line_it != span_it->cend(); ++text_line_it)
+            for (auto text_line_it = span_it->cbegin(); text_line_it != span_it->cend(); ++text_line_it)
             {
                 const char character = *text_line_it;
 
@@ -399,10 +399,10 @@ namespace yli::ontology
                 const float uv_x = (character % print_console_struct.font_size) / static_cast<float>(print_console_struct.font_size);
                 const float uv_y = (character / print_console_struct.font_size) / static_cast<float>(print_console_struct.font_size);
 
-                const glm::vec2 uv_up_left = glm::vec2(uv_x, uv_y);
-                const glm::vec2 uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_console_struct.font_size)), uv_y);
-                const glm::vec2 uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_console_struct.font_size)), (uv_y + 1.0f / static_cast<float>(print_console_struct.font_size)));
-                const glm::vec2 uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(print_console_struct.font_size)));
+                const auto uv_up_left = glm::vec2(uv_x, uv_y);
+                const auto uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_console_struct.font_size)), uv_y);
+                const auto uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_console_struct.font_size)), (uv_y + 1.0f / static_cast<float>(print_console_struct.font_size)));
+                const auto uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(print_console_struct.font_size)));
 
                 uvs.emplace_back(uv_up_left);
                 uvs.emplace_back(uv_down_left);
