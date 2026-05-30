@@ -36,19 +36,19 @@ namespace yli::ontology
 
     class GenericCallbackEngine : public Entity
     {
-        public:
-            GenericCallbackEngine(
-                    core::Application& application,
-                    Universe& universe,
-                    const GenericCallbackEngineStruct& generic_callback_engine_struct);
+    public:
+        GenericCallbackEngine(
+            core::Application& application,
+            Universe& universe,
+            const GenericCallbackEngineStruct& generic_callback_engine_struct);
 
-            GenericCallbackEngine(const GenericCallbackEngine&) = delete;            // Delete copy constructor.
-            GenericCallbackEngine &operator=(const GenericCallbackEngine&) = delete; // Delete copy assignment.
+        GenericCallbackEngine(const GenericCallbackEngine&) = delete; // Delete copy constructor.
+        GenericCallbackEngine& operator=(const GenericCallbackEngine&) = delete; // Delete copy assignment.
 
-            ~GenericCallbackEngine() override = default;
+        ~GenericCallbackEngine() override = default;
 
-            // execute all callbacks with a parameter.
-            virtual std::optional<data::AnyValue> execute(const data::AnyValue& any_value) = 0;
+        // execute all callbacks with a parameter.
+        virtual std::optional<data::AnyValue> execute(const data::AnyValue& any_value) = 0;
     };
 }
 

@@ -29,9 +29,9 @@ namespace yli::ontology
     class Universe;
 
     GenericCallbackEngine::GenericCallbackEngine(
-            core::Application& application,
-            Universe& universe,
-            const GenericCallbackEngineStruct& generic_callback_engine_struct)
+        core::Application& application,
+        Universe& universe,
+        const GenericCallbackEngineStruct& generic_callback_engine_struct)
         : Entity(application, universe, generic_callback_engine_struct)
     {
         // `Entity` member variables begin here.
