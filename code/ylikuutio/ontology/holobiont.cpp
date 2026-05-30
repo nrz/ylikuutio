@@ -53,27 +53,27 @@ namespace yli::ontology
     class Entity;
 
     Holobiont::Holobiont(
-            core::Application& application,
-            Universe& universe,
-            const HolobiontStruct& holobiont_struct,
-            GenericParentModule* const scene_parent_module,
-            GenericMasterModule* const movable_controller_master_module,
-            GenericMasterModule* const symbiosis_master_module)
+        core::Application& application,
+        Universe& universe,
+        const HolobiontStruct& holobiont_struct,
+        GenericParentModule* const scene_parent_module,
+        GenericMasterModule* const movable_controller_master_module,
+        GenericMasterModule* const symbiosis_master_module)
         : Movable(
-                application,
-                universe,
-                holobiont_struct,
-                movable_controller_master_module),
-        child_of_scene(scene_parent_module, *this),
-        parent_of_bionts(
-                *this,
-                this->registry,
-                "bionts"),
-        parent_of_skills(
-                *this,
-                this->registry,
-                "skills"),
-        apprentice_of_symbiosis(symbiosis_master_module, this)
+              application,
+              universe,
+              holobiont_struct,
+              movable_controller_master_module),
+          child_of_scene(scene_parent_module, *this),
+          parent_of_bionts(
+              *this,
+              this->registry,
+              "bionts"),
+          parent_of_skills(
+              *this,
+              this->registry,
+              "skills"),
+          apprentice_of_symbiosis(symbiosis_master_module, this)
     {
         if (this->Holobiont::get_parent() != nullptr && this->get_symbiosis() != nullptr)
         {
@@ -97,7 +97,8 @@ namespace yli::ontology
             return;
         }
 
-        if (Scene* const scene = this->get_scene(); target_scene != nullptr && scene != nullptr && scene != target_scene)
+        if (Scene* const scene = this->get_scene();
+            target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
             // Different `Scene`s, do not render.
             return;
@@ -152,7 +153,8 @@ namespace yli::ontology
         {
             if (!symbiosis->has_texture(biontID))
             {
-                std::cerr << "ERROR: `Holobiont::create_bionts`: There is no texture for biont with biontID " << biontID << "\n";
+                std::cerr << "ERROR: `Holobiont::create_bionts`: There is no texture for biont with biontID " << biontID
+                        << "\n";
                 continue;
             }
 
@@ -164,15 +166,18 @@ namespace yli::ontology
             }
 
             BiontStruct biont_struct {
-                    Request(&holobiont),
-                    Request(scene),
-                    Request(symbiont_species) };
-            biont_struct.biontID                = biontID;
+                Request(&holobiont),
+                Request(scene),
+                Request(symbiont_species)
+            };
+            biont_struct.biontID = biontID;
             biont_struct.initial_rotate_vectors = holobiont.initial_rotate_vectors;
-            biont_struct.initial_rotate_angles  = holobiont.initial_rotate_angles;
-            biont_struct.original_scale_vector  = holobiont.original_scale_vector;
-            biont_struct.cartesian_coordinates  = holobiont.location;
-            biont_struct.should_render          = (should_render_bionts_vector.size() > biontID ? should_render_bionts_vector.at(biontID) : true);
+            biont_struct.initial_rotate_angles = holobiont.initial_rotate_angles;
+            biont_struct.original_scale_vector = holobiont.original_scale_vector;
+            biont_struct.cartesian_coordinates = holobiont.location;
+            biont_struct.should_render = (should_render_bionts_vector.size() > biontID
+                                              ? should_render_bionts_vector.at(biontID)
+                                              : true);
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
@@ -239,51 +244,53 @@ namespace yli::ontology
     std::size_t Holobiont::get_number_of_children() const
     {
         return this->parent_of_bionts.get_number_of_children() +
-            this->parent_of_skills.get_number_of_children();
+               this->parent_of_skills.get_number_of_children();
     }
 
     std::size_t Holobiont::get_number_of_descendants() const
     {
         return ontology::get_number_of_descendants(this->parent_of_bionts.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_skills.child_pointer_vector);
+               ontology::get_number_of_descendants(this->parent_of_skills.child_pointer_vector);
     }
 
     // Public callbacks.
 
     std::optional<data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z(
-            Scene& parent,
-            Symbiosis& symbiosis,
-            const std::string& holobiont_name,
-            const std::string& x,
-            const std::string& y,
-            const std::string& z)
+        Scene& parent,
+        Symbiosis& symbiosis,
+        const std::string& holobiont_name,
+        const std::string& x,
+        const std::string& y,
+        const std::string& z)
     {
-        return create_holobiont_with_parent_name_x_y_z_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0", "0.0");
+        return create_holobiont_with_parent_name_x_y_z_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0",
+                                                                 "0.0");
     }
 
     std::optional<data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch(
-            Scene& parent,
-            Symbiosis& symbiosis,
-            const std::string& holobiont_name,
-            const std::string& x,
-            const std::string& y,
-            const std::string& z,
-            const std::string& yaw,
-            const std::string& pitch)
+        Scene& parent,
+        Symbiosis& symbiosis,
+        const std::string& holobiont_name,
+        const std::string& x,
+        const std::string& y,
+        const std::string& z,
+        const std::string& yaw,
+        const std::string& pitch)
     {
-        return create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0", yaw, pitch);
+        return create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(parent, symbiosis, holobiont_name, x, y, z, "0.0",
+                                                                      yaw, pitch);
     }
 
     std::optional<data::AnyValue> Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(
-            Scene& parent,
-            Symbiosis& symbiosis,
-            const std::string& holobiont_name,
-            const std::string& x,
-            const std::string& y,
-            const std::string& z,
-            const std::string& roll,
-            const std::string& yaw,
-            const std::string& pitch)
+        Scene& parent,
+        Symbiosis& symbiosis,
+        const std::string& holobiont_name,
+        const std::string& x,
+        const std::string& y,
+        const std::string& z,
+        const std::string& roll,
+        const std::string& yaw,
+        const std::string& pitch)
     {
         const GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
 
@@ -296,37 +303,43 @@ namespace yli::ontology
 
         if (!std::holds_alternative<float>(x_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `x`!\n";
+            std::cerr <<
+                    "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `x`!\n";
             return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(y_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `y`!\n";
+            std::cerr <<
+                    "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `y`!\n";
             return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(z_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `z`!\n";
+            std::cerr <<
+                    "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `z`!\n";
             return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(roll_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_roll_pitch`: invalid value for `roll`!\n";
+            std::cerr <<
+                    "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_roll_pitch`: invalid value for `roll`!\n";
             return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(yaw_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `yaw`!\n";
+            std::cerr <<
+                    "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `yaw`!\n";
             return std::nullopt;
         }
 
         if (!std::holds_alternative<float>(pitch_any_value.data))
         {
-            std::cerr << "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `pitch`!\n";
+            std::cerr <<
+                    "ERROR: `Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch`: invalid value for `pitch`!\n";
             return std::nullopt;
         }
 

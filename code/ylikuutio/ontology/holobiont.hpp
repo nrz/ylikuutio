@@ -37,7 +37,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -54,98 +54,101 @@ namespace yli::ontology
 
     class Holobiont : public Movable
     {
-        protected:
-            Holobiont(
-                    core::Application& application,
-                    Universe& universe,
-                    const HolobiontStruct& holobiont_struct,
-                    GenericParentModule* scene_parent_module,
-                    GenericMasterModule* movable_controller_master_module,
-                    GenericMasterModule* symbiosis_master_module);
+    protected:
+        Holobiont(
+            core::Application& application,
+            Universe& universe,
+            const HolobiontStruct& holobiont_struct,
+            GenericParentModule* scene_parent_module,
+            GenericMasterModule* movable_controller_master_module,
+            GenericMasterModule* symbiosis_master_module);
 
-        public:
-            Holobiont(const Holobiont&) = delete;            // Delete copy constructor.
-            Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
+    public:
+        Holobiont(const Holobiont&) = delete; // Delete copy constructor.
+        Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
 
-            ~Holobiont() override = default;
+        ~Holobiont() override = default;
 
-            Entity* get_parent() const final;
+        Entity* get_parent() const final;
 
-            void update_x(float x);
-            void update_y(float y);
-            void update_z(float z);
+        void update_x(float x);
 
-            // Public callbacks.
+        void update_y(float y);
 
-            static std::optional<data::AnyValue> create_holobiont_with_parent_name_x_y_z(
-                    Scene& parent,
-                    Symbiosis& symbiosis,
-                    const std::string& holobiont_name,
-                    const std::string& x,
-                    const std::string& y,
-                    const std::string& z);
+        void update_z(float z);
 
-            static std::optional<data::AnyValue> create_holobiont_with_parent_name_x_y_z_yaw_pitch(
-                    Scene& parent,
-                    Symbiosis& symbiosis,
-                    const std::string& holobiont_name,
-                    const std::string& x,
-                    const std::string& y,
-                    const std::string& z,
-                    const std::string& yaw,
-                    const std::string& pitch);
+        // Public callbacks.
 
-            static std::optional<data::AnyValue> create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(
-                    Scene& parent,
-                    Symbiosis& symbiosis,
-                    const std::string& holobiont_name,
-                    const std::string& x,
-                    const std::string& y,
-                    const std::string& z,
-                    const std::string& roll,
-                    const std::string& yaw,
-                    const std::string& pitch);
+        static std::optional<data::AnyValue> create_holobiont_with_parent_name_x_y_z(
+            Scene& parent,
+            Symbiosis& symbiosis,
+            const std::string& holobiont_name,
+            const std::string& x,
+            const std::string& y,
+            const std::string& z);
 
-            // Public callbacks end here.
+        static std::optional<data::AnyValue> create_holobiont_with_parent_name_x_y_z_yaw_pitch(
+            Scene& parent,
+            Symbiosis& symbiosis,
+            const std::string& holobiont_name,
+            const std::string& x,
+            const std::string& y,
+            const std::string& z,
+            const std::string& yaw,
+            const std::string& pitch);
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        static std::optional<data::AnyValue> create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch(
+            Scene& parent,
+            Symbiosis& symbiosis,
+            const std::string& holobiont_name,
+            const std::string& x,
+            const std::string& y,
+            const std::string& z,
+            const std::string& roll,
+            const std::string& yaw,
+            const std::string& pitch);
 
-            ChildModule child_of_scene;
-            GenericParentModule parent_of_bionts;
-            GenericParentModule parent_of_skills;
-            ApprenticeModule apprentice_of_symbiosis;
+        // Public callbacks end here.
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            Scene* get_scene() const final;
+        ChildModule child_of_scene;
+        GenericParentModule parent_of_bionts;
+        GenericParentModule parent_of_skills;
+        ApprenticeModule apprentice_of_symbiosis;
 
-            Symbiosis* get_symbiosis() const;
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            std::size_t get_number_of_children() const final;
-            std::size_t get_number_of_descendants() const final;
+        Scene* get_scene() const final;
 
-            // this method renders this `Holobiont`.
-            void render(const Scene* target_scene);
+        Symbiosis* get_symbiosis() const;
 
-            static void create_skill(Holobiont& holobiont, const std::string& skill_name);
+        std::size_t get_number_of_children() const final;
 
-        private:
-            static void create_bionts(Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector);
+        std::size_t get_number_of_descendants() const final;
+
+        // this method renders this `Holobiont`.
+        void render(const Scene* target_scene);
+
+        static void create_skill(Holobiont& holobiont, const std::string& skill_name);
+
+    private:
+        static void create_bionts(Holobiont& holobiont, const std::vector<bool>& should_render_bionts_vector);
     };
 
     template<>
-        inline GenericParentModule* Holobiont::get_generic_parent_module<Biont>()
-        {
-            return &this->parent_of_bionts;
-        }
+    inline GenericParentModule* Holobiont::get_generic_parent_module<Biont>()
+    {
+        return &this->parent_of_bionts;
+    }
 
     template<>
-        inline GenericParentModule* Holobiont::get_generic_parent_module<Skill>()
-        {
-            return &this->parent_of_skills;
-        }
+    inline GenericParentModule* Holobiont::get_generic_parent_module<Skill>()
+    {
+        return &this->parent_of_skills;
+    }
 }
 
 #endif
