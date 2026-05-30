@@ -37,7 +37,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -52,89 +52,90 @@ namespace yli::ontology
 
     class Object : public Movable
     {
-        public:
-            // Set pointer to `object` to `nullptr`, set parent according to the input,
-            // and request a new childID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_scene_parent(
-                    Object& object,
-                    Scene& new_parent);
+    public:
+        // Set pointer to `object` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_scene_parent(
+            Object& object,
+            Scene& new_parent);
 
-            // Set pointer to `object` to `nullptr`, set mesh according to the input,
-            // and request a new apprenticeID from `new_species`.
-            static std::optional<data::AnyValue> bind_to_new_species_master(
-                    Object& object,
-                    Species& new_species) noexcept;
+        // Set pointer to `object` to `nullptr`, set mesh according to the input,
+        // and request a new apprenticeID from `new_species`.
+        static std::optional<data::AnyValue> bind_to_new_species_master(
+            Object& object,
+            Species& new_species) noexcept;
 
-        protected:
-            Object(
-                    core::Application& application,
-                    Universe& universe,
-                    const ObjectStruct& object_struct,
-                    GenericParentModule* scene_parent_module,
-                    GenericMasterModule* movable_controller_master_module,
-                    GenericMasterModule* species_master_module);
+    protected:
+        Object(
+            core::Application& application,
+            Universe& universe,
+            const ObjectStruct& object_struct,
+            GenericParentModule* scene_parent_module,
+            GenericMasterModule* movable_controller_master_module,
+            GenericMasterModule* species_master_module);
 
-            ~Object() override = default;
+        ~Object() override = default;
 
-        public:
-            Object(const Object&) = delete;            // Delete copy constructor.
-            Object& operator=(const Object&) = delete; // Delete copy assignment.
+    public:
+        Object(const Object&) = delete; // Delete copy constructor.
+        Object& operator=(const Object&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const final;
+        Entity* get_parent() const final;
 
-            // Public callbacks.
+        // Public callbacks.
 
-            static std::optional<data::AnyValue> with_parent_name_x_y_z(
-                    Scene& parent,
-                    Species& species,
-                    const std::string& object_name,
-                    const std::string& x,
-                    const std::string& y,
-                    const std::string& z);
+        static std::optional<data::AnyValue> with_parent_name_x_y_z(
+            Scene& parent,
+            Species& species,
+            const std::string& object_name,
+            const std::string& x,
+            const std::string& y,
+            const std::string& z);
 
-            static std::optional<data::AnyValue> with_parent_name_x_y_z_yaw_pitch(
-                    Scene& parent,
-                    Species& species,
-                    const std::string& object_name,
-                    const std::string& x,
-                    const std::string& y,
-                    const std::string& z,
-                    const std::string& yaw,
-                    const std::string& pitch);
+        static std::optional<data::AnyValue> with_parent_name_x_y_z_yaw_pitch(
+            Scene& parent,
+            Species& species,
+            const std::string& object_name,
+            const std::string& x,
+            const std::string& y,
+            const std::string& z,
+            const std::string& yaw,
+            const std::string& pitch);
 
-            static std::optional<data::AnyValue> with_parent_name_x_y_z_roll_yaw_pitch(
-                    Scene& parent,
-                    Species& species,
-                    const std::string& object_name,
-                    const std::string& x,
-                    const std::string& y,
-                    const std::string& z,
-                    const std::string& roll,
-                    const std::string& yaw,
-                    const std::string& pitch);
+        static std::optional<data::AnyValue> with_parent_name_x_y_z_roll_yaw_pitch(
+            Scene& parent,
+            Species& species,
+            const std::string& object_name,
+            const std::string& x,
+            const std::string& y,
+            const std::string& z,
+            const std::string& roll,
+            const std::string& yaw,
+            const std::string& pitch);
 
-            // Public callbacks end here.
+        // Public callbacks end here.
 
-            Scene* get_scene() const final;
+        Scene* get_scene() const final;
 
-            Pipeline* get_pipeline() const;
+        Pipeline* get_pipeline() const;
 
-            std::size_t get_number_of_children() const final;
-            std::size_t get_number_of_descendants() const final;
+        std::size_t get_number_of_children() const final;
 
-        public:
-            // this method renders this `Object`.
-            void render(const Scene* target_scene);
+        std::size_t get_number_of_descendants() const final;
 
-        private:
-            void render_this_object(const Pipeline* pipeline);
+    public:
+        // this method renders this `Object`.
+        void render(const Scene* target_scene);
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+    private:
+        void render_this_object(const Pipeline* pipeline);
 
-        public:
-            ChildModule child_of_scene;
-            ApprenticeModule apprentice_of_species;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+    public:
+        ChildModule child_of_scene;
+        ApprenticeModule apprentice_of_species;
     };
 }
 

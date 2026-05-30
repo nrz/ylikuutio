@@ -69,8 +69,8 @@ namespace yli::ontology
     class Entity;
 
     std::optional<data::AnyValue> Object::bind_to_new_scene_parent(
-            Object& object,
-            Scene& new_parent)
+        Object& object,
+        Scene& new_parent)
     {
         // Set pointer to `object` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -100,8 +100,8 @@ namespace yli::ontology
     }
 
     std::optional<data::AnyValue> Object::bind_to_new_species_master(
-            Object& object,
-            Species& new_species) noexcept
+        Object& object,
+        Species& new_species) noexcept
     {
         // Set pointer to `object` to `nullptr`, set mesh according to the input,
         // and request a new apprenticeID from `new_species`.
@@ -109,34 +109,35 @@ namespace yli::ontology
         // Master and apprentice must belong to the same `Scene`,
         // if both belong to some `Scene`, and not `Ecosystem`.
         if (object.get_scene() == new_species.get_scene() ||
-                object.get_scene() == nullptr ||
-                new_species.get_scene() == nullptr)
+            object.get_scene() == nullptr ||
+            new_species.get_scene() == nullptr)
         {
             object.apprentice_of_species.unbind_and_bind_to_new_generic_master_module(
-                    &new_species.master_of_objects);
+                &new_species.master_of_objects);
         }
         else
         {
-            std::cerr << "ERROR: `Object::bind_to_new_species_master`: master and apprentice can not belong to different `Scene`s!\n";
+            std::cerr <<
+                    "ERROR: `Object::bind_to_new_species_master`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
     }
 
     Object::Object(
-            core::Application& application,
-            Universe& universe,
-            const ObjectStruct& object_struct,
-            GenericParentModule* const scene_parent_module,
-            GenericMasterModule* const movable_controller_master_module,
-            GenericMasterModule* const species_master_module)
+        core::Application& application,
+        Universe& universe,
+        const ObjectStruct& object_struct,
+        GenericParentModule* const scene_parent_module,
+        GenericMasterModule* const movable_controller_master_module,
+        GenericMasterModule* const species_master_module)
         : Movable(
-                application,
-                universe,
-                object_struct,
-                movable_controller_master_module),
-        child_of_scene(scene_parent_module, *this),
-        apprentice_of_species(species_master_module, this)
+              application,
+              universe,
+              object_struct,
+              movable_controller_master_module),
+          child_of_scene(scene_parent_module, *this),
+          apprentice_of_species(species_master_module, this)
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Object*";
@@ -177,16 +178,19 @@ namespace yli::ontology
 
         this->model_matrix = glm::mat4(1.0f);
 
-        if (const auto species = static_cast<Species*>(this->apprentice_of_species.get_master()); species == nullptr) [[unlikely]]
+        if (const auto species = static_cast<Species*>(this->apprentice_of_species.get_master()); species == nullptr)
+        [[unlikely]]
         {
             return;
         }
 
         if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size()) [[likely]]
         {
-            for (std::size_t i = 0; i < this->initial_rotate_vectors.size() && i < this->initial_rotate_angles.size(); i++)
+            for (std::size_t i = 0; i < this->initial_rotate_vectors.size() && i < this->initial_rotate_angles.size();
+                 i++)
             {
-                this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angles[i], this->initial_rotate_vectors[i]);
+                this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angles[i],
+                                                 this->initial_rotate_vectors[i]);
             }
         }
 
@@ -199,14 +203,17 @@ namespace yli::ontology
         this->model_matrix[3][1] = this->location.get_y();
         this->model_matrix[3][2] = this->location.get_z();
 
-        this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() * this->model_matrix;
+        this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() * this->
+                           model_matrix;
 
         if (this->universe.get_is_opengl_in_use()) [[likely]]
         {
             // Send our transformation to the uniform buffer object (UBO).
             glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
-            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::MVP, sizeof(glm::mat4), glm::value_ptr(this->mvp_matrix)); // mat4
-            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::M, sizeof(glm::mat4), glm::value_ptr(this->model_matrix)); // mat4
+            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::MVP, sizeof(glm::mat4),
+                            glm::value_ptr(this->mvp_matrix)); // mat4
+            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::M, sizeof(glm::mat4),
+                            glm::value_ptr(this->model_matrix)); // mat4
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
             glBindBufferBase(GL_UNIFORM_BUFFER, opengl::UboBlockIndices::MOVABLE, this->movable_uniform_block);
@@ -227,52 +234,52 @@ namespace yli::ontology
 
         if (this->universe.get_is_opengl_in_use() && master_model != nullptr) [[likely]]
         {
-            const GLuint vao                             = master_model->get_vao();
-            const GLuint vertex_buffer                   = master_model->get_vertex_buffer();
+            const GLuint vao = master_model->get_vao();
+            const GLuint vertex_buffer = master_model->get_vertex_buffer();
             const std::uint32_t vertex_position_modelspace_id = master_model->get_vertex_position_modelspace_id();
-            const GLuint uv_buffer                       = master_model->get_uv_buffer();
-            const std::uint32_t vertex_uv_id             = master_model->get_vertex_uv_id();
-            const GLuint normal_buffer                   = master_model->get_normal_buffer();
+            const GLuint uv_buffer = master_model->get_uv_buffer();
+            const std::uint32_t vertex_uv_id = master_model->get_vertex_uv_id();
+            const GLuint normal_buffer = master_model->get_normal_buffer();
             const std::uint32_t vertex_normal_modelspace_id = master_model->get_vertex_normal_modelspace_id();
-            const GLuint element_buffer                  = master_model->get_element_buffer();
-            const std::uint32_t indices_size             = master_model->get_indices_size();
+            const GLuint element_buffer = master_model->get_element_buffer();
+            const std::uint32_t indices_size = master_model->get_indices_size();
 
             glBindVertexArray(vao);
 
             // 1st attribute buffer: vertices.
             glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
             glVertexAttribPointer(
-                    vertex_position_modelspace_id, // The attribute we want to configure
-                    3,                             // size
-                    GL_FLOAT,                      // type
-                    GL_FALSE,                      // normalized?
-                    0,                             // stride
-                    nullptr                        // array buffer offset
-                    );
+                vertex_position_modelspace_id, // The attribute we want to configure
+                3, // size
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                nullptr // array buffer offset
+            );
             opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
             glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
             glVertexAttribPointer(
-                    vertex_uv_id, // The attribute we want to configure
-                    2,            // size : U+V => 2
-                    GL_FLOAT,     // type
-                    GL_FALSE,     // normalized?
-                    0,            // stride
-                    nullptr       // array buffer offset
-                    );
+                vertex_uv_id, // The attribute we want to configure
+                2, // size : U+V => 2
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                nullptr // array buffer offset
+            );
             opengl::enable_vertex_attrib_array(vertex_uv_id);
 
             // 3rd attribute buffer: normals.
             glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
             glVertexAttribPointer(
-                    vertex_normal_modelspace_id, // The attribute we want to configure
-                    3,                           // size
-                    GL_FLOAT,                    // type
-                    GL_FALSE,                    // normalized?
-                    0,                           // stride
-                    nullptr                      // array buffer offset
-                    );
+                vertex_normal_modelspace_id, // The attribute we want to configure
+                3, // size
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                nullptr // array buffer offset
+            );
             opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
 
             // Index buffer.
@@ -280,11 +287,11 @@ namespace yli::ontology
 
             // Draw the triangles!
             glDrawElements(
-                    GL_TRIANGLES,    // mode
-                    indices_size,    // count
-                    GL_UNSIGNED_INT, // type
-                    nullptr          // element array buffer offset
-                    );
+                GL_TRIANGLES, // mode
+                indices_size, // count
+                GL_UNSIGNED_INT, // type
+                nullptr // element array buffer offset
+            );
 
             opengl::disable_vertex_attrib_array(vertex_position_modelspace_id);
             opengl::disable_vertex_attrib_array(vertex_uv_id);
@@ -303,7 +310,8 @@ namespace yli::ontology
 
     Pipeline* Object::get_pipeline() const
     {
-        if (const auto* const species = static_cast<Species*>(this->apprentice_of_species.get_master()); species != nullptr) [[likely]]
+        if (const auto* const species = static_cast<Species*>(this->apprentice_of_species.get_master());
+            species != nullptr) [[likely]]
         {
             return species->get_pipeline();
         }
@@ -324,39 +332,39 @@ namespace yli::ontology
     // Public callbacks.
 
     std::optional<data::AnyValue> Object::with_parent_name_x_y_z(
-            Scene& parent,
-            Species& species,
-            const std::string& object_name,
-            const std::string& x,
-            const std::string& y,
-            const std::string& z)
+        Scene& parent,
+        Species& species,
+        const std::string& object_name,
+        const std::string& x,
+        const std::string& y,
+        const std::string& z)
     {
         return with_parent_name_x_y_z_yaw_pitch(parent, species, object_name, x, y, z, "0.0", "0.0");
     }
 
     std::optional<data::AnyValue> Object::with_parent_name_x_y_z_yaw_pitch(
-            Scene& parent,
-            Species& species,
-            const std::string& object_name,
-            const std::string& x,
-            const std::string& y,
-            const std::string& z,
-            const std::string& yaw,
-            const std::string& pitch)
+        Scene& parent,
+        Species& species,
+        const std::string& object_name,
+        const std::string& x,
+        const std::string& y,
+        const std::string& z,
+        const std::string& yaw,
+        const std::string& pitch)
     {
         return with_parent_name_x_y_z_roll_yaw_pitch(parent, species, object_name, x, y, z, "0.0", yaw, pitch);
     }
 
     std::optional<data::AnyValue> Object::with_parent_name_x_y_z_roll_yaw_pitch(
-            Scene& parent,
-            Species& species,
-            const std::string& object_name,
-            const std::string& x,
-            const std::string& y,
-            const std::string& z,
-            const std::string& roll,
-            const std::string& yaw,
-            const std::string& pitch)
+        Scene& parent,
+        Species& species,
+        const std::string& object_name,
+        const std::string& x,
+        const std::string& y,
+        const std::string& z,
+        const std::string& roll,
+        const std::string& yaw,
+        const std::string& pitch)
     {
         GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
 
