@@ -50,8 +50,8 @@ namespace yli::core
 namespace yli::ontology
 {
     std::optional<data::AnyValue> Movable::bind_to_new_movable_controller(
-            Movable& movable,
-            MovableController& new_movable_controller) noexcept
+        Movable& movable,
+        MovableController& new_movable_controller) noexcept
     {
         // Set pointer to `movable` to `nullptr`, set movable_controller according to the input,
         // and request a new apprenticeID from `new_movable_controller`.
@@ -59,15 +59,16 @@ namespace yli::ontology
         // Master and apprentice must belong to the same `Scene`,
         // if both belong to some `Scene`, and not `Ecosystem`.
         if (movable.get_scene() == new_movable_controller.get_scene() ||
-                movable.get_scene() == nullptr ||
-                new_movable_controller.get_scene() == nullptr)
+            movable.get_scene() == nullptr ||
+            new_movable_controller.get_scene() == nullptr)
         {
             movable.apprentice_of_movable_controller.unbind_and_bind_to_new_generic_master_module(
-                    &new_movable_controller.master_of_movables);
+                &new_movable_controller.master_of_movables);
         }
         else
         {
-            std::cerr << "ERROR: `Movable::bind_to_new_movable_controller`: master and apprentice can not belong to different `Scene`s!\n";
+            std::cerr <<
+                    "ERROR: `Movable::bind_to_new_movable_controller`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
@@ -80,23 +81,24 @@ namespace yli::ontology
     }
 
     Movable::Movable(
-            core::Application& application,
-            Universe& universe,
-            const MovableStruct& movable_struct,
-            GenericMasterModule* const movable_controller_master_module)
+        core::Application& application,
+        Universe& universe,
+        const MovableStruct& movable_struct,
+        GenericMasterModule* const movable_controller_master_module)
         : Entity(application, universe, movable_struct),
-        apprentice_of_movable_controller(movable_controller_master_module, this),
-        rigid_body_module(
-                movable_struct.rigid_body_module_struct,
-                resolve_request(movable_struct.scene, universe.registry),
-                this),
-        initial_rotate_vectors { movable_struct.initial_rotate_vectors },
-        initial_rotate_angles { movable_struct.initial_rotate_angles },
-        original_scale_vector { movable_struct.original_scale_vector },
-        location(movable_struct.cartesian_coordinates),
-        orientation(movable_struct.orientation.roll, movable_struct.orientation.yaw, movable_struct.orientation.pitch),
-        scale        { movable_struct.scale },
-        input_method { movable_struct.input_method }
+          apprentice_of_movable_controller(movable_controller_master_module, this),
+          rigid_body_module(
+              movable_struct.rigid_body_module_struct,
+              resolve_request(movable_struct.scene, universe.registry),
+              this),
+          initial_rotate_vectors { movable_struct.initial_rotate_vectors },
+          initial_rotate_angles { movable_struct.initial_rotate_angles },
+          original_scale_vector { movable_struct.original_scale_vector },
+          location(movable_struct.cartesian_coordinates),
+          orientation(movable_struct.orientation.roll, movable_struct.orientation.yaw,
+                      movable_struct.orientation.pitch),
+          scale { movable_struct.scale },
+          input_method { movable_struct.input_method }
     {
         if (this->universe.get_is_opengl_in_use())
         {
@@ -104,7 +106,8 @@ namespace yli::ontology
 
             glGenBuffers(1, &this->movable_uniform_block);
             glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
-            glBufferData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
+            glBufferData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::TOTAL_SIZE, nullptr,
+                         GL_STATIC_DRAW);
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
         }
 
@@ -235,7 +238,8 @@ namespace yli::ontology
         cartesian_coordinates_variable_struct.activate_callback = &activate_cartesian_coordinates;
         cartesian_coordinates_variable_struct.read_callback = &read_cartesian_coordinates;
         cartesian_coordinates_variable_struct.should_call_activate_callback_now = true;
-        this->create_variable(cartesian_coordinates_variable_struct, yli::data::AnyValue(glm::vec3(float_x, float_y, float_z)));
+        this->create_variable(cartesian_coordinates_variable_struct,
+                              yli::data::AnyValue(glm::vec3(float_x, float_y, float_z)));
 
         VariableStruct x_variable_struct(this->get_universe(), this);
         x_variable_struct.local_name = "x";

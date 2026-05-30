@@ -51,382 +51,404 @@
 
 namespace yli::core
 {
-    class Application;
+        class Application;
 }
 
 namespace yli::input
 {
-    enum class InputMethod;
+        enum class InputMethod;
 }
 
 namespace yli::ontology
 {
-    class GenericMasterModule;
-    class Universe;
-    class MovableController;
+        class GenericMasterModule;
+        class Universe;
+        class MovableController;
 
-    class Movable : public Entity
-    {
+        class Movable : public Entity
+        {
         public:
-            // Set pointer to `movable` to `nullptr`, set movable_controller according to the input,
-            // and request a new apprenticeID from `new_movable_controller`.
-            static std::optional<data::AnyValue> bind_to_new_movable_controller(
-                    Movable& movable,
-                    MovableController& new_movable_controller) noexcept;
+                // Set pointer to `movable` to `nullptr`, set movable_controller according to the input,
+                // and request a new apprenticeID from `new_movable_controller`.
+                static std::optional<data::AnyValue> bind_to_new_movable_controller(
+                        Movable& movable,
+                        MovableController& new_movable_controller) noexcept;
 
-            static std::optional<data::AnyValue> unbind_from_movable_controller(
-                    Movable& movable) noexcept;
+                static std::optional<data::AnyValue> unbind_from_movable_controller(
+                        Movable& movable) noexcept;
 
         protected:
-            Movable(
-                    core::Application& application,
-                    Universe& universe,
-                    const MovableStruct& movable_struct,
-                    GenericMasterModule* movable_controller_master_module);
+                Movable(
+                        core::Application& application,
+                        Universe& universe,
+                        const MovableStruct& movable_struct,
+                        GenericMasterModule* movable_controller_master_module);
 
         public:
-            Movable(const Movable&) = delete;            // Delete copy constructor.
-            Movable& operator=(const Movable&) = delete; // Delete copy assignment.
+                Movable(const Movable&) = delete; // Delete copy constructor.
+                Movable& operator=(const Movable&) = delete; // Delete copy assignment.
 
-            ~Movable() override = default;
+                ~Movable() override = default;
 
-            const glm::vec3& get_cartesian_coordinates() const;
-            void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);
-            float get_roll() const;
-            void set_roll(float roll);
-            float get_yaw() const;
-            void set_yaw(float yaw);
-            float get_pitch() const;
-            void set_pitch(float pitch);
-            float get_azimuth() const;
-            void set_azimuth(float azimuth);
-            float get_scale() const;
-            void set_scale(float scale);
+                const glm::vec3& get_cartesian_coordinates() const;
 
-            // Public callbacks (to be called from AI scripts written in YliLisp).
-            // These are the functions that are available for AI scripts.
-            // Ylikuutio will support scripting of game agents using YliLisp.
-            // Ylikuutio can be used for all kinds of games. However, there is
-            // more support for some kinds of games needing such callbacks.
-            // In particular, Ylikuutio supports simulations of real-life phenomena.
-            // TODO: implement public AI callbacks!
+                void set_cartesian_coordinates(const glm::vec3& cartesian_coordinates);
 
-            // Command callbacks.
+                float get_roll() const;
 
-            // Set target towards which to move.
-            static void set_dest(Movable* movable, float x, float y, float z);
+                void set_roll(float roll);
 
-            // Get x coordinate of `movable`.
-            static float get_x(const Movable* movable);
+                float get_yaw() const;
 
-            // Get y coordinate of `movable`.
-            static float get_y(const Movable* movable);
+                void set_yaw(float yaw);
 
-            // Get z destination coordinate of `movable`.
-            static float get_z(const Movable* movable);
+                float get_pitch() const;
 
-            // Get x destination coordinate of `movable`.
-            static float get_dest_x(const Movable* movable);
+                void set_pitch(float pitch);
 
-            // Get y destination coordinate of `movable`.
-            static float get_dest_y(const Movable* movable);
+                float get_azimuth() const;
 
-            // Get z coordinate of `movable`.
-            static float get_dest_z(const Movable* movable);
+                void set_azimuth(float azimuth);
 
-            // Allied-movable-centric path and map information callbacks.
+                float get_scale() const;
 
-            // This method returns `true` if destination is visible, `false` otherwise.
-            // destination may be visible directly (line of sight) or eg. by radar (without line of sight).
-            static bool is_visible(float x, float y, float z);
+                void set_scale(float scale);
 
-            // This method returns `true` if destination is visible with a line of sight for any own `Movable`, `false` otherwise.
-            static bool is_line_of_sight_for_any(float x, float y, float z);
+                // Public callbacks (to be called from AI scripts written in YliLisp).
+                // These are the functions that are available for AI scripts.
+                // Ylikuutio will support scripting of game agents using YliLisp.
+                // Ylikuutio can be used for all kinds of games. However, there is
+                // more support for some kinds of games needing such callbacks.
+                // In particular, Ylikuutio supports simulations of real-life phenomena.
+                // TODO: implement public AI callbacks!
 
-            // This method returns `true` if destination is visible with a line of sight for any own `Movable`, `false` otherwise.
-            static bool is_line_of_sight(const Movable* movable, float x, float y, float z);
+                // Command callbacks.
 
-            // This method returns `true` if there is any known ground path between `Movable` and (x, y, z),  `false` otherwise.
-            static bool is_ground_path_known(const Movable* movable, float x, float y, float z);
+                // Set target towards which to move.
+                static void set_dest(Movable* movable, float x, float y, float z);
 
-            // This method returns `true` if there is any known rail path between `Movable` and (x, y, z),  `false` otherwise.
-            static bool is_rail_path_known(const Movable* movable, float x, float y, float z);
+                // Get x coordinate of `movable`.
+                static float get_x(const Movable* movable);
 
-            // This method returns `true` if there is known air path between movables, `false` otherwise.
-            static bool is_air_path_known(const Movable* movable, float x, float y, float z);
+                // Get y coordinate of `movable`.
+                static float get_y(const Movable* movable);
 
-            // This method returns `true` if there is known ballistic path between `Movable` and (x, y, z), `false` otherwise.
-            static bool is_ballistic_path_known(const Movable* movable, float x, float y, float z);
+                // Get z destination coordinate of `movable`.
+                static float get_z(const Movable* movable);
 
-            // This method returns `true` if there may be ballistic path between movables, `false` otherwise.
-            static bool may_have_ballistic_path(const Movable* movable, float x, float y, float z);
+                // Get x destination coordinate of `movable`.
+                static float get_dest_x(const Movable* movable);
 
-            // These functions return the coordinates of the farthest point.
-            static float get_closest_visible_ground_dest_x_towards(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // Get y destination coordinate of `movable`.
+                static float get_dest_y(const Movable* movable);
 
-            static float get_closest_visible_ground_dest_y_towards(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // Get z coordinate of `movable`.
+                static float get_dest_z(const Movable* movable);
 
-            static float get_closest_visible_ground_dest_z_towards(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // Allied-movable-centric path and map information callbacks.
 
-            // This method returns `true` if complete path is visible, `false` otherwise.
-            static bool is_complete_ground_path_visible(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // This method returns `true` if destination is visible, `false` otherwise.
+                // destination may be visible directly (line of sight) or eg. by radar (without line of sight).
+                static bool is_visible(float x, float y, float z);
 
-            static bool is_complete_rail_path_visible(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // This method returns `true` if destination is visible with a line of sight for any own `Movable`, `false` otherwise.
+                static bool is_line_of_sight_for_any(float x, float y, float z);
 
-            static bool is_complete_air_path_visible(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // This method returns `true` if destination is visible with a line of sight for any own `Movable`, `false` otherwise.
+                static bool is_line_of_sight(const Movable* movable, float x, float y, float z);
 
-            static bool is_complete_ballistic_path_visible(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // This method returns `true` if there is any known ground path between `Movable` and (x, y, z),  `false` otherwise.
+                static bool is_ground_path_known(const Movable* movable, float x, float y, float z);
 
-            // These methods return the coordinates of the point closest to `movable` from which there is known ballistic path to (x, y, z).
-            static float get_nearest_known_ballistic_launch_site_x(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // This method returns `true` if there is any known rail path between `Movable` and (x, y, z),  `false` otherwise.
+                static bool is_rail_path_known(const Movable* movable, float x, float y, float z);
 
-            static float get_nearest_known_ballistic_launch_site_y(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // This method returns `true` if there is known air path between movables, `false` otherwise.
+                static bool is_air_path_known(const Movable* movable, float x, float y, float z);
 
-            static float get_nearest_known_ballistic_launch_site_z(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // This method returns `true` if there is known ballistic path between `Movable` and (x, y, z), `false` otherwise.
+                static bool is_ballistic_path_known(const Movable* movable, float x, float y, float z);
 
-            // These methods return the coordinates of the point closest to `movable` from which there may be a ballistic path to (x, y, z).
-            static float get_nearest_possible_ballistic_launch_site_x(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // This method returns `true` if there may be ballistic path between movables, `false` otherwise.
+                static bool may_have_ballistic_path(const Movable* movable, float x, float y, float z);
 
-            static float get_nearest_possible_ballistic_launch_site_y(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                // These functions return the coordinates of the farthest point.
+                static float get_closest_visible_ground_dest_x_towards(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static float get_nearest_possible_ballistic_launch_site_z(
-                    const Movable* movable,
-                    float x,
-                    float y,
-                    float z);
+                static float get_closest_visible_ground_dest_y_towards(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            // This method returns `true` if there is known line of sight between (x1, y1, z1) and (x2, y2, z2).
+                static float get_closest_visible_ground_dest_z_towards(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            // Coordinate-centric path and map information callbacks.
-            // The conditions for returning `true` match the conditions of the corresponding allied-movable-centric callbacks.
+                // This method returns `true` if complete path is visible, `false` otherwise.
+                static bool is_complete_ground_path_visible(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static bool is_line_of_sight_between_from(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static bool is_complete_rail_path_visible(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static bool may_have_line_of_sight_between(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static bool is_complete_air_path_visible(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static bool is_ground_path_known_between(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static bool is_complete_ballistic_path_visible(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static bool is_rail_path_known_between(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                // These methods return the coordinates of the point closest to `movable` from which there is known ballistic path to (x, y, z).
+                static float get_nearest_known_ballistic_launch_site_x(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static bool is_air_path_known_between(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static float get_nearest_known_ballistic_launch_site_y(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static bool is_ballistic_path_known(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static float get_nearest_known_ballistic_launch_site_z(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static bool may_have_ballistic_path_between(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                // These methods return the coordinates of the point closest to `movable` from which there may be a ballistic path to (x, y, z).
+                static float get_nearest_possible_ballistic_launch_site_x(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static float get_nearest_known_ballistic_launch_site_x(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static float get_nearest_possible_ballistic_launch_site_y(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static float get_nearest_known_ballistic_launch_site_y(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static float get_nearest_possible_ballistic_launch_site_z(
+                        const Movable* movable,
+                        float x,
+                        float y,
+                        float z);
 
-            static float get_nearest_known_ballistic_launch_site_z(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                // This method returns `true` if there is known line of sight between (x1, y1, z1) and (x2, y2, z2).
 
-            static float get_nearest_possible_ballistic_launch_site_x(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                // Coordinate-centric path and map information callbacks.
+                // The conditions for returning `true` match the conditions of the corresponding allied-movable-centric callbacks.
 
-            static float get_nearest_possible_ballistic_launch_site_y(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static bool is_line_of_sight_between_from(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
 
-            static float get_nearest_possible_ballistic_launch_site_z(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static bool may_have_line_of_sight_between(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
 
-            static float get_closest_visible_dest_x_towards(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static bool is_ground_path_known_between(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
 
-            static float get_closest_visible_dest_y_towards(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static bool is_rail_path_known_between(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
 
-            static float get_closest_visible_dest_z_towards(
-                    float x1,
-                    float y1,
-                    float z1,
-                    float x2,
-                    float y2,
-                    float z2);
+                static bool is_air_path_known_between(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
 
-            // Callbacks for looping through movables.
-            static void* get_first_allied_movable(Movable& movable);       // point `allied_iterator` to the first movable, `nullptr` if N/A.
-            static void* get_next_allied_movable(Movable& movable);        // advance `allied_iterator`, `nullptr` if N/A.
-            static void* get_first_other_allied_movable(Movable& movable); // point `allied_other_iterator` to the first other movable, `nullptr` if N/A.
-            static void* get_next_other_allied_movable(Movable& movable);  // advance `allied_other_iterator`, `nullptr` if N/A.
-            static void* get_first_opponent_movable(Movable& movable);     // point `opponent_iterator` to the first opponent, `nullptr` if N/A.
-            static void* get_next_opponent_movable(Movable& movable);      // advance `opponent_iterator`, `nullptr` if N/A.
+                static bool is_ballistic_path_known(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
 
-            // Public callbacks end here.
+                static bool may_have_ballistic_path_between(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
+
+                static float get_nearest_known_ballistic_launch_site_x(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
+
+                static float get_nearest_known_ballistic_launch_site_y(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
+
+                static float get_nearest_known_ballistic_launch_site_z(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
+
+                static float get_nearest_possible_ballistic_launch_site_x(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
+
+                static float get_nearest_possible_ballistic_launch_site_y(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
+
+                static float get_nearest_possible_ballistic_launch_site_z(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
+
+                static float get_closest_visible_dest_x_towards(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
+
+                static float get_closest_visible_dest_y_towards(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
+
+                static float get_closest_visible_dest_z_towards(
+                        float x1,
+                        float y1,
+                        float z1,
+                        float x2,
+                        float y2,
+                        float z2);
+
+                // Callbacks for looping through movables.
+                static void* get_first_allied_movable(Movable& movable);
+
+                // point `allied_iterator` to the first movable, `nullptr` if N/A.
+                static void* get_next_allied_movable(Movable& movable); // advance `allied_iterator`, `nullptr` if N/A.
+                static void* get_first_other_allied_movable(Movable& movable);
+
+                // point `allied_other_iterator` to the first other movable, `nullptr` if N/A.
+                static void* get_next_other_allied_movable(Movable& movable);
+
+                // advance `allied_other_iterator`, `nullptr` if N/A.
+                static void* get_first_opponent_movable(Movable& movable);
+
+                // point `opponent_iterator` to the first opponent, `nullptr` if N/A.
+                static void* get_next_opponent_movable(Movable& movable);
+
+                // advance `opponent_iterator`, `nullptr` if N/A.
+
+                // Public callbacks end here.
 
         private:
-            void create_coordinate_and_angle_variables();
+                void create_coordinate_and_angle_variables();
 
         public:
-            ApprenticeModule apprentice_of_movable_controller;
+                ApprenticeModule apprentice_of_movable_controller;
 
         private:
-            RigidBodyModule rigid_body_module;
+                RigidBodyModule rigid_body_module;
 
         public:
-            std::vector<glm::vec3> initial_rotate_vectors;
-            std::vector<float> initial_rotate_angles;
+                std::vector<glm::vec3> initial_rotate_vectors;
+                std::vector<float> initial_rotate_angles;
 
-            glm::vec3 original_scale_vector { glm::vec3(1.0f, 1.0f, 1.0f) };
+                glm::vec3 original_scale_vector { glm::vec3(1.0f, 1.0f, 1.0f) };
 
-            // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
-            CartesianCoordinatesModule location;
+                // `cartesian_coordinates` can be accessed as a vector or as single coordinates `x`, `y`, `z`.
+                CartesianCoordinatesModule location;
 
-            glm::vec3 dest_cartesian_coordinates {};                  // cartesian destination coordinates.
+                glm::vec3 dest_cartesian_coordinates {}; // cartesian destination coordinates.
 
-            // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
-            glm::vec3 direction { glm::vec3(NAN, NAN, NAN) };
+                // `direction` can be accessed as a vector or as single coordinates `pitch`, `roll`, `yaw`.
+                glm::vec3 direction { glm::vec3(NAN, NAN, NAN) };
 
-            glm::vec3 right { glm::vec3(NAN, NAN, NAN) };          // note: can not be set directly using console.
-            glm::vec3 up { glm::vec3(NAN, NAN, NAN) };             // note: can not be set directly using console.
+                glm::vec3 right { glm::vec3(NAN, NAN, NAN) }; // note: can not be set directly using console.
+                glm::vec3 up { glm::vec3(NAN, NAN, NAN) }; // note: can not be set directly using console.
 
-            OrientationModule orientation;
+                OrientationModule orientation;
 
-            float scale { 1.0f };
-            float speed { 1.0f };
+                float scale { 1.0f };
+                float speed { 1.0f };
 
-            // The rest fields are created in the constructor.
-            glm::mat4 model_matrix { glm::mat4(1.0f) };            // model matrix (initialized with dummy value).
-            glm::mat4 mvp_matrix { glm::mat4(1.0f) };              // model view projection matrix (initialized with dummy value).
+                // The rest fields are created in the constructor.
+                glm::mat4 model_matrix { glm::mat4(1.0f) }; // model matrix (initialized with dummy value).
+                glm::mat4 mvp_matrix { glm::mat4(1.0f) };
+                // model view projection matrix (initialized with dummy value).
 
-            GLuint movable_uniform_block { 0 };
+                GLuint movable_uniform_block { 0 };
 
-            // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
-            // If `input_method` is `MOVABLE_CONTROLLER`, then the chosen `MovableController` controls this `Movable`.
-            yli::input::InputMethod input_method;
-    };
+                // If `input_method` is `KEYBOARD`, then keypresses control this `Movable`.
+                // If `input_method` is `MOVABLE_CONTROLLER`, then the chosen `MovableController` controls this `Movable`.
+                yli::input::InputMethod input_method;
+        };
 }
 
 #endif
