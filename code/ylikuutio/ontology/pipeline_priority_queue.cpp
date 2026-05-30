@@ -20,7 +20,7 @@
 #include "pipeline_compare.hpp"
 
 // Include standard headers
-#include <algorithm> // std::make_heap etc.
+#include <algorithm> // std::ranges::make_heap etc.
 #include <cstddef>   // std::size_t
 
 namespace yli::ontology
@@ -39,7 +39,7 @@ namespace yli::ontology
             if ((*it)->get_childID() == childID)
             {
                 this->c.erase(it);
-                std::make_heap(this->c.begin(), this->c.end(), PipelineCompare());
+                std::ranges::make_heap(this->c, PipelineCompare());
                 return true;
             }
         }
