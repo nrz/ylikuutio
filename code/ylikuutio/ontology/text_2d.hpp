@@ -70,7 +70,7 @@ namespace yli::ontology
             Text2d(const Text2d&) = delete;            // Delete copy constructor.
             Text2d& operator=(const Text2d&) = delete; // Delete copy assignment.
 
-            void render();
+            void render() const;
 
             Entity* get_parent() const override;
 

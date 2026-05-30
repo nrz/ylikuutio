@@ -122,7 +122,7 @@ namespace yli::ontology
         }
     }
 
-    void Text2d::render()
+    void Text2d::render() const
     {
         PrintTextStruct text_struct { this->universe.get_font_size(), this->universe.get_window_width() / this->universe.get_font_size() };
         text_struct.position = this->position;
