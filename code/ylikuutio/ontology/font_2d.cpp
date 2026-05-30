@@ -282,7 +282,7 @@ namespace yli::ontology
             return;
         }
 
-        yli::render::RenderSystem& render_system = this->universe.get_render_system();
+        render::RenderSystem& render_system = this->universe.get_render_system();
 
         this->prepare_to_print();
         render_system.render_text_2ds(this->parent_of_text_2ds);
