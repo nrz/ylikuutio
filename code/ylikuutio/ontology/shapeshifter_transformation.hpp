@@ -39,7 +39,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -54,61 +54,62 @@ namespace yli::ontology
 
     class ShapeshifterTransformation final : public Entity
     {
-        public:
-            // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
-            // and request a new childID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_material_parent(
-                    ShapeshifterTransformation& shapeshifter_transformation,
-                    Material& new_parent);
+    public:
+        // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_material_parent(
+            ShapeshifterTransformation& shapeshifter_transformation,
+            Material& new_parent);
 
-        private:
-            ShapeshifterTransformation(
-                    core::Application& application,
-                    Universe& universe,
-                    const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
-                    GenericParentModule* material_parent_module);
+    private:
+        ShapeshifterTransformation(
+            core::Application& application,
+            Universe& universe,
+            const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
+            GenericParentModule* material_parent_module);
 
-            ~ShapeshifterTransformation() override = default;
+        ~ShapeshifterTransformation() override = default;
 
-        public:
-            Entity* get_parent() const override;
+    public:
+        Entity* get_parent() const override;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            ChildModule child_of_material;
-            GenericParentModule parent_of_shapeshifter_forms;
-            GenericParentModule parent_of_shapeshifter_sequences;
+        ChildModule child_of_material;
+        GenericParentModule parent_of_shapeshifter_forms;
+        GenericParentModule parent_of_shapeshifter_sequences;
 
-        private:
-            void bind_to_parent() noexcept;
+    private:
+        void bind_to_parent() noexcept;
 
-        public:
-            Scene* get_scene() const override;
+    public:
+        Scene* get_scene() const override;
 
-            Pipeline* get_pipeline() const;
+        Pipeline* get_pipeline() const;
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        std::size_t get_number_of_children() const override;
 
-        private:
-            void render(const Scene* target_scene);
+        std::size_t get_number_of_descendants() const override;
+
+    private:
+        void render(const Scene* target_scene);
     };
 
     template<>
-        inline GenericParentModule* ShapeshifterTransformation::get_generic_parent_module<ShapeshifterForm>()
-        {
-            return &this->parent_of_shapeshifter_forms;
-        }
+    inline GenericParentModule* ShapeshifterTransformation::get_generic_parent_module<ShapeshifterForm>()
+    {
+        return &this->parent_of_shapeshifter_forms;
+    }
 
     template<>
-        inline GenericParentModule* ShapeshifterTransformation::get_generic_parent_module<ShapeshifterSequence>()
-        {
-            return &this->parent_of_shapeshifter_sequences;
-        }
+    inline GenericParentModule* ShapeshifterTransformation::get_generic_parent_module<ShapeshifterSequence>()
+    {
+        return &this->parent_of_shapeshifter_sequences;
+    }
 }
 
 #endif

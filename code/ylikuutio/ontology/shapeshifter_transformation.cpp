@@ -44,8 +44,8 @@ namespace yli::ontology
     class Pipeline;
 
     std::optional<data::AnyValue> ShapeshifterTransformation::bind_to_new_material_parent(
-            ShapeshifterTransformation& shapeshifter_transformation,
-            Material& new_parent)
+        ShapeshifterTransformation& shapeshifter_transformation,
+        Material& new_parent)
     {
         // Set pointer to `shapeshifter_transformation` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -54,36 +54,38 @@ namespace yli::ontology
 
         if (material_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `material_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: `material_parent` is `nullptr`!");
         }
 
         if (new_parent.has_child(shapeshifter_transformation.local_name))
         {
-            std::cerr << "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: local name is already in use!\n";
+            std::cerr <<
+                    "ERROR: `ShapeshifterTransformation::bind_to_new_material_parent`: local name is already in use!\n";
             return std::nullopt;
         }
 
         shapeshifter_transformation.child_of_material.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_shapeshifter_transformations);
+            &new_parent.parent_of_shapeshifter_transformations);
 
         return std::nullopt;
     }
 
     ShapeshifterTransformation::ShapeshifterTransformation(
-            core::Application& application,
-            Universe& universe,
-            const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
-            GenericParentModule* const material_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
+        GenericParentModule* const material_parent_module)
         : Entity(application, universe, shapeshifter_transformation_struct),
-        child_of_material(material_parent_module, *this),
-        parent_of_shapeshifter_forms(
-                *this,
-                this->registry,
-                "shapeshifter_forms"),
-        parent_of_shapeshifter_sequences(
-                *this,
-                this->registry,
-                "shapeshifter_sequences")
+          child_of_material(material_parent_module, *this),
+          parent_of_shapeshifter_forms(
+              *this,
+              this->registry,
+              "shapeshifter_forms"),
+          parent_of_shapeshifter_sequences(
+              *this,
+              this->registry,
+              "shapeshifter_sequences")
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ShapeshifterTransformation*";
@@ -135,7 +137,8 @@ namespace yli::ontology
 
         if (material_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `ShapeshifterTransformation::get_pipeline`: `material_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `ShapeshifterTransformation::get_pipeline`: `material_parent` is `nullptr`!");
         }
 
         return material_parent->get_pipeline();
@@ -144,12 +147,12 @@ namespace yli::ontology
     std::size_t ShapeshifterTransformation::get_number_of_children() const
     {
         return this->parent_of_shapeshifter_forms.get_number_of_children() +
-            this->parent_of_shapeshifter_sequences.get_number_of_children();
+               this->parent_of_shapeshifter_sequences.get_number_of_children();
     }
 
     std::size_t ShapeshifterTransformation::get_number_of_descendants() const
     {
         return ontology::get_number_of_descendants(this->parent_of_shapeshifter_forms.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_shapeshifter_sequences.child_pointer_vector);
+               ontology::get_number_of_descendants(this->parent_of_shapeshifter_sequences.child_pointer_vector);
     }
 }
