@@ -177,9 +177,7 @@ namespace yli::ontology
 
         this->model_matrix = glm::mat4(1.0f);
 
-        Species* const species = static_cast<Species*>(this->apprentice_of_species.get_master());
-
-        if (species == nullptr) [[unlikely]]
+        if (const auto species = static_cast<Species*>(this->apprentice_of_species.get_master()); species == nullptr) [[unlikely]]
         {
             return;
         }
@@ -412,7 +410,7 @@ namespace yli::ontology
         const float float_yaw = std::get<float>(yaw_any_value.data);
         const float float_pitch = std::get<float>(pitch_any_value.data);
 
-        ObjectStruct object_struct { Request<Scene>(&parent) };
+        ObjectStruct object_struct { Request(&parent) };
         object_struct.species_master = Request(&species);
         object_struct.cartesian_coordinates = CartesianCoordinatesModule(float_x, float_y, float_z);
         object_struct.orientation = OrientationModule(float_roll, float_yaw, float_pitch);
