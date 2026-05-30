@@ -40,8 +40,8 @@ namespace yli::ontology
     class Pipeline;
 
     std::optional<data::AnyValue> Text3d::bind_to_new_scene_parent(
-            Text3d& text_3d,
-            Scene& new_parent)
+        Text3d& text_3d,
+        Scene& new_parent)
     {
         // Disable all `GlyphObject`s of `text_3d`,
         // set `parent` according to the input, request a new childID
@@ -64,14 +64,14 @@ namespace yli::ontology
         }
 
         text_3d.child_of_scene.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_text_3ds);
+            &new_parent.parent_of_text_3ds);
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> Text3d::bind_to_new_vector_font_master(
-            Text3d& text_3d,
-            VectorFont& new_master)
+        Text3d& text_3d,
+        VectorFont& new_master)
     {
         // Disable all `GlyphObject`s of `text_3d`,
         // set `master` according to the input, request a new apprenticeID
@@ -80,9 +80,11 @@ namespace yli::ontology
         // TODO: implement creation and enabling the `GlyphObject`s!
         // Note: different fonts may provide glyphs for different Unicode code points!
 
-        if (VectorFont* const vector_font_master = text_3d.get_vector_font_master(); vector_font_master == nullptr) [[unlikely]]
+        if (VectorFont* const vector_font_master = text_3d.get_vector_font_master(); vector_font_master == nullptr)
+        [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Text3d::bind_to_new_vector_font_master`: `vector_font_master` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `Text3d::bind_to_new_vector_font_master`: `vector_font_master` is `nullptr`!");
         }
 
         if (new_master.has_child(text_3d.local_name))
@@ -92,26 +94,26 @@ namespace yli::ontology
         }
 
         text_3d.apprentice_of_vector_font.unbind_and_bind_to_new_generic_master_module(
-                &new_master.master_of_text_3ds);
+            &new_master.master_of_text_3ds);
 
         return std::nullopt;
     }
 
     Text3d::Text3d(
-            core::Application& application,
-            Universe& universe,
-            const Text3dStruct& text_3d_struct,
-            GenericParentModule* const scene_parent_module,
-            GenericMasterModule* const movable_controller_master_module,
-            GenericMasterModule* const vector_font_master_module)
+        core::Application& application,
+        Universe& universe,
+        const Text3dStruct& text_3d_struct,
+        GenericParentModule* const scene_parent_module,
+        GenericMasterModule* const movable_controller_master_module,
+        GenericMasterModule* const vector_font_master_module)
         : Movable(
-                application,
-                universe,
-                text_3d_struct,
-                movable_controller_master_module),
-        child_of_scene(scene_parent_module, *this),
-        apprentice_of_vector_font(vector_font_master_module, this),
-        master_of_glyph_objects(*this, &this->registry, "glyph_objects")
+              application,
+              universe,
+              text_3d_struct,
+              movable_controller_master_module),
+          child_of_scene(scene_parent_module, *this),
+          apprentice_of_vector_font(vector_font_master_module, this),
+          master_of_glyph_objects(*this, &this->registry, "glyph_objects")
     {
         // TODO: `Text3d` constructor also creates each `GlyphObject`,
         // and binds each to its corresponding `Glyph` for rendering hierarchy,

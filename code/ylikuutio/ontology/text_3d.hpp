@@ -49,69 +49,70 @@ namespace yli::ontology
 
     class Text3d final : public Movable
     {
-        public:
-            // Disable all `GlyphObject`s of `text_3d`,
-            // set `parent` according to the input, request a new childID
-            // from the `new_parent`, and create and enable the needed
-            // `GlyphObject`s of `text_3d`.
-            // TODO: implement creation and enabling the `GlyphObject`s!
-            // Note: different fonts may provide glyphs for different Unicode code points!
-            static std::optional<data::AnyValue> bind_to_new_scene_parent(
-                    Text3d& text_3d,
-                    Scene& new_parent);
+    public:
+        // Disable all `GlyphObject`s of `text_3d`,
+        // set `parent` according to the input, request a new childID
+        // from the `new_parent`, and create and enable the needed
+        // `GlyphObject`s of `text_3d`.
+        // TODO: implement creation and enabling the `GlyphObject`s!
+        // Note: different fonts may provide glyphs for different Unicode code points!
+        static std::optional<data::AnyValue> bind_to_new_scene_parent(
+            Text3d& text_3d,
+            Scene& new_parent);
 
-            // Disable all `GlyphObject`s of `text_3d`,
-            // set `master` according to the input, request a new childID
-            // from the `new_master`, and create and enable the needed
-            // `GlyphObject`s of `text_3d`.
-            // TODO: implement creation and enabling the `GlyphObject`s!
-            // Note: different fonts may provide glyphs for different Unicode code points!
-            static std::optional<data::AnyValue> bind_to_new_vector_font_master(
-                    Text3d& text_3d,
-                    VectorFont& new_master);
+        // Disable all `GlyphObject`s of `text_3d`,
+        // set `master` according to the input, request a new childID
+        // from the `new_master`, and create and enable the needed
+        // `GlyphObject`s of `text_3d`.
+        // TODO: implement creation and enabling the `GlyphObject`s!
+        // Note: different fonts may provide glyphs for different Unicode code points!
+        static std::optional<data::AnyValue> bind_to_new_vector_font_master(
+            Text3d& text_3d,
+            VectorFont& new_master);
 
-            Text3d(
-                    core::Application& application,
-                    Universe& universe,
-                    const Text3dStruct& text_3d_struct,
-                    GenericParentModule* scene_parent_module,
-                    GenericMasterModule* movable_controller_master_module,
-                    GenericMasterModule* vector_font_master_module);
+        Text3d(
+            core::Application& application,
+            Universe& universe,
+            const Text3dStruct& text_3d_struct,
+            GenericParentModule* scene_parent_module,
+            GenericMasterModule* movable_controller_master_module,
+            GenericMasterModule* vector_font_master_module);
 
-            ~Text3d() override = default;
+        ~Text3d() override = default;
 
-            Text3d(const Text3d&) = delete;            // Delete copy constructor.
-            Text3d& operator=(const Text3d&) = delete; // Delete copy assignment.
+        Text3d(const Text3d&) = delete; // Delete copy constructor.
+        Text3d& operator=(const Text3d&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            Scene* get_scene() const override;
+        Scene* get_scene() const override;
 
-            Pipeline* get_pipeline() const;
+        Pipeline* get_pipeline() const;
 
-            VectorFont* get_vector_font_master() const;
+        VectorFont* get_vector_font_master() const;
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
 
-            friend void create_glyph_objects(const std::string& text_string, Text3d& text_3d);
+        friend void create_glyph_objects(const std::string& text_string, Text3d& text_3d);
 
-            ChildModule child_of_scene;
-            ApprenticeModule apprentice_of_vector_font;
-            GenericMasterModule master_of_glyph_objects;
+        ChildModule child_of_scene;
+        ApprenticeModule apprentice_of_vector_font;
+        GenericMasterModule master_of_glyph_objects;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        std::size_t get_number_of_children() const override;
 
-        private:
-            std::string text_string;
+        std::size_t get_number_of_descendants() const override;
+
+    private:
+        std::string text_string;
     };
 
     template<>
-        inline GenericMasterModule* Text3d::get_generic_master_module<GlyphObject>()
-        {
-            return &this->master_of_glyph_objects;
-        }
+    inline GenericMasterModule* Text3d::get_generic_master_module<GlyphObject>()
+    {
+        return &this->master_of_glyph_objects;
+    }
 }
 
 #endif
