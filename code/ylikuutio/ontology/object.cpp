@@ -196,7 +196,7 @@ namespace yli::ontology
 
         this->model_matrix = glm::scale(this->model_matrix, this->scale * this->original_scale_vector);
         const glm::vec3 euler_angles { this->orientation.roll, -this->orientation.pitch, this->orientation.yaw };
-        const glm::quat my_quaternion = glm::quat(euler_angles);
+        const auto my_quaternion = glm::quat(euler_angles);
         const glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
         this->model_matrix = rotation_matrix * this->model_matrix;
         this->model_matrix[3][0] = this->location.get_x();
