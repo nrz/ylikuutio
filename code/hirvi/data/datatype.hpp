@@ -70,8 +70,6 @@ namespace hirvi
         VARIABLE            = 120,
         // `yli::ontology` datatypes, 'callback' path.
         GENERIC_CALLBACK_ENGINE    = 121,
-        GENERIC_CALLBACK_OBJECT    = 122,
-        GENERIC_CALLBACK_PARAMETER = 123,
         CALLBACK_ENGINE     = 124,
         CALLBACK_OBJECT     = 125,
         CALLBACK_PARAMETER  = 126,
