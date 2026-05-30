@@ -46,7 +46,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -61,81 +61,83 @@ namespace yli::ontology
 
     class VectorFont final : public Entity
     {
-        public:
-            // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
-            // and request a new childID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_material_parent(
-                    VectorFont& vector_font,
-                    Material& new_parent);
+    public:
+        // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_material_parent(
+            VectorFont& vector_font,
+            Material& new_parent);
 
-        private:
-            VectorFont(
-                    core::Application& application,
-                    Universe& universe,
-                    const VectorFontStruct& vector_font_struct,
-                    GenericParentModule* material_parent_module);
+    private:
+        VectorFont(
+            core::Application& application,
+            Universe& universe,
+            const VectorFontStruct& vector_font_struct,
+            GenericParentModule* material_parent_module);
 
-            ~VectorFont() override = default;
+        ~VectorFont() override = default;
 
-        public:
-            VectorFont(const VectorFont&) = delete;            // Delete copy constructor.
-            VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
+    public:
+        VectorFont(const VectorFont&) = delete; // Delete copy constructor.
+        VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
-            // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
-            Glyph* get_glyph_pointer(std::int32_t unicode_value) const;
+        // This method returns a pointer to `Glyph` that matches the given `unicode_value`,
+        // and `nullptr` if this `VectorFont` does not contain such a `Glyph`.
+        Glyph* get_glyph_pointer(std::int32_t unicode_value) const;
 
-            // The rest fields are created in the constructor.
+        // The rest fields are created in the constructor.
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            ChildModule child_of_material;
-            GenericParentModule parent_of_glyphs;
-            GenericMasterModule master_of_text_3ds;
+        ChildModule child_of_material;
+        GenericParentModule parent_of_glyphs;
+        GenericMasterModule master_of_text_3ds;
 
-            Scene* get_scene() const override;
-            Pipeline* get_pipeline() const;
+        Scene* get_scene() const override;
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        Pipeline* get_pipeline() const;
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
 
-            // This method renders all `Glyph`s of this `VectorFont`.
-            void render(const Scene* target_scene);
+        std::size_t get_number_of_children() const override;
 
-        private:
-            std::string font_file_format; // Type of the model file, eg. `"png"`.
-            std::string font_filename;    // Filename of the model file.
-            float vertex_scaling_factor;
+        std::size_t get_number_of_descendants() const override;
 
-            std::vector<std::vector<std::vector<glm::vec2>>> glyph_vertex_data;
-            std::vector<std::vector<glm::vec2>> glyph_uv_data;
-            std::vector<std::vector<glm::vec2>> glyph_normal_data;
-            std::vector<std::string> glyph_names;
-            std::vector<std::string> unicode_strings;
+        // This method renders all `Glyph`s of this `VectorFont`.
+        void render(const Scene* target_scene);
 
-            std::unordered_map<std::int32_t, Glyph*> unicode_glyph_map;
+    private:
+        std::string font_file_format; // Type of the model file, eg. `"png"`.
+        std::string font_filename; // Filename of the model file.
+        float vertex_scaling_factor;
+
+        std::vector<std::vector<std::vector<glm::vec2>>> glyph_vertex_data;
+        std::vector<std::vector<glm::vec2>> glyph_uv_data;
+        std::vector<std::vector<glm::vec2>> glyph_normal_data;
+        std::vector<std::string> glyph_names;
+        std::vector<std::string> unicode_strings;
+
+        std::unordered_map<std::int32_t, Glyph*> unicode_glyph_map;
     };
 
     template<>
-        inline GenericParentModule* VectorFont::get_generic_parent_module<Glyph>()
-        {
-            return &this->parent_of_glyphs;
-        }
+    inline GenericParentModule* VectorFont::get_generic_parent_module<Glyph>()
+    {
+        return &this->parent_of_glyphs;
+    }
 
     template<>
-        inline GenericMasterModule* VectorFont::get_generic_master_module<Text3d>()
-        {
-            return &this->master_of_text_3ds;
-        }
+    inline GenericMasterModule* VectorFont::get_generic_master_module<Text3d>()
+    {
+        return &this->master_of_text_3ds;
+    }
 }
 
 #endif

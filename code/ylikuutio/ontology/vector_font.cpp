@@ -49,15 +49,17 @@ namespace yli::ontology
     class Glyph;
 
     std::optional<data::AnyValue> VectorFont::bind_to_new_material_parent(
-            VectorFont& vector_font,
-            Material& new_parent)
+        VectorFont& vector_font,
+        Material& new_parent)
     {
         // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        if (const Material* const material_parent = static_cast<Material*>(vector_font.get_parent()); material_parent == nullptr) [[unlikely]]
+        if (const Material* const material_parent = static_cast<Material*>(vector_font.get_parent());
+            material_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `VectorFont::bind_to_new_material_parent`: `material_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `VectorFont::bind_to_new_material_parent`: `material_parent` is `nullptr`!");
         }
 
         if (new_parent.has_child(vector_font.local_name))
@@ -84,26 +86,26 @@ namespace yli::ontology
     }
 
     VectorFont::VectorFont(
-            core::Application& application,
-            Universe& universe,
-            const VectorFontStruct& vector_font_struct,
-            GenericParentModule* const material_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const VectorFontStruct& vector_font_struct,
+        GenericParentModule* const material_parent_module)
         : Entity(application, universe, vector_font_struct),
-        child_of_material(material_parent_module, *this),
-        parent_of_glyphs(
-                *this,
-                this->registry,
-                "glyphs"),
-        master_of_text_3ds(
-                *this,
-                &this->registry,
-                "text_3ds"),
-        font_file_format      { vector_font_struct.font_file_format },
-        font_filename         { vector_font_struct.font_filename },
-        vertex_scaling_factor { vector_font_struct.vertex_scaling_factor }
+          child_of_material(material_parent_module, *this),
+          parent_of_glyphs(
+              *this,
+              this->registry,
+              "glyphs"),
+          master_of_text_3ds(
+              *this,
+              &this->registry,
+              "text_3ds"),
+          font_file_format { vector_font_struct.font_file_format },
+          font_filename { vector_font_struct.font_filename },
+          vertex_scaling_factor { vector_font_struct.vertex_scaling_factor }
     {
-        this->can_be_erased         = true;
-        bool font_loading_result    = false;
+        this->can_be_erased = true;
+        bool font_loading_result = false;
 
         if (this->font_file_format == "svg" || this->font_file_format == "SVG")
         {
@@ -137,7 +139,8 @@ namespace yli::ontology
                 const char* unicode_char_pointer = this->unicode_strings.at(glyph_i).c_str();
                 const char* temp_unicode_char_pointer = unicode_char_pointer;
 
-                std::optional<std::int32_t> unicode_value = yli::string::extract_unicode_value_from_string(temp_unicode_char_pointer);
+                std::optional<std::int32_t> unicode_value = yli::string::extract_unicode_value_from_string(
+                    temp_unicode_char_pointer);
 
                 if (!unicode_value.has_value())
                 {
@@ -153,8 +156,9 @@ namespace yli::ontology
                 }
 
                 GlyphStruct glyph_struct {
-                        Request(this),
-                        Request(material_parent) };
+                    Request(this),
+                    Request(material_parent)
+                };
                 glyph_struct.glyph_vertex_data = &this->glyph_vertex_data.at(glyph_i);
                 glyph_struct.glyph_name_pointer = this->glyph_names.at(glyph_i).c_str();
                 glyph_struct.unicode_char_pointer = unicode_char_pointer;
@@ -171,7 +175,6 @@ namespace yli::ontology
                 this->unicode_glyph_map[*unicode_value] = glyph;
             }
         }
-
     }
 
     void VectorFont::render(const Scene* const target_scene)
