@@ -80,9 +80,7 @@ namespace yli::ontology
         // TODO: implement creation and enabling the `GlyphObject`s!
         // Note: different fonts may provide glyphs for different Unicode code points!
 
-        VectorFont* const vector_font_master = text_3d.get_vector_font_master();
-
-        if (vector_font_master == nullptr) [[unlikely]]
+        if (VectorFont* const vector_font_master = text_3d.get_vector_font_master(); vector_font_master == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Text3d::bind_to_new_vector_font_master`: `vector_font_master` is `nullptr`!");
         }
