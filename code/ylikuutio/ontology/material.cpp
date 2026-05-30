@@ -48,8 +48,8 @@ namespace yli::ontology
     class Entity;
 
     std::optional<data::AnyValue> Material::bind_to_new_ecosystem_parent(
-            Material& material,
-            Ecosystem& new_parent)
+        Material& material,
+        Ecosystem& new_parent)
     {
         // Set pointer to `Material` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -58,7 +58,8 @@ namespace yli::ontology
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Material::bind_to_new_ecosystem_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `Material::bind_to_new_ecosystem_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_ecosystem_or_scene_parent)
@@ -76,14 +77,14 @@ namespace yli::ontology
         // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
         // so binding to an `Ecosystem` does not unbind any apprentices.
         material.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_materials);
+            &new_parent.parent_of_materials);
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> Material::bind_to_new_scene_parent(
-            Material& material,
-            Scene& new_parent)
+        Material& material,
+        Scene& new_parent)
     {
         // Set pointer to `material` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -92,7 +93,8 @@ namespace yli::ontology
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Material::bind_to_new_scene_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `Material::bind_to_new_scene_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_ecosystem_or_scene_parent)
@@ -110,14 +112,14 @@ namespace yli::ontology
         material.master_of_species.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         material.apprentice_of_pipeline.unbind_from_any_master_belonging_to_other_scene(new_parent);
         material.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_materials);
+            &new_parent.parent_of_materials);
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> Material::bind_to_new_pipeline(
-            Material& material,
-            Pipeline& new_pipeline) noexcept
+        Material& material,
+        Pipeline& new_pipeline) noexcept
     {
         // Set pointer to `material` to `nullptr`, set pipeline according to the input,
         // and request a new apprenticeID from `new_parent`.
@@ -125,46 +127,47 @@ namespace yli::ontology
         // All apprentices of a master must belong to the same `Scene`
         // as the master if the master belongs to some `Scene`.
         if (material.get_scene() == new_pipeline.get_scene() ||
-                (new_pipeline.get_scene() == nullptr))
+            (new_pipeline.get_scene() == nullptr))
         {
             material.apprentice_of_pipeline.unbind_and_bind_to_new_generic_master_module(
-                    &new_pipeline.master_of_materials);
+                &new_pipeline.master_of_materials);
         }
         else
         {
-            std::cerr << "ERROR: `Material::bind_to_new_pipeline`: master and apprentice can not belong to different `Scene`s!\n";
+            std::cerr <<
+                    "ERROR: `Material::bind_to_new_pipeline`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
     }
 
     Material::Material(
-            core::Application& application,
-            Universe& universe,
-            const MaterialStruct& material_struct,
-            GenericParentModule* const ecosystem_or_scene_parent_module,
-            GenericMasterModule* const pipeline_master_module)
+        core::Application& application,
+        Universe& universe,
+        const MaterialStruct& material_struct,
+        GenericParentModule* const ecosystem_or_scene_parent_module,
+        GenericMasterModule* const pipeline_master_module)
         : Entity(application, universe, material_struct),
-        child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
-        parent_of_shapeshifter_transformations(
-                *this,
-                this->registry,
-                "shapeshifter_transformations"),
-        parent_of_vector_fonts(
-                *this,
-                this->registry,
-                "vector_fonts"),
-        apprentice_of_pipeline(pipeline_master_module, this),
-        master_of_species(*this, &this->registry, "species"),
-        master_of_symbiont_species(*this, &this->registry, "symbiont_species"),
-        master_of_glyphs(*this, &this->registry, "glyphs"),
-        texture(
-                universe,
-                &this->registry,
-                material_struct.texture_filename,
-                material_struct.texture_file_format,
-                load::ImageLoaderStruct(),
-                "texture")
+          child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
+          parent_of_shapeshifter_transformations(
+              *this,
+              this->registry,
+              "shapeshifter_transformations"),
+          parent_of_vector_fonts(
+              *this,
+              this->registry,
+              "vector_fonts"),
+          apprentice_of_pipeline(pipeline_master_module, this),
+          master_of_species(*this, &this->registry, "species"),
+          master_of_symbiont_species(*this, &this->registry, "symbiont_species"),
+          master_of_glyphs(*this, &this->registry, "glyphs"),
+          texture(
+              universe,
+              &this->registry,
+              material_struct.texture_filename,
+              material_struct.texture_file_format,
+              load::ImageLoaderStruct(),
+              "texture")
     {
         if (this->texture.get_is_texture_loaded() && this->get_pipeline() != nullptr)
         {
@@ -226,13 +229,13 @@ namespace yli::ontology
     std::size_t Material::get_number_of_children() const
     {
         return this->parent_of_shapeshifter_transformations.get_number_of_children() +
-            this->parent_of_vector_fonts.get_number_of_children();
+               this->parent_of_vector_fonts.get_number_of_children();
     }
 
     std::size_t Material::get_number_of_descendants() const
     {
         return ontology::get_number_of_descendants(this->parent_of_shapeshifter_transformations.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_vector_fonts.child_pointer_vector);
+               ontology::get_number_of_descendants(this->parent_of_vector_fonts.child_pointer_vector);
     }
 
     std::size_t Material::get_number_of_apprentices() const

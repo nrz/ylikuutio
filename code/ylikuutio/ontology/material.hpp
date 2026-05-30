@@ -42,7 +42,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -60,110 +60,116 @@ namespace yli::ontology
 
     class Material final : public Entity
     {
-        public:
-            // Set pointer to `material` to `nullptr`, set parent according to the input,
-            // and request a new childID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_ecosystem_parent(
-                    Material& material,
-                    Ecosystem& new_parent);
+    public:
+        // Set pointer to `material` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_ecosystem_parent(
+            Material& material,
+            Ecosystem& new_parent);
 
-            // Set pointer to `material` to `nullptr`, set parent according to the input,
-            // and request a new childID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_scene_parent(
-                    Material& material,
-                    Scene& new_parent);
+        // Set pointer to `material` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_scene_parent(
+            Material& material,
+            Scene& new_parent);
 
-            // Set pointer to `material` to `nullptr`, set pipeline according to the input,
-            // and request a new apprenticeID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_pipeline(
-                    Material& material,
-                    Pipeline& new_pipeline) noexcept;
+        // Set pointer to `material` to `nullptr`, set pipeline according to the input,
+        // and request a new apprenticeID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_pipeline(
+            Material& material,
+            Pipeline& new_pipeline) noexcept;
 
-        private:
-            Material(
-                    core::Application& application,
-                    Universe& universe,
-                    const MaterialStruct& material_struct,
-                    GenericParentModule* ecosystem_or_scene_parent_module,
-                    GenericMasterModule* pipeline_master_module);
+    private:
+        Material(
+            core::Application& application,
+            Universe& universe,
+            const MaterialStruct& material_struct,
+            GenericParentModule* ecosystem_or_scene_parent_module,
+            GenericMasterModule* pipeline_master_module);
 
-            ~Material() override = default;
+        ~Material() override = default;
 
-        public:
-            Material(const Material&) = delete;            // Delete copy constructor.
-            Material& operator=(const Material&) = delete; // Delete copy assignment.
+    public:
+        Material(const Material&) = delete; // Delete copy constructor.
+        Material& operator=(const Material&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
 
-            std::size_t get_number_of_apprentices() const;
+        std::size_t get_number_of_apprentices() const;
 
-            Pipeline* get_pipeline() const;
+        Pipeline* get_pipeline() const;
 
-            TextureFileFormat get_texture_file_format() const;
-            const std::string& get_texture_filename() const;
-            std::uint32_t get_image_width() const;
-            std::uint32_t get_image_height() const;
-            std::uint32_t get_image_size() const;
+        TextureFileFormat get_texture_file_format() const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        const std::string& get_texture_filename() const;
 
-            ChildModule child_of_ecosystem_or_scene;
-            GenericParentModule parent_of_shapeshifter_transformations;
-            GenericParentModule parent_of_vector_fonts;
-            ApprenticeModule apprentice_of_pipeline;
-            GenericMasterModule master_of_species;
-            GenericMasterModule master_of_symbiont_species;
-            GenericMasterModule master_of_glyphs;
-            TextureModule texture;
+        std::uint32_t get_image_width() const;
 
-        protected:
-            GLuint opengl_texture_id { 0 }; // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
+        std::uint32_t get_image_height() const;
 
-        public:
-            Scene* get_scene() const override;
+        std::uint32_t get_image_size() const;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            void render(const Scene* target_scene);
+        ChildModule child_of_ecosystem_or_scene;
+        GenericParentModule parent_of_shapeshifter_transformations;
+        GenericParentModule parent_of_vector_fonts;
+        ApprenticeModule apprentice_of_pipeline;
+        GenericMasterModule master_of_species;
+        GenericMasterModule master_of_symbiont_species;
+        GenericMasterModule master_of_glyphs;
+        TextureModule texture;
+
+    protected:
+        GLuint opengl_texture_id { 0 };
+        // Texture ID, returned by `glGetUniformLocation(program_id, "texture_sampler")`. Dummy value.
+
+    public:
+        Scene* get_scene() const override;
+
+        std::size_t get_number_of_children() const override;
+
+        std::size_t get_number_of_descendants() const override;
+
+        void render(const Scene* target_scene);
     };
 
     template<>
-        inline GenericParentModule* Material::get_generic_parent_module<ShapeshifterTransformation>()
-        {
-            return &this->parent_of_shapeshifter_transformations;
-        }
+    inline GenericParentModule* Material::get_generic_parent_module<ShapeshifterTransformation>()
+    {
+        return &this->parent_of_shapeshifter_transformations;
+    }
 
     template<>
-        inline GenericParentModule* Material::get_generic_parent_module<VectorFont>()
-        {
-            return &this->parent_of_vector_fonts;
-        }
+    inline GenericParentModule* Material::get_generic_parent_module<VectorFont>()
+    {
+        return &this->parent_of_vector_fonts;
+    }
 
     template<>
-        inline GenericMasterModule* Material::get_generic_master_module<Species>()
-        {
-            return &this->master_of_species;
-        }
+    inline GenericMasterModule* Material::get_generic_master_module<Species>()
+    {
+        return &this->master_of_species;
+    }
 
     template<>
-        inline GenericMasterModule* Material::get_generic_master_module<SymbiontSpecies>()
-        {
-            return &this->master_of_symbiont_species;
-        }
+    inline GenericMasterModule* Material::get_generic_master_module<SymbiontSpecies>()
+    {
+        return &this->master_of_symbiont_species;
+    }
 
     template<>
-        inline GenericMasterModule* Material::get_generic_master_module<Glyph>()
-        {
-            return &this->master_of_glyphs;
-        }
+    inline GenericMasterModule* Material::get_generic_master_module<Glyph>()
+    {
+        return &this->master_of_glyphs;
+    }
 }
 
 #endif
