@@ -50,7 +50,6 @@ namespace yli::ontology
 
     class ShapeshifterForm final : public Entity
     {
-    private:
         ShapeshifterForm(
             core::Application& application,
             Universe& universe,
