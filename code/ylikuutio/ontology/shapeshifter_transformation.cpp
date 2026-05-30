@@ -97,7 +97,7 @@ namespace yli::ontology
             return;
         }
 
-        Scene* const scene = this->get_scene();
+        const Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
@@ -119,7 +119,7 @@ namespace yli::ontology
 
     Scene* ShapeshifterTransformation::get_scene() const
     {
-        Entity* material_parent = this->get_parent();
+        const Entity* material_parent = this->get_parent();
 
         if (material_parent == nullptr) [[unlikely]]
         {
