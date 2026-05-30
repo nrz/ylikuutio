@@ -64,7 +64,7 @@ namespace yli::ontology
         }
     }
 
-    void InputMode::deactivate()
+    void InputMode::deactivate() const
     {
         // Only the active input mode may deactivate itself.
 

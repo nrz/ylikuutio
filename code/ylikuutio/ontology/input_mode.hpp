@@ -63,7 +63,7 @@ namespace yli::ontology
 
         public:
             void activate() override;
-            void deactivate();
+            void deactivate() const;
 
             GenericCallbackEngine* get_keypress_callback_engine(std::uint32_t keycode) const;
             GenericCallbackEngine* get_keyrelease_callback_engine(std::uint32_t keycode) const;
