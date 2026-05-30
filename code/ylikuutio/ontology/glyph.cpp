@@ -40,26 +40,26 @@ namespace yli::ontology
     class Pipeline;
 
     Glyph::Glyph(
-            core::Application& application,
-            Universe& universe,
-            const GlyphStruct& glyph_struct,
-            GenericParentModule* const vector_font_parent_module,
-            GenericMasterModule* const material_master_module)
+        core::Application& application,
+        Universe& universe,
+        const GlyphStruct& glyph_struct,
+        GenericParentModule* const vector_font_parent_module,
+        GenericMasterModule* const material_master_module)
         : Entity(application, universe, glyph_struct),
-        child_of_vector_font(vector_font_parent_module, *this),
-        apprentice_of_material(material_master_module, this),
-        master_of_glyph_objects(*this, &this->registry, "glyph_objects"),
-        mesh(universe, glyph_struct, this->get_pipeline()),
-        glyph_vertex_data    { glyph_struct.glyph_vertex_data },
-        glyph_name_pointer   { glyph_struct.glyph_name_pointer },
-        unicode_char_pointer { glyph_struct.unicode_char_pointer }
+          child_of_vector_font(vector_font_parent_module, *this),
+          apprentice_of_material(material_master_module, this),
+          master_of_glyph_objects(*this, &this->registry, "glyph_objects"),
+          mesh(universe, glyph_struct, this->get_pipeline()),
+          glyph_vertex_data { glyph_struct.glyph_vertex_data },
+          glyph_name_pointer { glyph_struct.glyph_name_pointer },
+          unicode_char_pointer { glyph_struct.unicode_char_pointer }
     {
         // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
         const bool should_load_texture =
-            this->universe.get_is_opengl_in_use() ||
-            this->universe.get_is_vulkan_in_use() ||
-            this->universe.get_is_software_rendering_in_use();
+                this->universe.get_is_opengl_in_use() ||
+                this->universe.get_is_vulkan_in_use() ||
+                this->universe.get_is_software_rendering_in_use();
 
         // FIXME: implement mesh loading!
 
@@ -87,7 +87,7 @@ namespace yli::ontology
     Pipeline* Glyph::get_pipeline() const
     {
         const Material* const material = static_cast<Material*>(
-                this->apprentice_of_material.get_master());
+            this->apprentice_of_material.get_master());
 
         if (material != nullptr)
         {

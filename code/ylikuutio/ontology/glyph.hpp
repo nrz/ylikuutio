@@ -42,7 +42,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -58,64 +58,65 @@ namespace yli::ontology
 
     class Glyph final : public Entity
     {
-            Glyph(
-                    core::Application& application,
-                    Universe& universe,
-                    const GlyphStruct& glyph_struct,
-                    GenericParentModule* vector_font_parent_module,
-                    GenericMasterModule* material_master_module);
+        Glyph(
+            core::Application& application,
+            Universe& universe,
+            const GlyphStruct& glyph_struct,
+            GenericParentModule* vector_font_parent_module,
+            GenericMasterModule* material_master_module);
 
-            // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
-            ~Glyph() override = default;
+        // `Glyph`s should be destroyed only by destroying the entire `VectorFont`.
+        ~Glyph() override = default;
 
-        public:
-            Entity* get_parent() const override;
+    public:
+        Entity* get_parent() const override;
 
-            const char* get_unicode_char_pointer() const;
+        const char* get_unicode_char_pointer() const;
 
-            friend class VectorFont;
+        friend class VectorFont;
 
-        private:
-            Glyph(const Glyph&) = delete;            // Delete copy constructor.
-            Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.
+    private:
+        Glyph(const Glyph&) = delete; // Delete copy constructor.
+        Glyph& operator=(const Glyph&) = delete; // Delete copy assignment.
 
-        public:
-            Scene* get_scene() const override;
+    public:
+        Scene* get_scene() const override;
 
-            Pipeline* get_pipeline() const;
+        Pipeline* get_pipeline() const;
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        std::size_t get_number_of_children() const override;
 
-            void render(const Scene* target_scene);
+        std::size_t get_number_of_descendants() const override;
 
-            GenericMasterModule* get_renderables_container();
+        void render(const Scene* target_scene);
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        GenericMasterModule* get_renderables_container();
 
-        private:
-            ChildModule child_of_vector_font;
-            ApprenticeModule apprentice_of_material;
-            GenericMasterModule master_of_glyph_objects;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-        public:
-            MeshModule mesh;
+    private:
+        ChildModule child_of_vector_font;
+        ApprenticeModule apprentice_of_material;
+        GenericMasterModule master_of_glyph_objects;
 
-        private:
-            std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr };
-            const char* glyph_name_pointer                         { nullptr };
-            const char* unicode_char_pointer                       { nullptr };
+    public:
+        MeshModule mesh;
+
+    private:
+        std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr };
+        const char* glyph_name_pointer { nullptr };
+        const char* unicode_char_pointer { nullptr };
     };
 
     template<>
-        inline GenericMasterModule* Glyph::get_generic_master_module<GlyphObject>()
-        {
-            return &this->master_of_glyph_objects;
-        }
+    inline GenericMasterModule* Glyph::get_generic_master_module<GlyphObject>()
+    {
+        return &this->master_of_glyph_objects;
+    }
 }
 
 #endif
