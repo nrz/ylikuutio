@@ -24,7 +24,6 @@
 
 namespace yli::ontology
 {
-    class Scene;
     class Movable;
     class Scene;
 
