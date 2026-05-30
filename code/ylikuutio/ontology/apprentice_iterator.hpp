@@ -93,9 +93,7 @@ namespace yli::ontology
 
             Entity* operator*() const
             {
-                ApprenticeModule* const apprentice_module = *(this->it);
-
-                if (apprentice_module != nullptr)
+                if (const ApprenticeModule* const apprentice_module = *(this->it); apprentice_module != nullptr)
                 {
                     return apprentice_module->get_apprentice();
                 }
