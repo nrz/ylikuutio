@@ -165,18 +165,15 @@ namespace yli::ontology
         {
             return print_text_struct.position.x;
         }
-        else if (print_text_struct.position.horizontal_alignment == HORIZONTAL_CENTER)
+        if (print_text_struct.position.horizontal_alignment == HORIZONTAL_CENTER)
         {
             return print_text_struct.position.x - 0.5f * length * text_size;
         }
-        else if (print_text_struct.position.horizontal_alignment == RIGHT)
+        if (print_text_struct.position.horizontal_alignment == RIGHT)
         {
             return print_text_struct.position.x - length * text_size;
         }
-        else
-        {
-            throw std::runtime_error("ERROR: `Font2d::compute_left_x`: invalid horizontal alignment!");
-        }
+        throw std::runtime_error("ERROR: `Font2d::compute_left_x`: invalid horizontal alignment!");
     }
 
     std::uint32_t Font2d::compute_top_y(const PrintTextStruct& print_text_struct) const
@@ -189,18 +186,15 @@ namespace yli::ontology
         {
             return print_text_struct.position.y;
         }
-        else if (print_text_struct.position.vertical_alignment == VERTICAL_CENTER)
+        if (print_text_struct.position.vertical_alignment == VERTICAL_CENTER)
         {
             return print_text_struct.position.y + 0.5f * number_of_lines * text_size;
         }
-        else if (print_text_struct.position.vertical_alignment == BOTTOM)
+        if (print_text_struct.position.vertical_alignment == BOTTOM)
         {
             return print_text_struct.position.y + number_of_lines * text_size;
         }
-        else
-        {
-            throw std::runtime_error("ERROR: `Font2d::compute_top_y`: invalid vertical alignment!");
-        }
+        throw std::runtime_error("ERROR: `Font2d::compute_top_y`: invalid vertical alignment!");
     }
 
     void Font2d::compute_and_store_glyph_vertices(
