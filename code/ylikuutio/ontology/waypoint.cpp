@@ -40,17 +40,17 @@ namespace yli::ontology
     }
 
     Waypoint::Waypoint(
-            core::Application& application,
-            Universe& universe,
-            const WaypointStruct& waypoint_struct,
-            GenericParentModule* const parent_module,
-            GenericMasterModule* const movable_controller_master_module)
+        core::Application& application,
+        Universe& universe,
+        const WaypointStruct& waypoint_struct,
+        GenericParentModule* const parent_module,
+        GenericMasterModule* const movable_controller_master_module)
         : Movable(
-                application,
-                universe,
-                waypoint_struct,
-                movable_controller_master_module),
-        child_of_scene(parent_module, *this)
+              application,
+              universe,
+              waypoint_struct,
+              movable_controller_master_module),
+          child_of_scene(parent_module, *this)
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Waypoint*";

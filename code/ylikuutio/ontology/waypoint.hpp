@@ -40,26 +40,28 @@ namespace yli::ontology
 
     class Waypoint final : public Movable
     {
-        public:
-            Waypoint(
-                    core::Application& application,
-                    Universe& universe,
-                    const WaypointStruct& waypoint_struct,
-                    GenericParentModule* parent_module,
-                    GenericMasterModule* movable_controller_master_module);
+    public:
+        Waypoint(
+            core::Application& application,
+            Universe& universe,
+            const WaypointStruct& waypoint_struct,
+            GenericParentModule* parent_module,
+            GenericMasterModule* movable_controller_master_module);
 
-            Waypoint(const Waypoint&) = delete;            // Delete copy constructor.
-            Waypoint &operator=(const Waypoint&) = delete; // Delete copy assignment.
+        Waypoint(const Waypoint&) = delete; // Delete copy constructor.
+        Waypoint& operator=(const Waypoint&) = delete; // Delete copy assignment.
 
-            ~Waypoint() override = default;
+        ~Waypoint() override = default;
 
-            Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        Entity* get_parent() const override;
 
-            Scene* get_scene() const override;
+        std::size_t get_number_of_children() const override;
 
-            ChildModule child_of_scene;
+        std::size_t get_number_of_descendants() const override;
+
+        Scene* get_scene() const override;
+
+        ChildModule child_of_scene;
     };
 }
 
