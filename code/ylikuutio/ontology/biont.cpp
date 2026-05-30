@@ -65,20 +65,20 @@ namespace yli::ontology
     class Scene;
 
     Biont::Biont(
-            core::Application& application,
-            Universe& universe,
-            const BiontStruct& biont_struct,
-            GenericParentModule* const holobiont_parent_module,
-            GenericMasterModule* const symbiont_species_master_module)
+        core::Application& application,
+        Universe& universe,
+        const BiontStruct& biont_struct,
+        GenericParentModule* const holobiont_parent_module,
+        GenericMasterModule* const symbiont_species_master_module)
         : Movable(
-                application,
-                universe,
-                biont_struct,
-                nullptr),
-        child_of_holobiont(holobiont_parent_module, *this),
-        apprentice_of_symbiont_species(symbiont_species_master_module, this)
+              application,
+              universe,
+              biont_struct,
+              nullptr),
+          child_of_holobiont(holobiont_parent_module, *this),
+          apprentice_of_symbiont_species(symbiont_species_master_module, this)
     {
-        this->biontID       = biont_struct.biontID;
+        this->biontID = biont_struct.biontID;
         this->should_render = biont_struct.should_render;
 
         // `Entity` member variables begin here.
@@ -137,11 +137,12 @@ namespace yli::ontology
 
         if (symbiosis_master_of_holobiont == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Biont::render_this_biont`: `symbiosis_master_of_holobiont` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `Biont::render_this_biont`: `symbiosis_master_of_holobiont` is `nullptr`!");
         }
 
         const SymbiontSpecies* const symbiont_species_master = static_cast<SymbiontSpecies*>(
-                this->apprentice_of_symbiont_species.get_master());
+            this->apprentice_of_symbiont_species.get_master());
 
         if (symbiont_species_master == nullptr) [[unlikely]]
         {
@@ -152,14 +153,19 @@ namespace yli::ontology
 
         if (this->initial_rotate_vectors.size() == this->initial_rotate_angles.size())
         {
-            for (std::size_t i = 0; i < this->initial_rotate_vectors.size() && i < this->initial_rotate_angles.size(); i++)
+            for (std::size_t i = 0; i < this->initial_rotate_vectors.size() && i < this->initial_rotate_angles.size();
+                 i++)
             {
-                this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angles[i], this->initial_rotate_vectors[i]);
+                this->model_matrix = glm::rotate(this->model_matrix, this->initial_rotate_angles[i],
+                                                 this->initial_rotate_vectors[i]);
             }
         }
 
-        this->model_matrix = glm::scale(this->model_matrix, holobiont_parent->get_scale() * this->original_scale_vector);
-        const glm::vec3 euler_angles { holobiont_parent->orientation.roll, -holobiont_parent->orientation.pitch, holobiont_parent->orientation.yaw };
+        this->model_matrix = glm::scale(this->model_matrix,
+                                        holobiont_parent->get_scale() * this->original_scale_vector);
+        const glm::vec3 euler_angles {
+            holobiont_parent->orientation.roll, -holobiont_parent->orientation.pitch, holobiont_parent->orientation.yaw
+        };
         const glm::quat my_quaternion = glm::quat(euler_angles);
         const glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
         this->model_matrix = rotation_matrix * this->model_matrix;
@@ -167,7 +173,8 @@ namespace yli::ontology
         this->model_matrix[3][1] = holobiont_parent->location.get_y();
         this->model_matrix[3][2] = holobiont_parent->location.get_z();
 
-        this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() * this->model_matrix;
+        this->mvp_matrix = this->universe.get_projection_matrix() * this->universe.get_view_matrix() *
+                           this->model_matrix;
 
         if (this->universe.get_is_opengl_in_use())
         {
@@ -200,58 +207,60 @@ namespace yli::ontology
 
             // Matrices' uniform block gets updated by `Object`s and `Biont`s.
             glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
-            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::MVP, sizeof(glm::mat4), glm::value_ptr(this->mvp_matrix)); // mat4
-            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::M, sizeof(glm::mat4), glm::value_ptr(this->model_matrix)); // mat4
+            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::MVP, sizeof(glm::mat4),
+                            glm::value_ptr(this->mvp_matrix)); // mat4
+            glBufferSubData(GL_UNIFORM_BUFFER, opengl::movable_ubo::MovableUboBlockOffsets::M, sizeof(glm::mat4),
+                            glm::value_ptr(this->model_matrix)); // mat4
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
             glBindBufferBase(GL_UNIFORM_BUFFER, opengl::UboBlockIndices::MOVABLE, this->movable_uniform_block);
 
-            const GLuint vao                             = mesh.get_vao();
-            const GLuint vertex_buffer                   = mesh.get_vertex_buffer();
+            const GLuint vao = mesh.get_vao();
+            const GLuint vertex_buffer = mesh.get_vertex_buffer();
             const std::uint32_t vertex_position_modelspace_id = mesh.get_vertex_position_modelspace_id();
-            const GLuint uv_buffer                       = mesh.get_uv_buffer();
-            const std::uint32_t vertex_uv_id             = mesh.get_vertex_uv_id();
-            const GLuint normal_buffer                   = mesh.get_normal_buffer();
+            const GLuint uv_buffer = mesh.get_uv_buffer();
+            const std::uint32_t vertex_uv_id = mesh.get_vertex_uv_id();
+            const GLuint normal_buffer = mesh.get_normal_buffer();
             const std::uint32_t vertex_normal_modelspace_id = mesh.get_vertex_normal_modelspace_id();
-            const GLuint element_buffer                  = mesh.get_element_buffer();
-            const std::uint32_t indices_size             = mesh.get_indices_size();
+            const GLuint element_buffer = mesh.get_element_buffer();
+            const std::uint32_t indices_size = mesh.get_indices_size();
 
             glBindVertexArray(vao);
 
             // 1st attribute buffer : vertices.
             glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
             glVertexAttribPointer(
-                    vertex_position_modelspace_id, // The attribute we want to configure
-                    3,                            // size
-                    GL_FLOAT,                     // type
-                    GL_FALSE,                     // normalized?
-                    0,                            // stride
-                    nullptr                       // array buffer offset
-                    );
+                vertex_position_modelspace_id, // The attribute we want to configure
+                3, // size
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                nullptr // array buffer offset
+            );
             yli::opengl::enable_vertex_attrib_array(vertex_position_modelspace_id);
 
             // 2nd attribute buffer : UVs.
             glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
             glVertexAttribPointer(
-                    vertex_uv_id,                   // The attribute we want to configure
-                    2,                            // size : U+V => 2
-                    GL_FLOAT,                     // type
-                    GL_FALSE,                     // normalized?
-                    0,                            // stride
-                    nullptr                       // array buffer offset
-                    );
+                vertex_uv_id, // The attribute we want to configure
+                2, // size : U+V => 2
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                nullptr // array buffer offset
+            );
             opengl::enable_vertex_attrib_array(vertex_uv_id);
 
             // 3rd attribute buffer : normals.
             glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
             glVertexAttribPointer(
-                    vertex_normal_modelspace_id,   // The attribute we want to configure
-                    3,                            // size
-                    GL_FLOAT,                     // type
-                    GL_FALSE,                     // normalized?
-                    0,                            // stride
-                    nullptr                       // array buffer offset
-                    );
+                vertex_normal_modelspace_id, // The attribute we want to configure
+                3, // size
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                nullptr // array buffer offset
+            );
             opengl::enable_vertex_attrib_array(vertex_normal_modelspace_id);
 
             // Index buffer.
@@ -259,11 +268,11 @@ namespace yli::ontology
 
             // Draw the triangles!
             glDrawElements(
-                    GL_TRIANGLES,                 // mode
-                    indices_size,                 // count
-                    GL_UNSIGNED_INT,              // type
-                    nullptr                       // element array buffer offset
-                    );
+                GL_TRIANGLES, // mode
+                indices_size, // count
+                GL_UNSIGNED_INT, // type
+                nullptr // element array buffer offset
+            );
 
             opengl::disable_vertex_attrib_array(mesh.get_vertex_position_modelspace_id());
             opengl::disable_vertex_attrib_array(mesh.get_vertex_uv_id());

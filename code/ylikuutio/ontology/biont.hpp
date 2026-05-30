@@ -34,7 +34,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -48,40 +48,42 @@ namespace yli::ontology
 
     class Biont final : public Movable
     {
-        private:
-            Biont(
-                    core::Application& application,
-                    Universe& universe,
-                    const BiontStruct& biont_struct,
-                    GenericParentModule* holobiont_parent_module,
-                    GenericMasterModule* symbiont_species_master_module);
+    private:
+        Biont(
+            core::Application& application,
+            Universe& universe,
+            const BiontStruct& biont_struct,
+            GenericParentModule* holobiont_parent_module,
+            GenericMasterModule* symbiont_species_master_module);
 
-            ~Biont() override = default;
+        ~Biont() override = default;
 
-        public:
-            Biont(const Biont&) = delete;            // Delete copy constructor.
-            Biont& operator=(const Biont&) = delete; // Delete copy assignment.
+    public:
+        Biont(const Biont&) = delete; // Delete copy constructor.
+        Biont& operator=(const Biont&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            ChildModule child_of_holobiont;
-            ApprenticeModule apprentice_of_symbiont_species;
+        ChildModule child_of_holobiont;
+        ApprenticeModule apprentice_of_symbiont_species;
 
-            // This method renders this `Biont`.
-            void render();
+        // This method renders this `Biont`.
+        void render();
 
-        protected:
-            void render_this_biont();
+    protected:
+        void render_this_biont();
 
-            std::size_t biontID { std::numeric_limits<std::size_t>::max() };
+        std::size_t biontID { std::numeric_limits<std::size_t>::max() };
 
-        public:
-            Scene* get_scene() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+    public:
+        Scene* get_scene() const override;
+
+        std::size_t get_number_of_children() const override;
+
+        std::size_t get_number_of_descendants() const override;
     };
 }
 
