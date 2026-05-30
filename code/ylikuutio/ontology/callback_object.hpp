@@ -38,7 +38,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -54,61 +54,66 @@ namespace yli::ontology
     {
         // CallbackObject is an object that contains a single callback.
 
-        protected:
-            CallbackObject(
-                    core::Application& application,
-                    Universe& universe,
-                    const CallbackObjectStruct& callback_object_struct,
-                    GenericParentModule* callback_engine_parent_module);
+    protected:
+        CallbackObject(
+            core::Application& application,
+            Universe& universe,
+            const CallbackObjectStruct& callback_object_struct,
+            GenericParentModule* callback_engine_parent_module);
 
-            CallbackObject(
-                    core::Application& application,
-                    Universe& universe,
-                    const CallbackObjectStruct& callback_object_struct,
-                    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
-                    GenericParentModule* callback_engine_parent_module);
-            ~CallbackObject() override = default;
+        CallbackObject(
+            core::Application& application,
+            Universe& universe,
+            const CallbackObjectStruct& callback_object_struct,
+            InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
+            GenericParentModule* callback_engine_parent_module);
 
-        public:
-            CallbackParameter* create_callback_parameter(
-                    const std::string& name,
-                    data::AnyValue&& any_value);
+        ~CallbackObject() override = default;
 
-            // this method changes the callback without changing the parameters of CallbackObject.
-            void set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
+    public:
+        CallbackParameter* create_callback_parameter(
+            const std::string& name,
+            data::AnyValue&& any_value);
 
-            std::optional<data::AnyValue> get_any_value(const std::string& name) const;
-            std::optional<data::AnyValue> get_arg(std::size_t arg_i) const;
+        // this method changes the callback without changing the parameters of CallbackObject.
+        void set_new_callback(const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        std::optional<data::AnyValue> get_any_value(const std::string& name) const;
 
-            Entity* get_parent() const override;
-            Scene* get_scene() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        std::optional<data::AnyValue> get_arg(std::size_t arg_i) const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            ChildModule child_of_callback_engine;
-            GenericParentModule parent_of_callback_parameters;
+        Entity* get_parent() const override;
 
-            friend class CallbackEngine;
+        Scene* get_scene() const override;
 
-        protected:
-            InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback { nullptr };
+        std::size_t get_number_of_children() const override;
 
-        private:
-            // execute this callback with a parameter.
-            virtual std::optional<data::AnyValue> execute(const data::AnyValue& any_value);
+        std::size_t get_number_of_descendants() const override;
+
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+        ChildModule child_of_callback_engine;
+        GenericParentModule parent_of_callback_parameters;
+
+        friend class CallbackEngine;
+
+    protected:
+        InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback { nullptr };
+
+    private:
+        // execute this callback with a parameter.
+        virtual std::optional<data::AnyValue> execute(const data::AnyValue& any_value);
     };
 
     template<>
-        inline GenericParentModule* CallbackObject::get_generic_parent_module<CallbackParameter>()
-        {
-            return &this->parent_of_callback_parameters;
-        }
+    inline GenericParentModule* CallbackObject::get_generic_parent_module<CallbackParameter>()
+    {
+        return &this->parent_of_callback_parameters;
+    }
 }
 
 #endif
