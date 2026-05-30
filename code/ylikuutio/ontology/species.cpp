@@ -44,8 +44,8 @@ namespace yli::ontology
     class Pipeline;
 
     std::optional<data::AnyValue> Species::bind_to_new_ecosystem_parent(
-            Species& species,
-            Ecosystem& new_parent)
+        Species& species,
+        Ecosystem& new_parent)
     {
         // Set pointer to `Species` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -54,7 +54,8 @@ namespace yli::ontology
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Species::bind_to_new_ecosystem_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `Species::bind_to_new_ecosystem_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_ecosystem_or_scene_parent)
@@ -72,14 +73,14 @@ namespace yli::ontology
         // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
         // so binding to an `Ecosystem` does not unbind any apprentices.
         species.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_species);
+            &new_parent.parent_of_species);
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> Species::bind_to_new_scene_parent(
-            Species& species,
-            Scene& new_parent)
+        Species& species,
+        Scene& new_parent)
     {
         // Set pointer to `species` to `nullptr`, set parent according to the input,
         // and request a new childID from the new `new_parent`.
@@ -88,7 +89,8 @@ namespace yli::ontology
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Species::bind_to_new_scene_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `Species::bind_to_new_scene_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_ecosystem_or_scene_parent)
@@ -106,14 +108,14 @@ namespace yli::ontology
         species.master_of_objects.unbind_all_apprentice_modules_belonging_to_other_scenes(&new_parent);
         species.apprentice_of_material.unbind_from_any_master_belonging_to_other_scene(new_parent);
         species.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_species);
+            &new_parent.parent_of_species);
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> Species::bind_to_new_material(
-            Species& species,
-            Material& new_material) noexcept
+        Species& species,
+        Material& new_material) noexcept
     {
         // Set pointer to `species` to `nullptr`, set material according to the input,
         // and request a new apprenticeID from `new_material`.
@@ -121,31 +123,32 @@ namespace yli::ontology
         // Master and apprentice must belong to the same `Scene`,
         // if both belong to some `Scene`, and not `Ecosystem`.
         if (species.get_scene() == new_material.get_scene() ||
-                species.get_scene() == nullptr ||
-                new_material.get_scene() == nullptr)
+            species.get_scene() == nullptr ||
+            new_material.get_scene() == nullptr)
         {
             species.apprentice_of_material.unbind_and_bind_to_new_generic_master_module(
-                    &new_material.master_of_species);
+                &new_material.master_of_species);
         }
         else
         {
-            std::cerr << "ERROR: `Species::bind_to_new_material`: master and apprentice can not belong to different `Scene`s!\n";
+            std::cerr <<
+                    "ERROR: `Species::bind_to_new_material`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
     }
 
     Species::Species(
-            core::Application& application,
-            Universe& universe,
-            const SpeciesStruct& species_struct,
-            GenericParentModule* const ecosystem_or_scene_parent_module,
-            GenericMasterModule* const material_master_module)
+        core::Application& application,
+        Universe& universe,
+        const SpeciesStruct& species_struct,
+        GenericParentModule* const ecosystem_or_scene_parent_module,
+        GenericMasterModule* const material_master_module)
         : Entity(application, universe, species_struct),
-        child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
-        master_of_objects(*this, &this->registry, "objects"),
-        apprentice_of_material(material_master_module, this),
-        mesh(universe, species_struct, this->get_pipeline())
+          child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
+          master_of_objects(*this, &this->registry, "objects"),
+          apprentice_of_material(material_master_module, this),
+          mesh(universe, species_struct, this->get_pipeline())
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Species*";
@@ -180,7 +183,7 @@ namespace yli::ontology
         const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         yli::render::render_model<GenericMasterModule&, Object*>(
-                this->mesh, this->master_of_objects, new_target_scene);
+            this->mesh, this->master_of_objects, new_target_scene);
     }
 
     std::uint32_t Species::get_image_width() const
@@ -201,7 +204,7 @@ namespace yli::ontology
     Pipeline* Species::get_pipeline() const
     {
         Material* const material = static_cast<Material*>(
-                this->apprentice_of_material.get_master());
+            this->apprentice_of_material.get_master());
 
         if (material != nullptr)
         {

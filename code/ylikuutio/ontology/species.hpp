@@ -38,7 +38,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -54,75 +54,77 @@ namespace yli::ontology
 
     class Species final : public Entity
     {
-        public:
-            // Set pointer to `species` to `nullptr`, set parent according to the input,
-            // and request a new childID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_ecosystem_parent(
-                    Species& species,
-                    Ecosystem& new_parent);
+    public:
+        // Set pointer to `species` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_ecosystem_parent(
+            Species& species,
+            Ecosystem& new_parent);
 
-            // Set pointer to `species` to `nullptr`, set parent according to the input,
-            // and request a new childID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_scene_parent(
-                    Species& species,
-                    Scene& new_parent);
+        // Set pointer to `species` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_scene_parent(
+            Species& species,
+            Scene& new_parent);
 
-            // Set pointer to `species` to `nullptr`, set material according to the input,
-            // and request a new apprenticeID from `new_material`.
-            static std::optional<data::AnyValue> bind_to_new_material(
-                    Species& species,
-                    Material& new_material) noexcept;
+        // Set pointer to `species` to `nullptr`, set material according to the input,
+        // and request a new apprenticeID from `new_material`.
+        static std::optional<data::AnyValue> bind_to_new_material(
+            Species& species,
+            Material& new_material) noexcept;
 
-        private:
-            Species(
-                    core::Application& application,
-                    Universe& universe,
-                    const SpeciesStruct& species_struct,
-                    GenericParentModule* ecosystem_or_scene_parent_module,
-                    GenericMasterModule* material_master_module);
+    private:
+        Species(
+            core::Application& application,
+            Universe& universe,
+            const SpeciesStruct& species_struct,
+            GenericParentModule* ecosystem_or_scene_parent_module,
+            GenericMasterModule* material_master_module);
 
-            ~Species() override = default;
+        ~Species() override = default;
 
-        public:
-            Species(const Species&) = delete;            // Delete copy constructor.
-            Species& operator=(const Species&) = delete; // Delete copy assignment.
+    public:
+        Species(const Species&) = delete; // Delete copy constructor.
+        Species& operator=(const Species&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            std::size_t get_number_of_apprentices() const;
+        std::size_t get_number_of_apprentices() const;
 
-            std::uint32_t get_image_width() const;
-            std::uint32_t get_image_height() const;
+        std::uint32_t get_image_width() const;
 
-            void render(const Scene* target_scene);
+        std::uint32_t get_image_height() const;
 
-            Scene* get_scene() const override;
+        void render(const Scene* target_scene);
 
-            Pipeline* get_pipeline() const;
+        Scene* get_scene() const override;
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        Pipeline* get_pipeline() const;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
 
-        private:
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        std::size_t get_number_of_children() const override;
 
-            ChildModule child_of_ecosystem_or_scene;
+        std::size_t get_number_of_descendants() const override;
 
-        public:
-            GenericMasterModule master_of_objects;
-            ApprenticeModule apprentice_of_material;
-            MeshModule mesh;
+    private:
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+        ChildModule child_of_ecosystem_or_scene;
+
+    public:
+        GenericMasterModule master_of_objects;
+        ApprenticeModule apprentice_of_material;
+        MeshModule mesh;
     };
 
     template<>
-        inline GenericMasterModule* Species::get_generic_master_module<Object>()
-        {
-            return &this->master_of_objects;
-        }
+    inline GenericMasterModule* Species::get_generic_master_module<Object>()
+    {
+        return &this->master_of_objects;
+    }
 }
 
 #endif
