@@ -46,12 +46,12 @@ namespace yli::ontology
     }
 
     Skill::Skill(
-            core::Application& application,
-            Universe& universe,
-            const SkillStruct& skill_struct,
-            GenericParentModule* const parent_module)
+        core::Application& application,
+        Universe& universe,
+        const SkillStruct& skill_struct,
+        GenericParentModule* const parent_module)
         : Capability(application, universe, skill_struct),
-        child_of_holobiont(parent_module, *this)
+          child_of_holobiont(parent_module, *this)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::Skill*";

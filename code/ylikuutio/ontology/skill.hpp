@@ -40,27 +40,29 @@ namespace yli::ontology
 
     class Skill : public Capability
     {
-        public:
-            Skill(
-                    core::Application& application,
-                    Universe& universe,
-                    const SkillStruct& skill_struct,
-                    GenericParentModule* parent_module);
+    public:
+        Skill(
+            core::Application& application,
+            Universe& universe,
+            const SkillStruct& skill_struct,
+            GenericParentModule* parent_module);
 
-            Skill(const Skill&) = delete;            // Delete copy constructor.
-            Skill &operator=(const Skill&) = delete; // Delete copy assignment.
+        Skill(const Skill&) = delete; // Delete copy constructor.
+        Skill& operator=(const Skill&) = delete; // Delete copy assignment.
 
-            ~Skill() override = default;
+        ~Skill() override = default;
 
-            Holobiont* get_holobiont() const;
+        Holobiont* get_holobiont() const;
 
-            Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        Entity* get_parent() const override;
 
-            Scene* get_scene() const override;
+        std::size_t get_number_of_children() const override;
 
-            ChildModule child_of_holobiont;
+        std::size_t get_number_of_descendants() const override;
+
+        Scene* get_scene() const override;
+
+        ChildModule child_of_holobiont;
     };
 }
 
