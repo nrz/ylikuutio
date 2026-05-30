@@ -36,13 +36,13 @@ namespace yli::ontology
     class Pipeline;
 
     ShapeshifterForm::ShapeshifterForm(
-            core::Application& application,
-            Universe& universe,
-            const ShapeshifterFormStruct& shapeshifter_form_struct,
-            GenericParentModule* const shapeshifter_transformation_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const ShapeshifterFormStruct& shapeshifter_form_struct,
+        GenericParentModule* const shapeshifter_transformation_parent_module)
         : Entity(application, universe, shapeshifter_form_struct),
-        child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
-        mesh(universe, shapeshifter_form_struct, this->get_pipeline())
+          child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
+          mesh(universe, shapeshifter_form_struct, this->get_pipeline())
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ShapeshifterForm*";
@@ -59,7 +59,8 @@ namespace yli::ontology
 
         if (shapeshifter_transformation_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `ShapeshifterForm::get_scene`: `shapeshifter_transformation_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `ShapeshifterForm::get_scene`: `shapeshifter_transformation_parent` is `nullptr`!");
         }
 
         return shapeshifter_transformation_parent->get_scene();
@@ -67,7 +68,8 @@ namespace yli::ontology
 
     Pipeline* ShapeshifterForm::get_pipeline() const
     {
-        if (auto* const shapeshifter_transformation_parent = static_cast<ShapeshifterTransformation*>(this->get_parent()); shapeshifter_transformation_parent != nullptr)
+        if (auto* const shapeshifter_transformation_parent = static_cast<ShapeshifterTransformation*>(this->
+            get_parent()); shapeshifter_transformation_parent != nullptr)
         {
             return shapeshifter_transformation_parent->get_pipeline();
         }
