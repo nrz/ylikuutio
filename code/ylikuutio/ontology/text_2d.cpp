@@ -46,9 +46,7 @@ namespace yli::ontology
         // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const Entity* const old_font_2d_parent = text_2d.get_parent();
-
-        if (old_font_2d_parent == nullptr) [[unlikely]]
+        if (const Entity* const old_font_2d_parent = text_2d.get_parent(); old_font_2d_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `Text2d::bind_to_new_font_2d_parent`: `old_font_2d_parent` is `nullptr`!");
         }
@@ -95,9 +93,8 @@ namespace yli::ontology
             glGenBuffers(1, &this->uv_buffer);
 
             // Get a handle for our buffers.
-            const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent());
 
-            if (font_2d_parent != nullptr)
+            if (const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent()); font_2d_parent != nullptr)
             {
                 this->vertex_position_in_screenspace_id = glGetAttribLocation(
                         font_2d_parent->get_program_id(),
