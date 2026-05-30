@@ -187,7 +187,7 @@ namespace yli::ontology
 
         const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
-        yli::render::RenderSystem& render_system = this->universe.get_render_system();
+        render::RenderSystem& render_system = this->universe.get_render_system();
 
         // [Re]bind `program_id` program.
         glUseProgram(this->program_id);

@@ -67,7 +67,7 @@ namespace yli::ontology
         private:
             // Completable modules are stored here.
             // Everything stored in `indexable_map` or `entity_map` can be completed.
-            yli::string::StringSet completable_string_set;
+            string::StringSet completable_string_set;
 
             // Indexable modules are stored here.
             std::unordered_map<std::string, Indexable*> indexable_map;
