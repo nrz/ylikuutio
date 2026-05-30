@@ -36,14 +36,14 @@ namespace yli::ontology
     class Scene;
 
     SymbiontSpecies::SymbiontSpecies(
-            core::Application& application,
-            Universe& universe,
-            const SymbiontSpeciesStruct& symbiont_species_struct,
-            GenericParentModule* const symbiont_material_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const SymbiontSpeciesStruct& symbiont_species_struct,
+        GenericParentModule* const symbiont_material_parent_module)
         : Entity(application, universe, symbiont_species_struct),
-        child_of_symbiont_material(symbiont_material_parent_module, *this),
-        master_of_bionts(*this, &this->registry, "bionts"),
-        mesh(universe, symbiont_species_struct, this->get_pipeline())
+          child_of_symbiont_material(symbiont_material_parent_module, *this),
+          master_of_bionts(*this, &this->registry, "bionts"),
+          mesh(universe, symbiont_species_struct, this->get_pipeline())
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::SymbiontSpecies*";
@@ -56,7 +56,8 @@ namespace yli::ontology
 
     std::size_t SymbiontSpecies::get_number_of_apprentices() const
     {
-        return this->master_of_bionts.get_number_of_apprentices(); // `Biont`s belonging to `SymbiontSpecies` are its apprentices.
+        return this->master_of_bionts.get_number_of_apprentices();
+        // `Biont`s belonging to `SymbiontSpecies` are its apprentices.
     }
 
     GenericMasterModule* SymbiontSpecies::get_renderables_container() const
@@ -79,7 +80,7 @@ namespace yli::ontology
     Pipeline* SymbiontSpecies::get_pipeline() const
     {
         SymbiontMaterial* const symbiont_material = static_cast<SymbiontMaterial*>(
-                this->child_of_symbiont_material.get_parent());
+            this->child_of_symbiont_material.get_parent());
 
         if (symbiont_material != nullptr)
         {

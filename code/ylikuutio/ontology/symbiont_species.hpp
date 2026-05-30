@@ -38,7 +38,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -53,50 +53,52 @@ namespace yli::ontology
 
     class SymbiontSpecies final : public Entity
     {
-            SymbiontSpecies(
-                    core::Application& application,
-                    Universe& universe,
-                    const SymbiontSpeciesStruct& symbiont_species_struct,
-                    GenericParentModule* symbiont_material_parent_module);
+        SymbiontSpecies(
+            core::Application& application,
+            Universe& universe,
+            const SymbiontSpeciesStruct& symbiont_species_struct,
+            GenericParentModule* symbiont_material_parent_module);
 
-            ~SymbiontSpecies() override = default;
+        ~SymbiontSpecies() override = default;
 
-        public:
-            SymbiontSpecies(const SymbiontSpecies&) = delete;            // Delete copy constructor.
-            SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
+    public:
+        SymbiontSpecies(const SymbiontSpecies&) = delete; // Delete copy constructor.
+        SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
 
-            std::size_t get_number_of_apprentices() const;
+        std::size_t get_number_of_apprentices() const;
 
-            GenericMasterModule* get_renderables_container() const;
-            Scene* get_scene() const override;
+        GenericMasterModule* get_renderables_container() const;
 
-            Pipeline* get_pipeline() const;
+        Scene* get_scene() const override;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        Pipeline* get_pipeline() const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        std::size_t get_number_of_children() const override;
 
-            ChildModule child_of_symbiont_material;
-            GenericMasterModule master_of_bionts;
-            MeshModule mesh;
+        std::size_t get_number_of_descendants() const override;
 
-        private:
-            std::string model_file_format; // Type of the model file, eg. `"png"`.
-            std::string model_filename;    // Filename of the model file.
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+        ChildModule child_of_symbiont_material;
+        GenericMasterModule master_of_bionts;
+        MeshModule mesh;
+
+    private:
+        std::string model_file_format; // Type of the model file, eg. `"png"`.
+        std::string model_filename; // Filename of the model file.
     };
 
     template<>
-        inline GenericMasterModule* SymbiontSpecies::get_generic_master_module<Biont>()
-        {
-            return &this->master_of_bionts;
-        }
+    inline GenericMasterModule* SymbiontSpecies::get_generic_master_module<Biont>()
+    {
+        return &this->master_of_bionts;
+    }
 }
 
 #endif
