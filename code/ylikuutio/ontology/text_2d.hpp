@@ -37,7 +37,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -50,57 +50,59 @@ namespace yli::ontology
 
     class Text2d final : public Entity
     {
-        public:
-            // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
-            // and request a new childID from `new_parent`.
-            static std::optional<data::AnyValue> bind_to_new_font_2d_parent(
-                    Text2d& text_2d,
-                    Font2d& new_parent);
+    public:
+        // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
+        // and request a new childID from `new_parent`.
+        static std::optional<data::AnyValue> bind_to_new_font_2d_parent(
+            Text2d& text_2d,
+            Font2d& new_parent);
 
-        private:
-            Text2d(
-                    core::Application& application,
-                    Universe& universe,
-                    const TextStruct& text_struct,
-                    GenericParentModule* font_2d_parent_module);
+    private:
+        Text2d(
+            core::Application& application,
+            Universe& universe,
+            const TextStruct& text_struct,
+            GenericParentModule* font_2d_parent_module);
 
-            ~Text2d() override;
+        ~Text2d() override;
 
-        public:
-            Text2d(const Text2d&) = delete;            // Delete copy constructor.
-            Text2d& operator=(const Text2d&) = delete; // Delete copy assignment.
+    public:
+        Text2d(const Text2d&) = delete; // Delete copy constructor.
+        Text2d& operator=(const Text2d&) = delete; // Delete copy assignment.
 
-            void render() const;
+        void render() const;
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            void change_string(const std::string& text);
+        void change_string(const std::string& text);
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            ChildModule child_of_font_2d;
+        ChildModule child_of_font_2d;
 
-            Scene* get_scene() const override;
+        Scene* get_scene() const override;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        std::size_t get_number_of_children() const override;
 
-        private:
-            GLuint vao                              { 0 };
-            GLuint vertex_buffer                    { 0 }; // Buffer containing the vertices
-            GLuint uv_buffer                        { 0 }; // Buffer containing the UVs
-            GLint vertex_position_in_screenspace_id { 0 }; // Location of the program's `vertex_position_screenspace` attribute.
-            GLint vertex_uv_id                      { 0 }; // Location of the program's `vertex_uv` attribute.
+        std::size_t get_number_of_descendants() const override;
 
-            std::string text;
-            PositionStruct position;
-            std::size_t screen_width;
-            std::size_t screen_height;
-            std::size_t text_size;
-            std::size_t font_size;
+    private:
+        GLuint vao { 0 };
+        GLuint vertex_buffer { 0 }; // Buffer containing the vertices
+        GLuint uv_buffer { 0 }; // Buffer containing the UVs
+        GLint vertex_position_in_screenspace_id { 0 };
+        // Location of the program's `vertex_position_screenspace` attribute.
+        GLint vertex_uv_id { 0 }; // Location of the program's `vertex_uv` attribute.
 
-            bool vertices_and_uvs_loaded { false };
+        std::string text;
+        PositionStruct position;
+        std::size_t screen_width;
+        std::size_t screen_height;
+        std::size_t text_size;
+        std::size_t font_size;
+
+        bool vertices_and_uvs_loaded { false };
     };
 }
 

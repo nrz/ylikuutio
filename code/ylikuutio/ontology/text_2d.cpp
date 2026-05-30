@@ -40,8 +40,8 @@ namespace yli::ontology
     class Scene;
 
     std::optional<data::AnyValue> Text2d::bind_to_new_font_2d_parent(
-            Text2d& text_2d,
-            Font2d& new_parent)
+        Text2d& text_2d,
+        Font2d& new_parent)
     {
         // Set pointer to `text_2d` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -58,18 +58,18 @@ namespace yli::ontology
         }
 
         text_2d.child_of_font_2d.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_text_2ds);
+            &new_parent.parent_of_text_2ds);
 
         return std::nullopt;
     }
 
     Text2d::Text2d(
-            core::Application& application,
-            Universe& universe,
-            const TextStruct& text_struct,
-            GenericParentModule* const font_2d_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const TextStruct& text_struct,
+        GenericParentModule* const font_2d_parent_module)
         : Entity(application, universe, text_struct),
-        child_of_font_2d(font_2d_parent_module, *this)
+          child_of_font_2d(font_2d_parent_module, *this)
     {
         this->text = text_struct.text;
         this->position = text_struct.position;
@@ -79,9 +79,9 @@ namespace yli::ontology
         // If software rendering is in use, the vertices and UVs can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
         const bool should_load_vertices_and_uvs =
-            this->universe.get_is_opengl_in_use() ||
-            this->universe.get_is_vulkan_in_use() ||
-            this->universe.get_is_software_rendering_in_use();
+                this->universe.get_is_opengl_in_use() ||
+                this->universe.get_is_vulkan_in_use() ||
+                this->universe.get_is_software_rendering_in_use();
 
         if (this->get_parent() != nullptr && should_load_vertices_and_uvs)
         {
@@ -94,11 +94,12 @@ namespace yli::ontology
 
             // Get a handle for our buffers.
 
-            if (const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent()); font_2d_parent != nullptr)
+            if (const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent());
+                font_2d_parent != nullptr)
             {
                 this->vertex_position_in_screenspace_id = glGetAttribLocation(
-                        font_2d_parent->get_program_id(),
-                        "vertex_position_screenspace");
+                    font_2d_parent->get_program_id(),
+                    "vertex_position_screenspace");
                 this->vertex_uv_id = glGetAttribLocation(font_2d_parent->get_program_id(), "vertex_uv");
             }
 
@@ -121,7 +122,9 @@ namespace yli::ontology
 
     void Text2d::render() const
     {
-        PrintTextStruct text_struct { this->universe.get_font_size(), this->universe.get_window_width() / this->universe.get_font_size() };
+        PrintTextStruct text_struct {
+            this->universe.get_font_size(), this->universe.get_window_width() / this->universe.get_font_size()
+        };
         text_struct.position = this->position;
         text_struct.text = this->text;
         const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent());
