@@ -39,19 +39,19 @@ namespace yli::ontology
     class Pipeline;
 
     ShapeshifterSequence::ShapeshifterSequence(
-            core::Application& application,
-            Universe& universe,
-            const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
-            GenericParentModule* const shapeshifter_transformation_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
+        GenericParentModule* const shapeshifter_transformation_parent_module)
         : Entity(application, universe, shapeshifter_sequence_struct),
-        child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
-        master_of_shapeshifters(*this, &this->registry, "shapeshifters")
+          child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
+          master_of_shapeshifters(*this, &this->registry, "shapeshifters")
     {
-        this->transformation_speed        = shapeshifter_sequence_struct.transformation_speed;
-        this->initial_offset              = shapeshifter_sequence_struct.initial_offset;
+        this->transformation_speed = shapeshifter_sequence_struct.transformation_speed;
+        this->initial_offset = shapeshifter_sequence_struct.initial_offset;
         this->is_repeating_transformation = shapeshifter_sequence_struct.is_repeating_transformation;
-        this->bounce_from_start           = shapeshifter_sequence_struct.bounce_from_start;
-        this->bounce_from_end             = shapeshifter_sequence_struct.bounce_from_end;
+        this->bounce_from_start = shapeshifter_sequence_struct.bounce_from_start;
+        this->bounce_from_end = shapeshifter_sequence_struct.bounce_from_end;
 
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ShapeshifterSequence*";
@@ -69,7 +69,8 @@ namespace yli::ontology
 
         if (shapeshifter_transformation_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `ShapeshifterSequence::get_scene`: `shapeshifter_transformation_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `ShapeshifterSequence::get_scene`: `shapeshifter_transformation_parent` is `nullptr`!");
         }
 
         return shapeshifter_transformation_parent->get_scene();
@@ -78,11 +79,12 @@ namespace yli::ontology
     Pipeline* ShapeshifterSequence::get_pipeline() const
     {
         const ShapeshifterTransformation* const shapeshifter_transformation_parent =
-            static_cast<ShapeshifterTransformation*>(this->get_parent());
+                static_cast<ShapeshifterTransformation*>(this->get_parent());
 
         if (shapeshifter_transformation_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `ShapeshifterSequence::get_pipeline`: `shapeshifter_transformation_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `ShapeshifterSequence::get_pipeline`: `shapeshifter_transformation_parent` is `nullptr`!");
         }
 
         return shapeshifter_transformation_parent->get_pipeline();

@@ -39,7 +39,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -54,63 +54,64 @@ namespace yli::ontology
 
     class ShapeshifterSequence final : public Entity
     {
-            ShapeshifterSequence(
-                    core::Application& application,
-                    Universe& universe,
-                    const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
-                    GenericParentModule* shapeshifter_transformation_parent_module);
+        ShapeshifterSequence(
+            core::Application& application,
+            Universe& universe,
+            const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
+            GenericParentModule* shapeshifter_transformation_parent_module);
 
-            ~ShapeshifterSequence() override = default;
+        ~ShapeshifterSequence() override = default;
 
-        public:
-            Entity* get_parent() const override;
+    public:
+        Entity* get_parent() const override;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-        private:
-            ChildModule child_of_shapeshifter_transformation;
+    private:
+        ChildModule child_of_shapeshifter_transformation;
 
-        public:
-            GenericMasterModule master_of_shapeshifters;
+    public:
+        GenericMasterModule master_of_shapeshifters;
 
-        private:
-            void bind_to_parent() noexcept;
+    private:
+        void bind_to_parent() noexcept;
 
-        public:
-            Scene* get_scene() const override;
+    public:
+        Scene* get_scene() const override;
 
-            Pipeline* get_pipeline() const;
+        Pipeline* get_pipeline() const;
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        std::size_t get_number_of_children() const override;
 
-            void render(const Scene* const target_scene);
+        std::size_t get_number_of_descendants() const override;
 
-        private:
-            float transformation_speed; // Negative speed means inverse initial transition direction.
-            std::size_t initial_offset; // Index of the `ShapeshifterForm` from which to begin the transition.
+        void render(const Scene* const target_scene);
 
-            // Repeating transitions begin from the `initial_offset`
-            // endlessly in the same initial transition direction,
-            // after all potential bouncing has ended.
-            bool is_repeating_transformation;
+    private:
+        float transformation_speed; // Negative speed means inverse initial transition direction.
+        std::size_t initial_offset; // Index of the `ShapeshifterForm` from which to begin the transition.
 
-            // If both `bounce_from_start` and `bounce_from_end` are `true`,
-            // then bouncing continues endlessly and the value of
-            // `is_repeating_transformation` has no effect.
-            bool bounce_from_start;
-            bool bounce_from_end;
+        // Repeating transitions begin from the `initial_offset`
+        // endlessly in the same initial transition direction,
+        // after all potential bouncing has ended.
+        bool is_repeating_transformation;
+
+        // If both `bounce_from_start` and `bounce_from_end` are `true`,
+        // then bouncing continues endlessly and the value of
+        // `is_repeating_transformation` has no effect.
+        bool bounce_from_start;
+        bool bounce_from_end;
     };
 
     template<>
-        inline GenericMasterModule* ShapeshifterSequence::get_generic_master_module<Shapeshifter>()
-        {
-            return &this->master_of_shapeshifters;
-        }
+    inline GenericMasterModule* ShapeshifterSequence::get_generic_master_module<Shapeshifter>()
+    {
+        return &this->master_of_shapeshifters;
+    }
 }
 
 #endif
