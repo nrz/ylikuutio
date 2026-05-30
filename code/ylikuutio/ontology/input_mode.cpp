@@ -40,15 +40,15 @@ namespace yli::ontology
     class Scene;
 
     InputMode::InputMode(
-            core::Application& application,
-            Universe& universe,
-            const InputModeStruct& input_mode_struct,
-            ParentOfInputModesModule* const parent_module,
-            GenericMasterModule* const console_master_module)
+        core::Application& application,
+        Universe& universe,
+        const InputModeStruct& input_mode_struct,
+        ParentOfInputModesModule* const parent_module,
+        GenericMasterModule* const console_master_module)
         : Entity(application, universe, input_mode_struct),
-        child_of_universe(parent_module, *this),
-        apprentice_of_console(static_cast<MasterOfInputModesModule*>(console_master_module), this),
-        is_text_input_mode { input_mode_struct.is_text_input_mode }
+          child_of_universe(parent_module, *this),
+          apprentice_of_console(static_cast<MasterOfInputModesModule*>(console_master_module), this),
+          is_text_input_mode { input_mode_struct.is_text_input_mode }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::InputMode*";
@@ -109,7 +109,8 @@ namespace yli::ontology
         return nullptr;
     }
 
-    void InputMode::set_keypress_callback_engine(const std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine)
+    void InputMode::set_keypress_callback_engine(const std::uint32_t keycode,
+                                                 const Request<GenericCallbackEngine>& callback_engine)
     {
         if (keycode >= this->keypress_callback_engines.size())
         {
@@ -119,7 +120,8 @@ namespace yli::ontology
         this->keypress_callback_engines[keycode] = &resolve_request_or_throw(callback_engine, universe.registry);
     }
 
-    void InputMode::set_keyrelease_callback_engine(const std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine)
+    void InputMode::set_keyrelease_callback_engine(const std::uint32_t keycode,
+                                                   const Request<GenericCallbackEngine>& callback_engine)
     {
         if (keycode >= this->keyrelease_callback_engines.size())
         {
@@ -129,14 +131,16 @@ namespace yli::ontology
         this->keyrelease_callback_engines[keycode] = &resolve_request_or_throw(callback_engine, universe.registry);
     }
 
-    void InputMode::set_continuous_keypress_callback_engine(const std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine)
+    void InputMode::set_continuous_keypress_callback_engine(const std::uint32_t keycode,
+                                                            const Request<GenericCallbackEngine>& callback_engine)
     {
         if (keycode >= this->continuous_keypress_callback_engines.size())
         {
             this->continuous_keypress_callback_engines.resize(keycode + 1, nullptr);
         }
 
-        this->continuous_keypress_callback_engines[keycode] = &resolve_request_or_throw(callback_engine, universe.registry);
+        this->continuous_keypress_callback_engines[keycode] = &resolve_request_or_throw(
+            callback_engine, universe.registry);
     }
 
     const std::vector<GenericCallbackEngine*>* InputMode::get_keypress_callback_engines() const

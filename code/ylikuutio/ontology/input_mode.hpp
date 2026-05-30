@@ -35,7 +35,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -47,56 +47,68 @@ namespace yli::ontology
     struct InputModeStruct;
 
     template<typename Type>
-        struct Request;
+    struct Request;
 
     class InputMode final : public Entity
     {
-        private:
-            InputMode(
-                    core::Application& application,
-                    Universe& universe,
-                    const InputModeStruct& input_mode_struct,
-                    ParentOfInputModesModule* parent_module,
-                    GenericMasterModule* console_master_module);
+    private:
+        InputMode(
+            core::Application& application,
+            Universe& universe,
+            const InputModeStruct& input_mode_struct,
+            ParentOfInputModesModule* parent_module,
+            GenericMasterModule* console_master_module);
 
-            ~InputMode() override = default;
+        ~InputMode() override = default;
 
-        public:
-            void activate() override;
-            void deactivate() const;
+    public:
+        void activate() override;
 
-            GenericCallbackEngine* get_keypress_callback_engine(std::uint32_t keycode) const;
-            GenericCallbackEngine* get_keyrelease_callback_engine(std::uint32_t keycode) const;
-            GenericCallbackEngine* get_continuous_keypress_callback_engine(std::uint32_t keycode) const;
+        void deactivate() const;
 
-            void set_keypress_callback_engine(std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
-            void set_keyrelease_callback_engine(std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
-            void set_continuous_keypress_callback_engine(std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
+        GenericCallbackEngine* get_keypress_callback_engine(std::uint32_t keycode) const;
 
-            const std::vector<GenericCallbackEngine*>* get_keypress_callback_engines() const;
-            const std::vector<GenericCallbackEngine*>* get_keyrelease_callback_engines() const;
-            const std::vector<GenericCallbackEngine*>* get_continuous_keypress_callback_engines() const;
+        GenericCallbackEngine* get_keyrelease_callback_engine(std::uint32_t keycode) const;
 
-            Entity* get_parent() const override;
-            Scene* get_scene() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        GenericCallbackEngine* get_continuous_keypress_callback_engine(std::uint32_t keycode) const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        void set_keypress_callback_engine(std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
 
-            InputModeChildModule child_of_universe;
-            InputModeApprenticeModule apprentice_of_console;
+        void set_keyrelease_callback_engine(std::uint32_t keycode,
+                                            const Request<GenericCallbackEngine>& callback_engine);
 
-        private:
-            InputMode(const InputMode&) = delete;                           // Delete copy constructor.
-            InputMode& operator=(const InputMode&) = delete; // Delete copy assignment.
+        void set_continuous_keypress_callback_engine(std::uint32_t keycode,
+                                                     const Request<GenericCallbackEngine>& callback_engine);
 
-            std::vector<GenericCallbackEngine*> keypress_callback_engines;
-            std::vector<GenericCallbackEngine*> keyrelease_callback_engines;
-            std::vector<GenericCallbackEngine*> continuous_keypress_callback_engines;
+        const std::vector<GenericCallbackEngine*>* get_keypress_callback_engines() const;
 
-            const bool is_text_input_mode;
+        const std::vector<GenericCallbackEngine*>* get_keyrelease_callback_engines() const;
+
+        const std::vector<GenericCallbackEngine*>* get_continuous_keypress_callback_engines() const;
+
+        Entity* get_parent() const override;
+
+        Scene* get_scene() const override;
+
+        std::size_t get_number_of_children() const override;
+
+        std::size_t get_number_of_descendants() const override;
+
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+        InputModeChildModule child_of_universe;
+        InputModeApprenticeModule apprentice_of_console;
+
+    private:
+        InputMode(const InputMode&) = delete; // Delete copy constructor.
+        InputMode& operator=(const InputMode&) = delete; // Delete copy assignment.
+
+        std::vector<GenericCallbackEngine*> keypress_callback_engines;
+        std::vector<GenericCallbackEngine*> keyrelease_callback_engines;
+        std::vector<GenericCallbackEngine*> continuous_keypress_callback_engines;
+
+        const bool is_text_input_mode;
     };
 }
 
