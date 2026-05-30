@@ -82,9 +82,9 @@ namespace hirvi
         SCENE                 = 160,
         // `yli::ontology` datatypes, 'movable_controller' path.
         MOVABLE_CONTROLLER                   = 161,
-        BRAIN_LISP_FUNCTION                  = 162,
-        GENERIC_BRAIN_LISP_FUNCTION_OVERLOAD = 163,
-        BRAIN_LISP_FUNCTION_OVERLOAD         = 164,
+        MOVABLE_CONTROLLER_LISP_FUNCTION                  = 162,
+        GENERIC_MOVABLE_CONTROLLER_LISP_FUNCTION_OVERLOAD = 163,
+        MOVABLE_CONTROLLER_LISP_FUNCTION_OVERLOAD         = 164,
         WAYPOINT                             = 165,
         // `yli::ontology` datatypes, 'camera' path.
         CAMERA                = 166,
