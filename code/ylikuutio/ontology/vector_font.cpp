@@ -55,9 +55,7 @@ namespace yli::ontology
         // Set pointer to `vector_font` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
 
-        const Material* const material_parent = static_cast<Material*>(vector_font.get_parent());
-
-        if (material_parent == nullptr) [[unlikely]]
+        if (const Material* const material_parent = static_cast<Material*>(vector_font.get_parent()); material_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error("ERROR: `VectorFont::bind_to_new_material_parent`: `material_parent` is `nullptr`!");
         }
