@@ -86,7 +86,7 @@ namespace yli::ontology
 
     Pipeline* Glyph::get_pipeline() const
     {
-        Material* const material = static_cast<Material*>(
+        const Material* const material = static_cast<Material*>(
                 this->apprentice_of_material.get_master());
 
         if (material != nullptr)
