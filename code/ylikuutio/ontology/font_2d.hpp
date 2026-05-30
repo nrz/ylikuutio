@@ -38,7 +38,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -53,86 +53,93 @@ namespace yli::ontology
 
     class Font2d final : public Entity
     {
-            Font2d(
-                    core::Application& application,
-                    Universe& universe,
-                    const FontStruct& font_struct,
-                    GenericParentModule* universe_parent_module);
+        Font2d(
+            core::Application& application,
+            Universe& universe,
+            const FontStruct& font_struct,
+            GenericParentModule* universe_parent_module);
 
-            ~Font2d() override;
+        ~Font2d() override;
 
-        public:
-            Font2d(const Font2d&) = delete;            // Delete copy constructor.
-            Font2d& operator=(const Font2d&) = delete; // Delete copy assignment.
+    public:
+        Font2d(const Font2d&) = delete; // Delete copy constructor.
+        Font2d& operator=(const Font2d&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            std::uint32_t get_text_size() const;
-            TextureFileFormat get_font_texture_file_format() const;
-            std::uint32_t get_program_id() const;
+        std::uint32_t get_text_size() const;
 
-            void prepare_to_print() const;
+        TextureFileFormat get_font_texture_file_format() const;
 
-            void render();
+        std::uint32_t get_program_id() const;
 
-            void print_text_2d(const PrintTextStruct& print_text_struct) const;
-            void print_console(const PrintConsoleStruct& print_console_struct) const;
+        void prepare_to_print() const;
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        void render();
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        void print_text_2d(const PrintTextStruct& print_text_struct) const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        void print_console(const PrintConsoleStruct& print_console_struct) const;
 
-            ChildModule child_of_universe;
-            GenericParentModule parent_of_text_2ds;
-            GenericMasterModule master_of_consoles;
-            TextureModule texture;
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            Scene* get_scene() const override;
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
 
-        private:
-            std::uint32_t compute_left_x(const PrintTextStruct& print_text_struct) const;
-            std::uint32_t compute_top_y(const PrintTextStruct& print_text_struct) const;
-            void compute_and_store_glyph_vertices(
-                    std::vector<glm::vec2>& vertices,
-                    std::uint32_t vertex_left_x,
-                    std::uint32_t vertex_top_y) const;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-        public:
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        ChildModule child_of_universe;
+        GenericParentModule parent_of_text_2ds;
+        GenericMasterModule master_of_consoles;
+        TextureModule texture;
 
-        private:
-            GLuint vao                               { 0 };
-            GLuint vertex_buffer                     { 0 }; // Buffer containing the vertices.
-            GLuint uv_buffer                         { 0 }; // Buffer containing the UVs.
-            GLuint program_id                        { 0 }; // The `program_id` of the shader used to display the text, returned by `load_shaders`.
-            GLint vertex_position_in_screenspace_id  { 0 }; // Location of the program's `vertex_position_screenspace` attribute.
-            GLint vertex_uv_id                       { 0 }; // Location of the program's `vertex_uv` attribute.
-            GLint text_2d_uniform_id                 { 0 }; // Location of the program's texture attribute.
-            GLint screen_width_uniform_id            { 0 }; // Location of the program's window width uniform.
-            GLint screen_height_uniform_id           { 0 }; // Location of the program's window height uniform.
+        Scene* get_scene() const override;
 
-            std::uint32_t screen_width;
-            std::uint32_t screen_height;
-            std::uint32_t text_size;
+    private:
+        std::uint32_t compute_left_x(const PrintTextStruct& print_text_struct) const;
+
+        std::uint32_t compute_top_y(const PrintTextStruct& print_text_struct) const;
+
+        void compute_and_store_glyph_vertices(
+            std::vector<glm::vec2>& vertices,
+            std::uint32_t vertex_left_x,
+            std::uint32_t vertex_top_y) const;
+
+    public:
+        std::size_t get_number_of_children() const override;
+
+        std::size_t get_number_of_descendants() const override;
+
+    private:
+        GLuint vao { 0 };
+        GLuint vertex_buffer { 0 }; // Buffer containing the vertices.
+        GLuint uv_buffer { 0 }; // Buffer containing the UVs.
+        GLuint program_id { 0 }; // The `program_id` of the shader used to display the text, returned by `load_shaders`.
+        GLint vertex_position_in_screenspace_id { 0 };
+        // Location of the program's `vertex_position_screenspace` attribute.
+        GLint vertex_uv_id { 0 }; // Location of the program's `vertex_uv` attribute.
+        GLint text_2d_uniform_id { 0 }; // Location of the program's texture attribute.
+        GLint screen_width_uniform_id { 0 }; // Location of the program's window width uniform.
+        GLint screen_height_uniform_id { 0 }; // Location of the program's window height uniform.
+
+        std::uint32_t screen_width;
+        std::uint32_t screen_height;
+        std::uint32_t text_size;
     };
 
     template<>
-        inline GenericParentModule* Font2d::get_generic_parent_module<Text2d>()
-        {
-            return &this->parent_of_text_2ds;
-        }
+    inline GenericParentModule* Font2d::get_generic_parent_module<Text2d>()
+    {
+        return &this->parent_of_text_2ds;
+    }
 
     template<>
-        inline GenericMasterModule* Font2d::get_generic_master_module<Console>()
-        {
-            return &this->master_of_consoles;
-        }
+    inline GenericMasterModule* Font2d::get_generic_master_module<Console>()
+    {
+        return &this->master_of_consoles;
+    }
 }
 
 #endif

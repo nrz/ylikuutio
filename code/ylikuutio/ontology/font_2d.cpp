@@ -65,27 +65,27 @@ namespace yli::ontology
     class Scene;
 
     Font2d::Font2d(
-            core::Application& application,
-            Universe& universe,
-            const FontStruct& font_struct,
-            GenericParentModule* const universe_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const FontStruct& font_struct,
+        GenericParentModule* const universe_parent_module)
         : Entity(application, universe, font_struct),
-        child_of_universe(universe_parent_module, *this),
-        parent_of_text_2ds(
-                *this,
-                this->registry,
-                "text_2ds"),
-        master_of_consoles(*this, &this->registry, "consoles"),
-        texture(
-                universe,
-                &this->registry,
-                font_struct.texture_filename,
-                font_struct.font_texture_file_format,
-                load::ImageLoaderStruct({ std::pair(load::ImageLoadingFlags::SHOULD_CONVERT_GRAYSCALE_TO_RGB, true) }),
-                "texture"),
-        screen_width  { font_struct.screen_width },
-        screen_height { font_struct.screen_height },
-        text_size     { font_struct.text_size }
+          child_of_universe(universe_parent_module, *this),
+          parent_of_text_2ds(
+              *this,
+              this->registry,
+              "text_2ds"),
+          master_of_consoles(*this, &this->registry, "consoles"),
+          texture(
+              universe,
+              &this->registry,
+              font_struct.texture_filename,
+              font_struct.font_texture_file_format,
+              load::ImageLoaderStruct({ std::pair(load::ImageLoadingFlags::SHOULD_CONVERT_GRAYSCALE_TO_RGB, true) }),
+              "texture"),
+          screen_width { font_struct.screen_width },
+          screen_height { font_struct.screen_height },
+          text_size { font_struct.text_size }
     {
         if (this->texture.get_is_texture_loaded())
         {
@@ -104,7 +104,8 @@ namespace yli::ontology
                 glUseProgram(this->program_id);
 
                 // Get a handle for our buffers.
-                this->vertex_position_in_screenspace_id = glGetAttribLocation(this->program_id, "vertex_position_screenspace");
+                this->vertex_position_in_screenspace_id = glGetAttribLocation(
+                    this->program_id, "vertex_position_screenspace");
                 this->vertex_uv_id = glGetAttribLocation(this->program_id, "vertex_uv");
 
                 // Initialize uniforms' IDs.
@@ -198,9 +199,9 @@ namespace yli::ontology
     }
 
     void Font2d::compute_and_store_glyph_vertices(
-            std::vector<glm::vec2>& vertices,
-            const std::uint32_t vertex_left_x,
-            const std::uint32_t vertex_top_y) const
+        std::vector<glm::vec2>& vertices,
+        const std::uint32_t vertex_left_x,
+        const std::uint32_t vertex_top_y) const
     {
         const std::uint32_t vertex_right_x = vertex_left_x + this->text_size;
 
@@ -327,7 +328,7 @@ namespace yli::ontology
                 current_top_y -= this->text_size;
                 column_i = 0;
 
-                if (character == '\n' )
+                if (character == '\n')
                 {
                     continue;
                 }
@@ -337,12 +338,15 @@ namespace yli::ontology
             this->compute_and_store_glyph_vertices(vertices, current_left_x, current_top_y);
             current_left_x += this->text_size;
 
-            const float uv_x = (character % print_text_struct.font_size) / static_cast<float>(print_text_struct.font_size);
-            const float uv_y = (character / print_text_struct.font_size) / static_cast<float>(print_text_struct.font_size);
+            const float uv_x = (character % print_text_struct.font_size) /
+                               static_cast<float>(print_text_struct.font_size);
+            const float uv_y = (character / print_text_struct.font_size) /
+                               static_cast<float>(print_text_struct.font_size);
 
             const auto uv_up_left = glm::vec2(uv_x, uv_y);
             const auto uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)), uv_y);
-            const auto uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)), (uv_y + 1.0f / static_cast<float>(print_text_struct.font_size)));
+            const auto uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_text_struct.font_size)),
+                                                 (uv_y + 1.0f / static_cast<float>(print_text_struct.font_size)));
             const auto uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(print_text_struct.font_size)));
 
             uvs.emplace_back(uv_up_left);
@@ -357,13 +361,13 @@ namespace yli::ontology
         }
 
         render::render_text(
-                vertices,
-                uvs,
-                this->vao,
-                this->vertex_buffer,
-                this->uv_buffer,
-                this->vertex_position_in_screenspace_id,
-                this->vertex_uv_id);
+            vertices,
+            uvs,
+            this->vao,
+            this->vertex_buffer,
+            this->uv_buffer,
+            this->vertex_position_in_screenspace_id,
+            this->vertex_uv_id);
     }
 
     void Font2d::print_console(const PrintConsoleStruct& print_console_struct) const
@@ -396,13 +400,19 @@ namespace yli::ontology
                 this->compute_and_store_glyph_vertices(vertices, current_left_x, current_top_y);
                 current_left_x += this->text_size;
 
-                const float uv_x = (character % print_console_struct.font_size) / static_cast<float>(print_console_struct.font_size);
-                const float uv_y = (character / print_console_struct.font_size) / static_cast<float>(print_console_struct.font_size);
+                const float uv_x = (character % print_console_struct.font_size) /
+                                   static_cast<float>(print_console_struct.font_size);
+                const float uv_y = (character / print_console_struct.font_size) /
+                                   static_cast<float>(print_console_struct.font_size);
 
                 const auto uv_up_left = glm::vec2(uv_x, uv_y);
-                const auto uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_console_struct.font_size)), uv_y);
-                const auto uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_console_struct.font_size)), (uv_y + 1.0f / static_cast<float>(print_console_struct.font_size)));
-                const auto uv_down_left = glm::vec2(uv_x, (uv_y + 1.0f / static_cast<float>(print_console_struct.font_size)));
+                const auto uv_up_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_console_struct.font_size)),
+                                                   uv_y);
+                const auto uv_down_right = glm::vec2(uv_x + (1.0f / static_cast<float>(print_console_struct.font_size)),
+                                                     (uv_y + 1.0f / static_cast<float>(print_console_struct.
+                                                          font_size)));
+                const auto uv_down_left = glm::vec2(
+                    uv_x, (uv_y + 1.0f / static_cast<float>(print_console_struct.font_size)));
 
                 uvs.emplace_back(uv_up_left);
                 uvs.emplace_back(uv_down_left);
@@ -419,17 +429,19 @@ namespace yli::ontology
         }
 
         render::render_text(
-                vertices,
-                uvs,
-                this->vao,
-                this->vertex_buffer,
-                this->uv_buffer,
-                this->vertex_position_in_screenspace_id,
-                this->vertex_uv_id);
+            vertices,
+            uvs,
+            this->vao,
+            this->vertex_buffer,
+            this->uv_buffer,
+            this->vertex_position_in_screenspace_id,
+            this->vertex_uv_id);
 
         if (print_console_struct.text_input != nullptr)
         {
-            PrintTextStruct print_text_struct { print_console_struct.font_size, this->universe.get_window_width() / this->text_size };
+            PrintTextStruct print_text_struct {
+                print_console_struct.font_size, this->universe.get_window_width() / this->text_size
+            };
             print_text_struct.position.x = current_left_x;
             print_text_struct.position.y = current_top_y;
             print_text_struct.position.horizontal_alignment = LEFT;
