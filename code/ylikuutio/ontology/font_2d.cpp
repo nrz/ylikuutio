@@ -31,7 +31,6 @@
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_text.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
