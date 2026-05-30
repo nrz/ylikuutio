@@ -185,7 +185,7 @@ namespace yli::ontology
 
         render::RenderSystem& render_system = this->universe.get_render_system();
 
-        Scene* const scene = this->get_scene();
+        const Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
@@ -205,7 +205,7 @@ namespace yli::ontology
 
     Scene* VectorFont::get_scene() const
     {
-        Entity* const material_parent = this->get_parent();
+        const Entity* const material_parent = this->get_parent();
 
         if (material_parent == nullptr) [[unlikely]]
         {
