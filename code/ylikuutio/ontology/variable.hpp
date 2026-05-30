@@ -155,7 +155,6 @@ namespace yli::ontology
 
             void activate() override;
 
-        public:
             // The variable value (may be a pointer a some datatype).
             data::AnyValue variable_value;
 
