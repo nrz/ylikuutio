@@ -62,8 +62,8 @@ namespace yli::ontology
     class Entity;
 
     std::optional<data::AnyValue> Symbiosis::bind_to_new_ecosystem_parent(
-            Symbiosis& symbiosis,
-            Ecosystem& new_parent)
+        Symbiosis& symbiosis,
+        Ecosystem& new_parent)
     {
         // Set pointer to `Symbiosis` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -72,7 +72,8 @@ namespace yli::ontology
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Symbiosis::bind_to_new_ecosystem_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `Symbiosis::bind_to_new_ecosystem_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_ecosystem_or_scene_parent)
@@ -90,14 +91,14 @@ namespace yli::ontology
         // `Ecosystem`s do not care in which `Ecosystem`s their apprentices reside,
         // so binding to an `Ecosystem` does not unbind any apprentices.
         symbiosis.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_symbioses);
+            &new_parent.parent_of_symbioses);
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> Symbiosis::bind_to_new_scene_parent(
-            Symbiosis& symbiosis,
-            Scene& new_parent)
+        Symbiosis& symbiosis,
+        Scene& new_parent)
     {
         // Set pointer to `symbiosis` to `nullptr`, set parent according to the input,
         // and request a new childID from `new_parent`.
@@ -106,7 +107,8 @@ namespace yli::ontology
 
         if (old_ecosystem_or_scene_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `Symbiosis::bind_to_new_scene_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `Symbiosis::bind_to_new_scene_parent`: `old_ecosystem_or_scene_parent` is `nullptr`!");
         }
 
         if (&new_parent == old_ecosystem_or_scene_parent)
@@ -123,14 +125,14 @@ namespace yli::ontology
 
         symbiosis.apprentice_of_pipeline.unbind_from_any_master_belonging_to_other_scene(new_parent);
         symbiosis.child_of_ecosystem_or_scene.unbind_and_bind_to_new_parent(
-                &new_parent.parent_of_symbioses);
+            &new_parent.parent_of_symbioses);
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> Symbiosis::bind_to_new_pipeline(
-            Symbiosis& symbiosis,
-            Pipeline& new_pipeline) noexcept
+        Symbiosis& symbiosis,
+        Pipeline& new_pipeline) noexcept
     {
         // Set pointer to `symbiosis` to `nullptr`, set pipeline according to the input,
         // and request a new apprenticeID from `new_pipeline`.
@@ -138,39 +140,40 @@ namespace yli::ontology
         // All apprentices of a master must belong to the same `Scene`
         // as the master if the master belongs to some `Scene`.
         if (symbiosis.get_scene() == new_pipeline.get_scene() ||
-                new_pipeline.get_scene() == nullptr)
+            new_pipeline.get_scene() == nullptr)
         {
             symbiosis.apprentice_of_pipeline.unbind_and_bind_to_new_generic_master_module(
-                    &new_pipeline.master_of_symbioses);
+                &new_pipeline.master_of_symbioses);
         }
         else
         {
-            std::cerr << "ERROR: `Symbiosis::bind_to_new_pipeline`: master and apprentice can not belong to different `Scene`s!\n";
+            std::cerr <<
+                    "ERROR: `Symbiosis::bind_to_new_pipeline`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
     }
 
     Symbiosis::Symbiosis(
-            core::Application& application,
-            Universe& universe,
-            const SymbiosisStruct& symbiosis_struct,
-            GenericParentModule* const ecosystem_or_scene_parent_module,
-            GenericMasterModule* const pipeline_master_module)
+        core::Application& application,
+        Universe& universe,
+        const SymbiosisStruct& symbiosis_struct,
+        GenericParentModule* const ecosystem_or_scene_parent_module,
+        GenericMasterModule* const pipeline_master_module)
         : Entity(application, universe, symbiosis_struct),
-        child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
-        parent_of_symbiont_materials(
-                *this,
-                this->registry,
-                "symbiont_materials"),
-        parent_of_abilities(
-                *this,
-                this->registry,
-                "abilities"),
-        apprentice_of_pipeline(pipeline_master_module, this),
-        master_of_holobionts(*this, &this->registry, "holobionts"),
-        model_filename     { symbiosis_struct.model_filename },
-        model_file_format  { symbiosis_struct.model_file_format }
+          child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
+          parent_of_symbiont_materials(
+              *this,
+              this->registry,
+              "symbiont_materials"),
+          parent_of_abilities(
+              *this,
+              this->registry,
+              "abilities"),
+          apprentice_of_pipeline(pipeline_master_module, this),
+          master_of_holobionts(*this, &this->registry, "holobionts"),
+          model_filename { symbiosis_struct.model_filename },
+          model_file_format { symbiosis_struct.model_file_format }
     {
         this->create_symbionts();
 
@@ -236,13 +239,13 @@ namespace yli::ontology
     std::size_t Symbiosis::get_number_of_children() const
     {
         return this->parent_of_symbiont_materials.get_number_of_children() +
-            this->parent_of_abilities.get_number_of_children();
+               this->parent_of_abilities.get_number_of_children();
     }
 
     std::size_t Symbiosis::get_number_of_descendants() const
     {
         return ontology::get_number_of_descendants(this->parent_of_symbiont_materials.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_abilities.child_pointer_vector);
+               ontology::get_number_of_descendants(this->parent_of_abilities.child_pointer_vector);
     }
 
     const std::string& Symbiosis::get_model_file_format() const
@@ -257,17 +260,17 @@ namespace yli::ontology
         const bool is_debug_mode = true;
 
         if (load::load_symbiosis(
-                    symbiosis_loader_struct,
-                    this->vertices,
-                    this->uvs,
-                    this->normals,
-                    this->ofbx_diffuse_texture_mesh_map,
-                    this->ofbx_meshes,
-                    this->ofbx_diffuse_texture_vector,
-                    this->ofbx_normal_texture_vector,
-                    this->ofbx_count_texture_vector,
-                    this->ofbx_mesh_count,
-                    is_debug_mode))
+            symbiosis_loader_struct,
+            this->vertices,
+            this->uvs,
+            this->normals,
+            this->ofbx_diffuse_texture_mesh_map,
+            this->ofbx_meshes,
+            this->ofbx_diffuse_texture_vector,
+            this->ofbx_normal_texture_vector,
+            this->ofbx_count_texture_vector,
+            this->ofbx_mesh_count,
+            is_debug_mode))
         {
             std::cout << "number of meshes: " << this->ofbx_mesh_count << "\n";
 
@@ -294,7 +297,8 @@ namespace yli::ontology
                 std::stringstream memory_address_stringstream;
                 memory_address_stringstream << "0x" << std::hex << memory_address;
 
-                std::cout << "Creating `SymbiontMaterial*` based on `ofbx::Texture*` at 0x" << memory_address_stringstream.str() << " ...\n";
+                std::cout << "Creating `SymbiontMaterial*` based on `ofbx::Texture*` at 0x" <<
+                        memory_address_stringstream.str() << " ...\n";
                 SymbiontMaterialStruct symbiont_material_struct { Request(this) };
                 symbiont_material_struct.ofbx_texture = ofbx_texture;
 
@@ -310,10 +314,18 @@ namespace yli::ontology
                     SymbiontSpeciesStruct symbiont_species_struct { Request(symbiont_material) };
                     symbiont_species_struct.model_loader_struct.model_filename = this->model_filename;
                     symbiont_species_struct.model_loader_struct.model_file_format = this->model_file_format;
-                    symbiont_species_struct.vertex_count = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i).size() : 0;
-                    symbiont_species_struct.vertices = mesh_i < this->vertices.size() ? this->vertices.at(mesh_i) : std::vector<glm::vec3>();
-                    symbiont_species_struct.uvs = mesh_i < this->uvs.size() ? this->uvs.at(mesh_i) : std::vector<glm::vec2>();
-                    symbiont_species_struct.normals = mesh_i < this->normals.size() ? this->normals.at(mesh_i) : std::vector<glm::vec3>();
+                    symbiont_species_struct.vertex_count = mesh_i < this->vertices.size()
+                                                               ? this->vertices.at(mesh_i).size()
+                                                               : 0;
+                    symbiont_species_struct.vertices = mesh_i < this->vertices.size()
+                                                           ? this->vertices.at(mesh_i)
+                                                           : std::vector<glm::vec3>();
+                    symbiont_species_struct.uvs = mesh_i < this->uvs.size()
+                                                      ? this->uvs.at(mesh_i)
+                                                      : std::vector<glm::vec2>();
+                    symbiont_species_struct.normals = mesh_i < this->normals.size()
+                                                          ? this->normals.at(mesh_i)
+                                                          : std::vector<glm::vec3>();
                     symbiont_species_struct.model_loader_struct.mesh_i = mesh_i;
 
                     std::cout << "Creating SymbiontSpecies*, mesh index " << mesh_i << "...\n";
@@ -322,9 +334,11 @@ namespace yli::ontology
 
                     std::cout << "yli::ontology::SymbiontSpecies*, mesh index " << mesh_i << " successfully created.\n";
 
-                    std::cout << "storing SymbiontMaterial* symbiont_material into vector with mesh_i " << mesh_i << " ...\n";
+                    std::cout << "storing SymbiontMaterial* symbiont_material into vector with mesh_i " << mesh_i <<
+                            " ...\n";
                     this->biontID_symbiont_material_vector.at(mesh_i) = symbiont_material;
-                    std::cout << "storing SymbiontSpecies* symbiont_species into vector with mesh_i " << mesh_i << " ...\n";
+                    std::cout << "storing SymbiontSpecies* symbiont_species into vector with mesh_i " << mesh_i <<
+                            " ...\n";
                     this->biontID_symbiont_species_vector.at(mesh_i) = symbiont_species;
 
                     std::cout << "Success.\n";
@@ -343,7 +357,7 @@ namespace yli::ontology
         }
 
         return static_cast<SymbiontMaterial*>(
-                this->parent_of_symbiont_materials.child_pointer_vector.at(symbiont_material_i));
+            this->parent_of_symbiont_materials.child_pointer_vector.at(symbiont_material_i));
     }
 
     SymbiontSpecies* Symbiosis::get_symbiont_species(const std::size_t biontID) const
