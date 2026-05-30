@@ -40,20 +40,20 @@ namespace yli::ontology
     }
 
     GlyphObject::GlyphObject(
-            core::Application& application,
-            Universe& universe,
-            const GlyphObjectStruct& glyph_object_struct,
-            GenericParentModule* const scene_parent_module,
-            GenericMasterModule* const glyph_master_module,
-            GenericMasterModule* const text_3d_master_module)
+        core::Application& application,
+        Universe& universe,
+        const GlyphObjectStruct& glyph_object_struct,
+        GenericParentModule* const scene_parent_module,
+        GenericMasterModule* const glyph_master_module,
+        GenericMasterModule* const text_3d_master_module)
         : Movable(
-                application,
-                universe,
-                glyph_object_struct,
-                nullptr),
-        child_of_scene(scene_parent_module, *this),
-        apprentice_of_glyph(glyph_master_module, this),
-        apprentice_of_text_3d(text_3d_master_module, this)
+              application,
+              universe,
+              glyph_object_struct,
+              nullptr),
+          child_of_scene(scene_parent_module, *this),
+          apprentice_of_glyph(glyph_master_module, this),
+          apprentice_of_text_3d(text_3d_master_module, this)
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::GlyphObject*";

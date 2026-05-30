@@ -41,29 +41,31 @@ namespace yli::ontology
 
     class GlyphObject final : public Movable
     {
-        public:
-            GlyphObject(
-                    core::Application& application,
-                    Universe& universe,
-                    const GlyphObjectStruct& glyph_object_struct,
-                    GenericParentModule* scene_parent_module,
-                    GenericMasterModule* glyph_master_module,
-                    GenericMasterModule* text_3d_master_module);
+    public:
+        GlyphObject(
+            core::Application& application,
+            Universe& universe,
+            const GlyphObjectStruct& glyph_object_struct,
+            GenericParentModule* scene_parent_module,
+            GenericMasterModule* glyph_master_module,
+            GenericMasterModule* text_3d_master_module);
 
-            GlyphObject(const GlyphObject&) = delete;            // Delete copy constructor.
-            GlyphObject &operator=(const GlyphObject&) = delete; // Delete copy assignment.
+        GlyphObject(const GlyphObject&) = delete; // Delete copy constructor.
+        GlyphObject& operator=(const GlyphObject&) = delete; // Delete copy assignment.
 
-            ~GlyphObject() override = default;
+        ~GlyphObject() override = default;
 
-            Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        Entity* get_parent() const override;
 
-            Scene* get_scene() const override;
+        std::size_t get_number_of_children() const override;
 
-            ChildModule child_of_scene;
-            ApprenticeModule apprentice_of_glyph;
-            ApprenticeModule apprentice_of_text_3d;
+        std::size_t get_number_of_descendants() const override;
+
+        Scene* get_scene() const override;
+
+        ChildModule child_of_scene;
+        ApprenticeModule apprentice_of_glyph;
+        ApprenticeModule apprentice_of_text_3d;
     };
 }
 
