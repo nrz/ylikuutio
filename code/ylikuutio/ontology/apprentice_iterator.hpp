@@ -91,7 +91,7 @@ namespace yli::ontology
                 return temp;
             }
 
-            Entity* operator*()
+            Entity* operator*() const
             {
                 ApprenticeModule* const apprentice_module = *(this->it);
 
