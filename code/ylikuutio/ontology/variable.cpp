@@ -41,16 +41,16 @@ namespace yli::ontology
     class Scene;
 
     Variable::Variable(
-            core::Application& application,
-            Universe& universe,
-            const VariableStruct& variable_struct,
-            GenericParentModule* const entity_parent_module,
-            data::AnyValue&& any_value)
+        core::Application& application,
+        Universe& universe,
+        const VariableStruct& variable_struct,
+        GenericParentModule* const entity_parent_module,
+        data::AnyValue&& any_value)
         : Entity(application, universe, variable_struct),
-        child_of_entity(entity_parent_module, *this),
-        variable_value    { std::move(any_value) },
-        activate_callback { variable_struct.activate_callback },
-        read_callback     { variable_struct.read_callback }
+          child_of_entity(entity_parent_module, *this),
+          variable_value { std::move(any_value) },
+          activate_callback { variable_struct.activate_callback },
+          read_callback { variable_struct.read_callback }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Variable*";
@@ -145,8 +145,8 @@ namespace yli::ontology
     // Public callbacks.
 
     std::optional<data::AnyValue> Variable::set_variable_const_std_string(
-            Variable& variable,
-            const std::string& new_value)
+        Variable& variable,
+        const std::string& new_value)
     {
         // Usage:
         // to set variable: set2 <variable-name> <variable-value>
@@ -157,9 +157,9 @@ namespace yli::ontology
     }
 
     std::optional<data::AnyValue> Variable::set_variable_variable(
-            Variable& dest_variable,
-            const Universe&,              // A context is needed so that correct `Variable` is bound to the function call.
-            const Variable& src_variable)
+        Variable& dest_variable,
+        const Universe&, // A context is needed so that correct `Variable` is bound to the function call.
+        const Variable& src_variable)
     {
         // Usage:
         // to set variable: set <dest-variable-name> <src-variable-name>
@@ -177,9 +177,9 @@ namespace yli::ontology
     }
 
     std::optional<data::AnyValue> Variable::print_value1(
-            Console& console,
-            const Universe&,          // A context is needed so that correct `Variable` is bound to the function call.
-            const Variable& variable)
+        Console& console,
+        const Universe&, // A context is needed so that correct `Variable` is bound to the function call.
+        const Variable& variable)
     {
         // Usage:
         // to get variable value: get1 <variable-name>

@@ -46,125 +46,131 @@
 
 namespace yli::core
 {
-    class Application;
+        class Application;
 }
 
 namespace yli::memory
 {
-    template<typename T1, std::size_t DataSize>
+        template<typename T1, std::size_t DataSize>
         class MemoryStorage;
 }
 
 namespace yli::ontology
 {
-    class GenericParentModule;
-    class Entity;
-    class Universe;
-    class Scene;
-    class Console;
-    struct VariableStruct;
+        class GenericParentModule;
+        class Entity;
+        class Universe;
+        class Scene;
+        class Console;
+        struct VariableStruct;
 
-    class Variable final : public Entity
-    {
-            Variable(
-                    core::Application& application,
-                    Universe& universe,
-                    const VariableStruct& variable_struct,
-                    GenericParentModule* entity_parent_module,
-                    data::AnyValue&& any_value);
+        class Variable final : public Entity
+        {
+                Variable(
+                        core::Application& application,
+                        Universe& universe,
+                        const VariableStruct& variable_struct,
+                        GenericParentModule* entity_parent_module,
+                        data::AnyValue&& any_value);
 
-            ~Variable() override = default;
+                ~Variable() override = default;
 
         public:
-            Variable(const Variable&) = delete;            // Delete copy constructor.
-            Variable& operator=(const Variable&) = delete; // Delete copy assignment.
+                Variable(const Variable&) = delete; // Delete copy constructor.
+                Variable& operator=(const Variable&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+                Entity* get_parent() const override;
 
-            Scene* get_scene() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+                Scene* get_scene() const override;
 
-            std::string help() const override;
+                std::size_t get_number_of_children() const override;
 
-            std::optional<data::AnyValue> get() const;
-            void set(const data::AnyValue& new_value);
-            void set(const std::string& new_value);
+                std::size_t get_number_of_descendants() const override;
 
-            // Public callbacks.
+                std::string help() const override;
 
-            static std::optional<data::AnyValue> set_variable_const_std_string(
-                    Variable& variable,
-                    const std::string& new_value);
+                std::optional<data::AnyValue> get() const;
 
-            static std::optional<data::AnyValue> set_variable_variable(
-                    Variable& dest_variable,
-                    const Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
-                    const Variable& src_variable);
+                void set(const data::AnyValue& new_value);
 
-            static std::optional<data::AnyValue> print_value1(
-                    Console& console,
-                    const Universe&,         // A context is needed so that correct `Variable` is bound to the function call.
-                    const Variable& variable);
+                void set(const std::string& new_value);
 
-            static std::optional<data::AnyValue> activate_framebuffer_width(
-                    Entity& entity,
-                    Variable& variable);
+                // Public callbacks.
 
-            static std::optional<data::AnyValue> activate_framebuffer_height(
-                    Entity& entity,
-                    Variable& variable);
+                static std::optional<data::AnyValue> set_variable_const_std_string(
+                        Variable& variable,
+                        const std::string& new_value);
 
-            static std::optional<data::AnyValue> activate_background_color(
-                    Entity& entity,
-                    Variable& variable);
+                static std::optional<data::AnyValue> set_variable_variable(
+                        Variable& dest_variable,
+                        const Universe&,
+                        // A context is needed so that correct `Variable` is bound to the function call.
+                        const Variable& src_variable);
 
-            static std::optional<data::AnyValue> activate_wireframe(
-                    Entity& entity,
-                    Variable& variable);
+                static std::optional<data::AnyValue> print_value1(
+                        Console& console,
+                        const Universe&,
+                        // A context is needed so that correct `Variable` is bound to the function call.
+                        const Variable& variable);
 
-            static std::optional<data::AnyValue> activate_speed(
-                    Entity& entity,
-                    Variable& variable);
+                static std::optional<data::AnyValue> activate_framebuffer_width(
+                        Entity& entity,
+                        Variable& variable);
 
-            static std::optional<data::AnyValue> activate_turbo_factor(
-                    Entity& entity,
-                    Variable& variable);
+                static std::optional<data::AnyValue> activate_framebuffer_height(
+                        Entity& entity,
+                        Variable& variable);
 
-            static std::optional<data::AnyValue> activate_twin_turbo_factor(
-                    Entity& entity,
-                    Variable& variable);
+                static std::optional<data::AnyValue> activate_background_color(
+                        Entity& entity,
+                        Variable& variable);
 
-            static std::optional<data::AnyValue> activate_mouse_speed(
-                    Entity& entity,
-                    Variable& variable);
+                static std::optional<data::AnyValue> activate_wireframe(
+                        Entity& entity,
+                        Variable& variable);
 
-            static std::optional<data::AnyValue> activate_is_flight_mode_in_use(
-                    Entity& entity,
-                    Variable& variable);
+                static std::optional<data::AnyValue> activate_speed(
+                        Entity& entity,
+                        Variable& variable);
 
-            static std::optional<data::AnyValue> read_is_flight_mode_in_use(
-                    Entity& entity);
+                static std::optional<data::AnyValue> activate_turbo_factor(
+                        Entity& entity,
+                        Variable& variable);
 
-            // Public callbacks and here.
+                static std::optional<data::AnyValue> activate_twin_turbo_factor(
+                        Entity& entity,
+                        Variable& variable);
 
-            template<typename T1, std::size_t DataSize>
+                static std::optional<data::AnyValue> activate_mouse_speed(
+                        Entity& entity,
+                        Variable& variable);
+
+                static std::optional<data::AnyValue> activate_is_flight_mode_in_use(
+                        Entity& entity,
+                        Variable& variable);
+
+                static std::optional<data::AnyValue> read_is_flight_mode_in_use(
+                        Entity& entity);
+
+                // Public callbacks and here.
+
+                template<typename T1, std::size_t DataSize>
                 friend class memory::MemoryStorage;
 
-            ChildModule child_of_entity;
+                ChildModule child_of_entity;
 
-            void activate() override;
+                void activate() override;
 
-            // The variable value (may be a pointer a some datatype).
-            data::AnyValue variable_value;
+                // The variable value (may be a pointer a some datatype).
+                data::AnyValue variable_value;
 
         private:
-            // pointer to `ActivateCallback` used to activate the new value after variable it.
-            ActivateCallback activate_callback;
+                // pointer to `ActivateCallback` used to activate the new value after variable it.
+                ActivateCallback activate_callback;
 
-            // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `variable_value` of `class Variable`.
-            ReadCallback read_callback;
-    };
+                // pointer to `ReadCallback` used to read the value. Leave to `nullptr` to read the value from `variable_value` of `class Variable`.
+                ReadCallback read_callback;
+        };
 }
 
 #endif
