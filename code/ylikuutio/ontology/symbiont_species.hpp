@@ -72,10 +72,6 @@ namespace yli::ontology
 
             std::size_t get_number_of_apprentices() const;
 
-        private:
-            void bind_to_parent() noexcept;
-
-        public:
             GenericMasterModule* get_renderables_container() const;
             Scene* get_scene() const override;
 
