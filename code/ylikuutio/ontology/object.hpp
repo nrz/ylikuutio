@@ -127,7 +127,7 @@ namespace yli::ontology
             void render(const Scene* target_scene);
 
         private:
-            void render_this_object(Pipeline* pipeline);
+            void render_this_object(const Pipeline* pipeline);
 
             template<typename T1, std::size_t DataSize>
                 friend class memory::MemoryStorage;

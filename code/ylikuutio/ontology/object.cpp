@@ -168,7 +168,7 @@ namespace yli::ontology
         this->render_this_object(this->get_pipeline());
     }
 
-    void Object::render_this_object(Pipeline* const pipeline)
+    void Object::render_this_object(const Pipeline* const pipeline)
     {
         if (pipeline == nullptr) [[unlikely]]
         {
@@ -193,9 +193,9 @@ namespace yli::ontology
         }
 
         this->model_matrix = glm::scale(this->model_matrix, this->scale * this->original_scale_vector);
-        glm::vec3 euler_angles { this->orientation.roll, -this->orientation.pitch, this->orientation.yaw };
-        glm::quat my_quaternion = glm::quat(euler_angles);
-        glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
+        const glm::vec3 euler_angles { this->orientation.roll, -this->orientation.pitch, this->orientation.yaw };
+        const glm::quat my_quaternion = glm::quat(euler_angles);
+        const glm::mat4 rotation_matrix = glm::mat4_cast(my_quaternion);
         this->model_matrix = rotation_matrix * this->model_matrix;
         this->model_matrix[3][0] = this->location.get_x();
         this->model_matrix[3][1] = this->location.get_y();
@@ -218,9 +218,9 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Object::render_this_object`: Vulkan is not supported yet!");
         }
 
-        MeshModule* master_model = nullptr;
+        const MeshModule* master_model = nullptr;
 
-        Species* const master_species = static_cast<Species*>(this->apprentice_of_species.get_master());
+        const Species* const master_species = static_cast<Species*>(this->apprentice_of_species.get_master());
 
         if (master_species != nullptr)
         {
@@ -405,12 +405,12 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        float float_x = std::get<float>(x_any_value.data);
-        float float_y = std::get<float>(y_any_value.data);
-        float float_z = std::get<float>(z_any_value.data);
-        float float_roll = std::get<float>(roll_any_value.data);
-        float float_yaw = std::get<float>(yaw_any_value.data);
-        float float_pitch = std::get<float>(pitch_any_value.data);
+        const float float_x = std::get<float>(x_any_value.data);
+        const float float_y = std::get<float>(y_any_value.data);
+        const float float_z = std::get<float>(z_any_value.data);
+        const float float_roll = std::get<float>(roll_any_value.data);
+        const float float_yaw = std::get<float>(yaw_any_value.data);
+        const float float_pitch = std::get<float>(pitch_any_value.data);
 
         ObjectStruct object_struct { Request<Scene>(&parent) };
         object_struct.species_master = Request(&species);

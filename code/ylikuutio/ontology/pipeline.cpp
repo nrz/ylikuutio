@@ -177,7 +177,7 @@ namespace yli::ontology
             return;
         }
 
-        Scene* const scene = this->get_scene();
+        const Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
