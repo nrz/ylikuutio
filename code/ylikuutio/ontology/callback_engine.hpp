@@ -38,7 +38,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -73,60 +73,66 @@ namespace yli::ontology
         //    `CallbackParameter` for each parameter, give `CallbackObject`
         //    as input parameter for the `CallbackParameter` constructor.
 
-        protected:
-            CallbackEngine(
-                    core::Application& application,
-                    Universe& universe,
-                    const CallbackEngineStruct&,
-                    GenericParentModule* entity_parent_module);
-            ~CallbackEngine() override = default;
+    protected:
+        CallbackEngine(
+            core::Application& application,
+            Universe& universe,
+            const CallbackEngineStruct&,
+            GenericParentModule* entity_parent_module);
 
-        public:
-            CallbackObject* create_callback_object();
-            CallbackObject* create_callback_object(
-                    InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
+        ~CallbackEngine() override = default;
 
-            // execute all callbacks with a parameter.
-            std::optional<data::AnyValue> execute(const data::AnyValue& any_value) override;
+    public:
+        CallbackObject* create_callback_object();
 
-            std::size_t get_n_of_return_values() const;
-            std::optional<data::AnyValue> get_nth_return_value(std::size_t n) const;
-            std::optional<data::AnyValue> get_previous_return_value() const;
+        CallbackObject* create_callback_object(
+            InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback);
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        // execute all callbacks with a parameter.
+        std::optional<data::AnyValue> execute(const data::AnyValue& any_value) override;
 
-            Entity* get_parent() const override;
-            Scene* get_scene() const override;
+        std::size_t get_n_of_return_values() const;
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        std::optional<data::AnyValue> get_nth_return_value(std::size_t n) const;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        std::optional<data::AnyValue> get_previous_return_value() const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            ChildModule child_of_entity;
-            GenericParentModule parent_of_callback_objects;
-            GenericMasterModule master_of_movable_controllers;
+        Entity* get_parent() const override;
 
-        private:
-            std::vector<std::optional<data::AnyValue>> return_values;
+        Scene* get_scene() const override;
+
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
+
+        std::size_t get_number_of_children() const override;
+
+        std::size_t get_number_of_descendants() const override;
+
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+        ChildModule child_of_entity;
+        GenericParentModule parent_of_callback_objects;
+        GenericMasterModule master_of_movable_controllers;
+
+    private:
+        std::vector<std::optional<data::AnyValue>> return_values;
     };
 
     template<>
-        inline GenericParentModule* CallbackEngine::get_generic_parent_module<CallbackObject>()
-        {
-            return &this->parent_of_callback_objects;
-        }
+    inline GenericParentModule* CallbackEngine::get_generic_parent_module<CallbackObject>()
+    {
+        return &this->parent_of_callback_objects;
+    }
 
     template<>
-        inline GenericMasterModule* CallbackEngine::get_generic_master_module<MovableController>()
-        {
-            return &this->master_of_movable_controllers;
-        }
+    inline GenericMasterModule* CallbackEngine::get_generic_master_module<MovableController>()
+    {
+        return &this->master_of_movable_controllers;
+    }
 }
 
 #endif

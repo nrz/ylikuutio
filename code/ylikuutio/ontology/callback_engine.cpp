@@ -36,20 +36,20 @@ namespace yli::ontology
     struct CallbackEngineStruct;
 
     CallbackEngine::CallbackEngine(
-            core::Application& application,
-            Universe& universe,
-            const CallbackEngineStruct&,
-            GenericParentModule* const entity_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const CallbackEngineStruct&,
+        GenericParentModule* const entity_parent_module)
         : GenericCallbackEngine(application, universe, GenericCallbackEngineStruct()),
-        child_of_entity(entity_parent_module, *this),
-        parent_of_callback_objects(
-                *this,
-                this->registry,
-                "callback_objects"),
-        master_of_movable_controllers(
-                *this,
-                &this->registry,
-                "movable_controllers")
+          child_of_entity(entity_parent_module, *this),
+          parent_of_callback_objects(
+              *this,
+              this->registry,
+              "callback_objects"),
+          master_of_movable_controllers(
+              *this,
+              &this->registry,
+              "movable_controllers")
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::CallbackEngine*";
@@ -64,7 +64,7 @@ namespace yli::ontology
     }
 
     CallbackObject* CallbackEngine::create_callback_object(
-            const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
+        const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
     {
         const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
@@ -83,7 +83,7 @@ namespace yli::ontology
         for (std::size_t child_i = 0; child_i < this->parent_of_callback_objects.child_pointer_vector.size(); child_i++)
         {
             const auto callback_object_pointer = static_cast<CallbackObject*>(
-                    this->parent_of_callback_objects.child_pointer_vector.at(child_i));
+                this->parent_of_callback_objects.child_pointer_vector.at(child_i));
 
             if (callback_object_pointer != nullptr)
             {
