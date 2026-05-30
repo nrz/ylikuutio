@@ -1,4 +1,4 @@
-t// Ylikuutio - A 3D game and simulation engine.
+// Ylikuutio - A 3D game and simulation engine.
 //
 // Copyright (C) 2015-2026 Antti Nuortimo.
 //
