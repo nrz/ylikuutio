@@ -74,7 +74,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -88,53 +88,57 @@ namespace yli::ontology
 
     class Camera final : public Movable
     {
-        private:
-            Camera(
-                    core::Application& application,
-                    Universe& universe,
-                    const CameraStruct& camera_struct,
-                    GenericParentModule* scene_parent_module,
-                    GenericMasterModule* movable_controller_master_module);
+    private:
+        Camera(
+            core::Application& application,
+            Universe& universe,
+            const CameraStruct& camera_struct,
+            GenericParentModule* scene_parent_module,
+            GenericMasterModule* movable_controller_master_module);
 
-            ~Camera() override = default;
+        ~Camera() override = default;
 
-        public:
-            Camera(const Camera&) = delete;            // Delete copy constructor.
-            Camera& operator=(const Camera&) = delete; // Delete copy assignment.
+    public:
+        Camera(const Camera&) = delete; // Delete copy constructor.
+        Camera& operator=(const Camera&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            void activate() override;
+        void activate() override;
 
-            void render() const;
+        void render() const;
 
-            void compute_and_update_matrices_from_inputs(float initial_fov, float aspect_ratio, float znear, float zfar);
+        void compute_and_update_matrices_from_inputs(float initial_fov, float aspect_ratio, float znear, float zfar);
 
-            const glm::mat4& get_projection_matrix() const;
-            void set_projection_matrix(const glm::mat4 &projection_matrix);
+        const glm::mat4& get_projection_matrix() const;
 
-            const glm::mat4& get_view_matrix() const;
-            void set_view_matrix(const glm::mat4 &view_matrix);
+        void set_projection_matrix(const glm::mat4& projection_matrix);
 
-            GLuint get_camera_uniform_block() const;
+        const glm::mat4& get_view_matrix() const;
 
-            friend class Universe;
+        void set_view_matrix(const glm::mat4& view_matrix);
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        GLuint get_camera_uniform_block() const;
 
-            ChildModule child_of_scene;
+        friend class Universe;
 
-            Scene* get_scene() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-        private:
-            // variables related to the projection.
-            glm::mat4 projection_matrix { glm::mat4(1.0f) }; // identity matrix (dummy value).
-            glm::mat4 view_matrix { glm::mat4(1.0f) };       // identity matrix (dummy value).
+        ChildModule child_of_scene;
 
-            GLuint camera_uniform_block { 0 };
+        Scene* get_scene() const override;
+
+        std::size_t get_number_of_children() const override;
+
+        std::size_t get_number_of_descendants() const override;
+
+    private:
+        // variables related to the projection.
+        glm::mat4 projection_matrix { glm::mat4(1.0f) }; // identity matrix (dummy value).
+        glm::mat4 view_matrix { glm::mat4(1.0f) }; // identity matrix (dummy value).
+
+        GLuint camera_uniform_block { 0 };
     };
 }
 

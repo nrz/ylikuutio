@@ -55,24 +55,25 @@ namespace yli::ontology
     class Entity;
 
     Camera::Camera(
-            core::Application& application,
-            Universe& universe,
-            const CameraStruct& camera_struct,
-            GenericParentModule* const scene_parent_module,
-            GenericMasterModule* const movable_controller_master_module)
+        core::Application& application,
+        Universe& universe,
+        const CameraStruct& camera_struct,
+        GenericParentModule* const scene_parent_module,
+        GenericMasterModule* const movable_controller_master_module)
         : Movable(
-                application,
-                universe,
-                camera_struct,
-                movable_controller_master_module),
-        child_of_scene(scene_parent_module, *this)
+              application,
+              universe,
+              camera_struct,
+              movable_controller_master_module),
+          child_of_scene(scene_parent_module, *this)
     {
         if (this->universe.get_is_opengl_in_use())
         {
             // Uniform block for this `Camera`.
             glGenBuffers(1, &this->camera_uniform_block);
             glBindBuffer(GL_UNIFORM_BUFFER, this->camera_uniform_block);
-            glBufferData(GL_UNIFORM_BUFFER, opengl::camera_ubo::CameraUboBlockOffsets::TOTAL_SIZE, nullptr, GL_STATIC_DRAW);
+            glBufferData(GL_UNIFORM_BUFFER, opengl::camera_ubo::CameraUboBlockOffsets::TOTAL_SIZE, nullptr,
+                         GL_STATIC_DRAW);
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
         }
         else if (this->universe.get_is_vulkan_in_use())
@@ -122,7 +123,8 @@ namespace yli::ontology
         return 0; // `Camera` has no children.
     }
 
-    void Camera::compute_and_update_matrices_from_inputs(const float initial_fov, const float aspect_ratio, const float znear, const float zfar)
+    void Camera::compute_and_update_matrices_from_inputs(const float initial_fov, const float aspect_ratio,
+                                                         const float znear, const float zfar)
     {
         // Compute the projection matrix.
         this->set_projection_matrix(glm::perspective(
@@ -133,9 +135,10 @@ namespace yli::ontology
 
         // Compute the view matrix.
         this->set_view_matrix(glm::lookAt(
-            this->location.xyz,                   // Camera coordinates.
-            this->location.xyz + this->direction, // Camera looks here: at the same position, plus "current_camera_direction".
-            this->up));                           // Head is up (set to 0,-1,0 to look upside-down).
+            this->location.xyz, // Camera coordinates.
+            this->location.xyz + this->direction,
+            // Camera looks here: at the same position, plus "current_camera_direction".
+            this->up)); // Head is up (set to 0,-1,0 to look upside-down).
     }
 
     const glm::mat4& Camera::get_projection_matrix() const
