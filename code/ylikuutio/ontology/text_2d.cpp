@@ -18,17 +18,9 @@
 #include "text_2d.hpp"
 #include "universe.hpp"
 #include "font_2d.hpp"
-#include "horizontal_alignment.hpp"
-#include "vertical_alignment.hpp"
 #include "text_struct.hpp"
 #include "print_text_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
 
 // Include standard headers
 #include <cstddef>   // std::size_t
@@ -36,8 +28,6 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
-#include <variant>   // std::holds_alternative
-#include <vector>    // std::vector
 
 namespace yli::core
 {
