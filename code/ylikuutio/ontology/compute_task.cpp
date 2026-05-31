@@ -331,7 +331,7 @@ namespace yli::ontology
                     0,                                  // stride
                     nullptr                             // array buffer offset
                     );
-            yli::opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
+            opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
             glBindBuffer(GL_ARRAY_BUFFER, this->uv_buffer);
