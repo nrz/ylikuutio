@@ -87,7 +87,7 @@ namespace yli::ontology
 
         Result execute(const std::vector<std::string>& parameter_vector) override
         {
-            ConsoleLispFunction* const console_lisp_function_parent =
+            const auto console_lisp_function_parent =
                     static_cast<ConsoleLispFunction*>(this->get_parent());
 
             if (console_lisp_function_parent == nullptr) [[unlikely]]
@@ -96,7 +96,7 @@ namespace yli::ontology
                     "ERROR: `ConsoleLispFunctionOverload::execute`: `console_lisp_function_parent` is `nullptr`!");
             }
 
-            Console* const console_parent_of_lisp_function =
+            const auto console_parent_of_lisp_function =
                     static_cast<Console*>(console_lisp_function_parent->get_parent());
 
             if (console_parent_of_lisp_function == nullptr) [[unlikely]]
