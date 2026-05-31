@@ -73,8 +73,8 @@ namespace yli::render
                 // This function renders everything.
                 static void render(const RenderStruct& render_struct);
 
-                void render_pipelines_of_ecosystems(ontology::GenericParentModule& parent,
-                                                    const ontology::Scene* scene) const;
+                static void render_pipelines_of_ecosystems(ontology::GenericParentModule& parent,
+                                                           const ontology::Scene* scene);
 
                 static void render_pipelines_of_an_ecosystem(ontology::ParentOfPipelinesModule& parent,
                                                              const ontology::Scene* scene);

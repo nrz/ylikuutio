@@ -210,7 +210,7 @@ namespace yli::render
     }
 
     void RenderSystem::render_pipelines_of_ecosystems(ontology::GenericParentModule& parent,
-                                                      const ontology::Scene* const scene) const
+                                                      const ontology::Scene* const scene)
     {
         for (auto it = parent.begin(); it != parent.end(); ++it)
         {
