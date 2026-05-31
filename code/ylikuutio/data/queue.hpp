@@ -75,7 +75,7 @@ namespace yli::data
             return this->queue_size;
         }
 
-        std::size_t max_size() const
+        static std::size_t max_size()
         {
             return QueueMaxSize;
         }
