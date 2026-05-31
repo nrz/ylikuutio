@@ -36,7 +36,7 @@ namespace yli::sdl
     [[nodiscard]] std::vector<SDL_DisplayMode> get_display_modes(render::GraphicsApiBackend graphics_api_backend);
 
     [[nodiscard]] SDL_Window* create_window(
-            SDL_DisplayID displayid,
+            SDL_DisplayID display_id,
             int window_width,
             int window_height,
             const char* title,
