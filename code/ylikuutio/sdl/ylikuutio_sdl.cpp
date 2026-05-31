@@ -223,7 +223,8 @@ namespace yli::sdl
     void flush_sdl_event_queue()
     {
         SDL_Event sdl_event;
-        while (SDL_PollEvent(&sdl_event));
+        while (SDL_PollEvent(&sdl_event))
+        { }
     }
 
     void print_sdl_error()
