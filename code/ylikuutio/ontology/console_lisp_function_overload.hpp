@@ -129,7 +129,7 @@ namespace yli::ontology
         }
 
     private:
-        template<typename Tag>
+        template<typename>
         static std::optional<std::tuple<>> process_args(
             std::size_t,
             Universe&,
@@ -151,7 +151,7 @@ namespace yli::ontology
             return std::nullopt;
         }
 
-        template<typename Tag, typename T1, typename... RestTypes>
+        template<typename, typename T1, typename... RestTypes>
         std::optional<std::tuple<typename data::WrapAllButStrings<T1>::type, typename data::WrapAllButStrings<
             RestTypes>::type...>> process_args(
             const std::size_t tag,
