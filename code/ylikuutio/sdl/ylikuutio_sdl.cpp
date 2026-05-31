@@ -153,7 +153,7 @@ namespace yli::sdl
         throw std::runtime_error("ERROR: `yli::sdl::create_window`: creating window failed!");
     }
 
-    [[nodiscard]] SDL_Window* create_hidden_window(SDL_DisplayID display_id, const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
+    [[nodiscard]] SDL_Window* create_hidden_window(const SDL_DisplayID display_id, const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
     {
         Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN; // `Uint32` is a SDL datatype.
 
@@ -196,7 +196,7 @@ namespace yli::sdl
         throw std::runtime_error("ERROR: `yli::sdl::set_window_windowed`: setting window to windowed failed!");
     }
 
-    [[nodiscard]] bool make_context_current(SDL_Window* window, SDL_GLContext context)
+    [[nodiscard]] bool make_context_current(SDL_Window* window, const SDL_GLContext context)
     {
         if (SDL_GL_MakeCurrent(window, context))
         {
