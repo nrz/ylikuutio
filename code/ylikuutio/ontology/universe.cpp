@@ -197,7 +197,7 @@ namespace yli::ontology
         else
         {
             render::RenderSystemStruct render_system_struct;
-            this->render_system = std::make_unique<render::RenderSystem>(this, render_system_struct);
+            this->render_system = std::make_unique<render::RenderSystem>(*this, render_system_struct);
         }
 
         // `Entity` member variables begin here.

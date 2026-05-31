@@ -52,30 +52,24 @@
 
 namespace yli::render
 {
-    RenderSystem::RenderSystem(ontology::Universe* const universe, const RenderSystemStruct& render_system_struct)
+    RenderSystem::RenderSystem(ontology::Universe& universe, const RenderSystemStruct& render_system_struct)
         : universe { universe },
           hidden_window_title { render_system_struct.hidden_window_title },
-          hidden_window_width { universe != nullptr ? universe->get_window_width() : 0 },
-          hidden_window_height { universe != nullptr ? universe->get_window_height() : 0 },
+          hidden_window_width { universe.get_window_width() },
+          hidden_window_height { universe.get_window_height() },
           is_hidden_window_fullscreen { render_system_struct.is_hidden_window_fullscreen }
     {
         // Open a window and create its OpenGL context.
         std::cout << "Opening a window and creating its OpenGL context...\n";
 
-        if (universe == nullptr)
-        {
-            std::cerr << "ERROR: `RenderSystem::RenderSystem`: `universe` is `nullptr`!\n";
-            return;
-        }
-
-        if (!universe->display_mode)
+        if (!universe.display_mode)
         {
             std::cerr << "ERROR: `RenderSystem::RenderSystem`: `!universe->display_mode` is `std::nullopt`!\n";
             return;
         }
 
         this->hidden_sdl_window = sdl::create_hidden_window(
-            universe->display_mode->displayID,
+            universe.display_mode->displayID,
             static_cast<int>(this->hidden_window_width),
             static_cast<int>(this->hidden_window_height),
             this->hidden_window_title.c_str(),

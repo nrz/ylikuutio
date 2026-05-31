@@ -47,7 +47,7 @@ namespace yli::render
         class RenderSystem final
         {
         public:
-                RenderSystem(ontology::Universe* universe, const RenderSystemStruct& render_system_struct);
+                RenderSystem(ontology::Universe& universe, const RenderSystemStruct& render_system_struct);
 
                 RenderSystem(const RenderSystem&) = delete; // Delete copy constructor.
                 RenderSystem& operator=(const RenderSystem&) = delete; // Delete copy assignment.
@@ -124,7 +124,7 @@ namespace yli::render
                         const ontology::Scene* scene);
 
         private:
-                ontology::Universe* const universe { nullptr };
+                ontology::Universe& universe;
 
                 SDL_GLContext context { nullptr };
                 SDL_Window* hidden_sdl_window { nullptr };
