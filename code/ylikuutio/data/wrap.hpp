@@ -24,34 +24,34 @@
 namespace yli::data
 {
     template<typename T>
-        struct Wrap
-        {
-            using type = T;
-        };
+    struct Wrap
+    {
+        using type = T;
+    };
 
     template<typename T>
-        struct Wrap<T&>
-        {
-            using type = std::reference_wrapper<T>;
-        };
+    struct Wrap<T&>
+    {
+        using type = std::reference_wrapper<T>;
+    };
 
     template<typename T>
-        struct WrapAllButStrings
-        {
-            using type = T;
-        };
+    struct WrapAllButStrings
+    {
+        using type = T;
+    };
 
     template<typename T>
-        struct WrapAllButStrings<T&>
-        {
-            using type = std::reference_wrapper<T>;
-        };
+    struct WrapAllButStrings<T&>
+    {
+        using type = std::reference_wrapper<T>;
+    };
 
     template<>
-        struct WrapAllButStrings<const std::string&>
-        {
-            using type = const std::string;
-        };
+    struct WrapAllButStrings<const std::string&>
+    {
+        using type = const std::string;
+    };
 }
 
 #endif
