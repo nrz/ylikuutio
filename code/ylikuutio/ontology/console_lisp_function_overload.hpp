@@ -67,7 +67,6 @@ namespace yli::ontology
     template<typename... Types>
     class ConsoleLispFunctionOverload final : public GenericConsoleLispFunctionOverload
     {
-    private:
         ConsoleLispFunctionOverload(
             core::Application& application,
             Universe& universe,
