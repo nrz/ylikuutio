@@ -31,72 +31,72 @@ namespace yli::data
 {
     // Get a variant based on `std::variant` type, a type string and a value string.
     template<typename... V>
-        std::variant<V...> get_variant(const std::string& type, const std::string& value_string)
+    std::variant<V...> get_variant(const std::string& type, const std::string& value_string)
+    {
+        std::stringstream value_stringstream;
+        std::variant<V...> my_variant;
+
+        if (type == "bool")
         {
-            std::stringstream value_stringstream;
-            std::variant<V...> my_variant;
-
-            if (type == "bool")
+            if (value_string == "true") // Ylikuutio is case sensitive!
             {
-                if (value_string == "true")       // Ylikuutio is case sensitive!
-                {
-                    my_variant = true;
-                }
-                else if (value_string == "false") // Ylikuutio is case sensitive!
-                {
-                    my_variant = false;
-                }
+                my_variant = true;
             }
-            else if (type == "char")
+            else if (value_string == "false") // Ylikuutio is case sensitive!
             {
-                if (value_string.size() == 1)
-                {
-                    my_variant = value_string[0];
-                }
+                my_variant = false;
             }
-            else if (type == "float")
-            {
-                if (yli::string::check_if_float_string<char>(value_string))
-                {
-                    float float_value;
-                    value_stringstream << value_string;
-                    value_stringstream >> float_value;
-                    my_variant = float_value;
-                }
-            }
-            else if (type == "double")
-            {
-                if (yli::string::check_if_double_string<char>(value_string))
-                {
-                    double double_value;
-                    value_stringstream << value_string;
-                    value_stringstream >> double_value;
-                    my_variant = double_value;
-                }
-            }
-            else if (type == "std::int32_t")
-            {
-                if (yli::string::check_if_signed_integer_string<char>(value_string))
-                {
-                    std::int32_t int32_t_value;
-                    value_stringstream << value_string;
-                    value_stringstream >> int32_t_value;
-                    my_variant = int32_t_value;
-                }
-            }
-            else if (type == "std::uint32_t")
-            {
-                if (yli::string::check_if_unsigned_integer_string<char>(value_string))
-                {
-                    std::uint32_t uint32_t_value;
-                    value_stringstream << value_string;
-                    value_stringstream >> uint32_t_value;
-                    my_variant = uint32_t_value;
-                }
-            }
-
-            return my_variant;
         }
+        else if (type == "char")
+        {
+            if (value_string.size() == 1)
+            {
+                my_variant = value_string[0];
+            }
+        }
+        else if (type == "float")
+        {
+            if (yli::string::check_if_float_string<char>(value_string))
+            {
+                float float_value;
+                value_stringstream << value_string;
+                value_stringstream >> float_value;
+                my_variant = float_value;
+            }
+        }
+        else if (type == "double")
+        {
+            if (yli::string::check_if_double_string<char>(value_string))
+            {
+                double double_value;
+                value_stringstream << value_string;
+                value_stringstream >> double_value;
+                my_variant = double_value;
+            }
+        }
+        else if (type == "std::int32_t")
+        {
+            if (yli::string::check_if_signed_integer_string<char>(value_string))
+            {
+                std::int32_t int32_t_value;
+                value_stringstream << value_string;
+                value_stringstream >> int32_t_value;
+                my_variant = int32_t_value;
+            }
+        }
+        else if (type == "std::uint32_t")
+        {
+            if (yli::string::check_if_unsigned_integer_string<char>(value_string))
+            {
+                std::uint32_t uint32_t_value;
+                value_stringstream << value_string;
+                value_stringstream >> uint32_t_value;
+                my_variant = uint32_t_value;
+            }
+        }
+
+        return my_variant;
+    }
 }
 
 #endif
