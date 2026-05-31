@@ -24,7 +24,6 @@
 #include "result.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/data/wrap.hpp"
-#include "code/ylikuutio/lisp/function_arg_extractor.hpp"
 #include "code/ylikuutio/lisp/lisp_templates.hpp"
 
 // Include standard headers
