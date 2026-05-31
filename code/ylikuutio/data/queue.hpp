@@ -44,7 +44,7 @@ namespace yli::data
             }
 
             this->queue.at(this->next_tail++) = value;
-            this->queue_size++;
+            ++this->queue_size;
 
             if (this->next_tail == QueueMaxSize)
             {
@@ -66,7 +66,7 @@ namespace yli::data
                 this->head = 0;
             }
 
-            this->queue_size--;
+            --this->queue_size;
             return value;
         }
 
