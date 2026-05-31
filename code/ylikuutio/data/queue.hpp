@@ -97,7 +97,7 @@ namespace yli::data
 
         void move_to_beginning()
         {
-            yli::memory::copy_circular_buffer_into_begin(this->queue, this->head, this->queue_size);
+            memory::copy_circular_buffer_into_begin(this->queue, this->head, this->queue_size);
             this->head = 0;
         }
 
