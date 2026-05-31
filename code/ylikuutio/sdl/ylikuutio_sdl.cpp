@@ -27,9 +27,9 @@
 
 namespace yli::sdl
 {
-    [[nodiscard]] yli::render::GraphicsApiBackend init_sdl(const yli::render::GraphicsApiBackend graphics_api_backend)
+    [[nodiscard]] render::GraphicsApiBackend init_sdl(const render::GraphicsApiBackend graphics_api_backend)
     {
-        if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
+        if (graphics_api_backend == render::GraphicsApiBackend::OPENGL)
         {
             // Initialize SDL.
 
@@ -43,22 +43,22 @@ namespace yli::sdl
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
             SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-            return yli::render::GraphicsApiBackend::OPENGL; // Success.
+            return render::GraphicsApiBackend::OPENGL; // Success.
         }
-        else if (graphics_api_backend == yli::render::GraphicsApiBackend::VULKAN)
+        else if (graphics_api_backend == render::GraphicsApiBackend::VULKAN)
         {
             throw std::runtime_error("ERROR: `yli::sdl::init_sdl`: Vulkan support not implemented yet!");
         }
 
-        return yli::render::GraphicsApiBackend::HEADLESS; // Headless.
+        return render::GraphicsApiBackend::HEADLESS; // Headless.
     }
 
     [[nodiscard]] std::vector<SDL_DisplayMode> get_display_modes(const yli::render::GraphicsApiBackend graphics_api_backend)
     {
         std::vector<SDL_DisplayMode> display_modes;
 
-        if (graphics_api_backend == yli::render::GraphicsApiBackend::HEADLESS ||
-            graphics_api_backend == yli::render::GraphicsApiBackend::SOFTWARE)
+        if (graphics_api_backend == render::GraphicsApiBackend::HEADLESS ||
+            graphics_api_backend == render::GraphicsApiBackend::SOFTWARE)
         {
             return display_modes;
         }
@@ -82,7 +82,7 @@ namespace yli::sdl
             throw std::runtime_error("ERROR: `yli::sdl::get_display_modes`: `n_displays` is negative: " + std::to_string(n_displays));
         }
 
-        if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
+        if (graphics_api_backend == render::GraphicsApiBackend::OPENGL)
         {
             display_modes.resize(n_displays);
 

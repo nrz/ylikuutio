@@ -32,8 +32,8 @@ namespace yli::render
 
 namespace yli::sdl
 {
-    [[nodiscard]] yli::render::GraphicsApiBackend init_sdl(const yli::render::GraphicsApiBackend graphics_api_backend);
-    [[nodiscard]] std::vector<SDL_DisplayMode> get_display_modes(const yli::render::GraphicsApiBackend graphics_api_backend);
+    [[nodiscard]] render::GraphicsApiBackend init_sdl(const render::GraphicsApiBackend graphics_api_backend);
+    [[nodiscard]] std::vector<SDL_DisplayMode> get_display_modes(const render::GraphicsApiBackend graphics_api_backend);
 
     [[nodiscard]] SDL_Window* create_window(
             const SDL_DisplayID displayid,
