@@ -51,7 +51,6 @@ namespace yli::ontology
 
     class ConsoleCallbackEngine final : public GenericCallbackEngine
     {
-        private:
             ConsoleCallbackEngine(
                     core::Application& application,
                     Universe& universe,
