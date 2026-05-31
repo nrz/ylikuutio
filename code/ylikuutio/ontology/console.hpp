@@ -68,7 +68,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -91,120 +91,132 @@ namespace yli::ontology
 
     class Console final : public LispContext
     {
-        public:
-            // Set pointer to `console` to `nullptr`, set font according to the input,
-            // and request a new apprenticeID from `new_font_2d`.
-            static std::optional<data::AnyValue> bind_to_new_font_2d(
-                    Console& console,
-                    Font2d& new_font_2d) noexcept;
+    public:
+        // Set pointer to `console` to `nullptr`, set font according to the input,
+        // and request a new apprenticeID from `new_font_2d`.
+        static std::optional<data::AnyValue> bind_to_new_font_2d(
+            Console& console,
+            Font2d& new_font_2d) noexcept;
 
-        private:
-            Console(
-                    core::Application& application,
-                    Universe& universe,
-                    const ConsoleStruct& console_struct,
-                    GenericParentModule* universe_parent_module,
-                    GenericMasterModule* font_2d_master_module);
+    private:
+        Console(
+            core::Application& application,
+            Universe& universe,
+            const ConsoleStruct& console_struct,
+            GenericParentModule* universe_parent_module,
+            GenericMasterModule* font_2d_master_module);
 
-            ~Console() override;
+        ~Console() override;
 
-        public:
-            Console(const Console&) = delete;            // Delete copy constructor.
-            Console& operator=(const Console&) = delete; // Delete copy assignment.
+    public:
+        Console(const Console&) = delete; // Delete copy constructor.
+        Console& operator=(const Console&) = delete; // Delete copy assignment.
 
-            void activate() override;
+        void activate() override;
 
-            void set_input_mode(InputMode* input_mode);
-            void print_text(const std::string& text);
-            void print_help();
-            void render(const Scene*) const;
+        void set_input_mode(InputMode* input_mode);
 
-            bool enter_console();
-            bool exit_console();
-            void process_text_input(const SDL_TextInputEvent& text_input_event);
+        void print_text(const std::string& text);
 
-            template<typename ChildType>
-                GenericParentModule* get_generic_parent_module() = delete;
+        void print_help();
 
-            template<typename ApprenticeType>
-                GenericMasterModule* get_generic_master_module() = delete;
+        void render(const Scene*) const;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        bool enter_console();
 
-            ChildModule child_of_universe;
-            GenericParentModule parent_of_console_callback_engines;
-            GenericParentModule parent_of_console_lisp_functions;
-            ApprenticeModule apprentice_of_font_2d;
-            MasterOfInputModesModule master_of_input_modes;
+        bool exit_console();
 
-            friend class GenericMasterModule;
+        void process_text_input(const SDL_TextInputEvent& text_input_event);
 
-            template<typename T1>
-                friend void hierarchy::bind_apprentice_to_master(
-                        T1& apprentice,
-                        std::vector<T1*>& apprentice_pointer_vector,
-                        std::queue<std::size_t>& free_apprenticeID_queue,
-                        std::size_t& number_of_apprentices) noexcept;
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            Entity* get_parent() const override;
+        template<typename ApprenticeType>
+        GenericMasterModule* get_generic_master_module() = delete;
 
-            std::size_t get_number_of_apprentices() const;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            Scene* get_scene() const override;
+        ChildModule child_of_universe;
+        GenericParentModule parent_of_console_callback_engines;
+        GenericParentModule parent_of_console_lisp_functions;
+        ApprenticeModule apprentice_of_font_2d;
+        MasterOfInputModesModule master_of_input_modes;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        friend class GenericMasterModule;
 
-            void copy_historical_input_into_temp_input();
-            void delete_character();
-            void move_cursor_left();
-            void move_cursor_right();
-            void move_cursor_to_start_of_line();
-            void move_cursor_to_end_of_line();
-            void print_completions(const Registry& registry, const std::string& input);
+        template<typename T1>
+        friend void hierarchy::bind_apprentice_to_master(
+            T1& apprentice,
+            std::vector<T1*>& apprentice_pointer_vector,
+            std::queue<std::size_t>& free_apprenticeID_queue,
+            std::size_t& number_of_apprentices) noexcept;
 
-            // Getters for unit tests and for building upon `Console`.
+        Entity* get_parent() const override;
 
-            const std::string& get_prompt() const;
+        std::size_t get_number_of_apprentices() const;
 
-            InputMode* get_input_mode() const;
+        Scene* get_scene() const override;
 
-            // Getters end here.
+        std::size_t get_number_of_children() const override;
 
-            const std::uint32_t console_left_x;
-            const std::uint32_t console_right_x;
-            const std::uint32_t console_top_y;
-            const std::uint32_t console_bottom_y;
+        std::size_t get_number_of_descendants() const override;
 
-            const std::uint32_t n_columns;
-            const std::uint32_t n_rows;
+        void copy_historical_input_into_temp_input();
 
-            TextInput new_input;  // This is used for new inputs.
-            TextInput temp_input; // This is used as copy of a unchanged historical input, for editing.
-            TextInputHistory command_history;
-            ScrollbackBuffer scrollback_buffer;
-            ConsoleLogicModule console_logic_module;
-            CompletionModule completion_module;
+        void delete_character();
+
+        void move_cursor_left();
+
+        void move_cursor_right();
+
+        void move_cursor_to_start_of_line();
+
+        void move_cursor_to_end_of_line();
+
+        void print_completions(const Registry& registry, const std::string& input);
+
+        // Getters for unit tests and for building upon `Console`.
+
+        const std::string& get_prompt() const;
+
+        InputMode* get_input_mode() const;
+
+        // Getters end here.
+
+        const std::uint32_t console_left_x;
+        const std::uint32_t console_right_x;
+        const std::uint32_t console_top_y;
+        const std::uint32_t console_bottom_y;
+
+        const std::uint32_t n_columns;
+        const std::uint32_t n_rows;
+
+        TextInput new_input; // This is used for new inputs.
+        TextInput temp_input; // This is used as copy of a unchanged historical input, for editing.
+        TextInputHistory command_history;
+        ScrollbackBuffer scrollback_buffer;
+        ConsoleLogicModule console_logic_module;
+        CompletionModule completion_module;
     };
 
     template<>
-        inline GenericParentModule* Console::get_generic_parent_module<ConsoleCallbackEngine>()
-        {
-            return &this->parent_of_console_callback_engines;
-        }
+    inline GenericParentModule* Console::get_generic_parent_module<ConsoleCallbackEngine>()
+    {
+        return &this->parent_of_console_callback_engines;
+    }
 
     template<>
-        inline GenericParentModule* Console::get_generic_parent_module<ConsoleLispFunction>()
-        {
-            return &this->parent_of_console_lisp_functions;
-        }
+    inline GenericParentModule* Console::get_generic_parent_module<ConsoleLispFunction>()
+    {
+        return &this->parent_of_console_lisp_functions;
+    }
 
     template<>
-        inline GenericMasterModule* Console::get_generic_master_module<InputMode>()
-        {
-            return &this->master_of_input_modes;
-        }
+    inline GenericMasterModule* Console::get_generic_master_module<InputMode>()
+    {
+        return &this->master_of_input_modes;
+    }
 }
 
 #endif

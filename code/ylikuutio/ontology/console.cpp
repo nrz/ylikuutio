@@ -53,8 +53,8 @@ namespace yli::ontology
     using console::TextInputType;
 
     std::optional<data::AnyValue> Console::bind_to_new_font_2d(
-            Console& console,
-            Font2d& new_font_2d) noexcept
+        Console& console,
+        Font2d& new_font_2d) noexcept
     {
         // Set pointer to `console` to `nullptr`, set font according to the input,
         // and request a new apprenticeID from `new_font_2d`.
@@ -62,49 +62,53 @@ namespace yli::ontology
         // Master and apprentice must belong to the same `Scene`,
         // if both belong to some `Scene`, and not `Ecosystem`.
         if (console.get_scene() == new_font_2d.get_scene() ||
-                console.get_scene() == nullptr ||
-                new_font_2d.get_scene() == nullptr)
+            console.get_scene() == nullptr ||
+            new_font_2d.get_scene() == nullptr)
         {
             console.apprentice_of_font_2d.unbind_and_bind_to_new_generic_master_module(
-                    &new_font_2d.master_of_consoles);
+                &new_font_2d.master_of_consoles);
         }
         else
         {
-            std::cerr << "ERROR: `Console::bind_to_new_font_2d`: master and apprentice can not belong to different `Scene`s!\n";
+            std::cerr <<
+                    "ERROR: `Console::bind_to_new_font_2d`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
     }
 
     Console::Console(
-            core::Application& application,
-            Universe& universe,
-            const ConsoleStruct& console_struct,
-            GenericParentModule* const universe_parent_module,
-            GenericMasterModule* const font_2d_master_module)
+        core::Application& application,
+        Universe& universe,
+        const ConsoleStruct& console_struct,
+        GenericParentModule* const universe_parent_module,
+        GenericMasterModule* const font_2d_master_module)
         : LispContext(application, universe, console_struct),
-        child_of_universe(universe_parent_module, *this),
-        parent_of_console_callback_engines(
-                *this,
-                this->registry,
-                "console_callback_engines"),
-        parent_of_console_lisp_functions(
-                *this,
-                this->registry,
-                "console_lisp_functions"),
-        apprentice_of_font_2d(font_2d_master_module, this),
-        master_of_input_modes(*this, &this->registry, "input_modes"),
-        console_left_x   { console_struct.left_x },
-        console_right_x  { console_struct.right_x },
-        console_top_y    { console_struct.top_y },
-        console_bottom_y { console_struct.bottom_y },
-        n_columns        { this->console_right_x - this->console_left_x + 1 },
-        n_rows           { this->console_top_y - this->console_bottom_y + 1 },
-        new_input            { TextInputType::NEW_INPUT },
-        temp_input           { TextInputType::TEMP_INPUT },
-        scrollback_buffer    { this->n_columns, this->n_rows },
-        console_logic_module { this->new_input, this->temp_input, this->command_history, this->scrollback_buffer, this->n_columns, this->n_rows },
-        completion_module    { *this }
+          child_of_universe(universe_parent_module, *this),
+          parent_of_console_callback_engines(
+              *this,
+              this->registry,
+              "console_callback_engines"),
+          parent_of_console_lisp_functions(
+              *this,
+              this->registry,
+              "console_lisp_functions"),
+          apprentice_of_font_2d(font_2d_master_module, this),
+          master_of_input_modes(*this, &this->registry, "input_modes"),
+          console_left_x { console_struct.left_x },
+          console_right_x { console_struct.right_x },
+          console_top_y { console_struct.top_y },
+          console_bottom_y { console_struct.bottom_y },
+          n_columns { this->console_right_x - this->console_left_x + 1 },
+          n_rows { this->console_top_y - this->console_bottom_y + 1 },
+          new_input { TextInputType::NEW_INPUT },
+          temp_input { TextInputType::TEMP_INPUT },
+          scrollback_buffer { this->n_columns, this->n_rows },
+          console_logic_module {
+              this->new_input, this->temp_input, this->command_history, this->scrollback_buffer, this->n_columns,
+              this->n_rows
+          },
+          completion_module { *this }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Console*";
@@ -152,27 +156,29 @@ namespace yli::ontology
     void Console::render(const Scene* const) const
     {
         if (!this->console_logic_module.get_active_in_console() ||
-                !this->should_render ||
-                this->universe.get_active_console() != this)
+            !this->should_render ||
+            this->universe.get_active_console() != this)
         {
             return;
         }
 
         const auto font_2d = static_cast<Font2d*>(
-                this->apprentice_of_font_2d.get_master());
+            this->apprentice_of_font_2d.get_master());
 
         if (font_2d == nullptr)
         {
             return;
         }
 
-        if (const TextInput* const visible_input = this->console_logic_module.get_visible_input(); visible_input == nullptr)
+        if (const TextInput* const visible_input = this->console_logic_module.get_visible_input();
+            visible_input == nullptr)
         {
             return;
         }
 
         // Number of lines there are in total in the input that is currently visible (not all lines might be visible).
-        const std::optional<std::size_t> maybe_n_lines_of_total_visible_input = this->console_logic_module.get_n_lines_of_visible_input();
+        const std::optional<std::size_t> maybe_n_lines_of_total_visible_input =
+                this->console_logic_module.get_n_lines_of_visible_input();
 
         if (!maybe_n_lines_of_total_visible_input.has_value())
         {
@@ -182,20 +188,20 @@ namespace yli::ontology
         const std::size_t n_lines_of_total_visible_input = *maybe_n_lines_of_total_visible_input;
 
         // Actual number of visible lines to be rendered can not exceed number of rows available.
-        const std::size_t n_lines_of_visible_input = (n_lines_of_total_visible_input < this->n_rows ? n_lines_of_total_visible_input : this->n_rows);
+        const std::size_t n_lines_of_visible_input = (n_lines_of_total_visible_input < this->n_rows
+                                                          ? n_lines_of_total_visible_input
+                                                          : this->n_rows);
         const std::size_t n_lines_of_scrollback_buffer_view = this->n_rows - n_lines_of_visible_input;
 
         // Draw the console to screen using `font_2d::print_console`.
         const bool is_in_scrollback_buffer = this->console_logic_module.get() & console::in_scrollback_buffer;
         PrintConsoleStruct print_console_struct(
-                (is_in_scrollback_buffer ?
-                 (this->scrollback_buffer.get_view(this->scrollback_buffer.get_buffer_index(), this->n_rows)) :
-                 (this->scrollback_buffer.get_view_to_last(n_lines_of_scrollback_buffer_view))),
-                (is_in_scrollback_buffer ?
-                 nullptr :
-                 this->console_logic_module.get_visible_input()),
-                this->universe.get_font_size(),
-                this->n_columns);
+            (is_in_scrollback_buffer
+                 ? (this->scrollback_buffer.get_view(this->scrollback_buffer.get_buffer_index(), this->n_rows))
+                 : (this->scrollback_buffer.get_view_to_last(n_lines_of_scrollback_buffer_view))),
+            (is_in_scrollback_buffer ? nullptr : this->console_logic_module.get_visible_input()),
+            this->universe.get_font_size(),
+            this->n_columns);
         print_console_struct.position.x = 0;
         print_console_struct.position.y = this->universe.get_window_height() - (2 * this->universe.get_text_size());
         print_console_struct.position.horizontal_alignment = LEFT;
@@ -224,20 +230,20 @@ namespace yli::ontology
     std::size_t Console::get_number_of_children() const
     {
         return this->parent_of_console_callback_engines.get_number_of_children() +
-            this->parent_of_console_lisp_functions.get_number_of_children();
+               this->parent_of_console_lisp_functions.get_number_of_children();
     }
 
     std::size_t Console::get_number_of_descendants() const
     {
         return ontology::get_number_of_descendants(this->parent_of_console_callback_engines.child_pointer_vector) +
-            ontology::get_number_of_descendants(this->parent_of_console_lisp_functions.child_pointer_vector);
+               ontology::get_number_of_descendants(this->parent_of_console_lisp_functions.child_pointer_vector);
     }
 
     bool Console::enter_console()
     {
         if (this->universe.get_active_console() == this &&
-                !this->console_logic_module.get_active_in_console() &&
-                this->master_of_input_modes.has_current_input_mode())
+            !this->console_logic_module.get_active_in_console() &&
+            this->master_of_input_modes.has_current_input_mode())
         {
             this->master_of_input_modes.activate_current_input_mode();
 
@@ -307,7 +313,8 @@ namespace yli::ontology
     {
         if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr) [[likely]]
+            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr)
+            [[likely]]
             {
                 active_input->delete_character();
             }
@@ -318,7 +325,8 @@ namespace yli::ontology
     {
         if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr) [[likely]]
+            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr)
+            [[likely]]
             {
                 active_input->move_cursor_left();
             }
@@ -329,7 +337,8 @@ namespace yli::ontology
     {
         if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr) [[likely]]
+            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr)
+            [[likely]]
             {
                 active_input->move_cursor_right();
             }
@@ -340,7 +349,8 @@ namespace yli::ontology
     {
         if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr) [[likely]]
+            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr)
+            [[likely]]
             {
                 active_input->move_cursor_to_start_of_line();
             }
@@ -351,7 +361,8 @@ namespace yli::ontology
     {
         if (this->console_logic_module.get_active_in_console()) [[likely]]
         {
-            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr) [[likely]]
+            if (TextInput* const active_input = this->console_logic_module.edit_input(); active_input != nullptr)
+            [[likely]]
             {
                 active_input->move_cursor_to_end_of_line();
             }
@@ -371,7 +382,8 @@ namespace yli::ontology
 
             this->print_text(active_input->data());
 
-            for (const std::vector<std::string> completions = registry.get_completions(input); const std::string& completion : completions)
+            for (const std::vector<std::string> completions = registry.get_completions(input);
+                 const std::string& completion : completions)
             {
                 this->print_text(completion);
             }
