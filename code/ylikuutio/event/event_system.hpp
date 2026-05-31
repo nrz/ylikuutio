@@ -26,7 +26,7 @@
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -39,20 +39,20 @@ namespace yli::event
 {
     class EventSystem
     {
-        public:
-            explicit EventSystem(ontology::Universe& universe);
+    public:
+        explicit EventSystem(ontology::Universe& universe);
 
-            void poll_events(const ontology::InputMode& input_mode) const;
+        void poll_events(const ontology::InputMode& input_mode) const;
 
-            EventSystem& get();
+        EventSystem& get();
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-        private:
-            memory::ConstructibleModule constructible_module;
+    private:
+        memory::ConstructibleModule constructible_module;
 
-            ontology::Universe& universe;
+        ontology::Universe& universe;
     };
 }
 

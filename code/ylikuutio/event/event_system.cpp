@@ -31,8 +31,7 @@ namespace yli::event
 {
     EventSystem::EventSystem(ontology::Universe& universe)
         : universe { universe }
-    {
-    }
+    { }
 
     void EventSystem::poll_events(const ontology::InputMode& input_mode) const
     {
@@ -49,10 +48,12 @@ namespace yli::event
             {
                 const auto scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
-                if (ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keypress_callback_engine(scancode);
+                if (ontology::GenericCallbackEngine* const generic_callback_engine =
+                            input_mode.get_keypress_callback_engine(scancode);
                     generic_callback_engine != nullptr)
                 {
-                    if (const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue());
+                    if (const std::optional<data::AnyValue> any_value =
+                                generic_callback_engine->execute(data::AnyValue());
                         any_value &&
                         std::holds_alternative<std::uint32_t>(any_value->data) &&
                         std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)
@@ -65,7 +66,8 @@ namespace yli::event
             {
                 const auto scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
-                ontology::GenericCallbackEngine* const generic_callback_engine = input_mode.get_keyrelease_callback_engine(scancode);
+                ontology::GenericCallbackEngine* const generic_callback_engine =
+                    input_mode.get_keyrelease_callback_engine(scancode);
 
                 if (generic_callback_engine == nullptr)
                 {
