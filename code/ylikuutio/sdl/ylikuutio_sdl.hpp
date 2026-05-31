@@ -33,22 +33,31 @@ namespace yli::render
 namespace yli::sdl
 {
     [[nodiscard]] render::GraphicsApiBackend init_sdl(render::GraphicsApiBackend graphics_api_backend);
+
     [[nodiscard]] std::vector<SDL_DisplayMode> get_display_modes(render::GraphicsApiBackend graphics_api_backend);
 
     [[nodiscard]] SDL_Window* create_window(
-            SDL_DisplayID display_id,
-            int window_width,
-            int window_height,
-            const char* title,
-            SDL_WindowFlags flags);
+        SDL_DisplayID display_id,
+        int window_width,
+        int window_height,
+        const char* title,
+        SDL_WindowFlags flags);
 
-    [[nodiscard]] SDL_Window* create_hidden_window(SDL_DisplayID display_id, int window_width, int window_height, const char* title, bool is_fullscreen);
+    [[nodiscard]] SDL_Window* create_hidden_window(SDL_DisplayID display_id, int window_width, int window_height,
+                                                   const char* title, bool is_fullscreen);
+
     [[nodiscard]] SDL_GLContext create_context(SDL_Window* window);
+
     void set_window_size(SDL_Window* window, int window_width, int window_height);
+
     [[nodiscard]] bool set_window_windowed(SDL_Window* window);
+
     [[nodiscard]] bool make_context_current(SDL_Window* window, SDL_GLContext context);
+
     [[nodiscard]] bool set_swap_interval(int interval);
+
     void flush_sdl_event_queue();
+
     void print_sdl_error();
 }
 

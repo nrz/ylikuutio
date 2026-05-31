@@ -79,7 +79,8 @@ namespace yli::sdl
 
         if (n_displays < 0)
         {
-            throw std::runtime_error("ERROR: `yli::sdl::get_display_modes`: `n_displays` is negative: " + std::to_string(n_displays));
+            throw std::runtime_error(
+                "ERROR: `yli::sdl::get_display_modes`: `n_displays` is negative: " + std::to_string(n_displays));
         }
 
         if (graphics_api_backend == render::GraphicsApiBackend::OPENGL)
@@ -92,7 +93,8 @@ namespace yli::sdl
 
                 if (display_mode_ptr == nullptr)
                 {
-                    throw std::runtime_error("ERROR: `yli::sdl::get_display_modes`: `SDL_GetCurrentDisplayMode` failed!");
+                    throw std::runtime_error(
+                        "ERROR: `yli::sdl::get_display_modes`: `SDL_GetCurrentDisplayMode` failed!");
                 }
 
                 display_modes.at(i) = *display_mode_ptr;
@@ -103,11 +105,11 @@ namespace yli::sdl
     }
 
     [[nodiscard]] SDL_Window* create_window(
-            const SDL_DisplayID display_id,
-            const int window_width,
-            const int window_height,
-            const char* const title,
-            const SDL_WindowFlags flags)
+        const SDL_DisplayID display_id,
+        const int window_width,
+        const int window_height,
+        const char* const title,
+        const SDL_WindowFlags flags)
     {
         SDL_Rect bounds;
         SDL_Window* window = nullptr;
@@ -122,10 +124,10 @@ namespace yli::sdl
             }
 
             window = SDL_CreateWindow(
-                    title,
-                    bounds.w,
-                    bounds.h,
-                    flags);
+                title,
+                bounds.w,
+                bounds.h,
+                flags);
         }
         else
         {
@@ -137,10 +139,10 @@ namespace yli::sdl
             }
 
             window = SDL_CreateWindow(
-                    title,
-                    (window_width < bounds.w ? window_width : bounds.w),
-                    (window_height < bounds.h ? window_height : bounds.h),
-                    flags);
+                title,
+                (window_width < bounds.w ? window_width : bounds.w),
+                (window_height < bounds.h ? window_height : bounds.h),
+                flags);
         }
 
         if (window != nullptr)
@@ -153,7 +155,9 @@ namespace yli::sdl
         throw std::runtime_error("ERROR: `yli::sdl::create_window`: creating window failed!");
     }
 
-    [[nodiscard]] SDL_Window* create_hidden_window(const SDL_DisplayID display_id, const int window_width, const int window_height, const char* const title, const bool is_fullscreen)
+    [[nodiscard]] SDL_Window* create_hidden_window(const SDL_DisplayID display_id, const int window_width,
+                                                   const int window_height, const char* const title,
+                                                   const bool is_fullscreen)
     {
         Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN; // `Uint32` is a SDL datatype.
 
