@@ -59,7 +59,7 @@ namespace yli::data
                 throw std::runtime_error("ERROR: `yli::data::Queue::pop`: queue is empty, nothing to pop!");
             }
 
-            std::size_t value = this->queue.at(this->head++);
+            const std::size_t value = this->queue.at(this->head++);
 
             if (this->head >= QueueMaxSize)
             {
