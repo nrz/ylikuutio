@@ -54,59 +54,61 @@ namespace yli::ontology
     class Scene;
 
     ComputeTask::ComputeTask(
-            core::Application& application,
-            Universe& universe,
-            const ComputeTaskStruct& compute_task_struct,
-            GenericParentModule* const pipeline_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const ComputeTaskStruct& compute_task_struct,
+        GenericParentModule* const pipeline_parent_module)
         : Entity(application, universe, compute_task_struct),
-        child_of_pipeline(pipeline_parent_module, *this),
-        texture_file_format              { compute_task_struct.texture_file_format },
-        texture_filename                 { compute_task_struct.texture_filename },
-        output_filename                  { compute_task_struct.output_filename },
-        left_filler_vector_any_value     { compute_task_struct.left_filler_vector_any_value },
-        right_filler_vector_any_value    { compute_task_struct.right_filler_vector_any_value },
-        n_max_iterations                 { compute_task_struct.n_max_iterations },
-        compute_taskID                   { compute_task_struct.compute_taskID },
-        texture_width                    { compute_task_struct.texture_width },
-        texture_height                   { compute_task_struct.texture_height },
-        n_index_characters               { compute_task_struct.n_index_characters },
-        format                           { compute_task_struct.format },
-        internal_format                  { compute_task_struct.internal_format },
-        output_format                    { compute_task_struct.output_format },
-        type                             { compute_task_struct.type },
-        should_save_intermediate_results { compute_task_struct.should_save_intermediate_results },
-        should_flip_texture              { compute_task_struct.should_flip_texture }
+          child_of_pipeline(pipeline_parent_module, *this),
+          texture_file_format { compute_task_struct.texture_file_format },
+          texture_filename { compute_task_struct.texture_filename },
+          output_filename { compute_task_struct.output_filename },
+          left_filler_vector_any_value { compute_task_struct.left_filler_vector_any_value },
+          right_filler_vector_any_value { compute_task_struct.right_filler_vector_any_value },
+          n_max_iterations { compute_task_struct.n_max_iterations },
+          compute_taskID { compute_task_struct.compute_taskID },
+          texture_width { compute_task_struct.texture_width },
+          texture_height { compute_task_struct.texture_height },
+          n_index_characters { compute_task_struct.n_index_characters },
+          format { compute_task_struct.format },
+          internal_format { compute_task_struct.internal_format },
+          output_format { compute_task_struct.output_format },
+          type { compute_task_struct.type },
+          should_save_intermediate_results { compute_task_struct.should_save_intermediate_results },
+          should_flip_texture { compute_task_struct.should_flip_texture }
     {
         // `ComputeTask` is currently designed to be a GPGPU class that uses GLSL shaders for computation.
         // If support for using YliLisp as a shading language that compiles to SPIR-V or GLSL is implemented,
         // then `ComputeTask` could and should support software rendering as well.
         const bool should_load_texture =
-            this->universe.get_is_opengl_in_use() ||
-            this->universe.get_is_vulkan_in_use();
+                this->universe.get_is_opengl_in_use() ||
+                this->universe.get_is_vulkan_in_use();
 
         const Pipeline* const pipeline_parent = static_cast<Pipeline*>(this->get_parent());
 
         if (pipeline_parent != nullptr && should_load_texture && this->universe.get_is_opengl_in_use())
         {
             // Get a handle for our buffers.
-            this->vertex_position_modelspace_id = glGetAttribLocation(pipeline_parent->get_program_id(), "vertex_position_modelspace");
+            this->vertex_position_modelspace_id = glGetAttribLocation(pipeline_parent->get_program_id(),
+                                                                      "vertex_position_modelspace");
             this->vertex_uv_id = glGetAttribLocation(pipeline_parent->get_program_id(), "vertex_uv");
 
             glUseProgram(pipeline_parent->get_program_id());
         }
 
         // Load the source texture, just like in `Material` constructor.
-        if (pipeline_parent != nullptr && should_load_texture && (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
+        if (pipeline_parent != nullptr && should_load_texture &&
+            (this->texture_file_format == "png" || this->texture_file_format == "PNG"))
         {
             if (std::uint32_t n_color_channels = 0; !yli::load::load_common_texture(
-                        this->texture_filename,
-                        load::ImageLoaderStruct(),
-                        this->texture_width,
-                        this->texture_height,
-                        this->texture_size,
-                        n_color_channels,
-                        this->source_texture,
-                        this->universe.get_graphics_api_backend()))
+                this->texture_filename,
+                load::ImageLoaderStruct(),
+                this->texture_width,
+                this->texture_height,
+                this->texture_size,
+                n_color_channels,
+                this->source_texture,
+                this->universe.get_graphics_api_backend()))
             {
                 std::cerr << "ERROR: `ComputeTask::ComputeTask`: loading PNG texture failed!\n";
             }
@@ -115,19 +117,20 @@ namespace yli::ontology
                 this->is_texture_loaded = true;
             }
         }
-        else if (pipeline_parent != nullptr && should_load_texture && (this->texture_file_format == "csv" || this->texture_file_format == "CSV"))
+        else if (pipeline_parent != nullptr && should_load_texture &&
+                 (this->texture_file_format == "csv" || this->texture_file_format == "CSV"))
         {
             if (!load::load_csv_texture(
-                        this->texture_filename,
-                        this->format,
-                        this->internal_format,
-                        this->type,
-                        &this->left_filler_vector_any_value,
-                        &this->right_filler_vector_any_value,
-                        this->texture_width,
-                        this->texture_height,
-                        this->texture_size,
-                        this->source_texture))
+                this->texture_filename,
+                this->format,
+                this->internal_format,
+                this->type,
+                &this->left_filler_vector_any_value,
+                &this->right_filler_vector_any_value,
+                this->texture_width,
+                this->texture_height,
+                this->texture_size,
+                this->source_texture))
             {
                 std::cerr << "ERROR: `ComputeTask::ComputeTask`: loading CSV texture failed!\n";
             }
@@ -168,11 +171,11 @@ namespace yli::ontology
             // |/  |
             // *---*
             const std::vector<glm::vec2> vertices
-            { { -1.0f, 1.0f }, { -1.0f, -1.0f }, { 1.0f, 1.0f }, { 1.0f, -1.0f } };
+                    { { -1.0f, 1.0f }, { -1.0f, -1.0f }, { 1.0f, 1.0f }, { 1.0f, -1.0f } };
             this->vertices_size = vertices.size();
 
             const std::vector<glm::vec2> uvs
-            { { 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f } };
+                    { { 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f } };
             this->uvs_size = uvs.size();
 
             const std::vector<GLuint> indices { 0, 1 };
@@ -257,29 +260,29 @@ namespace yli::ontology
             {
                 // Internal format not defined, use format as internal format.
                 glTexImage2D(
-                        GL_TEXTURE_2D,
-                        0,
-                        this->format,
-                        this->texture_width,
-                        this->texture_height,
-                        0,
-                        this->format,
-                        this->type,
-                        nullptr);
+                    GL_TEXTURE_2D,
+                    0,
+                    this->format,
+                    this->texture_width,
+                    this->texture_height,
+                    0,
+                    this->format,
+                    this->type,
+                    nullptr);
             }
             else
             {
                 // Internal format is defined.
                 glTexImage2D(
-                        GL_TEXTURE_2D,
-                        0,
-                        this->internal_format,
-                        this->texture_width,
-                        this->texture_height,
-                        0,
-                        this->format,
-                        this->type,
-                        nullptr);
+                    GL_TEXTURE_2D,
+                    0,
+                    this->internal_format,
+                    this->texture_width,
+                    this->texture_height,
+                    0,
+                    this->format,
+                    this->type,
+                    nullptr);
             }
 
             opengl::set_nearest_filtering_parameters();
@@ -324,25 +327,25 @@ namespace yli::ontology
             glBindBuffer(GL_ARRAY_BUFFER, this->vertex_buffer);
 
             glVertexAttribPointer(
-                    this->vertex_position_modelspace_id, // The attribute we want to configure
-                    2,                                  // size
-                    GL_FLOAT,                           // type
-                    GL_FALSE,                           // normalized?
-                    0,                                  // stride
-                    nullptr                             // array buffer offset
-                    );
+                this->vertex_position_modelspace_id, // The attribute we want to configure
+                2, // size
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                nullptr // array buffer offset
+            );
             opengl::enable_vertex_attrib_array(this->vertex_position_modelspace_id);
 
             // 2nd attribute buffer: UVs.
             glBindBuffer(GL_ARRAY_BUFFER, this->uv_buffer);
             glVertexAttribPointer(
-                    this->vertex_uv_id, // The attribute we want to configure
-                    2,                // size : U+V => 2
-                    GL_FLOAT,         // type
-                    GL_FALSE,         // normalized?
-                    0,                // stride
-                    nullptr           // array buffer offset
-                    );
+                this->vertex_uv_id, // The attribute we want to configure
+                2, // size : U+V => 2
+                GL_FLOAT, // type
+                GL_FALSE, // normalized?
+                0, // stride
+                nullptr // array buffer offset
+            );
             opengl::enable_vertex_attrib_array(this->vertex_uv_id);
 
             // Draw the triangles!
@@ -354,30 +357,31 @@ namespace yli::ontology
             if (this->should_save_intermediate_results && !this->output_filename.empty())
             {
                 std::stringstream filename_stringstream;
-                filename_stringstream << this->output_filename << "_" << std::setfill('0') << std::setw(this->n_index_characters) << iteration_i;
+                filename_stringstream << this->output_filename << "_" << std::setfill('0') <<
+                        std::setw(this->n_index_characters) << iteration_i;
 
                 // Transfer data from the GPU texture to a CPU array and save into a file.
                 if (this->output_format == GL_INVALID_ENUM)
                 {
                     // Output format not defined, use format as output format.
                     opengl::save_data_from_gpu_texture_into_file(
-                            this->format,
-                            this->type,
-                            this->texture_width,
-                            this->texture_height,
-                            filename_stringstream.str(),
-                            this->should_flip_texture);
+                        this->format,
+                        this->type,
+                        this->texture_width,
+                        this->texture_height,
+                        filename_stringstream.str(),
+                        this->should_flip_texture);
                 }
                 else
                 {
                     // Output format is defined.
                     opengl::save_data_from_gpu_texture_into_file(
-                            this->output_format,
-                            this->type,
-                            this->texture_width,
-                            this->texture_height,
-                            filename_stringstream.str(),
-                            this->should_flip_texture);
+                        this->output_format,
+                        this->type,
+                        this->texture_width,
+                        this->texture_height,
+                        filename_stringstream.str(),
+                        this->should_flip_texture);
                 }
             }
 
@@ -396,23 +400,23 @@ namespace yli::ontology
         {
             // Output format not defined, use format as output format.
             opengl::save_data_from_gpu_texture_into_file(
-                    this->format,
-                    this->type,
-                    this->texture_width,
-                    this->texture_height,
-                    this->output_filename,
-                    this->should_flip_texture);
+                this->format,
+                this->type,
+                this->texture_width,
+                this->texture_height,
+                this->output_filename,
+                this->should_flip_texture);
         }
         else
         {
             // Output format is defined.
             opengl::save_data_from_gpu_texture_into_file(
-                    this->output_format,
-                    this->type,
-                    this->texture_width,
-                    this->texture_height,
-                    this->output_filename,
-                    this->should_flip_texture);
+                this->output_format,
+                this->type,
+                this->texture_width,
+                this->texture_height,
+                this->output_filename,
+                this->should_flip_texture);
         }
 
         this->universe.restore_onscreen_rendering();

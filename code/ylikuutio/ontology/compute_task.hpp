@@ -51,7 +51,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -64,84 +64,86 @@ namespace yli::ontology
 
     class ComputeTask final : public Entity
     {
-            ComputeTask(
-                    core::Application& application,
-                    Universe& universe,
-                    const ComputeTaskStruct& compute_task_struct,
-                    GenericParentModule* pipeline_parent_module);
+        ComputeTask(
+            core::Application& application,
+            Universe& universe,
+            const ComputeTaskStruct& compute_task_struct,
+            GenericParentModule* pipeline_parent_module);
 
-            ~ComputeTask() override;
+        ~ComputeTask() override;
 
-        public:
-            ComputeTask(const ComputeTask&) = delete;            // Delete copy constructor.
-            ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
+    public:
+        ComputeTask(const ComputeTask&) = delete; // Delete copy constructor.
+        ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            ChildModule child_of_pipeline;
+        ChildModule child_of_pipeline;
 
-            Scene* get_scene() const override;
+        Scene* get_scene() const override;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        std::size_t get_number_of_children() const override;
 
-            // This method renders this `ComputeTask`, that is, computes this task.
-            void render(const Scene*);
+        std::size_t get_number_of_descendants() const override;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        // This method renders this `ComputeTask`, that is, computes this task.
+        void render(const Scene*);
 
-        private:
-            std::string texture_file_format; // Type of the texture file. Supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
-            std::string texture_filename;    // Filename of the model file.
-            std::string output_filename;     // Filename of the output file.
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
 
-            data::AnyValue left_filler_vector_any_value;
-            data::AnyValue right_filler_vector_any_value;
+    private:
+        std::string texture_file_format;
+        // Type of the texture file. Supported file formats so far: `"png"`/`"PNG"`, `"csv"`/`"CSV"`.
+        std::string texture_filename; // Filename of the model file.
+        std::string output_filename; // Filename of the output file.
 
-            std::shared_ptr<std::vector<std::uint8_t>> result_vector { nullptr };
+        data::AnyValue left_filler_vector_any_value;
+        data::AnyValue right_filler_vector_any_value;
 
-            // This is the maximum number of iterations.
-            std::size_t n_max_iterations;
+        std::shared_ptr<std::vector<std::uint8_t>> result_vector { nullptr };
 
-            std::size_t compute_taskID;
+        // This is the maximum number of iterations.
+        std::size_t n_max_iterations;
 
-            std::uint32_t texture_width;
-            std::uint32_t texture_height;
-            std::uint32_t texture_size { 0 }; // Some dummy value.
+        std::size_t compute_taskID;
 
-            std::uint32_t n_index_characters; // For intermediate results' filenames.
+        std::uint32_t texture_width;
+        std::uint32_t texture_height;
+        std::uint32_t texture_size { 0 }; // Some dummy value.
 
-            std::uint32_t vertices_size { 0 };
-            std::uint32_t uvs_size      { 0 };
+        std::uint32_t n_index_characters; // For intermediate results' filenames.
 
-            // variables related to the framebuffer.
-            GLuint framebuffer              { 0 }; // Some dummy value.
-            GLuint source_texture           { 0 }; // Some dummy value.
-            GLuint target_texture           { 0 }; // Some dummy value.
-            GLint opengl_texture_id         { 0 }; // Some dummy value.
-            bool is_texture_loaded          { false };
-            bool is_framebuffer_initialized { false };
-            bool is_ready                   { false };
+        std::uint32_t vertices_size { 0 };
+        std::uint32_t uvs_size { 0 };
 
-            GLint vertex_position_modelspace_id { 0 }; // Some dummy value.
-            GLint vertex_uv_id                  { 0 }; // Some dummy value.
-            GLint screen_width_uniform_id       { 0 }; // Some dummy value. Location of the program's window width uniform.
-            GLint screen_height_uniform_id      { 0 }; // Some dummy value. Location of the program's window height uniform.
-            GLint iteration_i_uniform_id        { 0 }; // Some dummy value. Location of the program's iteration index uniform.
+        // variables related to the framebuffer.
+        GLuint framebuffer { 0 }; // Some dummy value.
+        GLuint source_texture { 0 }; // Some dummy value.
+        GLuint target_texture { 0 }; // Some dummy value.
+        GLint opengl_texture_id { 0 }; // Some dummy value.
+        bool is_texture_loaded { false };
+        bool is_framebuffer_initialized { false };
+        bool is_ready { false };
 
-            GLuint vao            { 0 }; // Some dummy value.
-            GLuint vertex_buffer  { 0 }; // Some dummy value.
-            GLuint uv_buffer      { 0 }; // Some dummy value.
-            GLuint element_buffer { 0 }; // Some dummy value.
+        GLint vertex_position_modelspace_id { 0 }; // Some dummy value.
+        GLint vertex_uv_id { 0 }; // Some dummy value.
+        GLint screen_width_uniform_id { 0 }; // Some dummy value. Location of the program's window width uniform.
+        GLint screen_height_uniform_id { 0 }; // Some dummy value. Location of the program's window height uniform.
+        GLint iteration_i_uniform_id { 0 }; // Some dummy value. Location of the program's iteration index uniform.
 
-            GLenum format;
-            GLenum internal_format;
-            GLenum output_format;
-            GLenum type;
+        GLuint vao { 0 }; // Some dummy value.
+        GLuint vertex_buffer { 0 }; // Some dummy value.
+        GLuint uv_buffer { 0 }; // Some dummy value.
+        GLuint element_buffer { 0 }; // Some dummy value.
 
-            bool should_save_intermediate_results;
-            bool should_flip_texture;
+        GLenum format;
+        GLenum internal_format;
+        GLenum output_format;
+        GLenum type;
+
+        bool should_save_intermediate_results;
+        bool should_flip_texture;
     };
 }
 
