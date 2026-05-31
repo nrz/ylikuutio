@@ -32,7 +32,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryAllocator;
+    class MemoryAllocator;
 }
 
 namespace yli::ontology
@@ -44,28 +44,33 @@ namespace yli::ontology
 
     class GenericConsoleLispFunctionOverload : public GenericLispFunctionOverload
     {
-        public:
-            GenericConsoleLispFunctionOverload(
-                    core::Application& application,
-                    Universe& universe,
-                    GenericParentModule* console_lisp_function_parent_module);
+    public:
+        GenericConsoleLispFunctionOverload(
+            core::Application& application,
+            Universe& universe,
+            GenericParentModule* console_lisp_function_parent_module);
 
-            GenericConsoleLispFunctionOverload(const GenericConsoleLispFunctionOverload&) = delete;            // Delete copy constructor.
-            GenericConsoleLispFunctionOverload &operator=(const GenericConsoleLispFunctionOverload&) = delete; // Delete copy assignment.
+        GenericConsoleLispFunctionOverload(const GenericConsoleLispFunctionOverload&) = delete;
 
-            ~GenericConsoleLispFunctionOverload() override = default;
+        // Delete copy constructor.
+        GenericConsoleLispFunctionOverload& operator=(const GenericConsoleLispFunctionOverload&) = delete;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryAllocator;
+        // Delete copy assignment.
 
-            Entity* get_parent() const override;
+        ~GenericConsoleLispFunctionOverload() override = default;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryAllocator;
 
-            Scene* get_scene() const override;
+        Entity* get_parent() const override;
 
-            ChildModule child_of_console_lisp_function;
+        std::size_t get_number_of_children() const override;
+
+        std::size_t get_number_of_descendants() const override;
+
+        Scene* get_scene() const override;
+
+        ChildModule child_of_console_lisp_function;
     };
 }
 

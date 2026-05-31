@@ -35,11 +35,11 @@ namespace yli::ontology
     class Scene;
 
     GenericConsoleLispFunctionOverload::GenericConsoleLispFunctionOverload(
-            core::Application& application,
-            Universe& universe,
-            GenericParentModule* const console_lisp_function_parent_module)
+        core::Application& application,
+        Universe& universe,
+        GenericParentModule* const console_lisp_function_parent_module)
         : GenericLispFunctionOverload(application, universe),
-        child_of_console_lisp_function(console_lisp_function_parent_module, *this)
+          child_of_console_lisp_function(console_lisp_function_parent_module, *this)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::GenericConsoleLispFunctionOverload*";
@@ -66,7 +66,8 @@ namespace yli::ontology
 
         if (console_lisp_function_parent == nullptr) [[unlikely]]
         {
-            throw std::runtime_error("ERROR: `GenericConsoleLispFunctionOverload::get_scene`: `console_lisp_function_parent` is `nullptr`!");
+            throw std::runtime_error(
+                "ERROR: `GenericConsoleLispFunctionOverload::get_scene`: `console_lisp_function_parent` is `nullptr`!");
         }
 
         return console_lisp_function_parent->get_scene();
