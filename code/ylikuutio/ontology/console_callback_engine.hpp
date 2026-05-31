@@ -37,7 +37,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -51,48 +51,49 @@ namespace yli::ontology
 
     class ConsoleCallbackEngine final : public GenericCallbackEngine
     {
-            ConsoleCallbackEngine(
-                    core::Application& application,
-                    Universe& universe,
-                    const ConsoleCallbackEngineStruct&,
-                    GenericParentModule* console_parent_module);
+        ConsoleCallbackEngine(
+            core::Application& application,
+            Universe& universe,
+            const ConsoleCallbackEngineStruct&,
+            GenericParentModule* console_parent_module);
 
-            ~ConsoleCallbackEngine() override = default;
+        ~ConsoleCallbackEngine() override = default;
 
-        public:
-            template<typename ApprenticeType>
-                GenericParentModule* get_generic_parent_module() = delete;
+    public:
+        template<typename ApprenticeType>
+        GenericParentModule* get_generic_parent_module() = delete;
 
-            Entity* get_parent() const override;
+        Entity* get_parent() const override;
 
-            Scene* get_scene() const override;
+        Scene* get_scene() const override;
 
-            Console* get_console() const;
+        Console* get_console() const;
 
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        std::size_t get_number_of_children() const override;
 
-            ChildModule child_of_console;
-            GenericParentModule parent_of_console_callback_objects;
+        std::size_t get_number_of_descendants() const override;
 
-            ConsoleCallbackObject* create_console_callback_object(
-                InputParametersToAnyValueCallbackWithConsole callback);
+        ChildModule child_of_console;
+        GenericParentModule parent_of_console_callback_objects;
 
-            // execute all callbacks with a parameter.
-            std::optional<data::AnyValue> execute(const data::AnyValue& any_value) override;
+        ConsoleCallbackObject* create_console_callback_object(
+            InputParametersToAnyValueCallbackWithConsole callback);
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        // execute all callbacks with a parameter.
+        std::optional<data::AnyValue> execute(const data::AnyValue& any_value) override;
 
-        private:
-            std::vector<std::optional<data::AnyValue>> return_values;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+    private:
+        std::vector<std::optional<data::AnyValue>> return_values;
     };
 
     template<>
-        inline GenericParentModule* ConsoleCallbackEngine::get_generic_parent_module<ConsoleCallbackObject>()
-        {
-            return &this->parent_of_console_callback_objects;
-        }
+    inline GenericParentModule* ConsoleCallbackEngine::get_generic_parent_module<ConsoleCallbackObject>()
+    {
+        return &this->parent_of_console_callback_objects;
+    }
 }
 
 #endif

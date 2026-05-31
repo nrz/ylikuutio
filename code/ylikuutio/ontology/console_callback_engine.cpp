@@ -38,16 +38,16 @@ namespace yli::ontology
     struct ConsoleCallbackEngineStruct;
 
     ConsoleCallbackEngine::ConsoleCallbackEngine(
-            core::Application& application,
-            Universe& universe,
-            const ConsoleCallbackEngineStruct&,
-            GenericParentModule* const console_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const ConsoleCallbackEngineStruct&,
+        GenericParentModule* const console_parent_module)
         : GenericCallbackEngine(application, universe, GenericCallbackEngineStruct()),
-        child_of_console(console_parent_module, *this),
-        parent_of_console_callback_objects(
-                *this,
-                this->registry,
-                "console_callback_objects")
+          child_of_console(console_parent_module, *this),
+          parent_of_console_callback_objects(
+              *this,
+              this->registry,
+              "console_callback_objects")
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ConsoleCallbackEngine*";
@@ -80,7 +80,7 @@ namespace yli::ontology
     }
 
     ConsoleCallbackObject* ConsoleCallbackEngine::create_console_callback_object(
-            const InputParametersToAnyValueCallbackWithConsole callback)
+        const InputParametersToAnyValueCallbackWithConsole callback)
     {
         const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
 
@@ -95,10 +95,11 @@ namespace yli::ontology
         bool is_any_console_callback_object_executed { false };
 
         // execute all callbacks.
-        for (std::size_t child_i = 0; child_i < this->parent_of_console_callback_objects.child_pointer_vector.size(); child_i++)
+        for (std::size_t child_i = 0; child_i < this->parent_of_console_callback_objects.child_pointer_vector.size();
+             child_i++)
         {
             const auto console_callback_object_pointer = static_cast<ConsoleCallbackObject*>(
-                    this->parent_of_console_callback_objects.child_pointer_vector.at(child_i));
+                this->parent_of_console_callback_objects.child_pointer_vector.at(child_i));
 
             if (console_callback_object_pointer != nullptr)
             {
