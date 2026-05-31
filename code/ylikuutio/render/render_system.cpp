@@ -214,9 +214,8 @@ namespace yli::render
     {
         for (auto it = parent.begin(); it != parent.end(); ++it)
         {
-            ontology::Ecosystem* ecosystem = static_cast<ontology::Ecosystem*>(*it);
-
-            if (ecosystem != nullptr && ecosystem->should_render) [[likely]]
+            if (const auto ecosystem = static_cast<ontology::Ecosystem*>(*it);
+                ecosystem != nullptr && ecosystem->should_render) [[likely]]
             {
                 render_pipelines_of_an_ecosystem(ecosystem->parent_of_pipelines, scene);
             }
