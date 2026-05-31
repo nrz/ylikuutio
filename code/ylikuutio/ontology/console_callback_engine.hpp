@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
+
 #include "generic_callback_engine.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
@@ -25,9 +28,6 @@
 #include <cstddef> // std::size_t
 #include <optional> // std::optional
 #include <vector>   // std::vector
-
-#ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
 
 namespace yli::core
 {
