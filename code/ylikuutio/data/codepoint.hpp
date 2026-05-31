@@ -27,12 +27,12 @@ namespace yli::data
     {
         explicit Codepoint(const char codepoint)
             : codepoint { static_cast<std::uint32_t>(codepoint) }
-        {
-        }
+        { }
 
         ~Codepoint() = default;
 
         Codepoint(const Codepoint& original) = default;
+
         Codepoint& operator=(const Codepoint&) = default;
 
         bool operator==(const Codepoint& other) const
