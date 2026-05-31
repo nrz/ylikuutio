@@ -28,110 +28,116 @@ struct SDL_Window;
 
 namespace yli::ontology
 {
-    class Entity;
-    class Universe;
-    class Scene;
-    class SymbiontSpecies;
-    class Glyph;
-    class GenericParentModule;
-    class ParentOfPipelinesModule;
-    class GenericMasterModule;
-    class ApprenticeModule;
+        class Entity;
+        class Universe;
+        class Scene;
+        class SymbiontSpecies;
+        class Glyph;
+        class GenericParentModule;
+        class ParentOfPipelinesModule;
+        class GenericMasterModule;
+        class ApprenticeModule;
 }
 
 namespace yli::render
 {
-    struct RenderSystemStruct;
-    struct RenderStruct;
+        struct RenderSystemStruct;
+        struct RenderStruct;
 
-    class RenderSystem final
-    {
+        class RenderSystem final
+        {
         public:
-            RenderSystem(ontology::Universe* universe, const RenderSystemStruct& render_system_struct);
+                RenderSystem(ontology::Universe* universe, const RenderSystemStruct& render_system_struct);
 
-            RenderSystem(const RenderSystem&) = delete;            // Delete copy constructor.
-            RenderSystem& operator=(const RenderSystem&) = delete; // Delete copy assignment.
+                RenderSystem(const RenderSystem&) = delete; // Delete copy constructor.
+                RenderSystem& operator=(const RenderSystem&) = delete; // Delete copy assignment.
 
-            ~RenderSystem() = default;
+                ~RenderSystem() = default;
 
-            void create_context_and_make_it_current();
-            [[nodiscard]] bool setup_context(SDL_Window* window) const;
-            [[nodiscard]] bool setup_context() const;
+                void create_context_and_make_it_current();
 
-            static void set_swap_interval(std::int32_t interval);
+                [[nodiscard]] bool setup_context(SDL_Window* window) const;
 
-            static void clear_color_and_depth_buffers();
-            void restore_onscreen_rendering(std::uint32_t window_width, std::uint32_t window_height) const;
-            void set_opengl_background_color() const;
+                [[nodiscard]] bool setup_context() const;
 
-            static void adjust_opengl_viewport(std::uint32_t window_width, std::uint32_t window_height);
+                static void set_swap_interval(std::int32_t interval);
 
-            // This function renders everything.
-            static void render(const RenderStruct& render_struct);
+                static void clear_color_and_depth_buffers();
 
-            void render_pipelines_of_ecosystems(ontology::GenericParentModule& parent, const ontology::Scene* scene) const;
+                void restore_onscreen_rendering(std::uint32_t window_width, std::uint32_t window_height) const;
 
-            static void render_pipelines_of_an_ecosystem(ontology::ParentOfPipelinesModule& parent, const ontology::Scene* scene);
+                void set_opengl_background_color() const;
 
-            static void render_pipelines(ontology::ParentOfPipelinesModule& parent, const ontology::Scene* scene);
+                static void adjust_opengl_viewport(std::uint32_t window_width, std::uint32_t window_height);
 
-            static void render_materials(
-                    ontology::GenericMasterModule& master,
-                    const ontology::Scene* scene);
+                // This function renders everything.
+                static void render(const RenderStruct& render_struct);
 
-            static void render_species(
-                    ontology::GenericMasterModule& master,
-                    const ontology::Scene* scene);
+                void render_pipelines_of_ecosystems(ontology::GenericParentModule& parent,
+                                                    const ontology::Scene* scene) const;
 
-            static void render_symbioses(
-                    ontology::GenericMasterModule& master,
-                    const ontology::Scene* scene);
+                static void render_pipelines_of_an_ecosystem(ontology::ParentOfPipelinesModule& parent,
+                                                             const ontology::Scene* scene);
 
-            static void render_holobionts(
-                    yli::ontology::GenericMasterModule& master,
-                    const yli::ontology::Scene* scene);
+                static void render_pipelines(ontology::ParentOfPipelinesModule& parent, const ontology::Scene* scene);
 
-            static void render_bionts(ontology::GenericParentModule& parent);
+                static void render_materials(
+                        ontology::GenericMasterModule& master,
+                        const ontology::Scene* scene);
 
-            static void render_shapeshifter_sequences(
-                    ontology::GenericParentModule& parent,
-                    const ontology::Scene* scene);
+                static void render_species(
+                        ontology::GenericMasterModule& master,
+                        const ontology::Scene* scene);
 
-            static void render_text_2ds(ontology::GenericParentModule& parent);
+                static void render_symbioses(
+                        ontology::GenericMasterModule& master,
+                        const ontology::Scene* scene);
 
-            static void render_consoles(ontology::GenericMasterModule& master);
+                static void render_holobionts(
+                        yli::ontology::GenericMasterModule& master,
+                        const yli::ontology::Scene* scene);
 
-            static void render_vector_fonts(
-                    ontology::GenericParentModule& parent,
-                    const ontology::Scene* scene);
+                static void render_bionts(ontology::GenericParentModule& parent);
 
-            static void render_glyph(
-                    ontology::Glyph* glyph,
-                    const ontology::Scene* scene);
+                static void render_shapeshifter_sequences(
+                        ontology::GenericParentModule& parent,
+                        const ontology::Scene* scene);
 
-            static void render_glyphs(
-                    ontology::GenericParentModule& parent,
-                    const ontology::Scene* scene);
+                static void render_text_2ds(ontology::GenericParentModule& parent);
 
-            static void render_compute_tasks(
-                    ontology::GenericParentModule& parent,
-                    const ontology::Scene* scene);
+                static void render_consoles(ontology::GenericMasterModule& master);
+
+                static void render_vector_fonts(
+                        ontology::GenericParentModule& parent,
+                        const ontology::Scene* scene);
+
+                static void render_glyph(
+                        ontology::Glyph* glyph,
+                        const ontology::Scene* scene);
+
+                static void render_glyphs(
+                        ontology::GenericParentModule& parent,
+                        const ontology::Scene* scene);
+
+                static void render_compute_tasks(
+                        ontology::GenericParentModule& parent,
+                        const ontology::Scene* scene);
 
         private:
-            ontology::Universe* const universe { nullptr };
+                ontology::Universe* const universe { nullptr };
 
-            SDL_GLContext context              { nullptr };
-            SDL_Window* hidden_sdl_window      { nullptr };
-            std::string hidden_window_title;
-            std::uint32_t hidden_window_width  { 0 };
-            std::uint32_t hidden_window_height { 0 };
-            bool is_hidden_window_fullscreen   { false };
+                SDL_GLContext context { nullptr };
+                SDL_Window* hidden_sdl_window { nullptr };
+                std::string hidden_window_title;
+                std::uint32_t hidden_window_width { 0 };
+                std::uint32_t hidden_window_height { 0 };
+                bool is_hidden_window_fullscreen { false };
 
-            float background_red   { 0.0f };
-            float background_green { 0.0f };
-            float background_blue  { 0.0f };
-            float background_alpha { 0.0f };
-    };
+                float background_red { 0.0f };
+                float background_green { 0.0f };
+                float background_blue { 0.0f };
+                float background_alpha { 0.0f };
+        };
 }
 
 #endif

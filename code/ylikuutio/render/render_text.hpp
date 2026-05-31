@@ -32,13 +32,13 @@
 namespace yli::render
 {
     void render_text(
-            const std::vector<glm::vec2>& vertices,
-            const std::vector<glm::vec2>& uvs,
-            GLuint vao,
-            GLuint vertex_buffer,
-            GLuint uv_buffer,
-            GLint vertex_position_in_screenspace_id,
-            GLint vertex_uv_id);
+        const std::vector<glm::vec2>& vertices,
+        const std::vector<glm::vec2>& uvs,
+        GLuint vao,
+        GLuint vertex_buffer,
+        GLuint uv_buffer,
+        GLint vertex_position_in_screenspace_id,
+        GLint vertex_uv_id);
 }
 
 #endif

@@ -31,13 +31,13 @@
 namespace yli::render
 {
     void render_text(
-            const std::vector<glm::vec2>& vertices,
-            const std::vector<glm::vec2>& uvs,
-            const GLuint vao,
-            const GLuint vertex_buffer,
-            const GLuint uv_buffer,
-            const GLint vertex_position_in_screenspace_id,
-            const GLint vertex_uv_id)
+        const std::vector<glm::vec2>& vertices,
+        const std::vector<glm::vec2>& uvs,
+        const GLuint vao,
+        const GLuint vertex_buffer,
+        const GLuint uv_buffer,
+        const GLint vertex_position_in_screenspace_id,
+        const GLint vertex_uv_id)
     {
         glBindVertexArray(vao);
         glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);

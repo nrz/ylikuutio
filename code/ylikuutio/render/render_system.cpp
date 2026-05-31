@@ -54,10 +54,10 @@ namespace yli::render
 {
     RenderSystem::RenderSystem(ontology::Universe* const universe, const RenderSystemStruct& render_system_struct)
         : universe { universe },
-        hidden_window_title { render_system_struct.hidden_window_title },
-        hidden_window_width { universe != nullptr ? universe->get_window_width() : 0 },
-        hidden_window_height { universe != nullptr ? universe->get_window_height() : 0 },
-        is_hidden_window_fullscreen { render_system_struct.is_hidden_window_fullscreen }
+          hidden_window_title { render_system_struct.hidden_window_title },
+          hidden_window_width { universe != nullptr ? universe->get_window_width() : 0 },
+          hidden_window_height { universe != nullptr ? universe->get_window_height() : 0 },
+          is_hidden_window_fullscreen { render_system_struct.is_hidden_window_fullscreen }
     {
         // Open a window and create its OpenGL context.
         std::cout << "Opening a window and creating its OpenGL context...\n";
@@ -75,11 +75,11 @@ namespace yli::render
         }
 
         this->hidden_sdl_window = sdl::create_hidden_window(
-                universe->display_mode->displayID,
-                static_cast<int>(this->hidden_window_width),
-                static_cast<int>(this->hidden_window_height),
-                this->hidden_window_title.c_str(),
-                this->is_hidden_window_fullscreen);
+            universe->display_mode->displayID,
+            static_cast<int>(this->hidden_window_width),
+            static_cast<int>(this->hidden_window_height),
+            this->hidden_window_title.c_str(),
+            this->is_hidden_window_fullscreen);
 
         if (this->hidden_sdl_window != nullptr)
         {
@@ -158,7 +158,8 @@ namespace yli::render
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void RenderSystem::restore_onscreen_rendering(const std::uint32_t window_width, const std::uint32_t window_height) const
+    void RenderSystem::restore_onscreen_rendering(const std::uint32_t window_width,
+                                                  const std::uint32_t window_height) const
     {
         // Bind the default framebuffer for on-screen rendering.
         opengl::bind_gl_framebuffer(0);
@@ -176,16 +177,16 @@ namespace yli::render
     void RenderSystem::set_opengl_background_color() const
     {
         opengl::set_background_color(
-                this->background_red,
-                this->background_green,
-                this->background_blue,
-                this->background_alpha);
+            this->background_red,
+            this->background_green,
+            this->background_blue,
+            this->background_alpha);
     }
 
     void RenderSystem::adjust_opengl_viewport(const std::uint32_t window_width, const std::uint32_t window_height)
     {
         if (window_width <= std::numeric_limits<GLsizei>::max() &&
-                window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
+            window_height <= std::numeric_limits<GLsizei>::max()) [[likely]]
         {
             glViewport(0, 0, window_width, window_height);
         }
@@ -217,7 +218,8 @@ namespace yli::render
         SDL_GL_SwapWindow(render_struct.window);
     }
 
-    void RenderSystem::render_pipelines_of_ecosystems(ontology::GenericParentModule& parent, const ontology::Scene* const scene) const
+    void RenderSystem::render_pipelines_of_ecosystems(ontology::GenericParentModule& parent,
+                                                      const ontology::Scene* const scene) const
     {
         for (auto it = parent.begin(); it != parent.end(); ++it)
         {
@@ -230,50 +232,51 @@ namespace yli::render
         }
     }
 
-    void RenderSystem::render_pipelines_of_an_ecosystem(ontology::ParentOfPipelinesModule& parent, const ontology::Scene* const scene)
+    void RenderSystem::render_pipelines_of_an_ecosystem(ontology::ParentOfPipelinesModule& parent,
+                                                        const ontology::Scene* const scene)
     {
         render_children_of_given_scene_or_of_all_scenes<
             ontology::ParentOfPipelinesModule&,
             ontology::Pipeline*>(
-                parent,
-                scene);
+            parent,
+            scene);
     }
 
     void RenderSystem::render_pipelines(ontology::ParentOfPipelinesModule& parent, const ontology::Scene* const scene)
     {
         render_children_of_given_scene_or_of_all_scenes<ontology::ParentOfPipelinesModule&, ontology::Pipeline*>(
-                parent,
-                scene);
+            parent,
+            scene);
     }
 
     void RenderSystem::render_materials(
-            ontology::GenericMasterModule& master,
-            const ontology::Scene* const scene)
+        ontology::GenericMasterModule& master,
+        const ontology::Scene* const scene)
     {
         render_apprentices<ontology::GenericMasterModule&, ontology::Material*>(master, scene);
     }
 
     void RenderSystem::render_species(
-            ontology::GenericMasterModule& master,
-            const ontology::Scene* const scene)
+        ontology::GenericMasterModule& master,
+        const ontology::Scene* const scene)
     {
         render_apprentices<ontology::GenericMasterModule&, ontology::Species*>(master, scene);
     }
 
     void RenderSystem::render_symbioses(
-            ontology::GenericMasterModule& master,
-            const ontology::Scene* const scene)
+        ontology::GenericMasterModule& master,
+        const ontology::Scene* const scene)
     {
         render_apprentices<ontology::GenericMasterModule&, ontology::Symbiosis*>(master, scene);
     }
 
     void RenderSystem::render_holobionts(
-            ontology::GenericMasterModule& master,
-            const ontology::Scene* const scene)
+        ontology::GenericMasterModule& master,
+        const ontology::Scene* const scene)
     {
         render_apprentices<ontology::GenericMasterModule&, ontology::Holobiont*>(
-                master,
-                scene);
+            master,
+            scene);
     }
 
     void RenderSystem::render_bionts(ontology::GenericParentModule& parent)
@@ -282,12 +285,14 @@ namespace yli::render
     }
 
     void RenderSystem::render_shapeshifter_sequences(
-            ontology::GenericParentModule& parent,
-            const ontology::Scene* const scene)
+        ontology::GenericParentModule& parent,
+        const ontology::Scene* const scene)
     {
-        render_children_of_given_scene_or_of_all_scenes<ontology::GenericParentModule&, ontology::ShapeshifterSequence*>(
-                parent,
-                scene);
+        render_children_of_given_scene_or_of_all_scenes<
+            ontology::GenericParentModule&,
+            ontology::ShapeshifterSequence*>(
+            parent,
+            scene);
     }
 
     void RenderSystem::render_text_2ds(ontology::GenericParentModule& parent)
@@ -298,44 +303,44 @@ namespace yli::render
     void RenderSystem::render_consoles(ontology::GenericMasterModule& master)
     {
         render_apprentices<ontology::GenericMasterModule&, ontology::Console*>(
-                master,
-                nullptr); // `Console`s are rendered in all `Scene`s.
+            master,
+            nullptr); // `Console`s are rendered in all `Scene`s.
     }
 
     void RenderSystem::render_vector_fonts(
-            ontology::GenericParentModule& parent,
-            const ontology::Scene* const scene)
+        ontology::GenericParentModule& parent,
+        const ontology::Scene* const scene)
     {
         render_children_of_given_scene_or_of_all_scenes<ontology::GenericParentModule&, ontology::VectorFont*>(
-                parent,
-                scene);
+            parent,
+            scene);
     }
 
     void RenderSystem::render_glyph(
-            ontology::Glyph* const glyph,
-            const ontology::Scene* const scene)
+        ontology::Glyph* const glyph,
+        const ontology::Scene* const scene)
     {
         render_model<ontology::GenericMasterModule&, ontology::Object*>(
-                glyph->mesh,
-                *(glyph->get_renderables_container()),
-                scene);
+            glyph->mesh,
+            *(glyph->get_renderables_container()),
+            scene);
     }
 
     void RenderSystem::render_glyphs(
-            ontology::GenericParentModule& parent,
-            const ontology::Scene* const scene)
+        ontology::GenericParentModule& parent,
+        const ontology::Scene* const scene)
     {
         render_children_of_given_scene_or_of_all_scenes<ontology::GenericParentModule&, ontology::Glyph*>(
-                parent,
-                scene);
+            parent,
+            scene);
     }
 
     void RenderSystem::render_compute_tasks(
-            ontology::GenericParentModule& parent,
-            const ontology::Scene* const scene)
+        ontology::GenericParentModule& parent,
+        const ontology::Scene* const scene)
     {
         render_children_of_given_scene_or_of_all_scenes<ontology::GenericParentModule&, ontology::ComputeTask*>(
-                parent,
-                scene);
+            parent,
+            scene);
     }
 }

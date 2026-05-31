@@ -31,75 +31,75 @@ namespace yli::ontology
 namespace yli::render
 {
     template<typename T>
-        using SomeIterator = std::decay_t<T>::iterator;
+    using SomeIterator = std::decay_t<T>::iterator;
 
     template<typename ContainerType, typename CastType>
-        void render_children(ContainerType& child_container)
+    void render_children(ContainerType& child_container)
+    {
+        for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); ++it)
         {
-            for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); ++it)
-            {
-                auto child_pointer = static_cast<CastType>(*it);
+            auto child_pointer = static_cast<CastType>(*it);
 
-                if (child_pointer != nullptr && child_pointer->should_render)
+            if (child_pointer != nullptr && child_pointer->should_render)
+            {
+                child_pointer->render();
+            }
+        }
+    }
+
+    template<typename ContainerType, typename CastType>
+    void render_children_of_given_scene_or_of_all_scenes(
+        ContainerType& child_container,
+        const ontology::Scene* const scene)
+    {
+        for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); ++it)
+        {
+            auto child_pointer = static_cast<CastType>(*it);
+
+            if (child_pointer != nullptr && child_pointer->should_render)
+            {
+                if (ontology::Scene* const scene_of_child = child_pointer->get_scene();
+                    scene_of_child == scene || scene == nullptr)
                 {
-                    child_pointer->render();
+                    // Set `Scene` of the child as the chosen `Scene`.
+                    child_pointer->render(scene_of_child);
+                }
+                else if (scene_of_child == nullptr)
+                {
+                    // Keep the chosen `Scene` as a requirement.
+                    child_pointer->render(scene);
                 }
             }
         }
+    }
 
     template<typename ContainerType, typename CastType>
-        void render_children_of_given_scene_or_of_all_scenes(
-                ContainerType& child_container,
-                const ontology::Scene* const scene)
+    void render_apprentices(ContainerType& apprentice_container, const ontology::Scene* const scene)
+    {
+        // Render apprentices of the given `Scene` (`scene`) or of all `Scene`s.
+        for (SomeIterator<ContainerType&> it = apprentice_container.begin(); it != apprentice_container.end(); ++it)
         {
-            for (SomeIterator<ContainerType&> it = child_container.begin(); it != child_container.end(); ++it)
+            if (*it != nullptr)
             {
-                auto child_pointer = static_cast<CastType>(*it);
+                auto apprentice_pointer = static_cast<CastType>(*it);
 
-                if (child_pointer != nullptr && child_pointer->should_render)
+                if (apprentice_pointer != nullptr && apprentice_pointer->should_render)
                 {
-                    if (ontology::Scene* const scene_of_child = child_pointer->get_scene();
-                        scene_of_child == scene || scene == nullptr)
+                    if (ontology::Scene* const scene_of_apprentice = apprentice_pointer->get_scene();
+                        scene_of_apprentice == scene || scene == nullptr)
                     {
-                        // Set `Scene` of the child as the chosen `Scene`.
-                        child_pointer->render(scene_of_child);
+                        // Set `Scene` of the apprentice as the chosen `Scene`.
+                        apprentice_pointer->render(scene_of_apprentice);
                     }
-                    else if (scene_of_child == nullptr)
+                    else if (scene_of_apprentice == nullptr)
                     {
                         // Keep the chosen `Scene` as a requirement.
-                        child_pointer->render(scene);
+                        apprentice_pointer->render(scene);
                     }
                 }
             }
         }
-
-    template<typename ContainerType, typename CastType>
-        void render_apprentices(ContainerType& apprentice_container, const ontology::Scene* const scene)
-        {
-            // Render apprentices of the given `Scene` (`scene`) or of all `Scene`s.
-            for (SomeIterator<ContainerType&> it = apprentice_container.begin(); it != apprentice_container.end(); ++it)
-            {
-                if (*it != nullptr)
-                {
-                    auto apprentice_pointer = static_cast<CastType>(*it);
-
-                    if (apprentice_pointer != nullptr && apprentice_pointer->should_render)
-                    {
-                        if (ontology::Scene* const scene_of_apprentice = apprentice_pointer->get_scene();
-                            scene_of_apprentice == scene || scene == nullptr)
-                        {
-                            // Set `Scene` of the apprentice as the chosen `Scene`.
-                            apprentice_pointer->render(scene_of_apprentice);
-                        }
-                        else if (scene_of_apprentice == nullptr)
-                        {
-                            // Keep the chosen `Scene` as a requirement.
-                            apprentice_pointer->render(scene);
-                        }
-                    }
-                }
-            }
-        }
+    }
 }
 
 #endif
