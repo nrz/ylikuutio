@@ -22,7 +22,6 @@
 #include "result.hpp"
 
 // Include standard headers
-#include <cstddef>    // std::size_t
 #include <string>     // std::string
 #include <vector>     // std::vector
 
