@@ -119,11 +119,8 @@ namespace yli::render
                 std::cout << "OpenGL context set up successfully.\n";
                 return true; // Success.
             }
-            else
-            {
-                std::cerr << "ERROR: `RenderSystem::setup_context`: setting context failed!\n";
-                return false; // Fail.
-            }
+            std::cerr << "ERROR: `RenderSystem::setup_context`: setting context failed!\n";
+            return false; // Fail.
         }
 
         return false; // Fail.
