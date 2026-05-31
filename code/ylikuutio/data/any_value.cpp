@@ -210,7 +210,7 @@ namespace yli::data
             std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(rhs.data))
         {
             return std::get<std::reference_wrapper<const ontology::Movable>>(this->data).get() ==
-                std::get<std::reference_wrapper<const ontology::Movable>>(rhs.data).get();
+                   std::get<std::reference_wrapper<const ontology::Movable>>(rhs.data).get();
         }
         if (std::holds_alternative<std::reference_wrapper<ontology::Universe>>(this->data) &&
             std::holds_alternative<std::reference_wrapper<ontology::Universe>>(rhs.data))
@@ -575,111 +575,129 @@ namespace yli::data
             const glm::vec3& cartesian_coordinates = std::get<std::reference_wrapper<glm::vec3>>(this->data);
 
             any_value_stringstream << std::fixed << "{ " << cartesian_coordinates.x
-                << ", " << cartesian_coordinates.y
-                << ", " << cartesian_coordinates.z
-                << " }";
+                    << ", " << cartesian_coordinates.y
+                    << ", " << cartesian_coordinates.z
+                    << " }";
         }
         else if (std::holds_alternative<std::reference_wrapper<const glm::vec3>>(this->data))
         {
             const glm::vec3& cartesian_coordinates = std::get<std::reference_wrapper<const glm::vec3>>(this->data);
 
             any_value_stringstream << std::fixed << "{ " << cartesian_coordinates.x
-                << ", " << cartesian_coordinates.y
-                << ", " << cartesian_coordinates.z
-                << " }";
+                    << ", " << cartesian_coordinates.y
+                    << ", " << cartesian_coordinates.z
+                    << " }";
         }
         else if (std::holds_alternative<std::reference_wrapper<glm::vec4>>(this->data))
         {
             const glm::vec4& cartesian_coordinates = std::get<std::reference_wrapper<glm::vec4>>(this->data);
 
             any_value_stringstream << std::fixed << "{ " << cartesian_coordinates.x
-                << ", " << cartesian_coordinates.y
-                << ", " << cartesian_coordinates.z
-                << ", " << cartesian_coordinates.w
-                << " }";
+                    << ", " << cartesian_coordinates.y
+                    << ", " << cartesian_coordinates.z
+                    << ", " << cartesian_coordinates.w
+                    << " }";
         }
         else if (std::holds_alternative<std::reference_wrapper<const glm::vec4>>(this->data))
         {
             const glm::vec4& cartesian_coordinates = std::get<std::reference_wrapper<const glm::vec4>>(this->data);
 
             any_value_stringstream << std::fixed << "{ " << cartesian_coordinates.x
-                << ", " << cartesian_coordinates.y
-                << ", " << cartesian_coordinates.z
-                << ", " << cartesian_coordinates.w
-                << " }";
+                    << ", " << cartesian_coordinates.y
+                    << ", " << cartesian_coordinates.z
+                    << ", " << cartesian_coordinates.w
+                    << " }";
         }
         // Ontology.
         else if (std::holds_alternative<std::reference_wrapper<ontology::Entity>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Entity>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Entity>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Movable>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Movable>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<const ontology::Movable>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<const
+                ontology::Movable>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Universe>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Universe>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Universe>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Ecosystem>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Ecosystem>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Ecosystem>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Scene>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Scene>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Scene>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Pipeline>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Pipeline>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Pipeline>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Material>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Material>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Material>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Species>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Species>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Species>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Object>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Object>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Object>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Symbiosis>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Symbiosis>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Symbiosis>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Holobiont>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Holobiont>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Holobiont>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Font2d>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Font2d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Font2d>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Text2d>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Text2d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Text2d>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::VectorFont>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::VectorFont>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::VectorFont>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Text3d>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Text3d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Text3d>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Console>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::Console>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::Console>>(this->data) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::ComputeTask>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<ontology::ComputeTask>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
+                ontology::ComputeTask>>(this->data) << std::dec;
         }
         else
         {
@@ -700,7 +718,8 @@ namespace yli::data
             return std::get<std::reference_wrapper<const std::string>>(this->data);
         }
 
-        throw std::runtime_error("Requested `const std::string&` for `AnyValue` that didn't hold `std::string` or `const std::string` reference!");
+        throw std::runtime_error(
+            "Requested `const std::string&` for `AnyValue` that didn't hold `std::string` or `const std::string` reference!");
     }
 
     ontology::Entity& AnyValue::get_entity_ref() const
@@ -972,268 +991,226 @@ namespace yli::data
 
     AnyValue::AnyValue(const std::string& type, const std::string& value_string)
         : data(get_variant<
-                std::monostate,
-                // Fundamental types.
-                bool,
-                char,
-                float,
-                double,
-                std::int32_t,
-                std::uint32_t,
-                std::int64_t,
-                std::uint64_t,
-                // Strings.
-                std::reference_wrapper<std::string>,
-                std::reference_wrapper<const std::string>,
-                // Variable-size vectors.
-                std::reference_wrapper<std::vector<std::int8_t>>,
-                std::reference_wrapper<std::vector<std::uint8_t>>,
-                std::reference_wrapper<std::vector<std::int16_t>>,
-                std::reference_wrapper<std::vector<std::uint16_t>>,
-                std::reference_wrapper<std::vector<std::int32_t>>,
-                std::reference_wrapper<std::vector<std::uint32_t>>,
-                std::reference_wrapper<std::vector<std::int64_t>>,
-                std::reference_wrapper<std::vector<std::uint64_t>>,
-                std::reference_wrapper<std::vector<float>>,
-                // Fixed-size vectors.
-                std::reference_wrapper<glm::vec3>,
-                std::reference_wrapper<const glm::vec3>,
-                std::reference_wrapper<glm::vec4>,
-                std::reference_wrapper<const glm::vec4>,
-                // Ontology.
-                std::reference_wrapper<ontology::Entity>,
-                std::reference_wrapper<ontology::Movable>,
-                std::reference_wrapper<const ontology::Movable>,
-                std::reference_wrapper<ontology::Universe>,
-                std::reference_wrapper<ontology::Ecosystem>,
-                std::reference_wrapper<ontology::Scene>,
-                std::reference_wrapper<ontology::Pipeline>,
-                std::reference_wrapper<ontology::Material>,
-                std::reference_wrapper<ontology::Species>,
-                std::reference_wrapper<ontology::Object>,
-                std::reference_wrapper<ontology::Symbiosis>,
-                std::reference_wrapper<ontology::Holobiont>,
-                std::reference_wrapper<ontology::Font2d>,
-                std::reference_wrapper<ontology::Text2d>,
-                std::reference_wrapper<ontology::VectorFont>,
-                std::reference_wrapper<ontology::Text3d>,
-                std::reference_wrapper<ontology::Console>,
-                std::reference_wrapper<ontology::ComputeTask>>(type, value_string))
-    {
-    }
+            std::monostate,
+            // Fundamental types.
+            bool,
+            char,
+            float,
+            double,
+            std::int32_t,
+            std::uint32_t,
+            std::int64_t,
+            std::uint64_t,
+            // Strings.
+            std::reference_wrapper<std::string>,
+            std::reference_wrapper<const std::string>,
+            // Variable-size vectors.
+            std::reference_wrapper<std::vector<std::int8_t>>,
+            std::reference_wrapper<std::vector<std::uint8_t>>,
+            std::reference_wrapper<std::vector<std::int16_t>>,
+            std::reference_wrapper<std::vector<std::uint16_t>>,
+            std::reference_wrapper<std::vector<std::int32_t>>,
+            std::reference_wrapper<std::vector<std::uint32_t>>,
+            std::reference_wrapper<std::vector<std::int64_t>>,
+            std::reference_wrapper<std::vector<std::uint64_t>>,
+            std::reference_wrapper<std::vector<float>>,
+            // Fixed-size vectors.
+            std::reference_wrapper<glm::vec3>,
+            std::reference_wrapper<const glm::vec3>,
+            std::reference_wrapper<glm::vec4>,
+            std::reference_wrapper<const glm::vec4>,
+            // Ontology.
+            std::reference_wrapper<ontology::Entity>,
+            std::reference_wrapper<ontology::Movable>,
+            std::reference_wrapper<const ontology::Movable>,
+            std::reference_wrapper<ontology::Universe>,
+            std::reference_wrapper<ontology::Ecosystem>,
+            std::reference_wrapper<ontology::Scene>,
+            std::reference_wrapper<ontology::Pipeline>,
+            std::reference_wrapper<ontology::Material>,
+            std::reference_wrapper<ontology::Species>,
+            std::reference_wrapper<ontology::Object>,
+            std::reference_wrapper<ontology::Symbiosis>,
+            std::reference_wrapper<ontology::Holobiont>,
+            std::reference_wrapper<ontology::Font2d>,
+            std::reference_wrapper<ontology::Text2d>,
+            std::reference_wrapper<ontology::VectorFont>,
+            std::reference_wrapper<ontology::Text3d>,
+            std::reference_wrapper<ontology::Console>,
+            std::reference_wrapper<ontology::ComputeTask>>(type, value_string))
+    { }
 
     // Fundamental types.
 
     AnyValue::AnyValue(const bool bool_value)
         : data(bool_value)
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const char char_value)
         : data(char_value)
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const float float_value)
         : data(float_value)
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const double double_value)
         : data(double_value)
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const std::int32_t int32_t_value)
         : data(int32_t_value)
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const std::uint32_t uint32_t_value)
         : data(uint32_t_value)
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const std::int64_t int64_t_value)
         : data(int64_t_value)
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const std::uint64_t uint64_t_value)
         : data(uint64_t_value)
-    {
-    }
+    { }
 
     // Strings.
 
     AnyValue::AnyValue(std::string& std_string_ref)
         : data(std::reference_wrapper(std_string_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const std::string& const_std_string_ref)
         : data(std::reference_wrapper(const_std_string_ref))
-    {
-    }
+    { }
 
     // Variable-size vectors.
 
     AnyValue::AnyValue(std::vector<std::int8_t>& std_vector_int8_t_ref)
         : data(std::reference_wrapper(std_vector_int8_t_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(std::vector<std::uint8_t>& std_vector_uint8_t_ref)
         : data(std::reference_wrapper(std_vector_uint8_t_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(std::vector<std::int16_t>& std_vector_int16_t_ref)
         : data(std::reference_wrapper(std_vector_int16_t_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(std::vector<std::uint16_t>& std_vector_uint16_t_ref)
         : data(std::reference_wrapper(std_vector_uint16_t_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(std::vector<std::int32_t>& std_vector_int32_t_ref)
         : data(std::reference_wrapper(std_vector_int32_t_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(std::vector<std::uint32_t>& std_vector_uint32_t_ref)
         : data(std::reference_wrapper(std_vector_uint32_t_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(std::vector<std::int64_t>& std_vector_int64_t_ref)
         : data(std::reference_wrapper(std_vector_int64_t_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(std::vector<std::uint64_t>& std_vector_uint64_t_ref)
         : data(std::reference_wrapper(std_vector_uint64_t_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(std::vector<float>& std_vector_float_ref)
         : data(std::reference_wrapper(std_vector_float_ref))
-    {
-    }
+    { }
 
     // Fixed-size vectors.
 
     AnyValue::AnyValue(glm::vec3& glm_vec3_ref)
         : data(std::reference_wrapper(glm_vec3_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const glm::vec3& const_glm_vec3_ref)
         : data(std::reference_wrapper(const_glm_vec3_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(glm::vec4& glm_vec4_ref)
         : data(std::reference_wrapper(glm_vec4_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const glm::vec4& const_glm_vec4_ref)
         : data(std::reference_wrapper(const_glm_vec4_ref))
-    {
-    }
+    { }
 
     // Ontology.
 
     AnyValue::AnyValue(ontology::Entity& entity_ref)
         : data(std::reference_wrapper(entity_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Movable& movable_ref)
         : data(std::reference_wrapper(movable_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(const ontology::Movable& const_movable_ref)
         : data(std::reference_wrapper(const_movable_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Universe& universe_ref)
         : data(std::reference_wrapper(universe_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Ecosystem& ecosystem_ref)
         : data(std::reference_wrapper(ecosystem_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Scene& scene_ref)
         : data(std::reference_wrapper(scene_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Pipeline& pipeline_ref)
         : data(std::reference_wrapper(pipeline_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Material& material_ref)
         : data(std::reference_wrapper(material_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Species& species_ref)
         : data(std::reference_wrapper(species_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Object& object_ref)
         : data(std::reference_wrapper(object_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Symbiosis& symbiosis_ref)
         : data(std::reference_wrapper(symbiosis_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Holobiont& holobiont_ref)
         : data(std::reference_wrapper(holobiont_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Font2d& font_2d_ref)
         : data(std::reference_wrapper(font_2d_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Text2d& text_2d_ref)
         : data(std::reference_wrapper(text_2d_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::VectorFont& vector_font_ref)
         : data(std::reference_wrapper(vector_font_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Text3d& text_3d_ref)
         : data(std::reference_wrapper(text_3d_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::Console& console_ref)
         : data(std::reference_wrapper(console_ref))
-    {
-    }
+    { }
 
     AnyValue::AnyValue(ontology::ComputeTask& compute_task_ref)
         : data(std::reference_wrapper(compute_task_ref))
-    {
-    }
+    { }
 }
