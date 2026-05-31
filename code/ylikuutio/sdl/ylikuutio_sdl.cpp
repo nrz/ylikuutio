@@ -53,7 +53,7 @@ namespace yli::sdl
         return render::GraphicsApiBackend::HEADLESS; // Headless.
     }
 
-    [[nodiscard]] std::vector<SDL_DisplayMode> get_display_modes(const yli::render::GraphicsApiBackend graphics_api_backend)
+    [[nodiscard]] std::vector<SDL_DisplayMode> get_display_modes(const render::GraphicsApiBackend graphics_api_backend)
     {
         std::vector<SDL_DisplayMode> display_modes;
 
