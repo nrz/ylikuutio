@@ -29,15 +29,16 @@ namespace yli::opengl
 {
     // Load texture from memory.
     bool prepare_opengl_texture(
-            const std::vector<std::uint8_t>& image_data,
-            const std::size_t image_width,
-            const std::size_t image_height,
-            GLuint& textureID)
+        const std::vector<std::uint8_t>& image_data,
+        const std::size_t image_width,
+        const std::size_t image_height,
+        GLuint& textureID)
     {
         if (image_data.size() != 3 * image_width * image_height)
         {
-            std::cerr << "ERROR: `image_data.size()` " << image_data.size() << " does not match `3 * image_width * image_height` (RGB)! " <<
-                " 3 * " << image_width << " * " << image_height << " = " << 3 * image_width * image_height << "!\n";
+            std::cerr << "ERROR: `image_data.size()` " << image_data.size() <<
+                    " does not match `3 * image_width * image_height` (RGB)! " <<
+                    " 3 * " << image_width << " * " << image_height << " = " << 3 * image_width * image_height << "!\n";
             return false;
         }
 
@@ -48,7 +49,8 @@ namespace yli::opengl
         glBindTexture(GL_TEXTURE_2D, textureID);
 
         // Give the image to OpenGL.
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_RGB, GL_UNSIGNED_BYTE, image_data.data());
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image_width, image_height, 0, GL_RGB, GL_UNSIGNED_BYTE,
+                     image_data.data());
 
         yli::opengl::set_filtering_parameters();
 

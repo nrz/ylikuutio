@@ -40,25 +40,25 @@ bool is_near(float v1, float v2)
 // for a similar one.
 // Similar = same position + same UVs + same normal
 bool getSimilarVertexIndex(
-        const glm::vec3& in_vertex,
-        const glm::vec2& in_uv,
-        const glm::vec3& in_normal,
-        std::vector<glm::vec3>& out_vertices,
-        std::vector<glm::vec2>& out_uvs,
-        std::vector<glm::vec3>& out_normals,
-        std::uint32_t &result)
+    const glm::vec3& in_vertex,
+    const glm::vec2& in_uv,
+    const glm::vec3& in_normal,
+    std::vector<glm::vec3>& out_vertices,
+    std::vector<glm::vec2>& out_uvs,
+    std::vector<glm::vec3>& out_normals,
+    std::uint32_t& result)
 {
     // Lame linear search
     for (std::size_t i = 0; i < out_vertices.size(); i++)
     {
         if (is_near(in_vertex.x, out_vertices[i].x) &&
-                is_near(in_vertex.y, out_vertices[i].y) &&
-                is_near(in_vertex.z, out_vertices[i].z) &&
-                is_near(in_uv.x, out_uvs[i].x) &&
-                is_near(in_uv.y, out_uvs[i].y) &&
-                is_near(in_normal.x, out_normals [i].x) &&
-                is_near(in_normal.y, out_normals [i].y) &&
-                is_near(in_normal.z, out_normals [i].z))
+            is_near(in_vertex.y, out_vertices[i].y) &&
+            is_near(in_vertex.z, out_vertices[i].z) &&
+            is_near(in_uv.x, out_uvs[i].x) &&
+            is_near(in_uv.y, out_uvs[i].y) &&
+            is_near(in_normal.x, out_normals[i].x) &&
+            is_near(in_normal.y, out_normals[i].y) &&
+            is_near(in_normal.z, out_normals[i].z))
         {
             result = i;
             return true;
@@ -77,16 +77,17 @@ namespace yli::opengl
         glm::vec3 position;
         glm::vec2 uv;
         glm::vec3 normal;
-        bool operator < (const PackedVertex that) const
+
+        bool operator <(const PackedVertex that) const
         {
             return (std::memcmp((void*) this, (void*) &that, sizeof(PackedVertex)) > 0);
         };
     };
 
     bool getSimilarVertexIndex_fast(
-            const PackedVertex& packed,
-            const std::map<PackedVertex, std::uint32_t>& VertexToOutIndex,
-            std::uint32_t& result)
+        const PackedVertex& packed,
+        const std::map<PackedVertex, std::uint32_t>& VertexToOutIndex,
+        std::uint32_t& result)
     {
         const std::map<PackedVertex, std::uint32_t>::const_iterator it = VertexToOutIndex.find(packed);
         if (it == VertexToOutIndex.end())
@@ -101,13 +102,13 @@ namespace yli::opengl
     }
 
     void indexVBO(
-            const std::vector<glm::vec3>& in_vertices,
-            const std::vector<glm::vec2>& in_UVs,
-            const std::vector<glm::vec3>& in_normals,
-            std::vector<std::uint32_t>& out_indices,
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_uvs,
-            std::vector<glm::vec3>& out_normals)
+        const std::vector<glm::vec3>& in_vertices,
+        const std::vector<glm::vec2>& in_UVs,
+        const std::vector<glm::vec3>& in_normals,
+        std::vector<std::uint32_t>& out_indices,
+        std::vector<glm::vec3>& out_vertices,
+        std::vector<glm::vec2>& out_uvs,
+        std::vector<glm::vec3>& out_normals)
     {
         std::map<PackedVertex, std::uint32_t> VertexToOutIndex;
 

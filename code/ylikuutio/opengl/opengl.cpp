@@ -53,7 +53,8 @@ namespace yli::opengl
 
             std::cout << my_string << "\n";
             std::stringstream opengl_error_stringstream;
-            opengl_error_stringstream << "OpenGL error: 0x" << std::setfill('0') << std::setw(4) << std::hex << error << "\n";
+            opengl_error_stringstream << "OpenGL error: 0x" << std::setfill('0') << std::setw(4) << std::hex << error <<
+                    "\n";
             std::cout << opengl_error_stringstream.str();
         }
     }
@@ -253,13 +254,13 @@ namespace yli::opengl
     }
 
     void save_data_from_gpu_texture_into_file(
-            const GLenum format,
-            const GLenum type,
-            const std::size_t texture_width,
-            const std::size_t texture_height,
-            const std::size_t texture_depth,
-            const std::string& filename,
-            const bool should_flip_texture)
+        const GLenum format,
+        const GLenum type,
+        const std::size_t texture_width,
+        const std::size_t texture_height,
+        const std::size_t texture_depth,
+        const std::string& filename,
+        const bool should_flip_texture)
     {
         if (filename.empty())
         {
@@ -269,104 +270,109 @@ namespace yli::opengl
         if (type == GL_BYTE)
         {
             std::vector<std::int8_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::int8_t>(
-                    yli::opengl::get_base_format(format),
-                    type,
-                    texture_width,
-                    texture_height,
-                    texture_depth,
-                    should_flip_texture);
+                yli::opengl::get_base_format(format),
+                type,
+                texture_width,
+                texture_height,
+                texture_depth,
+                should_flip_texture);
             yli::file::binary_write(data_vector, filename);
         }
         else if (type == GL_UNSIGNED_BYTE)
         {
             std::vector<std::uint8_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::uint8_t>(
-                    yli::opengl::get_base_format(format),
-                    type,
-                    texture_width,
-                    texture_height,
-                    texture_depth,
-                    should_flip_texture);
+                yli::opengl::get_base_format(format),
+                type,
+                texture_width,
+                texture_height,
+                texture_depth,
+                should_flip_texture);
             yli::file::binary_write(data_vector, filename);
         }
         else if (type == GL_SHORT)
         {
             std::vector<std::int16_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::int16_t>(
-                    yli::opengl::get_base_format(format),
-                    type,
-                    texture_width,
-                    texture_height,
-                    texture_depth,
-                    should_flip_texture);
+                yli::opengl::get_base_format(format),
+                type,
+                texture_width,
+                texture_height,
+                texture_depth,
+                should_flip_texture);
             yli::file::binary_write(data_vector, filename);
         }
         else if (type == GL_UNSIGNED_SHORT)
         {
-            std::vector<std::uint16_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::uint16_t>(
-                    yli::opengl::get_base_format(format),
-                    type,
-                    texture_width,
-                    texture_height,
-                    texture_depth,
-                    should_flip_texture);
+            std::vector<std::uint16_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<
+                std::uint16_t>(
+                yli::opengl::get_base_format(format),
+                type,
+                texture_width,
+                texture_height,
+                texture_depth,
+                should_flip_texture);
             yli::file::binary_write(data_vector, filename);
         }
         else if (type == GL_INT)
         {
             std::vector<std::int32_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::int32_t>(
-                    yli::opengl::get_base_format(format),
-                    type,
-                    texture_width,
-                    texture_height,
-                    texture_depth,
-                    should_flip_texture);
+                yli::opengl::get_base_format(format),
+                type,
+                texture_width,
+                texture_height,
+                texture_depth,
+                should_flip_texture);
             yli::file::binary_write(data_vector, filename);
         }
         else if (type == GL_UNSIGNED_INT)
         {
-            std::vector<std::uint32_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<std::uint32_t>(
-                    yli::opengl::get_base_format(format),
-                    type,
-                    texture_width,
-                    texture_height,
-                    texture_depth,
-                    should_flip_texture);
+            std::vector<std::uint32_t> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<
+                std::uint32_t>(
+                yli::opengl::get_base_format(format),
+                type,
+                texture_width,
+                texture_height,
+                texture_depth,
+                should_flip_texture);
             yli::file::binary_write(data_vector, filename);
         }
         else if (type == GL_FIXED)
         {
             // TODO: add support for `GL_FIXED`!
-            std::cerr << "ERROR: `yli::opengl::save_data_from_gpu_texture_into_file`: type `GL_FIXED` is not supported yet!\n";
+            std::cerr <<
+                    "ERROR: `yli::opengl::save_data_from_gpu_texture_into_file`: type `GL_FIXED` is not supported yet!\n";
         }
         else if (type == GL_HALF_FLOAT)
         {
             // TODO: add support for `GL_HALF_FLOAT`!
-            std::cerr << "ERROR: `yli::opengl::save_data_from_gpu_texture_into_file`: type `GL_HALF_FLOAT` is not supported yet!\n";
+            std::cerr <<
+                    "ERROR: `yli::opengl::save_data_from_gpu_texture_into_file`: type `GL_HALF_FLOAT` is not supported yet!\n";
         }
         else if (type == GL_FLOAT)
         {
             std::vector<float> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<float>(
-                    yli::opengl::get_base_format(format),
-                    type,
-                    texture_width,
-                    texture_height,
-                    texture_depth,
-                    should_flip_texture);
+                yli::opengl::get_base_format(format),
+                type,
+                texture_width,
+                texture_height,
+                texture_depth,
+                should_flip_texture);
             yli::file::binary_write(data_vector, filename);
         }
         else if (type == GL_DOUBLE)
         {
             std::vector<double> data_vector = yli::opengl::copy_data_from_gpu_texture_to_cpu_array<double>(
-                    yli::opengl::get_base_format(format),
-                    type,
-                    texture_width,
-                    texture_height,
-                    texture_depth,
-                    should_flip_texture);
+                yli::opengl::get_base_format(format),
+                type,
+                texture_width,
+                texture_height,
+                texture_depth,
+                should_flip_texture);
             yli::file::binary_write(data_vector, filename);
         }
         else
         {
-            std::cerr << "ERROR: `yli::opengl::save_data_from_gpu_texture_into_file`: unknown or unsupported type: " << type << "\n";
+            std::cerr << "ERROR: `yli::opengl::save_data_from_gpu_texture_into_file`: unknown or unsupported type: " <<
+                    type << "\n";
         }
 
         // Unknown or unsupported type.
@@ -374,12 +380,12 @@ namespace yli::opengl
     }
 
     void save_data_from_gpu_texture_into_file(
-            const GLenum format,
-            const GLenum type,
-            const std::size_t texture_width,
-            const std::size_t texture_height,
-            const std::string& filename,
-            const bool should_flip_texture)
+        const GLenum format,
+        const GLenum type,
+        const std::size_t texture_width,
+        const std::size_t texture_height,
+        const std::string& filename,
+        const bool should_flip_texture)
     {
         const std::size_t texture_depth = 1;
         yli::opengl::save_data_from_gpu_texture_into_file(

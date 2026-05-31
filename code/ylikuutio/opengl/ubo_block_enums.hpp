@@ -37,7 +37,7 @@ namespace yli::opengl
     {
         enum SceneUboBlockOffsets
         {
-            LIGHT_POSITION_WORLDSPACE = 0,   // vec4
+            LIGHT_POSITION_WORLDSPACE = 0, // vec4
             WATER_LEVEL = sizeof(glm::vec4), // float
             TOTAL_SIZE = yli::opengl::scene_ubo::SceneUboBlockOffsets::WATER_LEVEL + sizeof(float)
         };
@@ -47,7 +47,7 @@ namespace yli::opengl
     {
         enum MovableUboBlockOffsets
         {
-            MVP = 0,                                                                       // mat4
+            MVP = 0, // mat4
             M = yli::opengl::movable_ubo::MovableUboBlockOffsets::MVP + sizeof(glm::mat4), // mat4
             TOTAL_SIZE = yli::opengl::movable_ubo::MovableUboBlockOffsets::M + sizeof(glm::mat4)
         };
