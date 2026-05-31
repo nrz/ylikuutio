@@ -24,7 +24,7 @@
 #include "srtm_heightmap_loader.hpp"
 #include "heightmap_loader_struct.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
-#include "code/ylikuutio/opengl/vboindexer.hpp"
+#include "code/ylikuutio/opengl/vbo_indexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 

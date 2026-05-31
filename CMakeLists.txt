@@ -836,8 +836,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/opengl/opengl_texture.cpp
     code/ylikuutio/opengl/opengl_texture.hpp
     code/ylikuutio/opengl/ubo_block_enums.hpp
-    code/ylikuutio/opengl/vboindexer.cpp
-    code/ylikuutio/opengl/vboindexer.hpp
+    code/ylikuutio/opengl/vbo_indexer.cpp
+    code/ylikuutio/opengl/vbo_indexer.hpp
     code/ylikuutio/opengl/ylikuutio_glew.hpp
 
     # render, in alphabetical order
