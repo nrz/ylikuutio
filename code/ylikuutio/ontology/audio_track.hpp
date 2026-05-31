@@ -39,30 +39,32 @@ namespace yli::ontology
 
     class AudioTrack final : public Entity
     {
-        public:
-            AudioTrack(
-                    core::Application& application,
-                    Universe& universe,
-                    const AudioTrackStruct& audio_track_struct,
-                    GenericParentModule* universe_parent_module);
+    public:
+        AudioTrack(
+            core::Application& application,
+            Universe& universe,
+            const AudioTrackStruct& audio_track_struct,
+            GenericParentModule* universe_parent_module);
 
-            AudioTrack(const AudioTrack&) = delete;            // Delete copy constructor.
-            AudioTrack &operator=(const AudioTrack&) = delete; // Delete copy assignment.
+        AudioTrack(const AudioTrack&) = delete; // Delete copy constructor.
+        AudioTrack& operator=(const AudioTrack&) = delete; // Delete copy assignment.
 
-            ~AudioTrack() override = default;
+        ~AudioTrack() override = default;
 
-            const std::string& get_filename() const;
+        const std::string& get_filename() const;
 
-            Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        Entity* get_parent() const override;
 
-            Scene* get_scene() const override;
+        std::size_t get_number_of_children() const override;
 
-            ChildModule child_of_universe;
+        std::size_t get_number_of_descendants() const override;
 
-        private:
-            const std::string filename;
+        Scene* get_scene() const override;
+
+        ChildModule child_of_universe;
+
+    private:
+        const std::string filename;
     };
 }
 

@@ -44,13 +44,13 @@ namespace yli::ontology
     }
 
     AudioTrack::AudioTrack(
-            core::Application& application,
-            Universe& universe,
-            const AudioTrackStruct& audio_track_struct,
-            GenericParentModule* const universe_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const AudioTrackStruct& audio_track_struct,
+        GenericParentModule* const universe_parent_module)
         : Entity(application, universe, audio_track_struct),
-        child_of_universe(universe_parent_module, *this),
-        filename { audio_track_struct.filename }
+          child_of_universe(universe_parent_module, *this),
+          filename { audio_track_struct.filename }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::AudioTrack*";
