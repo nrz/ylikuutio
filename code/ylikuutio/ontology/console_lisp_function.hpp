@@ -37,7 +37,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -50,33 +50,35 @@ namespace yli::ontology
 
     class ConsoleLispFunction final : public LispFunction
     {
-        public:
-            ConsoleLispFunction(
-                    core::Application& application,
-                    Universe& universe,
-                    const ConsoleLispFunctionStruct& console_lisp_function_struct,
-                    GenericParentModule* console_parent_module);
+    public:
+        ConsoleLispFunction(
+            core::Application& application,
+            Universe& universe,
+            const ConsoleLispFunctionStruct& console_lisp_function_struct,
+            GenericParentModule* console_parent_module);
 
-            ConsoleLispFunction(const ConsoleLispFunction&) = delete;            // Delete copy constructor.
-            ConsoleLispFunction &operator=(const ConsoleLispFunction&) = delete; // Delete copy assignment.
+        ConsoleLispFunction(const ConsoleLispFunction&) = delete; // Delete copy constructor.
+        ConsoleLispFunction& operator=(const ConsoleLispFunction&) = delete; // Delete copy assignment.
 
-            ~ConsoleLispFunction() override = default;
+        ~ConsoleLispFunction() override = default;
 
-            Console* get_console() const;
+        Console* get_console() const;
 
-            Entity* get_parent() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        Entity* get_parent() const override;
 
-            Scene* get_scene() const override;
+        std::size_t get_number_of_children() const override;
 
-            std::optional<data::AnyValue> execute(const std::vector<std::string>& parameter_vector) const;
+        std::size_t get_number_of_descendants() const override;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        Scene* get_scene() const override;
 
-            ChildModule child_of_console;
-            GenericParentModule parent_of_generic_console_lisp_function_overloads;
+        std::optional<data::AnyValue> execute(const std::vector<std::string>& parameter_vector) const;
+
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+        ChildModule child_of_console;
+        GenericParentModule parent_of_generic_console_lisp_function_overloads;
     };
 }
 

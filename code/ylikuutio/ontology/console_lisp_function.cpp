@@ -52,16 +52,16 @@ namespace yli::ontology
     }
 
     ConsoleLispFunction::ConsoleLispFunction(
-            core::Application& application,
-            Universe& universe,
-            const ConsoleLispFunctionStruct& console_lisp_function_struct,
-            GenericParentModule* const console_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const ConsoleLispFunctionStruct& console_lisp_function_struct,
+        GenericParentModule* const console_parent_module)
         : LispFunction(application, universe, console_lisp_function_struct),
-        child_of_console(console_parent_module, *this),
-        parent_of_generic_console_lisp_function_overloads(
-                *this,
-                this->registry,
-                "generic_console_lisp_function_overloads")
+          child_of_console(console_parent_module, *this),
+          parent_of_generic_console_lisp_function_overloads(
+              *this,
+              this->registry,
+              "generic_console_lisp_function_overloads")
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "yli::ontology::ConsoleLispFunction*";
@@ -74,7 +74,8 @@ namespace yli::ontology
 
     std::size_t ConsoleLispFunction::get_number_of_descendants() const
     {
-        return ontology::get_number_of_descendants(this->parent_of_generic_console_lisp_function_overloads.child_pointer_vector);
+        return ontology::get_number_of_descendants(
+            this->parent_of_generic_console_lisp_function_overloads.child_pointer_vector);
     }
 
     Scene* ConsoleLispFunction::get_scene() const
@@ -106,7 +107,7 @@ namespace yli::ontology
         for (const auto it : this->parent_of_generic_console_lisp_function_overloads.child_pointer_vector)
         {
             Result result =
-                static_cast<GenericConsoleLispFunctionOverload*>(it)->execute(parameter_vector);
+                    static_cast<GenericConsoleLispFunctionOverload*>(it)->execute(parameter_vector);
 
             if (result)
             {
