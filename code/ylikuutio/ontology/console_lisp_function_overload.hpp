@@ -130,7 +130,7 @@ namespace yli::ontology
 
     private:
         template<typename Tag>
-        std::optional<std::tuple<>> process_args(
+        static std::optional<std::tuple<>> process_args(
             std::size_t,
             Universe&,
             Console&,
