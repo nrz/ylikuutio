@@ -35,7 +35,7 @@ namespace yli::data
         using pointer = std::size_t*;
         using reference = std::size_t&;
 
-        explicit QueueIterator(typename std::array<std::size_t, QueueMaxSize>::iterator it)
+        explicit QueueIterator(std::array<std::size_t, QueueMaxSize>::iterator it)
             : it { it }
         { }
 
@@ -46,7 +46,7 @@ namespace yli::data
         QueueIterator& operator=(const QueueIterator&) = default;
 
         // assignment of `std::array` iterator.
-        QueueIterator& operator=(typename std::array<std::size_t, QueueMaxSize>::iterator it)
+        QueueIterator& operator=(std::array<std::size_t, QueueMaxSize>::iterator it)
         {
             this->it = it;
             return *this;
@@ -93,7 +93,7 @@ namespace yli::data
         }
 
     private:
-        typename std::array<std::size_t, QueueMaxSize>::iterator it;
+        std::array<std::size_t, QueueMaxSize>::iterator it;
     };
 }
 
