@@ -42,14 +42,14 @@ namespace yli::ontology
     struct EntityStruct;
 
     ConsoleCallbackParameter::ConsoleCallbackParameter(
-            core::Application& application,
-            Universe& universe,
-            const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
-            GenericParentModule* const console_callback_object_parent_module,
-            const data::AnyValue& any_value)
+        core::Application& application,
+        Universe& universe,
+        const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
+        GenericParentModule* const console_callback_object_parent_module,
+        const data::AnyValue& any_value)
         : Entity(application, universe, console_callback_parameter_struct),
-        child_of_console_callback_object(console_callback_object_parent_module, *this),
-        any_value { any_value }
+          child_of_console_callback_object(console_callback_object_parent_module, *this),
+          any_value { any_value }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ConsoleCallbackParameter*";

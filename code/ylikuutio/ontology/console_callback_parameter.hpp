@@ -34,7 +34,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -46,32 +46,35 @@ namespace yli::ontology
 
     class ConsoleCallbackParameter final : public Entity
     {
-            ConsoleCallbackParameter(
-                    core::Application& application,
-                    Universe& universe,
-                    const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
-                    GenericParentModule* console_callback_object_parent_module,
-                    const data::AnyValue& any_value);
+        ConsoleCallbackParameter(
+            core::Application& application,
+            Universe& universe,
+            const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
+            GenericParentModule* console_callback_object_parent_module,
+            const data::AnyValue& any_value);
 
-            ~ConsoleCallbackParameter() override = default;
+        ~ConsoleCallbackParameter() override = default;
 
-        public:
-            const data::AnyValue& get_any_value() const;
+    public:
+        const data::AnyValue& get_any_value() const;
 
-            Entity* get_parent() const override;
-            Scene* get_scene() const override;
-            std::size_t get_number_of_children() const override;
-            std::size_t get_number_of_descendants() const override;
+        Entity* get_parent() const override;
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        Scene* get_scene() const override;
 
-            ChildModule child_of_console_callback_object;
+        std::size_t get_number_of_children() const override;
 
-            friend class ConsoleCallbackObject;
+        std::size_t get_number_of_descendants() const override;
 
-        private:
-            data::AnyValue any_value;  // this is `private` to make sure that someone does not overwrite it.
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryStorage;
+
+        ChildModule child_of_console_callback_object;
+
+        friend class ConsoleCallbackObject;
+
+    private:
+        data::AnyValue any_value; // this is `private` to make sure that someone does not overwrite it.
     };
 }
 
