@@ -37,17 +37,17 @@ namespace yli::ontology
     class Universe;
 
     ConsoleCallbackObject::ConsoleCallbackObject(
-            core::Application& application,
-            Universe& universe,
-            const ConsoleCallbackObjectStruct& console_callback_object_struct,
-            GenericParentModule* const console_callback_engine_parent_module)
+        core::Application& application,
+        Universe& universe,
+        const ConsoleCallbackObjectStruct& console_callback_object_struct,
+        GenericParentModule* const console_callback_engine_parent_module)
         : Entity(application, universe, console_callback_object_struct),
-        child_of_console_callback_engine(console_callback_engine_parent_module, *this),
-        parent_of_console_callback_parameters(
-                *this,
-                this->registry,
-                "console_callback_parameters"),
-        console_callback { console_callback_object_struct.console_callback }
+          child_of_console_callback_engine(console_callback_engine_parent_module, *this),
+          parent_of_console_callback_parameters(
+              *this,
+              this->registry,
+              "console_callback_parameters"),
+          console_callback { console_callback_object_struct.console_callback }
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::ConsoleCallbackObject*";
@@ -92,11 +92,11 @@ namespace yli::ontology
         if (Console* const console = this->get_console(); console != nullptr && this->console_callback != nullptr)
         {
             return data::AnyValue(
-                    this->console_callback(
-                        static_cast<ConsoleCallbackEngine*>(this->get_parent()),
-                        this,
-                        this->parent_of_console_callback_parameters,
-                        *console));
+                this->console_callback(
+                    static_cast<ConsoleCallbackEngine*>(this->get_parent()),
+                    this,
+                    this->parent_of_console_callback_parameters,
+                    *console));
         }
 
         return std::nullopt;
