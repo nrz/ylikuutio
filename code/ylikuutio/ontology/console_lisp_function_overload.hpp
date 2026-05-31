@@ -154,7 +154,7 @@ namespace yli::ontology
         template<typename Tag, typename T1, typename... RestTypes>
         std::optional<std::tuple<typename data::WrapAllButStrings<T1>::type, typename data::WrapAllButStrings<
             RestTypes>::type...>> process_args(
-            std::size_t tag,
+            const std::size_t tag,
             Universe& universe,
             Console& context,
             Entity*& environment,
