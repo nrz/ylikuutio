@@ -37,16 +37,16 @@ namespace yli::ontology
 
     class GenericLispFunctionOverload : public Entity
     {
-        protected:
-            GenericLispFunctionOverload(core::Application& application, Universe& universe);
+    protected:
+        GenericLispFunctionOverload(core::Application& application, Universe& universe);
 
-        public:
-            GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete;            // Delete copy constructor.
-            GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
+    public:
+        GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete; // Delete copy constructor.
+        GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
 
-            ~GenericLispFunctionOverload() override = default;
+        ~GenericLispFunctionOverload() override = default;
 
-            virtual Result execute(const std::vector<std::string>& parameter_vector) = 0;
+        virtual Result execute(const std::vector<std::string>& parameter_vector) = 0;
     };
 }
 
