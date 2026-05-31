@@ -26,76 +26,75 @@
 namespace yli::data
 {
     template<std::size_t QueueMaxSize = 1>
-        class QueueIterator
+    class QueueIterator
+    {
+    public:
+        using iterator_category = std::bidirectional_iterator_tag;
+        using value_type = std::size_t;
+        using difference_type = std::ptrdiff_t;
+        using pointer = std::size_t*;
+        using reference = std::size_t&;
+
+        explicit QueueIterator(typename std::array<std::size_t, QueueMaxSize>::iterator it)
+            : it { it }
+        { }
+
+        // copy constructor.
+        QueueIterator(const QueueIterator&) = default;
+
+        // copy assignment.
+        QueueIterator& operator=(const QueueIterator&) = default;
+
+        // assignment of `std::array` iterator.
+        QueueIterator& operator=(typename std::array<std::size_t, QueueMaxSize>::iterator it)
         {
-            public:
-                using iterator_category = std::bidirectional_iterator_tag;
-                using value_type        = std::size_t;
-                using difference_type   = std::ptrdiff_t;
-                using pointer           = std::size_t*;
-                using reference         = std::size_t&;
+            this->it = it;
+            return *this;
+        }
 
-                explicit QueueIterator(typename std::array<std::size_t, QueueMaxSize>::iterator it)
-                    : it { it }
-                {
-                }
+        ~QueueIterator() = default;
 
-                // copy constructor.
-                QueueIterator(const QueueIterator&) = default;
+        bool operator==(const QueueIterator& other_it) const noexcept
+        {
+            return this->it == other_it.it;
+        }
 
-                // copy assignment.
-                QueueIterator& operator=(const QueueIterator&) = default;
+        bool operator!=(const QueueIterator& other_it) const = default;
 
-                // assignment of `std::array` iterator.
-                QueueIterator& operator=(typename std::array<std::size_t, QueueMaxSize>::iterator it)
-                {
-                    this->it = it;
-                    return *this;
-                }
+        QueueIterator& operator++()
+        {
+            ++this->it;
+            return *this;
+        }
 
-                ~QueueIterator() = default;
+        QueueIterator& operator--()
+        {
+            --this->it;
+            return *this;
+        }
 
-                bool operator==(const QueueIterator& other_it) const noexcept
-                {
-                    return this->it == other_it.it;
-                }
+        QueueIterator& operator++(int)
+        {
+            QueueIterator& temp { *this };
+            ++this->it;
+            return temp;
+        }
 
-                bool operator!=(const QueueIterator& other_it) const = default;
+        QueueIterator& operator--(int)
+        {
+            QueueIterator& temp { *this };
+            --this->it;
+            return temp;
+        }
 
-                QueueIterator& operator++()
-                {
-                    ++this->it;
-                    return *this;
-                }
+        std::size_t& operator*()
+        {
+            return *(this->it);
+        }
 
-                QueueIterator& operator--()
-                {
-                    --this->it;
-                    return *this;
-                }
-
-                QueueIterator& operator++(int)
-                {
-                    QueueIterator& temp { *this };
-                    ++this->it;
-                    return temp;
-                }
-
-                QueueIterator& operator--(int)
-                {
-                    QueueIterator& temp { *this };
-                    --this->it;
-                    return temp;
-                }
-
-                std::size_t& operator*()
-                {
-                    return *(this->it);
-                }
-
-            private:
-                typename std::array<std::size_t, QueueMaxSize>::iterator it;
-        };
+    private:
+        typename std::array<std::size_t, QueueMaxSize>::iterator it;
+    };
 }
 
 #endif
