@@ -138,7 +138,7 @@ namespace yli::render
 
     void RenderSystem::set_swap_interval(const std::int32_t interval)
     {
-        if (!sdl::set_swap_interval(static_cast<int>(interval)))
+        if (!sdl::set_swap_interval(interval))
         {
             std::cerr << "ERROR: `RenderSystem::set_swap_interval`: setting swap interval failed!\n";
         }
