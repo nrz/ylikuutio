@@ -136,9 +136,6 @@ namespace hirvi
         CONSOLE_LISP_FUNCTION                  = 265,
         GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD = 266,
         CONSOLE_LISP_FUNCTION_OVERLOAD         = 267,
-        // `yli::ontology` datatypes, 'graph' path.
-        GRAPH                       = 270,
-        NODE                        = 271,
         // `yli::ontology` datatypes, 'compute' path.
         COMPUTE_TASK                = 280,
         // Custom datatypes of Hirvi.
