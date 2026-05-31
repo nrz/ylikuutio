@@ -45,7 +45,7 @@ namespace yli::sdl
 
             return render::GraphicsApiBackend::OPENGL; // Success.
         }
-        else if (graphics_api_backend == render::GraphicsApiBackend::VULKAN)
+        if (graphics_api_backend == render::GraphicsApiBackend::VULKAN)
         {
             throw std::runtime_error("ERROR: `yli::sdl::init_sdl`: Vulkan support not implemented yet!");
         }
