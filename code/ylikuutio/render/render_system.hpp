@@ -94,8 +94,8 @@ namespace yli::render
                         const ontology::Scene* scene);
 
                 static void render_holobionts(
-                        yli::ontology::GenericMasterModule& master,
-                        const yli::ontology::Scene* scene);
+                        ontology::GenericMasterModule& master,
+                        const ontology::Scene* scene);
 
                 static void render_bionts(ontology::GenericParentModule& parent);
 
