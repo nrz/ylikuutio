@@ -550,7 +550,7 @@ namespace hirvi
         Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "drive-forward");
         Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "drive-backward");
         Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "steer");
-        Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "use-handbreak");
+        Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "use-handbrake");
         Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "tx-on-radio");
 
         HolobiontStruct turbo_polizei_png_police_car_struct1 {
