@@ -56,7 +56,7 @@ namespace hirvi
         ~PoliceCar() override = default;
 
         yli::snippets::locomotion::RoadVehicleModule road_vehicle;
-        hirvi::PoliceModule police;
+        PoliceModule police;
     };
 }
 

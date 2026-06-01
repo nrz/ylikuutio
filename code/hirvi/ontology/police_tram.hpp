@@ -56,7 +56,7 @@ namespace hirvi
         ~PoliceTram() override = default;
 
         yli::snippets::locomotion::RailVehicleModule rail_vehicle;
-        hirvi::PoliceModule police;
+        PoliceModule police;
     };
 }
 

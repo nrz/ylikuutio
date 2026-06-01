@@ -63,8 +63,8 @@ namespace hirvi
         yli::snippets::locomotion::GaitModule run;
         yli::snippets::locomotion::GaitModule canter;
         yli::snippets::locomotion::GaitModule gallop;
-        hirvi::EmancipationModule emancipation;
-        hirvi::PoliceModule police;
+        EmancipationModule emancipation;
+        PoliceModule police;
     };
 }
 
