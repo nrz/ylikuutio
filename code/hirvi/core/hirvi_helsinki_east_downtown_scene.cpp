@@ -490,7 +490,7 @@ namespace hirvi
 
         Entity* const turbo_polizei_png_symbiosis_entity = this->get_universe().get_entity("turbo_polizei_png_symbiosis");
 
-        auto const turbo_polizei_png_symbiosis = dynamic_cast<Symbiosis*>(turbo_polizei_png_symbiosis_entity);
+        const auto turbo_polizei_png_symbiosis = dynamic_cast<Symbiosis*>(turbo_polizei_png_symbiosis_entity);
 
         if (turbo_polizei_png_symbiosis == nullptr)
         {

@@ -59,9 +59,8 @@ namespace hirvi
         earth_pipeline_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating Pipeline* earth_pipeline ...\n";
-        Pipeline* const earth_pipeline = this->entity_factory.create_pipeline(earth_pipeline_struct);
 
-        if (earth_pipeline == nullptr)
+        if (const Pipeline* const earth_pipeline = this->entity_factory.create_pipeline(earth_pipeline_struct); earth_pipeline == nullptr)
         {
             std::cerr << "Failed to create `Pipeline`.\n";
             return nullptr;
