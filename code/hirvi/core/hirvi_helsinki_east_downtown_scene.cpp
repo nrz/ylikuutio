@@ -64,7 +64,7 @@ namespace hirvi
 {
     using namespace yli::ontology;
 
-    Scene* HirviCore::create_helsinki_scene()
+    Scene* HirviCore::create_helsinki_scene() const
     {
         // Helsinki `Scene` begins here.
 

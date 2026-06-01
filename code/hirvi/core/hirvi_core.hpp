@@ -71,8 +71,8 @@ namespace hirvi
 
             bool create_and_start_simulation(HirviApplicationCallback hirvi_application_callback);
 
-            yli::ontology::Scene* create_helsinki_scene();
-            yli::ontology::Ecosystem* create_earth_ecosystem();
+            yli::ontology::Scene* create_helsinki_scene() const;
+            yli::ontology::Ecosystem* create_earth_ecosystem() const;
 
             yli::memory::MemorySystem<Datatype> memory_system { UNIVERSE };
             yli::ontology::EntityFactory<Datatype> entity_factory;

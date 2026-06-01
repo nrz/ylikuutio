@@ -36,7 +36,7 @@ namespace hirvi
 {
     using namespace yli::ontology;
 
-    Ecosystem* HirviCore::create_earth_ecosystem()
+    Ecosystem* HirviCore::create_earth_ecosystem() const
     {
         // Earth `Ecosystem` begins here.
 
