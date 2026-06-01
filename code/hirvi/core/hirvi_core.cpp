@@ -113,7 +113,7 @@ namespace hirvi
 
         std::cout << "Creating Entity* my_font_2d_entity ...\n";
 
-        FontStruct font_struct { TextureFileFormat::PNG };
+        FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
         font_struct.texture_filename = "Holstein.png";
         font_struct.screen_width = this->get_universe().get_window_width();
         font_struct.screen_height = this->get_universe().get_window_height();
