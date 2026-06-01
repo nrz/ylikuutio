@@ -57,7 +57,7 @@ namespace hirvi
         PoliceDog(const PoliceDog&) = delete; // Delete copy constructor.
         PoliceDog& operator=(const PoliceDog&) = delete; // Delete copy assignment.
 
-        ~PoliceDog() = default;
+        ~PoliceDog() override = default;
 
         yli::snippets::locomotion::GaitModule walk;
         yli::snippets::locomotion::GaitModule run;

@@ -56,7 +56,7 @@ namespace hirvi
         Elk(const Elk&) = delete; // Delete copy constructor.
         Elk& operator=(const Elk&) = delete; // Delete copy assignment.
 
-        ~Elk() = default;
+        ~Elk() override = default;
 
         yli::snippets::locomotion::GaitModule walk;
         yli::snippets::locomotion::GaitModule trot;

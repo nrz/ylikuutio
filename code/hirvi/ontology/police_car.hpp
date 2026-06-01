@@ -53,7 +53,7 @@ namespace hirvi
         PoliceCar(const PoliceCar&) = delete; // Delete copy constructor.
         PoliceCar& operator=(const PoliceCar&) = delete; // Delete copy assignment.
 
-        ~PoliceCar() = default;
+        ~PoliceCar() override = default;
 
         yli::snippets::locomotion::RoadVehicleModule road_vehicle;
         hirvi::PoliceModule police;

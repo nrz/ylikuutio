@@ -53,7 +53,7 @@ namespace hirvi
         PoliceTram(const PoliceTram&) = delete; // Delete copy constructor.
         PoliceTram& operator=(const PoliceTram&) = delete; // Delete copy assignment.
 
-        ~PoliceTram() = default;
+        ~PoliceTram() override = default;
 
         yli::snippets::locomotion::RailVehicleModule rail_vehicle;
         hirvi::PoliceModule police;

@@ -57,7 +57,7 @@ namespace hirvi
         Cat(const Cat&) = delete; // Delete copy constructor.
         Cat& operator=(const Cat&) = delete; // Delete copy assignment.
 
-        ~Cat() = default;
+        ~Cat() override = default;
 
         yli::snippets::locomotion::GaitModule walk;
         yli::snippets::locomotion::GaitModule trot;

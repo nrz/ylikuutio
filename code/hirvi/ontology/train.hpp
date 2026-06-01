@@ -52,7 +52,7 @@ namespace hirvi
         Train(const Train&) = delete; // Delete copy constructor.
         Train& operator=(const Train&) = delete; // Delete copy assignment.
 
-        ~Train() = default;
+        ~Train() override = default;
 
         yli::snippets::locomotion::RailVehicleModule rail_vehicle;
     };
