@@ -59,8 +59,8 @@ namespace hirvi
     class PoliceCar;
 
     // Allocators for custom types.
-    using CatMemoryAllocator       = yli::memory::MemoryAllocator<hirvi::Cat, 256>;
-    using PoliceCarMemoryAllocator = yli::memory::MemoryAllocator<hirvi::PoliceCar, 256>;
+    using CatMemoryAllocator       = yli::memory::MemoryAllocator<Cat, 256>;
+    using PoliceCarMemoryAllocator = yli::memory::MemoryAllocator<PoliceCar, 256>;
 
     class HirviCore
     {
@@ -74,9 +74,9 @@ namespace hirvi
             yli::ontology::Scene* create_helsinki_scene();
             yli::ontology::Ecosystem* create_earth_ecosystem();
 
-            yli::memory::MemorySystem<hirvi::Datatype> memory_system { hirvi::Datatype::UNIVERSE };
-            yli::ontology::EntityFactory<hirvi::Datatype> entity_factory;
-            yli::core::SystemFactory<hirvi::Datatype> system_factory;
+            yli::memory::MemorySystem<Datatype> memory_system { UNIVERSE };
+            yli::ontology::EntityFactory<Datatype> entity_factory;
+            yli::core::SystemFactory<Datatype> system_factory;
             yli::ontology::Universe* const universe     { nullptr };
             yli::event::EventSystem* const event_system { nullptr };
             yli::input::InputSystem* const input_system { nullptr };

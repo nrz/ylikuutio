@@ -44,7 +44,7 @@ namespace hirvi
     using namespace yli::console;
     using namespace yli::ontology;
 
-    HirviCore::HirviCore(yli::core::Application& application, const yli::ontology::UniverseStruct& universe_struct)
+    HirviCore::HirviCore(yli::core::Application& application, const UniverseStruct& universe_struct)
         : entity_factory(application, this->memory_system),
         system_factory(this->memory_system),
         universe { this->entity_factory.create_universe(universe_struct) },
@@ -54,7 +54,7 @@ namespace hirvi
     {
     }
 
-    yli::ontology::Universe& HirviCore::get_universe() const
+    Universe& HirviCore::get_universe() const
     {
         if (this->universe == nullptr) [[unlikely]]
         {
@@ -76,7 +76,7 @@ namespace hirvi
 
         // Create the main `Console`.
         std::cout << "Creating Entity* my_console_entity ...\n";
-        yli::ontology::ConsoleStruct my_console_struct(0, this->get_universe().get_window_width() / this->get_universe().get_font_size(), 15, 0);
+        ConsoleStruct my_console_struct(0, this->get_universe().get_window_width() / this->get_universe().get_font_size(), 15, 0);
         my_console_struct.global_name = "my_console";
         std::cout << "Creating Console* my_console ...\n";
         Console* const my_console = this->entity_factory.create_console(my_console_struct);
@@ -114,7 +114,7 @@ namespace hirvi
 
         std::cout << "Creating Entity* my_font_2d_entity ...\n";
 
-        yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
+        FontStruct font_struct { TextureFileFormat::PNG };
         font_struct.texture_filename = "Holstein.png";
         font_struct.screen_width = this->get_universe().get_window_width();
         font_struct.screen_height = this->get_universe().get_window_height();
