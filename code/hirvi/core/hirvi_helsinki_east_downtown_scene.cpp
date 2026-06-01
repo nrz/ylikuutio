@@ -361,7 +361,7 @@ namespace hirvi
         }
 
         // Create the material, store it in `helsinki_grass_material`.
-        MaterialStruct helsinki_grass_material_struct { Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG };
+        MaterialStruct helsinki_grass_material_struct { Request(helsinki_scene), Request(helsinki_pipeline), TextureFileFormat::PNG };
         helsinki_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating Material* helsinki_grass_material ...\n";
@@ -376,7 +376,7 @@ namespace hirvi
         helsinki_grass_material->set_global_name("helsinki_grass_material");
 
         // Create the material, store it in `orange_fur_material`.
-        MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG };
+        MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline), TextureFileFormat::PNG };
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
         std::cout << "Creating Material* orange_fur_material ...\n";
