@@ -18,5 +18,4 @@
 #include "police_module.hpp"
 
 namespace hirvi
-{
-}
+{ }

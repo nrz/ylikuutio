@@ -55,11 +55,15 @@ TEST(species_must_be_initialized_appropriately, hirvi_species)
     helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
-    Pipeline* const helsinki_pipeline = hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
+    Pipeline* const helsinki_pipeline =
+            hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
-    MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG };
+    MaterialStruct orange_fur_material_struct {
+        Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG
+    };
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
-    Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(orange_fur_material_struct);
+    Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(
+        orange_fur_material_struct);
 
     SpeciesStruct cat_species_struct { Request(helsinki_scene), Request(orange_fur_material) };
     cat_species_struct.global_name = "cat_species";

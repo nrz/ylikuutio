@@ -41,30 +41,30 @@ namespace hirvi
 {
     class PoliceDog : public yli::ontology::Holobiont
     {
-        public:
-            explicit PoliceDog(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::HolobiontStruct& police_dog_struct,
-                    yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const symbiosis_master,
-                    yli::ontology::GenericMasterModule* const movable_controller_master,
-                    const yli::ontology::LocomotionModuleStruct& walk_struct,
-                    const yli::ontology::LocomotionModuleStruct& run_struct,
-                    const yli::ontology::LocomotionModuleStruct& canter_struct,
-                    const yli::ontology::LocomotionModuleStruct& gallop_struct);
+    public:
+        explicit PoliceDog(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::HolobiontStruct& police_dog_struct,
+            yli::ontology::GenericParentModule* const scene_parent,
+            yli::ontology::GenericMasterModule* const symbiosis_master,
+            yli::ontology::GenericMasterModule* const movable_controller_master,
+            const yli::ontology::LocomotionModuleStruct& walk_struct,
+            const yli::ontology::LocomotionModuleStruct& run_struct,
+            const yli::ontology::LocomotionModuleStruct& canter_struct,
+            const yli::ontology::LocomotionModuleStruct& gallop_struct);
 
-            PoliceDog(const PoliceDog&) = delete;            // Delete copy constructor.
-            PoliceDog &operator=(const PoliceDog&) = delete; // Delete copy assignment.
+        PoliceDog(const PoliceDog&) = delete; // Delete copy constructor.
+        PoliceDog& operator=(const PoliceDog&) = delete; // Delete copy assignment.
 
-            ~PoliceDog() = default;
+        ~PoliceDog() = default;
 
-            yli::snippets::locomotion::GaitModule walk;
-            yli::snippets::locomotion::GaitModule run;
-            yli::snippets::locomotion::GaitModule canter;
-            yli::snippets::locomotion::GaitModule gallop;
-            hirvi::EmancipationModule emancipation;
-            hirvi::PoliceModule police;
+        yli::snippets::locomotion::GaitModule walk;
+        yli::snippets::locomotion::GaitModule run;
+        yli::snippets::locomotion::GaitModule canter;
+        yli::snippets::locomotion::GaitModule gallop;
+        hirvi::EmancipationModule emancipation;
+        hirvi::PoliceModule police;
     };
 }
 

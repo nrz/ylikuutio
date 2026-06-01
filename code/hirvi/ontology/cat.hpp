@@ -40,30 +40,30 @@ namespace hirvi
 {
     class Cat : public yli::ontology::Object
     {
-        public:
-            explicit Cat(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::ObjectStruct& cat_struct,
-                    yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const species_master,
-                    yli::ontology::GenericMasterModule* const movable_controller_master,
-                    const yli::ontology::LocomotionModuleStruct& walk_struct,
-                    const yli::ontology::LocomotionModuleStruct& trot_struct,
-                    const yli::ontology::LocomotionModuleStruct& canter_struct,
-                    const yli::ontology::LocomotionModuleStruct& gallop_struct,
-                    const yli::ontology::LocomotionModuleStruct& climb_struct);
+    public:
+        explicit Cat(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::ObjectStruct& cat_struct,
+            yli::ontology::GenericParentModule* const scene_parent,
+            yli::ontology::GenericMasterModule* const species_master,
+            yli::ontology::GenericMasterModule* const movable_controller_master,
+            const yli::ontology::LocomotionModuleStruct& walk_struct,
+            const yli::ontology::LocomotionModuleStruct& trot_struct,
+            const yli::ontology::LocomotionModuleStruct& canter_struct,
+            const yli::ontology::LocomotionModuleStruct& gallop_struct,
+            const yli::ontology::LocomotionModuleStruct& climb_struct);
 
-            Cat(const Cat&) = delete;            // Delete copy constructor.
-            Cat &operator=(const Cat&) = delete; // Delete copy assignment.
+        Cat(const Cat&) = delete; // Delete copy constructor.
+        Cat& operator=(const Cat&) = delete; // Delete copy assignment.
 
-            ~Cat() = default;
+        ~Cat() = default;
 
-            yli::snippets::locomotion::GaitModule walk;
-            yli::snippets::locomotion::GaitModule trot;
-            yli::snippets::locomotion::GaitModule canter;
-            yli::snippets::locomotion::GaitModule gallop;
-            yli::snippets::locomotion::ClimbModule climb;
+        yli::snippets::locomotion::GaitModule walk;
+        yli::snippets::locomotion::GaitModule trot;
+        yli::snippets::locomotion::GaitModule canter;
+        yli::snippets::locomotion::GaitModule gallop;
+        yli::snippets::locomotion::ClimbModule climb;
     };
 }
 

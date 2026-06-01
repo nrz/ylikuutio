@@ -18,5 +18,4 @@
 #include "emancipation_module.hpp"
 
 namespace hirvi
-{
-}
+{ }

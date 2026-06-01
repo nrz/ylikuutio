@@ -39,17 +39,17 @@ namespace hirvi
 {
     class RunAbility final : public yli::ontology::Ability
     {
-        public:
-            explicit RunAbility(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::AbilityStruct& ability_struct,
-                    yli::ontology::GenericParentModule* const parent_module);
+    public:
+        explicit RunAbility(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::AbilityStruct& ability_struct,
+            yli::ontology::GenericParentModule* const parent_module);
 
-            RunAbility(const RunAbility&) = delete;            // Delete copy constructor.
-            RunAbility &operator=(const RunAbility&) = delete; // Delete copy assignment.
+        RunAbility(const RunAbility&) = delete; // Delete copy constructor.
+        RunAbility& operator=(const RunAbility&) = delete; // Delete copy assignment.
 
-            ~RunAbility() override = default;
+        ~RunAbility() override = default;
     };
 }
 

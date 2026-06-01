@@ -26,9 +26,10 @@
 namespace hirvi_edit
 {
     std::optional<yli::data::AnyValue> version(
-            yli::ontology::Console& console)
+        yli::ontology::Console& console)
     {
-        console.print_text("HirviEdit " + yli::ontology::Universe::version + " / Ylikuutio " + yli::ontology::Universe::version);
+        console.print_text(
+            "HirviEdit " + yli::ontology::Universe::version + " / Ylikuutio " + yli::ontology::Universe::version);
         return std::nullopt;
     }
 }

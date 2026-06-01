@@ -31,11 +31,13 @@ TEST(callback_engine_must_be_initialized_appropriately, hirvi_callback_engine)
     hirvi::HirviApplication hirvi_application(argc, argv);
 
     yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
-    yli::ontology::CallbackEngine* const rest_callback_engine = hirvi_application.get_entity_factory().create_callback_engine(rest_callback_engine_struct);
+    yli::ontology::CallbackEngine* const rest_callback_engine =
+            hirvi_application.get_entity_factory().create_callback_engine(rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
     ASSERT_NE(rest_callback_engine, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_callback_engine) % alignof(yli::ontology::CallbackEngine), 0);
-    yli::memory::ConstructibleModule callback_engine_constructible_module = rest_callback_engine->get_constructible_module();
+    yli::memory::ConstructibleModule callback_engine_constructible_module =
+            rest_callback_engine->get_constructible_module();
     ASSERT_EQ(callback_engine_constructible_module.storage_i, 0);
     ASSERT_EQ(callback_engine_constructible_module.slot_i, 0);
     ASSERT_EQ(callback_engine_constructible_module.alive, true);

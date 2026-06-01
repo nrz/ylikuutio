@@ -40,23 +40,23 @@ namespace hirvi
 {
     class PoliceTrain : public yli::ontology::Holobiont
     {
-        public:
-            explicit PoliceTrain(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::HolobiontStruct& police_train_struct,
-                    yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const symbiosis_master,
-                    yli::ontology::GenericMasterModule* const movable_controller_master,
-                    const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct);
+    public:
+        explicit PoliceTrain(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::HolobiontStruct& police_train_struct,
+            yli::ontology::GenericParentModule* const scene_parent,
+            yli::ontology::GenericMasterModule* const symbiosis_master,
+            yli::ontology::GenericMasterModule* const movable_controller_master,
+            const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct);
 
-            PoliceTrain(const PoliceTrain&) = delete;            // Delete copy constructor.
-            PoliceTrain &operator=(const PoliceTrain&) = delete; // Delete copy assignment.
+        PoliceTrain(const PoliceTrain&) = delete; // Delete copy constructor.
+        PoliceTrain& operator=(const PoliceTrain&) = delete; // Delete copy assignment.
 
-            ~PoliceTrain() = default;
+        ~PoliceTrain() = default;
 
-            yli::snippets::locomotion::RailVehicleModule rail_vehicle;
-            hirvi::PoliceModule police;
+        yli::snippets::locomotion::RailVehicleModule rail_vehicle;
+        hirvi::PoliceModule police;
     };
 }
 

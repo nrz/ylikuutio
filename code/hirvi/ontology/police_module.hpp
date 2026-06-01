@@ -24,10 +24,10 @@ namespace hirvi
     {
         // `PoliceModule` provides access to the knowledge shared in the police network.
 
-        public:
-            PoliceModule() = default;
+    public:
+        PoliceModule() = default;
 
-            // TODO: implement!
+        // TODO: implement!
     };
 }
 

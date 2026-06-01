@@ -55,7 +55,7 @@ namespace yli::ontology
 
 TEST(cat_must_be_initialized_appropriately, hirvi_cat)
 {
-    using namespace yli::ontology; 
+    using namespace yli::ontology;
 
     const int argc { 0 };
     const char** const argv { nullptr };
@@ -68,24 +68,30 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     Scene* const helsinki_scene = hirvi_application.get_entity_factory().create_scene(scene_struct);
 
     CallbackEngineStruct rest_callback_engine_struct;
-    auto rest_callback_engine = hirvi_application.get_entity_factory().create_callback_engine(rest_callback_engine_struct);
+    auto rest_callback_engine = hirvi_application.get_entity_factory().create_callback_engine(
+        rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
     MovableControllerStruct rest_movable_controller_struct { Request(helsinki_scene), Request(rest_callback_engine) };
     rest_movable_controller_struct.global_name = "rest_movable_controller";
     rest_movable_controller_struct.local_name = "rest";
-    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(rest_movable_controller_struct);
+    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(
+        rest_movable_controller_struct);
 
     PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
     helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
-    Pipeline* const helsinki_pipeline = hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
+    Pipeline* const helsinki_pipeline =
+            hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
-    MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG };
+    MaterialStruct orange_fur_material_struct {
+        Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG
+    };
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
-    Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(orange_fur_material_struct);
+    Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(
+        orange_fur_material_struct);
 
     SpeciesStruct cat_species_struct { Request(helsinki_scene), Request(orange_fur_material) };
     cat_species_struct.global_name = "cat_species";
@@ -98,7 +104,9 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     cat1_object_struct.global_name = "cat1";
     cat1_object_struct.local_name = "kissa1";
     cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
-    cat1_object_struct.initial_rotate_angles = { static_cast<float>(std::numbers::pi), -0.5f * static_cast<float>(std::numbers::pi) };
+    cat1_object_struct.initial_rotate_angles = {
+        static_cast<float>(std::numbers::pi), -0.5f * static_cast<float>(std::numbers::pi)
+    };
     cat1_object_struct.original_scale_vector = glm::vec3(10.0f, 10.0f, 10.0f);
     cat1_object_struct.cartesian_coordinates = CartesianCoordinatesModule(500.00f, 100.00f, 1000.00f);
 
@@ -114,20 +122,21 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     hirvi::Cat* const cat1 = hirvi_application.get_entity_factory().create_object_derivative<
         hirvi::Cat,
         hirvi::CatMemoryAllocator>(
-                hirvi::Datatype::CAT,
-                cat1_object_struct,
-                cat1_walk_struct,
-                cat1_trot_struct,
-                cat1_canter_struct,
-                cat1_gallop_struct,
-                cat1_climb_struct);
+        hirvi::Datatype::CAT,
+        cat1_object_struct,
+        cat1_walk_struct,
+        cat1_trot_struct,
+        cat1_canter_struct,
+        cat1_gallop_struct,
+        cat1_climb_struct);
     ASSERT_NE(cat1, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(cat1) % alignof(hirvi::Cat), 0);
 
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::Datatype::CAT));
 
     // Even though `Cat` is derived from `Object`. `Cat` should be allocated using its own allocator.
-    yli::memory::MemoryAllocator<hirvi::Cat*>& cat_memory_allocator = hirvi_application.get_memory_allocator<hirvi::Cat*>(hirvi::Datatype::CAT);
+    yli::memory::MemoryAllocator<hirvi::Cat*>& cat_memory_allocator =
+            hirvi_application.get_memory_allocator<hirvi::Cat*>(hirvi::Datatype::CAT);
     ASSERT_EQ(cat_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(cat_memory_allocator.get_number_of_instances(), 1);
 

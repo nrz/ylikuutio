@@ -52,15 +52,18 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
     helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
-    Pipeline* const helsinki_pipeline = hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
+    Pipeline* const helsinki_pipeline =
+            hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
     SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
     turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
     turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.get_entity_factory().create_symbiosis(turbo_polizei_png_symbiosis_struct);
+    Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.get_entity_factory().create_symbiosis(
+        turbo_polizei_png_symbiosis_struct);
     ASSERT_NE(turbo_polizei_png_symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei_png_symbiosis) % alignof(Symbiosis), 0);
-    yli::memory::ConstructibleModule symbiosis_constructible_module = turbo_polizei_png_symbiosis->get_constructible_module();
+    yli::memory::ConstructibleModule symbiosis_constructible_module =
+            turbo_polizei_png_symbiosis->get_constructible_module();
     ASSERT_EQ(symbiosis_constructible_module.storage_i, 0);
     ASSERT_EQ(symbiosis_constructible_module.slot_i, 0);
     ASSERT_EQ(symbiosis_constructible_module.alive, true);

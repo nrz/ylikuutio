@@ -39,17 +39,17 @@ namespace hirvi
 {
     class MooAbility final : public yli::ontology::Ability
     {
-        public:
-            explicit MooAbility(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::AbilityStruct& ability_struct,
-                    yli::ontology::GenericParentModule* const parent_module);
+    public:
+        explicit MooAbility(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::AbilityStruct& ability_struct,
+            yli::ontology::GenericParentModule* const parent_module);
 
-            MooAbility(const MooAbility&) = delete;            // Delete copy constructor.
-            MooAbility &operator=(const MooAbility&) = delete; // Delete copy assignment.
+        MooAbility(const MooAbility&) = delete; // Delete copy constructor.
+        MooAbility& operator=(const MooAbility&) = delete; // Delete copy assignment.
 
-            ~MooAbility() override = default;
+        ~MooAbility() override = default;
     };
 }
 

@@ -22,7 +22,7 @@ namespace hirvi
 {
     class HirviCore;
 
-    typedef void (*HirviApplicationCallback) (HirviCore&);
+    typedef void (*HirviApplicationCallback)(HirviCore&);
 }
 
 #endif

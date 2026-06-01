@@ -40,23 +40,23 @@ namespace hirvi
 {
     class PoliceHelicopter : public yli::ontology::Holobiont
     {
-        public:
-            explicit PoliceHelicopter(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::HolobiontStruct& police_helicopter_struct,
-                    yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const symbiosis_master,
-                    yli::ontology::GenericMasterModule* const movable_controller_master,
-                    const yli::ontology::LocomotionModuleStruct& fly_struct);
+    public:
+        explicit PoliceHelicopter(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::HolobiontStruct& police_helicopter_struct,
+            yli::ontology::GenericParentModule* const scene_parent,
+            yli::ontology::GenericMasterModule* const symbiosis_master,
+            yli::ontology::GenericMasterModule* const movable_controller_master,
+            const yli::ontology::LocomotionModuleStruct& fly_struct);
 
-            PoliceHelicopter(const PoliceHelicopter&) = delete;            // Delete copy constructor.
-            PoliceHelicopter &operator=(const PoliceHelicopter&) = delete; // Delete copy assignment.
+        PoliceHelicopter(const PoliceHelicopter&) = delete; // Delete copy constructor.
+        PoliceHelicopter& operator=(const PoliceHelicopter&) = delete; // Delete copy assignment.
 
-            ~PoliceHelicopter() = default;
+        ~PoliceHelicopter() = default;
 
-            yli::snippets::locomotion::FlyModule fly;
-            hirvi::PoliceModule police;
+        yli::snippets::locomotion::FlyModule fly;
+        hirvi::PoliceModule police;
     };
 }
 

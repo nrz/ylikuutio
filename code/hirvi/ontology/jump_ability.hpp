@@ -39,17 +39,17 @@ namespace hirvi
 {
     class JumpAbility final : public yli::ontology::Ability
     {
-        public:
-            explicit JumpAbility(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::AbilityStruct& ability_struct,
-                    yli::ontology::GenericParentModule* const parent_module);
+    public:
+        explicit JumpAbility(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::AbilityStruct& ability_struct,
+            yli::ontology::GenericParentModule* const parent_module);
 
-            JumpAbility(const JumpAbility&) = delete;            // Delete copy constructor.
-            JumpAbility &operator=(const JumpAbility&) = delete; // Delete copy assignment.
+        JumpAbility(const JumpAbility&) = delete; // Delete copy constructor.
+        JumpAbility& operator=(const JumpAbility&) = delete; // Delete copy assignment.
 
-            ~JumpAbility() override = default;
+        ~JumpAbility() override = default;
     };
 }
 

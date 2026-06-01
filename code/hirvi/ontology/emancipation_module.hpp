@@ -24,14 +24,15 @@ namespace hirvi
     {
         // `EmancipationModule` provides the functionality to become emancipated.
 
-        public:
-            EmancipationModule() = default;
+    public:
+        EmancipationModule() = default;
 
-            void emancipate();
-            bool get_is_emancipated() const;
+        void emancipate();
 
-        private:
-            bool is_emancipated { false };
+        bool get_is_emancipated() const;
+
+    private:
+        bool is_emancipated { false };
     };
 }
 

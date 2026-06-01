@@ -35,27 +35,27 @@ namespace yli::ontology
 namespace hirvi
 {
     Elk::Elk(
-            yli::core::Application& application,
-            yli::ontology::Universe& universe,
-            const yli::ontology::HolobiontStruct& elk_struct,
-            yli::ontology::GenericParentModule* const scene_parent,
-            yli::ontology::GenericMasterModule* const symbiosis_master,
-            yli::ontology::GenericMasterModule* const movable_controller_master,
-            const yli::ontology::LocomotionModuleStruct& walk_struct,
-            const yli::ontology::LocomotionModuleStruct& trot_struct,
-            const yli::ontology::LocomotionModuleStruct& canter_struct,
-            const yli::ontology::LocomotionModuleStruct& gallop_struct)
+        yli::core::Application& application,
+        yli::ontology::Universe& universe,
+        const yli::ontology::HolobiontStruct& elk_struct,
+        yli::ontology::GenericParentModule* const scene_parent,
+        yli::ontology::GenericMasterModule* const symbiosis_master,
+        yli::ontology::GenericMasterModule* const movable_controller_master,
+        const yli::ontology::LocomotionModuleStruct& walk_struct,
+        const yli::ontology::LocomotionModuleStruct& trot_struct,
+        const yli::ontology::LocomotionModuleStruct& canter_struct,
+        const yli::ontology::LocomotionModuleStruct& gallop_struct)
         : yli::ontology::Holobiont(
-            application,
-            universe,
-            elk_struct,
-            scene_parent,
-            symbiosis_master,
-            movable_controller_master),
-        walk(walk_struct),
-        trot(trot_struct),
-        canter(canter_struct),
-        gallop(gallop_struct)
+              application,
+              universe,
+              elk_struct,
+              scene_parent,
+              symbiosis_master,
+              movable_controller_master),
+          walk(walk_struct),
+          trot(trot_struct),
+          canter(canter_struct),
+          gallop(gallop_struct)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "hirvi::Elk*";

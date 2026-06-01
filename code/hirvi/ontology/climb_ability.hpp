@@ -39,17 +39,17 @@ namespace hirvi
 {
     class ClimbAbility final : public yli::ontology::Ability
     {
-        public:
-            explicit ClimbAbility(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::AbilityStruct& ability_struct,
-                    yli::ontology::GenericParentModule* const parent_module);
+    public:
+        explicit ClimbAbility(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::AbilityStruct& ability_struct,
+            yli::ontology::GenericParentModule* const parent_module);
 
-            ClimbAbility(const ClimbAbility&) = delete;            // Delete copy constructor.
-            ClimbAbility &operator=(const ClimbAbility&) = delete; // Delete copy assignment.
+        ClimbAbility(const ClimbAbility&) = delete; // Delete copy constructor.
+        ClimbAbility& operator=(const ClimbAbility&) = delete; // Delete copy assignment.
 
-            ~ClimbAbility() override = default;
+        ~ClimbAbility() override = default;
     };
 }
 

@@ -45,13 +45,12 @@ namespace hirvi
 
     HirviCore::HirviCore(yli::core::Application& application, const UniverseStruct& universe_struct)
         : entity_factory(application, this->memory_system),
-        system_factory(this->memory_system),
-        universe { this->entity_factory.create_universe(universe_struct) },
-        event_system { this->system_factory.create_event_system(this->get_universe()) },
-        input_system { this->system_factory.create_input_system(this->get_universe()) },
-        audio_system { this->system_factory.create_audio_system(this->get_universe()) }
-    {
-    }
+          system_factory(this->memory_system),
+          universe { this->entity_factory.create_universe(universe_struct) },
+          event_system { this->system_factory.create_event_system(this->get_universe()) },
+          input_system { this->system_factory.create_input_system(this->get_universe()) },
+          audio_system { this->system_factory.create_audio_system(this->get_universe()) }
+    { }
 
     Universe& HirviCore::get_universe() const
     {
@@ -75,7 +74,8 @@ namespace hirvi
 
         // Create the main `Console`.
         std::cout << "Creating Entity* my_console_entity ...\n";
-        ConsoleStruct my_console_struct(0, this->get_universe().get_window_width() / this->get_universe().get_font_size(), 15, 0);
+        ConsoleStruct my_console_struct(
+            0, this->get_universe().get_window_width() / this->get_universe().get_font_size(), 15, 0);
         my_console_struct.global_name = "my_console";
         std::cout << "Creating Console* my_console ...\n";
         Console* const my_console = this->entity_factory.create_console(my_console_struct);
@@ -175,7 +175,8 @@ namespace hirvi
         my_console_mode_input_mode_struct.global_name = "my_console_mode_input_mode";
         my_console_mode_input_mode_struct.console_master = Request<Console>("my_console");
         my_console_mode_input_mode_struct.is_text_input_mode = true;
-        InputMode* const my_console_mode_input_mode = this->entity_factory.create_input_mode(my_console_mode_input_mode_struct);
+        InputMode* const my_console_mode_input_mode = this->entity_factory.create_input_mode(
+            my_console_mode_input_mode_struct);
 
         // Keypress callbacks for `my_console`.
         yli::snippets::set_console_mode_keypress_callback_engines_or_throw(*my_console_mode_input_mode, "my_console");
@@ -197,19 +198,24 @@ namespace hirvi
         if (this->audio_system != nullptr)
         {
             this->audio_system->add_to_playlist("Hirvi_playlist", "414269__jpmusic82__arp-bass-loop-128-bpm.mp3");
-            this->audio_system->add_to_playlist("Hirvi_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
+            this->audio_system->add_to_playlist("Hirvi_playlist",
+                                                "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
             this->audio_system->add_to_playlist("Hirvi_playlist", "414270__greek555__sample-97-bpm.wav");
             this->audio_system->play_playlist("Hirvi_playlist");
         }
 
         std::cout << "Setting up framebuffer size ...\n";
-        yli::snippets::set_framebuffer_size(&this->get_universe(), this->get_universe().framebuffer_module.get_texture_width(), this->get_universe().framebuffer_module.get_texture_height());
+        yli::snippets::set_framebuffer_size(&this->get_universe(),
+                                            this->get_universe().framebuffer_module.get_texture_width(),
+                                            this->get_universe().framebuffer_module.get_texture_height());
         std::cout << "Setting up background colors ...\n";
         yli::snippets::set_background_colors(&this->get_universe(), 0.0f, 0.0f, 1.0f, 0.0f);
         std::cout << "Setting up wireframe state ...\n";
         yli::snippets::set_wireframe(&this->get_universe(), false);
         std::cout << "Setting up movement ...\n";
-        yli::snippets::set_movement(&this->get_universe(), this->get_universe().speed, this->get_universe().turbo_factor, this->get_universe().twin_turbo_factor, this->get_universe().mouse_speed);
+        yli::snippets::set_movement(&this->get_universe(), this->get_universe().speed,
+                                    this->get_universe().turbo_factor, this->get_universe().twin_turbo_factor,
+                                    this->get_universe().mouse_speed);
         std::cout << "Setting up location and orientation ...\n";
         yli::snippets::set_location_and_orientation(&this->get_universe(), 100.0f, 100.0f, 100.0f);
         std::cout << "Setting up debug variables ...\n";

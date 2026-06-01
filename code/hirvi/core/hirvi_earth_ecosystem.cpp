@@ -60,18 +60,22 @@ namespace hirvi
 
         std::cout << "Creating Pipeline* earth_pipeline ...\n";
 
-        if (const Pipeline* const earth_pipeline = this->entity_factory.create_pipeline(earth_pipeline_struct); earth_pipeline == nullptr)
+        if (const Pipeline* const earth_pipeline = this->entity_factory.create_pipeline(earth_pipeline_struct);
+            earth_pipeline == nullptr)
         {
             std::cerr << "Failed to create `Pipeline`.\n";
             return nullptr;
         }
 
-        SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request<Ecosystem>("earth_ecosystem"), Request<Pipeline>("earth_pipeline") };
+        SymbiosisStruct turbo_polizei_png_symbiosis_struct {
+            Request<Ecosystem>("earth_ecosystem"), Request<Pipeline>("earth_pipeline")
+        };
         turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
         turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
 
         std::cout << "Creating Symbiosis* turbo_polizei_png_symbiosis ...\n";
-        Symbiosis* const turbo_polizei_png_symbiosis = this->entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
+        Symbiosis* const turbo_polizei_png_symbiosis = this->entity_factory.create_symbiosis(
+            turbo_polizei_png_symbiosis_struct);
 
         if (turbo_polizei_png_symbiosis == nullptr)
         {

@@ -31,7 +31,7 @@ namespace yli::ontology
 namespace hirvi_edit
 {
     std::optional<yli::data::AnyValue> version(
-            yli::ontology::Console& console);
+        yli::ontology::Console& console);
 }
 
 #endif

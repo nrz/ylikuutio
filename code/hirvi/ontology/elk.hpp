@@ -40,28 +40,28 @@ namespace hirvi
 
     class Elk : public yli::ontology::Holobiont
     {
-        public:
-            explicit Elk(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::HolobiontStruct& elk_struct,
-                    yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const symbiosis_master,
-                    yli::ontology::GenericMasterModule* const movable_controller_master,
-                    const yli::ontology::LocomotionModuleStruct& walk_struct,
-                    const yli::ontology::LocomotionModuleStruct& trot_struct,
-                    const yli::ontology::LocomotionModuleStruct& canter_struct,
-                    const yli::ontology::LocomotionModuleStruct& gallop_struct);
+    public:
+        explicit Elk(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::HolobiontStruct& elk_struct,
+            yli::ontology::GenericParentModule* const scene_parent,
+            yli::ontology::GenericMasterModule* const symbiosis_master,
+            yli::ontology::GenericMasterModule* const movable_controller_master,
+            const yli::ontology::LocomotionModuleStruct& walk_struct,
+            const yli::ontology::LocomotionModuleStruct& trot_struct,
+            const yli::ontology::LocomotionModuleStruct& canter_struct,
+            const yli::ontology::LocomotionModuleStruct& gallop_struct);
 
-            Elk(const Elk&) = delete;            // Delete copy constructor.
-            Elk &operator=(const Elk&) = delete; // Delete copy assignment.
+        Elk(const Elk&) = delete; // Delete copy constructor.
+        Elk& operator=(const Elk&) = delete; // Delete copy assignment.
 
-            ~Elk() = default;
+        ~Elk() = default;
 
-            yli::snippets::locomotion::GaitModule walk;
-            yli::snippets::locomotion::GaitModule trot;
-            yli::snippets::locomotion::GaitModule canter;
-            yli::snippets::locomotion::GaitModule gallop;
+        yli::snippets::locomotion::GaitModule walk;
+        yli::snippets::locomotion::GaitModule trot;
+        yli::snippets::locomotion::GaitModule canter;
+        yli::snippets::locomotion::GaitModule gallop;
     };
 }
 

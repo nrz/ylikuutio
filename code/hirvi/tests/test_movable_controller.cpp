@@ -49,16 +49,19 @@ TEST(movable_controller_must_be_initialized_appropriately, hirvi_movable_control
     Scene* const helsinki_scene = hirvi_application.get_entity_factory().create_scene(scene_struct);
 
     CallbackEngineStruct rest_callback_engine_struct;
-    auto rest_callback_engine = hirvi_application.get_entity_factory().create_callback_engine(rest_callback_engine_struct);
+    auto rest_callback_engine = hirvi_application.get_entity_factory().create_callback_engine(
+        rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
     MovableControllerStruct rest_movable_controller_struct { Request(helsinki_scene), Request(rest_callback_engine) };
     rest_movable_controller_struct.global_name = "rest_movable_controller";
     rest_movable_controller_struct.local_name = "rest";
-    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(rest_movable_controller_struct);
+    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(
+        rest_movable_controller_struct);
     ASSERT_NE(rest_movable_controller, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_movable_controller) % alignof(MovableController), 0);
-    yli::memory::ConstructibleModule movable_controller_constructible_module = rest_movable_controller->get_constructible_module();
+    yli::memory::ConstructibleModule movable_controller_constructible_module =
+            rest_movable_controller->get_constructible_module();
     ASSERT_EQ(movable_controller_constructible_module.storage_i, 0);
     ASSERT_EQ(movable_controller_constructible_module.slot_i, 0);
     ASSERT_EQ(movable_controller_constructible_module.alive, true);

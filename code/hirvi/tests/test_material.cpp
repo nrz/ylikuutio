@@ -53,14 +53,19 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
     helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
-    Pipeline* const helsinki_pipeline = hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
+    Pipeline* const helsinki_pipeline =
+            hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
-    MaterialStruct orange_fur_material_struct { Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG };
+    MaterialStruct orange_fur_material_struct {
+        Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG
+    };
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
-    Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(orange_fur_material_struct);
+    Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(
+        orange_fur_material_struct);
     ASSERT_NE(orange_fur_material, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(orange_fur_material) % alignof(Material), 0);
-    yli::memory::ConstructibleModule orange_fur_material_constructible_module = orange_fur_material->get_constructible_module();
+    yli::memory::ConstructibleModule orange_fur_material_constructible_module =
+            orange_fur_material->get_constructible_module();
     ASSERT_EQ(orange_fur_material_constructible_module.storage_i, 0);
     ASSERT_EQ(orange_fur_material_constructible_module.slot_i, 0);
     ASSERT_EQ(orange_fur_material_constructible_module.alive, true);

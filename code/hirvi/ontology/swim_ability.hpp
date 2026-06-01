@@ -39,17 +39,17 @@ namespace hirvi
 {
     class SwimAbility final : public yli::ontology::Ability
     {
-        public:
-            explicit SwimAbility(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::AbilityStruct& ability_struct,
-                    yli::ontology::GenericParentModule* const parent_module);
+    public:
+        explicit SwimAbility(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::AbilityStruct& ability_struct,
+            yli::ontology::GenericParentModule* const parent_module);
 
-            SwimAbility(const SwimAbility&) = delete;            // Delete copy constructor.
-            SwimAbility &operator=(const SwimAbility&) = delete; // Delete copy assignment.
+        SwimAbility(const SwimAbility&) = delete; // Delete copy constructor.
+        SwimAbility& operator=(const SwimAbility&) = delete; // Delete copy assignment.
 
-            ~SwimAbility() override = default;
+        ~SwimAbility() override = default;
     };
 }
 

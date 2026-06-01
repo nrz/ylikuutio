@@ -40,30 +40,30 @@ namespace hirvi
 {
     class PoliceHorse : public yli::ontology::Holobiont
     {
-        public:
-            explicit PoliceHorse(
-                    yli::core::Application& application,
-                    yli::ontology::Universe& universe,
-                    const yli::ontology::HolobiontStruct& police_horse_struct,
-                    yli::ontology::GenericParentModule* const scene_parent,
-                    yli::ontology::GenericMasterModule* const symbiosis_master,
-                    yli::ontology::GenericMasterModule* const movable_controller_master,
-                    const yli::ontology::LocomotionModuleStruct& walk_struct,
-                    const yli::ontology::LocomotionModuleStruct& run_struct,
-                    const yli::ontology::LocomotionModuleStruct& canter_struct,
-                    const yli::ontology::LocomotionModuleStruct& gallop_struct);
+    public:
+        explicit PoliceHorse(
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::HolobiontStruct& police_horse_struct,
+            yli::ontology::GenericParentModule* const scene_parent,
+            yli::ontology::GenericMasterModule* const symbiosis_master,
+            yli::ontology::GenericMasterModule* const movable_controller_master,
+            const yli::ontology::LocomotionModuleStruct& walk_struct,
+            const yli::ontology::LocomotionModuleStruct& run_struct,
+            const yli::ontology::LocomotionModuleStruct& canter_struct,
+            const yli::ontology::LocomotionModuleStruct& gallop_struct);
 
-            PoliceHorse(const PoliceHorse&) = delete;            // Delete copy constructor.
-            PoliceHorse &operator=(const PoliceHorse&) = delete; // Delete copy assignment.
+        PoliceHorse(const PoliceHorse&) = delete; // Delete copy constructor.
+        PoliceHorse& operator=(const PoliceHorse&) = delete; // Delete copy assignment.
 
-            ~PoliceHorse() = default;
+        ~PoliceHorse() = default;
 
-            yli::snippets::locomotion::GaitModule walk;
-            yli::snippets::locomotion::GaitModule run;
-            yli::snippets::locomotion::GaitModule canter;
-            yli::snippets::locomotion::GaitModule gallop;
-            hirvi::EmancipationModule emancipation;
-            hirvi::PoliceModule police;
+        yli::snippets::locomotion::GaitModule walk;
+        yli::snippets::locomotion::GaitModule run;
+        yli::snippets::locomotion::GaitModule canter;
+        yli::snippets::locomotion::GaitModule gallop;
+        hirvi::EmancipationModule emancipation;
+        hirvi::PoliceModule police;
     };
 }
 
