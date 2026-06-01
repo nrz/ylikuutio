@@ -53,7 +53,7 @@ namespace hirvi
         PoliceHelicopter(const PoliceHelicopter&) = delete; // Delete copy constructor.
         PoliceHelicopter& operator=(const PoliceHelicopter&) = delete; // Delete copy assignment.
 
-        ~PoliceHelicopter() = default;
+        ~PoliceHelicopter() override = default;
 
         yli::snippets::locomotion::FlyModule fly;
         PoliceModule police;
