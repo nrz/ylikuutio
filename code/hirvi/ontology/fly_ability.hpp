@@ -44,7 +44,7 @@ namespace hirvi
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::AbilityStruct& ability_struct,
-            yli::ontology::GenericParentModule* const parent_module);
+            yli::ontology::GenericParentModule* parent_module);
 
         FlyAbility(const FlyAbility&) = delete; // Delete copy constructor.
         FlyAbility& operator=(const FlyAbility&) = delete; // Delete copy assignment.

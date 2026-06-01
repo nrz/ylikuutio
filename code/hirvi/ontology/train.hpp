@@ -44,9 +44,9 @@ namespace hirvi
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::HolobiontStruct& train_struct,
-            yli::ontology::GenericParentModule* const scene_parent,
-            yli::ontology::GenericMasterModule* const symbiosis_master,
-            yli::ontology::GenericMasterModule* const movable_controller_master,
+            yli::ontology::GenericParentModule* scene_parent,
+            yli::ontology::GenericMasterModule* symbiosis_master,
+            yli::ontology::GenericMasterModule* movable_controller_master,
             const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct);
 
         Train(const Train&) = delete; // Delete copy constructor.
