@@ -67,13 +67,13 @@ namespace hirvi
     public:
         HirviCore(yli::core::Application& application, const yli::ontology::UniverseStruct& universe_struct);
 
-        yli::ontology::Universe& get_universe() const;
+        [[nodiscard]] yli::ontology::Universe& get_universe() const;
 
         bool create_and_start_simulation(HirviApplicationCallback hirvi_application_callback);
 
-        yli::ontology::Scene* create_helsinki_scene() const;
+        [[nodiscard]] yli::ontology::Scene* create_helsinki_scene() const;
 
-        yli::ontology::Ecosystem* create_earth_ecosystem() const;
+        [[nodiscard]] yli::ontology::Ecosystem* create_earth_ecosystem() const;
 
         yli::memory::MemorySystem<Datatype> memory_system { UNIVERSE };
         yli::ontology::EntityFactory<Datatype> entity_factory;
