@@ -8,6 +8,10 @@
 - [ ] BUG/UI/HIRVI Camera control with mouse is broken.
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] HIRVI/AI Implement `PoliceNetwork` class that inherits `GenericMasterModule` class.
+- [ ] HIRVI/AI Implement `Emancipable` class.
+- [ ] HIRVI/AI Make `PoliceHorse` and `PoliceDog` inherit `Emancipable`.
+- [ ] HIRVI/AI Make `EmancipationModule` inherit `ApprenticeModule`.
 - [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] AI/YLILISP Implement new `GenericLispModule` class that supports YliLisp.
 - [ ] AI/YLILISP Implement new `ConsoleLispModule` class that inherits `GenericLispModule` and can be composited into `Console`.
