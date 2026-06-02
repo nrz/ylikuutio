@@ -45,7 +45,7 @@ namespace hirvi
         const yli::ontology::LocomotionModuleStruct& trot_struct,
         const yli::ontology::LocomotionModuleStruct& canter_struct,
         const yli::ontology::LocomotionModuleStruct& gallop_struct)
-        : yli::ontology::Holobiont(
+        : Holobiont(
               application,
               universe,
               elk_struct,

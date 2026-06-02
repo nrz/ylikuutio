@@ -42,7 +42,7 @@ namespace hirvi
         yli::ontology::GenericMasterModule* const symbiosis_master,
         yli::ontology::GenericMasterModule* const movable_controller_master,
         const yli::ontology::LocomotionModuleStruct& fly_struct)
-        : yli::ontology::Holobiont(
+        : Holobiont(
               application,
               universe,
               police_helicopter_struct,
