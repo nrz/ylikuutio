@@ -18,4 +18,8 @@
 #include "emancipation_module.hpp"
 
 namespace hirvi
-{ }
+{
+    EmancipationModule::EmancipationModule(PoliceModule& police_module)
+        : police_module(police_module)
+    { }
+}

@@ -55,7 +55,8 @@ namespace hirvi
           walk(walk_struct),
           run(run_struct),
           canter(canter_struct),
-          gallop(gallop_struct)
+          gallop(gallop_struct),
+          emancipation(this->police)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "hirvi::PoliceDog*";

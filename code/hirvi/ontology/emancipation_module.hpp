@@ -20,18 +20,21 @@
 
 namespace hirvi
 {
+    class PoliceModule;
+
     class EmancipationModule
     {
         // `EmancipationModule` provides the functionality to become emancipated.
 
     public:
-        EmancipationModule() = default;
+        explicit EmancipationModule(PoliceModule& police_module);
 
         void emancipate();
 
         bool get_is_emancipated() const;
 
     private:
+        PoliceModule& police_module;
         bool is_emancipated { false };
     };
 }
