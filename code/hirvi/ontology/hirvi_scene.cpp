@@ -39,7 +39,11 @@ namespace hirvi
         Universe& universe,
         const SceneStruct& scene_struct,
         GenericParentModule* universe_parent_module)
-        : Scene(application, universe, scene_struct, universe_parent_module)
+        : Scene(application, universe, scene_struct, universe_parent_module),
+          operations_center(
+              *this,
+              &this->registry,
+              "polices")
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "hirvi::HirviScene*";

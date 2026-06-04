@@ -34,10 +34,10 @@ namespace hirvi
 {
     using namespace yli::ontology;
 
-    class PoliceNetwork final : GenericMasterModule
+    class PoliceOperationsCenter final : GenericMasterModule
     {
     public:
-        PoliceNetwork(
+        PoliceOperationsCenter(
             Scene& master_scene,
             Registry* registry,
             const std::string& name);
