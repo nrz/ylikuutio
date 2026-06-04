@@ -19,6 +19,7 @@
 #define HIRVI_HIRVI_CORE_HPP_INCLUDED
 
 #include "hirvi_application_callback.hpp"
+#include "code/hirvi/ontology/hirvi_scene.hpp"
 #include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/core/system_factory.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
@@ -59,6 +60,7 @@ namespace hirvi
     class PoliceCar;
 
     // Allocators for custom types.
+    using HirviSceneMemoryAllocator = yli::memory::MemoryAllocator<HirviScene, 256>;
     using CatMemoryAllocator = yli::memory::MemoryAllocator<Cat, 256>;
     using PoliceCarMemoryAllocator = yli::memory::MemoryAllocator<PoliceCar, 256>;
 
@@ -71,7 +73,7 @@ namespace hirvi
 
         bool create_and_start_simulation(HirviApplicationCallback hirvi_application_callback);
 
-        [[nodiscard]] yli::ontology::Scene* create_helsinki_scene() const;
+        [[nodiscard]] HirviScene* create_helsinki_scene() const;
 
         [[nodiscard]] yli::ontology::Ecosystem* create_earth_ecosystem() const;
 

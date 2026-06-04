@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "hirvi_core.hpp"
+#include "code/hirvi/ontology/hirvi_scene.hpp"
 #include "code/hirvi/ontology/cat.hpp"
 #include "code/hirvi/ontology/police_car.hpp"
 #include "code/hirvi/data/datatype.hpp"
@@ -64,7 +65,7 @@ namespace hirvi
 {
     using namespace yli::ontology;
 
-    Scene* HirviCore::create_helsinki_scene() const
+    HirviScene* HirviCore::create_helsinki_scene() const
     {
         // Helsinki `Scene` begins here.
 
@@ -74,11 +75,15 @@ namespace hirvi
         scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
         std::cout << "Creating Scene* helsinki_scene ...\n";
-        Scene* const helsinki_scene = this->entity_factory.create_scene(scene_struct);
+        HirviScene* const helsinki_scene = this->entity_factory.create_scene_derivative<
+            HirviScene,
+            HirviSceneMemoryAllocator>(
+            HIRVI_SCENE,
+            scene_struct);
 
         if (helsinki_scene == nullptr)
         {
-            std::cerr << "Failed to create Scene.\n";
+            std::cerr << "Failed to create HirviScene.\n";
             return nullptr;
         }
 
@@ -404,7 +409,7 @@ namespace hirvi
 
         // Create the material, store it in `helsinki_grass_material`.
         MaterialStruct helsinki_grass_material_struct {
-            Request(helsinki_scene), Request(helsinki_pipeline), TextureFileFormat::PNG
+            Request<Scene>(helsinki_scene), Request(helsinki_pipeline), TextureFileFormat::PNG
         };
         helsinki_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
@@ -421,7 +426,7 @@ namespace hirvi
 
         // Create the material, store it in `orange_fur_material`.
         MaterialStruct orange_fur_material_struct {
-            Request(helsinki_scene), Request(helsinki_pipeline), TextureFileFormat::PNG
+            Request<Scene>(helsinki_scene), Request(helsinki_pipeline), TextureFileFormat::PNG
         };
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
@@ -436,7 +441,7 @@ namespace hirvi
 
         orange_fur_material->set_global_name("helsinki_orange_fur_material");
 
-        SpeciesStruct helsinki_terrain_species_struct { Request(helsinki_scene), Request(helsinki_grass_material) };
+        SpeciesStruct helsinki_terrain_species_struct { Request<Scene>(helsinki_scene), Request(helsinki_grass_material) };
         helsinki_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
         helsinki_terrain_species_struct.model_loader_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_terrain_species_struct.model_loader_struct.x_step = 4;
@@ -453,12 +458,12 @@ namespace hirvi
         helsinki_terrain_species->set_global_name("helsinki_terrain_species");
 
         // Create Helsinki eastern downtown terrain.
-        ObjectStruct helsinki_struct { Request(helsinki_scene) };
+        ObjectStruct helsinki_struct { Request<Scene>(helsinki_scene) };
         helsinki_struct.species_master = Request(helsinki_terrain_species);
         helsinki_struct.cartesian_coordinates = CartesianCoordinatesModule(0.0f, 0.0f, 0.0f);
         this->entity_factory.create_object(helsinki_struct);
 
-        SpeciesStruct cat_species_struct { Request(helsinki_scene), Request(orange_fur_material) };
+        SpeciesStruct cat_species_struct { Request<Scene>(helsinki_scene), Request(orange_fur_material) };
         cat_species_struct.global_name = "cat_species";
         cat_species_struct.local_name = "cat";
         cat_species_struct.model_loader_struct.model_file_format = "fbx";

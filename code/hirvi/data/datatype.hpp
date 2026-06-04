@@ -139,6 +139,7 @@ namespace hirvi
         // `yli::ontology` datatypes, 'compute' path.
         COMPUTE_TASK                = 280,
         // Custom datatypes of Hirvi.
+        HIRVI_SCENE       = 1000,
         CAT               = 1001,
         ELK               = 1002,
         POLICE_CAR        = 1003,
