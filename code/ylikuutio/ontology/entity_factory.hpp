@@ -155,7 +155,7 @@ namespace yli::ontology
             return const_cast<EntityFactory<TypeEnumType>&>(*this);
         }
 
-        template<EntityNotUniverse ChildType, EntityNotUniverse ParentType>
+        template<EntityNotUniverse ChildType, typename ParentType>
         GenericParentModule* get_generic_parent_module(const Request<ParentType>& entity_request) const
         {
             ParentType* const parent = resolve_request<ParentType>(entity_request, this->get_universe().registry);
@@ -776,6 +776,21 @@ namespace yli::ontology
             return generic_console_lisp_function_overload;
         }
 
+        template<typename T, typename SceneDerivativeMemoryAllocator, typename... ModuleArgs>
+        T* create_scene_derivative(
+            int scene_derivative_type,
+            const SceneStruct& scene_struct,
+            ModuleArgs&&... module_args) const
+        {
+            return static_cast<T*>(this->template create_child_of_known_parent_type<
+                Scene, Universe, SceneDerivativeMemoryAllocator, SceneStruct>(
+                scene_derivative_type,
+                Request<Universe>(&this->get_universe()),
+                scene_struct,
+                // Feature modules.
+                std::forward<ModuleArgs>(module_args)...));
+        }
+
         template<typename T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_object_derivative(
             int object_derivative_type,
@@ -876,7 +891,7 @@ namespace yli::ontology
             return instance;
         }
 
-        template<EntityNotUniverse Type, EntityNotUniverse ParentType, typename TypeAllocator, typename DataStruct,
+        template<EntityNotUniverse Type, typename ParentType, typename TypeAllocator, typename DataStruct,
             typename... Types, typename... Args>
         Type* create_child_of_known_parent_type(
             const int allocator_type,

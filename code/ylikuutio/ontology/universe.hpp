@@ -406,6 +406,9 @@ namespace yli::ontology
 
         FramebufferModule framebuffer_module;
 
+        template<typename ChildType>
+        GenericParentModule* get_generic_parent_module() = delete;
+
         std::size_t get_number_of_children() const override;
 
         std::size_t get_number_of_descendants() const override;
@@ -480,6 +483,12 @@ namespace yli::ontology
         // `std::numeric_limits<std::size_t>::max()` means that `current_time_before_reading_keyboard` is not defined.
         std::uint32_t current_time_before_reading_keyboard { std::numeric_limits<std::uint32_t>::max() };
     };
+
+    template<>
+    inline GenericParentModule* Universe::get_generic_parent_module<Scene>()
+    {
+        return &this->parent_of_scenes;
+    }
 }
 
 #endif

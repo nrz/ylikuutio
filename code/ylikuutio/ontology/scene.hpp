@@ -83,8 +83,9 @@ namespace yli::ontology
     class RigidBodyModule;
     struct SceneStruct;
 
-    class Scene final : public Entity
+    class Scene : public Entity
     {
+    public:
         Scene(
             core::Application& application,
             Universe& universe,
@@ -93,7 +94,6 @@ namespace yli::ontology
 
         ~Scene() override;
 
-    public:
         Scene(const Scene&) = delete; // Delete copy constructor.
         Scene& operator=(const Scene&) = delete; // Delete copy assignment.
 
