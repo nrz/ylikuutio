@@ -22,8 +22,8 @@
 
 namespace yli::snippets::locomotion
 {
-    FlyModule::FlyModule(const yli::ontology::LocomotionModuleStruct& fly_module_struct)
-        : yli::ontology::LocomotionModule(yli::ontology::LocomotionEnvironment::AIR),
+    FlyModule::FlyModule(const ontology::LocomotionModuleStruct& fly_module_struct)
+        : LocomotionModule(ontology::LocomotionEnvironment::AIR),
         max_speed         { fly_module_struct.max_speed },
         acceleration      { fly_module_struct.acceleration },
         deceleration      { fly_module_struct.deceleration },

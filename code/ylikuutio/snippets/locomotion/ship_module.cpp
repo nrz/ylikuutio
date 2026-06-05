@@ -22,8 +22,8 @@
 
 namespace yli::snippets::locomotion
 {
-    ShipModule::ShipModule(const yli::ontology::LocomotionModuleStruct& ship_module_struct)
-        : yli::ontology::LocomotionModule(yli::ontology::LocomotionEnvironment::WATER),
+    ShipModule::ShipModule(const ontology::LocomotionModuleStruct& ship_module_struct)
+        : LocomotionModule(ontology::LocomotionEnvironment::WATER),
         max_speed         { ship_module_struct.max_speed },
         acceleration      { ship_module_struct.acceleration },
         deceleration      { ship_module_struct.deceleration },

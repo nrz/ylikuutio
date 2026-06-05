@@ -28,10 +28,10 @@ namespace yli::ontology
 
 namespace yli::snippets::locomotion
 {
-    class RailVehicleModule final : public yli::ontology::LocomotionModule
+    class RailVehicleModule final : public ontology::LocomotionModule
     {
         public:
-            explicit RailVehicleModule(const yli::ontology::LocomotionModuleStruct& rail_vehicle_module_struct);
+            explicit RailVehicleModule(const ontology::LocomotionModuleStruct& rail_vehicle_module_struct);
 
         private:
             float max_speed    { 0.0f }; // m/s.

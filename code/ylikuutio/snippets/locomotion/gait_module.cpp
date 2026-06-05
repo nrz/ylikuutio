@@ -22,8 +22,8 @@
 
 namespace yli::snippets::locomotion
 {
-    GaitModule::GaitModule(const yli::ontology::LocomotionModuleStruct& gait_module_struct)
-        : yli::ontology::LocomotionModule(yli::ontology::LocomotionEnvironment::LAND),
+    GaitModule::GaitModule(const ontology::LocomotionModuleStruct& gait_module_struct)
+        : LocomotionModule(ontology::LocomotionEnvironment::LAND),
         max_speed         { gait_module_struct.max_speed },
         acceleration      { gait_module_struct.acceleration },
         deceleration      { gait_module_struct.deceleration },

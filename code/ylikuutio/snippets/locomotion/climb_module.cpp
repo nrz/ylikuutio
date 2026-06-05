@@ -23,7 +23,7 @@
 namespace yli::snippets::locomotion
 {
     ClimbModule::ClimbModule(const yli::ontology::LocomotionModuleStruct& climb_module_struct)
-        : yli::ontology::LocomotionModule(yli::ontology::LocomotionEnvironment::CLIMB),
+        : LocomotionModule(ontology::LocomotionEnvironment::CLIMB),
         max_speed         { climb_module_struct.max_speed },
         acceleration      { climb_module_struct.acceleration },
         deceleration      { climb_module_struct.deceleration },
