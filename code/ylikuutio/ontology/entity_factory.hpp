@@ -141,6 +141,10 @@ namespace yli::ontology
     concept SceneDerivative =
             std::derived_from<T, Scene> && (!std::same_as<T, Scene>);
 
+    template<typename T>
+    concept ObjectOrObjectDerivative =
+            std::derived_from<T, Object>;
+
     template<typename TypeEnumType>
     class EntityFactory : public GenericEntityFactory
     {
@@ -795,7 +799,7 @@ namespace yli::ontology
                 std::forward<ModuleArgs>(module_args)...));
         }
 
-        template<EntityNotUniverse T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
+        template<ObjectOrObjectDerivative T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_object_derivative(
             int object_derivative_type,
             const ObjectStruct& object_struct,
