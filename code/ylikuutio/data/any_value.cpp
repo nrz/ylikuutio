@@ -611,93 +611,93 @@ namespace yli::data
         // Ontology.
         else if (std::holds_alternative<std::reference_wrapper<ontology::Entity>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Entity>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Entity>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Movable>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Movable>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<const
-                ontology::Movable>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<const
+                ontology::Movable>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Universe>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Universe>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Universe>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Ecosystem>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Ecosystem>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Ecosystem>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Scene>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Scene>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Scene>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Pipeline>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Pipeline>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Pipeline>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Material>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Material>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Material>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Species>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Species>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Species>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Object>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Object>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Object>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Symbiosis>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Symbiosis>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Symbiosis>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Holobiont>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Holobiont>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Holobiont>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Font2d>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Font2d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Font2d>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Text2d>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Text2d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Text2d>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::VectorFont>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::VectorFont>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::VectorFont>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Text3d>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Text3d>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Text3d>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Console>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::Console>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::Console>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::ComputeTask>>(this->data))
         {
-            any_value_stringstream << std::hex << (std::uint64_t) &std::get<std::reference_wrapper<
-                ontology::ComputeTask>>(this->data) << std::dec;
+            any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
+                ontology::ComputeTask>>(this->data)) << std::dec;
         }
         else
         {
