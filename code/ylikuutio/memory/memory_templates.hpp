@@ -33,7 +33,7 @@ namespace yli::memory
     template<typename T1, typename T2>
         T2 read_nonaligned_32_bit(T1* src_data, const std::size_t offset)
         {
-            std::uint8_t* src_data_uint8_t = (std::uint8_t*) src_data;
+            auto* src_data_uint8_t = static_cast<std::uint8_t*>(src_data);
             T2 value_32_bit = static_cast<T2>(src_data_uint8_t[offset + 3]);
             value_32_bit = value_32_bit << 8 | static_cast<T2>(src_data_uint8_t[offset + 2]);
             value_32_bit = value_32_bit << 8 | static_cast<T2>(src_data_uint8_t[offset + 1]);
