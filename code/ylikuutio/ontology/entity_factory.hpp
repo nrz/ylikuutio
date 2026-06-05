@@ -892,7 +892,7 @@ namespace yli::ontology
         }
 
         template<EntityNotUniverse Type, typename ParentType, typename TypeAllocator, typename DataStruct,
-            typename... Types, typename... Args>
+            typename... Args>
         Type* create_child_of_known_parent_type(
             const int allocator_type,
             const Request<ParentType>& parent,
