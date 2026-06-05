@@ -52,7 +52,7 @@ namespace yli::memory
                 {
                 }
 
-                ~MemoryAllocator() = default;
+                ~MemoryAllocator() override = default;
 
                 MemoryAllocator(const MemoryAllocator&) = delete;            // Delete copy constructor.
                 MemoryAllocator& operator=(const MemoryAllocator&) = delete; // Delete copy assignment.
