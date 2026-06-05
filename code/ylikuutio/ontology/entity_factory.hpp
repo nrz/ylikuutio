@@ -137,6 +137,10 @@ namespace yli::ontology
     concept EntityNotUniverse =
             std::derived_from<T, Entity> && (!std::same_as<T, Universe>);
 
+    template<typename T>
+    concept SceneDerivative =
+            std::derived_from<T, Scene> && (!std::same_as<T, Scene>);
+
     template<typename TypeEnumType>
     class EntityFactory : public GenericEntityFactory
     {
@@ -776,7 +780,7 @@ namespace yli::ontology
             return generic_console_lisp_function_overload;
         }
 
-        template<EntityNotUniverse T, typename SceneDerivativeMemoryAllocator, typename... ModuleArgs>
+        template<SceneDerivative T, typename SceneDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_scene_derivative(
             int scene_derivative_type,
             const SceneStruct& scene_struct,
