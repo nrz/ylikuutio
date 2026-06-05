@@ -142,6 +142,10 @@ namespace yli::ontology
             std::derived_from<T, Scene> && (!std::same_as<T, Scene>);
 
     template<typename T>
+    concept ObjectDerivative =
+            std::derived_from<T, Object> && (!std::same_as<T, Object>);
+
+    template<typename T>
     concept ObjectOrObjectDerivative =
             std::derived_from<T, Object>;
 
@@ -430,7 +434,7 @@ namespace yli::ontology
 
         Object* create_object(const ObjectStruct& object_struct) const final
         {
-            return this->create_object_derivative<
+            return this->create_object_or_object_derivative<
                 Object, memory::ObjectMemoryAllocator>(
                 data::Datatype::OBJECT,
                 object_struct);
@@ -799,23 +803,14 @@ namespace yli::ontology
                 std::forward<ModuleArgs>(module_args)...));
         }
 
-        template<ObjectOrObjectDerivative T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
+        template<ObjectDerivative T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_object_derivative(
             int object_derivative_type,
             const ObjectStruct& object_struct,
             ModuleArgs&&... module_args) const
         {
-            return static_cast<T*>(this->template create_child_of_known_parent_type<
-                Object, Scene, ObjectDerivativeMemoryAllocator, ObjectStruct>(
-                object_derivative_type,
-                object_struct.scene,
-                object_struct,
-                // `MovableController` master.
-                this->get_generic_master_module<Movable, MovableController>(object_struct.movable_controller_master),
-                // `Species` master.
-                this->get_generic_master_module<Object, Species>(object_struct.species_master),
-                // Skill modules.
-                std::forward<ModuleArgs>(module_args)...));
+            return this->template create_object_or_object_derivative<T, ObjectDerivativeMemoryAllocator, ModuleArgs...>(
+                object_derivative_type, object_struct, std::forward<ModuleArgs>(module_args)...);
         }
 
         template<EntityNotUniverse T, typename HolobiontDerivativeMemoryAllocator, typename... ModuleArgs>
@@ -926,6 +921,25 @@ namespace yli::ontology
             instance->set_global_name(data_struct.global_name);
             instance->set_local_name(data_struct.local_name);
             return instance;
+        }
+
+        template<ObjectOrObjectDerivative T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
+        T* create_object_or_object_derivative(
+            int object_derivative_type,
+            const ObjectStruct& object_struct,
+            ModuleArgs&&... module_args) const
+        {
+            return static_cast<T*>(this->template create_child_of_known_parent_type<
+                Object, Scene, ObjectDerivativeMemoryAllocator, ObjectStruct>(
+                object_derivative_type,
+                object_struct.scene,
+                object_struct,
+                // `MovableController` master.
+                this->get_generic_master_module<Movable, MovableController>(object_struct.movable_controller_master),
+                // `Species` master.
+                this->get_generic_master_module<Object, Species>(object_struct.species_master),
+                // Skill modules.
+                std::forward<ModuleArgs>(module_args)...));
         }
 
         core::Application& application;
