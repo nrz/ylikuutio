@@ -776,7 +776,7 @@ namespace yli::ontology
             return generic_console_lisp_function_overload;
         }
 
-        template<typename T, typename SceneDerivativeMemoryAllocator, typename... ModuleArgs>
+        template<EntityNotUniverse T, typename SceneDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_scene_derivative(
             int scene_derivative_type,
             const SceneStruct& scene_struct,
@@ -791,7 +791,7 @@ namespace yli::ontology
                 std::forward<ModuleArgs>(module_args)...));
         }
 
-        template<typename T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
+        template<EntityNotUniverse T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_object_derivative(
             int object_derivative_type,
             const ObjectStruct& object_struct,
@@ -810,7 +810,7 @@ namespace yli::ontology
                 std::forward<ModuleArgs>(module_args)...));
         }
 
-        template<typename T, typename HolobiontDerivativeMemoryAllocator, typename... ModuleArgs>
+        template<EntityNotUniverse T, typename HolobiontDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_holobiont_derivative(
             int holobiont_derivative_type,
             const HolobiontStruct& holobiont_struct,
@@ -827,7 +827,7 @@ namespace yli::ontology
         }
 
     private:
-        template<typename T, typename ParentModuleType, typename TypeAllocator, typename DataStruct, typename... Args>
+        template<EntityNotUniverse T, typename ParentModuleType, typename TypeAllocator, typename DataStruct, typename... Args>
         T* create_child_of_universe(
             const int type,
             const DataStruct& data_struct,
