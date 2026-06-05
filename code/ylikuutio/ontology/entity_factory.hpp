@@ -220,12 +220,11 @@ namespace yli::ontology
                         static_cast<int>(data::Datatype::UNIVERSE));
             auto& allocator = static_cast<memory::UniverseMemoryAllocator&>(generic_allocator);
 
-            Universe* const universe = allocator.build_in(
+            this->universe = allocator.build_in(
                 this->application,
                 universe_struct);
 
-            this->universe = universe;
-            return universe;
+            return this->universe;
         }
 
         Universe& get_universe() const
