@@ -24,10 +24,9 @@ namespace yli::snippets::locomotion
 {
     RoadVehicleModule::RoadVehicleModule(const ontology::LocomotionModuleStruct& road_vehicle_module_struct)
         : LocomotionModule(ontology::LocomotionEnvironment::ROAD),
-        max_speed         { road_vehicle_module_struct.max_speed },
-        acceleration      { road_vehicle_module_struct.acceleration },
-        deceleration      { road_vehicle_module_struct.deceleration },
-        max_angular_speed { road_vehicle_module_struct.max_angular_speed }
-    {
-    }
+          max_speed { road_vehicle_module_struct.max_speed },
+          acceleration { road_vehicle_module_struct.acceleration },
+          deceleration { road_vehicle_module_struct.deceleration },
+          max_angular_speed { road_vehicle_module_struct.max_angular_speed }
+    { }
 }

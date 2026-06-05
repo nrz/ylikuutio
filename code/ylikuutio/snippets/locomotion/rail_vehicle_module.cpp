@@ -24,9 +24,8 @@ namespace yli::snippets::locomotion
 {
     RailVehicleModule::RailVehicleModule(const ontology::LocomotionModuleStruct& rail_vehicle_module_struct)
         : LocomotionModule(ontology::LocomotionEnvironment::RAIL),
-        max_speed    { rail_vehicle_module_struct.max_speed },
-        acceleration { rail_vehicle_module_struct.acceleration },
-        deceleration { rail_vehicle_module_struct.deceleration }
-    {
-    }
+          max_speed { rail_vehicle_module_struct.max_speed },
+          acceleration { rail_vehicle_module_struct.acceleration },
+          deceleration { rail_vehicle_module_struct.deceleration }
+    { }
 }

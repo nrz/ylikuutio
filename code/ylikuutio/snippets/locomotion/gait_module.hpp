@@ -30,16 +30,16 @@ namespace yli::snippets::locomotion
 {
     class GaitModule final : public ontology::LocomotionModule
     {
-        public:
-            explicit GaitModule(const ontology::LocomotionModuleStruct& gait_module_struct);
+    public:
+        explicit GaitModule(const ontology::LocomotionModuleStruct& gait_module_struct);
 
-        public:
-            float max_speed            { 0.0f }; // m/s.
-            float acceleration         { 0.0f }; // m/s^2
-            float deceleration         { 0.0f }; // m/s^2
-            float max_angular_speed    { 0.0f }; // 1/s
-            float angular_acceleration { 0.0f }; // 1/s^2
-            float angular_deceleration { 0.0f }; // 1/s^2
+    public:
+        float max_speed { 0.0f }; // m/s.
+        float acceleration { 0.0f }; // m/s^2
+        float deceleration { 0.0f }; // m/s^2
+        float max_angular_speed { 0.0f }; // 1/s
+        float angular_acceleration { 0.0f }; // 1/s^2
+        float angular_deceleration { 0.0f }; // 1/s^2
     };
 }
 

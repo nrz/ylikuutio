@@ -30,16 +30,16 @@ namespace yli::snippets::locomotion
 {
     class SwimModule final : public ontology::LocomotionModule
     {
-        public:
-            explicit SwimModule(const ontology::LocomotionModuleStruct& swim_module_struct);
+    public:
+        explicit SwimModule(const ontology::LocomotionModuleStruct& swim_module_struct);
 
-        private:
-            float max_speed            { 0.0f }; // m/s.
-            float acceleration         { 0.0f }; // m/s^2
-            float deceleration         { 0.0f }; // m/s^2
-            float max_angular_speed    { 0.0f }; // 1/s
-            float angular_acceleration { 0.0f }; // 1/s^2
-            float angular_deceleration { 0.0f }; // 1/s^2
+    private:
+        float max_speed { 0.0f }; // m/s.
+        float acceleration { 0.0f }; // m/s^2
+        float deceleration { 0.0f }; // m/s^2
+        float max_angular_speed { 0.0f }; // 1/s
+        float angular_acceleration { 0.0f }; // 1/s^2
+        float angular_deceleration { 0.0f }; // 1/s^2
     };
 }
 

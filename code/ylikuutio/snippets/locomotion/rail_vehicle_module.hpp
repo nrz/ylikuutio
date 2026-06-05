@@ -30,13 +30,13 @@ namespace yli::snippets::locomotion
 {
     class RailVehicleModule final : public ontology::LocomotionModule
     {
-        public:
-            explicit RailVehicleModule(const ontology::LocomotionModuleStruct& rail_vehicle_module_struct);
+    public:
+        explicit RailVehicleModule(const ontology::LocomotionModuleStruct& rail_vehicle_module_struct);
 
-        private:
-            float max_speed    { 0.0f }; // m/s.
-            float acceleration { 0.0f }; // m/s^2
-            float deceleration { 0.0f }; // m/s^2
+    private:
+        float max_speed { 0.0f }; // m/s.
+        float acceleration { 0.0f }; // m/s^2
+        float deceleration { 0.0f }; // m/s^2
 
         // There is no angular movement for railways.
     };
