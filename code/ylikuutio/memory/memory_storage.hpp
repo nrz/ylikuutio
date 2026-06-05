@@ -36,152 +36,152 @@ namespace yli::memory
     class GenericMemoryAllocator;
 
     template<typename T1 = std::byte, std::size_t DataSize = 1>
-        class MemoryStorage
+    class MemoryStorage
+    {
+        // `MemoryStorage` instance takes care of single memory storage.
+
+    public:
+        MemoryStorage(GenericMemoryAllocator& allocator, const std::size_t storage_i)
+            : allocator { allocator },
+              storage_i { storage_i }
         {
-            // `MemoryStorage` instance takes care of single memory storage.
+            if (storage_i == std::numeric_limits<std::size_t>::max()) [[unlikely]]
+            {
+                throw std::runtime_error("ERROR: `MemoryStorage::MemoryStorage`: `storage_i` has invalid value!");
+            }
+        }
 
-            public:
-                MemoryStorage(GenericMemoryAllocator& allocator, const std::size_t storage_i)
-                    : allocator { allocator },
-                    storage_i { storage_i }
+        ~MemoryStorage()
+        {
+            if (this->number_of_instances == 0) [[unlikely]]
+            {
+                // No instances to destroy.
+                return;
+            }
+
+            // The queue needs to be sorted as it will be used
+            // for finding out which slots are in use.
+            //
+            // First, copy the data so that the head of the queue is at index 0.
+            this->free_slot_id_queue.move_to_beginning();
+
+            // Sort.
+            for (
+                typename data::Queue<DataSize>::iterator left_it = this->free_slot_id_queue.begin();
+                left_it != this->free_slot_id_queue.last();
+                ++left_it)
+            {
+                typename data::Queue<DataSize>::iterator right_it = this->free_slot_id_queue.begin();
+                ++right_it;
+
+                for (; right_it != this->free_slot_id_queue.last(); ++right_it)
                 {
-                    if (storage_i == std::numeric_limits<std::size_t>::max()) [[unlikely]]
+                    if (*left_it > *right_it)
                     {
-                        throw std::runtime_error("ERROR: `MemoryStorage::MemoryStorage`: `storage_i` has invalid value!");
+                        const std::size_t temp = *left_it;
+                        *left_it = *right_it;
+                        *right_it = temp;
                     }
                 }
+            }
 
-                ~MemoryStorage()
+            typename data::Queue<DataSize>::iterator queue_it = this->free_slot_id_queue.begin();
+
+            for (
+                std::size_t slot_i = 0, count = 0;
+                count < this->number_of_instances;
+                slot_i++)
+            {
+                if (queue_it != free_slot_id_queue.last() && slot_i == *queue_it)
                 {
-                    if (this->number_of_instances == 0) [[unlikely]]
-                    {
-                        // No instances to destroy.
-                        return;
-                    }
+                    // This slot ID was not in use.
 
-                    // The queue needs to be sorted as it will be used
-                    // for finding out which slots are in use.
-                    //
-                    // First, copy the data so that the head of the queue is at index 0.
-                    this->free_slot_id_queue.move_to_beginning();
-
-                    // Sort.
-                    for (
-                            typename data::Queue<DataSize>::iterator left_it = this->free_slot_id_queue.begin();
-                            left_it != this->free_slot_id_queue.last();
-                            ++left_it)
-                    {
-                        typename data::Queue<DataSize>::iterator right_it = this->free_slot_id_queue.begin();
-                        ++right_it;
-
-                        for ( ; right_it != this->free_slot_id_queue.last(); ++right_it)
-                        {
-                            if (*left_it > *right_it)
-                            {
-                                const std::size_t temp = *left_it;
-                                *left_it = *right_it;
-                                *right_it = temp;
-                            }
-                        }
-                    }
-
-                    typename data::Queue<DataSize>::iterator queue_it = this->free_slot_id_queue.begin();
-
-                    for (
-                            std::size_t slot_i = 0, count = 0;
-                            count < this->number_of_instances;
-                            slot_i++)
-                    {
-                        if (queue_it != free_slot_id_queue.last() && slot_i == *queue_it)
-                        {
-                            // This slot ID was not in use.
-
-                            ++queue_it;
-                            continue;
-                        }
-
-                        T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
-                        T1* instance { &data[slot_i] };
-                        instance->~T1();
-                        count++;
-                    }
+                    ++queue_it;
+                    continue;
                 }
 
-                MemoryStorage(const MemoryStorage&) = delete;            // Delete copy constructor.
-                MemoryStorage& operator=(const MemoryStorage&) = delete; // Delete copy assignment.
+                T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
+                T1* instance { &data[slot_i] };
+                instance->~T1();
+                count++;
+            }
+        }
 
-                template<typename... Args>
-                    T1* build_in(Args&&... args)
-                    {
-                        if (this->number_of_instances >= DataSize) [[unlikely]]
-                        {
-                            // This `MemoryStorage` is already full, can't build anything.
-                            return nullptr;
-                        }
+        MemoryStorage(const MemoryStorage&) = delete; // Delete copy constructor.
+        MemoryStorage& operator=(const MemoryStorage&) = delete; // Delete copy assignment.
 
-                        std::size_t slot_i;
+        template<typename... Args>
+        T1* build_in(Args&&... args)
+        {
+            if (this->number_of_instances >= DataSize) [[unlikely]]
+            {
+                // This `MemoryStorage` is already full, can't build anything.
+                return nullptr;
+            }
 
-                        if (this->free_slot_id_queue.size() == 0) [[unlikely]]
-                        {
-                            // Queue is empty.
-                            // Use the current number of instances as the index,
-                            slot_i = this->number_of_instances;
-                        }
-                        else [[likely]]
-                        {
-                            // Queue is not empty.
-                            // Pop a free index from queue.
-                            slot_i = this->free_slot_id_queue.pop();
-                        }
+            std::size_t slot_i;
 
-                        T1* instance = new (this->memory.data() + (slot_i * sizeof(T1))) T1(std::forward<Args>(args)...);
-                        instance->constructible_module = ConstructibleModule(this->allocator, this->storage_i, slot_i);
-                        this->number_of_instances++;
-                        return instance;
-                    }
+            if (this->free_slot_id_queue.size() == 0) [[unlikely]]
+            {
+                // Queue is empty.
+                // Use the current number of instances as the index,
+                slot_i = this->number_of_instances;
+            }
+            else [[likely]]
+            {
+                // Queue is not empty.
+                // Pop a free index from queue.
+                slot_i = this->free_slot_id_queue.pop();
+            }
 
-                void destroy(const std::size_t slot_i)
-                {
-                    if (slot_i == std::numeric_limits<std::size_t>::max()) [[unlikely]]
-                    {
-                        throw std::runtime_error("ERROR: `MemoryStorage::destroy`: `slot_i` has invalid value!");
-                    }
+            T1* instance = new(this->memory.data() + (slot_i * sizeof(T1))) T1(std::forward<Args>(args)...);
+            instance->constructible_module = ConstructibleModule(this->allocator, this->storage_i, slot_i);
+            this->number_of_instances++;
+            return instance;
+        }
 
-                    if (slot_i >= DataSize) [[unlikely]]
-                    {
-                        throw std::runtime_error(
-                                "ERROR: `MemoryStorage::destroy`: `slot_i` " + std::to_string(storage_i) +
-                                " is out of bounds, `DataSize` is " + std::to_string(DataSize));
-                    }
+        void destroy(const std::size_t slot_i)
+        {
+            if (slot_i == std::numeric_limits<std::size_t>::max()) [[unlikely]]
+            {
+                throw std::runtime_error("ERROR: `MemoryStorage::destroy`: `slot_i` has invalid value!");
+            }
 
-                    // `slot_i` is not checked here (because it would make `destroy` O(n) operation instead of O(1)).
-                    // The caller must make sure that `slot_i` points to an existing instance.
-                    T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
-                    T1* instance { &data[slot_i] };
-                    instance->~T1();
+            if (slot_i >= DataSize) [[unlikely]]
+            {
+                throw std::runtime_error(
+                    "ERROR: `MemoryStorage::destroy`: `slot_i` " + std::to_string(storage_i) +
+                    " is out of bounds, `DataSize` is " + std::to_string(DataSize));
+            }
 
-                    // Push the freed index to the queue.
-                    this->free_slot_id_queue.push(slot_i);
-                    this->number_of_instances--;
-                }
+            // `slot_i` is not checked here (because it would make `destroy` O(n) operation instead of O(1)).
+            // The caller must make sure that `slot_i` points to an existing instance.
+            T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
+            T1* instance { &data[slot_i] };
+            instance->~T1();
 
-                [[nodiscard]] std::size_t get_storage_id() const
-                {
-                    return this->storage_i;
-                }
+            // Push the freed index to the queue.
+            this->free_slot_id_queue.push(slot_i);
+            this->number_of_instances--;
+        }
 
-                [[nodiscard]] std::size_t get_number_of_instances() const
-                {
-                    return this->number_of_instances;
-                }
+        [[nodiscard]] std::size_t get_storage_id() const
+        {
+            return this->storage_i;
+        }
 
-            private:
-                GenericMemoryAllocator& allocator;
-                alignas(T1) std::array<std::byte, DataSize * sizeof(T1)> memory {};
-                data::Queue<DataSize> free_slot_id_queue;
-                const std::size_t storage_i;
-                std::size_t number_of_instances { 0 };
-        };
+        [[nodiscard]] std::size_t get_number_of_instances() const
+        {
+            return this->number_of_instances;
+        }
+
+    private:
+        GenericMemoryAllocator& allocator;
+        alignas(T1) std::array<std::byte, DataSize * sizeof(T1)> memory {};
+        data::Queue<DataSize> free_slot_id_queue;
+        const std::size_t storage_i;
+        std::size_t number_of_instances { 0 };
+    };
 }
 
 #endif

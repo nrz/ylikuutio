@@ -36,136 +36,139 @@ namespace yli::memory
 
     // `GetTypeEnumFunction` is a function template that return `TypeEnumType` values for different types.
     template<typename TypeEnumType = data::Datatype>
-        class MemorySystem final : public GenericMemorySystem
+    class MemorySystem final : public GenericMemorySystem
+    {
+        // Each class instance takes care of memory
+        // management for a given application.
+
+    public:
+        explicit MemorySystem(TypeEnumType universe_datatype)
+            : universe_datatype { universe_datatype }
+        { }
+
+        ~MemorySystem() override
         {
-            // Each class instance takes care of memory
-            // management for a given application.
+            // Delete other except `Universe` allocators.
 
-            public:
-                explicit MemorySystem(TypeEnumType universe_datatype)
-                    : universe_datatype { universe_datatype }
+            for (auto it = this->memory_allocators.begin(); it != this->memory_allocators.end();)
+            {
+                if (it->first != this->universe_datatype)
                 {
+                    auto old_it = it;
+                    ++it;
+                    delete old_it->second;
+                    this->memory_allocators.erase(old_it);
                 }
-
-                ~MemorySystem() override
+                else
                 {
-                    // Delete other except `Universe` allocators.
-
-                    for (auto it = this->memory_allocators.begin(); it != this->memory_allocators.end(); )
-                    {
-                        if (it->first != this->universe_datatype)
-                        {
-                            auto old_it = it;
-                            ++it;
-                            delete old_it->second;
-                            this->memory_allocators.erase(old_it);
-                        }
-                        else
-                        {
-                            ++it;
-                        }
-                    }
-
-                    // Delete `Universe` allocator.
-                    for (auto it = this->memory_allocators.begin(); it != this->memory_allocators.end(); )
-                    {
-                        if (it->first == this->universe_datatype)
-                        {
-                            auto old_it = it;
-                            ++it;
-                            delete old_it->second;
-                            this->memory_allocators.erase(old_it);
-                        }
-                        else
-                        {
-                            ++it;
-                        }
-                    }
+                    ++it;
                 }
+            }
 
-                MemorySystem(const MemorySystem&) = delete;            // Delete copy constructor.
-                MemorySystem& operator=(const MemorySystem&) = delete; // Delete copy assignment.
-
-                [[nodiscard]] TypeEnumType get_universe_datatype() const
+            // Delete `Universe` allocator.
+            for (auto it = this->memory_allocators.begin(); it != this->memory_allocators.end();)
+            {
+                if (it->first == this->universe_datatype)
                 {
-                    return this->universe_datatype;
+                    auto old_it = it;
+                    ++it;
+                    delete old_it->second;
+                    this->memory_allocators.erase(old_it);
                 }
-
-                [[nodiscard]] MemorySystem<TypeEnumType>& get() const
+                else
                 {
-                    return const_cast<MemorySystem<TypeEnumType>&>(*this);
+                    ++it;
                 }
+            }
+        }
 
-                [[nodiscard]] std::size_t get_number_of_allocators() const override
-                {
-                    return this->memory_allocators.size();
-                }
+        MemorySystem(const MemorySystem&) = delete; // Delete copy constructor.
+        MemorySystem& operator=(const MemorySystem&) = delete; // Delete copy assignment.
 
-                template<typename T1, typename... Args>
-                    void create_allocator(int type, Args&&... args)
-                    {
-                        // TODO: Return the return value of `try_emplace`.
-                        // TODO: Throw an exception if creating an allocator fails.
-                        this->memory_allocators.try_emplace(type, new T1(type, std::forward<Args>(args)...));
-                    }
+        [[nodiscard]] TypeEnumType get_universe_datatype() const
+        {
+            return this->universe_datatype;
+        }
 
-                // TODO: use `TypeEnumType` instead of `int`!
-                [[nodiscard]] bool has_allocator(const int type) const override
-                {
-                    return this->memory_allocators.contains(type);
-                }
+        [[nodiscard]] MemorySystem<TypeEnumType>& get() const
+        {
+            return const_cast<MemorySystem<TypeEnumType>&>(*this);
+        }
 
-                // TODO: use `TypeEnumType` instead of `int`!
-                [[nodiscard]] GenericMemoryAllocator& get_generic_allocator(const int type) const override
-                {
-                    if (this->has_allocator(type)) [[likely]]
-                    {
-                        return *(this->memory_allocators.at(type));
-                    }
+        [[nodiscard]] std::size_t get_number_of_allocators() const override
+        {
+            return this->memory_allocators.size();
+        }
 
-                    throw std::runtime_error("ERROR: `MemorySystem::get_generic_allocator`: allocator for type " + std::to_string(type) + " does not exist!");
-                }
+        template<typename T1, typename... Args>
+        void create_allocator(int type, Args&&... args)
+        {
+            // TODO: Return the return value of `try_emplace`.
+            // TODO: Throw an exception if creating an allocator fails.
+            this->memory_allocators.try_emplace(type, new T1(type, std::forward<Args>(args)...));
+        }
 
-                template<typename T1, typename... Args>
-                    // TODO: use `TypeEnumType` instead of `int`!
-                    [[nodiscard]] MemoryAllocator<T1>& get_allocator(const int type) const
-                    {
-                        if (this->has_allocator(type)) [[likely]]
-                        {
-                            return static_cast<MemoryAllocator<T1>&>(*(this->memory_allocators.at(type)));
-                        }
+        // TODO: use `TypeEnumType` instead of `int`!
+        [[nodiscard]] bool has_allocator(const int type) const override
+        {
+            return this->memory_allocators.contains(type);
+        }
 
-                        throw std::runtime_error("ERROR: `MemorySystem::get_allocator`: allocator for type " + std::to_string(type) + " does not exist!");
-                    }
+        // TODO: use `TypeEnumType` instead of `int`!
+        [[nodiscard]] GenericMemoryAllocator& get_generic_allocator(const int type) const override
+        {
+            if (this->has_allocator(type)) [[likely]]
+            {
+                return *(this->memory_allocators.at(type));
+            }
 
-                virtual void destroy(const ConstructibleModule& constructible_module) override
-                {
-                    if (constructible_module.alive && constructible_module.generic_allocator != nullptr)
-                    {
-                        GenericMemoryAllocator& allocator = *constructible_module.generic_allocator;
-                        allocator.destroy(constructible_module);
-                    }
-                }
+            throw std::runtime_error(
+                "ERROR: `MemorySystem::get_generic_allocator`: allocator for type " + std::to_string(type) +
+                " does not exist!");
+        }
 
-                template<typename T1, typename... Args>
-                    // TODO: use `TypeEnumType` instead of `int`!
-                    [[nodiscard]] GenericMemoryAllocator& get_or_create_allocator(int type, Args&&... args)
-                    {
-                        if (this->has_allocator(type))
-                        {
-                            return this->get_generic_allocator(type);
-                        }
+        template<typename T1, typename... Args>
+        // TODO: use `TypeEnumType` instead of `int`!
+        [[nodiscard]] MemoryAllocator<T1>& get_allocator(const int type) const
+        {
+            if (this->has_allocator(type)) [[likely]]
+            {
+                return static_cast<MemoryAllocator<T1>&>(*(this->memory_allocators.at(type)));
+            }
 
-                        this->template create_allocator<T1, Args...>(type, std::forward<Args>(args)...);
-                        return this->get_generic_allocator(type);
-                    }
+            throw std::runtime_error(
+                "ERROR: `MemorySystem::get_allocator`: allocator for type " + std::to_string(type) +
+                " does not exist!");
+        }
 
-            private:
-                // Allocators need to be created elsewhere and only stored here.
-                // TODO: use `TypeEnumType` as the key type instead of `int`!
-                std::map<int, GenericMemoryAllocator*> memory_allocators;
-                const TypeEnumType universe_datatype;
-        };
+        virtual void destroy(const ConstructibleModule& constructible_module) override
+        {
+            if (constructible_module.alive && constructible_module.generic_allocator != nullptr)
+            {
+                GenericMemoryAllocator& allocator = *constructible_module.generic_allocator;
+                allocator.destroy(constructible_module);
+            }
+        }
+
+        template<typename T1, typename... Args>
+        // TODO: use `TypeEnumType` instead of `int`!
+        [[nodiscard]] GenericMemoryAllocator& get_or_create_allocator(int type, Args&&... args)
+        {
+            if (this->has_allocator(type))
+            {
+                return this->get_generic_allocator(type);
+            }
+
+            this->template create_allocator<T1, Args...>(type, std::forward<Args>(args)...);
+            return this->get_generic_allocator(type);
+        }
+
+    private:
+        // Allocators need to be created elsewhere and only stored here.
+        // TODO: use `TypeEnumType` as the key type instead of `int`!
+        std::map<int, GenericMemoryAllocator*> memory_allocators;
+        const TypeEnumType universe_datatype;
+    };
 }
 
 #endif

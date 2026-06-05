@@ -30,17 +30,17 @@ namespace yli::memory
     {
         ConstructibleModule() = default;
 
-        ConstructibleModule(GenericMemoryAllocator& generic_allocator, const std::size_t storage_i, const std::size_t slot_i)
+        ConstructibleModule(GenericMemoryAllocator& generic_allocator, const std::size_t storage_i,
+                            const std::size_t slot_i)
             : generic_allocator { &generic_allocator },
-            storage_i { storage_i },
-            slot_i { slot_i }
-        {
-        }
+              storage_i { storage_i },
+              slot_i { slot_i }
+        { }
 
         GenericMemoryAllocator* generic_allocator { nullptr };
         std::size_t storage_i { std::numeric_limits<std::size_t>::max() };
-        std::size_t slot_i    { std::numeric_limits<std::size_t>::max() };
-        bool alive            { true };
+        std::size_t slot_i { std::numeric_limits<std::size_t>::max() };
+        bool alive { true };
     };
 }
 

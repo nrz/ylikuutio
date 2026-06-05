@@ -41,206 +41,211 @@ namespace yli::ontology
 namespace yli::memory
 {
     template<typename T1 = std::byte, std::size_t DataSize = 1>
-        class MemoryAllocator : public GenericMemoryAllocator
+    class MemoryAllocator : public GenericMemoryAllocator
+    {
+        // Each class instance takes care of the memory storage
+        // management for some given storable datatype.
+
+    public:
+        explicit MemoryAllocator(const int datatype)
+            : datatype { datatype }
+        { }
+
+        ~MemoryAllocator() override = default;
+
+        MemoryAllocator(const MemoryAllocator&) = delete; // Delete copy constructor.
+        MemoryAllocator& operator=(const MemoryAllocator&) = delete; // Delete copy assignment.
+
+        template<typename... Args>
+        T1* build_in(Args&&... args)
         {
-            // Each class instance takes care of the memory storage
-            // management for some given storable datatype.
+            for (auto& storage : this->storages)
+            {
+                T1* instance = storage->build_in(std::forward<Args>(args)...);
 
-            public:
-                explicit MemoryAllocator(const int datatype)
-                    : datatype { datatype }
+                if (instance != nullptr)
                 {
+                    return instance;
                 }
+            }
 
-                ~MemoryAllocator() override = default;
+            // Pass number of storages to `MemoryStorage` constructor as the `storage_i`.
+            // This assumes that storages can not be deleted (except in `MemoryAllocator`'s destructor).
+            const std::size_t storage_i { this->storages.size() };
+            auto storage = std::make_unique<MemoryStorage<T1, DataSize>>(*this, storage_i);
+            this->storages.emplace_back(std::move(storage));
+            return this->storages.back()->build_in(std::forward<Args>(args)...);
+        }
 
-                MemoryAllocator(const MemoryAllocator&) = delete;            // Delete copy constructor.
-                MemoryAllocator& operator=(const MemoryAllocator&) = delete; // Delete copy assignment.
+        [[nodiscard]] std::size_t get_datatype() const override
+        {
+            return this->datatype;
+        }
 
-                template<typename... Args>
-                    T1* build_in(Args&&... args)
-                    {
-                        for (auto& storage : this->storages)
-                        {
-                            T1* instance = storage->build_in(std::forward<Args>(args)...);
+        [[nodiscard]] std::size_t get_number_of_storages() const override
+        {
+            return this->storages.size();
+        }
 
-                            if (instance != nullptr)
-                            {
-                                return instance;
-                            }
-                        }
+        [[nodiscard]] std::size_t get_number_of_instances() const override
+        {
+            std::size_t count { 0 };
 
-                        // Pass number of storages to `MemoryStorage` constructor as the `storage_i`.
-                        // This assumes that storages can not be deleted (except in `MemoryAllocator`'s destructor).
-                        const std::size_t storage_i { this->storages.size() };
-                        auto storage = std::make_unique<MemoryStorage<T1, DataSize>>(*this, storage_i);
-                        this->storages.emplace_back(std::move(storage));
-                        return this->storages.back()->build_in(std::forward<Args>(args)...);
-                    }
+            for (const auto& storage : this->storages)
+            {
+                count += storage->get_number_of_instances();
+            }
 
-                [[nodiscard]] std::size_t get_datatype() const override
-                {
-                    return this->datatype;
-                }
+            return count;
+        }
 
-                [[nodiscard]] std::size_t get_number_of_storages() const override
-                {
-                    return this->storages.size();
-                }
+        [[nodiscard]] std::size_t get_data_size() const
+        {
+            return DataSize;
+        }
 
-                [[nodiscard]] std::size_t get_number_of_instances() const override
-                {
-                    std::size_t count { 0 };
+        std::optional<std::reference_wrapper<MemoryStorage<T1, DataSize>>> get_storage(
+            const std::size_t storage_i) const noexcept
+        {
+            if (storage_i == std::numeric_limits<std::size_t>::max())
+            {
+                std::cerr <<
+                        "ERROR: `MemoryAllocator::get_storage`: trying to get storage with an invalid `storage_i`!\n";
+                return std::nullopt;
+            }
 
-                    for (const auto& storage : this->storages)
-                    {
-                        count += storage->get_number_of_instances();
-                    }
+            if (storage_i >= this->get_number_of_storages())
+            {
+                std::cerr << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i <<
+                        " is out of bounds, size is " << this->get_number_of_storages() << "\n";
+                return std::nullopt;
+            }
 
-                    return count;
-                }
+            auto raw_storage_pointer = this->storages.at(storage_i).get();
 
-                [[nodiscard]] std::size_t get_data_size() const
-                {
-                    return DataSize;
-                }
+            if (raw_storage_pointer == nullptr)
+            {
+                std::cerr << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i << " is `nullptr`!\n";
+                return std::nullopt;
+            }
 
-                std::optional<std::reference_wrapper<MemoryStorage<T1, DataSize>>> get_storage(const std::size_t storage_i) const noexcept
-                {
-                    if (storage_i == std::numeric_limits<std::size_t>::max())
-                    {
-                        std::cerr << "ERROR: `MemoryAllocator::get_storage`: trying to get storage with an invalid `storage_i`!\n";
-                        return std::nullopt;
-                    }
+            return *raw_storage_pointer;
+        }
 
-                    if (storage_i >= this->get_number_of_storages())
-                    {
-                        std::cerr << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i <<
-                            " is out of bounds, size is " << this->get_number_of_storages() << "\n";
-                        return std::nullopt;
-                    }
+        void destroy(const ConstructibleModule& constructible_module) noexcept override
+        {
+            if (constructible_module.storage_i == std::numeric_limits<std::size_t>::max())
+            {
+                std::cerr << "ERROR: `MemoryAllocator::destroy`: `constructible_module.storage_i` has invalid value!\n";
+                return;
+            }
 
-                    auto raw_storage_pointer = this->storages.at(storage_i).get();
+            if (constructible_module.slot_i == std::numeric_limits<std::size_t>::max())
+            {
+                std::cerr << "ERROR: `MemoryAllocator::destroy`: `constructible_module.slot_i` has invalid value!\n";
+                return;
+            }
 
-                    if (raw_storage_pointer == nullptr)
-                    {
-                        std::cerr << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i << " is `nullptr`!\n";
-                        return std::nullopt;
-                    }
+            if (constructible_module.storage_i >= this->get_number_of_storages())
+            {
+                std::cerr << "ERROR: `MemoryAllocator::destroy`: `storage_i` " <<
+                        constructible_module.storage_i << " is out of bounds, size is " << this->
+                        get_number_of_storages() << "\n";
+                return;
+            }
 
-                    return *raw_storage_pointer;
-                }
+            auto storage = this->get_storage(constructible_module.storage_i);
 
-                void destroy(const ConstructibleModule& constructible_module) noexcept override
-                {
-                    if (constructible_module.storage_i == std::numeric_limits<std::size_t>::max())
-                    {
-                        std::cerr << "ERROR: `MemoryAllocator::destroy`: `constructible_module.storage_i` has invalid value!\n";
-                        return;
-                    }
+            if (storage)
+            {
+                (*storage).get().destroy(constructible_module.slot_i);
+            }
+        }
 
-                    if (constructible_module.slot_i == std::numeric_limits<std::size_t>::max())
-                    {
-                        std::cerr << "ERROR: `MemoryAllocator::destroy`: `constructible_module.slot_i` has invalid value!\n";
-                        return;
-                    }
-
-                    if (constructible_module.storage_i >= this->get_number_of_storages())
-                    {
-                        std::cerr << "ERROR: `MemoryAllocator::destroy`: `storage_i` " <<
-                            constructible_module.storage_i << " is out of bounds, size is " << this->get_number_of_storages() << "\n";
-                        return;
-                    }
-
-                    auto storage = this->get_storage(constructible_module.storage_i);
-
-                    if (storage)
-                    {
-                        (*storage).get().destroy(constructible_module.slot_i);
-                    }
-                }
-
-            private:
-                const int datatype;
-                std::vector<std::unique_ptr<MemoryStorage<T1, DataSize>>> storages;
-        };
+    private:
+        const int datatype;
+        std::vector<std::unique_ptr<MemoryStorage<T1, DataSize>>> storages;
+    };
 
     template<std::size_t DataSize>
-        class MemoryAllocator<ontology::GenericConsoleLispFunctionOverload, DataSize> : public GenericMemoryAllocator
+    class MemoryAllocator<ontology::GenericConsoleLispFunctionOverload, DataSize> : public GenericMemoryAllocator
+    {
+    public:
+        explicit MemoryAllocator(const int datatype)
+            : datatype { datatype }
+        { }
+
+        ~MemoryAllocator()
         {
-            public:
-                explicit MemoryAllocator(const int datatype)
-                    : datatype { datatype }
-                {
-                }
+            for (auto* const instance : this->instances)
+            {
+                delete instance;
+            }
+        }
 
-                ~MemoryAllocator()
-                {
-                    for (auto* const instance : this->instances)
-                    {
-                        delete instance;
-                    }
-                }
+        MemoryAllocator(const MemoryAllocator&) = delete; // Delete copy constructor.
+        MemoryAllocator& operator=(const MemoryAllocator&) = delete; // Delete copy assignment.
 
-                MemoryAllocator(const MemoryAllocator&) = delete;            // Delete copy constructor.
-                MemoryAllocator& operator=(const MemoryAllocator&) = delete; // Delete copy assignment.
+        template<typename... Args>
+        ontology::GenericConsoleLispFunctionOverload* build_in(Args&&... args)
+        {
+            ontology::GenericConsoleLispFunctionOverload* function_overload =
+                    new ontology::ConsoleLispFunctionOverload(std::forward<Args>(args)...);
 
-                template<typename... Args>
-                    ontology::GenericConsoleLispFunctionOverload* build_in(Args&&... args)
-                    {
-                        ontology::GenericConsoleLispFunctionOverload* function_overload =
-                            new ontology::ConsoleLispFunctionOverload(std::forward<Args>(args)...);
+            if (this->free_storageID_queue.empty())
+            {
+                function_overload->constructible_module = yli::memory::ConstructibleModule(
+                    *this, this->free_storageID_queue.size(), 0);
+                this->instances.emplace_back(function_overload);
+            }
+            else
+            {
+                const std::size_t storage_i = this->free_storageID_queue.front();
+                this->free_storageID_queue.pop();
+                function_overload->constructible_module = ConstructibleModule(*this, storage_i, 0);
+                this->instances.at(storage_i) = function_overload;
+            }
 
-                        if (this->free_storageID_queue.empty())
-                        {
-                            function_overload->constructible_module = yli::memory::ConstructibleModule(*this, this->free_storageID_queue.size(), 0);
-                            this->instances.emplace_back(function_overload);
-                        }
-                        else
-                        {
-                            const std::size_t storage_i = this->free_storageID_queue.front();
-                            this->free_storageID_queue.pop();
-                            function_overload->constructible_module = ConstructibleModule(*this, storage_i, 0);
-                            this->instances.at(storage_i) = function_overload;
-                        }
+            return function_overload;
+        }
 
-                        return function_overload;
-                    }
+        [[nodiscard]] std::size_t get_datatype() const override
+        {
+            return this->datatype;
+        }
 
-                [[nodiscard]] std::size_t get_datatype() const override
-                {
-                    return this->datatype;
-                }
+        [[nodiscard]] std::size_t get_number_of_storages() const override
+        {
+            return this->instances.size();
+        }
 
-                [[nodiscard]] std::size_t get_number_of_storages() const override
-                {
-                    return this->instances.size();
-                }
+        [[nodiscard]] std::size_t get_number_of_instances() const override
+        {
+            return this->instances.size();
+        }
 
-                [[nodiscard]] std::size_t get_number_of_instances() const override
-                {
-                    return this->instances.size();
-                }
+        std::optional<std::reference_wrapper<MemoryStorage<ontology::GenericConsoleLispFunctionOverload, DataSize>>>
+        get_storage(const std::size_t /* storage_i */) const noexcept
+        {
+            std::cerr <<
+                    "ERROR: `MemoryAllocator<yli::ontology::GenericConsoleLispFunctionOverload, DataSize>::get_storage`: "
+                    <<
+                    "this function is not implemented for this specialization!\n";
+            return std::nullopt;
+        }
 
-                std::optional<std::reference_wrapper<MemoryStorage<ontology::GenericConsoleLispFunctionOverload, DataSize>>> get_storage(const std::size_t /* storage_i */ ) const noexcept
-                {
-                    std::cerr << "ERROR: `MemoryAllocator<yli::ontology::GenericConsoleLispFunctionOverload, DataSize>::get_storage`: " <<
-                        "this function is not implemented for this specialization!\n";
-                    return std::nullopt;
-                }
+        void destroy(const ConstructibleModule& constructible_module) noexcept override
+        {
+            delete this->instances.at(constructible_module.storage_i);
+            this->instances.at(constructible_module.storage_i) = nullptr;
+            this->free_storageID_queue.push(constructible_module.storage_i);
+        }
 
-                void destroy(const ConstructibleModule& constructible_module) noexcept override
-                {
-                    delete this->instances.at(constructible_module.storage_i);
-                    this->instances.at(constructible_module.storage_i) = nullptr;
-                    this->free_storageID_queue.push(constructible_module.storage_i);
-                }
-
-            private:
-                const int datatype;
-                std::vector<ontology::GenericConsoleLispFunctionOverload*> instances;
-                std::queue<std::size_t> free_storageID_queue;
-        };
+    private:
+        const int datatype;
+        std::vector<ontology::GenericConsoleLispFunctionOverload*> instances;
+        std::queue<std::size_t> free_storageID_queue;
+    };
 }
 
 #endif
