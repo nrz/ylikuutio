@@ -74,7 +74,7 @@ namespace yli::memory
             std::vector<T1> dest;
             dest.reserve(buffer_size);
 
-            std::size_t n_values_to_copy_first_part { buffer_size <= DataSize - start_i ? buffer_size : DataSize - start_i };
+            const std::size_t n_values_to_copy_first_part { buffer_size <= DataSize - start_i ? buffer_size : DataSize - start_i };
             std::copy(&buffer.at(start_i), buffer.end(), std::back_inserter(dest));
 
             if (n_values_to_copy_first_part < buffer_size)
