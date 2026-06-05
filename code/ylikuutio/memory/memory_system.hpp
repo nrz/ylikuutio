@@ -47,7 +47,7 @@ namespace yli::memory
                 {
                 }
 
-                ~MemorySystem()
+                ~MemorySystem() override
                 {
                     // Delete other except `Universe` allocators.
 
