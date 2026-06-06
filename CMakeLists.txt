@@ -16,10 +16,6 @@ endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
     project(ylikuutio LANGUAGES C CXX)
-else()
-    project(ylikuutio LANGUAGES C CXX Fortran)
-    include(FortranCInterface)
-    FortranCInterface_VERIFY(CXX)
 endif()
 
 #-------------------------------------------------------+
@@ -115,7 +111,6 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU
     # Command line arguments not supported by Visual Studio.
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type -Werror=nonnull")
-    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type")
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /DNOMINMAX")
 endif()
@@ -369,18 +364,6 @@ configure_file(res/audio/freesound.org/419588__greek555__dreaming-of-me.ogg 4195
 # Image files for tests.
 configure_file(res/height_maps/noise256x256.png noise256x256.png COPYONLY)
 configure_file(res/textures/test3x3.png test3x3.png COPYONLY)
-
-# Copy data files for Avaruus.
-configure_file(run/input.dat                   input.dat COPYONLY)
-configure_file(run/empty_file_for_testing.dat  empty_file_for_testing.dat COPYONLY)
-configure_file(run/one_line_for_testing.dat    one_line_for_testing.dat COPYONLY)
-configure_file(run/three_lines_for_testing.dat three_lines_for_testing.dat COPYONLY)
-
-# Copy scripts for Avaruus.
-configure_file(code/avaruus/bash/process_output_file_2_objects     process_output_file_2_objects COPYONLY)
-configure_file(code/avaruus/bash/process_output_file_solar_system  process_output_file_solar_system COPYONLY)
-configure_file(code/avaruus/python/visualize_2_objects             visualize_2_objects COPYONLY)
-configure_file(code/avaruus/python/visualize_solar_system          visualize_solar_system COPYONLY)
 
 ### Ylikuutio libraries ###
 
@@ -1036,35 +1019,6 @@ add_executable(yli_edit
 )
 target_link_libraries(yli_edit PRIVATE edit_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-### Physics simulations ###
-
-if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows"))
-    # Planetary simulation library
-    add_library(planetary_simulation STATIC
-        code/avaruus/fortran/constants.f90
-        code/avaruus/fortran/file.f90
-        code/avaruus/fortran/global_parameters.f90
-        code/avaruus/fortran/my_kind.f90
-        code/avaruus/fortran/object.f90
-        code/avaruus/fortran/physics.f90
-        code/avaruus/fortran/parser.f90
-        code/avaruus/fortran/avaruus.f90
-        code/avaruus/fortran/planetary_system.f90
-        code/avaruus/fortran/string.f90
-    )
-    target_compile_features(planetary_simulation PUBLIC cxx_std_20)
-    set_target_properties(planetary_simulation PROPERTIES CXX_EXTENSIONS OFF)
-
-    FortranCInterface_HEADER(code/avaruus/cpp/tests/planetary_simulation.h
-        planet
-        planet)
-
-    add_executable(avaruus_fortran
-        code/avaruus/fortran/avaruus.f90
-    )
-    target_link_libraries(avaruus_fortran PRIVATE planetary_simulation)
-endif()
-
 ### Testing ###
 
 # Ajokki (sandbox application for testing Ylikuutio features)
@@ -1227,21 +1181,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_species.cpp
         code/hirvi/tests/test_symbiosis.cpp)
 
-    if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows"))
-        set(AVARUUS_UNIT_TESTS
-            # Tests for Avaruus.
-            code/avaruus/cpp/tests/test_read_file.cpp
-            code/avaruus/cpp/tests/test_get_line.cpp
-            code/avaruus/cpp/tests/test_get_line_i_with_n_token_statement.cpp
-            code/avaruus/cpp/tests/test_get_has_line_code.cpp
-            code/avaruus/cpp/tests/test_get_first_token.cpp
-            code/avaruus/cpp/tests/test_get_n_of_code_lines_between.cpp
-            code/avaruus/cpp/tests/test_get_nth_token.cpp
-            code/avaruus/cpp/tests/test_parse.cpp
-            code/avaruus/cpp/tests/test_parse_global_parameters.cpp
-        )
-    endif()
-
     set(MAIN_FILE code/ylikuutio/tests/main.cpp)
 
     add_executable(test_ylikuutio code/ylikuutio/tests/test_main.cpp ${YLIKUUTIO_UNIT_TESTS})
@@ -1249,15 +1188,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
 
     add_executable(test_hirvi code/ylikuutio/tests/test_main.cpp ${HIRVI_UNIT_TESTS})
     set_property(TARGET test_hirvi PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
-
-    if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows"))
-        add_executable(test_avaruus code/ylikuutio/tests/test_main.cpp ${AVARUUS_UNIT_TESTS})
-        set_property(TARGET test_avaruus PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
-
-        target_compile_features(test_avaruus PUBLIC cxx_std_20)
-        set_target_properties(test_avaruus PROPERTIES CXX_EXTENSIONS OFF)
-        target_link_libraries(test_avaruus PRIVATE gtest_main planetary_simulation)
-    endif()
 
     if (DEFINED "PNG_LIBRARIES")
         if(COMPILE_SDL_FROM_SOURCE)
