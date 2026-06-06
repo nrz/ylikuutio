@@ -32,13 +32,13 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    using yli::console::ConsoleLogicModule;
-    using yli::ontology::GenericCallbackEngine;
-    using yli::ontology::CallbackEngine;
-    using yli::ontology::Request;
-    using yli::ontology::CallbackEngineStruct;
+    using console::ConsoleLogicModule;
+    using ontology::GenericCallbackEngine;
+    using ontology::CallbackEngine;
+    using ontology::Request;
+    using ontology::CallbackEngineStruct;
 
-    void create_action_mode_keypress_callbacks(yli::ontology::GenericEntityFactory& entity_factory)
+    void create_action_mode_keypress_callbacks(ontology::GenericEntityFactory& entity_factory)
     {
         {
             // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
@@ -52,84 +52,84 @@ namespace yli::snippets
             CallbackEngineStruct exit_program_callback_engine_struct;
             exit_program_callback_engine_struct.global_name = "exit_program_callback_engine";
             auto exit_program_callback_engine = entity_factory.create_callback_engine(exit_program_callback_engine_struct);
-            exit_program_callback_engine->create_callback_object(&yli::snippets::exit_program);
+            exit_program_callback_engine->create_callback_object(&exit_program);
         }
         {
             // Callback code for left Control: first turbo.
             CallbackEngineStruct first_turbo_callback_engine_struct;
             first_turbo_callback_engine_struct.global_name = "first_turbo_callback_engine";
             auto first_turbo_callback_engine = entity_factory.create_callback_engine(first_turbo_callback_engine_struct);
-            first_turbo_callback_engine->create_callback_object(&yli::snippets::press_first_turbo);
+            first_turbo_callback_engine->create_callback_object(&press_first_turbo);
         }
         {
             // Callback code for right Control: second turbo.
             CallbackEngineStruct second_turbo_callback_engine_struct;
             second_turbo_callback_engine_struct.global_name = "second_turbo_callback_engine";
             auto second_turbo_callback_engine = entity_factory.create_callback_engine(second_turbo_callback_engine_struct);
-            second_turbo_callback_engine->create_callback_object(&yli::snippets::press_second_turbo);
+            second_turbo_callback_engine->create_callback_object(&press_second_turbo);
         }
         {
             // Callback code for key up: move forward.
             CallbackEngineStruct move_forward_callback_engine_struct;
             move_forward_callback_engine_struct.global_name = "move_forward_callback_engine";
             auto move_forward_callback_engine = entity_factory.create_callback_engine(move_forward_callback_engine_struct);
-            move_forward_callback_engine->create_callback_object(&yli::snippets::move_forward);
+            move_forward_callback_engine->create_callback_object(&move_forward);
         }
         {
             // Callback code for key down: move backward.
             CallbackEngineStruct move_backward_callback_engine_struct;
             move_backward_callback_engine_struct.global_name = "move_backward_callback_engine";
             auto move_backward_callback_engine = entity_factory.create_callback_engine(move_backward_callback_engine_struct);
-            move_backward_callback_engine->create_callback_object(&yli::snippets::move_backward);
+            move_backward_callback_engine->create_callback_object(&move_backward);
         }
         {
             // Callback code for key left: strafe left.
             CallbackEngineStruct strafe_left_callback_engine_struct;
             strafe_left_callback_engine_struct.global_name = "strafe_left_callback_engine";
             auto strafe_left_callback_engine = entity_factory.create_callback_engine(strafe_left_callback_engine_struct);
-            strafe_left_callback_engine->create_callback_object(&yli::snippets::strafe_left);
+            strafe_left_callback_engine->create_callback_object(&strafe_left);
         }
         {
             // Callback code for key right: strafe right.
             CallbackEngineStruct strafe_right_callback_engine_struct;
             strafe_right_callback_engine_struct.global_name = "strafe_right_callback_engine";
             auto strafe_right_callback_engine = entity_factory.create_callback_engine(strafe_right_callback_engine_struct);
-            strafe_right_callback_engine->create_callback_object(&yli::snippets::strafe_right);
+            strafe_right_callback_engine->create_callback_object(&strafe_right);
         }
         {
             // Callback code for space: ascent.
             CallbackEngineStruct ascent_callback_engine_struct;
             ascent_callback_engine_struct.global_name = "ascent_callback_engine";
             auto ascent_callback_engine = entity_factory.create_callback_engine(ascent_callback_engine_struct);
-            ascent_callback_engine->create_callback_object(&yli::snippets::ascent);
+            ascent_callback_engine->create_callback_object(&ascent);
         }
         {
             // Callback code for enter: descent.
             CallbackEngineStruct descent_callback_engine_struct;
             descent_callback_engine_struct.global_name = "descent_callback_engine";
             auto descent_callback_engine = entity_factory.create_callback_engine(descent_callback_engine_struct);
-            descent_callback_engine->create_callback_object(&yli::snippets::descent);
+            descent_callback_engine->create_callback_object(&descent);
         }
         {
             // Callback code for I: toggle invert mouse.
             CallbackEngineStruct toggle_invert_mouse_callback_engine_struct;
             toggle_invert_mouse_callback_engine_struct.global_name = "toggle_invert_mouse_callback_engine";
             auto toggle_invert_mouse_callback_engine = entity_factory.create_callback_engine(toggle_invert_mouse_callback_engine_struct);
-            toggle_invert_mouse_callback_engine->create_callback_object(&yli::snippets::toggle_invert_mouse);
+            toggle_invert_mouse_callback_engine->create_callback_object(&toggle_invert_mouse);
         }
         {
             // Callback code for F: toggle flight mode.
             CallbackEngineStruct toggle_flight_mode_callback_engine_struct;
             toggle_flight_mode_callback_engine_struct.global_name = "toggle_flight_mode_callback_engine";
             auto toggle_flight_mode_callback_engine = entity_factory.create_callback_engine(toggle_flight_mode_callback_engine_struct);
-            toggle_flight_mode_callback_engine->create_callback_object(&yli::snippets::toggle_flight_mode);
+            toggle_flight_mode_callback_engine->create_callback_object(&toggle_flight_mode);
         }
         {
             // Callback code for F1: toggle help mode.
             CallbackEngineStruct toggle_help_mode_callback_engine_struct;
             toggle_help_mode_callback_engine_struct.global_name = "toggle_help_mode_callback_engine";
             auto toggle_help_mode_callback_engine = entity_factory.create_callback_engine(toggle_help_mode_callback_engine_struct);
-            toggle_help_mode_callback_engine->create_callback_object(&yli::snippets::toggle_help_mode);
+            toggle_help_mode_callback_engine->create_callback_object(&toggle_help_mode);
         }
     }
 
@@ -140,35 +140,35 @@ namespace yli::snippets
             CallbackEngineStruct release_first_turbo_callback_engine_struct;
             release_first_turbo_callback_engine_struct.global_name = "release_first_turbo_callback_engine";
             auto release_first_turbo_callback_engine = entity_factory.create_callback_engine(release_first_turbo_callback_engine_struct);
-            release_first_turbo_callback_engine->create_callback_object(&yli::snippets::release_first_turbo);
+            release_first_turbo_callback_engine->create_callback_object(&release_first_turbo);
         }
         {
             // Callback code for right Control release: release second turbo.
             CallbackEngineStruct release_second_turbo_callback_engine_struct;
             release_second_turbo_callback_engine_struct.global_name = "release_second_turbo_callback_engine";
             auto release_second_turbo_callback_engine = entity_factory.create_callback_engine(release_second_turbo_callback_engine_struct);
-            release_second_turbo_callback_engine->create_callback_object(&yli::snippets::release_second_turbo);
+            release_second_turbo_callback_engine->create_callback_object(&release_second_turbo);
         }
         {
             // Callback code for I release: enable_toggle invert mouse.
             CallbackEngineStruct enable_toggle_invert_mouse_callback_engine_struct;
             enable_toggle_invert_mouse_callback_engine_struct.global_name = "enable_toggle_invert_mouse_callback_engine";
             auto enable_toggle_invert_mouse_callback_engine = entity_factory.create_callback_engine(enable_toggle_invert_mouse_callback_engine_struct);
-            enable_toggle_invert_mouse_callback_engine->create_callback_object(&yli::snippets::enable_toggle_invert_mouse);
+            enable_toggle_invert_mouse_callback_engine->create_callback_object(&enable_toggle_invert_mouse);
         }
         {
             // Callback code for F release: enable_toggle flight mode.
             CallbackEngineStruct enable_toggle_flight_mode_callback_engine_struct;
             enable_toggle_flight_mode_callback_engine_struct.global_name = "enable_toggle_flight_mode_callback_engine";
             auto enable_toggle_flight_mode_callback_engine = entity_factory.create_callback_engine(enable_toggle_flight_mode_callback_engine_struct);
-            enable_toggle_flight_mode_callback_engine->create_callback_object(&yli::snippets::enable_toggle_flight_mode);
+            enable_toggle_flight_mode_callback_engine->create_callback_object(&enable_toggle_flight_mode);
         }
         {
             // Callback code for F1 release: enable toggle help mode.
             CallbackEngineStruct enable_toggle_help_mode_callback_engine_struct;
             enable_toggle_help_mode_callback_engine_struct.global_name = "enable_toggle_help_mode_callback_engine";
             auto enable_toggle_help_mode_callback_engine = entity_factory.create_callback_engine(enable_toggle_help_mode_callback_engine_struct);
-            enable_toggle_help_mode_callback_engine->create_callback_object(&yli::snippets::enable_toggle_help_mode);
+            enable_toggle_help_mode_callback_engine->create_callback_object(&enable_toggle_help_mode);
         }
     }
 

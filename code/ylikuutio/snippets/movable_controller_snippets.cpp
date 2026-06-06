@@ -36,27 +36,27 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::optional<yli::data::AnyValue> rest(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& /* any_value */)
+    std::optional<data::AnyValue> rest(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& /* any_value */)
     {
         // Do nothing.
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> go_east(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> go_east(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::Movable& movable = any_value.get_movable_ref();
             movable.location.xyz.x += movable.speed;
             return std::nullopt;
         }
@@ -65,16 +65,16 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> go_west(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> go_west(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::Movable& movable = any_value.get_movable_ref();
             movable.location.xyz.x -= movable.speed;
             return std::nullopt;
         }
@@ -83,16 +83,16 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> go_north(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> go_north(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::Movable& movable = any_value.get_movable_ref();
             movable.location.xyz.y += movable.speed;
             return std::nullopt;
         }
@@ -101,16 +101,16 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> go_south(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> go_south(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::Movable& movable = any_value.get_movable_ref();
             movable.location.xyz.y -= movable.speed;
             return std::nullopt;
         }
@@ -119,16 +119,16 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> orient_to_east(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> orient_to_east(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::Movable& movable = any_value.get_movable_ref();
             movable.orientation.yaw = 0.0f;
             return std::nullopt;
         }
@@ -137,16 +137,16 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> orient_to_west(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> orient_to_west(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::Movable& movable = any_value.get_movable_ref();
             movable.orientation.yaw = static_cast<float>(std::numbers::pi);
             return std::nullopt;
         }
@@ -155,16 +155,16 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> orient_to_north(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> orient_to_north(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::Movable& movable = any_value.get_movable_ref();
             movable.orientation.yaw = 0.5f * static_cast<float>(std::numbers::pi);
             return std::nullopt;
         }
@@ -173,16 +173,16 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> orient_to_south(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> orient_to_south(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::Movable& movable = any_value.get_movable_ref();
             movable.orientation.yaw = -0.5f * static_cast<float>(std::numbers::pi);
             return std::nullopt;
         }
@@ -191,17 +191,17 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> orient_and_go_east(
-            yli::ontology::Universe& universe,
-            yli::ontology::CallbackEngine* callback_engine,
-            yli::ontology::CallbackObject* callback_object,
-            yli::ontology::GenericParentModule& callback_parameters,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> orient_and_go_east(
+            ontology::Universe& universe,
+            ontology::CallbackEngine* callback_engine,
+            ontology::CallbackObject* callback_object,
+            ontology::GenericParentModule& callback_parameters,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::snippets::orient_to_east(universe, callback_engine, callback_object, callback_parameters, any_value);
-            yli::snippets::go_east(universe, callback_engine, callback_object, callback_parameters, any_value);
+            orient_to_east(universe, callback_engine, callback_object, callback_parameters, any_value);
+            go_east(universe, callback_engine, callback_object, callback_parameters, any_value);
             return std::nullopt;
         }
 
@@ -209,17 +209,17 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> orient_and_go_west(
-            yli::ontology::Universe& universe,
-            yli::ontology::CallbackEngine* callback_engine,
-            yli::ontology::CallbackObject* callback_object,
-            yli::ontology::GenericParentModule& callback_parameters,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> orient_and_go_west(
+            ontology::Universe& universe,
+            ontology::CallbackEngine* callback_engine,
+            ontology::CallbackObject* callback_object,
+            ontology::GenericParentModule& callback_parameters,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::snippets::orient_to_west(universe, callback_engine, callback_object, callback_parameters, any_value);
-            yli::snippets::go_west(universe, callback_engine, callback_object, callback_parameters, any_value);
+            orient_to_west(universe, callback_engine, callback_object, callback_parameters, any_value);
+            go_west(universe, callback_engine, callback_object, callback_parameters, any_value);
             return std::nullopt;
         }
 
@@ -227,17 +227,17 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> orient_and_go_north(
-            yli::ontology::Universe& universe,
-            yli::ontology::CallbackEngine* callback_engine,
-            yli::ontology::CallbackObject* callback_object,
-            yli::ontology::GenericParentModule& callback_parameters,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> orient_and_go_north(
+            ontology::Universe& universe,
+            ontology::CallbackEngine* callback_engine,
+            ontology::CallbackObject* callback_object,
+            ontology::GenericParentModule& callback_parameters,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::snippets::orient_to_north(universe, callback_engine, callback_object, callback_parameters, any_value);
-            yli::snippets::go_north(universe, callback_engine, callback_object, callback_parameters, any_value);
+            orient_to_north(universe, callback_engine, callback_object, callback_parameters, any_value);
+            go_north(universe, callback_engine, callback_object, callback_parameters, any_value);
             return std::nullopt;
         }
 
@@ -245,17 +245,17 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> orient_and_go_south(
-            yli::ontology::Universe& universe,
-            yli::ontology::CallbackEngine* callback_engine,
-            yli::ontology::CallbackObject* callback_object,
-            yli::ontology::GenericParentModule& callback_parameters,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> orient_and_go_south(
+            ontology::Universe& universe,
+            ontology::CallbackEngine* callback_engine,
+            ontology::CallbackObject* callback_object,
+            ontology::GenericParentModule& callback_parameters,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::snippets::orient_to_south(universe, callback_engine, callback_object, callback_parameters, any_value);
-            yli::snippets::go_south(universe, callback_engine, callback_object, callback_parameters, any_value);
+            orient_to_south(universe, callback_engine, callback_object, callback_parameters, any_value);
+            go_south(universe, callback_engine, callback_object, callback_parameters, any_value);
             return std::nullopt;
         }
 
@@ -263,16 +263,16 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> rotate_clockwise(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> rotate_clockwise(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::Movable& movable = any_value.get_movable_ref();
             movable.orientation.yaw -= 0.1f * static_cast<float>(std::numbers::pi);
             return std::nullopt;
         }
@@ -281,16 +281,16 @@ namespace yli::snippets
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> rotate_counterclockwise(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue& any_value)
+    std::optional<data::AnyValue> rotate_counterclockwise(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue& any_value)
     {
         if (any_value.has_movable_ref())
         {
-            yli::ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::Movable& movable = any_value.get_movable_ref();
             movable.orientation.yaw += 0.1f * static_cast<float>(std::numbers::pi);
             return std::nullopt;
         }

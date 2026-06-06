@@ -26,7 +26,7 @@ namespace yli::ontology
 namespace yli::snippets
 {
     void set_movement(
-            yli::ontology::Entity* const entity,
+            ontology::Entity* const entity,
             const float speed,
             const float turbo_factor,
             const float twin_turbo_factor,

@@ -33,110 +33,110 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::optional<yli::data::AnyValue> rest(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> rest(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> go_east(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> go_east(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> go_west(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> go_west(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> go_north(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> go_north(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> go_south(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> go_south(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> orient_to_east(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> orient_to_east(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> orient_to_west(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> orient_to_west(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> orient_to_north(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> orient_to_north(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> orient_to_south(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> orient_to_south(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> orient_and_go_east(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> orient_and_go_east(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> orient_and_go_west(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> orient_and_go_west(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> orient_and_go_north(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> orient_and_go_north(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> orient_and_go_south(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> orient_and_go_south(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> rotate_clockwise(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> rotate_clockwise(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> rotate_counterclockwise(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> rotate_counterclockwise(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 }
 
 #endif

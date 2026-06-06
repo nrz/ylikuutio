@@ -28,7 +28,7 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    void set_framebuffer_size(yli::ontology::Universe* universe, const std::uint32_t framebuffer_width, const std::uint32_t framebuffer_height);
+    void set_framebuffer_size(ontology::Universe* universe, const std::uint32_t framebuffer_width, const std::uint32_t framebuffer_height);
 }
 
 #endif

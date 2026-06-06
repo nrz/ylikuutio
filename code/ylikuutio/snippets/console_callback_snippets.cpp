@@ -31,13 +31,13 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::optional<yli::data::AnyValue> quit(yli::ontology::Console* const /* console */)
+    std::optional<data::AnyValue> quit(ontology::Console* const /* console */)
     {
-        std::uint32_t exit_program_magic_number = yli::ontology::CallbackMagicNumber::EXIT_PROGRAM;
-        return yli::data::AnyValue(exit_program_magic_number);
+        std::uint32_t exit_program_magic_number = ontology::CallbackMagicNumber::EXIT_PROGRAM;
+        return data::AnyValue(exit_program_magic_number);
     }
 
-    std::optional<yli::data::AnyValue> help(yli::ontology::Console* const console)
+    std::optional<data::AnyValue> help(ontology::Console* const console)
     {
         if (console == nullptr)
         {

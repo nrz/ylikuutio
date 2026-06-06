@@ -37,54 +37,54 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::optional<yli::data::AnyValue> square(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule& input_parameters,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> square(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule& input_parameters,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> square_last(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine* callback_engine,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule& input_parameters,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> square_last(
+            ontology::Universe&,
+            ontology::CallbackEngine* callback_engine,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule& input_parameters,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> expt(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule& input_parameters,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> expt(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule& input_parameters,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> expt_with_named_inputs(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject* callback_object,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> expt_with_named_inputs(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject* callback_object,
+            ontology::GenericParentModule&,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> neg(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule& input_parameters,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> neg(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule& input_parameters,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> nop(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule& /* input_parameters */,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> nop(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule& /* input_parameters */,
+            const data::AnyValue&);
 
-    std::optional<yli::data::AnyValue> return_uint32_t_deadbeef(
-            yli::ontology::Universe&,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule& /* input_parameters */,
-            const yli::data::AnyValue&);
+    std::optional<data::AnyValue> return_uint32_t_deadbeef(
+            ontology::Universe&,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule& /* input_parameters */,
+            const data::AnyValue&);
 }
 
 #endif

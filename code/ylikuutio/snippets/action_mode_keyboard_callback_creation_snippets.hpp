@@ -26,11 +26,11 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    void create_action_mode_keypress_callbacks(yli::ontology::GenericEntityFactory& entity_factory);
-    void create_action_mode_keyrelease_callbacks(yli::ontology::GenericEntityFactory& entity_factory);
-    void set_action_mode_keypress_callback_engines_or_throw(yli::ontology::InputMode& action_mode_input_mode);
-    void set_action_mode_keyrelease_callback_engines_or_throw(yli::ontology::InputMode& action_mode_input_mode);
-    void set_action_mode_continuous_keypress_callback_engines_or_throw(yli::ontology::InputMode& action_mode_input_mode);
+    void create_action_mode_keypress_callbacks(ontology::GenericEntityFactory& entity_factory);
+    void create_action_mode_keyrelease_callbacks(ontology::GenericEntityFactory& entity_factory);
+    void set_action_mode_keypress_callback_engines_or_throw(ontology::InputMode& action_mode_input_mode);
+    void set_action_mode_keyrelease_callback_engines_or_throw(ontology::InputMode& action_mode_input_mode);
+    void set_action_mode_continuous_keypress_callback_engines_or_throw(ontology::InputMode& action_mode_input_mode);
 }
 
 #endif

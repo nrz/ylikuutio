@@ -34,13 +34,13 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    using yli::console::ConsoleLogicModule;
-    using yli::ontology::InputMode;
-    using yli::ontology::Console;
-    using yli::ontology::ConsoleCallbackEngineStruct;
-    using yli::ontology::GenericCallbackEngine;
-    using yli::ontology::Request;
-    using yli::ontology::GenericEntityFactory;
+    using console::ConsoleLogicModule;
+    using ontology::InputMode;
+    using ontology::Console;
+    using ontology::ConsoleCallbackEngineStruct;
+    using ontology::GenericCallbackEngine;
+    using ontology::Request;
+    using ontology::GenericEntityFactory;
 
     void create_console_mode_keypress_callbacks(GenericEntityFactory& entity_factory, const std::string& console_global_name)
     {

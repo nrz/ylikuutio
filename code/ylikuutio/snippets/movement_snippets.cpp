@@ -24,35 +24,35 @@
 namespace yli::snippets
 {
     void set_movement(
-            yli::ontology::Entity* const entity,
+            ontology::Entity* const entity,
             const float speed,
             const float turbo_factor,
             const float twin_turbo_factor,
             const float mouse_speed)
     {
         // Variables related to voluntary movement.
-        yli::ontology::VariableStruct speed_variable_struct(entity->get_universe(), entity);
+        ontology::VariableStruct speed_variable_struct(entity->get_universe(), entity);
         speed_variable_struct.local_name = "speed";
-        speed_variable_struct.activate_callback = &yli::ontology::Variable::activate_speed;
+        speed_variable_struct.activate_callback = &ontology::Variable::activate_speed;
         speed_variable_struct.should_call_activate_callback_now = true;
-        entity->create_variable(speed_variable_struct, yli::data::AnyValue(speed));
+        entity->create_variable(speed_variable_struct, data::AnyValue(speed));
 
-        yli::ontology::VariableStruct turbo_factor_variable_struct(entity->get_universe(), entity);
+        ontology::VariableStruct turbo_factor_variable_struct(entity->get_universe(), entity);
         turbo_factor_variable_struct.local_name = "turbo_factor";
-        turbo_factor_variable_struct.activate_callback = &yli::ontology::Variable::activate_turbo_factor;
+        turbo_factor_variable_struct.activate_callback = &ontology::Variable::activate_turbo_factor;
         turbo_factor_variable_struct.should_call_activate_callback_now = true;
-        entity->create_variable(turbo_factor_variable_struct, yli::data::AnyValue(turbo_factor));
+        entity->create_variable(turbo_factor_variable_struct, data::AnyValue(turbo_factor));
 
-        yli::ontology::VariableStruct twin_turbo_factor_variable_struct(entity->get_universe(), entity);
+        ontology::VariableStruct twin_turbo_factor_variable_struct(entity->get_universe(), entity);
         twin_turbo_factor_variable_struct.local_name = "twin_turbo_factor";
-        twin_turbo_factor_variable_struct.activate_callback = &yli::ontology::Variable::activate_twin_turbo_factor;
+        twin_turbo_factor_variable_struct.activate_callback = &ontology::Variable::activate_twin_turbo_factor;
         twin_turbo_factor_variable_struct.should_call_activate_callback_now = true;
-        entity->create_variable(twin_turbo_factor_variable_struct, yli::data::AnyValue(twin_turbo_factor));
+        entity->create_variable(twin_turbo_factor_variable_struct, data::AnyValue(twin_turbo_factor));
 
-        yli::ontology::VariableStruct mouse_speed_variable_struct(entity->get_universe(), entity);
+        ontology::VariableStruct mouse_speed_variable_struct(entity->get_universe(), entity);
         mouse_speed_variable_struct.local_name = "mouse_speed";
-        mouse_speed_variable_struct.activate_callback = &yli::ontology::Variable::activate_mouse_speed;
+        mouse_speed_variable_struct.activate_callback = &ontology::Variable::activate_mouse_speed;
         mouse_speed_variable_struct.should_call_activate_callback_now = true;
-        entity->create_variable(mouse_speed_variable_struct, yli::data::AnyValue(mouse_speed));
+        entity->create_variable(mouse_speed_variable_struct, data::AnyValue(mouse_speed));
     }
 }

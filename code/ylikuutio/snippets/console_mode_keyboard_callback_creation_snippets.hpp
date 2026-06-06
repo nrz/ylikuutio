@@ -29,8 +29,8 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    using yli::ontology::InputMode;
-    using yli::ontology::GenericEntityFactory;
+    using ontology::InputMode;
+    using ontology::GenericEntityFactory;
 
     void create_console_mode_keypress_callbacks(GenericEntityFactory& entity_factory, const std::string& console_global_name);
     void create_console_mode_keyrelease_callbacks(GenericEntityFactory& entity_factory, const std::string& console_global_name);

@@ -23,13 +23,13 @@
 
 namespace yli::snippets
 {
-    void set_flight_mode(yli::ontology::Universe* universe, const bool is_flight_mode_in_use)
+    void set_flight_mode(ontology::Universe* universe, const bool is_flight_mode_in_use)
     {
-        yli::ontology::VariableStruct is_flight_mode_in_use_variable_struct(*universe, universe);
+        ontology::VariableStruct is_flight_mode_in_use_variable_struct(*universe, universe);
         is_flight_mode_in_use_variable_struct.local_name = "is_flight_mode_in_use";
-        is_flight_mode_in_use_variable_struct.activate_callback = &yli::ontology::Variable::activate_is_flight_mode_in_use;
-        is_flight_mode_in_use_variable_struct.read_callback = &yli::ontology::Variable::read_is_flight_mode_in_use;
+        is_flight_mode_in_use_variable_struct.activate_callback = &ontology::Variable::activate_is_flight_mode_in_use;
+        is_flight_mode_in_use_variable_struct.read_callback = &ontology::Variable::read_is_flight_mode_in_use;
         is_flight_mode_in_use_variable_struct.should_call_activate_callback_now = true;
-        universe->create_variable(is_flight_mode_in_use_variable_struct, yli::data::AnyValue(is_flight_mode_in_use));
+        universe->create_variable(is_flight_mode_in_use_variable_struct, data::AnyValue(is_flight_mode_in_use));
     }
 }

@@ -40,23 +40,23 @@
 
 namespace yli::snippets
 {
-    using yli::console::ConsoleLogicModule;
-    using yli::ontology::Entity;
-    using yli::ontology::Movable;
-    using yli::ontology::Universe;
-    using yli::ontology::Variable;
-    using yli::ontology::Pipeline;
-    using yli::ontology::Material;
-    using yli::ontology::Species;
-    using yli::ontology::Object;
-    using yli::ontology::Symbiosis;
-    using yli::ontology::Holobiont;
-    using yli::ontology::ShapeshifterTransformation;
-    using yli::ontology::Text2d;
-    using yli::ontology::Text3d;
-    using yli::ontology::Console;
-    using yli::ontology::Console;
-    using yli::ontology::Request;
+    using console::ConsoleLogicModule;
+    using ontology::Entity;
+    using ontology::Movable;
+    using ontology::Universe;
+    using ontology::Variable;
+    using ontology::Pipeline;
+    using ontology::Material;
+    using ontology::Species;
+    using ontology::Object;
+    using ontology::Symbiosis;
+    using ontology::Holobiont;
+    using ontology::ShapeshifterTransformation;
+    using ontology::Text2d;
+    using ontology::Text3d;
+    using ontology::Console;
+    using ontology::Console;
+    using ontology::Request;
 
     template<typename EntityFactoryType>
         void create_console_lisp_function_overloads_for_variable_callbacks(EntityFactoryType& entity_factory, Console& console)
@@ -158,19 +158,19 @@ namespace yli::snippets
         void create_console_lisp_function_overloads_for_exit_program(EntityFactoryType& entity_factory, Console& console)
         {
             // Exit program callbacks.
-            entity_factory.create_console_lisp_function_overload("bye", Request(&console), &yli::snippets::quit);
-            entity_factory.create_console_lisp_function_overload("chau", Request(&console), &yli::snippets::quit);
-            entity_factory.create_console_lisp_function_overload("ciao", Request(&console), &yli::snippets::quit);
-            entity_factory.create_console_lisp_function_overload("heippa", Request(&console), &yli::snippets::quit);
-            entity_factory.create_console_lisp_function_overload("quit", Request(&console), &yli::snippets::quit);
-            entity_factory.create_console_lisp_function_overload("sayonara", Request(&console), &yli::snippets::quit);
+            entity_factory.create_console_lisp_function_overload("bye", Request(&console), &quit);
+            entity_factory.create_console_lisp_function_overload("chau", Request(&console), &quit);
+            entity_factory.create_console_lisp_function_overload("ciao", Request(&console), &quit);
+            entity_factory.create_console_lisp_function_overload("heippa", Request(&console), &quit);
+            entity_factory.create_console_lisp_function_overload("quit", Request(&console), &quit);
+            entity_factory.create_console_lisp_function_overload("sayonara", Request(&console), &quit);
         }
 
     template<typename EntityFactoryType>
         void create_console_lisp_function_overloads_for_other_callbacks(EntityFactoryType& entity_factory, Console& console)
         {
             // Other callbacks.
-            entity_factory.create_console_lisp_function_overload("help", Request(&console), &yli::snippets::help);
+            entity_factory.create_console_lisp_function_overload("help", Request(&console), &help);
             entity_factory.create_console_lisp_function_overload("clear", Request(&console), &ConsoleLogicModule::clear);
             entity_factory.create_console_lisp_function_overload("screenshot", Request(&console), &Universe::screenshot);
         }
