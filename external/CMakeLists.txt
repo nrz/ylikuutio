@@ -119,6 +119,7 @@ set_property(TARGET OpenFBX PROPERTY COMPILE_FLAGS "-std=c++14")
 if(COMPILE_SDL_FROM_SOURCE)
     set(BUILD_SHARED_LIBS OFF)
     set(SDL_X11_XTEST OFF)
+    set(SDL_X11_XSCRNSAVER OFF)
     add_subdirectory(SDL)
 endif()
 
