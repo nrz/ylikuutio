@@ -397,7 +397,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        ontology::Species* const species = dynamic_cast<ontology::Species*>(species_entity);
+        auto* const species = dynamic_cast<ontology::Species*>(species_entity);
 
         if (species == nullptr)
         {
@@ -431,7 +431,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        ontology::Material* const new_material = dynamic_cast<ontology::Material*>(new_material_entity);
+        auto* const new_material = dynamic_cast<ontology::Material*>(new_material_entity);
 
         if (new_material == nullptr)
         {
@@ -475,7 +475,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        ontology::Object* const object = dynamic_cast<ontology::Object*>(object_entity);
+        auto* const object = dynamic_cast<ontology::Object*>(object_entity);
 
         if (object == nullptr)
         {
@@ -508,7 +508,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        ontology::Species* const new_species = dynamic_cast<ontology::Species*>(new_species_entity);
+        auto* const new_species = dynamic_cast<ontology::Species*>(new_species_entity);
 
         if (new_species == nullptr)
         {
