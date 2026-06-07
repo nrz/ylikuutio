@@ -38,7 +38,7 @@ namespace yli::string
 
         for (const std::byte* data_pointer = start_address; data_pointer < end_address; data_pointer++)
         {
-            const std::uint8_t data_byte = static_cast<std::uint8_t>(*data_pointer);
+            const auto data_byte = static_cast<std::uint8_t>(*data_pointer);
             const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');
             current_line_ascii += data_char;
 
