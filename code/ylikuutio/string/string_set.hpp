@@ -35,7 +35,7 @@ namespace yli::string
 
             void add_string(const std::string& string);
             void erase_string(const std::string& string);
-            bool is_string(const std::string& string);
+            bool contains(const std::string& string);
             std::size_t get_number_of_completions(const std::string& input) const;
             std::string complete(const std::string& input) const;
             std::vector<std::string> get_completions(const std::string& input) const;

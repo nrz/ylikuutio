@@ -26,7 +26,7 @@ namespace yli::string
 {
     void StringSet::add_string(const std::string& string)
     {
-        if (this->is_string(string))
+        if (this->contains(string))
         {
             return;
         }
@@ -39,7 +39,7 @@ namespace yli::string
         this->strings.erase(string);
     }
 
-    bool StringSet::is_string(const std::string& string)
+    bool StringSet::contains(const std::string& string)
     {
         return this->strings.count(string) == 1;
     }
