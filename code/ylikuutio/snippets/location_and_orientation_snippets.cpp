@@ -74,7 +74,7 @@ namespace yli::snippets
         std::cout << "Executing `entity->create_variable(z_variable_struct);` ...\n";
         entity->create_variable(z_variable_struct, data::AnyValue(z));
 
-        const float roll = 0.0f;
+        constexpr float roll = 0.0f;
         ontology::VariableStruct roll_variable_struct(entity->get_universe(), entity);
         roll_variable_struct.local_name = "roll";
         roll_variable_struct.activate_callback = &ontology::activate_roll;
@@ -83,7 +83,7 @@ namespace yli::snippets
         std::cout << "Executing `entity->create_variable(roll_variable_struct);` ...\n";
         entity->create_variable(roll_variable_struct, data::AnyValue(roll));
 
-        const float yaw = -0.41f;
+        constexpr float yaw = -0.41f;
         ontology::VariableStruct yaw_variable_struct(entity->get_universe(), entity);
         yaw_variable_struct.local_name = "yaw";
         yaw_variable_struct.activate_callback = &ontology::activate_yaw;
@@ -92,7 +92,7 @@ namespace yli::snippets
         std::cout << "Executing `entity->create_variable(yaw_variable_struct);` ...\n";
         entity->create_variable(yaw_variable_struct, data::AnyValue(yaw));
 
-        const float pitch = -0.19f;
+        constexpr float pitch = -0.19f;
         ontology::VariableStruct pitch_variable_struct(entity->get_universe(), entity);
         pitch_variable_struct.local_name = "pitch";
         pitch_variable_struct.activate_callback = &ontology::activate_pitch;
@@ -101,7 +101,7 @@ namespace yli::snippets
         std::cout << "Executing `entity->create_variable(pitch_variable_struct);` ...\n";
         entity->create_variable(pitch_variable_struct, data::AnyValue(pitch));
 
-        const float azimuth = 0.0f;
+        constexpr float azimuth = 0.0f;
         ontology::VariableStruct azimuth_variable_struct(entity->get_universe(), entity);
         azimuth_variable_struct.local_name = "azimuth";
         azimuth_variable_struct.activate_callback = &ontology::activate_azimuth;
