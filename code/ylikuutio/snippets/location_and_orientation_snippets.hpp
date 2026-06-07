@@ -26,10 +26,10 @@ namespace yli::ontology
 namespace yli::snippets
 {
     void set_location_and_orientation(
-            ontology::Entity* const entity,
-            const float x,
-            const float y,
-            const float z);
+            ontology::Entity* entity,
+            float x,
+            float y,
+            float z);
 }
 
 #endif

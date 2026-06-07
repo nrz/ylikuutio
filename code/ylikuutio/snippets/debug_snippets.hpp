@@ -25,7 +25,7 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    void set_flight_mode(ontology::Universe* universe, const bool is_flight_mode_in_use);
+    void set_flight_mode(ontology::Universe* universe, bool is_flight_mode_in_use);
 }
 
 #endif

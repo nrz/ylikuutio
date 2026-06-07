@@ -25,7 +25,7 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    void set_wireframe(ontology::Universe* universe, const bool use_wireframe);
+    void set_wireframe(ontology::Universe* universe, bool use_wireframe);
 }
 
 #endif

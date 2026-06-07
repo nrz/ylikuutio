@@ -30,9 +30,9 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    std::optional<data::AnyValue> quit(ontology::Console* const);
+    std::optional<data::AnyValue> quit(ontology::Console*);
 
-    std::optional<data::AnyValue> help(ontology::Console* const);
+    std::optional<data::AnyValue> help(ontology::Console*);
 }
 
 #endif

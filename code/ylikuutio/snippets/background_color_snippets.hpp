@@ -25,7 +25,7 @@ namespace yli::ontology
 
 namespace yli::snippets
 {
-    void set_background_colors(ontology::Universe* const universe, const float red, const float green, const float blue, const float alpha);
+    void set_background_colors(ontology::Universe* universe, float red, float green, float blue, float alpha);
 }
 
 #endif
