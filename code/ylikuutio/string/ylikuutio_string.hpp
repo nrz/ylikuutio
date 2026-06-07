@@ -35,7 +35,7 @@
 namespace yli::string
 {
     template<typename CharType>
-        inline bool check_and_report_if_some_string_matches(
+        bool check_and_report_if_some_string_matches(
                 std::basic_string_view<CharType> data_string,
                 const std::size_t data_index,
                 const std::vector<std::basic_string<CharType>>& identifier_strings_vector)
@@ -65,7 +65,7 @@ namespace yli::string
     // (according to the function) is not modified.
 
     template<typename CharType>
-        inline std::basic_string<CharType> extract_string_with_several_endings(
+        std::basic_string<CharType> extract_string_with_several_endings(
                 std::basic_string_view<CharType> data_string,
                 std::size_t& data_index,
                 std::basic_string_view<CharType> char_end_string)
@@ -101,7 +101,7 @@ namespace yli::string
         }
 
     template<typename CharType>
-        inline std::basic_string<CharType> extract_last_part_of_string(
+        std::basic_string<CharType> extract_last_part_of_string(
                 std::basic_string_view<CharType> data_string,
                 const CharType separator)
         {
@@ -131,7 +131,7 @@ namespace yli::string
         }
 
     template<typename CharType>
-        inline std::basic_string<CharType> extract_string(
+        std::basic_string<CharType> extract_string(
                 std::basic_string_view<CharType> data_string,
                 std::size_t& data_index,
                 const CharType separator)
@@ -143,7 +143,7 @@ namespace yli::string
         }
 
     template<typename CharType>
-        inline std::optional<std::int32_t> extract_unicode_value_from_string(const CharType*& unicode_char_pointer)
+        std::optional<std::int32_t> extract_unicode_value_from_string(const CharType*& unicode_char_pointer)
         {
             if (*unicode_char_pointer == '\0')
             {
@@ -398,7 +398,7 @@ namespace yli::string
         }
 
     template<typename CharType>
-        inline bool check_if_floating_point_string(std::basic_string_view<CharType> my_string, const std::size_t safe_number_of_chars)
+        bool check_if_floating_point_string(std::basic_string_view<CharType> my_string, const std::size_t safe_number_of_chars)
         {
             std::size_t n_chars = 0;
 
@@ -461,7 +461,7 @@ namespace yli::string
         }
 
     template<typename CharType>
-        inline bool check_if_signed_integer_string(std::basic_string_view<CharType> my_string)
+        bool check_if_signed_integer_string(std::basic_string_view<CharType> my_string)
         {
             if (my_string.empty())
             {
@@ -488,7 +488,7 @@ namespace yli::string
         }
 
     template<typename CharType>
-        inline bool check_if_unsigned_integer_string(std::basic_string_view<CharType> my_string)
+        bool check_if_unsigned_integer_string(std::basic_string_view<CharType> my_string)
         {
             if (my_string.empty())
             {
@@ -510,14 +510,14 @@ namespace yli::string
         }
 
     template<typename CharType>
-        inline bool check_if_float_string(std::basic_string_view<CharType> my_string)
+        bool check_if_float_string(std::basic_string_view<CharType> my_string)
         {
             const std::size_t maximum_safe_length_for_float_string = 38;
             return check_if_floating_point_string(my_string, maximum_safe_length_for_float_string);
         }
 
     template<typename CharType>
-        inline bool check_if_double_string(std::basic_string_view<CharType> my_string)
+        bool check_if_double_string(std::basic_string_view<CharType> my_string)
         {
             const std::size_t maximum_safe_length_for_double_string = 308;
             return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
@@ -526,7 +526,7 @@ namespace yli::string
     void print_hexdump(const std::byte* const start_address, const std::byte* const end_address); // `begin` is inclusive, `end is exclusive.
 
     template<typename CharType>
-        inline void print_hexdump(std::basic_string_view<CharType> my_string)
+        void print_hexdump(std::basic_string_view<CharType> my_string)
         {
             const std::size_t line_width_in_bytes = 16 / sizeof(CharType);
             std::size_t characters_on_this_line = 0;
