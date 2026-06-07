@@ -202,28 +202,28 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (std::holds_alternative<std::int32_t>((*base).data) && std::holds_alternative<std::int32_t>((*exponent).data))
+        if (std::holds_alternative<std::int32_t>(base->data) && std::holds_alternative<std::int32_t>(exponent->data))
         {
-            const std::int32_t power = std::pow(std::get<std::int32_t>((*base).data), std::get<std::int32_t>((*exponent).data));
-            std::cout << "(std::int32_t) " << std::get<std::int32_t>((*base).data) << "^" << std::get<std::int32_t>((*exponent).data) << " is " << power << ".\n";
+            const std::int32_t power = std::pow(std::get<std::int32_t>(base->data), std::get<std::int32_t>(exponent->data));
+            std::cout << "(std::int32_t) " << std::get<std::int32_t>(base->data) << "^" << std::get<std::int32_t>(exponent->data) << " is " << power << ".\n";
             return data::AnyValue(power);
         }
-        if (std::holds_alternative<std::uint32_t>((*base).data) && std::holds_alternative<std::uint32_t>((*exponent).data))
+        if (std::holds_alternative<std::uint32_t>(base->data) && std::holds_alternative<std::uint32_t>((*exponent).data))
         {
-            const std::uint32_t power = std::pow(std::get<std::uint32_t>((*base).data), std::get<std::uint32_t>((*exponent).data));
-            std::cout << "(std::uint32_t) " << std::get<std::uint32_t>((*base).data) << "^" << std::get<std::uint32_t>((*exponent).data) << " is " << power << ".\n";
+            const std::uint32_t power = std::pow(std::get<std::uint32_t>(base->data), std::get<std::uint32_t>(exponent->data));
+            std::cout << "(std::uint32_t) " << std::get<std::uint32_t>(base->data) << "^" << std::get<std::uint32_t>((*exponent).data) << " is " << power << ".\n";
             return data::AnyValue(power);
         }
-        if (std::holds_alternative<float>((*base).data) && std::holds_alternative<float>((*exponent).data))
+        if (std::holds_alternative<float>(base->data) && std::holds_alternative<float>(exponent->data))
         {
-            const float power = std::pow(std::get<float>((*base).data), std::get<float>((*exponent).data));
-            std::cout << "(float) " << std::get<float>((*base).data) << "^" << std::get<float>((*exponent).data) << " is " << power << ".\n";
+            const float power = std::pow(std::get<float>(base->data), std::get<float>(exponent->data));
+            std::cout << "(float) " << std::get<float>(base->data) << "^" << std::get<float>(exponent->data) << " is " << power << ".\n";
             return data::AnyValue(power);
         }
-        if (std::holds_alternative<double>((*base).data) && std::holds_alternative<double>((*exponent).data))
+        if (std::holds_alternative<double>(base->data) && std::holds_alternative<double>(exponent->data))
         {
-            const double power = std::pow(std::get<double>((*base).data), std::get<double>((*exponent).data));
-            std::cout << "(double) " << std::get<double>((*base).data) << "^" << std::get<double>((*exponent).data) << " is " << power << ".\n";
+            const double power = std::pow(std::get<double>(base->data), std::get<double>(exponent->data));
+            std::cout << "(double) " << std::get<double>(base->data) << "^" << std::get<double>(exponent->data) << " is " << power << ".\n";
             return data::AnyValue(power);
         }
         return std::nullopt;

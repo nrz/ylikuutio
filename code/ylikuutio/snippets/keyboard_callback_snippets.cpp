@@ -84,9 +84,7 @@ namespace yli::snippets
         // variable in question from the `Universe`, otherwise return the location or orientation
         // variable from the `Scene`'s own member variable.
 
-        const ontology::Scene* const scene = universe.get_active_scene();
-
-        if (scene == nullptr)
+        if (const ontology::Scene* const scene = universe.get_active_scene(); scene == nullptr)
         {
             // No active scene.
             return false;
@@ -340,8 +338,8 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*entity_name_string_any_value).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*entity_name_string_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>(entity_name_string_any_value->data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>(entity_name_string_any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::delete_entity`: invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
@@ -379,8 +377,8 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*species_entity_name_string_any_value).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*species_entity_name_string_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>(species_entity_name_string_any_value->data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>(species_entity_name_string_any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::switch_to_new_material`: invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
@@ -457,8 +455,8 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*object_entity_name_string_any_value).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*object_entity_name_string_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>(object_entity_name_string_any_value->data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>(object_entity_name_string_any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
@@ -491,8 +489,8 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        if (!std::holds_alternative<std::reference_wrapper<std::string>>((*species_name_string_any_value).data) &&
-                !std::holds_alternative<std::reference_wrapper<const std::string>>((*species_name_string_any_value).data))
+        if (!std::holds_alternative<std::reference_wrapper<std::string>>(species_name_string_any_value->data) &&
+                !std::holds_alternative<std::reference_wrapper<const std::string>>(species_name_string_any_value->data))
         {
             std::cerr << "ERROR: `yli::snippets::transform_into_new_species`: arg 1 is of invalid datatype.\n";
             std::cerr << "Datatype should be `std::reference_wrapper<std::string>` or `std::reference_wrapper<const std::string>`\n";
