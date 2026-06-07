@@ -105,7 +105,6 @@ namespace yli::string
                 std::basic_string_view<CharType> data_string,
                 const CharType separator)
         {
-            std::size_t length_of_last_part_of_string = 0;
             auto separator_it = data_string.end(); // by default no last part.
 
             for (auto it = data_string.begin(); it != data_string.end(); ++it)
@@ -113,11 +112,6 @@ namespace yli::string
                 if (*it == separator)
                 {
                     separator_it = it;
-                    length_of_last_part_of_string = 0;
-                }
-                else
-                {
-                    length_of_last_part_of_string++;
                 }
             }
 
