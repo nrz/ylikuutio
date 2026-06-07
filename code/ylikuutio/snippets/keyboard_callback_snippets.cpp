@@ -332,7 +332,7 @@ namespace yli::snippets
             ontology::GenericParentModule&,
             const data::AnyValue&)
     {
-        std::optional<data::AnyValue> entity_name_string_any_value = callback_object->get_arg(0);
+        const std::optional<data::AnyValue> entity_name_string_any_value = callback_object->get_arg(0);
 
         if (!entity_name_string_any_value)
         {
@@ -350,7 +350,7 @@ namespace yli::snippets
 
         const std::string& entity_name_string_ref = entity_name_string_any_value->get_const_std_string_ref();
 
-        ontology::Entity* const entity = universe.get_entity(entity_name_string_ref);
+        const ontology::Entity* const entity = universe.get_entity(entity_name_string_ref);
 
         if (entity == nullptr)
         {
@@ -371,7 +371,7 @@ namespace yli::snippets
             ontology::GenericParentModule&,
             const data::AnyValue&)
     {
-        std::optional<data::AnyValue> species_entity_name_string_any_value = callback_object->get_arg(0);
+        const std::optional<data::AnyValue> species_entity_name_string_any_value = callback_object->get_arg(0);
 
         if (!species_entity_name_string_any_value)
         {
@@ -405,7 +405,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        std::optional<data::AnyValue> material_name_string_any_value = callback_object->get_arg(1);
+        const std::optional<data::AnyValue> material_name_string_any_value = callback_object->get_arg(1);
 
         if (!material_name_string_any_value)
         {
@@ -483,7 +483,7 @@ namespace yli::snippets
             return std::nullopt;
         }
 
-        std::optional<data::AnyValue> species_name_string_any_value = callback_object->get_arg(1);
+        const std::optional<data::AnyValue> species_name_string_any_value = callback_object->get_arg(1);
 
         if (!species_name_string_any_value)
         {
