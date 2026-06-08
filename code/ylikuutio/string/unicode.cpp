@@ -38,9 +38,7 @@ std::optional<std::u32string> yli::string::u8_to_u32(std::string_view my_string)
 
     for (auto it = my_string.cbegin(); it != my_string.cend(); )
     {
-        std::optional<char32_t> codepoint = read_codepoint(it, my_string.cend());
-
-        if (codepoint.has_value())
+        if (std::optional<char32_t> codepoint = read_codepoint(it, my_string.cend()); codepoint.has_value())
         {
             u32_string.push_back(static_cast<char32_t>(codepoint.value()));
         }
