@@ -22,85 +22,88 @@
 #include <string>   // std::string, std::u32string
 #include <string_view> // std::string_view, std::u32string_view
 
-std::optional<char32_t> yli::string::read_codepoint(std::string_view::const_iterator& it, const std::string_view::const_iterator cend)
+namespace yli::string
 {
-    return read_or_peek_codepoint(it, cend);
-}
-
-std::optional<char32_t> yli::string::peek_codepoint(std::string_view::const_iterator it, const std::string_view::const_iterator cend)
-{
-    return read_or_peek_codepoint(it, cend);
-}
-
-std::optional<std::u32string> yli::string::u8_to_u32(std::string_view my_string)
-{
-    std::u32string u32_string;
-
-    for (auto it = my_string.cbegin(); it != my_string.cend(); )
+    std::optional<char32_t> read_codepoint(std::string_view::const_iterator& it, const std::string_view::const_iterator cend)
     {
-        if (std::optional<char32_t> codepoint = read_codepoint(it, my_string.cend()); codepoint.has_value())
-        {
-            u32_string.push_back(static_cast<char32_t>(codepoint.value()));
-        }
-        else
-        {
-            return std::nullopt;
-        }
+        return read_or_peek_codepoint(it, cend);
     }
 
-    return u32_string;
-}
-
-std::optional<std::string> yli::string::u32_to_u8(std::u32string_view my_string)
-{
-    std::string u8_string;
-
-    for (const char32_t u32_codepoint : my_string)
+    std::optional<char32_t> peek_codepoint(std::string_view::const_iterator it, const std::string_view::const_iterator cend)
     {
-        if (u32_codepoint <= 0x7f)
-        {
-            // ASCII.
-            u8_string.push_back(static_cast<char>(u32_codepoint));
-        }
-        else if (u32_codepoint <= 0x7ff)
-        {
-            // 2 bytes.
-            u8_string.push_back(static_cast<char>(0b1100'0000 | (u32_codepoint >> 6)));
-            u8_string.push_back(static_cast<char>(0b1000'0000 | (u32_codepoint & 0b0011'1111)));
-        }
-        else if (u32_codepoint <= 0xd7ff)
-        {
-            // 3 bytes.
-            u8_string.push_back(static_cast<char>(0b1110'0000 | (u32_codepoint >> 12)));
-            u8_string.push_back(static_cast<char>(0b1000'0000 | ((u32_codepoint >> 6) & 0b0011'1111)));
-            u8_string.push_back(static_cast<char>(0b1000'0000 | (u32_codepoint & 0b0011'1111)));
-        }
-        else if (u32_codepoint < 0xe000)
-        {
-            // Invalid codepoint.
-            return std::nullopt;
-        }
-        else if (u32_codepoint <= 0xffff)
-        {
-            // 3 bytes.
-            u8_string.push_back(static_cast<char>(0b1110'0000 | (u32_codepoint >> 12)));
-            u8_string.push_back(static_cast<char>(0b1000'0000 | ((u32_codepoint >> 6) & 0b0011'1111)));
-            u8_string.push_back(static_cast<char>(0b1000'0000 | (u32_codepoint & 0b0011'1111)));
-        }
-        else if (u32_codepoint <= 0x10ffff)
-        {
-            // 4 bytes.
-            u8_string.push_back(static_cast<char>(0b1111'0000 | (u32_codepoint >> 18)));
-            u8_string.push_back(static_cast<char>(0b1000'0000 | ((u32_codepoint >> 12) & 0b0011'1111)));
-            u8_string.push_back(static_cast<char>(0b1000'0000 | ((u32_codepoint >> 6) & 0b0011'1111)));
-            u8_string.push_back(static_cast<char>(0b1000'0000 | (u32_codepoint & 0b0011'1111)));
-        }
-        else
-        {
-            // Invalid codepoint.
-            return std::nullopt;
-        }
+        return read_or_peek_codepoint(it, cend);
     }
 
-    return u8_string;
+    std::optional<std::u32string> u8_to_u32(std::string_view my_string)
+    {
+        std::u32string u32_string;
+
+        for (auto it = my_string.cbegin(); it != my_string.cend(); )
+        {
+            if (std::optional<char32_t> codepoint = read_codepoint(it, my_string.cend()); codepoint.has_value())
+            {
+                u32_string.push_back(static_cast<char32_t>(codepoint.value()));
+            }
+            else
+            {
+                return std::nullopt;
+            }
+        }
+
+        return u32_string;
+    }
+
+    std::optional<std::string> u32_to_u8(std::u32string_view my_string)
+    {
+        std::string u8_string;
+
+        for (const char32_t u32_codepoint : my_string)
+        {
+            if (u32_codepoint <= 0x7f)
+            {
+                // ASCII.
+                u8_string.push_back(static_cast<char>(u32_codepoint));
+            }
+            else if (u32_codepoint <= 0x7ff)
+            {
+                // 2 bytes.
+                u8_string.push_back(static_cast<char>(0b1100'0000 | (u32_codepoint >> 6)));
+                u8_string.push_back(static_cast<char>(0b1000'0000 | (u32_codepoint & 0b0011'1111)));
+            }
+            else if (u32_codepoint <= 0xd7ff)
+            {
+                // 3 bytes.
+                u8_string.push_back(static_cast<char>(0b1110'0000 | (u32_codepoint >> 12)));
+                u8_string.push_back(static_cast<char>(0b1000'0000 | ((u32_codepoint >> 6) & 0b0011'1111)));
+                u8_string.push_back(static_cast<char>(0b1000'0000 | (u32_codepoint & 0b0011'1111)));
+            }
+            else if (u32_codepoint < 0xe000)
+            {
+                // Invalid codepoint.
+                return std::nullopt;
+            }
+            else if (u32_codepoint <= 0xffff)
+            {
+                // 3 bytes.
+                u8_string.push_back(static_cast<char>(0b1110'0000 | (u32_codepoint >> 12)));
+                u8_string.push_back(static_cast<char>(0b1000'0000 | ((u32_codepoint >> 6) & 0b0011'1111)));
+                u8_string.push_back(static_cast<char>(0b1000'0000 | (u32_codepoint & 0b0011'1111)));
+            }
+            else if (u32_codepoint <= 0x10ffff)
+            {
+                // 4 bytes.
+                u8_string.push_back(static_cast<char>(0b1111'0000 | (u32_codepoint >> 18)));
+                u8_string.push_back(static_cast<char>(0b1000'0000 | ((u32_codepoint >> 12) & 0b0011'1111)));
+                u8_string.push_back(static_cast<char>(0b1000'0000 | ((u32_codepoint >> 6) & 0b0011'1111)));
+                u8_string.push_back(static_cast<char>(0b1000'0000 | (u32_codepoint & 0b0011'1111)));
+            }
+            else
+            {
+                // Invalid codepoint.
+                return std::nullopt;
+            }
+        }
+
+        return u8_string;
+    }
 }
