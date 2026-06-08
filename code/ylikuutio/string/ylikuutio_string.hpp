@@ -517,15 +517,15 @@ namespace yli::string
             return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
         }
 
-    void print_hexdump(const std::byte* const start_address, const std::byte* const end_address); // `begin` is inclusive, `end is exclusive.
+    void print_hexdump(const std::byte* start_address, const std::byte* end_address); // `begin` is inclusive, `end is exclusive.
 
     template<typename CharType>
         void print_hexdump(std::basic_string_view<CharType> my_string)
         {
             const std::size_t line_width_in_bytes = 16 / sizeof(CharType);
             std::size_t characters_on_this_line = 0;
-            std::string current_line_ascii = "";
-            std::string current_line_hex = "";
+            std::string current_line_ascii;
+            std::string current_line_hex;
 
             for (auto it = my_string.begin(); it != my_string.end(); ++it)
             {

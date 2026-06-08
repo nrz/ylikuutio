@@ -32,8 +32,8 @@ namespace yli::string
     {
         constexpr std::size_t line_width_in_bytes = 16;
         std::size_t characters_on_this_line = 0;
-        std::string current_line_ascii = "";
-        std::string current_line_hex = "";
+        std::string current_line_ascii;
+        std::string current_line_hex;
 
         for (const std::byte* data_pointer = start_address; data_pointer < end_address; data_pointer++)
         {
