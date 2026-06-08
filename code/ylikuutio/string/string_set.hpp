@@ -35,11 +35,11 @@ namespace yli::string
 
             void add_string(const std::string& string);
             void erase_string(const std::string& string);
-            bool contains(const std::string& string) const;
-            std::size_t get_number_of_completions(const std::string& input) const;
-            std::string complete(const std::string& input) const;
-            std::vector<std::string> get_completions(const std::string& input) const;
-            std::size_t get_length_of_shortest_completion(const std::string& input) const;
+            [[nodiscard]] bool contains(const std::string& string) const;
+            [[nodiscard]] std::size_t get_number_of_completions(const std::string& input) const;
+            [[nodiscard]] std::string complete(const std::string& input) const;
+            [[nodiscard]] std::vector<std::string> get_completions(const std::string& input) const;
+            [[nodiscard]] std::size_t get_length_of_shortest_completion(const std::string& input) const;
 
         private:
             std::set<std::string> strings;
