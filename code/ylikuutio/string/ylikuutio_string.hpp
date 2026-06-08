@@ -198,7 +198,7 @@ namespace yli::string
     }
 
     template<typename T>
-    std::optional<T> convert_string_to_signed_integer(std::string_view string)
+    std::optional<T> convert_string_to_signed_integer(const std::string_view string)
     {
         const std::int64_t value = std::strtoll(std::string(string).c_str(), nullptr, 10); // base 10.
 
