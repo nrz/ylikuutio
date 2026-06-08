@@ -144,9 +144,9 @@ namespace yli::hierarchy
             // master-apprentice relationships, must be implemented
             // using `bind_apprentice_to_master`, not this function.
 
-            child.childID = yli::hierarchy::request_childID(child_pointer_vector, free_childID_queue);
+            child.childID = request_childID(child_pointer_vector, free_childID_queue);
             // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-            yli::hierarchy::set_child_pointer(child.childID, &child, child_pointer_vector, free_childID_queue, number_of_children);
+            set_child_pointer(child.childID, &child, child_pointer_vector, free_childID_queue, number_of_children);
         }
 
     template<typename T1>
@@ -162,9 +162,9 @@ namespace yli::hierarchy
             // Child-parent relationships must be implemented
             // using `yli::hierarchy::bind_child_to_parent`.
 
-            apprentice.apprenticeID = yli::hierarchy::request_childID(apprentice_pointer_vector, free_apprenticeID_queue);
+            apprentice.apprenticeID = request_childID(apprentice_pointer_vector, free_apprenticeID_queue);
             // set pointer to the apprentice in master's apprentice pointer vector so that master knows about apprentices' whereabouts!
-            yli::hierarchy::set_child_pointer(apprentice.apprenticeID, &apprentice, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
+            set_child_pointer(apprentice.apprenticeID, &apprentice, apprentice_pointer_vector, free_apprenticeID_queue, number_of_apprentices);
         }
 
     template <typename T1>
@@ -181,7 +181,7 @@ namespace yli::hierarchy
             }
 
             // Set pointer to this child to `nullptr` in the old parent.
-            yli::hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
+            set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
         }
 
     template<typename T1>
