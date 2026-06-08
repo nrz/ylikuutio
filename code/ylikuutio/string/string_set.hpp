@@ -28,24 +28,30 @@ namespace yli::string
 {
     class StringSet final
     {
-        public:
-            StringSet() = default;
+    public:
+        StringSet() = default;
 
-            StringSet(const StringSet&) = delete;            // Delete copy constructor.
-            StringSet& operator=(const StringSet&) = delete; // Delete copy assignment.
+        StringSet(const StringSet&) = delete; // Delete copy constructor.
+        StringSet& operator=(const StringSet&) = delete; // Delete copy assignment.
 
-            ~StringSet() = default;
+        ~StringSet() = default;
 
-            void add_string(const std::string& string);
-            void erase_string(const std::string& string);
-            [[nodiscard]] bool contains(const std::string& string) const;
-            [[nodiscard]] std::size_t get_number_of_completions(const std::string& input) const;
-            [[nodiscard]] std::string complete(const std::string& input) const;
-            [[nodiscard]] std::vector<std::string> get_completions(const std::string& input) const;
-            [[nodiscard]] std::size_t get_length_of_shortest_completion(const std::string& input) const;
+        void add_string(const std::string& string);
 
-        private:
-            std::set<std::string> strings;
+        void erase_string(const std::string& string);
+
+        [[nodiscard]] bool contains(const std::string& string) const;
+
+        [[nodiscard]] std::size_t get_number_of_completions(const std::string& input) const;
+
+        [[nodiscard]] std::string complete(const std::string& input) const;
+
+        [[nodiscard]] std::vector<std::string> get_completions(const std::string& input) const;
+
+        [[nodiscard]] std::size_t get_length_of_shortest_completion(const std::string& input) const;
+
+    private:
+        std::set<std::string> strings;
     };
 }
 

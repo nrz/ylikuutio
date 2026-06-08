@@ -24,12 +24,14 @@
 
 namespace yli::string
 {
-    std::optional<char32_t> read_codepoint(std::string_view::const_iterator& it, const std::string_view::const_iterator cend)
+    std::optional<char32_t> read_codepoint(std::string_view::const_iterator& it,
+                                           const std::string_view::const_iterator cend)
     {
         return read_or_peek_codepoint(it, cend);
     }
 
-    std::optional<char32_t> peek_codepoint(std::string_view::const_iterator it, const std::string_view::const_iterator cend)
+    std::optional<char32_t> peek_codepoint(std::string_view::const_iterator it,
+                                           const std::string_view::const_iterator cend)
     {
         return read_or_peek_codepoint(it, cend);
     }
@@ -38,7 +40,7 @@ namespace yli::string
     {
         std::u32string u32_string;
 
-        for (auto it = my_string.cbegin(); it != my_string.cend(); )
+        for (auto it = my_string.cbegin(); it != my_string.cend();)
         {
             if (std::optional<char32_t> codepoint = read_codepoint(it, my_string.cend()); codepoint.has_value())
             {

@@ -28,7 +28,8 @@
 
 namespace yli::string
 {
-    void print_hexdump(const std::byte* const start_address, const std::byte* const end_address) // `begin` is inclusive, `end` is exclusive.
+    void print_hexdump(const std::byte* const start_address, const std::byte* const end_address)
+    // `begin` is inclusive, `end` is exclusive.
     {
         constexpr std::size_t line_width_in_bytes = 16;
         std::size_t characters_on_this_line = 0;
@@ -41,9 +42,11 @@ namespace yli::string
             const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');
             current_line_ascii += data_char;
 
-            const auto data_32_bit = static_cast<std::uint32_t>(data_byte); // to get the hexadecimal representation instead of the actual value.
+            const auto data_32_bit = static_cast<std::uint32_t>(data_byte);
+            // to get the hexadecimal representation instead of the actual value.
             std::stringstream my_stream;
-            my_stream << std::setfill('0') << std::setw(2) << std::hex << data_32_bit << std::dec; // std::hex does not work on char values.
+            my_stream << std::setfill('0') << std::setw(2) << std::hex << data_32_bit << std::dec;
+            // std::hex does not work on char values.
             current_line_hex += my_stream.str();
             current_line_hex += " ";
 
@@ -59,7 +62,8 @@ namespace yli::string
         if (characters_on_this_line > 0)
         {
             constexpr std::size_t size_of_each_bytes_hexdump = 3; // each byte's hexdump takes 3 characters.
-            const std::size_t number_of_spaces_needed = (line_width_in_bytes - characters_on_this_line) * size_of_each_bytes_hexdump + 1;
+            const std::size_t number_of_spaces_needed =
+                    (line_width_in_bytes - characters_on_this_line) * size_of_each_bytes_hexdump + 1;
             std::cout << current_line_hex << std::string(number_of_spaces_needed, ' ') << current_line_ascii << "\n";
         }
 
