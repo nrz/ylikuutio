@@ -141,7 +141,7 @@ namespace yli::string
         {
             if (*unicode_char_pointer == '\0')
             {
-                unicode_char_pointer++;
+                ++unicode_char_pointer;
                 std::cerr << "Error: Unicode can not begin with \\0!\n";
                 return 0xdfff; // invalid unicode!
             }
@@ -156,7 +156,7 @@ namespace yli::string
             if (*++unicode_char_pointer != '#')
             {
                 // not valid format, must begin `"&#x"`.
-                unicode_char_pointer++;
+                ++unicode_char_pointer;
                 std::cerr << "Error: Unicode string format not supported!\n";
                 return 0xdfff; // invalid unicode!
             }
@@ -164,7 +164,7 @@ namespace yli::string
             if (*++unicode_char_pointer != 'x')
             {
                 // not valid format, must begin `"&#x"`.
-                unicode_char_pointer++;
+                ++unicode_char_pointer;
                 std::cerr << "Error: Unicode string format not supported!\n";
                 return 0xdfff; // invalid unicode!
             }
@@ -185,7 +185,7 @@ namespace yli::string
             }
 
             // Advance to the next character.
-            unicode_char_pointer++;
+            ++unicode_char_pointer;
 
             // convert hexadecimal string to signed integer.
             // http://stackoverflow.com/questions/1070497/c-convert-hex-string-to-signed-integer/1070499#1070499
