@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef YLIKUUTIO_STRING_SET_HPP_INCLUDED
+#define YLIKUUTIO_STRING_SET_HPP_INCLUDED
+
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <set>     // std::set
@@ -45,3 +48,5 @@ namespace yli::string
             std::set<std::string> strings;
     };
 }
+
+#endif
