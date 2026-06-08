@@ -18,8 +18,8 @@
 #include "unicode.hpp"
 
 // Include standard headers
-#include <optional> // std::optional
-#include <string>   // std::string, std::u32string
+#include <optional>    // std::optional
+#include <string>      // std::string, std::u32string
 #include <string_view> // std::string_view, std::u32string_view
 
 namespace yli::string

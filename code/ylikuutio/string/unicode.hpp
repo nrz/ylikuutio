@@ -19,8 +19,8 @@
 #define YLIKUUTIO_STRING_UNICODE_HPP_INCLUDED
 
 // Include standard headers
-#include <optional> // std::optional
-#include <string>   // std::string, std::u32string
+#include <optional>    // std::optional
+#include <string>      // std::string, std::u32string
 #include <string_view> // std::string_view, std::u32string_view
 
 namespace yli::string
