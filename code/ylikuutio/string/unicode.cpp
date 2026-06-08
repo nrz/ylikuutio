@@ -22,12 +22,12 @@
 #include <string>   // std::string, std::u32string
 #include <string_view> // std::string_view, std::u32string_view
 
-std::optional<char32_t> yli::string::read_codepoint(std::string_view::const_iterator& it, std::string_view::const_iterator cend)
+std::optional<char32_t> yli::string::read_codepoint(std::string_view::const_iterator& it, const std::string_view::const_iterator cend)
 {
     return read_or_peek_codepoint(it, cend);
 }
 
-std::optional<char32_t> yli::string::peek_codepoint(std::string_view::const_iterator it, std::string_view::const_iterator cend)
+std::optional<char32_t> yli::string::peek_codepoint(std::string_view::const_iterator it, const std::string_view::const_iterator cend)
 {
     return read_or_peek_codepoint(it, cend);
 }

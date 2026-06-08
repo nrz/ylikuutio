@@ -74,7 +74,7 @@ namespace yli::string
             return completions.at(0);
         }
 
-        std::size_t completion_max_length = this->get_length_of_shortest_completion(input);
+        const std::size_t completion_max_length = this->get_length_of_shortest_completion(input);
 
         for (std::size_t char_i = 0; char_i < completion_max_length; char_i++)
         {
