@@ -25,7 +25,6 @@
 #include <iostream>    // std::cout, std::cerr
 #include <string>      // std::string
 #include <sstream>     // std::stringstream
-#include <string_view> // std::string_view
 
 namespace yli::string
 {
