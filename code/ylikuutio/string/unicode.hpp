@@ -51,7 +51,7 @@ namespace yli::string
             // ASCII.
             return static_cast<char32_t>(byte1);
         }
-        else if (byte1 < 0b1110'0000)
+        if (byte1 < 0b1110'0000)
         {
             // 2 bytes.
             if (it == cend)
