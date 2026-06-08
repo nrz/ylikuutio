@@ -130,7 +130,7 @@ namespace yli::string
                 std::size_t& data_index,
                 const CharType separator)
         {
-            return yli::string::extract_string_with_several_endings<CharType>(
+            return extract_string_with_several_endings<CharType>(
                     data_string,
                     data_index,
                     std::basic_string<CharType>(1, separator));
@@ -299,12 +299,12 @@ namespace yli::string
                 std::string_view char_end_string,
                 std::string_view description)
         {
-            std::string string = yli::string::extract_string_with_several_endings<CharType>(
+            std::string string = extract_string_with_several_endings<CharType>(
                     data_string,
                     data_index,
                     char_end_string);
 
-            std::optional<ValueType> value = yli::string::convert_string_to_value<ValueType>(string);
+            std::optional<ValueType> value = convert_string_to_value<ValueType>(string);
 
             if (!value)
             {
@@ -326,7 +326,7 @@ namespace yli::string
                 std::basic_string_view<CharType> char_end_string,
                 std::basic_string_view<CharType> description)
         {
-            std::optional<ValueType> value = yli::string::extract_value_from_string<CharType, ValueType>(data_string, data_index, char_end_string, description);
+            std::optional<ValueType> value = extract_value_from_string<CharType, ValueType>(data_string, data_index, char_end_string, description);
 
             if (!value)
             {
