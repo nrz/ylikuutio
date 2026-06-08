@@ -506,14 +506,14 @@ namespace yli::string
     template<typename CharType>
         bool check_if_float_string(std::basic_string_view<CharType> my_string)
         {
-            const std::size_t maximum_safe_length_for_float_string = 38;
+            constexpr std::size_t maximum_safe_length_for_float_string = 38;
             return check_if_floating_point_string(my_string, maximum_safe_length_for_float_string);
         }
 
     template<typename CharType>
         bool check_if_double_string(std::basic_string_view<CharType> my_string)
         {
-            const std::size_t maximum_safe_length_for_double_string = 308;
+            constexpr std::size_t maximum_safe_length_for_double_string = 308;
             return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
         }
 
