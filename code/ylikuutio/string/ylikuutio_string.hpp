@@ -239,49 +239,49 @@ namespace yli::string
     template<>
     inline std::optional<std::int8_t> convert_string_to_value<std::int8_t>(const std::string_view string)
     {
-        return yli::string::convert_string_to_signed_integer<std::int8_t>(string);
+        return convert_string_to_signed_integer<std::int8_t>(string);
     }
 
     template<>
     inline std::optional<std::uint8_t> convert_string_to_value<std::uint8_t>(const std::string_view string)
     {
-        return yli::string::convert_string_to_unsigned_integer<std::uint8_t>(string);
+        return convert_string_to_unsigned_integer<std::uint8_t>(string);
     }
 
     template<>
     inline std::optional<std::int16_t> convert_string_to_value<std::int16_t>(const std::string_view string)
     {
-        return yli::string::convert_string_to_signed_integer<std::int16_t>(string);
+        return convert_string_to_signed_integer<std::int16_t>(string);
     }
 
     template<>
     inline std::optional<std::uint16_t> convert_string_to_value<std::uint16_t>(const std::string_view string)
     {
-        return yli::string::convert_string_to_unsigned_integer<std::uint16_t>(string);
+        return convert_string_to_unsigned_integer<std::uint16_t>(string);
     }
 
     template<>
     inline std::optional<std::int32_t> convert_string_to_value<std::int32_t>(const std::string_view string)
     {
-        return yli::string::convert_string_to_signed_integer<std::int32_t>(string);
+        return convert_string_to_signed_integer<std::int32_t>(string);
     }
 
     template<>
     inline std::optional<std::uint32_t> convert_string_to_value<std::uint32_t>(const std::string_view string)
     {
-        return yli::string::convert_string_to_unsigned_integer<std::uint32_t>(string);
+        return convert_string_to_unsigned_integer<std::uint32_t>(string);
     }
 
     template<>
     inline std::optional<std::int64_t> convert_string_to_value<std::int64_t>(const std::string_view string)
     {
-        return yli::string::convert_string_to_signed_integer<std::int64_t>(string);
+        return convert_string_to_signed_integer<std::int64_t>(string);
     }
 
     template<>
     inline std::optional<std::uint64_t> convert_string_to_value<std::uint64_t>(const std::string_view string)
     {
-        return yli::string::convert_string_to_unsigned_integer<std::uint64_t>(string);
+        return convert_string_to_unsigned_integer<std::uint64_t>(string);
     }
 
     template<>
