@@ -206,7 +206,7 @@ namespace yli::string
                 std::cerr << "ERROR: `yli::string::convert_string_to_signed_integer`: value " << value << " is too small for the type!\n";
                 return std::nullopt;
             }
-            else if (value > std::numeric_limits<T>::max())
+            if (value > std::numeric_limits<T>::max())
             {
                 std::cerr << "ERROR: `yli::string::convert_string_to_signed_integer`: value " << value << " is too big for the type!\n";
                 return std::nullopt;
