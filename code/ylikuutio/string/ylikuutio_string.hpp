@@ -150,7 +150,7 @@ namespace yli::string
             {
                 // it's just a character, so return its value,
                 // and advance to the next character.
-                return (std::int32_t) *unicode_char_pointer++;
+                return static_cast<std::int32_t>(*unicode_char_pointer++);
             }
 
             if (*++unicode_char_pointer != '#')
