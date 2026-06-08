@@ -39,7 +39,7 @@ namespace yli::string
         this->strings.erase(string);
     }
 
-    bool StringSet::contains(const std::string& string)
+    bool StringSet::contains(const std::string& string) const
     {
         return this->strings.count(string) == 1;
     }
