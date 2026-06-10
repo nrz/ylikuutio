@@ -25,7 +25,6 @@
 #include <ofbx.h>
 
 // Include standard headers
-#include <cstddef>  // std::size_t
 #include <cstdint>  // std::uint32_t
 #include <iostream> // std::cout, std::cerr
 #include <string>   // std::string
