@@ -17,7 +17,6 @@
 
 #include "common_texture_loader.hpp"
 #include "image_file_loader.hpp"
-#include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/opengl_texture.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
@@ -32,6 +31,8 @@
 
 namespace yli::load
 {
+    struct ImageLoaderStruct;
+
     bool load_common_texture(
             const std::string& filename,
             const yli::load::ImageLoaderStruct& image_loader_struct,
