@@ -26,7 +26,7 @@
 #endif
 
 // Include standard headers
-#include <algorithm> // std::replace
+#include <algorithm> // std::ranges::replace
 #include <cstddef>   // std::size_t
 #include <cstdint>   // std::int32_t
 #include <iostream>  // std::cout, std::cerr
@@ -89,7 +89,7 @@ namespace yli::load
             std::string current_line_string = yli::string::extract_string_with_several_endings<char>(*file_content, file_content_i, newline_char_end_string);
 
             // Replace slashes `'/'` with space `' '`, to make string processing easier.
-            std::replace(current_line_string.begin(), current_line_string.end(), '/', ' ');
+            std::ranges::replace(current_line_string, '/', ' ');
 
             // Note: `"vt"` and `"vn"` needs to be checked for before `"v"`!
 
