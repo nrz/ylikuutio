@@ -28,7 +28,7 @@ namespace yli::lisp
     {
         public:
             // Terminal expression.
-            explicit NumberExpr(const Token& expr);
+            explicit NumberExpr(const Token& token);
     };
 }
 

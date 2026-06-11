@@ -29,7 +29,7 @@ namespace yli::lisp
     {
         public:
             // Terminal expression.
-            explicit IdentifierExpr(const Token& expr);
+            explicit IdentifierExpr(const Token& token);
 
             void accept(ExprVisitor& visitor) override;
     };
