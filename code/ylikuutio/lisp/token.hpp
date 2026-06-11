@@ -42,12 +42,12 @@ namespace yli::lisp
             bool operator==(const Token& other) const; // Equal `Token`s have identical type and identical lexeme.
             bool operator!=(const Token& other) const; // Line numbers may differ.
 
-            TokenType get_type() const;
+            [[nodiscard]] TokenType get_type() const;
             void set_type(TokenType new_type);
-            std::string_view get_lexeme() const;
-            const TextPosition& get_text_position() const;
-            std::size_t get_line() const;
-            std::size_t get_column() const;
+            [[nodiscard]] std::string_view get_lexeme() const;
+            [[nodiscard]] const TextPosition& get_text_position() const;
+            [[nodiscard]] std::size_t get_line() const;
+            [[nodiscard]] std::size_t get_column() const;
 
             template<typename T>
                 std::optional<T> get_numeric_value() const

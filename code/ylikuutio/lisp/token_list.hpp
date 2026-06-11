@@ -32,12 +32,12 @@ namespace yli::lisp
         public:
             void add_token(Token&& token);
 
-            const Token& at(std::size_t index) const;
+            [[nodiscard]] const Token& at(std::size_t index) const;
 
-            const std::vector<Token>& data() const;
+            [[nodiscard]] const std::vector<Token>& data() const;
 
-            bool empty() const;
-            std::size_t size() const;
+            [[nodiscard]] bool empty() const;
+            [[nodiscard]] std::size_t size() const;
 
         private:
             std::vector<Token> tokens;

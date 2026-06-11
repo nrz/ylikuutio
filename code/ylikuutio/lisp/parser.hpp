@@ -56,10 +56,10 @@ namespace yli::lisp
         public:
             explicit Parser(const TokenList& token_list);
 
-            const SyntaxTreeList& get_syntax_tree_list() const;
-            const ErrorLog& get_error_log() const;
+            [[nodiscard]] const SyntaxTreeList& get_syntax_tree_list() const;
+            [[nodiscard]] const ErrorLog& get_error_log() const;
 
-            bool get_is_success() const;
+            [[nodiscard]] bool get_is_success() const;
 
         private:
             bool parse();

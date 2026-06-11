@@ -34,10 +34,10 @@ namespace yli::lisp
         public:
             void add_error(const TextPosition& text_position, ErrorType error_type);
 
-            const Error& at(std::size_t index) const;
+            [[nodiscard]] const Error& at(std::size_t index) const;
 
-            bool empty() const;
-            std::size_t size() const;
+            [[nodiscard]] bool empty() const;
+            [[nodiscard]] std::size_t size() const;
 
         private:
             std::vector<Error> errors;

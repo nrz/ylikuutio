@@ -109,12 +109,12 @@ namespace yli::lisp
             bool operator==(const Expr& other) const; // Equal `Expr`s have identical data.
             bool operator!=(const Expr& other) const;
 
-            ExprType get_type() const;
-            const Token& get_token() const;
-            const Expr& at(const std::size_t index) const;
-            Expr& last() const;
+            [[nodiscard]] ExprType get_type() const;
+            [[nodiscard]] const Token& get_token() const;
+            [[nodiscard]] const Expr& at(const std::size_t index) const;
+            [[nodiscard]] Expr& last() const;
 
-            std::size_t get_number_of_children() const;
+            [[nodiscard]] std::size_t get_number_of_children() const;
 
             void emplace_back(std::unique_ptr<Expr> expr);
 

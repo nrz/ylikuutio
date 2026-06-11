@@ -46,16 +46,16 @@ namespace yli::lisp
             void next_line();
             void next_column();
 
-            std::string_view get_filename() const;
+            [[nodiscard]] std::string_view get_filename() const;
 
             std::string_view::const_iterator next(char32_t codepoint);
-            std::string_view::const_iterator get_token_start_it() const;
-            std::string_view::const_iterator get_it() const;
-            std::string_view::const_iterator get_cbegin() const;
-            std::string_view::const_iterator get_cend() const;
-            std::size_t get_offset() const;
-            std::size_t get_line() const;
-            std::size_t get_column() const;
+            [[nodiscard]] std::string_view::const_iterator get_token_start_it() const;
+            [[nodiscard]] std::string_view::const_iterator get_it() const;
+            [[nodiscard]] std::string_view::const_iterator get_cbegin() const;
+            [[nodiscard]] std::string_view::const_iterator get_cend() const;
+            [[nodiscard]] std::size_t get_offset() const;
+            [[nodiscard]] std::size_t get_line() const;
+            [[nodiscard]] std::size_t get_column() const;
 
         private:
             std::string_view filename;

@@ -32,13 +32,13 @@ namespace yli::lisp
         public:
             SyntaxTreeList();
 
-            const std::vector<std::unique_ptr<Expr>>& data() const;
+            [[nodiscard]] const std::vector<std::unique_ptr<Expr>>& data() const;
 
-            const Expr& at(std::size_t i) const;
+            [[nodiscard]] const Expr& at(std::size_t i) const;
             Expr& last();
 
-            bool empty() const;
-            std::size_t size() const;
+            [[nodiscard]] bool empty() const;
+            [[nodiscard]] std::size_t size() const;
 
             void emplace_back(std::unique_ptr<Expr> expr);
 

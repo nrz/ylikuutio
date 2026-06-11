@@ -33,10 +33,10 @@ namespace yli::lisp
         public:
             Error(const TextPosition& text_position, ErrorType error_type);
 
-            std::string_view get_filename() const;
-            std::size_t get_line() const;
-            std::size_t get_column() const;
-            ErrorType get_type() const;
+            [[nodiscard]] std::string_view get_filename() const;
+            [[nodiscard]] std::size_t get_line() const;
+            [[nodiscard]] std::size_t get_column() const;
+            [[nodiscard]] ErrorType get_type() const;
 
         private:
             std::string_view filename;
