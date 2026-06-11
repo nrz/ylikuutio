@@ -86,7 +86,7 @@ namespace yli::load
         }
 
         // Open the file
-        const std::optional<std::string> file_content = yli::file::slurp(heightmap_loader_struct.filename);
+        const std::optional<std::string> file_content = file::slurp(heightmap_loader_struct.filename);
 
         if (!file_content || file_content->empty())
         {
@@ -99,12 +99,12 @@ namespace yli::load
         // All possible block identifier strings.
         const std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
+        while (!string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
 
-        std::optional<std::int32_t> image_width_int32_t = yli::string::extract_value_from_string<char, std::int32_t>(
+        std::optional<std::int32_t> image_width_int32_t = string::extract_value_from_string<char, std::int32_t>(
                 *file_content,
                 file_content_i,
                 " \n",
@@ -116,7 +116,7 @@ namespace yli::load
             return false;
         }
 
-        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
+        while (!string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }

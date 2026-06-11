@@ -34,7 +34,7 @@ namespace yli::load
     GLuint load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename)
     {
         // Read the vertex shader code from the file.
-        const std::optional<std::string> vertex_shader_code = yli::file::slurp(vertex_shader_filename);
+        const std::optional<std::string> vertex_shader_code = file::slurp(vertex_shader_filename);
 
         if (!vertex_shader_code)
         {
@@ -49,7 +49,7 @@ namespace yli::load
         }
 
         // Read the fragment shader code from the file.
-        const std::optional<std::string> fragment_shader_code = yli::file::slurp(fragment_shader_filename);
+        const std::optional<std::string> fragment_shader_code = file::slurp(fragment_shader_filename);
 
         if (!fragment_shader_code)
         {

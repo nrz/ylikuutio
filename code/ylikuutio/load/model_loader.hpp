@@ -40,7 +40,7 @@ namespace yli::load
     struct ModelLoaderStruct;
 
     bool load_model(
-            const yli::load::ModelLoaderStruct& model_loader_struct,
+            const ModelLoaderStruct& model_loader_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
@@ -53,7 +53,7 @@ namespace yli::load
             GLuint& uv_buffer,
             GLuint& normal_buffer,
             GLuint& element_buffer,
-            const yli::render::GraphicsApiBackend graphics_api_backend,
+            const render::GraphicsApiBackend graphics_api_backend,
             const bool is_debug_mode);
 }
 

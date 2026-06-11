@@ -38,8 +38,8 @@ namespace yli::load
             const GLenum format,
             const GLenum internal_format,
             const GLenum type,
-            const yli::data::AnyValue* const left_filler_vector_any_value,
-            const yli::data::AnyValue* const right_filler_vector_any_value,
+            const data::AnyValue* const left_filler_vector_any_value,
+            const data::AnyValue* const right_filler_vector_any_value,
             std::uint32_t& image_width,
             std::uint32_t& image_height,
             std::uint32_t& image_size,
@@ -288,7 +288,7 @@ namespace yli::load
             std::uint32_t& image_size,
             std::uint32_t& textureID)
     {
-        return yli::load::load_csv_texture(
+        return load_csv_texture(
                 filename,
                 format,
                 internal_format,

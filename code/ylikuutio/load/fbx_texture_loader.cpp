@@ -44,7 +44,7 @@ namespace yli::load
             std::uint32_t& image_size,
             std::uint32_t& n_color_channels,
             GLuint& textureID,
-            const yli::render::GraphicsApiBackend graphics_api_backend)
+            const render::GraphicsApiBackend graphics_api_backend)
     {
         // Requirements:
         // `ofbx_texture` must not be `nullptr`.
@@ -82,10 +82,10 @@ namespace yli::load
 
         if (file_suffix_buffer == "png")
         {
-            yli::load::ImageLoaderStruct image_loader_struct;
+            ImageLoaderStruct image_loader_struct;
             image_loader_struct.should_discard_alpha_channel = true;
             image_loader_struct.should_flip_vertically = true;
-            return yli::load::load_common_texture(filename_buffer, image_loader_struct, image_width, image_height, image_size, n_color_channels, textureID, graphics_api_backend);
+            return load_common_texture(filename_buffer, image_loader_struct, image_width, image_height, image_size, n_color_channels, textureID, graphics_api_backend);
         }
 
         return false;

@@ -34,7 +34,7 @@
 namespace yli::load
 {
     bool load_png_terrain(
-            const yli::load::HeightmapLoaderStruct& heightmap_loader_struct,
+            const HeightmapLoaderStruct& heightmap_loader_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,

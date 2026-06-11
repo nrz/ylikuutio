@@ -39,13 +39,13 @@ namespace yli::load
     // Load a PNG file.
     bool load_common_texture(
             const std::string& filename,
-            const yli::load::ImageLoaderStruct& image_loader_struct,
+            const ImageLoaderStruct& image_loader_struct,
             std::uint32_t& image_width,
             std::uint32_t& image_height,
             std::uint32_t& image_size,
             std::uint32_t& n_color_channels,
             GLuint& textureID,
-            const yli::render::GraphicsApiBackend graphics_api_backend);
+            const render::GraphicsApiBackend graphics_api_backend);
 }
 
 #endif

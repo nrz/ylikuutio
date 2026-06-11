@@ -36,7 +36,7 @@
 namespace yli::load
 {
     bool load_symbiosis(
-            yli::load::SymbiosisLoaderStruct& symbiosis_loader_struct,
+            SymbiosisLoaderStruct& symbiosis_loader_struct,
             std::vector<std::vector<glm::vec3>>& out_vertices,
             std::vector<std::vector<glm::vec2>>& out_uvs,
             std::vector<std::vector<glm::vec3>>& out_normals,
@@ -52,7 +52,7 @@ namespace yli::load
 
         if (symbiosis_loader_struct.model_file_format == "fbx" || symbiosis_loader_struct.model_file_format == "FBX")
         {
-            model_loading_result = yli::load::load_fbx(
+            model_loading_result = load_fbx(
                     symbiosis_loader_struct.model_filename,
                     out_vertices,
                     out_uvs,

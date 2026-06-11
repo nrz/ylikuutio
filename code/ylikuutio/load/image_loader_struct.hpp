@@ -37,19 +37,19 @@ namespace yli::load
     {
         ImageLoaderStruct() = default;
 
-        explicit ImageLoaderStruct(const std::vector<std::pair<yli::load::ImageLoadingFlags, bool>>& values)
+        explicit ImageLoaderStruct(const std::vector<std::pair<ImageLoadingFlags, bool>>& values)
         {
             for (const auto& [enum_value, bool_value] : values)
             {
-                if (enum_value == yli::load::ImageLoadingFlags::SHOULD_CONVERT_GRAYSCALE_TO_RGB)
+                if (enum_value == ImageLoadingFlags::SHOULD_CONVERT_GRAYSCALE_TO_RGB)
                 {
                     this->should_convert_grayscale_to_rgb = bool_value;
                 }
-                else if (enum_value == yli::load::ImageLoadingFlags::SHOULD_DISCARD_ALPHA_CHANNEL)
+                else if (enum_value == ImageLoadingFlags::SHOULD_DISCARD_ALPHA_CHANNEL)
                 {
                     this->should_discard_alpha_channel = bool_value;
                 }
-                else if (enum_value == yli::load::ImageLoadingFlags::SHOULD_FLIP_VERTICALLY)
+                else if (enum_value == ImageLoadingFlags::SHOULD_FLIP_VERTICALLY)
                 {
                     this->should_flip_vertically = bool_value;
                 }

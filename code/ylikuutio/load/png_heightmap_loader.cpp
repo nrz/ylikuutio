@@ -44,7 +44,7 @@
 namespace yli::load
 {
     bool load_png_terrain(
-            const yli::load::HeightmapLoaderStruct& heightmap_loader_struct,
+            const HeightmapLoaderStruct& heightmap_loader_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
@@ -69,7 +69,7 @@ namespace yli::load
 
         std::shared_ptr<std::vector<std::uint8_t>> image_data = load_image_file(
                 heightmap_loader_struct.filename,
-                yli::load::ImageLoaderStruct(),
+                ImageLoaderStruct(),
                 image_width,
                 image_height,
                 image_size,
@@ -112,7 +112,7 @@ namespace yli::load
         }
 
         std::cout << n_color_channels << " color channel" << (n_color_channels > 1 ? "s" : "") << " in use.\n";
-        yli::memory::flip_vertically(&(*image_data)[0], static_cast<std::size_t>(n_color_channels) * static_cast<std::size_t>(image_width), image_height);
+        memory::flip_vertically(&(*image_data)[0], static_cast<std::size_t>(n_color_channels) * static_cast<std::size_t>(image_width), image_height);
 
         // Define terrain size.
         const std::size_t terrain_size = static_cast<std::size_t>(image_width) * static_cast<std::size_t>(image_height);

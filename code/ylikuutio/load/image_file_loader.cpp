@@ -33,7 +33,7 @@ namespace yli::load
 {
     std::shared_ptr<std::vector<std::uint8_t>> load_image_file(
             const std::string& filename,
-            const yli::load::ImageLoaderStruct& image_loader_struct,
+            const ImageLoaderStruct& image_loader_struct,
             std::uint32_t& image_width,
             std::uint32_t& image_height,
             std::uint32_t& image_size,

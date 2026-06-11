@@ -35,7 +35,7 @@ namespace yli::load
 {
     std::shared_ptr<std::vector<std::uint8_t>> load_png_file(
             const std::string& filename,
-            const yli::load::ImageLoaderStruct& image_loader_struct,
+            const ImageLoaderStruct& image_loader_struct,
             std::uint32_t& image_width,
             std::uint32_t& image_height,
             std::uint32_t& image_size,
@@ -147,7 +147,7 @@ namespace yli::load
 
         if (image_loader_struct.should_flip_vertically)
         {
-            yli::memory::flip_vertically(&(*image_data)[0], line_width_in_bytes, image_height);
+            memory::flip_vertically(&(*image_data)[0], line_width_in_bytes, image_height);
         }
 
         png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);

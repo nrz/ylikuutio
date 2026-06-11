@@ -35,13 +35,13 @@ namespace yli::load
 
     bool load_common_texture(
             const std::string& filename,
-            const yli::load::ImageLoaderStruct& image_loader_struct,
+            const ImageLoaderStruct& image_loader_struct,
             std::uint32_t& image_width,
             std::uint32_t& image_height,
             std::uint32_t& image_size,
             std::uint32_t& n_color_channels,
             GLuint& textureID,
-            const yli::render::GraphicsApiBackend graphics_api_backend)
+            const render::GraphicsApiBackend graphics_api_backend)
     {
         const std::shared_ptr<std::vector<std::uint8_t>> image_data = load_image_file(
                 filename,
@@ -57,16 +57,16 @@ namespace yli::load
             return false;
         }
 
-        if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
+        if (graphics_api_backend == render::GraphicsApiBackend::OPENGL)
         {
-            return yli::opengl::prepare_opengl_texture(*image_data.get(), image_width, image_height, textureID);
+            return opengl::prepare_opengl_texture(*image_data.get(), image_width, image_height, textureID);
         }
-        else if (graphics_api_backend == yli::render::GraphicsApiBackend::VULKAN)
+        else if (graphics_api_backend == render::GraphicsApiBackend::VULKAN)
         {
             // TODO: implement.
             throw std::runtime_error("ERROR: `yli::load::load_common_texture`: Vulkan is not supported yet!");
         }
-        else if (graphics_api_backend == yli::render::GraphicsApiBackend::SOFTWARE)
+        else if (graphics_api_backend == render::GraphicsApiBackend::SOFTWARE)
         {
             // TODO: implement.
             throw std::runtime_error("ERROR: `yli::load::load_common_texture`: software rendering is not supported yet!");

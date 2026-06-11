@@ -42,7 +42,7 @@
 namespace yli::load
 {
     bool load_model(
-            const yli::load::ModelLoaderStruct& model_loader_struct,
+            const ModelLoaderStruct& model_loader_struct,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
@@ -55,14 +55,14 @@ namespace yli::load
             GLuint& uv_buffer,
             GLuint& normal_buffer,
             GLuint& element_buffer,
-            const yli::render::GraphicsApiBackend graphics_api_backend,
+            const render::GraphicsApiBackend graphics_api_backend,
             const bool is_debug_mode)
     {
         bool model_loading_result = false;
 
         if (model_loader_struct.model_file_format == "obj" || model_loader_struct.model_file_format == "OBJ")
         {
-            model_loading_result = yli::load::load_obj(
+            model_loading_result = load_obj(
                     model_loader_struct.model_filename,
                     out_vertices,
                     out_uvs,
@@ -70,7 +70,7 @@ namespace yli::load
         }
         else if (model_loader_struct.model_file_format == "fbx" || model_loader_struct.model_file_format == "FBX")
         {
-            model_loading_result = yli::load::load_fbx(
+            model_loading_result = load_fbx(
                     model_loader_struct.model_filename,
                     model_loader_struct.mesh_i,
                     out_vertices,
@@ -100,7 +100,7 @@ namespace yli::load
                 return false;
             }
 
-            yli::load::HeightmapLoaderStruct heightmap_loader_struct;
+            HeightmapLoaderStruct heightmap_loader_struct;
             heightmap_loader_struct.filename                     = model_loader_struct.model_filename;
             heightmap_loader_struct.file_format                  = model_loader_struct.model_file_format;
             heightmap_loader_struct.latitude                     = model_loader_struct.latitude;
@@ -112,7 +112,7 @@ namespace yli::load
 
             if (model_loader_struct.model_file_format == "srtm" || model_loader_struct.model_file_format == "SRTM")
             {
-                model_loading_result = yli::load::load_srtm_terrain(
+                model_loading_result = load_srtm_terrain(
                         heightmap_loader_struct,
                         model_loader_struct.model_filename,
                         out_vertices,
@@ -123,7 +123,7 @@ namespace yli::load
             }
             else if (model_loader_struct.model_file_format == "png" || model_loader_struct.model_file_format == "PNG")
             {
-                model_loading_result = yli::load::load_png_terrain(
+                model_loading_result = load_png_terrain(
                         heightmap_loader_struct,
                         out_vertices,
                         out_uvs,
@@ -136,7 +136,7 @@ namespace yli::load
                     model_loader_struct.model_file_format == "ascii_grid" ||
                     model_loader_struct.model_file_format == "ASCII_grid")
             {
-                model_loading_result = yli::load::load_ascii_grid_terrain(
+                model_loading_result = load_ascii_grid_terrain(
                         heightmap_loader_struct,
                         out_vertices,
                         out_uvs,
@@ -156,7 +156,7 @@ namespace yli::load
         std::cout << "Indexing...\n";
 
         // Fill the index buffer.
-        yli::opengl::indexVBO(
+        opengl::indexVBO(
                 out_vertices,
                 out_uvs,
                 out_normals,
@@ -167,7 +167,7 @@ namespace yli::load
 
         std::cout << "Indexing completed successfully.\n";
 
-        if (graphics_api_backend == yli::render::GraphicsApiBackend::OPENGL)
+        if (graphics_api_backend == render::GraphicsApiBackend::OPENGL)
         {
             glGenVertexArrays(1, &vao);
             glGenBuffers(1, &vertex_buffer);

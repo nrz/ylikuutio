@@ -40,7 +40,7 @@ namespace yli::load
                 std::uint32_t& data_size)
         {
             // Open the file
-            const std::optional<std::string> file_content = yli::file::slurp(filename);
+            const std::optional<std::string> file_content = file::slurp(filename);
 
             if (!file_content)
             {
@@ -114,7 +114,7 @@ namespace yli::load
                     break;
                 }
 
-                std::optional<T1> value = yli::string::extract_value_from_string<char, T1>(*file_content, file_content_i, char_end_string, std::string_view(""));
+                std::optional<T1> value = string::extract_value_from_string<char, T1>(*file_content, file_content_i, char_end_string, std::string_view(""));
 
                 if (!value)
                 {
@@ -125,7 +125,7 @@ namespace yli::load
                 data_vector.emplace_back(*value);
                 n_elements_in_current_line++;
 
-                while (file_content_i < file_content->size() && !yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, whitespace_strings))
+                while (file_content_i < file_content->size() && !string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, whitespace_strings))
                 {
                     file_content_i++;
                 }

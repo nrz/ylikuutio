@@ -46,7 +46,7 @@ namespace yli::load
         std::cout << "Loading OBJ file " << filename << " ...\n";
 
         // Open the file
-        const std::optional<std::string> file_content = yli::file::slurp(filename);
+        const std::optional<std::string> file_content = file::slurp(filename);
 
         if (!file_content || file_content->empty())
         {
@@ -69,7 +69,7 @@ namespace yli::load
             // Read until any non-whitespace character.
             while (true)
             {
-                if (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, whitespace_vector))
+                if (!string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, whitespace_vector))
                 {
                     // Not whitespace.
                     break;
