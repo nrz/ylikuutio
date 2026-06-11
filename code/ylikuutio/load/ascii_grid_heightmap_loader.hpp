@@ -28,7 +28,6 @@
 
 // Include standard headers
 #include <cstdint>  // std::uint32_t
-#include <string>   // std::string
 #include <vector>   // std::vector
 
 namespace yli::load
