@@ -73,7 +73,7 @@ namespace yli::load
         }
 
         // OpenFBX wants `u8` == `unsigned char`.
-        const u8* data = reinterpret_cast<const u8*>(data_vector->data());
+        auto data = reinterpret_cast<const u8*>(data_vector->data());
         const std::int64_t size = data_vector->size();
 
         if (is_debug_mode)
@@ -136,7 +136,7 @@ namespace yli::load
                 return false;
             }
 
-            const std::size_t material_count = static_cast<std::size_t>(temp_material_count);
+            const auto material_count = static_cast<std::size_t>(temp_material_count);
 
             for (std::size_t material_i = 0; material_i < material_count; material_i++)
             {
