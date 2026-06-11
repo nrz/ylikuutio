@@ -46,7 +46,7 @@ namespace yli::load
             std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
             std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
             std::size_t& mesh_count,
-            const bool is_debug_mode);
+            bool is_debug_mode);
 }
 
 #endif

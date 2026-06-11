@@ -22,7 +22,7 @@
 
 namespace yli::load
 {
-    GLuint load_shaders(const char* const vertex_shader_filename, const char* const fragment_shader_filename);
+    GLuint load_shaders(const char* vertex_shader_filename, const char* fragment_shader_filename);
 }
 
 #endif

@@ -34,7 +34,7 @@ namespace yli::load
 {
     // Load texture from memory.
     bool load_fbx_texture(
-            const ofbx::Texture* const ofbx_texture,
+            const ofbx::Texture* ofbx_texture,
             std::uint32_t& image_width,
             std::uint32_t& image_height,
             std::uint32_t& image_size,

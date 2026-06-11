@@ -49,9 +49,9 @@ namespace yli::load
     // Load a .CSV file using our custom loader.
     bool load_csv_texture(
             const std::string& filename,
-            const GLenum format,
-            const GLenum internal_format,
-            const GLenum type,
+            GLenum format,
+            GLenum internal_format,
+            GLenum type,
             std::uint32_t& image_width,
             std::uint32_t& image_height,
             std::uint32_t& image_size,
