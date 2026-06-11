@@ -104,8 +104,8 @@ namespace yli::load
         std::stringstream latitude_stringstream;
         std::stringstream longitude_stringstream;
 
-        const int SRTM_filename_n_of_latitude_chars = 2;
-        const int SRTM_filename_n_of_longitude_chars = 3;
+        constexpr int SRTM_filename_n_of_latitude_chars = 2;
+        constexpr int SRTM_filename_n_of_longitude_chars = 3;
 
         latitude_stringstream << std::setw(SRTM_filename_n_of_latitude_chars) << std::setfill('0') << abs(filename_latitude);
         longitude_stringstream << std::setw(SRTM_filename_n_of_longitude_chars) << std::setfill('0') << abs(filename_longitude);
@@ -127,7 +127,7 @@ namespace yli::load
             return false;
         }
 
-        const std::uint32_t true_image_width = 1201; // true image height is 1201 as well.
+        constexpr std::uint32_t true_image_width = 1201; // true image height is 1201 as well.
         image_width = 1200;  // rightmost column is not used (it is duplicated in the next SRTM file to the east).
         image_height = 1200; // bottom row is not used (it us duplicated in the next SRTM file to the south).
 

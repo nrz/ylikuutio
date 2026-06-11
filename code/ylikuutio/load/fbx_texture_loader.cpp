@@ -72,7 +72,7 @@ namespace yli::load
         std::cout << "Texture file: " << filename_buffer << "\n";
 
         // Find out the file suffix (filetype).
-        const char suffix_separator = '.';
+        constexpr char suffix_separator = '.';
 
         std::string file_suffix_buffer = yli::string::extract_last_part_of_string<char>(
                 filename_buffer,
