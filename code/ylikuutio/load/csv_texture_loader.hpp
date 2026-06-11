@@ -36,11 +36,11 @@ namespace yli::load
     // and elementes of `right_filler_vector_any_value` to the right side of each element.
     bool load_csv_texture(
             const std::string& filename,
-            const GLenum format,
-            const GLenum internal_format,
-            const GLenum type,
-            const data::AnyValue* const left_filler_vector_any_value,
-            const data::AnyValue* const right_filler_vector_any_value,
+            GLenum format,
+            GLenum internal_format,
+            GLenum type,
+            const data::AnyValue* left_filler_vector_any_value,
+            const data::AnyValue* right_filler_vector_any_value,
             std::uint32_t& image_width,
             std::uint32_t& image_height,
             std::uint32_t& image_size,

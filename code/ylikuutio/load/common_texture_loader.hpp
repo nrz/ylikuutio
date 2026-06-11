@@ -45,7 +45,7 @@ namespace yli::load
             std::uint32_t& image_size,
             std::uint32_t& n_color_channels,
             GLuint& textureID,
-            const render::GraphicsApiBackend graphics_api_backend);
+            render::GraphicsApiBackend graphics_api_backend);
 }
 
 #endif
