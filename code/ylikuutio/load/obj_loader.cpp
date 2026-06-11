@@ -188,7 +188,9 @@ namespace yli::load
             const std::vector<std::string> endline_vector = { "\n", "\r" };
 
             // Read until any non-whitespace character.
-            while (yli::string::check_and_report_if_some_string_matches<char>(*file_content, ++file_content_i, endline_vector));
+            while (yli::string::check_and_report_if_some_string_matches<char>(*file_content, ++file_content_i, endline_vector))
+            {
+            }
         }
 
         // For each vertex of each triangle
