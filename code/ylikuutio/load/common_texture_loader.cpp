@@ -61,12 +61,12 @@ namespace yli::load
         {
             return opengl::prepare_opengl_texture(*image_data.get(), image_width, image_height, textureID);
         }
-        else if (graphics_api_backend == render::GraphicsApiBackend::VULKAN)
+        if (graphics_api_backend == render::GraphicsApiBackend::VULKAN)
         {
             // TODO: implement.
             throw std::runtime_error("ERROR: `yli::load::load_common_texture`: Vulkan is not supported yet!");
         }
-        else if (graphics_api_backend == render::GraphicsApiBackend::SOFTWARE)
+        if (graphics_api_backend == render::GraphicsApiBackend::SOFTWARE)
         {
             // TODO: implement.
             throw std::runtime_error("ERROR: `yli::load::load_common_texture`: software rendering is not supported yet!");
