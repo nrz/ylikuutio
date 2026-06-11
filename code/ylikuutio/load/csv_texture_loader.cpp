@@ -273,7 +273,7 @@ namespace yli::load
             glTexImage2D(GL_TEXTURE_2D, 0, internal_format, image_width, image_height, 0, format, type, image_data_ptr);
         }
 
-        yli::opengl::set_nearest_filtering_parameters();
+        opengl::set_nearest_filtering_parameters();
 
         return true;
     }

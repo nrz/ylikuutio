@@ -64,7 +64,7 @@ namespace yli::load
         // };
         //
         // IScene* load(const u8* data, int size)
-        const std::optional<std::vector<std::uint8_t>> data_vector = yli::file::binary_slurp(filename);
+        const std::optional<std::vector<std::uint8_t>> data_vector = file::binary_slurp(filename);
 
         if (!data_vector || data_vector->empty())
         {
