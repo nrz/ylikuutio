@@ -29,6 +29,8 @@ namespace yli::lisp
     class ExprVisitor
     {
         public:
+            virtual ~ExprVisitor() = default;
+
             virtual void visit_identifier_expr(IdentifierExpr& identifier_expr) = 0;
             virtual void visit_literal_expr(LiteralExpr& literal_expr) = 0;
             virtual void visit_function_call_expr(FunctionCallExpr& function_call_expr) = 0;
