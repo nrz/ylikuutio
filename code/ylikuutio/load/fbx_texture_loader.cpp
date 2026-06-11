@@ -61,7 +61,7 @@ namespace yli::load
         yli::string::print_hexdump<char>(filename);
 
         // Find out the filename.
-        const char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
+        constexpr char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
         std::string filename_buffer = yli::string::extract_last_part_of_string<char>(
                 filename,
