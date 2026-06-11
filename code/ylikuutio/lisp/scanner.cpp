@@ -25,11 +25,9 @@
 #include "code/ylikuutio/string/unicode.hpp"
 
 // Include standard headers
-#include <cstddef>     // std::size_t
 #include <optional>    // std::optional, std::nullopt
 #include <string_view> // std::string_view
 #include <utility>     // std::move
-#include <vector>      // std::vector
 
 namespace yli::lisp
 {

@@ -22,11 +22,9 @@
 #include "error_log.hpp"
 #include "error_type.hpp"
 #include "token_list.hpp"
-#include "token_type.hpp"
 #include "text_position.hpp"
 
 // Include standard headers
-#include <cstddef>       // std::size_t
 #include <optional>      // std::optional
 #include <string_view>   // std::string_view
 #include <unordered_set> // std::unordered_set
