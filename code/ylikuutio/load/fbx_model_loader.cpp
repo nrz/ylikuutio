@@ -75,7 +75,7 @@ namespace yli::load
             std::cout << "Loaded FBX data vector size: " << size << "\n";
         }
 
-        const std::uint64_t flags = (std::uint64_t) ofbx::LoadFlags::TRIANGULATE;
+        const std::uint64_t flags = static_cast<std::uint64_t>(ofbx::LoadFlags::TRIANGULATE);
         ofbx::IScene* ofbx_iscene = ofbx::load(data, size, flags);
 
         if (ofbx_iscene == nullptr)
