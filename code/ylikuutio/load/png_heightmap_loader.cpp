@@ -166,7 +166,7 @@ namespace yli::load
 
         std::cout << "color channel in use: " << color_channel << "\n";
 
-        yli::triangulation::TriangulateQuadsStruct triangulate_quads_struct;
+        triangulation::TriangulateQuadsStruct triangulate_quads_struct;
         triangulate_quads_struct.image_width = image_width;
         triangulate_quads_struct.image_height = image_height;
         triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
