@@ -85,7 +85,7 @@ namespace yli::load
             }
 
             // OK, non-whitespace found.
-            const char* newline_char_end_string = "\n";
+            auto newline_char_end_string = "\n";
             std::string current_line_string = yli::string::extract_string_with_several_endings<char>(*file_content, file_content_i, newline_char_end_string);
 
             // Replace slashes `'/'` with space `' '`, to make string processing easier.
@@ -93,7 +93,7 @@ namespace yli::load
 
             // Note: `"vt"` and `"vn"` needs to be checked for before `"v"`!
 
-            std::stringstream current_line_stringstream = std::stringstream(current_line_string);
+            auto current_line_stringstream = std::stringstream(current_line_string);
             std::string prefix;
 
             if (current_line_string.compare(0, std::char_traits<char>::length("#"), "#") == 0)

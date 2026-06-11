@@ -45,7 +45,7 @@ namespace yli::load
             std::uint32_t& image_size,
             GLuint& textureID)
     {
-        GLvoid* image_data_ptr = nullptr;
+        const GLvoid* image_data_ptr = nullptr;
 
         std::variant<
             std::vector<std::int8_t>,

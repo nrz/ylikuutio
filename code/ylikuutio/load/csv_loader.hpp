@@ -69,7 +69,7 @@ namespace yli::load
             std::uint32_t n_lines = 0;
             std::uint32_t n_elements_in_first_line = 0;
             std::uint32_t n_elements_in_current_line = 0;
-            const char* const char_end_string = ", \n";
+            const auto char_end_string = ", \n";
 
             std::vector<T1> data_vector;
 

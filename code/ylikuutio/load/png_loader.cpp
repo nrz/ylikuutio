@@ -124,7 +124,7 @@ namespace yli::load
 
         png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
 
-        std::shared_ptr<std::vector<std::uint8_t>> image_data = std::make_shared<std::vector<std::uint8_t>>();
+        auto image_data = std::make_shared<std::vector<std::uint8_t>>();
         image_data->resize(image_height * line_width_in_bytes);
         n_color_channels = (image_data->size() / image_size);
         std::uint8_t* image_data_pointer = &(*image_data)[0];

@@ -56,7 +56,7 @@ namespace yli::load
         }
 
         // Load the texture.
-        const std::string filename = std::string(ofbx_texture->getFileName().begin, ofbx_texture->getFileName().end);
+        const auto filename = std::string(ofbx_texture->getFileName().begin, ofbx_texture->getFileName().end);
 
         yli::string::print_hexdump<char>(filename);
 

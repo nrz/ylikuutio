@@ -147,7 +147,7 @@ namespace yli::load
             for (std::uint32_t y = 0; y < image_height; y++)
             {
                 // show progress in percents.
-                std::int32_t current_percent = static_cast<std::int32_t>(floor(100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
+                auto current_percent = static_cast<std::int32_t>(floor(100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
 
                 if (current_percent > last_percent)
                 {
