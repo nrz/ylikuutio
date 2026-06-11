@@ -55,7 +55,7 @@ namespace yli::load
             }
 
             // Assume that all lines have equal number of elements.
-            // If any lines has number of elements different than the first line with elements,
+            // If any lines have number of elements different from the first line with elements,
             // that is an error and `std::nullopt` will be returned and `data_width`, `data_height`,
             // and `data_size` are set to 0.
             // However, lines with 0 elements are allowed at any time.
