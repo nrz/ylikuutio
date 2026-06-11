@@ -20,6 +20,7 @@
 
 // Include standard headers
 #include <string> // std::string
+#include <utility> // std::move
 
 namespace yli::load
 {
@@ -27,9 +28,9 @@ namespace yli::load
 
     struct SymbiosisLoaderStruct
     {
-        SymbiosisLoaderStruct(const std::string& model_filename, const std::string& model_file_format)
-            : model_filename  { model_filename },
-            model_file_format { model_file_format }
+        SymbiosisLoaderStruct(std::string&& model_filename, std::string&& model_file_format)
+            : model_filename  { std::move(model_filename) },
+            model_file_format { std::move(model_file_format) }
         {
         }
 

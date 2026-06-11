@@ -53,6 +53,7 @@
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <utility>   // std::move
 #include <vector>    // std::vector
 
 namespace yli::ontology
@@ -255,7 +256,7 @@ namespace yli::ontology
 
     void Symbiosis::create_symbionts()
     {
-        load::SymbiosisLoaderStruct symbiosis_loader_struct(this->model_filename, model_file_format);
+        load::SymbiosisLoaderStruct symbiosis_loader_struct(std::move(this->model_filename), std::move(model_file_format));
 
         const bool is_debug_mode = true;
 

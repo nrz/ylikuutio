@@ -20,12 +20,13 @@
 
 // Include standard headers
 #include <string> // std::string
+#include <utility> // std::move
 
 TEST(symbiosis_loader_struct_must_be_initialized_appropriately, symbiosis_loader_struct)
 {
-    const std::string model_filename    { "foo" };
-    const std::string model_file_format { "bar" };
-    const yli::load::SymbiosisLoaderStruct symbiosis_loader_struct(model_filename, model_file_format);
+    std::string model_filename    { "foo" };
+    std::string model_file_format { "bar" };
+    const yli::load::SymbiosisLoaderStruct symbiosis_loader_struct(std::move(model_filename), std::move(model_file_format));
 
     ASSERT_EQ(symbiosis_loader_struct.model_filename, "foo");
     ASSERT_EQ(symbiosis_loader_struct.model_file_format, "bar");
