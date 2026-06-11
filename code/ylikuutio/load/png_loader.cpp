@@ -22,7 +22,7 @@
 #include <png.h>
 
 // Include standard headers
-#include <algorithm> // std::copy
+#include <algorithm> // std::copy_n
 #include <array>     // std::array
 #include <cstddef>   // std::size_t
 #include <cstdint>   // std::uint8_t, std::uint32_t
@@ -141,7 +141,7 @@ namespace yli::load
                 return nullptr;
             }
 
-            std::copy(row_pointer, row_pointer + line_width_in_bytes, image_data_pointer);
+            std::copy_n(row_pointer, line_width_in_bytes, image_data_pointer);
             image_data_pointer += line_width_in_bytes;
         }
 
