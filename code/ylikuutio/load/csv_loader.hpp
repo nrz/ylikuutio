@@ -69,12 +69,11 @@ namespace yli::load
             std::uint32_t n_lines = 0;
             std::uint32_t n_elements_in_first_line = 0;
             std::uint32_t n_elements_in_current_line = 0;
-            const auto char_end_string = ", \n";
-
             std::vector<T1> data_vector;
 
             while (file_content_i < file_content->size())
             {
+                const auto char_end_string = ", \n";
                 // All possible block identifier strings.
                 const std::vector<std::string> whitespace_strings = { ",", " ", "\n" };
 

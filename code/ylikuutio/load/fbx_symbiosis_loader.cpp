@@ -191,9 +191,7 @@ namespace yli::load
                     ofbx_diffuse_texture_vector.emplace_back(diffuse_texture);
                 }
 
-                const ofbx::Texture* normal_texture = material->getTexture(ofbx::Texture::NORMAL);
-
-                if (normal_texture == nullptr)
+                if (const ofbx::Texture* normal_texture = material->getTexture(ofbx::Texture::NORMAL); normal_texture == nullptr)
                 {
                     if (is_debug_mode)
                     {
@@ -217,9 +215,7 @@ namespace yli::load
                     ofbx_normal_texture_vector.emplace_back(normal_texture);
                 }
 
-                const ofbx::Texture* count_texture = material->getTexture(ofbx::Texture::COUNT);
-
-                if (count_texture == nullptr)
+                if (const ofbx::Texture* count_texture = material->getTexture(ofbx::Texture::COUNT); count_texture == nullptr)
                 {
                     if (is_debug_mode)
                     {
