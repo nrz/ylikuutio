@@ -15,17 +15,18 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "police_module.hpp"
+#include "gtest/gtest.h"
+#include "code/hirvi/ontology/emancipation_module.hpp"
+#include "code/hirvi/ontology/police_module.hpp"
 
-namespace hirvi
+TEST(emancipation_must_function_properly, emancipation)
 {
-    void PoliceModule::emancipate()
-    {
-        this->is_emancipated = true;
-    }
+    hirvi::PoliceModule police_module;
+    ASSERT_FALSE(police_module.get_is_emancipated());
 
-    bool PoliceModule::get_is_emancipated() const
-    {
-        return this->is_emancipated;
-    }
+    hirvi::EmancipationModule emancipation_module(police_module);
+    ASSERT_FALSE(police_module.get_is_emancipated());
+
+    emancipation_module.emancipate();
+    ASSERT_TRUE(police_module.get_is_emancipated());
 }

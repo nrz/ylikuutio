@@ -16,10 +16,16 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "emancipation_module.hpp"
+#include "police_module.hpp"
 
 namespace hirvi
 {
     EmancipationModule::EmancipationModule(PoliceModule& police_module)
         : police_module(police_module)
     { }
+
+    void EmancipationModule::emancipate()
+    {
+        this->police_module.emancipate();
+    }
 }

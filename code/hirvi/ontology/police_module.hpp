@@ -27,7 +27,12 @@ namespace hirvi
     public:
         PoliceModule() = default;
 
-        // TODO: implement!
+        void emancipate();
+
+        [[nodiscard]] bool get_is_emancipated() const;
+
+    private:
+        bool is_emancipated { false };
     };
 }
 

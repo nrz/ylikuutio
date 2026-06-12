@@ -1172,6 +1172,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_callback_engine.cpp
         code/hirvi/tests/test_cat.cpp
         code/hirvi/tests/test_ecosystem.cpp
+        code/hirvi/tests/test_emancipation.cpp
         code/hirvi/tests/test_material.cpp
         code/hirvi/tests/test_memory.cpp
         code/hirvi/tests/test_movable_controller.cpp

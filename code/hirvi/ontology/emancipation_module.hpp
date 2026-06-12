@@ -31,11 +31,8 @@ namespace hirvi
 
         void emancipate();
 
-        bool get_is_emancipated() const;
-
     private:
         PoliceModule& police_module;
-        bool is_emancipated { false };
     };
 }
 
