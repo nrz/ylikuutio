@@ -27,7 +27,7 @@ namespace yli::lisp
 
     void ErrorLog::add_error(const TextPosition& text_position, ErrorType error_type)
     {
-        this->errors.emplace_back(Error(text_position, error_type));
+        this->errors.emplace_back(text_position, error_type);
     }
 
     const Error& ErrorLog::at(const std::size_t index) const
