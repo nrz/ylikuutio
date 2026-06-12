@@ -119,7 +119,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::Datatype::OBJECT));
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::Datatype::CAT));
 
-    hirvi::Cat* const cat1 = hirvi_application.get_entity_factory().create_object_derivative<
+    auto* const cat1 = hirvi_application.get_entity_factory().create_object_derivative<
         hirvi::Cat,
         hirvi::CatMemoryAllocator>(
         hirvi::Datatype::CAT,

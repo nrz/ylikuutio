@@ -101,7 +101,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::Datatype::BIONT));
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::Datatype::POLICE_CAR));
 
-    hirvi::PoliceCar* const turbo_polizei1 = hirvi_application.get_entity_factory().create_holobiont_derivative<
+    auto* const turbo_polizei1 = hirvi_application.get_entity_factory().create_holobiont_derivative<
         hirvi::PoliceCar,
         hirvi::PoliceCarMemoryAllocator>(
         hirvi::Datatype::POLICE_CAR,
