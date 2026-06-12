@@ -42,7 +42,7 @@ namespace yli::lisp
             std::optional<char32_t> peek_codepoint() const;
             std::optional<char32_t> scan_codepoint_and_advance();
 
-            void update_line_and_column(const char32_t codepoint);
+            void update_line_and_column(char32_t codepoint);
             void next_line();
             void next_column();
 

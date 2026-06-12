@@ -102,7 +102,7 @@ namespace yli::lisp
 
         public:
             // Terminal expression.
-            explicit Expr(const Token& expr, const ExprType expr_type);
+            explicit Expr(const Token& expr, ExprType expr_type);
 
             virtual ~Expr() = default;
 
