@@ -70,7 +70,7 @@ namespace yli::lisp
 
     std::optional<char32_t> TextPosition::scan_codepoint_and_advance()
     {
-        std::optional<char32_t> maybe_codepoint = yli::string::read_codepoint(this->current_it, this->end_it);
+        std::optional<char32_t> maybe_codepoint = string::read_codepoint(this->current_it, this->end_it);
 
         if (!maybe_codepoint.has_value())
         {

@@ -32,8 +32,8 @@ namespace yli::ontology
 
 namespace yli::lisp
 {
-    std::optional<yli::data::AnyValue> execute(
-            const yli::ontology::Console& console,
+    std::optional<data::AnyValue> execute(
+            const ontology::Console& console,
             const std::string& command,
             const std::vector<std::string>& parameter_vector);
 }
