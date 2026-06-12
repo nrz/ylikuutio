@@ -284,7 +284,7 @@ namespace yli::lisp
         }
     }
 
-    void Parser::add_error(ErrorType error_type, const TextPosition& text_position)
+    void Parser::add_error(const ErrorType error_type, const TextPosition& text_position)
     {
         this->error_log.add_error(text_position, error_type);
     }

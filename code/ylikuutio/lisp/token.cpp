@@ -28,14 +28,14 @@ namespace yli::lisp
 {
     class TextPosition;
 
-    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position)
+    Token::Token(const TokenType type, std::string&& lexeme, const TextPosition& text_position)
         : type      { type },
         lexeme      { std::move(lexeme) },
         text_position { text_position }
     {
     }
 
-    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const std::int64_t value)
+    Token::Token(const TokenType type, std::string&& lexeme, const TextPosition& text_position, const std::int64_t value)
         : type      { type },
         lexeme      { std::move(lexeme) },
         text_position { text_position },
@@ -43,7 +43,7 @@ namespace yli::lisp
     {
     }
 
-    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const std::uint64_t value)
+    Token::Token(const TokenType type, std::string&& lexeme, const TextPosition& text_position, const std::uint64_t value)
         : type        { type },
         lexeme        { std::move(lexeme) },
         text_position { text_position },
@@ -51,7 +51,7 @@ namespace yli::lisp
     {
     }
 
-    Token::Token(TokenType type, std::string&& lexeme, const TextPosition& text_position, const double value)
+    Token::Token(const TokenType type, std::string&& lexeme, const TextPosition& text_position, const double value)
         : type        { type },
         lexeme        { std::move(lexeme) },
         text_position { text_position },
