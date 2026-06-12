@@ -30,7 +30,7 @@ namespace yli::lisp
     class SyntaxTreeList
     {
         public:
-            SyntaxTreeList();
+            SyntaxTreeList() = default;
 
             [[nodiscard]] const std::vector<std::unique_ptr<Expr>>& data() const;
 

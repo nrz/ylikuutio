@@ -27,10 +27,6 @@ namespace yli::lisp
 {
     class Expr;
 
-    SyntaxTreeList::SyntaxTreeList()
-    {
-    }
-
     const std::vector<std::unique_ptr<Expr>>& SyntaxTreeList::data() const
     {
         return this->syntax_trees;
