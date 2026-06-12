@@ -39,7 +39,7 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
 
     constexpr int argc { 0 };
     const char** const argv { nullptr };
-    hirvi::HirviApplication hirvi_application(argc, argv);
+    const hirvi::HirviApplication hirvi_application(argc, argv);
 
     SceneStruct scene_struct;
     scene_struct.global_name = "helsinki_scene";
