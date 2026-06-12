@@ -57,7 +57,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
 {
     using namespace yli::ontology;
 
-    const int argc { 0 };
+    constexpr int argc { 0 };
     const char** const argv { nullptr };
     hirvi::HirviApplication hirvi_application(argc, argv);
 

@@ -26,7 +26,7 @@
 
 TEST(hirvi_application_must_be_initialized_appropriately, hirvi_application)
 {
-    const int argc { 0 };
+    constexpr int argc { 0 };
     const char** const argv { nullptr };
     hirvi::HirviApplication hirvi_application(argc, argv);
     ASSERT_EQ(hirvi_application.get_memory_system().get_universe_datatype(), hirvi::Datatype::UNIVERSE);
