@@ -143,7 +143,7 @@ namespace yli::string
         if (*unicode_char_pointer == '\0')
         {
             ++unicode_char_pointer;
-            std::cerr << "Error: Unicode can not begin with \\0!\n";
+            std::cerr << "ERROR: `yli::string::extract_unicode_value_from_string`: Unicode can not begin with \\0!\n";
             return 0xdfff; // invalid unicode!
         }
 
@@ -158,7 +158,7 @@ namespace yli::string
         {
             // not valid format, must begin `"&#x"`.
             ++unicode_char_pointer;
-            std::cerr << "Error: Unicode string format not supported!\n";
+            std::cerr << "ERROR: `yli::string::extract_unicode_value_from_string`: Unicode string format not supported!\n";
             return 0xdfff; // invalid unicode!
         }
 
@@ -166,7 +166,7 @@ namespace yli::string
         {
             // not valid format, must begin `"&#x"`.
             ++unicode_char_pointer;
-            std::cerr << "Error: Unicode string format not supported!\n";
+            std::cerr << "ERROR: `yli::string::extract_unicode_value_from_string`: Unicode string format not supported!\n";
             return 0xdfff; // invalid unicode!
         }
 
