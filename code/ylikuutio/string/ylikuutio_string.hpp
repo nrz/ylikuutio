@@ -388,7 +388,7 @@ namespace yli::string
             remaining_characters_on_this_line--;
         }
 
-        if (my_string.size() > 0)
+        if (!my_string.empty())
         {
             my_vector.emplace_back(my_string);
         }
