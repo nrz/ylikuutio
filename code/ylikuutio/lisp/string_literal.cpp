@@ -69,18 +69,15 @@ namespace yli::lisp
                 case U'\\':
                     {
                         // Escape. Read next codepoint.
-                        std::optional<char32_t> maybe_second_codepoint = text_position.scan_codepoint_and_advance();
 
-                        if (!maybe_second_codepoint.has_value())
+                        if (std::optional<char32_t> maybe_second_codepoint = text_position.scan_codepoint_and_advance(); !maybe_second_codepoint.has_value())
                         {
                             // Scanning failed.
                             error_log.add_error(text_position, ErrorType::INVALID_UNICODE);
                             return std::nullopt;
                         }
 
-                        const char32_t second_codepoint = maybe_codepoint.value();
-
-                        if (second_codepoint == U'n') [[likely]]
+                        if (const char32_t second_codepoint = maybe_codepoint.value(); second_codepoint == U'n') [[likely]]
                         {
                             // Newline.
                             current_string.push_back(U'\n');

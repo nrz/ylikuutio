@@ -68,9 +68,7 @@ namespace yli::lisp
 
         for (std::size_t token_i = 0; token_i < this->token_list.data().size(); token_i++)
         {
-            const Token& token = this->token_list.at(token_i);
-
-            if (token.get_type() == TokenType::LEFT_PARENTHESIS)
+            if (const Token& token = this->token_list.at(token_i); token.get_type() == TokenType::LEFT_PARENTHESIS)
             {
                 // This token is the beginning of a parenthesis expression.
                 paren_token_stack.push(token);
