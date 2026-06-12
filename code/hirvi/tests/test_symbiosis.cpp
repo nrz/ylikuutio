@@ -62,7 +62,7 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
         turbo_polizei_png_symbiosis_struct);
     ASSERT_NE(turbo_polizei_png_symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei_png_symbiosis) % alignof(Symbiosis), 0);
-    yli::memory::ConstructibleModule symbiosis_constructible_module =
+    const yli::memory::ConstructibleModule symbiosis_constructible_module =
             turbo_polizei_png_symbiosis->get_constructible_module();
     ASSERT_EQ(symbiosis_constructible_module.storage_i, 0);
     ASSERT_EQ(symbiosis_constructible_module.slot_i, 0);

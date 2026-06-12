@@ -35,7 +35,7 @@ TEST(ecosystem_must_be_initialized_appropriately, hirvi_ecosystem)
         earth_ecosystem_struct);
     ASSERT_NE(earth_ecosystem, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(earth_ecosystem) % alignof(yli::ontology::Ecosystem), 0);
-    yli::memory::ConstructibleModule ecosystem_constructible_module = earth_ecosystem->get_constructible_module();
+    const yli::memory::ConstructibleModule ecosystem_constructible_module = earth_ecosystem->get_constructible_module();
     ASSERT_EQ(ecosystem_constructible_module.storage_i, 0);
     ASSERT_EQ(ecosystem_constructible_module.slot_i, 0);
     ASSERT_EQ(ecosystem_constructible_module.alive, true);

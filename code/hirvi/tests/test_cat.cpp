@@ -140,7 +140,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     ASSERT_EQ(cat_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(cat_memory_allocator.get_number_of_instances(), 1);
 
-    yli::memory::ConstructibleModule cat1_constructible_module = cat1->get_constructible_module();
+    const yli::memory::ConstructibleModule cat1_constructible_module = cat1->get_constructible_module();
     ASSERT_EQ(cat1_constructible_module.storage_i, 0);
     ASSERT_EQ(cat1_constructible_module.slot_i, 0);
     ASSERT_EQ(cat1_constructible_module.alive, true);

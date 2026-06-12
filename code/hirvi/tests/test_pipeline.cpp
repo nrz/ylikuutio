@@ -54,7 +54,7 @@ TEST(pipeline_must_be_initialized_appropriately, hirvi_pipeline)
             hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
     ASSERT_NE(helsinki_pipeline, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(helsinki_pipeline) % alignof(Pipeline), 0);
-    yli::memory::ConstructibleModule pipeline_constructible_module = helsinki_pipeline->get_constructible_module();
+    const yli::memory::ConstructibleModule pipeline_constructible_module = helsinki_pipeline->get_constructible_module();
     ASSERT_EQ(pipeline_constructible_module.storage_i, 0);
     ASSERT_EQ(pipeline_constructible_module.slot_i, 0);
     ASSERT_EQ(pipeline_constructible_module.alive, true);
