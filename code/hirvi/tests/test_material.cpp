@@ -57,7 +57,7 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
             hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
     MaterialStruct orange_fur_material_struct {
-        Request(helsinki_scene), Request(helsinki_pipeline), yli::ontology::TextureFileFormat::PNG
+        Request(helsinki_scene), Request(helsinki_pipeline), TextureFileFormat::PNG
     };
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(
