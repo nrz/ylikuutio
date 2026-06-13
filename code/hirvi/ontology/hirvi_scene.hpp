@@ -38,7 +38,7 @@ namespace hirvi
         ~HirviScene() override = default;
 
     private:
-        MasterOfPolices operations_center;
+        MasterOfPolices master_of_polices;
     };
 }
 #endif

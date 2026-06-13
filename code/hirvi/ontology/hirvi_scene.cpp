@@ -40,7 +40,7 @@ namespace hirvi
         const SceneStruct& scene_struct,
         GenericParentModule* universe_parent_module)
         : Scene(application, universe, scene_struct, universe_parent_module),
-          operations_center(
+          master_of_polices(
               *this,
               &this->registry,
               "polices")
