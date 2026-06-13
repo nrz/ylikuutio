@@ -58,9 +58,9 @@ namespace yli::ontology
 
             virtual ~ApprenticeModule();
 
-            Entity* get_master() const noexcept;
-            Entity* get_apprentice() const noexcept;
-            std::size_t get_apprenticeID() const noexcept;
+            [[nodiscard]] Entity* get_master() const noexcept;
+            [[nodiscard]] Entity* get_apprentice() const noexcept;
+            [[nodiscard]] std::size_t get_apprenticeID() const noexcept;
 
             void release() noexcept;
 
