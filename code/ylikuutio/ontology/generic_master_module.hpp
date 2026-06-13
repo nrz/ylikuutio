@@ -72,14 +72,14 @@ namespace yli::ontology
 
             ~GenericMasterModule() override;
 
-            Entity& get_generic_master() const noexcept;
+            [[nodiscard]] Entity& get_generic_master() const noexcept;
 
             std::vector<ApprenticeModule*>& get_apprentice_module_pointer_vector_reference() noexcept;
-            const std::vector<ApprenticeModule*>& get_apprentice_module_pointer_vector_const_reference() const noexcept;
+            [[nodiscard]] const std::vector<ApprenticeModule*>& get_apprentice_module_pointer_vector_const_reference() const noexcept;
 
-            std::size_t get_number_of_apprentices() const noexcept;
+            [[nodiscard]] std::size_t get_number_of_apprentices() const noexcept;
 
-            Entity* get(std::size_t index) const noexcept override;
+            [[nodiscard]] Entity* get(std::size_t index) const noexcept override;
 
             // Iterator functions.
             iterator begin()
