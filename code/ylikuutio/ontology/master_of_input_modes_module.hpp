@@ -43,9 +43,9 @@ namespace yli::ontology
 
             ~MasterOfInputModesModule() override = default;
 
-            bool has_current_input_mode() const;
+            [[nodiscard]] bool has_current_input_mode() const;
             void set_current_input_mode(InputMode* input_mode);
-            InputMode* get_current_input_mode() const;
+            [[nodiscard]] InputMode* get_current_input_mode() const;
             void activate_current_input_mode() const;
             void deactivate_current_input_mode() const;
 
