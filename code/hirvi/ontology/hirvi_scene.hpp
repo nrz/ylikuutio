@@ -19,7 +19,7 @@
 #define HIRVI_HIRVI_SCENE_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "police_operations_center.hpp"
+#include "master_of_polices.hpp"
 
 namespace hirvi
 {
@@ -38,7 +38,7 @@ namespace hirvi
         ~HirviScene() override = default;
 
     private:
-        PoliceOperationsCenter operations_center;
+        MasterOfPolices operations_center;
     };
 }
 #endif

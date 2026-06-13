@@ -15,18 +15,14 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_ONTOLOGY_POLICE_NETWORK_HPP_INCLUDED
-#define HIRVI_ONTOLOGY_POLICE_NETWORK_HPP_INCLUDED
-
-#include "code/ylikuutio/ontology/generic_master_module.hpp"
-#include "spatial_data.hpp"
+#include "master_of_polices.hpp"
+#include "code/ylikuutio/ontology/scene.hpp"
 
 // Include standard headers
 #include <string> // std::string
 
 namespace yli::ontology
 {
-    class Scene;
     class Registry;
 }
 
@@ -34,21 +30,20 @@ namespace hirvi
 {
     using namespace yli::ontology;
 
-    class PoliceOperationsCenter final : GenericMasterModule
+    MasterOfPolices::MasterOfPolices(
+        Scene& master_scene,
+        Registry* const registry,
+        const std::string& name)
+        : GenericMasterModule(master_scene, registry, name)
+    { }
+
+    void MasterOfPolices::store_data()
     {
-    public:
-        PoliceOperationsCenter(
-            Scene& master_scene,
-            Registry* registry,
-            const std::string& name);
+        // TODO: implement!
+    }
 
-        void store_data();
-
-        [[nodiscard]] const SpatialData& get_spatial_data() const;
-
-    private:
-        SpatialData spatial_data;
-    };
+    const SpatialData& MasterOfPolices::get_spatial_data() const
+    {
+        return this->spatial_data;
+    }
 }
-
-#endif
