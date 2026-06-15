@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_ONTOLOGY_SPATIAL_DATA_HPP_INCLUDED
-#define HIRVI_ONTOLOGY_SPATIAL_DATA_HPP_INCLUDED
+#ifndef HIRVI_DATA_SPATIAL_DATA_HPP_INCLUDED
+#define HIRVI_DATA_SPATIAL_DATA_HPP_INCLUDED
 
 #include "code/hirvi/data/position_report.hpp"
 

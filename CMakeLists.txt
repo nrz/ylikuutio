@@ -940,6 +940,8 @@ add_library(hirvi_lib STATIC
     code/hirvi/data/data_analyzer.cpp
     code/hirvi/data/data_analyzer.hpp
     code/hirvi/data/position_report.hpp
+    code/hirvi/data/spatial_data.cpp
+    code/hirvi/data/spatial_data.hpp
     code/hirvi/data/trivial_data_analyzer.cpp
     code/hirvi/data/trivial_data_analyzer.hpp
     code/hirvi/ontology/elk.cpp
@@ -972,8 +974,6 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/police_tram.hpp
     code/hirvi/ontology/run_ability.cpp
     code/hirvi/ontology/run_ability.hpp
-    code/hirvi/ontology/spatial_data.cpp
-    code/hirvi/ontology/spatial_data.hpp
     code/hirvi/ontology/swim_ability.cpp
     code/hirvi/ontology/swim_ability.hpp
     code/hirvi/ontology/train.cpp

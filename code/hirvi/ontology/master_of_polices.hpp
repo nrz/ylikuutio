@@ -19,7 +19,7 @@
 #define HIRVI_ONTOLOGY_POLICE_NETWORK_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/generic_master_module.hpp"
-#include "spatial_data.hpp"
+#include "code/hirvi/data/spatial_data.hpp"
 
 // Include standard headers
 #include <string> // std::string
