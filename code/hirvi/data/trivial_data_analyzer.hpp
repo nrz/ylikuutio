@@ -15,10 +15,10 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_ONTOLOGY_SPATIAL_DATA_HPP_INCLUDED
-#define HIRVI_ONTOLOGY_SPATIAL_DATA_HPP_INCLUDED
+#ifndef HIRVI_ONTOLOGY_TRIVIAL_DATA_ANALYZER_HPP_INCLUDED
+#define HIRVI_ONTOLOGY_TRIVIAL_DATA_ANALYZER_HPP_INCLUDED
 
-#include "code/hirvi/data/position_report.hpp"
+#include "data_analyzer.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -26,28 +26,20 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-// Include standard headers
-#include <set>    // std::set
-#include <vector> // std::vector
+#include <cstddef> // std::size_t
+#include <utility> // std::pair
+#include <vector>  // std::vector
 
 namespace hirvi
 {
-    class DataAnalyzer;
+    class SpatialData;
 
-    class SpatialData
+    class TrivialDataAnalyzer : public DataAnalyzer
     {
     public:
-        SpatialData() = default;
+        TrivialDataAnalyzer();
 
-        void clear_reports();
-        void add_report(const PositionReport& report);
-        void determine_position_and_detect_traitors(const DataAnalyzer& data_analyzer);
-
-    private:
-        std::vector<PositionReport> position_reports;
-
-        std::set<std::size_t> detected_traitors;
-        glm::vec3 determined_position { NAN, NAN, NAN };
+        [[nodiscard]] std::pair<std::vector<std::size_t>, glm::vec3> analyze_data(const std::vector<PositionReport>& reports) const override;
     };
 }
 

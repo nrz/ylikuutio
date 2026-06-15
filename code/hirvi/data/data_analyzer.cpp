@@ -15,31 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "spatial_data.hpp"
-#include "code/hirvi/data/data_analyzer.hpp"
-
-// Include standard headers
-#include <algorithm> // std::ranges::copy
-#include <iterator>  // std::inserter
+#include "data_analyzer.hpp"
 
 namespace hirvi
 {
-    struct PositionReport;
-
-    void SpatialData::clear_reports()
-    {
-        this->position_reports.clear();
-    }
-
-    void SpatialData::add_report(const PositionReport& report)
-    {
-        this->position_reports.emplace_back(report);
-    }
-
-    void SpatialData::determine_position_and_detect_traitors(const DataAnalyzer& data_analyzer)
-    {
-        const auto& [traitors, position] = data_analyzer.analyze_data(this->position_reports);
-        std::ranges::copy(traitors, std::inserter(this->detected_traitors, this->detected_traitors.end()));
-        this->determined_position = position;
-    }
 }

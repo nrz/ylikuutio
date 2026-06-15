@@ -937,6 +937,11 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/climb_ability.cpp
     code/hirvi/ontology/climb_ability.hpp
     code/hirvi/data/datatype.hpp
+    code/hirvi/data/data_analyzer.cpp
+    code/hirvi/data/data_analyzer.hpp
+    code/hirvi/data/position_report.hpp
+    code/hirvi/data/trivial_data_analyzer.cpp
+    code/hirvi/data/trivial_data_analyzer.hpp
     code/hirvi/ontology/elk.cpp
     code/hirvi/ontology/elk.hpp
     code/hirvi/ontology/emancipation_module.cpp
