@@ -24,7 +24,7 @@
 // Only references and raw pointers are supported for `yli::ontology` Entities,
 // as they don't support any kind of shared ownership.
 
-namespace hirvi
+namespace hirvi::data
 {
     enum Datatype
     {

@@ -116,13 +116,13 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     LocomotionModuleStruct cat1_gallop_struct(12.5f); // 45 km/h.
     LocomotionModuleStruct cat1_climb_struct;
 
-    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::Datatype::OBJECT));
-    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::Datatype::CAT));
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::OBJECT));
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::CAT));
 
     auto* const cat1 = hirvi_application.get_entity_factory().create_object_derivative<
         hirvi::Cat,
         hirvi::CatMemoryAllocator>(
-        hirvi::Datatype::CAT,
+        hirvi::data::CAT,
         cat1_object_struct,
         cat1_walk_struct,
         cat1_trot_struct,
@@ -132,11 +132,11 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     ASSERT_NE(cat1, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(cat1) % alignof(hirvi::Cat), 0);
 
-    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::Datatype::CAT));
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::CAT));
 
     // Even though `Cat` is derived from `Object`. `Cat` should be allocated using its own allocator.
     yli::memory::MemoryAllocator<hirvi::Cat*>& cat_memory_allocator =
-            hirvi_application.get_memory_allocator<hirvi::Cat*>(hirvi::Datatype::CAT);
+            hirvi_application.get_memory_allocator<hirvi::Cat*>(hirvi::data::CAT);
     ASSERT_EQ(cat_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(cat_memory_allocator.get_number_of_instances(), 1);
 

@@ -42,7 +42,7 @@ namespace hirvi
         // TODO: implement!
     }
 
-    const SpatialData& MasterOfPolices::get_spatial_data() const
+    const data::SpatialData& MasterOfPolices::get_spatial_data() const
     {
         return this->spatial_data;
     }

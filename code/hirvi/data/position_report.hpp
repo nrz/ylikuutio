@@ -27,7 +27,7 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 
-namespace hirvi
+namespace hirvi::data
 {
     struct PositionReport
     {

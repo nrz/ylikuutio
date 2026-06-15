@@ -74,7 +74,7 @@ namespace hirvi
 
         yli::memory::GenericMemorySystem &get_generic_memory_system() const override;
 
-        yli::memory::MemorySystem<Datatype> &get_memory_system() const;
+        yli::memory::MemorySystem<data::Datatype> &get_memory_system() const;
 
         yli::memory::GenericMemoryAllocator &get_generic_memory_allocator(int type) const override;
 
@@ -91,7 +91,7 @@ namespace hirvi
 
         yli::ontology::GenericEntityFactory &get_generic_entity_factory() const override;
 
-        yli::ontology::EntityFactory<Datatype> &get_entity_factory() const
+        yli::ontology::EntityFactory<data::Datatype> &get_entity_factory() const
         {
             return this->core.entity_factory.get();
         }

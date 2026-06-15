@@ -111,7 +111,7 @@ namespace hirvi
         return this->core.memory_system.get();
     }
 
-    yli::memory::MemorySystem<Datatype> &HirviEditApplication::get_memory_system() const
+    yli::memory::MemorySystem<data::Datatype> &HirviEditApplication::get_memory_system() const
     {
         return this->core.memory_system.get();
     }

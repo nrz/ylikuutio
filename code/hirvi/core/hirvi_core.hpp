@@ -77,9 +77,9 @@ namespace hirvi
 
         [[nodiscard]] yli::ontology::Ecosystem* create_earth_ecosystem() const;
 
-        yli::memory::MemorySystem<Datatype> memory_system { UNIVERSE };
-        yli::ontology::EntityFactory<Datatype> entity_factory;
-        yli::core::SystemFactory<Datatype> system_factory;
+        yli::memory::MemorySystem<data::Datatype> memory_system { data::UNIVERSE };
+        yli::ontology::EntityFactory<data::Datatype> entity_factory;
+        yli::core::SystemFactory<data::Datatype> system_factory;
         yli::ontology::Universe* const universe { nullptr };
         yli::event::EventSystem* const event_system { nullptr };
         yli::input::InputSystem* const input_system { nullptr };

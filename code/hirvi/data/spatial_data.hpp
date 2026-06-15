@@ -30,7 +30,7 @@
 #include <set>    // std::set
 #include <vector> // std::vector
 
-namespace hirvi
+namespace hirvi::data
 {
     class DataAnalyzer;
 

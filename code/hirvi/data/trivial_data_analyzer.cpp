@@ -23,7 +23,7 @@
 // Include standard headers
 #include <unordered_map> // std::unordered_map
 
-namespace hirvi
+namespace hirvi::data
 {
     std::pair<std::vector<std::size_t>, glm::vec3> TrivialDataAnalyzer::analyze_data(
         const std::vector<PositionReport>& reports) const

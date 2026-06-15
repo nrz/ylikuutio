@@ -44,10 +44,10 @@ namespace hirvi
 
         void store_data();
 
-        [[nodiscard]] const SpatialData& get_spatial_data() const;
+        [[nodiscard]] const data::SpatialData& get_spatial_data() const;
 
     private:
-        SpatialData spatial_data;
+        data::SpatialData spatial_data;
     };
 }
 

@@ -78,7 +78,7 @@ namespace hirvi
         HirviScene* const helsinki_scene = this->entity_factory.create_scene_derivative<
             HirviScene,
             HirviSceneMemoryAllocator>(
-            HIRVI_SCENE,
+            data::HIRVI_SCENE,
             scene_struct);
 
         if (helsinki_scene == nullptr)
@@ -495,7 +495,7 @@ namespace hirvi
         if (this->entity_factory.create_object_derivative<
                 Cat,
                 CatMemoryAllocator>(
-                CAT,
+                data::CAT,
                 cat1_object_struct,
                 cat1_walk_struct,
                 cat1_trot_struct,
@@ -527,7 +527,7 @@ namespace hirvi
         Cat* const cat2 = this->entity_factory.create_object_derivative<
             Cat,
             CatMemoryAllocator>(
-            CAT,
+            data::CAT,
             cat2_object_struct,
             cat2_walk_struct,
             cat2_trot_struct,
@@ -573,7 +573,7 @@ namespace hirvi
         PoliceCar* const turbo_polizei_png1 = this->entity_factory.create_holobiont_derivative<
             PoliceCar,
             PoliceCarMemoryAllocator>(
-            POLICE_CAR,
+            data::POLICE_CAR,
             turbo_polizei_png_police_car_struct1,
             road_vehicle_struct1);
 
@@ -601,7 +601,7 @@ namespace hirvi
         PoliceCar* const turbo_polizei_png2 = this->entity_factory.create_holobiont_derivative<
             PoliceCar,
             PoliceCarMemoryAllocator>(
-            POLICE_CAR,
+            data::POLICE_CAR,
             turbo_polizei_png_police_car_struct2,
             road_vehicle_struct2);
 

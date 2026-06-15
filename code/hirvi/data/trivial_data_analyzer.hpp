@@ -30,7 +30,7 @@
 #include <utility> // std::pair
 #include <vector>  // std::vector
 
-namespace hirvi
+namespace hirvi::data
 {
     class SpatialData;
 

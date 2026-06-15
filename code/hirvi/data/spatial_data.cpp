@@ -22,7 +22,7 @@
 #include <algorithm> // std::ranges::copy
 #include <iterator>  // std::inserter
 
-namespace hirvi
+namespace hirvi::data
 {
     struct PositionReport;
 

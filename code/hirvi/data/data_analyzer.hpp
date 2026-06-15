@@ -29,7 +29,7 @@
 #include <glm/glm.hpp> // glm
 #endif
 
-namespace hirvi
+namespace hirvi::data
 {
     class SpatialData;
 

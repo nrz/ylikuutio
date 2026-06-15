@@ -30,14 +30,14 @@ TEST(memory_system_must_be_initialized_appropriately, hirvi_application)
     const char** const argv { nullptr };
     hirvi::HirviApplication hirvi_application(argc, argv);
 
-    const auto& memory_system = static_cast<yli::memory::MemorySystem<hirvi::Datatype>&>(
+    const auto& memory_system = static_cast<yli::memory::MemorySystem<hirvi::data::Datatype>&>(
         hirvi_application.get_generic_memory_system());
-    hirvi::Datatype universe_datatype = memory_system.get_universe_datatype();
-    ASSERT_EQ(universe_datatype, hirvi::Datatype::UNIVERSE);
+    hirvi::data::Datatype universe_datatype = memory_system.get_universe_datatype();
+    ASSERT_EQ(universe_datatype, hirvi::data::UNIVERSE);
 
     std::size_t n_allocators { 0 };
 
-    for (int datatype = 0; datatype < hirvi::Datatype::MAX_VALUE; datatype++)
+    for (int datatype = 0; datatype < hirvi::data::MAX_VALUE; datatype++)
     {
         if (bool has_allocator = memory_system.has_allocator(datatype))
         {
@@ -45,31 +45,31 @@ TEST(memory_system_must_be_initialized_appropriately, hirvi_application)
             const auto& memory_allocator = memory_system.get_generic_allocator(datatype);
             ASSERT_EQ(memory_allocator.get_datatype(), datatype);
 
-            if (datatype == hirvi::Datatype::UNIVERSE)
+            if (datatype == hirvi::data::UNIVERSE)
             {
                 // `Universe` gets created by the `HirviApplication` constructor.
                 ASSERT_EQ(memory_allocator.get_number_of_storages(), 1);
                 ASSERT_EQ(memory_allocator.get_number_of_instances(), 1);
             }
-            else if (datatype == hirvi::Datatype::VARIABLE)
+            else if (datatype == hirvi::data::VARIABLE)
             {
                 // `Variable` called `should_render` gets created by the `HirviApplication` constructor.
                 ASSERT_EQ(memory_allocator.get_number_of_storages(), 1);
                 ASSERT_EQ(memory_allocator.get_number_of_instances(), 1);
             }
-            else if (datatype == hirvi::Datatype::EVENT_SYSTEM)
+            else if (datatype == hirvi::data::EVENT_SYSTEM)
             {
                 // `EventSystem` gets created by the `HirviApplication` constructor.
                 ASSERT_EQ(memory_allocator.get_number_of_storages(), 1);
                 ASSERT_EQ(memory_allocator.get_number_of_instances(), 1);
             }
-            else if (datatype == hirvi::Datatype::INPUT_SYSTEM)
+            else if (datatype == hirvi::data::INPUT_SYSTEM)
             {
                 // `InputSystem` gets created by the `HirviApplication` constructor.
                 ASSERT_EQ(memory_allocator.get_number_of_storages(), 1);
                 ASSERT_EQ(memory_allocator.get_number_of_instances(), 1);
             }
-            else if (datatype == hirvi::Datatype::AUDIO_SYSTEM)
+            else if (datatype == hirvi::data::AUDIO_SYSTEM)
             {
                 // `AudioSystem` gets created by the `HirviApplication` constructor.
                 ASSERT_EQ(memory_allocator.get_number_of_storages(), 1);

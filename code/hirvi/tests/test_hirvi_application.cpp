@@ -29,7 +29,7 @@ TEST(hirvi_application_must_be_initialized_appropriately, hirvi_application)
     constexpr int argc { 0 };
     const char** const argv { nullptr };
     const hirvi::HirviApplication hirvi_application(argc, argv);
-    ASSERT_EQ(hirvi_application.get_memory_system().get_universe_datatype(), hirvi::Datatype::UNIVERSE);
+    ASSERT_EQ(hirvi_application.get_memory_system().get_universe_datatype(), hirvi::data::UNIVERSE);
 
     const yli::ontology::Universe& universe = hirvi_application.get_entity_factory().get_universe();
     ASSERT_EQ(universe, hirvi_application.get_universe());
