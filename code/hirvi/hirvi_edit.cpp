@@ -247,7 +247,7 @@ namespace hirvi
         return this->core.create_and_start_simulation(&HirviEditApplication::customize);
     }
 
-    void HirviEditApplication::customize(HirviCore &hirvi_core)
+    void HirviEditApplication::customize(core::HirviCore &hirvi_core)
     {
         hirvi_core.entity_factory.create_console_lisp_function_overload("version", Request<Console>("my_console"),
                                                                         &hirvi_edit::version);

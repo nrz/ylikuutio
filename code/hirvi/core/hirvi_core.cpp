@@ -42,7 +42,10 @@ namespace hirvi
 {
     using namespace yli::console;
     using namespace yli::ontology;
+}
 
+namespace hirvi::core
+{
     HirviCore::HirviCore(yli::core::Application& application, const UniverseStruct& universe_struct)
         : entity_factory(application, this->memory_system),
           system_factory(this->memory_system),

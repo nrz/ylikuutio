@@ -121,7 +121,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
 
     auto* const cat1 = hirvi_application.get_entity_factory().create_object_derivative<
         hirvi::Cat,
-        hirvi::CatMemoryAllocator>(
+        hirvi::core::CatMemoryAllocator>(
         hirvi::data::CAT,
         cat1_object_struct,
         cat1_walk_struct,

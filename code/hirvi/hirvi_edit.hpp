@@ -110,10 +110,10 @@ namespace hirvi
 
         bool create_and_start_simulation() override;
 
-        static void customize(HirviCore &hirvi_core);
+        static void customize(core::HirviCore &hirvi_core);
 
     private:
-        HirviCore core;
+        core::HirviCore core;
         yli::edit::EditCore edit;
     };
 }

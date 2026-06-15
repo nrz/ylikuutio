@@ -103,7 +103,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
 
     auto* const turbo_polizei1 = hirvi_application.get_entity_factory().create_holobiont_derivative<
         hirvi::PoliceCar,
-        hirvi::PoliceCarMemoryAllocator>(
+        hirvi::core::PoliceCarMemoryAllocator>(
         hirvi::data::POLICE_CAR,
         turbo_polizei_png_police_car_struct1,
         road_vehicle_struct1);

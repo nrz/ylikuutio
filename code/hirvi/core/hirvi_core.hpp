@@ -58,7 +58,10 @@ namespace hirvi
 {
     class Cat;
     class PoliceCar;
+}
 
+namespace hirvi::core
+{
     // Allocators for custom types.
     using HirviSceneMemoryAllocator = yli::memory::MemoryAllocator<HirviScene, 256>;
     using CatMemoryAllocator = yli::memory::MemoryAllocator<Cat, 256>;

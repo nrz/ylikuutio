@@ -61,7 +61,7 @@ namespace yli::ontology
     class Entity;
 }
 
-namespace hirvi
+namespace hirvi::core
 {
     using namespace yli::ontology;
 

@@ -18,7 +18,7 @@
 #ifndef HIRVI_CORE_HIRVI_APPLICATION_CALLBACK_HPP_INCLUDED
 #define HIRVI_CORE_HIRVI_APPLICATION_CALLBACK_HPP_INCLUDED
 
-namespace hirvi
+namespace hirvi::core
 {
     class HirviCore;
 
