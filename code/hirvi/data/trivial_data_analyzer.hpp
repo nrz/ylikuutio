@@ -37,8 +37,6 @@ namespace hirvi::data
     class TrivialDataAnalyzer : public DataAnalyzer
     {
     public:
-        TrivialDataAnalyzer();
-
         [[nodiscard]] std::pair<std::vector<std::size_t>, glm::vec3> analyze_data(const std::vector<PositionReport>& reports) const override;
     };
 }
