@@ -18,6 +18,7 @@
 #ifndef HIRVI_ONTOLOGY_DATA_ANALYZER_HPP_INCLUDED
 #define HIRVI_ONTOLOGY_DATA_ANALYZER_HPP_INCLUDED
 
+// Include standard headers
 #include <utility> // std::pair
 #include <vector>  // std::vector
 
