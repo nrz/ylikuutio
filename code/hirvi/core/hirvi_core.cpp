@@ -46,7 +46,7 @@ namespace hirvi
 
 namespace hirvi::core
 {
-    HirviCore::HirviCore(yli::core::Application& application, const UniverseStruct& universe_struct)
+    HirviCore::HirviCore(Application& application, const UniverseStruct& universe_struct)
         : entity_factory(application, this->memory_system),
           system_factory(this->memory_system),
           universe { this->entity_factory.create_universe(universe_struct) },
@@ -116,7 +116,7 @@ namespace hirvi::core
 
         std::cout << "Creating Entity* my_font_2d_entity ...\n";
 
-        FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
+        FontStruct font_struct { TextureFileFormat::PNG };
         font_struct.texture_filename = "Holstein.png";
         font_struct.screen_width = this->get_universe().get_window_width();
         font_struct.screen_height = this->get_universe().get_window_height();
