@@ -28,6 +28,8 @@ namespace yli::ontology
 
 namespace hirvi
 {
+    class SpatialData;
+
     using namespace yli::ontology;
 
     MasterOfPolices::MasterOfPolices(
