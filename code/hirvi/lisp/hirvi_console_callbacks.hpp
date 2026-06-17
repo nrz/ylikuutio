@@ -28,7 +28,7 @@ namespace yli::ontology
     class Console;
 }
 
-namespace hirvi
+namespace hirvi::lisp
 {
     std::optional<yli::data::AnyValue> version(
         yli::ontology::Console& console);

@@ -23,7 +23,7 @@
 // Include standard headers
 #include <optional> // std::optional
 
-namespace hirvi_edit
+namespace hirvi_edit::lisp
 {
     std::optional<yli::data::AnyValue> version(
         yli::ontology::Console& console)

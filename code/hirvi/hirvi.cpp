@@ -250,7 +250,7 @@ namespace hirvi
     void HirviApplication::customize(core::HirviCore &hirvi_core)
     {
         hirvi_core.entity_factory.create_console_lisp_function_overload("version", Request<Console>("my_console"),
-                                                                        &version);
+                                                                        &lisp::version);
     }
 }
 
