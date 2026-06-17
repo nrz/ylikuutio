@@ -28,16 +28,15 @@ namespace yli::core
 
 namespace yli::ontology
 {
+    class GenericParentModule;
+    class GenericMasterModule;
+    class Universe;
+    struct HolobiontStruct;
     struct LocomotionModuleStruct;
 }
 
 namespace hirvi
 {
-    class GenericParentModule;
-    class GenericMasterModule;
-    class Universe;
-    struct HolobiontStruct;
-
     class Elk : public yli::ontology::Holobiont
     {
     public:
