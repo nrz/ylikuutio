@@ -34,6 +34,8 @@ namespace yli::audio
 namespace yli::core
 {
     class Application;
+    template<typename TypeEnumType>
+    class SystemFactory;
 }
 
 namespace yli::event
