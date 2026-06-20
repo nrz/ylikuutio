@@ -38,7 +38,7 @@ namespace hirvi::ontology
         yli::ontology::Universe& universe,
         const yli::ontology::AbilityStruct& ability_struct,
         yli::ontology::GenericParentModule* const parent_module)
-        : yli::ontology::Ability(application, universe, ability_struct, parent_module)
+        : Ability(application, universe, ability_struct, parent_module)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "hirvi::JumpAbility*";
