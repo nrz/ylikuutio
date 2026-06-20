@@ -29,7 +29,7 @@ namespace hirvi::ontology
     public:
         explicit EmancipationModule(PoliceModule& police_module);
 
-        void emancipate();
+        void emancipate() const;
 
     private:
         PoliceModule& police_module;

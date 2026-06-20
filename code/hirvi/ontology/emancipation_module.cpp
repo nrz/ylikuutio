@@ -24,7 +24,7 @@ namespace hirvi::ontology
         : police_module(police_module)
     { }
 
-    void EmancipationModule::emancipate()
+    void EmancipationModule::emancipate() const
     {
         this->police_module.emancipate();
     }
