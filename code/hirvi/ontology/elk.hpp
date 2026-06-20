@@ -35,7 +35,7 @@ namespace yli::ontology
     struct LocomotionModuleStruct;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     class Elk : public yli::ontology::Holobiont
     {

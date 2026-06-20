@@ -21,7 +21,7 @@
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "master_of_polices.hpp"
 
-namespace hirvi
+namespace hirvi::ontology
 {
     using namespace yli::core;
     using namespace yli::ontology;

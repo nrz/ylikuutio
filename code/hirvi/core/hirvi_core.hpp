@@ -56,7 +56,7 @@ namespace yli::ontology
     struct UniverseStruct;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     class Cat;
     class PoliceCar;
@@ -65,27 +65,27 @@ namespace hirvi
 namespace hirvi::core
 {
     // Allocators for custom types.
-    using HirviSceneMemoryAllocator = yli::memory::MemoryAllocator<HirviScene, 256>;
-    using CatMemoryAllocator = yli::memory::MemoryAllocator<Cat, 256>;
-    using PoliceCarMemoryAllocator = yli::memory::MemoryAllocator<PoliceCar, 256>;
+    using HirviSceneMemoryAllocator = yli::memory::MemoryAllocator<ontology::HirviScene, 256>;
+    using CatMemoryAllocator = yli::memory::MemoryAllocator<ontology::Cat, 256>;
+    using PoliceCarMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceCar, 256>;
 
     class HirviCore
     {
     public:
-        HirviCore(Application& application, const UniverseStruct& universe_struct);
+        HirviCore(yli::core::Application& application, const ontology::UniverseStruct& universe_struct);
 
-        [[nodiscard]] Universe& get_universe() const;
+        [[nodiscard]] ontology::Universe& get_universe() const;
 
         bool create_and_start_simulation(HirviApplicationCallback hirvi_application_callback);
 
-        [[nodiscard]] HirviScene* create_helsinki_scene() const;
+        [[nodiscard]] ontology::HirviScene* create_helsinki_scene() const;
 
-        [[nodiscard]] Ecosystem* create_earth_ecosystem() const;
+        [[nodiscard]] ontology::Ecosystem* create_earth_ecosystem() const;
 
         yli::memory::MemorySystem<data::Datatype> memory_system { data::UNIVERSE };
-        EntityFactory<data::Datatype> entity_factory;
-        SystemFactory<data::Datatype> system_factory;
-        Universe* const universe { nullptr };
+        ontology::EntityFactory<data::Datatype> entity_factory;
+        yli::core::SystemFactory<data::Datatype> system_factory;
+        ontology::Universe* const universe { nullptr };
         yli::event::EventSystem* const event_system { nullptr };
         yli::input::InputSystem* const input_system { nullptr };
         yli::audio::AudioSystem* const audio_system { nullptr };

@@ -30,7 +30,7 @@ namespace yli::ontology
     class Registry;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     using namespace yli::ontology;
 

@@ -18,7 +18,7 @@
 #ifndef HIRVI_ONTOLOGY_POLICE_MODULE_HPP_INCLUDED
 #define HIRVI_ONTOLOGY_POLICE_MODULE_HPP_INCLUDED
 
-namespace hirvi
+namespace hirvi::ontology
 {
     class PoliceModule
     {

@@ -120,7 +120,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::CAT));
 
     auto* const cat1 = hirvi_application.get_entity_factory().create_object_derivative<
-        hirvi::Cat,
+        hirvi::ontology::Cat,
         hirvi::core::CatMemoryAllocator>(
         hirvi::data::CAT,
         cat1_object_struct,
@@ -130,13 +130,13 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
         cat1_gallop_struct,
         cat1_climb_struct);
     ASSERT_NE(cat1, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(cat1) % alignof(hirvi::Cat), 0);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(cat1) % alignof(hirvi::ontology::Cat), 0);
 
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::CAT));
 
     // Even though `Cat` is derived from `Object`. `Cat` should be allocated using its own allocator.
-    yli::memory::MemoryAllocator<hirvi::Cat*>& cat_memory_allocator =
-            hirvi_application.get_memory_allocator<hirvi::Cat*>(hirvi::data::CAT);
+    yli::memory::MemoryAllocator<hirvi::ontology::Cat*>& cat_memory_allocator =
+            hirvi_application.get_memory_allocator<hirvi::ontology::Cat*>(hirvi::data::CAT);
     ASSERT_EQ(cat_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(cat_memory_allocator.get_number_of_instances(), 1);
 

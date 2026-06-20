@@ -34,7 +34,7 @@ namespace yli::ontology
     struct AbilityStruct;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     JumpAbility::JumpAbility(
         yli::core::Application& application,

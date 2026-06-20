@@ -32,7 +32,7 @@ namespace yli::ontology
     struct HolobiontStruct;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     PoliceCar::PoliceCar(
         yli::core::Application& application,

@@ -32,7 +32,7 @@ namespace yli::ontology
     struct LocomotionModuleStruct;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     PoliceHelicopter::PoliceHelicopter(
         yli::core::Application& application,

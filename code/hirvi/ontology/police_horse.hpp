@@ -36,7 +36,7 @@ namespace yli::ontology
     struct HolobiontStruct;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     class PoliceHorse : public yli::ontology::Holobiont
     {

@@ -36,7 +36,7 @@ namespace yli::ontology
     struct LocomotionModuleStruct;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     class PoliceCar : public yli::ontology::Holobiont
     {

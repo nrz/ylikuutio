@@ -35,7 +35,7 @@ namespace yli::ontology
     struct AbilityStruct;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     class SwimAbility final : public yli::ontology::Ability
     {

@@ -36,7 +36,7 @@ namespace yli::ontology
     struct LocomotionModuleStruct;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     class Cat : public yli::ontology::Object
     {

@@ -26,7 +26,7 @@ namespace yli::ontology
     class Registry;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     class SpatialData;
 

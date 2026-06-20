@@ -29,7 +29,7 @@ namespace yli::ontology
     struct SceneStruct;
 }
 
-namespace hirvi
+namespace hirvi::ontology
 {
     using namespace yli::core;
     using namespace yli::ontology;

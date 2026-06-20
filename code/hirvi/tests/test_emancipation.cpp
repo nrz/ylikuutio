@@ -21,10 +21,10 @@
 
 TEST(emancipation_must_function_properly, emancipation)
 {
-    hirvi::PoliceModule police_module;
+    hirvi::ontology::PoliceModule police_module;
     ASSERT_FALSE(police_module.get_is_emancipated());
 
-    hirvi::EmancipationModule emancipation_module(police_module);
+    hirvi::ontology::EmancipationModule emancipation_module(police_module);
     ASSERT_FALSE(police_module.get_is_emancipated());
 
     emancipation_module.emancipate();

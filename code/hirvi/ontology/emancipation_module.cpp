@@ -18,7 +18,7 @@
 #include "emancipation_module.hpp"
 #include "police_module.hpp"
 
-namespace hirvi
+namespace hirvi::ontology
 {
     EmancipationModule::EmancipationModule(PoliceModule& police_module)
         : police_module(police_module)

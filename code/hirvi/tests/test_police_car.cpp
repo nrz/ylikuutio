@@ -102,20 +102,20 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::POLICE_CAR));
 
     auto* const turbo_polizei1 = hirvi_application.get_entity_factory().create_holobiont_derivative<
-        hirvi::PoliceCar,
+        hirvi::ontology::PoliceCar,
         hirvi::core::PoliceCarMemoryAllocator>(
         hirvi::data::POLICE_CAR,
         turbo_polizei_png_police_car_struct1,
         road_vehicle_struct1);
     ASSERT_NE(turbo_polizei1, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei1) % alignof(hirvi::PoliceCar), 0);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei1) % alignof(hirvi::ontology::PoliceCar), 0);
 
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::POLICE_CAR));
     ASSERT_TRUE(hirvi_application.has_memory_allocator(yli::data::Datatype::BIONT));
 
     // Even though `PoliceCar` is derived from `Holobiont`. `PoliceCar` should be allocated using its own allocator.
-    yli::memory::MemoryAllocator<hirvi::PoliceCar*>& police_car_memory_allocator =
-            hirvi_application.get_memory_allocator<hirvi::PoliceCar*>(hirvi::data::POLICE_CAR);
+    yli::memory::MemoryAllocator<hirvi::ontology::PoliceCar*>& police_car_memory_allocator =
+            hirvi_application.get_memory_allocator<hirvi::ontology::PoliceCar*>(hirvi::data::POLICE_CAR);
     // `PoliceCar` should be allocated using its own allocator.
     ASSERT_EQ(police_car_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(police_car_memory_allocator.get_number_of_instances(), 1);

@@ -17,7 +17,7 @@
 
 #include "police_module.hpp"
 
-namespace hirvi
+namespace hirvi::ontology
 {
     void PoliceModule::emancipate()
     {
