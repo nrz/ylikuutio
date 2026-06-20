@@ -17,7 +17,6 @@
 
 #include "police_car.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
-#include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
 
 namespace yli::core
 {
@@ -30,6 +29,7 @@ namespace yli::ontology
     class GenericMasterModule;
     class Universe;
     struct HolobiontStruct;
+    struct LocomotionModuleStruct;
 }
 
 namespace hirvi::ontology
