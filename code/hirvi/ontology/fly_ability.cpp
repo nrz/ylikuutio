@@ -18,9 +18,6 @@
 #include "fly_ability.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 
-// Include standard headers
-#include <cstddef> // std::size_t
-
 namespace yli::core
 {
     class Application;

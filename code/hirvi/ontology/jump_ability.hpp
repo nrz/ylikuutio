@@ -20,9 +20,6 @@
 
 #include "code/ylikuutio/ontology/ability.hpp"
 
-// Include standard headers
-#include <cstddef> // std::size_t
-
 namespace yli::core
 {
     class Application;
