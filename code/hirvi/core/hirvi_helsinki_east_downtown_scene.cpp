@@ -570,7 +570,7 @@ namespace hirvi::core
         LocomotionModuleStruct road_vehicle_struct1;
 
         std::cout << "Creating hirvi::PoliceCar* turbo_polizei_png1 ...\n";
-        ontology::PoliceCar* const turbo_polizei_png1 = this->entity_factory.create_holobiont_derivative<
+        auto* const turbo_polizei_png1 = this->entity_factory.create_holobiont_derivative<
             ontology::PoliceCar,
             PoliceCarMemoryAllocator>(
             data::POLICE_CAR,
@@ -598,7 +598,7 @@ namespace hirvi::core
         LocomotionModuleStruct road_vehicle_struct2;
 
         std::cout << "Creating hirvi::PoliceCar* turbo_polizei_png2 ...\n";
-        ontology::PoliceCar* const turbo_polizei_png2 = this->entity_factory.create_holobiont_derivative<
+        auto* const turbo_polizei_png2 = this->entity_factory.create_holobiont_derivative<
             ontology::PoliceCar,
             PoliceCarMemoryAllocator>(
             data::POLICE_CAR,
