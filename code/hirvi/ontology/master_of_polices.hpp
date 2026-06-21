@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_ONTOLOGY_POLICE_NETWORK_HPP_INCLUDED
-#define HIRVI_ONTOLOGY_POLICE_NETWORK_HPP_INCLUDED
+#ifndef HIRVI_ONTOLOGY_MASTER_OF_POLICES_HPP_INCLUDED
+#define HIRVI_ONTOLOGY_MASTER_OF_POLICES_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/generic_master_module.hpp"
 #include "code/hirvi/data/spatial_data.hpp"
