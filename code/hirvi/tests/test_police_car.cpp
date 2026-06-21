@@ -21,10 +21,7 @@
 #include "code/hirvi/ontology/police_car.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
-#include "code/ylikuutio/ontology/movable_controller.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
-#include "code/ylikuutio/ontology/pipeline.hpp"
-#include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/biont.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
@@ -44,6 +41,13 @@
 // Include standard headers
 #include <cstddef> // uintptr_t
 #include <numbers> // std::numbers::pi
+
+namespace hirvi::ontology
+{
+    class MovableController;
+    class Pipeline;
+    class Symbiosis;
+}
 
 TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
 {
