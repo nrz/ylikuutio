@@ -19,7 +19,7 @@
 #define YLIKUUTIO_FILE_FILE_WRITER_HPP_INCLUDED
 
 // Include standard headers
-#include <fstream>  // std::ifstream
+#include <fstream>  // std::ofstream
 #include <ios>      // std::ios
 #include <iostream> // std::cout
 #include <string>   // std::string
