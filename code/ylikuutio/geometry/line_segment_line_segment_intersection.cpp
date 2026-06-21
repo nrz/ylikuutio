@@ -32,7 +32,7 @@
 
 namespace yli::geometry
 {
-    glm::vec2 get_intersection_point(const yli::geometry::LineSegment2D* const line_segment1, const yli::geometry::LineSegment2D* const line_segment2)
+    glm::vec2 get_intersection_point(const LineSegment2D* const line_segment1, const LineSegment2D* const line_segment2)
     {
         // See http://mathworld.wolfram.com/Line-LineIntersection.html
 
@@ -44,10 +44,10 @@ namespace yli::geometry
         glm::vec2 line_segment2_point1 = glm::vec2(line_segment2->x1, line_segment2->y1);
         glm::vec2 line_segment2_point2 = glm::vec2(line_segment2->x2, line_segment2->y2);
 
-        yli::geometry::Line2D line1 = yli::geometry::Line2D(line_segment1_point1, line_segment1_point2);
-        yli::geometry::Line2D line2 = yli::geometry::Line2D(line_segment2_point1, line_segment2_point2);
+        Line2D line1 = Line2D(line_segment1_point1, line_segment1_point2);
+        Line2D line2 = Line2D(line_segment2_point1, line_segment2_point2);
 
-        glm::vec2 potential_intersection_point = yli::geometry::get_intersection_point(&line1, &line2);
+        glm::vec2 potential_intersection_point = get_intersection_point(&line1, &line2);
 
         glm::vec2 line_segment1_point_with_lower_x;
         glm::vec2 line_segment1_point_with_higher_x;

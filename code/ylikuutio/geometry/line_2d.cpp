@@ -19,18 +19,18 @@
 
 namespace yli::geometry
 {
-    bool Line2D::do_lines_2d_intersect(const yli::geometry::Line2D& /* line1 */, const yli::geometry::Line2D& /* line2 */) const
+    bool Line2D::do_lines_2d_intersect(const Line2D& /* line1 */, const Line2D& /* line2 */) const
     {
         // TODO: implement the function!
         return false;
     }
 
-    bool Line2D::do_lines_2d_intersect(const yli::geometry::Line2D& line) const
+    bool Line2D::do_lines_2d_intersect(const Line2D& line) const
     {
-        return yli::geometry::Line2D::do_lines_2d_intersect(line, *this);
+        return do_lines_2d_intersect(line, *this);
     }
 
-    bool Line2D::is_identical_with(const yli::geometry::Line2D& line) const
+    bool Line2D::is_identical_with(const Line2D& line) const
     {
         if (this->x1 == line.x1 &&
                 this->y1 == line.y1 &&

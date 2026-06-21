@@ -31,7 +31,7 @@
 
 namespace yli::geometry
 {
-    glm::vec2 get_intersection_point(const yli::geometry::Line2D* const line1, const yli::geometry::Line2D* const line2)
+    glm::vec2 get_intersection_point(const Line2D* const line1, const Line2D* const line2)
     {
         // See http://mathworld.wolfram.com/Line-LineIntersection.html
 
@@ -49,12 +49,12 @@ namespace yli::geometry
         // Lines do intersect, so let's compute where!
         // TODO: Implement support for vertical lines!
 
-        yli::linear_algebra::Matrix upper_matrix_for_solving_x(2, 2);
+        linear_algebra::Matrix upper_matrix_for_solving_x(2, 2);
         upper_matrix_for_solving_x << line1->determinant; upper_matrix_for_solving_x << line1->x1_minus_x2;
         upper_matrix_for_solving_x << line2->determinant; upper_matrix_for_solving_x << line2->x1_minus_x2;
         float det_upper_matrix_for_solving_x = upper_matrix_for_solving_x.det();
 
-        yli::linear_algebra::Matrix upper_matrix_for_solving_y(2, 2);
+        linear_algebra::Matrix upper_matrix_for_solving_y(2, 2);
         upper_matrix_for_solving_y << line1->determinant; upper_matrix_for_solving_y << line1->y1_minus_y2;
         upper_matrix_for_solving_y << line2->determinant; upper_matrix_for_solving_y << line2->y1_minus_y2;
         float det_upper_matrix_for_solving_y = upper_matrix_for_solving_y.det();
@@ -65,7 +65,7 @@ namespace yli::geometry
         return glm::vec2(x, y);
     }
 
-    glm::vec3 get_intersection_point(const yli::geometry::Line3D* const /* line1 */, const yli::geometry::Line3D* const /* line2 */)
+    glm::vec3 get_intersection_point(const Line3D* const /* line1 */, const Line3D* const /* line2 */)
     {
         // TODO: implement this function!
         glm::vec3 intersection_point { NAN, NAN, NAN };
