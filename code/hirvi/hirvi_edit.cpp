@@ -33,7 +33,6 @@
 #include "code/ylikuutio/core/entrypoint.hpp"
 #endif
 
-#include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // `yli::ontology` files included in the canonical order.
