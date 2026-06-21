@@ -33,7 +33,7 @@ namespace yli::file
             std::cout << "Writing binary file " << file_path << "\n";
 
             std::ofstream file_stream(file_path, std::ios::out | std::ios::binary);
-            file_stream.write((char*) &data[0], data.size() * sizeof(T1));
+            file_stream.write(reinterpret_cast<const char*>(&data[0]), data.size() * sizeof(T1));
             file_stream.close();
         }
 }
