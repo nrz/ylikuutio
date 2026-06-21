@@ -42,19 +42,19 @@ namespace yli::input
     class InputSystem
     {
         public:
-            explicit InputSystem(yli::ontology::Universe& universe);
+            explicit InputSystem(ontology::Universe& universe);
 
-            void process_keys(const InputMethod& input_method, const yli::ontology::InputMode& input_mode);
+            void process_keys(const InputMethod& input_method, const ontology::InputMode& input_mode);
 
             InputSystem& get();
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
         private:
-            yli::memory::ConstructibleModule constructible_module;
+            memory::ConstructibleModule constructible_module;
 
-            yli::ontology::Universe& universe;
+            ontology::Universe& universe;
     };
 }
 
