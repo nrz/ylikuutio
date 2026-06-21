@@ -40,7 +40,9 @@ namespace hirvi::data
         SpatialData() = default;
 
         void clear_reports();
+
         void add_report(const PositionReport& report);
+
         void determine_position_and_detect_traitors(const DataAnalyzer& data_analyzer);
 
     private:

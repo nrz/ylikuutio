@@ -72,7 +72,7 @@ namespace hirvi
     using namespace yli::console;
     using namespace yli::ontology;
 
-    HirviEditApplication::HirviEditApplication(const int argc, const char *const argv[])
+    HirviEditApplication::HirviEditApplication(const int argc, const char* const argv[])
         : yli::core::Application(argc, argv),
           core(*this, this->get_universe_struct())
     {
@@ -104,47 +104,47 @@ namespace hirvi
         };
     }
 
-    yli::memory::GenericMemorySystem &HirviEditApplication::get_generic_memory_system() const
+    yli::memory::GenericMemorySystem& HirviEditApplication::get_generic_memory_system() const
     {
         return this->core.memory_system.get();
     }
 
-    yli::memory::MemorySystem<data::Datatype> &HirviEditApplication::get_memory_system() const
+    yli::memory::MemorySystem<data::Datatype>& HirviEditApplication::get_memory_system() const
     {
         return this->core.memory_system.get();
     }
 
-    yli::memory::GenericMemoryAllocator &HirviEditApplication::get_generic_memory_allocator(const int type) const
+    yli::memory::GenericMemoryAllocator& HirviEditApplication::get_generic_memory_allocator(const int type) const
     {
         return this->core.memory_system.get_generic_allocator(type);
     }
 
-    GenericEntityFactory &HirviEditApplication::get_generic_entity_factory() const
+    GenericEntityFactory& HirviEditApplication::get_generic_entity_factory() const
     {
         return this->core.entity_factory.get();
     }
 
-    yli::event::EventSystem *HirviEditApplication::get_event_system() const
+    yli::event::EventSystem* HirviEditApplication::get_event_system() const
     {
         return this->core.event_system;
     }
 
-    yli::input::InputSystem *HirviEditApplication::get_input_system() const
+    yli::input::InputSystem* HirviEditApplication::get_input_system() const
     {
         return this->core.input_system;
     }
 
-    yli::audio::AudioSystem *HirviEditApplication::get_audio_system() const
+    yli::audio::AudioSystem* HirviEditApplication::get_audio_system() const
     {
         return this->core.audio_system;
     }
 
-    bool HirviEditApplication::is_universe(Entity *entity) const
+    bool HirviEditApplication::is_universe(Entity* entity) const
     {
-        return static_cast<Entity *>(this->core.universe) == entity;
+        return static_cast<Entity*>(this->core.universe) == entity;
     }
 
-    Universe &HirviEditApplication::get_universe() const
+    Universe& HirviEditApplication::get_universe() const
     {
         if (this->core.universe == nullptr) [[unlikely]]
         {
@@ -245,7 +245,7 @@ namespace hirvi
         return this->core.create_and_start_simulation(&HirviEditApplication::customize);
     }
 
-    void HirviEditApplication::customize(core::HirviCore &hirvi_core)
+    void HirviEditApplication::customize(core::HirviCore& hirvi_core)
     {
         hirvi_core.entity_factory.create_console_lisp_function_overload("version", Request<Console>("my_console"),
                                                                         &hirvi_edit::lisp::version);
@@ -254,7 +254,7 @@ namespace hirvi
 
 namespace yli::core
 {
-    std::unique_ptr<Application> create_application(const int argc, const char *const argv[])
+    std::unique_ptr<Application> create_application(const int argc, const char* const argv[])
     {
         return std::make_unique<hirvi::HirviEditApplication>(argc, argv);
     }

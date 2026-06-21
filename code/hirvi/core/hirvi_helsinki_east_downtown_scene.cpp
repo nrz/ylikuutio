@@ -441,7 +441,9 @@ namespace hirvi::core
 
         orange_fur_material->set_global_name("helsinki_orange_fur_material");
 
-        SpeciesStruct helsinki_terrain_species_struct { Request<Scene>(helsinki_scene), Request(helsinki_grass_material) };
+        SpeciesStruct helsinki_terrain_species_struct {
+            Request<Scene>(helsinki_scene), Request(helsinki_grass_material)
+        };
         helsinki_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
         helsinki_terrain_species_struct.model_loader_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_terrain_species_struct.model_loader_struct.x_step = 4;

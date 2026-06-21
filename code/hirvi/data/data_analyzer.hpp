@@ -39,7 +39,8 @@ namespace hirvi::data
     public:
         virtual ~DataAnalyzer() = default;
 
-        [[nodiscard]] virtual std::pair<std::vector<std::size_t>, glm::vec3> analyze_data(const std::vector<PositionReport>& reports) const = 0;
+        [[nodiscard]] virtual std::pair<std::vector<std::size_t>, glm::vec3> analyze_data(
+            const std::vector<PositionReport>& reports) const = 0;
     };
 }
 

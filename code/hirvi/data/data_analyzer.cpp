@@ -18,5 +18,4 @@
 #include "data_analyzer.hpp"
 
 namespace hirvi::data
-{
-}
+{ }
