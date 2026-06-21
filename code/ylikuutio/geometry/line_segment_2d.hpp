@@ -19,7 +19,6 @@
 #define YLIKUUTIO_GEOMETRY_LINE_SEGMENT_2D_HPP_INCLUDED
 
 #include "line_2d.hpp"
-#include "line_segment.hpp"
 
 // Include GLM
 #ifndef GLM_GLM_HPP_INCLUDED

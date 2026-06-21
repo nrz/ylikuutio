@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "line_segment_2d.hpp"
-#include "line_segment_line_segment_intersection.hpp"
 
 namespace yli::geometry
 {

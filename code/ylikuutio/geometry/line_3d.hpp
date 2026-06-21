@@ -20,12 +20,6 @@
 
 #include "line.hpp"
 
-// Include GLM
-#ifndef GLM_GLM_HPP_INCLUDED
-#define GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
 // Include standard headers
 #include <vector>   // std::vector
 
