@@ -43,7 +43,11 @@ namespace hirvi::ontology
           master_of_polices(
               *this,
               &this->registry,
-              "polices")
+              "polices"),
+          master_of_emancipated_ones(
+              *this,
+              &this->registry,
+              "emancipated_ones")
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "hirvi::HirviScene*";

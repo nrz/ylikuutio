@@ -966,6 +966,8 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/police_horse.hpp
     code/hirvi/ontology/police_module.cpp
     code/hirvi/ontology/police_module.hpp
+    code/hirvi/ontology/master_of_emancipated_ones.cpp
+    code/hirvi/ontology/master_of_emancipated_ones.hpp
     code/hirvi/ontology/master_of_polices.cpp
     code/hirvi/ontology/master_of_polices.hpp
     code/hirvi/ontology/police_train.cpp

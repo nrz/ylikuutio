@@ -15,32 +15,32 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_HIRVI_SCENE_HPP_INCLUDED
-#define HIRVI_HIRVI_SCENE_HPP_INCLUDED
+#ifndef HIRVI_ONTOLOGY_MASTER_OF_EMANCIPATED_ONES_HPP_INCLUDED
+#define HIRVI_ONTOLOGY_MASTER_OF_EMANCIPATED_ONES_HPP_INCLUDED
 
-#include "code/ylikuutio/ontology/scene.hpp"
-#include "master_of_polices.hpp"
-#include "master_of_emancipated_ones.hpp"
+#include "code/ylikuutio/ontology/generic_master_module.hpp"
+
+// Include standard headers
+#include <string> // std::string
+
+namespace yli::ontology
+{
+    class Scene;
+    class Registry;
+}
 
 namespace hirvi::ontology
 {
-    using namespace yli::core;
     using namespace yli::ontology;
 
-    class HirviScene final : public Scene
+    class MasterOfEmancipatedOnes final : GenericMasterModule
     {
     public:
-        HirviScene(
-            Application& application,
-            Universe& universe,
-            const SceneStruct& scene_struct,
-            GenericParentModule* universe_parent_module);
-
-        ~HirviScene() override = default;
-
-    private:
-        MasterOfPolices master_of_polices;
-        MasterOfEmancipatedOnes master_of_emancipated_ones;
+        MasterOfEmancipatedOnes(
+            Scene& master_scene,
+            Registry* registry,
+            const std::string& name);
     };
 }
+
 #endif
