@@ -23,7 +23,6 @@
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
-#include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
 #include "code/ylikuutio/ontology/movable_controller_struct.hpp"
