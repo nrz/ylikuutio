@@ -29,8 +29,8 @@ namespace yli::geometry
     class LineSegment2D;
     class LineSegment3D;
 
-    glm::vec2 get_intersection_point(const LineSegment2D* const line1, const LineSegment2D* const line2);
-    glm::vec3 get_intersection_point(const LineSegment3D* const line1, const LineSegment3D* const line2);
+    glm::vec2 get_intersection_point(const LineSegment2D* line1, const LineSegment2D* line2);
+    glm::vec3 get_intersection_point(const LineSegment3D* line1, const LineSegment3D* line2);
 }
 
 #endif

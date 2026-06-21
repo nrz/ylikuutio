@@ -20,7 +20,7 @@
 
 namespace yli::geometry
 {
-    float radians_to_degrees(const float x);
+    float radians_to_degrees(float x);
 }
 
 #endif
