@@ -42,7 +42,7 @@ namespace yli::geometry
 
             // constructor (delegate the constructor).
             LineSegment2D(const glm::vec2& point1, const glm::vec2& point2)
-                : LineSegment2D(std::vector<float>{ point1.x, point1.y }, std::vector<float>{ point2.x, point2.y })
+                : LineSegment2D(std::vector { point1.x, point1.y }, std::vector { point2.x, point2.y })
                 {
                 }
     };
