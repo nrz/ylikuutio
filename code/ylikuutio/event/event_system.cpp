@@ -84,9 +84,7 @@ namespace yli::event
             }
             else if (sdl_event.type == SDL_EVENT_TEXT_INPUT)
             {
-                ontology::Console* const active_console = this->universe.get_active_console();
-
-                if (active_console != nullptr && sdl_event.text.text != nullptr)
+                if (ontology::Console* const active_console = this->universe.get_active_console(); active_console != nullptr && sdl_event.text.text != nullptr)
                 {
                     active_console->process_text_input(sdl_event.text);
                 }
