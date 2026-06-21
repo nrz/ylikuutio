@@ -60,7 +60,7 @@ namespace yli::file
 
         file_stream.unsetf(std::ios::skipws);           // Do not skip whitespace.
         file_stream.seekg(0, std::ios::end);
-        std::streampos file_size = file_stream.tellg();
+        const std::streampos file_size = file_stream.tellg();
         file_stream.seekg(0, std::ios::beg);
         std::vector<std::uint8_t> data_vector;
         data_vector.reserve(file_size);

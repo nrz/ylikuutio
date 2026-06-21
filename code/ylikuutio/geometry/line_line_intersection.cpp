@@ -38,7 +38,7 @@ namespace yli::geometry
         linear_algebra::Matrix lower_matrix_for_solving_x_and_y(2, 2);
         lower_matrix_for_solving_x_and_y << line1->x1_minus_x2; lower_matrix_for_solving_x_and_y << line1->y1_minus_y2;
         lower_matrix_for_solving_x_and_y << line2->x1_minus_x2; lower_matrix_for_solving_x_and_y << line2->y1_minus_y2;
-        float det_lower_matrix_for_solving_x_and_y = lower_matrix_for_solving_x_and_y.det();
+        const float det_lower_matrix_for_solving_x_and_y = lower_matrix_for_solving_x_and_y.det();
 
         if (det_lower_matrix_for_solving_x_and_y == 0.0f)
         {
@@ -52,16 +52,16 @@ namespace yli::geometry
         linear_algebra::Matrix upper_matrix_for_solving_x(2, 2);
         upper_matrix_for_solving_x << line1->determinant; upper_matrix_for_solving_x << line1->x1_minus_x2;
         upper_matrix_for_solving_x << line2->determinant; upper_matrix_for_solving_x << line2->x1_minus_x2;
-        float det_upper_matrix_for_solving_x = upper_matrix_for_solving_x.det();
+        const float det_upper_matrix_for_solving_x = upper_matrix_for_solving_x.det();
 
         linear_algebra::Matrix upper_matrix_for_solving_y(2, 2);
         upper_matrix_for_solving_y << line1->determinant; upper_matrix_for_solving_y << line1->y1_minus_y2;
         upper_matrix_for_solving_y << line2->determinant; upper_matrix_for_solving_y << line2->y1_minus_y2;
-        float det_upper_matrix_for_solving_y = upper_matrix_for_solving_y.det();
+        const float det_upper_matrix_for_solving_y = upper_matrix_for_solving_y.det();
 
         // Compute x and y coordinates.
-        float x = det_upper_matrix_for_solving_x / det_lower_matrix_for_solving_x_and_y;
-        float y = det_upper_matrix_for_solving_y / det_lower_matrix_for_solving_x_and_y;
+        const float x = det_upper_matrix_for_solving_x / det_lower_matrix_for_solving_x_and_y;
+        const float y = det_upper_matrix_for_solving_y / det_lower_matrix_for_solving_x_and_y;
         return glm::vec2(x, y);
     }
 
