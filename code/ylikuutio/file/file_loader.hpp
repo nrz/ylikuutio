@@ -27,6 +27,7 @@
 namespace yli::file
 {
     std::optional<std::string> slurp(const std::string& file_path);
+
     std::optional<std::vector<std::uint8_t>> binary_slurp(const std::string& file_path);
 }
 

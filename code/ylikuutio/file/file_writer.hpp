@@ -28,14 +28,14 @@
 namespace yli::file
 {
     template<typename T1>
-        void binary_write(const std::vector<T1>& data, const std::string& file_path)
-        {
-            std::cout << "Writing binary file " << file_path << "\n";
+    void binary_write(const std::vector<T1>& data, const std::string& file_path)
+    {
+        std::cout << "Writing binary file " << file_path << "\n";
 
-            std::ofstream file_stream(file_path, std::ios::out | std::ios::binary);
-            file_stream.write(reinterpret_cast<const char*>(&data[0]), data.size() * sizeof(T1));
-            file_stream.close();
-        }
+        std::ofstream file_stream(file_path, std::ios::out | std::ios::binary);
+        file_stream.write(reinterpret_cast<const char*>(&data[0]), data.size() * sizeof(T1));
+        file_stream.close();
+    }
 }
 
 #endif

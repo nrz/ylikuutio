@@ -58,16 +58,16 @@ namespace yli::file
             return std::nullopt;
         }
 
-        file_stream.unsetf(std::ios::skipws);           // Do not skip whitespace.
+        file_stream.unsetf(std::ios::skipws); // Do not skip whitespace.
         file_stream.seekg(0, std::ios::end);
         const std::streampos file_size = file_stream.tellg();
         file_stream.seekg(0, std::ios::beg);
         std::vector<std::uint8_t> data_vector;
         data_vector.reserve(file_size);
         data_vector.insert(
-                data_vector.begin(),
-                std::istream_iterator<std::uint8_t>(file_stream),
-                std::istream_iterator<std::uint8_t>());
+            data_vector.begin(),
+            std::istream_iterator<std::uint8_t>(file_stream),
+            std::istream_iterator<std::uint8_t>());
         return data_vector;
     }
 }
