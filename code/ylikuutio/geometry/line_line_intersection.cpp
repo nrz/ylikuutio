@@ -35,7 +35,7 @@ namespace yli::geometry
     {
         // See http://mathworld.wolfram.com/Line-LineIntersection.html
 
-        yli::linear_algebra::Matrix lower_matrix_for_solving_x_and_y(2, 2);
+        linear_algebra::Matrix lower_matrix_for_solving_x_and_y(2, 2);
         lower_matrix_for_solving_x_and_y << line1->x1_minus_x2; lower_matrix_for_solving_x_and_y << line1->y1_minus_y2;
         lower_matrix_for_solving_x_and_y << line2->x1_minus_x2; lower_matrix_for_solving_x_and_y << line2->y1_minus_y2;
         float det_lower_matrix_for_solving_x_and_y = lower_matrix_for_solving_x_and_y.det();
