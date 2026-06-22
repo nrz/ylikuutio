@@ -48,21 +48,21 @@ namespace yli::console
         this->cursor_it = this->input.begin() + (++this->cursor_index);
     }
 
-    void TextInput::add_characters(std::string_view char_container)
+    void TextInput::add_characters(const std::string_view char_container)
     {
         this->input.insert(this->input.end(), char_container.begin(), char_container.end());
         this->cursor_index += char_container.size();
         this->cursor_it = this->input.begin() + this->cursor_index;
     }
 
-    void TextInput::emplace_back(char character)
+    void TextInput::emplace_back(const char character)
     {
         this->input.push_back(character);
         this->cursor_it = this->input.end(); // Keep the iterator valid.
         this->cursor_index = this->size();   // Keep the index matched to the iterator.
     }
 
-    void TextInput::push_back(char character)
+    void TextInput::push_back(const char character)
     {
         this->input.push_back(character);
         this->cursor_it = this->input.end(); // Keep the iterator valid.

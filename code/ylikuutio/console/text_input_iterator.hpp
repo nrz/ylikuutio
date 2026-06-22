@@ -46,7 +46,7 @@ namespace yli::console
             TextInputIterator& operator=(const TextInputIterator&) = default;
 
             // assignment of `std::vector` iterator.
-            TextInputIterator& operator=(std::string::iterator it)
+            TextInputIterator& operator=(const std::string::iterator it)
             {
                 this->it = it;
                 return *this;

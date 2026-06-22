@@ -92,7 +92,7 @@ namespace yli::console
     {
         // This should be idempotent. Entering history again just causes entering the last input of the history.
 
-        if (std::size_t history_size = this->size(); history_size > 0) [[likely]]
+        if (const std::size_t history_size = this->size(); history_size > 0) [[likely]]
         {
             // If the history is not empty, enter the history.
             this->history_index = history_size - 1;

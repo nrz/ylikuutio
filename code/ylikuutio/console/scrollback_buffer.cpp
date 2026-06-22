@@ -61,7 +61,7 @@ namespace yli::console
 
     bool ScrollbackBuffer::enter_buffer()
     {
-        if (std::size_t buffer_size = this->buffer.size(); buffer_size > 0) [[likely]]
+        if (const std::size_t buffer_size = this->buffer.size(); buffer_size > 0) [[likely]]
         {
             if (this->get_is_active_in_buffer()) [[unlikely]]
             {
@@ -159,7 +159,7 @@ namespace yli::console
     {
         if (this->size() > max_rows) [[likely]]
         {
-            auto top_of_view_it = this->data().cend() - max_rows;
+            const auto top_of_view_it = this->data().cend() - max_rows;
             return std::span(top_of_view_it, this->data().cend());
         }
 

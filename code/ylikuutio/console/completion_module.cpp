@@ -35,7 +35,7 @@ namespace yli::console
 
     void CompletionModule::complete()
     {
-        ontology::Universe& universe = this->console.get_universe();
+        const ontology::Universe& universe = this->console.get_universe();
 
         if (this->console.console_logic_module.get_active_in_console())
         {
@@ -47,7 +47,7 @@ namespace yli::console
             }
 
             // Copy active input into a `std::string`.
-            std::string input_string(active_input->data());
+            const std::string input_string(active_input->data());
 
             std::vector<std::string> parameter_vector;
             std::string command;

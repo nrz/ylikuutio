@@ -860,7 +860,7 @@ namespace yli::console
             return std::nullopt;
         }
 
-        TextInput* const active_input = console.console_logic_module.edit_input();
+        const TextInput* const active_input = console.console_logic_module.edit_input();
 
         if (active_input == nullptr)
         {

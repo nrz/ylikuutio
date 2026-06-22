@@ -35,7 +35,7 @@ namespace yli::console
             using pointer           = const std::string*;
             using reference         = const std::string&;
 
-            explicit ScrollbackBufferConstIterator(std::vector<std::string>::const_iterator it)
+            explicit ScrollbackBufferConstIterator(const std::vector<std::string>::const_iterator it)
                 : it { it }
             {
             }
@@ -47,7 +47,7 @@ namespace yli::console
             ScrollbackBufferConstIterator& operator=(const ScrollbackBufferConstIterator&) = default;
 
             // assignment of `std::vector` const_iterator.
-            ScrollbackBufferConstIterator& operator=(std::vector<std::string>::const_iterator it)
+            ScrollbackBufferConstIterator& operator=(const std::vector<std::string>::const_iterator it)
             {
                 this->it = it;
                 return *this;
