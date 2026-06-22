@@ -61,7 +61,7 @@ namespace yli::audio
         if (this->mixer == nullptr)
         {
             std::cerr << "ERROR: `AudioSystem::init`: creating mixer failed!\n";
-            yli::sdl::print_sdl_error();
+            sdl::print_sdl_error();
             return false;
         }
 
@@ -70,7 +70,7 @@ namespace yli::audio
         if (this->music_track == nullptr)
         {
             std::cerr << "ERROR: `AudioSystem::init`: creating music track failed!\n";
-            yli::sdl::print_sdl_error();
+            sdl::print_sdl_error();
             return false;
         }
 

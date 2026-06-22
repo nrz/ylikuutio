@@ -45,7 +45,7 @@ namespace yli::audio
     class AudioSystem final
     {
         public:
-            explicit AudioSystem(yli::ontology::Universe& universe);
+            explicit AudioSystem(ontology::Universe& universe);
 
             AudioSystem(const AudioSystem&) = delete;            // Delete copy constructor.
             AudioSystem& operator=(const AudioSystem&) = delete; // Delete copy assignment.
@@ -67,12 +67,12 @@ namespace yli::audio
             void erase_playlist(const std::string& playlist);
 
             template<typename T1, std::size_t DataSize>
-                friend class yli::memory::MemoryStorage;
+                friend class memory::MemoryStorage;
 
         private:
-            yli::memory::ConstructibleModule constructible_module;
+            memory::ConstructibleModule constructible_module;
 
-            yli::ontology::Universe& universe;
+            ontology::Universe& universe;
 
             MIX_Mixer* mixer        { nullptr };
             MIX_Track* music_track  { nullptr };
