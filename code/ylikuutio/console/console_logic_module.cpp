@@ -480,15 +480,15 @@ namespace yli::console
             this->state = new_state;
             return this->signal_state_change(old_state, new_state);
         }
-        else if (!((this->state ^ new_state) & (~in_scrollback_buffer)) && (this->state & active))
+        if (!((this->state ^ new_state) & (~in_scrollback_buffer)) && (this->state & active))
         {
             // If the old state and new state differ possibly only with regards to in-scrollback-buffer state,
             // and the current state in active, then the transition is valid.
             this->state = new_state;
             return this->signal_state_change(old_state, new_state);
         }
-        else if (const std::uint32_t any_input = in_new_input | in_historical_input | in_temp_input;
-                !((this->state ^ new_state) & (~any_input)) && (this->state & active))
+        if (const std::uint32_t any_input = in_new_input | in_historical_input | in_temp_input;
+            !((this->state ^ new_state) & (~any_input)) && (this->state & active))
         {
             // If the old state and new state differ possibly only with regards to which-buffer state,
             // and the current state in active, then the transition is valid.
