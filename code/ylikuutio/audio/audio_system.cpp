@@ -109,7 +109,7 @@ namespace yli::audio
     void AudioSystem::add_to_playlist(const std::string& playlist, const std::string& audio_file)
     {
         // Playlist must have a name. Empty string is not accepted.
-        if (!playlist.empty() && this->playlist_map.count(playlist) == 0)
+        if (!playlist.empty() && !this->playlist_map.contains(playlist))
         {
             this->playlist_map[playlist] = std::list<std::string>();
         }
