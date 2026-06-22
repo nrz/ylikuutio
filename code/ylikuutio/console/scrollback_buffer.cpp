@@ -97,8 +97,8 @@ namespace yli::console
         if (this->get_is_active_in_buffer() && this->buffer_index > 0) [[likely]]
         {
             // If we are in the buffer and not in the oldest input, move to the previous input.
-            this->buffer_index--;
-            this->buffer_it--;
+            --this->buffer_index;
+            --this->buffer_it;
             return true;
         }
 
@@ -111,8 +111,8 @@ namespace yli::console
         if (this->get_is_active_in_buffer() && this->buffer_index < this->size()) [[likely]]
         {
             // If we are in the buffer and not in the newest input, move to the next input.
-            this->buffer_index++;
-            this->buffer_it++;
+            ++this->buffer_index;
+            ++this->buffer_it;
             return true;
         }
 

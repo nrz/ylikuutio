@@ -133,8 +133,8 @@ namespace yli::console
         // Otherwise, return `false` to signal fail.
         if (this->cursor_it != this->input.begin()) [[likely]]
         {
-            this->cursor_it--;
-            this->cursor_index--;
+            --this->cursor_it;
+            --this->cursor_index;
             return true;
         }
 
@@ -147,8 +147,8 @@ namespace yli::console
         // Otherwise, return `false` to signal fail.
         if (this->cursor_it != this->input.end())
         {
-            this->cursor_it++;
-            this->cursor_index++;
+            ++this->cursor_it;
+            ++this->cursor_index;
             return true;
         }
 
