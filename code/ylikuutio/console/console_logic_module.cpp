@@ -458,7 +458,7 @@ namespace yli::console
         this->temp_input_index = std::numeric_limits<std::size_t>::max();
     }
 
-    std::optional<ConsoleState> ConsoleLogicModule::signal_state_change(const ConsoleState old_state, const ConsoleState new_state)
+    std::optional<ConsoleState> ConsoleLogicModule::signal_state_change(const ConsoleState old_state, const ConsoleState new_state) const
     {
         // Signal the 'modules' that the state has changed.
 

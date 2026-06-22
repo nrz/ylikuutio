@@ -87,7 +87,7 @@ namespace yli::console
                 return temp;
             }
 
-            char operator*()
+            char operator*() const
             {
                 return *(this->it);
             }

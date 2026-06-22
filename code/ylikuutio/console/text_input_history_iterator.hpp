@@ -89,7 +89,7 @@ namespace yli::console
                 return temp;
             }
 
-            TextInput operator*()
+            TextInput operator*() const
             {
                 return *(this->it);
             }
