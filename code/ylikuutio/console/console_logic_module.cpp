@@ -820,11 +820,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::backspace(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::backspace(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
