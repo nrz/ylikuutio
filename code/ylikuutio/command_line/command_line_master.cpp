@@ -83,7 +83,7 @@ namespace yli::command_line
                 is_previous_argument_available = false;
                 continue;
             }
-            else if (n_leading_dashes == 0)
+            if (n_leading_dashes == 0)
             {
                 // there is no previous argument available for this value.
                 // therefore arguments are invalid.
