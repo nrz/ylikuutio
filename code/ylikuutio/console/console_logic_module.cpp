@@ -620,28 +620,28 @@ namespace yli::console
 
     // Console mode keypress callbacks begin here.
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::exit_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::exit_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() && console.exit_console())
         {
             // Signal to caller that we have exited the console.
-            std::uint32_t exit_console_magic_number = yli::ontology::CallbackMagicNumber::EXIT_CONSOLE;
-            return yli::data::AnyValue(exit_console_magic_number);
+            std::uint32_t exit_console_magic_number = ontology::CallbackMagicNumber::EXIT_CONSOLE;
+            return data::AnyValue(exit_console_magic_number);
         }
 
         // We did not exit the console.
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_left_control_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::press_left_control_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -651,11 +651,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_right_control_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::press_right_control_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -665,11 +665,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_left_alt_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::press_left_alt_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -679,11 +679,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_right_alt_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::press_right_alt_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -693,11 +693,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_left_shift_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::press_left_shift_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -707,11 +707,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::press_right_shift_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::press_right_shift_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -721,11 +721,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::move_to_previous_input(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::move_to_previous_input(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -839,21 +839,21 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::tab(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::tab(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         console.completion_module.complete();
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::enter_key(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::enter_key(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (!console.console_logic_module.get_active_in_console())
         {
