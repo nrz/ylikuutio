@@ -59,7 +59,8 @@ namespace yli::command_line
             // If the argument contains `=`, then use the chars before `=` as the argument key, and chars after `=` as the value.
 
             std::size_t n_leading_dashes = 0;
-            std::size_t index_of_equal_sign = std::numeric_limits<std::size_t>::max(); // maximum value here means "not found yet".
+            std::size_t index_of_equal_sign =
+                    std::numeric_limits<std::size_t>::max(); // maximum value here means "not found yet".
 
             // count the number of leading dashes and check the location of potential equal sign.
             for (std::size_t i = 0; i < argument.size(); i++)
@@ -115,7 +116,8 @@ namespace yli::command_line
                 if (n_leading_dashes == 2)
                 {
                     // the string without dashes is the key, the value is an empty string.
-                    const std::string string_without_dashes = argument.substr(2); // the string without 2 leading dashes.
+                    const std::string string_without_dashes =
+                            argument.substr(2); // the string without 2 leading dashes.
                     previous_argument = string_without_dashes;
                     is_previous_argument_available = true;
                 }
@@ -144,7 +146,10 @@ namespace yli::command_line
                 {
                     // the characters between leading dashes and the equal sign are the key.
                     // the characters after the equal sign are the value.
-                    const std::string key = argument.substr(2, index_of_equal_sign - 2); // the characters between leading dashes and the equal sign.
+                    const std::string key =
+                            argument.substr(
+                                2,
+                                index_of_equal_sign - 2); // the characters between leading dashes and the equal sign.
                     const std::string value = argument.substr(index_of_equal_sign + 1);
                     this->arg_map[key] = value;
                 }

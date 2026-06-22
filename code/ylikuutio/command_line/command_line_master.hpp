@@ -31,34 +31,41 @@ namespace yli::command_line
 {
     class CommandLineMaster final
     {
-        public:
-            CommandLineMaster(const int argc, const char* const argv[]);
+    public:
+        CommandLineMaster(const int argc, const char* const argv[]);
 
-            bool get_are_arguments_valid() const;
-            bool check_keys(const std::vector<std::string>& valid_keys) const;
-            std::vector<std::string> get_invalid_keys(const std::vector<std::string>& valid_keys) const;
-            bool is_key(const std::string& key) const;
-            std::string get_value(const std::string& key) const;
-            void print_keys() const;
-            void print_keys_and_values() const;
+        bool get_are_arguments_valid() const;
 
-            template<typename Type>
-                Type get_value_or_throw(const std::string& key) const
-                {
-                    if (this->arg_map.count(key) == 1)
-                    {
-                        std::size_t index = 0;
-                        return yli::string::extract_value_or_throw<char, Type>(this->arg_map.at(key), index, "", "");
-                    }
+        bool check_keys(const std::vector<std::string>& valid_keys) const;
 
-                    throw std::runtime_error("ERROR: `CommandLineMaster::get_value_or_throw`: no value defined for the key: " + key + " !");
-                }
+        std::vector<std::string> get_invalid_keys(const std::vector<std::string>& valid_keys) const;
 
-        private:
-            int argc                 { 0 };     // By default there are 0 arguments.
-            bool are_arguments_valid { false }; // By default arguments are invalid.
-            std::vector<std::string> arg_vector;
-            std::unordered_map<std::string, std::string> arg_map;
+        bool is_key(const std::string& key) const;
+
+        std::string get_value(const std::string& key) const;
+
+        void print_keys() const;
+
+        void print_keys_and_values() const;
+
+        template<typename Type>
+        Type get_value_or_throw(const std::string& key) const
+        {
+            if (this->arg_map.count(key) == 1)
+            {
+                std::size_t index = 0;
+                return yli::string::extract_value_or_throw<char, Type>(this->arg_map.at(key), index, "", "");
+            }
+
+            throw std::runtime_error(
+                "ERROR: `CommandLineMaster::get_value_or_throw`: no value defined for the key: " + key + " !");
+        }
+
+    private:
+        int argc { 0 };     // By default there are 0 arguments.
+        bool are_arguments_valid { false }; // By default arguments are invalid.
+        std::vector<std::string> arg_vector;
+        std::unordered_map<std::string, std::string> arg_map;
     };
 }
 
