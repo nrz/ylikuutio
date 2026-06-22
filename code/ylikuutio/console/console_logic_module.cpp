@@ -214,9 +214,8 @@ namespace yli::console
         {
             // If we are in a historical input, the temp input is the active input.
             // If we are in scrollback buffer while in historical input, the historical input is the active input.
-            const TextInput* const historical_input = this->text_input_history.get();
 
-            if (historical_input != nullptr)
+            if (const TextInput* const historical_input = this->text_input_history.get(); historical_input != nullptr)
             {
                 // If we are in historical input or in scrollback buffer
                 // while in historical input, the current historical input becomes
@@ -241,9 +240,7 @@ namespace yli::console
         }
         else if (this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
         {
-            const TextInput* const historical_input = this->text_input_history.get();
-
-            if (historical_input != nullptr)
+            if (const TextInput* const historical_input = this->text_input_history.get(); historical_input != nullptr)
             {
                 // If we are in historical input or in scrollback buffer
                 // while in historical input, the current historical input becomes
@@ -730,11 +727,10 @@ namespace yli::console
         if (console.console_logic_module.get_active_in_console())
         {
             const std::size_t history_index = console.command_history.get_history_index();
-            const std::size_t temp_input_index = console.console_logic_module.get_temp_input_index();
 
-            if (console.console_logic_module.get_active_in_new_input() &&
-                    !console.command_history.empty() &&
-                    temp_input_index == console.command_history.size() - 1)
+            if (const std::size_t temp_input_index = console.console_logic_module.get_temp_input_index(); console.console_logic_module.get_active_in_new_input() &&
+                                                                                                          !console.command_history.empty() &&
+                                                                                                          temp_input_index == console.command_history.size() - 1)
             {
                 // OK, we moved from the new input to the last historical input, which happens to be the temp input.
                 console.console_logic_module.enter_historical_input();
@@ -828,9 +824,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            TextInput* const active_input = console.console_logic_module.edit_input();
-
-            if (active_input != nullptr)
+            if (TextInput* const active_input = console.console_logic_module.edit_input(); active_input != nullptr)
             {
                 active_input->delete_character();
             }
