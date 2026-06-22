@@ -27,10 +27,10 @@
 // Include standard headers
 #include <cstdint>    // std::int8_t, std::int16_t, std::int32_t, std::int64_t, std::uint8_t, std::uint16_t, std::uint32_t, std::uint64_t
 #include <functional> // std::reference_wrapper
-#include <optional> // std::optional
-#include <string>   // std::string
-#include <variant>  // std::holds_alternative, std::monostate, std::variant
-#include <vector>   // std::vector
+#include <optional>   // std::optional
+#include <string>     // std::string
+#include <variant>    // std::holds_alternative, std::monostate, std::variant
+#include <vector>     // std::vector
 
 namespace yli::ontology
 {
