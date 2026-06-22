@@ -67,7 +67,7 @@ namespace yli::event
                 const auto scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
                 ontology::GenericCallbackEngine* const generic_callback_engine =
-                    input_mode.get_keyrelease_callback_engine(scancode);
+                        input_mode.get_keyrelease_callback_engine(scancode);
 
                 if (generic_callback_engine == nullptr)
                 {
@@ -84,7 +84,8 @@ namespace yli::event
             }
             else if (sdl_event.type == SDL_EVENT_TEXT_INPUT)
             {
-                if (ontology::Console* const active_console = this->universe.get_active_console(); active_console != nullptr && sdl_event.text.text != nullptr)
+                if (ontology::Console* const active_console = this->universe.get_active_console();
+                    active_console != nullptr && sdl_event.text.text != nullptr)
                 {
                     active_console->process_text_input(sdl_event.text);
                 }
