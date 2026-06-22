@@ -487,7 +487,7 @@ namespace yli::console
             this->state = new_state;
             return this->signal_state_change(old_state, new_state);
         }
-        if (const std::uint32_t any_input = in_new_input | in_historical_input | in_temp_input;
+        if (constexpr std::uint32_t any_input = in_new_input | in_historical_input | in_temp_input;
             !((this->state ^ new_state) & (~any_input)) && (this->state & active))
         {
             // If the old state and new state differ possibly only with regards to which-buffer state,
@@ -524,7 +524,7 @@ namespace yli::console
         if (console->enter_console())
         {
             // Signal to caller that we have entered the console.
-            std::uint32_t enter_console_magic_number = ontology::CallbackMagicNumber::ENTER_CONSOLE;
+            constexpr std::uint32_t enter_console_magic_number = ontology::CallbackMagicNumber::ENTER_CONSOLE;
             return data::AnyValue(enter_console_magic_number);
         }
 
@@ -629,7 +629,7 @@ namespace yli::console
         if (console.console_logic_module.get_active_in_console() && console.exit_console())
         {
             // Signal to caller that we have exited the console.
-            std::uint32_t exit_console_magic_number = ontology::CallbackMagicNumber::EXIT_CONSOLE;
+            constexpr std::uint32_t exit_console_magic_number = ontology::CallbackMagicNumber::EXIT_CONSOLE;
             return data::AnyValue(exit_console_magic_number);
         }
 
@@ -1006,7 +1006,7 @@ namespace yli::console
         console.command_history.clear();
         console.scrollback_buffer.clear();
 
-        const std::uint32_t clear_console_magic_number = ontology::CallbackMagicNumber::CLEAR_CONSOLE;
+        constexpr std::uint32_t clear_console_magic_number = ontology::CallbackMagicNumber::CLEAR_CONSOLE;
         return data::AnyValue(clear_console_magic_number);
     }
 
