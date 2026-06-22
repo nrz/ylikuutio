@@ -28,12 +28,12 @@ namespace yli::console
     class CompletionModule
     {
         public:
-            explicit CompletionModule(yli::ontology::Console& console);
+            explicit CompletionModule(ontology::Console& console);
 
             void complete();
 
         private:
-            yli::ontology::Console& console;
+            ontology::Console& console;
     };
 }
 

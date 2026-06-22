@@ -162,7 +162,7 @@ namespace yli::console
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_new_input()
     {
-        return this->switch_to_state(ConsoleState::ACTIVE_IN_NEW_INPUT);
+        return this->switch_to_state(ACTIVE_IN_NEW_INPUT);
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_historical_input()
@@ -173,7 +173,7 @@ namespace yli::console
             return std::nullopt; // Transition failed.
         }
 
-        return this->switch_to_state(ConsoleState::ACTIVE_IN_HISTORICAL_INPUT);
+        return this->switch_to_state(ACTIVE_IN_HISTORICAL_INPUT);
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_temp_input()
@@ -184,7 +184,7 @@ namespace yli::console
             return std::nullopt; // Transition failed.
         }
 
-        return this->switch_to_state(ConsoleState::ACTIVE_IN_TEMP_INPUT);
+        return this->switch_to_state(ACTIVE_IN_TEMP_INPUT);
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_scrollback_buffer()
@@ -204,13 +204,13 @@ namespace yli::console
 
     TextInput* ConsoleLogicModule::edit_input()
     {
-        if (this->state == ConsoleState::ACTIVE_IN_NEW_INPUT)
+        if (this->state == ACTIVE_IN_NEW_INPUT)
         {
             // If we are in new input, the new input is the active input.
             // If we are in scrollback buffer while in new input, the new input is the active input.
             return &this->new_input;
         }
-        else if (this->state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT)
+        else if (this->state == ACTIVE_IN_HISTORICAL_INPUT)
         {
             // If we are in a historical input, the temp input is the active input.
             // If we are in scrollback buffer while in historical input, the historical input is the active input.
@@ -221,25 +221,25 @@ namespace yli::console
                 // If we are in historical input or in scrollback buffer
                 // while in historical input, the current historical input becomes
                 // the new temp input, and temp input becomes the active input.
-                this->switch_to_state(ConsoleState::ACTIVE_IN_TEMP_INPUT);
+                this->switch_to_state(ACTIVE_IN_TEMP_INPUT);
                 this->temp_input_index = this->text_input_history.get_history_index();
                 this->temp_input = *historical_input;
                 this->temp_input.move_cursor_to_end_of_line();
                 return &this->temp_input;
             }
         }
-        else if (this->state == ConsoleState::ACTIVE_IN_TEMP_INPUT)
+        else if (this->state == ACTIVE_IN_TEMP_INPUT)
         {
             // If we are in a temp input, the temp input is the active input.
             // If we are in scrollback buffer while in temp input, the temp input is the active input.
             return &this->temp_input;
         }
-        else if (this->state == ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT)
+        else if (this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT)
         {
-            this->switch_to_state(ConsoleState::ACTIVE_IN_NEW_INPUT);
+            this->switch_to_state(ACTIVE_IN_NEW_INPUT);
             return &this->new_input;
         }
-        else if (this->state == ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
+        else if (this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
         {
             const TextInput* const historical_input = this->text_input_history.get();
 
@@ -248,16 +248,16 @@ namespace yli::console
                 // If we are in historical input or in scrollback buffer
                 // while in historical input, the current historical input becomes
                 // the new temp input, and temp input becomes the active input.
-                this->switch_to_state(ConsoleState::ACTIVE_IN_TEMP_INPUT);
+                this->switch_to_state(ACTIVE_IN_TEMP_INPUT);
                 this->temp_input_index = this->text_input_history.get_history_index();
                 this->temp_input = *historical_input;
                 this->temp_input.move_cursor_to_end_of_line();
                 return &this->temp_input;
             }
         }
-        else if (this->state == ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
+        else if (this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
         {
-            this->switch_to_state(ConsoleState::ACTIVE_IN_TEMP_INPUT);
+            this->switch_to_state(ACTIVE_IN_TEMP_INPUT);
             return &this->temp_input;
         }
 
@@ -350,17 +350,17 @@ namespace yli::console
 
     bool ConsoleLogicModule::get_active_in_new_input() const
     {
-        return this->state == ConsoleState::ACTIVE_IN_NEW_INPUT;
+        return this->state == ACTIVE_IN_NEW_INPUT;
     }
 
     bool ConsoleLogicModule::get_active_in_historical_input() const
     {
-        return this->state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT;
+        return this->state == ACTIVE_IN_HISTORICAL_INPUT;
     }
 
     bool ConsoleLogicModule::get_active_in_temp_input() const
     {
-        return this->state == ConsoleState::ACTIVE_IN_TEMP_INPUT;
+        return this->state == ACTIVE_IN_TEMP_INPUT;
     }
 
     bool ConsoleLogicModule::get_active_in_scrollback_buffer() const
@@ -402,19 +402,19 @@ namespace yli::console
         // input might not be visible completely or at all. The console rendering code needs to take care
         // of rendering the right lines.
 
-        if (this->state == ConsoleState::ACTIVE_IN_NEW_INPUT || this->state == ConsoleState::ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT)
+        if (this->state == ACTIVE_IN_NEW_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT)
         {
             // If we are in new input, the new input is the visible input.
             // If we are in scrollback buffer while in new input, the new input is the visible input.
             return &this->new_input;
         }
-        else if (this->state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
+        else if (this->state == ACTIVE_IN_HISTORICAL_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
         {
             // If we are in a historical input, the temp input is the visible input.
             // If we are in scrollback buffer while in historical input, the historical input is the visible input.
             return this->text_input_history.get();
         }
-        else if (this->state == console::ConsoleState::ACTIVE_IN_TEMP_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
+        else if (this->state == ACTIVE_IN_TEMP_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
         {
             // If we are in a temp input, the temp input is the visible input.
             // If we are in scrollback buffer while in temp input, the temp input is the visible input.
@@ -506,14 +506,14 @@ namespace yli::console
 
     // Action mode keypress callbacks begin here.
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::enter_console(
-            yli::ontology::Universe& universe,
-            yli::ontology::CallbackEngine*,
-            yli::ontology::CallbackObject*,
-            yli::ontology::GenericParentModule&,
-            const yli::data::AnyValue&)
+    std::optional<data::AnyValue> ConsoleLogicModule::enter_console(
+            ontology::Universe& universe,
+            ontology::CallbackEngine*,
+            ontology::CallbackObject*,
+            ontology::GenericParentModule&,
+            const data::AnyValue&)
     {
-        yli::ontology::Console* const console = universe.get_active_console();
+        ontology::Console* const console = universe.get_active_console();
 
         if (console == nullptr)
         {
@@ -524,8 +524,8 @@ namespace yli::console
         if (console->enter_console())
         {
             // Signal to caller that we have entered the console.
-            std::uint32_t enter_console_magic_number = yli::ontology::CallbackMagicNumber::ENTER_CONSOLE;
-            return yli::data::AnyValue(enter_console_magic_number);
+            std::uint32_t enter_console_magic_number = ontology::CallbackMagicNumber::ENTER_CONSOLE;
+            return data::AnyValue(enter_console_magic_number);
         }
 
         // We did not enter the console.
@@ -534,11 +534,11 @@ namespace yli::console
 
     // Console mode keyrelease callbacks begin here.
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_left_control_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::release_left_control_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -548,11 +548,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_right_control_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::release_right_control_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -562,11 +562,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_left_alt_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::release_left_alt_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -576,11 +576,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_right_alt_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::release_right_alt_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -590,11 +590,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_left_shift_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::release_left_shift_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -604,11 +604,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::release_right_shift_in_console(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::release_right_shift_in_console(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -772,11 +772,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::move_to_next_input(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::move_to_next_input(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() && !console.command_history.empty())
         {
@@ -885,9 +885,9 @@ namespace yli::console
 
         console.new_input.clear();
 
-        if (yli::lisp::legacy_parse(console.command_history.at(console.command_history.size() - 1).data(), command, parameter_vector))
+        if (lisp::legacy_parse(console.command_history.at(console.command_history.size() - 1).data(), command, parameter_vector))
         {
-            std::optional<yli::data::AnyValue> any_value = yli::lisp::execute(console, command, parameter_vector);
+            std::optional<data::AnyValue> any_value = lisp::execute(console, command, parameter_vector);
             console.console_logic_module.enter_new_input();
             console.console_logic_module.invalidate_temp_input();
             return any_value;
@@ -898,11 +898,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::ctrl_c(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::ctrl_c(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() &&
                 (console.console_logic_module.modifier_state & (left_ctrl_pressed | right_ctrl_pressed)) &&
@@ -916,11 +916,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::ctrl_w(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::ctrl_w(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() &&
                 (console.console_logic_module.modifier_state & (left_ctrl_pressed | right_ctrl_pressed)) &&
@@ -940,11 +940,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::page_up(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::page_up(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -954,11 +954,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::page_down(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::page_down(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -968,11 +968,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::home(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::home(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -982,11 +982,11 @@ namespace yli::console
         return std::nullopt;
     }
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::end(
-            yli::ontology::ConsoleCallbackEngine*,
-            yli::ontology::ConsoleCallbackObject*,
-            yli::ontology::GenericParentModule&,
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::end(
+            ontology::ConsoleCallbackEngine*,
+            ontology::ConsoleCallbackObject*,
+            ontology::GenericParentModule&,
+            ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -998,16 +998,16 @@ namespace yli::console
 
     // Console command callbacks begin here.
 
-    std::optional<yli::data::AnyValue> ConsoleLogicModule::clear(
-            yli::ontology::Console& console)
+    std::optional<data::AnyValue> ConsoleLogicModule::clear(
+            ontology::Console& console)
     {
         console.console_logic_module.enter_new_input();
         console.new_input.clear();
         console.command_history.clear();
         console.scrollback_buffer.clear();
 
-        const std::uint32_t clear_console_magic_number = yli::ontology::CallbackMagicNumber::CLEAR_CONSOLE;
-        return yli::data::AnyValue(clear_console_magic_number);
+        const std::uint32_t clear_console_magic_number = ontology::CallbackMagicNumber::CLEAR_CONSOLE;
+        return data::AnyValue(clear_console_magic_number);
     }
 
     // Public callbacks end here.

@@ -228,11 +228,11 @@ namespace yli::console
 
         // Console state change.
 
-        if (new_state == ConsoleState::ACTIVE_IN_HISTORICAL_INPUT)
+        if (new_state == ACTIVE_IN_HISTORICAL_INPUT)
         {
             this->enter_history();
         }
-        else if (new_state == ConsoleState::ACTIVE_IN_NEW_INPUT)
+        else if (new_state == ACTIVE_IN_NEW_INPUT)
         {
             this->exit_history();
         }

@@ -28,14 +28,14 @@
 
 namespace yli::console
 {
-    CompletionModule::CompletionModule(yli::ontology::Console& console)
+    CompletionModule::CompletionModule(ontology::Console& console)
         : console { console }
     {
     }
 
     void CompletionModule::complete()
     {
-        yli::ontology::Universe& universe = this->console.get_universe();
+        ontology::Universe& universe = this->console.get_universe();
 
         if (this->console.console_logic_module.get_active_in_console())
         {
@@ -52,7 +52,7 @@ namespace yli::console
             std::vector<std::string> parameter_vector;
             std::string command;
 
-            yli::lisp::legacy_parse(input_string, command, parameter_vector);
+            lisp::legacy_parse(input_string, command, parameter_vector);
 
             if (command.empty() ||
                     (parameter_vector.empty() && input_string.back() != ' '))
