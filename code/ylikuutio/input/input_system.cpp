@@ -80,11 +80,9 @@ namespace yli::input
                     continue;
                 }
 
-                const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue());
-
-                if (any_value &&
-                        std::holds_alternative<std::uint32_t>(any_value->data) &&
-                        std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)
+                if (const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue()); any_value &&
+                                                                                                                        std::holds_alternative<std::uint32_t>(any_value->data) &&
+                                                                                                                        std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)
                 {
                     this->universe.request_exit();
                 }
