@@ -60,10 +60,10 @@ namespace yli::console
 
             void clear();
 
-            std::span<const std::string> get_view(const std::size_t top_index, const std::size_t max_rows) const;
-            std::span<const std::string> get_view_to_last(const std::size_t max_rows) const;
-            std::span<const std::string> get_end_view(const std::size_t max_rows) const;
-            const std::string& at(const std::size_t line_i) const;
+            std::span<const std::string> get_view(std::size_t top_index, std::size_t max_rows) const;
+            std::span<const std::string> get_view_to_last(std::size_t max_rows) const;
+            std::span<const std::string> get_end_view(std::size_t max_rows) const;
+            const std::string& at(std::size_t line_i) const;
 
             bool get_is_active_in_buffer() const;
             std::size_t size() const;
@@ -74,7 +74,7 @@ namespace yli::console
 
             std::size_t get_buffer_index() const;
 
-            void on_change(const ConsoleState old_state, const ConsoleState new_state);
+            void on_change(ConsoleState old_state, ConsoleState new_state);
 
             // Iterator functions.
             iterator begin()

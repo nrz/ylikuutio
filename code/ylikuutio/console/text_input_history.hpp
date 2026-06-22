@@ -48,12 +48,12 @@ namespace yli::console
             bool move_to_next();
             void move_to_first();
             void move_to_last();
-            bool move_to_nth(const std::size_t new_history_index);
+            bool move_to_nth(std::size_t new_history_index);
 
             void clear();
 
             const TextInput* get() const;
-            const TextInput& at(const std::size_t input_i) const;
+            const TextInput& at(std::size_t input_i) const;
 
             bool get_is_in_history() const;
             std::size_t size() const;
@@ -62,7 +62,7 @@ namespace yli::console
 
             std::size_t get_history_index() const;
 
-            void on_change(const ConsoleState old_state, const ConsoleState new_state);
+            void on_change(ConsoleState old_state, ConsoleState new_state);
 
             // Iterator functions.
             iterator begin()

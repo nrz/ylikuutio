@@ -60,7 +60,7 @@ namespace yli::console
                 return this->input != other.input;
             }
 
-            void add_character(const char character);
+            void add_character(char character);
 
             template<typename Alloc, template<typename, typename> typename Type>
                 void add_characters(const Type<char, Alloc>& char_container)

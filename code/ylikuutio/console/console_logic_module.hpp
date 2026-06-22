@@ -57,8 +57,8 @@ namespace yli::console
                     TextInput& temp_input,
                     TextInputHistory& text_input_history,
                     ScrollbackBuffer& scrollback_buffer,
-                    const std::size_t n_columns = 80,
-                    const std::size_t n_rows = 24);
+                    std::size_t n_columns = 80,
+                    std::size_t n_rows = 24);
 
             // State transition functions.
             // `ConsoleLogicModule` keeps track of the console state.
