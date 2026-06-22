@@ -157,7 +157,7 @@ namespace yli::console
     {
         // Deactivation is not reported to 'modules' because they don't need to know.
         // Deactivation always returns to the last active state.
-        return this->switch_to_state(ConsoleState(this->state & (~active)));
+        return this->switch_to_state(static_cast<ConsoleState>(this->state & (~active)));
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::enter_new_input()
@@ -194,12 +194,12 @@ namespace yli::console
             return std::nullopt;
         }
 
-        return this->switch_to_state(ConsoleState(this->state | in_scrollback_buffer));
+        return this->switch_to_state(static_cast<ConsoleState>(this->state | in_scrollback_buffer));
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::exit_scrollback_buffer()
     {
-        return this->switch_to_state(ConsoleState(this->state & (~in_scrollback_buffer)));
+        return this->switch_to_state(static_cast<ConsoleState>(this->state & (~in_scrollback_buffer)));
     }
 
     TextInput* ConsoleLogicModule::edit_input()
@@ -542,7 +542,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~left_ctrl_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~left_ctrl_pressed));
         }
 
         return std::nullopt;
@@ -556,7 +556,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~right_ctrl_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~right_ctrl_pressed));
         }
 
         return std::nullopt;
@@ -570,7 +570,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~left_alt_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~left_alt_pressed));
         }
 
         return std::nullopt;
@@ -584,7 +584,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~right_alt_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~right_alt_pressed));
         }
 
         return std::nullopt;
@@ -598,7 +598,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~left_shift_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~left_shift_pressed));
         }
 
         return std::nullopt;
@@ -612,7 +612,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state & (~right_shift_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~right_shift_pressed));
         }
 
         return std::nullopt;
@@ -645,7 +645,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | left_ctrl_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | left_ctrl_pressed);
         }
 
         return std::nullopt;
@@ -659,7 +659,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | right_ctrl_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | right_ctrl_pressed);
         }
 
         return std::nullopt;
@@ -673,7 +673,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | left_alt_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | left_alt_pressed);
         }
 
         return std::nullopt;
@@ -687,7 +687,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | right_alt_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | right_alt_pressed);
         }
 
         return std::nullopt;
@@ -701,7 +701,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | left_shift_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | left_shift_pressed);
         }
 
         return std::nullopt;
@@ -715,7 +715,7 @@ namespace yli::console
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = ModifierState(console.console_logic_module.modifier_state | right_shift_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | right_shift_pressed);
         }
 
         return std::nullopt;
