@@ -46,7 +46,7 @@ namespace yli::console
             TextInputConstIterator& operator=(const TextInputConstIterator&) = default;
 
             // assignment of `std::string` const_iterator.
-            TextInputConstIterator& operator=(std::string::const_iterator it)
+            TextInputConstIterator& operator=(const std::string::const_iterator it)
             {
                 this->it = it;
                 return *this;

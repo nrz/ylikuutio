@@ -881,7 +881,7 @@ namespace yli::console
 
         if (lisp::legacy_parse(console.command_history.at(console.command_history.size() - 1).data(), command, parameter_vector))
         {
-            std::optional<data::AnyValue> any_value = lisp::execute(console, command, parameter_vector);
+            const std::optional<data::AnyValue> any_value = lisp::execute(console, command, parameter_vector);
             console.console_logic_module.enter_new_input();
             console.console_logic_module.invalidate_temp_input();
             return any_value;
