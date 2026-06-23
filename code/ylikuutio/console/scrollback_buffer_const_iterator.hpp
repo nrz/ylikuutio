@@ -88,7 +88,7 @@ namespace yli::console
                 return temp;
             }
 
-            std::string operator*()
+            std::string operator*() const
             {
                 return *(this->it);
             }
