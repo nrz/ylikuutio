@@ -150,7 +150,7 @@ namespace yli::console
     {
         // Activation is not reported to 'modules' because they don't need to know.
         // Activation always returns to the same state in which deactivate was run.
-        return this->switch_to_state(ConsoleState(this->state | active));
+        return this->switch_to_state(static_cast<ConsoleState>(this->state | active));
     }
 
     std::optional<ConsoleState> ConsoleLogicModule::deactivate()
