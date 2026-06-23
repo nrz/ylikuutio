@@ -62,7 +62,6 @@ namespace yli::console
 
             std::span<const std::string> get_view(std::size_t top_index, std::size_t max_rows) const;
             std::span<const std::string> get_view_to_last(std::size_t max_rows) const;
-            std::span<const std::string> get_end_view(std::size_t max_rows) const;
             const std::string& at(std::size_t line_i) const;
 
             bool get_is_active_in_buffer() const;
