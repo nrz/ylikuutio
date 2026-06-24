@@ -136,7 +136,7 @@ namespace yli::memory
 
             T1* instance = new(this->memory.data() + (slot_i * sizeof(T1))) T1(std::forward<Args>(args)...);
             instance->constructible_module = ConstructibleModule(this->allocator, this->storage_i, slot_i);
-            this->number_of_instances++;
+            ++this->number_of_instances;
             return instance;
         }
 
@@ -162,7 +162,7 @@ namespace yli::memory
 
             // Push the freed index to the queue.
             this->free_slot_id_queue.push(slot_i);
-            this->number_of_instances--;
+            --this->number_of_instances;
         }
 
         [[nodiscard]] std::size_t get_storage_id() const
