@@ -748,16 +748,24 @@ TEST(any_value_must_be_initialized_appropriately, console)
 TEST(any_value_must_be_initialized_appropriately, compute_task)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    yli::ontology::Console* console = application.get_generic_entity_factory().create_console(
-            console_struct);
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+            ecosystem_struct);
 
-    yli::data::AnyValue console_any_value = yli::data::AnyValue(*console);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(console_any_value.data));
-    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Console>>(console_any_value.data).get(), *console);
-    ASSERT_EQ(std::strcmp(console_any_value.get_datatype().c_str(), "yli::ontology::Console&"), 0);
-    ASSERT_EQ(console_any_value.get_entity_ref(), *console);
-    ASSERT_EQ(console_any_value.get_const_entity_ref(), *console);
+    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
+    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+            pipeline_struct);
+
+    yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request(pipeline) };
+    yli::ontology::ComputeTask* compute_task = application.get_generic_entity_factory().create_compute_task(
+            compute_task_struct);
+
+    yli::data::AnyValue compute_task_any_value = yli::data::AnyValue(*compute_task);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::ComputeTask>>(compute_task_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::ComputeTask>>(compute_task_any_value.data).get(), *compute_task);
+    ASSERT_EQ(std::strcmp(compute_task_any_value.get_datatype().c_str(), "yli::ontology::ComputeTask&"), 0);
+    ASSERT_EQ(compute_task_any_value.get_entity_ref(), *compute_task);
+    ASSERT_EQ(compute_task_any_value.get_const_entity_ref(), *compute_task);
 }
 
 TEST(any_value_must_be_initialized_appropriately, std_string)
