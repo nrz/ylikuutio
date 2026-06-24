@@ -94,9 +94,8 @@ int main(const int argc, const char* const argv[]) try
 
     // 2. Valid command line argument keys are requested
     //    by calling `Application::get_valid_keys`.
-    std::vector<std::string> valid_keys = application->get_valid_keys();
 
-    if (!application->command_line_master.check_keys(valid_keys))
+    if (std::vector<std::string> valid_keys = application->get_valid_keys(); !application->command_line_master.check_keys(valid_keys))
     {
         std::cerr << "ERROR: `main`: 1 or more invalid command line parameters given.\n";
 
