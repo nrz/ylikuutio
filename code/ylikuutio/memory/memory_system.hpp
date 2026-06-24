@@ -141,7 +141,7 @@ namespace yli::memory
                 " does not exist!");
         }
 
-        virtual void destroy(const ConstructibleModule& constructible_module) override
+        void destroy(const ConstructibleModule& constructible_module) override
         {
             if (constructible_module.alive && constructible_module.generic_allocator != nullptr)
             {
