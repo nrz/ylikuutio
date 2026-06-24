@@ -48,7 +48,7 @@ int main(const int argc, const char* const argv[]) try
 
     // 1. `yli::core::Application` is created. `Application`
     //    is defined by the application that uses Ylikuutio.
-    std::unique_ptr<yli::core::Application> application = yli::core::create_application(argc, argv);
+    const std::unique_ptr<yli::core::Application> application = yli::core::create_application(argc, argv);
 
     if (application == nullptr)
     {
@@ -95,7 +95,7 @@ int main(const int argc, const char* const argv[]) try
     // 2. Valid command line argument keys are requested
     //    by calling `Application::get_valid_keys`.
 
-    if (std::vector<std::string> valid_keys = application->get_valid_keys(); !application->command_line_master.check_keys(valid_keys))
+    if (const std::vector<std::string> valid_keys = application->get_valid_keys(); !application->command_line_master.check_keys(valid_keys))
     {
         std::cerr << "ERROR: `main`: 1 or more invalid command line parameters given.\n";
 
