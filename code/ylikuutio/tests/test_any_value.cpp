@@ -500,7 +500,7 @@ TEST(any_value_must_be_initialized_appropriately, universe)
     mock::MockApplication application;
     yli::ontology::Universe* const universe = &application.get_universe();
 
-    yli::data::AnyValue universe_any_value = yli::data::AnyValue(*universe);
+    auto universe_any_value = yli::data::AnyValue(*universe);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Universe>>(universe_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Universe>>(universe_any_value.data).get(), *universe);
     ASSERT_EQ(std::strcmp(universe_any_value.get_datatype().c_str(), "yli::ontology::Universe&"), 0);
