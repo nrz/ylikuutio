@@ -44,8 +44,7 @@ namespace yli::core
             using EventSystemMemoryAllocator = memory::MemoryAllocator<event::EventSystem, 1>;
 
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<EventSystemMemoryAllocator>(
-                        static_cast<int>(data::Datatype::EVENT_SYSTEM));
+                    this->memory_system.template get_or_create_allocator<EventSystemMemoryAllocator>(TypeEnumType::EVENT_SYSTEM);
             auto& allocator = static_cast<EventSystemMemoryAllocator&>(generic_allocator);
 
             return allocator.build_in(universe);
@@ -56,8 +55,7 @@ namespace yli::core
             using InputSystemMemoryAllocator = memory::MemoryAllocator<input::InputSystem, 1>;
 
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<InputSystemMemoryAllocator>(
-                        static_cast<int>(data::Datatype::INPUT_SYSTEM));
+                    this->memory_system.template get_or_create_allocator<InputSystemMemoryAllocator>(TypeEnumType::INPUT_SYSTEM);
             auto& allocator = static_cast<InputSystemMemoryAllocator&>(generic_allocator);
 
             return allocator.build_in(universe);
@@ -68,8 +66,7 @@ namespace yli::core
             using AudioSystemMemoryAllocator = memory::MemoryAllocator<audio::AudioSystem, 1>;
 
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<AudioSystemMemoryAllocator>(
-                        static_cast<int>(data::Datatype::AUDIO_SYSTEM));
+                    this->memory_system.template get_or_create_allocator<AudioSystemMemoryAllocator>(TypeEnumType::AUDIO_SYSTEM);
             auto& allocator = static_cast<AudioSystemMemoryAllocator&>(generic_allocator);
 
             return allocator.build_in(universe);

@@ -77,11 +77,6 @@ namespace gpgpu_test
         return this->core.memory_system.get();
     }
 
-    yli::memory::GenericMemoryAllocator& GpgpuTestApplication::get_generic_memory_allocator(const int type) const
-    {
-        return this->core.memory_system.get_generic_allocator(type);
-    }
-
     yli::ontology::GenericEntityFactory& GpgpuTestApplication::get_generic_entity_factory() const
     {
         return this->core.entity_factory.get();

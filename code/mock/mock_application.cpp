@@ -76,11 +76,6 @@ namespace mock
         return this->memory_system.get();
     }
 
-    yli::memory::GenericMemoryAllocator& MockApplication::get_generic_memory_allocator(const int type) const
-    {
-        return this->memory_system.get_generic_allocator(type);
-    }
-
     yli::ontology::GenericEntityFactory& MockApplication::get_generic_entity_factory() const
     {
         return this->entity_factory.get();

@@ -101,21 +101,19 @@ namespace yli::memory
         }
 
         template<typename T1, typename... Args>
-        void create_allocator(int type, Args&&... args)
+        void create_allocator(TypeEnumType type, Args&&... args)
         {
             // TODO: Return the return value of `try_emplace`.
             // TODO: Throw an exception if creating an allocator fails.
             this->memory_allocators.try_emplace(type, new T1(type, std::forward<Args>(args)...));
         }
 
-        // TODO: use `TypeEnumType` instead of `int`!
-        [[nodiscard]] bool has_allocator(const int type) const override
+        [[nodiscard]] bool has_allocator(const TypeEnumType type) const
         {
             return this->memory_allocators.contains(type);
         }
 
-        // TODO: use `TypeEnumType` instead of `int`!
-        [[nodiscard]] GenericMemoryAllocator& get_generic_allocator(const int type) const override
+        [[nodiscard]] GenericMemoryAllocator& get_generic_allocator(const TypeEnumType type) const
         {
             if (this->has_allocator(type)) [[likely]]
             {
@@ -128,8 +126,7 @@ namespace yli::memory
         }
 
         template<typename T1, typename... Args>
-        // TODO: use `TypeEnumType` instead of `int`!
-        [[nodiscard]] MemoryAllocator<T1>& get_allocator(const int type) const
+        [[nodiscard]] MemoryAllocator<T1>& get_allocator(const TypeEnumType type) const
         {
             if (this->has_allocator(type)) [[likely]]
             {
@@ -151,8 +148,7 @@ namespace yli::memory
         }
 
         template<typename T1, typename... Args>
-        // TODO: use `TypeEnumType` instead of `int`!
-        [[nodiscard]] GenericMemoryAllocator& get_or_create_allocator(int type, Args&&... args)
+        [[nodiscard]] GenericMemoryAllocator& get_or_create_allocator(TypeEnumType type, Args&&... args)
         {
             if (this->has_allocator(type))
             {
@@ -165,8 +161,7 @@ namespace yli::memory
 
     private:
         // Allocators need to be created elsewhere and only stored here.
-        // TODO: use `TypeEnumType` as the key type instead of `int`!
-        std::map<int, GenericMemoryAllocator*> memory_allocators;
+        std::map<TypeEnumType, GenericMemoryAllocator*> memory_allocators;
         const TypeEnumType universe_datatype;
     };
 }

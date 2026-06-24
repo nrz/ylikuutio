@@ -216,8 +216,7 @@ namespace yli::ontology
         Universe* create_universe(const UniverseStruct& universe_struct)
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<memory::UniverseMemoryAllocator>(
-                        static_cast<int>(data::Datatype::UNIVERSE));
+                    this->memory_system.template get_or_create_allocator<memory::UniverseMemoryAllocator>(TypeEnumType::UNIVERSE);
             auto& allocator = static_cast<memory::UniverseMemoryAllocator&>(generic_allocator);
 
             this->universe = allocator.build_in(
@@ -242,8 +241,7 @@ namespace yli::ontology
             data::AnyValue&& any_value) const final
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<memory::VariableMemoryAllocator>(
-                        static_cast<int>(data::Datatype::VARIABLE));
+                    this->memory_system.template get_or_create_allocator<memory::VariableMemoryAllocator>(TypeEnumType::VARIABLE);
             auto& allocator = static_cast<memory::VariableMemoryAllocator&>(generic_allocator);
 
             Entity* entity_parent { nullptr };
@@ -310,9 +308,9 @@ namespace yli::ontology
         CallbackEngine* create_callback_engine(
             const CallbackEngineStruct& callback_engine_struct) const final
         {
-            return this->create_child_of_universe<
+            return this->template create_child_of_universe<
                 CallbackEngine, GenericParentModule, memory::CallbackEngineMemoryAllocator, CallbackEngineStruct>(
-                data::Datatype::CALLBACK_ENGINE,
+                TypeEnumType::CALLBACK_ENGINE,
                 callback_engine_struct,
                 &this->get_universe().parent_of_callback_engines);
         }
@@ -320,9 +318,9 @@ namespace yli::ontology
         CallbackObject* create_callback_object(
             const CallbackObjectStruct& callback_object_struct) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 CallbackObject, CallbackEngine, memory::CallbackObjectMemoryAllocator, CallbackObjectStruct>(
-                data::Datatype::CALLBACK_OBJECT,
+                TypeEnumType::CALLBACK_OBJECT,
                 callback_object_struct.callback_engine_parent,
                 callback_object_struct);
         }
@@ -331,9 +329,9 @@ namespace yli::ontology
             const CallbackParameterStruct& callback_parameter_struct,
             data::AnyValue&& any_value) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 CallbackParameter, CallbackObject, memory::CallbackParameterMemoryAllocator, CallbackParameterStruct>(
-                data::Datatype::CALLBACK_PARAMETER,
+                TypeEnumType::CALLBACK_PARAMETER,
                 callback_parameter_struct.callback_object_parent,
                 callback_parameter_struct,
                 std::move(any_value));
@@ -345,18 +343,18 @@ namespace yli::ontology
 
         Ecosystem* create_ecosystem(const EcosystemStruct& ecosystem_struct) const final
         {
-            return this->create_child_of_universe<
+            return this->template create_child_of_universe<
                 Ecosystem, GenericParentModule, memory::EcosystemMemoryAllocator, EcosystemStruct>(
-                data::Datatype::ECOSYSTEM,
+                TypeEnumType::ECOSYSTEM,
                 ecosystem_struct,
                 &this->get_universe().parent_of_ecosystems);
         }
 
         Scene* create_scene(const SceneStruct& scene_struct) const final
         {
-            return this->create_child_of_universe<
+            return this->template create_child_of_universe<
                 Scene, GenericParentModule, memory::SceneMemoryAllocator, SceneStruct>(
-                data::Datatype::SCENE,
+                TypeEnumType::SCENE,
                 scene_struct,
                 &this->get_universe().parent_of_scenes);
         }
@@ -366,7 +364,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_known_parent_type<
                 MovableController, Scene, memory::MovableControllerMemoryAllocator, MovableControllerStruct>(
-                data::Datatype::MOVABLE_CONTROLLER,
+                TypeEnumType::MOVABLE_CONTROLLER,
                 movable_controller_struct.scene_parent,
                 movable_controller_struct,
                 this->get_generic_master_module<MovableController, CallbackEngine>(
@@ -377,7 +375,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_known_parent_type<
                 Waypoint, Scene, memory::WaypointMemoryAllocator, WaypointStruct>(
-                data::Datatype::WAYPOINT,
+                TypeEnumType::WAYPOINT,
                 waypoint_struct.scene,
                 waypoint_struct,
                 this->get_generic_master_module<Movable, MovableController>(waypoint_struct.movable_controller_master));
@@ -387,7 +385,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_known_parent_type<
                 Camera, Scene, memory::CameraMemoryAllocator, CameraStruct>(
-                data::Datatype::CAMERA,
+                TypeEnumType::CAMERA,
                 camera_struct.scene,
                 camera_struct,
                 this->get_generic_master_module<Movable, MovableController>(camera_struct.movable_controller_master));
@@ -397,7 +395,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_known_parent_type<
                 Camera, Scene, memory::CameraMemoryAllocator, CameraStruct>(
-                data::Datatype::CAMERA,
+                TypeEnumType::CAMERA,
                 camera_struct.scene,
                 camera_struct,
                 this->get_generic_master_module<Movable, MovableController>(camera_struct.movable_controller_master));
@@ -407,9 +405,9 @@ namespace yli::ontology
 
         Pipeline* create_pipeline(const PipelineStruct& pipeline_struct) const final
         {
-            return this->create_child_of_ecosystem_or_scene<
+            return this->template create_child_of_ecosystem_or_scene<
                 Pipeline, memory::PipelineMemoryAllocator, PipelineStruct>(
-                data::Datatype::PIPELINE,
+                TypeEnumType::PIPELINE,
                 pipeline_struct);
         }
 
@@ -417,7 +415,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_ecosystem_or_scene<
                 Material, memory::MaterialMemoryAllocator, MaterialStruct>(
-                data::Datatype::MATERIAL,
+                TypeEnumType::MATERIAL,
                 material_struct,
                 this->get_generic_master_module<Material, Pipeline>(material_struct.pipeline_master));
         }
@@ -426,16 +424,16 @@ namespace yli::ontology
         {
             return this->template create_child_of_ecosystem_or_scene<
                 Species, memory::SpeciesMemoryAllocator, SpeciesStruct>(
-                data::Datatype::SPECIES,
+                TypeEnumType::SPECIES,
                 species_struct,
                 this->get_generic_master_module<Species, Material>(species_struct.material_master));
         }
 
         Object* create_object(const ObjectStruct& object_struct) const final
         {
-            return this->create_object_or_object_derivative<
+            return this->template create_object_or_object_derivative<
                 Object, memory::ObjectMemoryAllocator>(
-                data::Datatype::OBJECT,
+                TypeEnumType::OBJECT,
                 object_struct);
         }
 
@@ -447,28 +445,28 @@ namespace yli::ontology
         {
             return this->template create_child_of_ecosystem_or_scene<
                 Symbiosis, memory::SymbiosisMemoryAllocator, SymbiosisStruct>(
-                data::Datatype::SYMBIOSIS,
+                TypeEnumType::SYMBIOSIS,
                 symbiosis_struct,
                 this->get_generic_master_module<Symbiosis, Pipeline>(symbiosis_struct.pipeline_master));
         }
 
         SymbiontMaterial* create_symbiont_material(const SymbiontMaterialStruct& symbiont_material_struct) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 SymbiontMaterial,
                 Symbiosis,
                 memory::SymbiontMaterialMemoryAllocator,
                 SymbiontMaterialStruct>(
-                data::Datatype::SYMBIONT_MATERIAL,
+                TypeEnumType::SYMBIONT_MATERIAL,
                 symbiont_material_struct.symbiosis_parent,
                 symbiont_material_struct);
         }
 
         SymbiontSpecies* create_symbiont_species(const SymbiontSpeciesStruct& symbiont_species_struct) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 SymbiontSpecies, SymbiontMaterial, memory::SymbiontSpeciesMemoryAllocator, SymbiontSpeciesStruct>(
-                data::Datatype::SYMBIONT_SPECIES,
+                TypeEnumType::SYMBIONT_SPECIES,
                 symbiont_species_struct.symbiont_material_parent,
                 symbiont_species_struct);
         }
@@ -476,8 +474,7 @@ namespace yli::ontology
         Ability* create_ability(const AbilityStruct& ability_struct) const final
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<memory::AbilityMemoryAllocator>(
-                        static_cast<int>(data::Datatype::ABILITY));
+                    this->memory_system.template get_or_create_allocator<memory::AbilityMemoryAllocator>(TypeEnumType::ABILITY);
             auto& allocator = static_cast<memory::AbilityMemoryAllocator&>(generic_allocator);
 
             return allocator.build_in(
@@ -489,17 +486,16 @@ namespace yli::ontology
 
         Holobiont* create_holobiont(const HolobiontStruct& holobiont_struct) const final
         {
-            return this->create_holobiont_derivative<
+            return this->template create_holobiont_derivative<
                 Holobiont, memory::HolobiontMemoryAllocator>(
-                data::Datatype::HOLOBIONT,
+                TypeEnumType::HOLOBIONT,
                 holobiont_struct);
         }
 
         Biont* create_biont(const BiontStruct& biont_struct) const final
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<memory::BiontMemoryAllocator>(
-                        static_cast<int>(data::Datatype::BIONT));
+                    this->memory_system.template get_or_create_allocator<memory::BiontMemoryAllocator>(TypeEnumType::BIONT);
             auto& allocator = static_cast<memory::BiontMemoryAllocator&>(generic_allocator);
 
             return allocator.build_in(
@@ -513,8 +509,7 @@ namespace yli::ontology
         Skill* create_skill(const SkillStruct& skill_struct) const final
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<memory::SkillMemoryAllocator>(
-                        static_cast<int>(data::Datatype::SKILL));
+                    this->memory_system.template get_or_create_allocator<memory::SkillMemoryAllocator>(TypeEnumType::SKILL);
             auto& allocator = static_cast<memory::SkillMemoryAllocator&>(generic_allocator);
 
             return allocator.build_in(
@@ -527,10 +522,10 @@ namespace yli::ontology
         ShapeshifterTransformation* create_shapeshifter_transformation(
             const ShapeshifterTransformationStruct& shapeshifter_transformation_struct) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 ShapeshifterTransformation, Material, memory::ShapeshifterTransformationMemoryAllocator,
                 ShapeshifterTransformationStruct>(
-                data::Datatype::SHAPESHIFTER_TRANSFORMATION,
+                TypeEnumType::SHAPESHIFTER_TRANSFORMATION,
                 shapeshifter_transformation_struct.material_parent,
                 shapeshifter_transformation_struct);
         }
@@ -538,10 +533,10 @@ namespace yli::ontology
         ShapeshifterSequence* create_shapeshifter_sequence(
             const ShapeshifterSequenceStruct& shapeshifter_sequence_struct) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 ShapeshifterSequence, ShapeshifterTransformation, memory::ShapeshifterSequenceMemoryAllocator,
                 ShapeshifterSequenceStruct>(
-                data::Datatype::SHAPESHIFTER_SEQUENCE,
+                TypeEnumType::SHAPESHIFTER_SEQUENCE,
                 shapeshifter_sequence_struct.shapeshifter_transformation_parent,
                 shapeshifter_sequence_struct);
         }
@@ -549,10 +544,10 @@ namespace yli::ontology
         ShapeshifterForm* create_shapeshifter_form(
             const ShapeshifterFormStruct& shapeshifter_form_struct) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 ShapeshifterForm, ShapeshifterTransformation, memory::ShapeshifterFormMemoryAllocator,
                 ShapeshifterFormStruct>(
-                data::Datatype::SHAPESHIFTER_FORM,
+                TypeEnumType::SHAPESHIFTER_FORM,
                 shapeshifter_form_struct.shapeshifter_transformation_parent,
                 shapeshifter_form_struct);
         }
@@ -561,7 +556,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_known_parent_type<
                 Shapeshifter, Scene, memory::ShapeshifterMemoryAllocator, ShapeshifterStruct>(
-                data::Datatype::SHAPESHIFTER,
+                TypeEnumType::SHAPESHIFTER,
                 shapeshifter_struct.scene,
                 shapeshifter_struct,
                 // `MovableController` master.
@@ -574,18 +569,18 @@ namespace yli::ontology
 
         Font2d* create_font_2d(const FontStruct& font_struct) const final
         {
-            return this->create_child_of_universe<
+            return this->template create_child_of_universe<
                 Font2d, GenericParentModule, memory::Font2dMemoryAllocator, FontStruct>(
-                data::Datatype::FONT_2D,
+                TypeEnumType::FONT_2D,
                 font_struct,
                 &this->get_universe().parent_of_font_2ds);
         }
 
         Text2d* create_text_2d(const TextStruct& text_struct) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 Text2d, Font2d, memory::Text2dMemoryAllocator, TextStruct>(
-                data::Datatype::TEXT_2D,
+                TypeEnumType::TEXT_2D,
                 text_struct.font_2d_parent,
                 text_struct);
         }
@@ -594,7 +589,7 @@ namespace yli::ontology
         {
             return this->create_child_of_known_parent_type<
                 VectorFont, Material, memory::VectorFontMemoryAllocator, VectorFontStruct>(
-                data::Datatype::VECTOR_FONT,
+                TypeEnumType::VECTOR_FONT,
                 vector_font_struct.material_parent,
                 vector_font_struct);
         }
@@ -603,7 +598,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_known_parent_type<
                 Glyph, VectorFont, memory::GlyphMemoryAllocator, GlyphStruct>(
-                data::Datatype::GLYPH,
+                TypeEnumType::GLYPH,
                 glyph_struct.vector_font_parent,
                 glyph_struct,
                 this->get_generic_master_module<Glyph, Material>(glyph_struct.material_master));
@@ -613,7 +608,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_known_parent_type<
                 GlyphObject, Scene, memory::GlyphObjectMemoryAllocator, GlyphObjectStruct>(
-                data::Datatype::GLYPH_OBJECT,
+                TypeEnumType::GLYPH_OBJECT,
                 glyph_object_struct.scene_parent,
                 glyph_object_struct,
                 this->get_generic_master_module<GlyphObject, Glyph>(glyph_object_struct.glyph_master),
@@ -624,7 +619,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_known_parent_type<
                 Text3d, Scene, memory::Text3dMemoryAllocator, Text3dStruct>(
-                data::Datatype::TEXT_3D,
+                TypeEnumType::TEXT_3D,
                 text_3d_struct.scene,
                 text_3d_struct,
                 this->get_generic_master_module<Movable, MovableController>(text_3d_struct.movable_controller_master),
@@ -635,7 +630,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_universe<
                 InputMode, ParentOfInputModesModule, memory::InputModeMemoryAllocator, InputModeStruct>(
-                data::Datatype::INPUT_MODE,
+                TypeEnumType::INPUT_MODE,
                 input_mode_struct,
                 &this->get_universe().parent_of_input_modes,
                 this->get_generic_master_module<InputMode, Console>(input_mode_struct.console_master));
@@ -647,9 +642,9 @@ namespace yli::ontology
 
         AudioTrack* create_audio_track(const AudioTrackStruct& audio_track_struct) const final
         {
-            return this->create_child_of_universe<
+            return this->template create_child_of_universe<
                 AudioTrack, GenericParentModule, memory::AudioTrackMemoryAllocator, AudioTrackStruct>(
-                data::Datatype::AUDIO_TRACK,
+                TypeEnumType::AUDIO_TRACK,
                 audio_track_struct,
                 &this->get_universe().parent_of_audio_tracks);
         }
@@ -658,7 +653,7 @@ namespace yli::ontology
         {
             return this->template create_child_of_universe<
                 Console, GenericParentModule, memory::ConsoleMemoryAllocator, ConsoleStruct>(
-                data::Datatype::CONSOLE,
+                TypeEnumType::CONSOLE,
                 console_struct,
                 &this->get_universe().parent_of_consoles,
                 this->get_generic_master_module<Console, Font2d>(console_struct.font_2d_master));
@@ -670,7 +665,7 @@ namespace yli::ontology
             return this->create_child_of_known_parent_type<
                 ConsoleCallbackEngine, Console, memory::ConsoleCallbackEngineMemoryAllocator,
                 ConsoleCallbackEngineStruct>(
-                data::Datatype::CONSOLE_CALLBACK_ENGINE,
+                TypeEnumType::CONSOLE_CALLBACK_ENGINE,
                 console_callback_engine_struct.console_parent,
                 console_callback_engine_struct);
         }
@@ -678,10 +673,10 @@ namespace yli::ontology
         ConsoleCallbackObject* create_console_callback_object(
             const ConsoleCallbackObjectStruct& console_callback_object_struct) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 ConsoleCallbackObject, ConsoleCallbackEngine, memory::ConsoleCallbackObjectMemoryAllocator,
                 ConsoleCallbackObjectStruct>(
-                data::Datatype::CONSOLE_CALLBACK_OBJECT,
+                TypeEnumType::CONSOLE_CALLBACK_OBJECT,
                 console_callback_object_struct.console_callback_engine_parent,
                 console_callback_object_struct);
         }
@@ -690,10 +685,10 @@ namespace yli::ontology
             const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
             const yli::data::AnyValue& any_value) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 ConsoleCallbackParameter, ConsoleCallbackObject, memory::ConsoleCallbackParameterMemoryAllocator,
                 ConsoleCallbackParameterStruct>(
-                data::Datatype::CONSOLE_CALLBACK_PARAMETER,
+                TypeEnumType::CONSOLE_CALLBACK_PARAMETER,
                 console_callback_parameter_struct.console_callback_object_parent,
                 console_callback_parameter_struct,
                 any_value);
@@ -705,9 +700,9 @@ namespace yli::ontology
 
         ComputeTask* create_compute_task(const ComputeTaskStruct& compute_task_struct) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 ComputeTask, Pipeline, memory::ComputeTaskMemoryAllocator, ComputeTaskStruct>(
-                data::Datatype::COMPUTE_TASK,
+                TypeEnumType::COMPUTE_TASK,
                 compute_task_struct.pipeline_parent,
                 compute_task_struct);
         }
@@ -715,9 +710,9 @@ namespace yli::ontology
         ConsoleLispFunction* create_console_lisp_function(
             const ConsoleLispFunctionStruct& console_lisp_function_struct) const final
         {
-            return this->create_child_of_known_parent_type<
+            return this->template create_child_of_known_parent_type<
                 ConsoleLispFunction, Console, memory::ConsoleLispFunctionMemoryAllocator, ConsoleLispFunctionStruct>(
-                data::Datatype::CONSOLE_LISP_FUNCTION,
+                TypeEnumType::CONSOLE_LISP_FUNCTION,
                 console_lisp_function_struct.console_parent,
                 console_lisp_function_struct);
         }
@@ -772,8 +767,7 @@ namespace yli::ontology
 
             memory::GenericMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<
-                        memory::GenericConsoleLispFunctionOverloadMemoryAllocator>(
-                        static_cast<int>(data::Datatype::GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD));
+                        memory::GenericConsoleLispFunctionOverloadMemoryAllocator>(TypeEnumType::GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD);
 
             auto& allocator =
                     static_cast<memory::GenericConsoleLispFunctionOverloadMemoryAllocator&>(generic_allocator);
@@ -789,7 +783,7 @@ namespace yli::ontology
 
         template<SceneDerivative T, typename SceneDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_scene_derivative(
-            int scene_derivative_type,
+            TypeEnumType scene_derivative_type,
             const SceneStruct& scene_struct,
             ModuleArgs&&... module_args) const
         {
@@ -804,7 +798,7 @@ namespace yli::ontology
 
         template<ObjectDerivative T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_object_derivative(
-            int object_derivative_type,
+            TypeEnumType object_derivative_type,
             const ObjectStruct& object_struct,
             ModuleArgs&&... module_args) const
         {
@@ -814,7 +808,7 @@ namespace yli::ontology
 
         template<EntityNotUniverse T, typename HolobiontDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_holobiont_derivative(
-            int holobiont_derivative_type,
+            TypeEnumType holobiont_derivative_type,
             const HolobiontStruct& holobiont_struct,
             ModuleArgs&&... module_args) const
         {
@@ -831,7 +825,7 @@ namespace yli::ontology
     private:
         template<EntityNotUniverse T, typename ParentModuleType, typename TypeAllocator, typename DataStruct, typename... Args>
         T* create_child_of_universe(
-            const int type,
+            const TypeEnumType type,
             const DataStruct& data_struct,
             ParentModuleType* const parent_module,
             Args&&... args) const
@@ -872,13 +866,12 @@ namespace yli::ontology
 
         template<EntityNotUniverse T, typename TypeAllocator, typename DataStruct, typename... Args>
         T* create_child_of_ecosystem_or_scene(
-            const int type,
+            const TypeEnumType type,
             const DataStruct& data_struct,
             Args&&... args) const
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<TypeAllocator>(
-                        static_cast<int>(type));
+                    this->memory_system.template get_or_create_allocator<TypeAllocator>(type);
             auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
 
             T* instance = allocator.build_in(
@@ -896,7 +889,7 @@ namespace yli::ontology
         template<EntityNotUniverse Type, typename ParentType, typename TypeAllocator, typename DataStruct,
             typename... Args>
         Type* create_child_of_known_parent_type(
-            const int allocator_type,
+            const TypeEnumType allocator_type,
             const Request<ParentType>& parent,
             const DataStruct& data_struct,
             Args&&... args) const
@@ -906,8 +899,7 @@ namespace yli::ontology
             // The type of the parent of the `Entity` must not be `Universe`.
 
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<TypeAllocator>(
-                        static_cast<int>(allocator_type));
+                    this->memory_system.template get_or_create_allocator<TypeAllocator>(allocator_type);
             auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
 
             Type* const instance = allocator.build_in(
@@ -924,7 +916,7 @@ namespace yli::ontology
 
         template<ObjectOrObjectDerivative T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
         T* create_object_or_object_derivative(
-            int object_derivative_type,
+            TypeEnumType object_derivative_type,
             const ObjectStruct& object_struct,
             ModuleArgs&&... module_args) const
         {

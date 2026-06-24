@@ -133,11 +133,6 @@ namespace yli_edit
         return this->core.memory_system.get();
     }
 
-    yli::memory::GenericMemoryAllocator& YliEditApplication::get_generic_memory_allocator(const int type) const
-    {
-        return this->core.memory_system.get_generic_allocator(type);
-    }
-
     yli::ontology::GenericEntityFactory& YliEditApplication::get_generic_entity_factory() const
     {
         return this->core.entity_factory.get();

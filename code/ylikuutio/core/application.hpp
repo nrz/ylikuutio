@@ -74,8 +74,6 @@ namespace yli::core
 
         virtual memory::GenericMemorySystem& get_generic_memory_system() const = 0;
 
-        virtual memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const = 0;
-
         virtual ontology::GenericEntityFactory& get_generic_entity_factory() const = 0;
 
         virtual event::EventSystem* get_event_system() const;

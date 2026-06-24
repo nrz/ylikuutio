@@ -76,9 +76,7 @@ namespace hirvi
 
         yli::memory::MemorySystem<data::Datatype>& get_memory_system() const;
 
-        yli::memory::GenericMemoryAllocator& get_generic_memory_allocator(int type) const override;
-
-        bool has_memory_allocator(const int type) const
+        bool has_memory_allocator(const data::Datatype type) const
         {
             return this->core.memory_system.has_allocator(type);
         }

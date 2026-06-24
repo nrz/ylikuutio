@@ -1310,11 +1310,6 @@ namespace yli::ontology
         return "TODO: eval";
     }
 
-    memory::GenericMemoryAllocator& Universe::get_generic_memory_allocator(const int type) const
-    {
-        return this->application.get_generic_memory_allocator(type);
-    }
-
     event::EventSystem& Universe::get_event_system() const
     {
         if (event::EventSystem* const event_system = this->application.get_event_system(); event_system != nullptr) [[

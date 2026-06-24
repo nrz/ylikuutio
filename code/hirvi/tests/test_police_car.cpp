@@ -111,7 +111,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei1) % alignof(hirvi::ontology::PoliceCar), 0);
 
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::POLICE_CAR));
-    ASSERT_TRUE(hirvi_application.has_memory_allocator(yli::data::Datatype::BIONT));
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::BIONT));
 
     // Even though `PoliceCar` is derived from `Holobiont`. `PoliceCar` should be allocated using its own allocator.
     yli::memory::MemoryAllocator<hirvi::ontology::PoliceCar*>& police_car_memory_allocator =
@@ -122,7 +122,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     // The `Biont`s of the `PoliceCar` should be allocated using the `Biont` allocator.
     // There is 1 body + chassis `Biont`, and 4 wheel `Biont`s.
     yli::memory::MemoryAllocator<Biont*>& biont_memory_allocator = hirvi_application.get_memory_allocator<Biont*>(
-        yli::data::Datatype::BIONT);
+        hirvi::data::BIONT);
     ASSERT_EQ(biont_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 5);
 

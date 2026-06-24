@@ -214,8 +214,6 @@ namespace yli::ontology
 
         static std::string eval_string(const std::string& my_string);
 
-        memory::GenericMemoryAllocator& get_generic_memory_allocator(int type) const;
-
         event::EventSystem& get_event_system() const;
 
         input::InputSystem& get_input_system() const;
