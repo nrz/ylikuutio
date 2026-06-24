@@ -125,9 +125,8 @@ int main(const int argc, const char* const argv[]) try
     }
 
     const std::string application_name = application->get_name();
-    const std::string application_version = application->get_version();
 
-    if (!application_name.empty() && !application_version.empty())
+    if (const std::string application_version = application->get_version(); !application_name.empty() && !application_version.empty())
     {
         std::cout << application_name << " " << application_version << " exited successfully!\n";
     }
