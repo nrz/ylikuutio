@@ -99,7 +99,7 @@ namespace yli::memory
             return count;
         }
 
-        [[nodiscard]] std::size_t get_data_size() const
+        [[nodiscard]] static std::size_t get_data_size()
         {
             return DataSize;
         }
