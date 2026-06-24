@@ -67,14 +67,14 @@
 
 TEST(any_value_must_be_initialized_appropriately, default_constructor)
 {
-    auto default_value = yli::data::AnyValue();
+    constexpr auto default_value = yli::data::AnyValue();
     ASSERT_TRUE(std::holds_alternative<std::monostate>(default_value.data));
 }
 
 TEST(any_value_must_be_initialized_appropriately, bool_true)
 {
-    bool bool_true = true;
-    auto true_value = yli::data::AnyValue(bool_true);
+    constexpr bool bool_true = true;
+    const auto true_value = yli::data::AnyValue(bool_true);
     ASSERT_TRUE(std::holds_alternative<bool>(true_value.data));
     ASSERT_TRUE(std::get<bool>(true_value.data));
     ASSERT_EQ(std::char_traits<char>::length(true_value.get_datatype().c_str()), std::char_traits<char>::length("bool"));
@@ -85,8 +85,8 @@ TEST(any_value_must_be_initialized_appropriately, bool_true)
 
 TEST(any_value_must_be_initialized_appropriately, bool_false)
 {
-    bool bool_false = false;
-    auto false_value = yli::data::AnyValue(bool_false);
+    constexpr bool bool_false = false;
+    const auto false_value = yli::data::AnyValue(bool_false);
     ASSERT_TRUE(std::holds_alternative<bool>(false_value.data));
     ASSERT_FALSE(std::get<bool>(false_value.data));
     ASSERT_EQ(std::char_traits<char>::length(false_value.get_datatype().c_str()), std::char_traits<char>::length("bool"));
@@ -97,8 +97,8 @@ TEST(any_value_must_be_initialized_appropriately, bool_false)
 
 TEST(any_value_must_be_initialized_appropriately, char_lowercase_a)
 {
-    char char_lowercase_a = 'a';
-    auto lowercase_a_value = yli::data::AnyValue(char_lowercase_a);
+    constexpr char char_lowercase_a = 'a';
+    const auto lowercase_a_value = yli::data::AnyValue(char_lowercase_a);
     ASSERT_TRUE(std::holds_alternative<char>(lowercase_a_value.data));
     ASSERT_EQ(std::get<char>(lowercase_a_value.data), 'a');
     ASSERT_EQ(std::char_traits<char>::length(lowercase_a_value.get_datatype().c_str()), std::char_traits<char>::length("char"));
@@ -109,8 +109,8 @@ TEST(any_value_must_be_initialized_appropriately, char_lowercase_a)
 
 TEST(any_value_must_be_initialized_appropriately, char_lowercase_b)
 {
-    char char_lowercase_b = 'b';
-    auto lowercase_b_value = yli::data::AnyValue(char_lowercase_b);
+    constexpr char char_lowercase_b = 'b';
+    const auto lowercase_b_value = yli::data::AnyValue(char_lowercase_b);
     ASSERT_TRUE(std::holds_alternative<char>(lowercase_b_value.data));
     ASSERT_EQ(std::get<char>(lowercase_b_value.data), 'b');
     ASSERT_EQ(std::char_traits<char>::length(lowercase_b_value.get_datatype().c_str()), std::char_traits<char>::length("char"));
@@ -121,8 +121,8 @@ TEST(any_value_must_be_initialized_appropriately, char_lowercase_b)
 
 TEST(any_value_must_be_initialized_appropriately, char_space)
 {
-    char char_space = ' ';
-    auto space_value = yli::data::AnyValue(char_space);
+    constexpr char char_space = ' ';
+    const auto space_value = yli::data::AnyValue(char_space);
     ASSERT_TRUE(std::holds_alternative<char>(space_value.data));
     ASSERT_EQ(std::get<char>(space_value.data), ' ');
     ASSERT_EQ(std::char_traits<char>::length(space_value.get_datatype().c_str()), std::char_traits<char>::length("char"));
@@ -133,8 +133,8 @@ TEST(any_value_must_be_initialized_appropriately, char_space)
 
 TEST(any_value_must_be_initialized_appropriately, char_newline)
 {
-    char char_newline = '\n';
-    auto newline_value = yli::data::AnyValue(char_newline);
+    constexpr char char_newline = '\n';
+    const auto newline_value = yli::data::AnyValue(char_newline);
     ASSERT_TRUE(std::holds_alternative<char>(newline_value.data));
     ASSERT_EQ(std::get<char>(newline_value.data), '\n');
     ASSERT_EQ(std::char_traits<char>::length(newline_value.get_datatype().c_str()), std::char_traits<char>::length("char"));
@@ -145,8 +145,8 @@ TEST(any_value_must_be_initialized_appropriately, char_newline)
 
 TEST(any_value_must_be_initialized_appropriately, float_0)
 {
-    float float_zero = 0.0f;
-    auto float_zero_value = yli::data::AnyValue(float_zero);
+    constexpr float float_zero = 0.0f;
+    const auto float_zero_value = yli::data::AnyValue(float_zero);
     ASSERT_TRUE(std::holds_alternative<float>(float_zero_value.data));
     ASSERT_EQ(std::get<float>(float_zero_value.data), 0.0f);
     ASSERT_EQ(std::char_traits<char>::length(float_zero_value.get_datatype().c_str()), std::char_traits<char>::length("float"));
@@ -158,8 +158,8 @@ TEST(any_value_must_be_initialized_appropriately, float_0)
 
 TEST(any_value_must_be_initialized_appropriately, float_positive_infinity)
 {
-    float float_positive_infinity = std::numeric_limits<float>::infinity();
-    auto float_positive_infinity_value = yli::data::AnyValue(float_positive_infinity);
+    const float float_positive_infinity = std::numeric_limits<float>::infinity();
+    const auto float_positive_infinity_value = yli::data::AnyValue(float_positive_infinity);
     ASSERT_TRUE(std::holds_alternative<float>(float_positive_infinity_value.data));
     ASSERT_EQ(std::get<float>(float_positive_infinity_value.data), std::numeric_limits<float>::infinity());
     ASSERT_EQ(std::char_traits<char>::length(float_positive_infinity_value.get_datatype().c_str()), std::char_traits<char>::length("float"));
@@ -170,8 +170,8 @@ TEST(any_value_must_be_initialized_appropriately, float_positive_infinity)
 
 TEST(any_value_must_be_initialized_appropriately, float_negative_infinity)
 {
-    float float_negative_infinity = -1.0f * std::numeric_limits<float>::infinity();
-    auto float_negative_infinity_value = yli::data::AnyValue(float_negative_infinity);
+    const float float_negative_infinity = -1.0f * std::numeric_limits<float>::infinity();
+    const auto float_negative_infinity_value = yli::data::AnyValue(float_negative_infinity);
     ASSERT_TRUE(std::holds_alternative<float>(float_negative_infinity_value.data));
     ASSERT_EQ(std::get<float>(float_negative_infinity_value.data), float_negative_infinity);
     ASSERT_EQ(std::char_traits<char>::length(float_negative_infinity_value.get_datatype().c_str()), std::char_traits<char>::length("float"));
@@ -182,8 +182,8 @@ TEST(any_value_must_be_initialized_appropriately, float_negative_infinity)
 
 TEST(any_value_must_be_initialized_appropriately, float_nan)
 {
-    float float_nan = NAN;
-    auto float_nan_value = yli::data::AnyValue(float_nan);
+    constexpr float float_nan = NAN;
+    const auto float_nan_value = yli::data::AnyValue(float_nan);
     ASSERT_TRUE(std::holds_alternative<float>(float_nan_value.data));
     ASSERT_TRUE(std::isnan(std::get<float>(float_nan_value.data)));
     ASSERT_EQ(std::char_traits<char>::length(float_nan_value.get_datatype().c_str()), std::char_traits<char>::length("float"));
@@ -194,8 +194,8 @@ TEST(any_value_must_be_initialized_appropriately, float_nan)
 
 TEST(any_value_must_be_initialized_appropriately, double_0)
 {
-    double double_zero = 0.0f;
-    auto double_zero_value = yli::data::AnyValue(double_zero);
+    constexpr double double_zero = 0.0f;
+    const auto double_zero_value = yli::data::AnyValue(double_zero);
     ASSERT_TRUE(std::holds_alternative<double>(double_zero_value.data));
     ASSERT_EQ(std::get<double>(double_zero_value.data), 0.0f);
     ASSERT_EQ(std::char_traits<char>::length(double_zero_value.get_datatype().c_str()), std::char_traits<char>::length("double"));
@@ -207,8 +207,8 @@ TEST(any_value_must_be_initialized_appropriately, double_0)
 
 TEST(any_value_must_be_initialized_appropriately, double_positive_infinity)
 {
-    double double_positive_infinity = std::numeric_limits<double>::infinity();
-    auto double_positive_infinity_value = yli::data::AnyValue(double_positive_infinity);
+    const double double_positive_infinity = std::numeric_limits<double>::infinity();
+    const auto double_positive_infinity_value = yli::data::AnyValue(double_positive_infinity);
     ASSERT_TRUE(std::holds_alternative<double>(double_positive_infinity_value.data));
     ASSERT_EQ(std::get<double>(double_positive_infinity_value.data), std::numeric_limits<double>::infinity());
     ASSERT_EQ(std::char_traits<char>::length(double_positive_infinity_value.get_datatype().c_str()), std::char_traits<char>::length("double"));
@@ -219,8 +219,8 @@ TEST(any_value_must_be_initialized_appropriately, double_positive_infinity)
 
 TEST(any_value_must_be_initialized_appropriately, double_negative_infinity)
 {
-    double double_negative_infinity = -1 * std::numeric_limits<double>::infinity();
-    auto double_negative_infinity_value = yli::data::AnyValue(double_negative_infinity);
+    const double double_negative_infinity = -1 * std::numeric_limits<double>::infinity();
+    const auto double_negative_infinity_value = yli::data::AnyValue(double_negative_infinity);
     ASSERT_TRUE(std::holds_alternative<double>(double_negative_infinity_value.data));
     ASSERT_EQ(std::get<double>(double_negative_infinity_value.data), double_negative_infinity);
     ASSERT_EQ(std::char_traits<char>::length(double_negative_infinity_value.get_datatype().c_str()), std::char_traits<char>::length("double"));
@@ -231,8 +231,8 @@ TEST(any_value_must_be_initialized_appropriately, double_negative_infinity)
 
 TEST(any_value_must_be_initialized_appropriately, double_nan)
 {
-    double double_nan = NAN;
-    auto double_nan_value = yli::data::AnyValue(double_nan);
+    constexpr double double_nan = NAN;
+    const auto double_nan_value = yli::data::AnyValue(double_nan);
     ASSERT_TRUE(std::holds_alternative<double>(double_nan_value.data));
     ASSERT_TRUE(std::isnan(std::get<double>(double_nan_value.data)));
     ASSERT_EQ(std::char_traits<char>::length(double_nan_value.get_datatype().c_str()), std::char_traits<char>::length("double"));
@@ -243,8 +243,8 @@ TEST(any_value_must_be_initialized_appropriately, double_nan)
 
 TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
 {
-    std::int32_t int32_t_zero = 0;
-    auto int32_t_zero_value = yli::data::AnyValue(int32_t_zero);
+    constexpr std::int32_t int32_t_zero = 0;
+    const auto int32_t_zero_value = yli::data::AnyValue(int32_t_zero);
     ASSERT_TRUE(std::holds_alternative<std::int32_t>(int32_t_zero_value.data));
     ASSERT_EQ(std::get<std::int32_t>(int32_t_zero_value.data), 0);
     ASSERT_EQ(std::char_traits<char>::length(int32_t_zero_value.get_datatype().c_str()), std::char_traits<char>::length("std::int32_t"));
@@ -255,8 +255,8 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_zero)
 
 TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
 {
-    std::int32_t int32_t_plus_1 = 1;
-    auto int32_t_plus_1_value = yli::data::AnyValue(int32_t_plus_1);
+    constexpr std::int32_t int32_t_plus_1 = 1;
+    const auto int32_t_plus_1_value = yli::data::AnyValue(int32_t_plus_1);
     ASSERT_TRUE(std::holds_alternative<std::int32_t>(int32_t_plus_1_value.data));
     ASSERT_EQ(std::get<std::int32_t>(int32_t_plus_1_value.data), 1);
     ASSERT_EQ(std::char_traits<char>::length(int32_t_plus_1_value.get_datatype().c_str()), std::char_traits<char>::length("std::int32_t"));
@@ -267,8 +267,8 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_plus_1)
 
 TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
 {
-    std::int32_t int32_t_minus_1 = -1;
-    auto int32_t_minus_1_value = yli::data::AnyValue(int32_t_minus_1);
+    constexpr std::int32_t int32_t_minus_1 = -1;
+    const auto int32_t_minus_1_value = yli::data::AnyValue(int32_t_minus_1);
     ASSERT_TRUE(std::holds_alternative<std::int32_t>(int32_t_minus_1_value.data));
     ASSERT_EQ(std::get<std::int32_t>(int32_t_minus_1_value.data), -1);
     ASSERT_EQ(std::char_traits<char>::length(int32_t_minus_1_value.get_datatype().c_str()), std::char_traits<char>::length("std::int32_t"));
@@ -279,8 +279,8 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_minus_1)
 
 TEST(any_value_must_be_initialized_appropriately, int32_t_max)
 {
-    std::int32_t int32_t_max = std::numeric_limits<std::int32_t>::max();
-    auto int32_t_max_value = yli::data::AnyValue(int32_t_max);
+    const std::int32_t int32_t_max = std::numeric_limits<std::int32_t>::max();
+    const auto int32_t_max_value = yli::data::AnyValue(int32_t_max);
     ASSERT_TRUE(std::holds_alternative<std::int32_t>(int32_t_max_value.data));
     ASSERT_EQ(std::get<std::int32_t>(int32_t_max_value.data), 2147483647);
     ASSERT_EQ(std::get<std::int32_t>(int32_t_max_value.data), std::numeric_limits<std::int32_t>::max());
@@ -298,8 +298,8 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_max)
 
 TEST(any_value_must_be_initialized_appropriately, int32_t_min)
 {
-    std::int32_t int32_t_min = std::numeric_limits<std::int32_t>::min();
-    auto int32_t_min_value = yli::data::AnyValue(int32_t_min);
+    const std::int32_t int32_t_min = std::numeric_limits<std::int32_t>::min();
+    const auto int32_t_min_value = yli::data::AnyValue(int32_t_min);
     ASSERT_TRUE(std::holds_alternative<std::int32_t>(int32_t_min_value.data));
     ASSERT_EQ(std::get<std::int32_t>(int32_t_min_value.data), -2147483648);
     ASSERT_EQ(std::get<std::int32_t>(int32_t_min_value.data), std::numeric_limits<std::int32_t>::min());
@@ -317,8 +317,8 @@ TEST(any_value_must_be_initialized_appropriately, int32_t_min)
 
 TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
 {
-    std::uint32_t uint32_t_zero = 0;
-    auto uint32_t_zero_value = yli::data::AnyValue(uint32_t_zero);
+    constexpr std::uint32_t uint32_t_zero = 0;
+    const auto uint32_t_zero_value = yli::data::AnyValue(uint32_t_zero);
     ASSERT_TRUE(std::holds_alternative<std::uint32_t>(uint32_t_zero_value.data));
     ASSERT_EQ(std::get<std::uint32_t>(uint32_t_zero_value.data), 0);
     ASSERT_EQ(std::char_traits<char>::length(uint32_t_zero_value.get_datatype().c_str()), std::char_traits<char>::length("std::uint32_t"));
@@ -329,8 +329,8 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_zero)
 
 TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
 {
-    std::uint32_t uint32_t_plus_1 = 1;
-    auto uint32_t_plus_1_value = yli::data::AnyValue(uint32_t_plus_1);
+    constexpr std::uint32_t uint32_t_plus_1 = 1;
+    const auto uint32_t_plus_1_value = yli::data::AnyValue(uint32_t_plus_1);
     ASSERT_TRUE(std::holds_alternative<std::uint32_t>(uint32_t_plus_1_value.data));
     ASSERT_EQ(std::get<std::uint32_t>(uint32_t_plus_1_value.data), 1);
     ASSERT_EQ(std::char_traits<char>::length(uint32_t_plus_1_value.get_datatype().c_str()), std::char_traits<char>::length("std::uint32_t"));
@@ -341,8 +341,8 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_plus_1)
 
 TEST(any_value_must_be_initialized_appropriately, uint32_t_max)
 {
-    std::uint32_t uint32_t_max = std::numeric_limits<std::uint32_t>::max();
-    auto uint32_t_max_value = yli::data::AnyValue(uint32_t_max);
+    const std::uint32_t uint32_t_max = std::numeric_limits<std::uint32_t>::max();
+    const auto uint32_t_max_value = yli::data::AnyValue(uint32_t_max);
     ASSERT_TRUE(std::holds_alternative<std::uint32_t>(uint32_t_max_value.data));
     ASSERT_EQ(std::get<std::uint32_t>(uint32_t_max_value.data), std::numeric_limits<std::uint32_t>::max());
 #ifdef __linux__
@@ -359,8 +359,8 @@ TEST(any_value_must_be_initialized_appropriately, uint32_t_max)
 
 TEST(any_value_must_be_initialized_appropriately, int64_t_zero)
 {
-    std::int64_t int64_t_zero = 0;
-    auto int64_t_zero_value = yli::data::AnyValue(int64_t_zero);
+    constexpr std::int64_t int64_t_zero = 0;
+    const auto int64_t_zero_value = yli::data::AnyValue(int64_t_zero);
     ASSERT_TRUE(std::holds_alternative<std::int64_t>(int64_t_zero_value.data));
     ASSERT_EQ(std::get<std::int64_t>(int64_t_zero_value.data), 0);
     ASSERT_EQ(std::char_traits<char>::length(int64_t_zero_value.get_datatype().c_str()), std::char_traits<char>::length("std::int64_t"));
@@ -371,8 +371,8 @@ TEST(any_value_must_be_initialized_appropriately, int64_t_zero)
 
 TEST(any_value_must_be_initialized_appropriately, int64_t_plus_1)
 {
-    std::int64_t int64_t_plus_1 = 1;
-    auto int64_t_plus_1_value = yli::data::AnyValue(int64_t_plus_1);
+    constexpr std::int64_t int64_t_plus_1 = 1;
+    const auto int64_t_plus_1_value = yli::data::AnyValue(int64_t_plus_1);
     ASSERT_TRUE(std::holds_alternative<std::int64_t>(int64_t_plus_1_value.data));
     ASSERT_EQ(std::get<std::int64_t>(int64_t_plus_1_value.data), 1);
     ASSERT_EQ(std::char_traits<char>::length(int64_t_plus_1_value.get_datatype().c_str()), std::char_traits<char>::length("std::int64_t"));
@@ -383,8 +383,8 @@ TEST(any_value_must_be_initialized_appropriately, int64_t_plus_1)
 
 TEST(any_value_must_be_initialized_appropriately, int64_t_minus_1)
 {
-    std::int64_t int64_t_minus_1 = -1;
-    auto int64_t_minus_1_value = yli::data::AnyValue(int64_t_minus_1);
+    constexpr std::int64_t int64_t_minus_1 = -1;
+    const auto int64_t_minus_1_value = yli::data::AnyValue(int64_t_minus_1);
     ASSERT_TRUE(std::holds_alternative<std::int64_t>(int64_t_minus_1_value.data));
     ASSERT_EQ(std::get<std::int64_t>(int64_t_minus_1_value.data), -1);
     ASSERT_EQ(std::char_traits<char>::length(int64_t_minus_1_value.get_datatype().c_str()), std::char_traits<char>::length("std::int64_t"));
@@ -395,8 +395,8 @@ TEST(any_value_must_be_initialized_appropriately, int64_t_minus_1)
 
 TEST(any_value_must_be_initialized_appropriately, int64_t_max)
 {
-    std::int64_t int64_t_max = std::numeric_limits<std::int64_t>::max();
-    auto int64_t_max_value = yli::data::AnyValue(int64_t_max);
+    const std::int64_t int64_t_max = std::numeric_limits<std::int64_t>::max();
+    const auto int64_t_max_value = yli::data::AnyValue(int64_t_max);
     ASSERT_TRUE(std::holds_alternative<std::int64_t>(int64_t_max_value.data));
     ASSERT_EQ(std::get<std::int64_t>(int64_t_max_value.data), 9223372036854775807);
     ASSERT_EQ(std::get<std::int64_t>(int64_t_max_value.data), std::numeric_limits<std::int64_t>::max());
@@ -408,8 +408,8 @@ TEST(any_value_must_be_initialized_appropriately, int64_t_max)
 
 TEST(any_value_must_be_initialized_appropriately, int64_t_min)
 {
-    std::int64_t int64_t_min = std::numeric_limits<std::int64_t>::min();
-    auto int64_t_min_value = yli::data::AnyValue(int64_t_min);
+    const std::int64_t int64_t_min = std::numeric_limits<std::int64_t>::min();
+    const auto int64_t_min_value = yli::data::AnyValue(int64_t_min);
     ASSERT_TRUE(std::holds_alternative<std::int64_t>(int64_t_min_value.data));
     ASSERT_EQ(std::get<std::int64_t>(int64_t_min_value.data), -9223372036854775808u);
     ASSERT_EQ(std::get<std::int64_t>(int64_t_min_value.data), std::numeric_limits<std::int64_t>::min());
@@ -421,8 +421,8 @@ TEST(any_value_must_be_initialized_appropriately, int64_t_min)
 
 TEST(any_value_must_be_initialized_appropriately, uint64_t_zero)
 {
-    std::uint64_t uint64_t_zero = 0;
-    auto uint64_t_zero_value = yli::data::AnyValue(uint64_t_zero);
+    constexpr std::uint64_t uint64_t_zero = 0;
+    const auto uint64_t_zero_value = yli::data::AnyValue(uint64_t_zero);
     ASSERT_TRUE(std::holds_alternative<std::uint64_t>(uint64_t_zero_value.data));
     ASSERT_EQ(std::get<std::uint64_t>(uint64_t_zero_value.data), 0);
     ASSERT_EQ(std::char_traits<char>::length(uint64_t_zero_value.get_datatype().c_str()), std::char_traits<char>::length("std::uint64_t"));
@@ -433,8 +433,8 @@ TEST(any_value_must_be_initialized_appropriately, uint64_t_zero)
 
 TEST(any_value_must_be_initialized_appropriately, uint64_t_plus_1)
 {
-    std::uint64_t uint64_t_plus_1 = 1;
-    auto uint64_t_plus_1_value = yli::data::AnyValue(uint64_t_plus_1);
+    constexpr std::uint64_t uint64_t_plus_1 = 1;
+    const auto uint64_t_plus_1_value = yli::data::AnyValue(uint64_t_plus_1);
     ASSERT_TRUE(std::holds_alternative<std::uint64_t>(uint64_t_plus_1_value.data));
     ASSERT_EQ(std::get<std::uint64_t>(uint64_t_plus_1_value.data), 1);
     ASSERT_EQ(std::char_traits<char>::length(uint64_t_plus_1_value.get_datatype().c_str()), std::char_traits<char>::length("std::uint64_t"));
@@ -445,8 +445,8 @@ TEST(any_value_must_be_initialized_appropriately, uint64_t_plus_1)
 
 TEST(any_value_must_be_initialized_appropriately, uint64_t_max)
 {
-    std::uint64_t uint64_t_max = std::numeric_limits<std::uint64_t>::max();
-    auto uint64_t_max_value = yli::data::AnyValue(uint64_t_max);
+    const std::uint64_t uint64_t_max = std::numeric_limits<std::uint64_t>::max();
+    const auto uint64_t_max_value = yli::data::AnyValue(uint64_t_max);
     ASSERT_TRUE(std::holds_alternative<std::uint64_t>(uint64_t_max_value.data));
     ASSERT_EQ(std::get<std::uint64_t>(uint64_t_max_value.data), std::numeric_limits<std::uint64_t>::max());
     ASSERT_EQ(std::char_traits<char>::length(uint64_t_max_value.get_datatype().c_str()), std::char_traits<char>::length("std::uint64_t"));
@@ -457,9 +457,9 @@ TEST(any_value_must_be_initialized_appropriately, uint64_t_max)
 
 TEST(any_value_must_be_initialized_appropriately, universe_as_entity)
 {
-    mock::MockApplication application;
+    const mock::MockApplication application;
     yli::ontology::Entity* const universe_entity = &application.get_universe();
-    auto entity_any_value = yli::data::AnyValue(*universe_entity);
+    const auto entity_any_value = yli::data::AnyValue(*universe_entity);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Entity>>(entity_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Entity>>(entity_any_value.data).get(), *universe_entity);
     ASSERT_EQ(std::strcmp(entity_any_value.get_datatype().c_str(), "yli::ontology::Entity&"), 0);
@@ -468,12 +468,12 @@ TEST(any_value_must_be_initialized_appropriately, universe_as_entity)
 
 TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 {
-    mock::MockApplication application;
-    yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
+    const mock::MockApplication application;
+    const yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
     yli::ontology::Movable* const object_movable = application.get_generic_entity_factory().create_object(
             object_struct);
 
-    auto movable_any_value = yli::data::AnyValue(*object_movable);
+    const auto movable_any_value = yli::data::AnyValue(*object_movable);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(movable_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Movable>>(movable_any_value.data).get(), *object_movable);
     ASSERT_EQ(std::strcmp(movable_any_value.get_datatype().c_str(), "yli::ontology::Movable&"), 0);
@@ -483,12 +483,12 @@ TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 
 TEST(any_value_must_be_initialized_appropriately, object_as_const_movable)
 {
-    mock::MockApplication application;
-    yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
+    const mock::MockApplication application;
+    const yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
     const yli::ontology::Movable* const const_object_movable = application.get_generic_entity_factory().create_object(
             object_struct);
 
-    auto const_movable_any_value = yli::data::AnyValue(*const_object_movable);
+    const auto const_movable_any_value = yli::data::AnyValue(*const_object_movable);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(const_movable_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<const yli::ontology::Movable>>(const_movable_any_value.data).get(), *const_object_movable);
     ASSERT_EQ(std::strcmp(const_movable_any_value.get_datatype().c_str(), "const yli::ontology::Movable&"), 0);
@@ -497,10 +497,10 @@ TEST(any_value_must_be_initialized_appropriately, object_as_const_movable)
 
 TEST(any_value_must_be_initialized_appropriately, universe)
 {
-    mock::MockApplication application;
+    const mock::MockApplication application;
     yli::ontology::Universe* const universe = &application.get_universe();
 
-    auto universe_any_value = yli::data::AnyValue(*universe);
+    const auto universe_any_value = yli::data::AnyValue(*universe);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Universe>>(universe_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Universe>>(universe_any_value.data).get(), *universe);
     ASSERT_EQ(std::strcmp(universe_any_value.get_datatype().c_str(), "yli::ontology::Universe&"), 0);
@@ -510,13 +510,13 @@ TEST(any_value_must_be_initialized_appropriately, universe)
 
 TEST(any_value_must_be_initialized_appropriately, ecosystem)
 {
-    mock::MockApplication application;
+    const mock::MockApplication application;
 
-    yli::ontology::EcosystemStruct ecosystem_struct;
+    const yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    auto ecosystem_any_value = yli::data::AnyValue(*ecosystem);
+    const auto ecosystem_any_value = yli::data::AnyValue(*ecosystem);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Ecosystem>>(ecosystem_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Ecosystem>>(ecosystem_any_value.data).get(), *ecosystem);
     ASSERT_EQ(std::strcmp(ecosystem_any_value.get_datatype().c_str(), "yli::ontology::Ecosystem&"), 0);
@@ -526,12 +526,12 @@ TEST(any_value_must_be_initialized_appropriately, ecosystem)
 
 TEST(any_value_must_be_initialized_appropriately, scene)
 {
-    mock::MockApplication application;
-    yli::ontology::SceneStruct scene_struct;
+    const mock::MockApplication application;
+    const yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    auto scene_any_value = yli::data::AnyValue(*scene);
+    const auto scene_any_value = yli::data::AnyValue(*scene);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Scene>>(scene_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Scene>>(scene_any_value.data).get(), *scene);
     ASSERT_EQ(std::strcmp(scene_any_value.get_datatype().c_str(), "yli::ontology::Scene&"), 0);
@@ -541,16 +541,16 @@ TEST(any_value_must_be_initialized_appropriately, scene)
 
 TEST(any_value_must_be_initialized_appropriately, pipeline)
 {
-    mock::MockApplication application;
-    yli::ontology::EcosystemStruct ecosystem_struct;
+    const mock::MockApplication application;
+    const yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
+    const yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    auto pipeline_any_value = yli::data::AnyValue(*pipeline);
+    const auto pipeline_any_value = yli::data::AnyValue(*pipeline);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Pipeline>>(pipeline_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Pipeline>>(pipeline_any_value.data).get(), *pipeline);
     ASSERT_EQ(std::strcmp(pipeline_any_value.get_datatype().c_str(), "yli::ontology::Pipeline&"), 0);
@@ -560,19 +560,19 @@ TEST(any_value_must_be_initialized_appropriately, pipeline)
 
 TEST(any_value_must_be_initialized_appropriately, material)
 {
-    mock::MockApplication application;
-    yli::ontology::EcosystemStruct ecosystem_struct;
+    const mock::MockApplication application;
+    const yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::MaterialStruct material_struct {
+    const yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(ecosystem),
             yli::ontology::Request<yli::ontology::Pipeline>(nullptr),
             yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
             material_struct);
 
-    auto material_any_value = yli::data::AnyValue(*material);
+    const auto material_any_value = yli::data::AnyValue(*material);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Material>>(material_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Material>>(material_any_value.data).get(), *material);
     ASSERT_EQ(std::strcmp(material_any_value.get_datatype().c_str(), "yli::ontology::Material&"), 0);
@@ -582,14 +582,14 @@ TEST(any_value_must_be_initialized_appropriately, material)
 
 TEST(any_value_must_be_initialized_appropriately, species)
 {
-    mock::MockApplication application;
-    yli::ontology::SpeciesStruct species_struct {
+    const mock::MockApplication application;
+    const yli::ontology::SpeciesStruct species_struct {
             yli::ontology::Request<yli::ontology::Ecosystem>(nullptr),
             yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::Species* const species = application.get_generic_entity_factory().create_species(
             species_struct);
 
-    auto species_any_value = yli::data::AnyValue(*species);
+    const auto species_any_value = yli::data::AnyValue(*species);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Species>>(species_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Species>>(species_any_value.data).get(), *species);
     ASSERT_EQ(std::strcmp(species_any_value.get_datatype().c_str(), "yli::ontology::Species&"), 0);
@@ -599,12 +599,12 @@ TEST(any_value_must_be_initialized_appropriately, species)
 
 TEST(any_value_must_be_initialized_appropriately, object)
 {
-    mock::MockApplication application;
-    yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
+    const mock::MockApplication application;
+    const yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
     yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
             object_struct);
 
-    auto object_any_value = yli::data::AnyValue(*object);
+    const auto object_any_value = yli::data::AnyValue(*object);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Object>>(object_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Object>>(object_any_value.data).get(), *object);
     ASSERT_EQ(std::strcmp(object_any_value.get_datatype().c_str(), "yli::ontology::Object&"), 0);
@@ -635,24 +635,24 @@ TEST(any_value_must_be_initialized_appropriately, symbiosis)
 
 TEST(any_value_must_be_initialized_appropriately, holobiont)
 {
-    mock::MockApplication application;
-    yli::ontology::SceneStruct scene_struct;
+    const mock::MockApplication application;
+    const yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::SymbiosisStruct symbiosis_struct {
+    const yli::ontology::SymbiosisStruct symbiosis_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
 
-    yli::ontology::HolobiontStruct holobiont_struct {
+    const yli::ontology::HolobiontStruct holobiont_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(symbiosis) };
     yli::ontology::Holobiont* const holobiont = application.get_generic_entity_factory().create_holobiont(
             holobiont_struct);
 
-    auto holobiont_any_value = yli::data::AnyValue(*holobiont);
+    const auto holobiont_any_value = yli::data::AnyValue(*holobiont);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Holobiont>>(holobiont_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Holobiont>>(holobiont_any_value.data).get(), *holobiont);
     ASSERT_EQ(std::strcmp(holobiont_any_value.get_datatype().c_str(), "yli::ontology::Holobiont&"), 0);
@@ -662,12 +662,12 @@ TEST(any_value_must_be_initialized_appropriately, holobiont)
 
 TEST(any_value_must_be_initialized_appropriately, font_2d)
 {
-    mock::MockApplication application;
-    yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
+    const mock::MockApplication application;
+    const yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
     yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
             font_struct);
 
-    auto font_2d_any_value = yli::data::AnyValue(*font_2d);
+    const auto font_2d_any_value = yli::data::AnyValue(*font_2d);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Font2d>>(font_2d_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Font2d>>(font_2d_any_value.data).get(), *font_2d);
     ASSERT_EQ(std::strcmp(font_2d_any_value.get_datatype().c_str(), "yli::ontology::Font2d&"), 0);
@@ -677,12 +677,12 @@ TEST(any_value_must_be_initialized_appropriately, font_2d)
 
 TEST(any_value_must_be_initialized_appropriately, text_2d)
 {
-    mock::MockApplication application;
-    yli::ontology::TextStruct text_struct;
+    const mock::MockApplication application;
+    const yli::ontology::TextStruct text_struct;
     yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
             text_struct);
 
-    auto text_2d_any_value = yli::data::AnyValue(*text_2d);
+    const auto text_2d_any_value = yli::data::AnyValue(*text_2d);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Text2d>>(text_2d_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Text2d>>(text_2d_any_value.data).get(), *text_2d);
     ASSERT_EQ(std::strcmp(text_2d_any_value.get_datatype().c_str(), "yli::ontology::Text2d&"), 0);
@@ -692,12 +692,12 @@ TEST(any_value_must_be_initialized_appropriately, text_2d)
 
 TEST(any_value_must_be_initialized_appropriately, vector_font)
 {
-    mock::MockApplication application;
-    yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
+    const mock::MockApplication application;
+    const yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
-    auto vector_font_any_value = yli::data::AnyValue(*vector_font);
+    const auto vector_font_any_value = yli::data::AnyValue(*vector_font);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::VectorFont>>(vector_font_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::VectorFont>>(vector_font_any_value.data).get(), *vector_font);
     ASSERT_EQ(std::strcmp(vector_font_any_value.get_datatype().c_str(), "yli::ontology::VectorFont&"), 0);
@@ -707,22 +707,22 @@ TEST(any_value_must_be_initialized_appropriately, vector_font)
 
 TEST(any_value_must_be_initialized_appropriately, text_3d)
 {
-    mock::MockApplication application;
-    yli::ontology::SceneStruct scene_struct;
+    const mock::MockApplication application;
+    const yli::ontology::SceneStruct scene_struct;
     yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
             scene_struct);
 
-    yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
+    const yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
             vector_font_struct);
 
-    yli::ontology::Text3dStruct text_3d_struct {
+    const yli::ontology::Text3dStruct text_3d_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(vector_font) };
     yli::ontology::Text3d* const text_3d = application.get_generic_entity_factory().create_text_3d(
             text_3d_struct);
 
-    auto text_3d_any_value = yli::data::AnyValue(*text_3d);
+    const auto text_3d_any_value = yli::data::AnyValue(*text_3d);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Text3d>>(text_3d_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Text3d>>(text_3d_any_value.data).get(), *text_3d);
     ASSERT_EQ(std::strcmp(text_3d_any_value.get_datatype().c_str(), "yli::ontology::Text3d&"), 0);
@@ -732,12 +732,12 @@ TEST(any_value_must_be_initialized_appropriately, text_3d)
 
 TEST(any_value_must_be_initialized_appropriately, console)
 {
-    mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
+    const mock::MockApplication application;
+    const yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
     yli::ontology::Console* console = application.get_generic_entity_factory().create_console(
             console_struct);
 
-    auto console_any_value = yli::data::AnyValue(*console);
+    const auto console_any_value = yli::data::AnyValue(*console);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Console>>(console_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Console>>(console_any_value.data).get(), *console);
     ASSERT_EQ(std::strcmp(console_any_value.get_datatype().c_str(), "yli::ontology::Console&"), 0);
@@ -747,20 +747,20 @@ TEST(any_value_must_be_initialized_appropriately, console)
 
 TEST(any_value_must_be_initialized_appropriately, compute_task)
 {
-    mock::MockApplication application;
-    yli::ontology::EcosystemStruct ecosystem_struct;
+    const mock::MockApplication application;
+    const yli::ontology::EcosystemStruct ecosystem_struct;
     yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
             ecosystem_struct);
 
-    yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
+    const yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
     yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
             pipeline_struct);
 
-    yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request(pipeline) };
+    const yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request(pipeline) };
     yli::ontology::ComputeTask* compute_task = application.get_generic_entity_factory().create_compute_task(
             compute_task_struct);
 
-    auto compute_task_any_value = yli::data::AnyValue(*compute_task);
+    const auto compute_task_any_value = yli::data::AnyValue(*compute_task);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::ComputeTask>>(compute_task_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::ComputeTask>>(compute_task_any_value.data).get(), *compute_task);
     ASSERT_EQ(std::strcmp(compute_task_any_value.get_datatype().c_str(), "yli::ontology::ComputeTask&"), 0);
@@ -791,7 +791,7 @@ TEST(any_value_must_be_initialized_appropriately, const_std_string)
 TEST(any_value_must_be_initialized_appropriately, std_vector_int8_t)
 {
     std::vector<std::int8_t> std_vector_int8_t;
-    auto std_vector_int8_t_any_value = yli::data::AnyValue(std_vector_int8_t);
+    const auto std_vector_int8_t_any_value = yli::data::AnyValue(std_vector_int8_t);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<std::int8_t>>>(std_vector_int8_t_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<std::vector<std::int8_t>>>(std_vector_int8_t_any_value.data).get(), std_vector_int8_t);
     ASSERT_EQ(std::strcmp(std_vector_int8_t_any_value.get_datatype().c_str(), "std::vector<std::int8_t>&"), 0);
@@ -800,7 +800,7 @@ TEST(any_value_must_be_initialized_appropriately, std_vector_int8_t)
 TEST(any_value_must_be_initialized_appropriately, std_vector_uint8_t)
 {
     std::vector<std::uint8_t> std_vector_uint8_t;
-    auto std_vector_uint8_t_any_value = yli::data::AnyValue(std_vector_uint8_t);
+    const auto std_vector_uint8_t_any_value = yli::data::AnyValue(std_vector_uint8_t);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<std::uint8_t>>>(std_vector_uint8_t_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<std::vector<std::uint8_t>>>(std_vector_uint8_t_any_value.data).get(), std_vector_uint8_t);
     ASSERT_EQ(std::strcmp(std_vector_uint8_t_any_value.get_datatype().c_str(), "std::vector<std::uint8_t>&"), 0);
@@ -809,7 +809,7 @@ TEST(any_value_must_be_initialized_appropriately, std_vector_uint8_t)
 TEST(any_value_must_be_initialized_appropriately, std_vector_int16_t)
 {
     std::vector<std::int16_t> std_vector_int16_t;
-    auto std_vector_int16_t_any_value = yli::data::AnyValue(std_vector_int16_t);
+    const auto std_vector_int16_t_any_value = yli::data::AnyValue(std_vector_int16_t);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<std::int16_t>>>(std_vector_int16_t_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<std::vector<std::int16_t>>>(std_vector_int16_t_any_value.data).get(), std_vector_int16_t);
     ASSERT_EQ(std::strcmp(std_vector_int16_t_any_value.get_datatype().c_str(), "std::vector<std::int16_t>&"), 0);
@@ -818,7 +818,7 @@ TEST(any_value_must_be_initialized_appropriately, std_vector_int16_t)
 TEST(any_value_must_be_initialized_appropriately, std_vector_uint16_t)
 {
     std::vector<std::uint16_t> std_vector_uint16_t;
-    auto std_vector_uint16_t_any_value = yli::data::AnyValue(std_vector_uint16_t);
+    const auto std_vector_uint16_t_any_value = yli::data::AnyValue(std_vector_uint16_t);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<std::uint16_t>>>(std_vector_uint16_t_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<std::vector<std::uint16_t>>>(std_vector_uint16_t_any_value.data).get(), std_vector_uint16_t);
     ASSERT_EQ(std::strcmp(std_vector_uint16_t_any_value.get_datatype().c_str(), "std::vector<std::uint16_t>&"), 0);
@@ -827,7 +827,7 @@ TEST(any_value_must_be_initialized_appropriately, std_vector_uint16_t)
 TEST(any_value_must_be_initialized_appropriately, std_vector_int32_t)
 {
     std::vector<std::int32_t> std_vector_int32_t;
-    auto std_vector_int32_t_any_value = yli::data::AnyValue(std_vector_int32_t);
+    const auto std_vector_int32_t_any_value = yli::data::AnyValue(std_vector_int32_t);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<std::int32_t>>>(std_vector_int32_t_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<std::vector<std::int32_t>>>(std_vector_int32_t_any_value.data).get(), std_vector_int32_t);
     ASSERT_EQ(std::strcmp(std_vector_int32_t_any_value.get_datatype().c_str(), "std::vector<std::int32_t>&"), 0);
@@ -836,7 +836,7 @@ TEST(any_value_must_be_initialized_appropriately, std_vector_int32_t)
 TEST(any_value_must_be_initialized_appropriately, std_vector_uint32_t)
 {
     std::vector<std::uint32_t> std_vector_uint32_t;
-    auto std_vector_uint32_t_any_value = yli::data::AnyValue(std_vector_uint32_t);
+    const auto std_vector_uint32_t_any_value = yli::data::AnyValue(std_vector_uint32_t);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<std::uint32_t>>>(std_vector_uint32_t_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<std::vector<std::uint32_t>>>(std_vector_uint32_t_any_value.data).get(), std_vector_uint32_t);
     ASSERT_EQ(std::strcmp(std_vector_uint32_t_any_value.get_datatype().c_str(), "std::vector<std::uint32_t>&"), 0);
@@ -845,7 +845,7 @@ TEST(any_value_must_be_initialized_appropriately, std_vector_uint32_t)
 TEST(any_value_must_be_initialized_appropriately, std_vector_float)
 {
     std::vector<float> std_vector_float;
-    auto std_vector_float_any_value = yli::data::AnyValue(std_vector_float);
+    const auto std_vector_float_any_value = yli::data::AnyValue(std_vector_float);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::vector<float>>>(std_vector_float_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<std::vector<float>>>(std_vector_float_any_value.data).get(), std_vector_float);
     ASSERT_EQ(std::strcmp(std_vector_float_any_value.get_datatype().c_str(), "std::vector<float>&"), 0);
@@ -854,7 +854,7 @@ TEST(any_value_must_be_initialized_appropriately, std_vector_float)
 TEST(any_value_must_be_initialized_appropriately, glm_vec3)
 {
     glm::vec3 glm_vec3(1.0f, 2.0f, 3.0f);
-    auto glm_vec3_any_value = yli::data::AnyValue(glm_vec3);
+    const auto glm_vec3_any_value = yli::data::AnyValue(glm_vec3);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<glm::vec3>>(glm_vec3_any_value.data));
     ASSERT_EQ(&std::get<std::reference_wrapper<glm::vec3>>(glm_vec3_any_value.data).get(), &glm_vec3);
     ASSERT_EQ(std::strcmp(glm_vec3_any_value.get_datatype().c_str(), "glm::vec3&"), 0);
@@ -864,7 +864,7 @@ TEST(any_value_must_be_initialized_appropriately, glm_vec3)
 TEST(any_value_must_be_initialized_appropriately, const_glm_vec3)
 {
     const glm::vec3 const_glm_vec3(1.0f, 2.0f, 3.0f);
-    auto const_glm_vec3_any_value = yli::data::AnyValue(const_glm_vec3);
+    const auto const_glm_vec3_any_value = yli::data::AnyValue(const_glm_vec3);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const glm::vec3>>(const_glm_vec3_any_value.data));
     ASSERT_EQ(&std::get<std::reference_wrapper<const glm::vec3>>(const_glm_vec3_any_value.data).get(), &const_glm_vec3);
     ASSERT_EQ(std::strcmp(const_glm_vec3_any_value.get_datatype().c_str(), "const glm::vec3&"), 0);
@@ -874,7 +874,7 @@ TEST(any_value_must_be_initialized_appropriately, const_glm_vec3)
 TEST(any_value_must_be_initialized_appropriately, glm_vec4)
 {
     glm::vec4 glm_vec4(1.0f, 2.0f, 3.0f, 4.0f);
-    auto glm_vec4_any_value = yli::data::AnyValue(glm_vec4);
+    const auto glm_vec4_any_value = yli::data::AnyValue(glm_vec4);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<glm::vec4>>(glm_vec4_any_value.data));
     ASSERT_EQ(&std::get<std::reference_wrapper<glm::vec4>>(glm_vec4_any_value.data).get(), &glm_vec4);
     ASSERT_EQ(std::strcmp(glm_vec4_any_value.get_datatype().c_str(), "glm::vec4&"), 0);
@@ -884,7 +884,7 @@ TEST(any_value_must_be_initialized_appropriately, glm_vec4)
 TEST(any_value_must_be_initialized_appropriately, const_glm_vec4)
 {
     const glm::vec4 const_glm_vec4(1.0f, 2.0f, 3.0f, 4.0f);
-    auto const_glm_vec4_any_value = yli::data::AnyValue(const_glm_vec4);
+    const auto const_glm_vec4_any_value = yli::data::AnyValue(const_glm_vec4);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const glm::vec4>>(const_glm_vec4_any_value.data));
     ASSERT_EQ(&std::get<std::reference_wrapper<const glm::vec4>>(const_glm_vec4_any_value.data).get(), &const_glm_vec4);
     ASSERT_EQ(std::strcmp(const_glm_vec4_any_value.get_datatype().c_str(), "const glm::vec4&"), 0);
@@ -893,7 +893,7 @@ TEST(any_value_must_be_initialized_appropriately, const_glm_vec4)
 
 TEST(set_new_value_must_function_properly, originally_bool_true_new_value_bool_true)
 {
-    bool bool_true = true;
+    constexpr bool bool_true = true;
     auto any_value = yli::data::AnyValue(bool_true);
     ASSERT_TRUE(any_value.set_new_value("true"));
     ASSERT_TRUE(std::holds_alternative<bool>(any_value.data));
@@ -902,7 +902,7 @@ TEST(set_new_value_must_function_properly, originally_bool_true_new_value_bool_t
 
 TEST(set_new_value_must_function_properly, originally_bool_true_new_value_bool_false)
 {
-    bool bool_true = true;
+    constexpr bool bool_true = true;
     auto any_value = yli::data::AnyValue(bool_true);
     ASSERT_TRUE(any_value.set_new_value("false"));
     ASSERT_TRUE(std::holds_alternative<bool>(any_value.data));
@@ -911,7 +911,7 @@ TEST(set_new_value_must_function_properly, originally_bool_true_new_value_bool_f
 
 TEST(set_new_value_must_function_properly, originally_bool_true_new_value_foo)
 {
-    bool bool_true = true;
+    constexpr bool bool_true = true;
     auto any_value = yli::data::AnyValue(bool_true);
     ASSERT_FALSE(any_value.set_new_value("foo")); // `"foo"` is invalid value and should not change the current value.
     ASSERT_TRUE(std::holds_alternative<bool>(any_value.data));
@@ -920,7 +920,7 @@ TEST(set_new_value_must_function_properly, originally_bool_true_new_value_foo)
 
 TEST(set_new_value_must_function_properly, originally_bool_false_new_value_bool_true)
 {
-    bool bool_false = false;
+    constexpr bool bool_false = false;
     auto any_value = yli::data::AnyValue(bool_false);
     ASSERT_TRUE(any_value.set_new_value("true"));
     ASSERT_TRUE(std::holds_alternative<bool>(any_value.data));
@@ -929,7 +929,7 @@ TEST(set_new_value_must_function_properly, originally_bool_false_new_value_bool_
 
 TEST(set_new_value_must_function_properly, originally_bool_false_new_value_bool_false)
 {
-    bool bool_false = false;
+    constexpr bool bool_false = false;
     auto any_value = yli::data::AnyValue(bool_false);
     ASSERT_TRUE(any_value.set_new_value("false"));
     ASSERT_TRUE(std::holds_alternative<bool>(any_value.data));
@@ -938,7 +938,7 @@ TEST(set_new_value_must_function_properly, originally_bool_false_new_value_bool_
 
 TEST(set_new_value_must_function_properly, originally_bool_false_new_value_foo)
 {
-    bool bool_false = false;
+    constexpr bool bool_false = false;
     auto any_value = yli::data::AnyValue(bool_false);
     ASSERT_FALSE(any_value.set_new_value("foo")); // `"foo"` is invalid value and should not change the current value.
     ASSERT_TRUE(std::holds_alternative<bool>(any_value.data));
@@ -947,7 +947,7 @@ TEST(set_new_value_must_function_properly, originally_bool_false_new_value_foo)
 
 TEST(set_new_value_must_function_properly, originally_char_lowercase_a_new_value_a)
 {
-    char char_lowercase_a = 'a';
+    constexpr char char_lowercase_a = 'a';
     auto any_value = yli::data::AnyValue(char_lowercase_a);
     ASSERT_TRUE(any_value.set_new_value("a"));
     ASSERT_TRUE(std::holds_alternative<char>(any_value.data));
@@ -956,7 +956,7 @@ TEST(set_new_value_must_function_properly, originally_char_lowercase_a_new_value
 
 TEST(set_new_value_must_function_properly, originally_char_lowercase_a_new_value_b)
 {
-    char char_lowercase_a = 'a';
+    constexpr char char_lowercase_a = 'a';
     auto any_value = yli::data::AnyValue(char_lowercase_a);
     ASSERT_TRUE(any_value.set_new_value("b"));
     ASSERT_TRUE(std::holds_alternative<char>(any_value.data));
@@ -965,7 +965,7 @@ TEST(set_new_value_must_function_properly, originally_char_lowercase_a_new_value
 
 TEST(set_new_value_must_function_properly, originally_char_lowercase_a_new_value_bb)
 {
-    char char_lowercase_a = 'a';
+    constexpr char char_lowercase_a = 'a';
     auto any_value = yli::data::AnyValue(char_lowercase_a);
     ASSERT_FALSE(any_value.set_new_value("bb")); // `"bb"` is invalid value and should not change the current value.
     ASSERT_TRUE(std::holds_alternative<char>(any_value.data));
@@ -974,7 +974,7 @@ TEST(set_new_value_must_function_properly, originally_char_lowercase_a_new_value
 
 TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_0)
 {
-    float float_zero = 0.0f;
+    constexpr float float_zero = 0.0f;
     auto any_value = yli::data::AnyValue(float_zero);
     ASSERT_TRUE(any_value.set_new_value("0"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -983,7 +983,7 @@ TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_0)
 
 TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_0_dot_0)
 {
-    float float_zero = 0.0f;
+    constexpr float float_zero = 0.0f;
     auto any_value = yli::data::AnyValue(float_zero);
     ASSERT_TRUE(any_value.set_new_value("0.0"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -992,7 +992,7 @@ TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_0_
 
 TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_plus_1)
 {
-    float float_zero = 0.0f;
+    constexpr float float_zero = 0.0f;
     auto any_value = yli::data::AnyValue(float_zero);
     ASSERT_TRUE(any_value.set_new_value("1"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1001,7 +1001,7 @@ TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_pl
 
 TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_plus_1_dot_0)
 {
-    float float_zero = 0.0f;
+    constexpr float float_zero = 0.0f;
     auto any_value = yli::data::AnyValue(float_zero);
     ASSERT_TRUE(any_value.set_new_value("1.0"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1010,7 +1010,7 @@ TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_pl
 
 TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_minus_1_dot_0)
 {
-    float float_zero = 0.0f;
+    constexpr float float_zero = 0.0f;
     auto any_value = yli::data::AnyValue(float_zero);
     ASSERT_TRUE(any_value.set_new_value("-1.0"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1019,7 +1019,7 @@ TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_mi
 
 TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_plus_1234)
 {
-    float float_zero = 0.0f;
+    constexpr float float_zero = 0.0f;
     auto any_value = yli::data::AnyValue(float_zero);
     ASSERT_TRUE(any_value.set_new_value("1234"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1028,7 +1028,7 @@ TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_pl
 
 TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_plus_1234_dot_0)
 {
-    float float_zero = 0.0f;
+    constexpr float float_zero = 0.0f;
     auto any_value = yli::data::AnyValue(float_zero);
     ASSERT_TRUE(any_value.set_new_value("1234.0"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1037,7 +1037,7 @@ TEST(set_new_value_must_function_properly, originally_float_0_new_value_float_pl
 
 TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_float_0)
 {
-    float float_plus_1 = 1.0f;
+    constexpr float float_plus_1 = 1.0f;
     auto any_value = yli::data::AnyValue(float_plus_1);
     ASSERT_TRUE(any_value.set_new_value("0"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1046,7 +1046,7 @@ TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_flo
 
 TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_float_0_dot_0)
 {
-    float float_plus_1 = 1.0f;
+    constexpr float float_plus_1 = 1.0f;
     auto any_value = yli::data::AnyValue(float_plus_1);
     ASSERT_TRUE(any_value.set_new_value("0.0"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1055,7 +1055,7 @@ TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_flo
 
 TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_float_plus_1)
 {
-    float float_plus_1 = 1.0f;
+    constexpr float float_plus_1 = 1.0f;
     auto any_value = yli::data::AnyValue(float_plus_1);
     ASSERT_TRUE(any_value.set_new_value("1"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1064,7 +1064,7 @@ TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_flo
 
 TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_float_plus_1_dot_0)
 {
-    float float_plus_1 = 1.0f;
+    constexpr float float_plus_1 = 1.0f;
     auto any_value = yli::data::AnyValue(float_plus_1);
     ASSERT_TRUE(any_value.set_new_value("1.0"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1073,7 +1073,7 @@ TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_flo
 
 TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_float_minus_1_dot_0)
 {
-    float float_plus_1 = 1.0f;
+    constexpr float float_plus_1 = 1.0f;
     auto any_value = yli::data::AnyValue(float_plus_1);
     ASSERT_TRUE(any_value.set_new_value("-1.0"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1082,7 +1082,7 @@ TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_flo
 
 TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_float_plus_1234)
 {
-    float float_plus_1 = 1.0f;
+    constexpr float float_plus_1 = 1.0f;
     auto any_value = yli::data::AnyValue(float_plus_1);
     ASSERT_TRUE(any_value.set_new_value("1234"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
@@ -1091,7 +1091,7 @@ TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_flo
 
 TEST(set_new_value_must_function_properly, originally_float_plus_1_new_value_float_plus_1234_dot_0)
 {
-    float float_plus_1 = 1.0f;
+    constexpr float float_plus_1 = 1.0f;
     auto any_value = yli::data::AnyValue(float_plus_1);
     ASSERT_TRUE(any_value.set_new_value("1234.0"));
     ASSERT_TRUE(std::holds_alternative<float>(any_value.data));
