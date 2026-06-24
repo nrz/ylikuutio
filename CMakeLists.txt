@@ -402,6 +402,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/core/application.hpp
     code/ylikuutio/core/application_core.cpp
     code/ylikuutio/core/application_core.hpp
+    code/ylikuutio/core/entrypoint.cpp
     code/ylikuutio/core/entrypoint.hpp
     code/ylikuutio/core/system_factory.hpp
 
