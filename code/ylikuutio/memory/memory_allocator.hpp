@@ -194,7 +194,7 @@ namespace yli::memory
 
             if (this->free_storageID_queue.empty())
             {
-                function_overload->constructible_module = yli::memory::ConstructibleModule(
+                function_overload->constructible_module = ConstructibleModule(
                     *this, this->free_storageID_queue.size(), 0);
                 this->instances.emplace_back(function_overload);
             }
