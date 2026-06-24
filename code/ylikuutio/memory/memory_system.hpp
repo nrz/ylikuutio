@@ -90,9 +90,9 @@ namespace yli::memory
             return this->universe_datatype;
         }
 
-        [[nodiscard]] MemorySystem<TypeEnumType>& get() const
+        [[nodiscard]] MemorySystem& get() const
         {
-            return const_cast<MemorySystem<TypeEnumType>&>(*this);
+            return const_cast<MemorySystem&>(*this);
         }
 
         [[nodiscard]] std::size_t get_number_of_allocators() const override
