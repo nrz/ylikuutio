@@ -771,7 +771,7 @@ TEST(any_value_must_be_initialized_appropriately, compute_task)
 TEST(any_value_must_be_initialized_appropriately, std_string)
 {
     std::string foo_string = "foo";
-    yli::data::AnyValue std_string_ref_any_value = yli::data::AnyValue(foo_string);
+    auto std_string_ref_any_value = yli::data::AnyValue(foo_string);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<std::string>>(std_string_ref_any_value.data));
     ASSERT_EQ(std::get<std::reference_wrapper<std::string>>(std_string_ref_any_value.data).get(), foo_string);
     ASSERT_EQ(std::strcmp(std_string_ref_any_value.get_datatype().c_str(), "std::string&"), 0);
