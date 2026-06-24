@@ -405,13 +405,13 @@ namespace yli::console
             // If we are in scrollback buffer while in new input, the new input is the visible input.
             return &this->new_input;
         }
-        else if (this->state == ACTIVE_IN_HISTORICAL_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
+        if (this->state == ACTIVE_IN_HISTORICAL_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT)
         {
             // If we are in a historical input, the temp input is the visible input.
             // If we are in scrollback buffer while in historical input, the historical input is the visible input.
             return this->text_input_history.get();
         }
-        else if (this->state == ACTIVE_IN_TEMP_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
+        if (this->state == ACTIVE_IN_TEMP_INPUT || this->state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
         {
             // If we are in a temp input, the temp input is the visible input.
             // If we are in scrollback buffer while in temp input, the temp input is the visible input.
