@@ -31,13 +31,12 @@ namespace yli::core
 {
     ApplicationCore::ApplicationCore(Application& application, const ontology::UniverseStruct& universe_struct)
         : entity_factory(application, this->memory_system),
-        system_factory(this->memory_system),
-        universe { this->entity_factory.create_universe(universe_struct) },
-        event_system { this->system_factory.create_event_system(this->get_universe()) },
-        input_system { this->system_factory.create_input_system(this->get_universe()) },
-        audio_system { this->system_factory.create_audio_system(this->get_universe()) }
-    {
-    }
+          system_factory(this->memory_system),
+          universe { this->entity_factory.create_universe(universe_struct) },
+          event_system { this->system_factory.create_event_system(this->get_universe()) },
+          input_system { this->system_factory.create_input_system(this->get_universe()) },
+          audio_system { this->system_factory.create_audio_system(this->get_universe()) }
+    { }
 
     ontology::Universe& ApplicationCore::get_universe() const
     {

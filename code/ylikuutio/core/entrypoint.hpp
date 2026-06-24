@@ -21,7 +21,7 @@
 #include "application.hpp"
 
 // Include standard headers
-#include <memory>    // std::unique_ptr
+#include <memory> // std::unique_ptr
 
 namespace yli::core
 {

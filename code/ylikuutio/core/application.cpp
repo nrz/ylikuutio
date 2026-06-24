@@ -18,7 +18,7 @@
 #include "application.hpp"
 
 // Include standard headers
-#include <string>   // std::string
+#include <string> // std::string
 
 namespace yli::audio
 {
@@ -44,8 +44,7 @@ namespace yli::core
 {
     Application::Application(const int argc, const char* const argv[])
         : command_line_master(argc, argv)
-    {
-    }
+    { }
 
     std::string Application::get_name() const
     {

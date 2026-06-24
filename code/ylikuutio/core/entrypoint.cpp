@@ -63,14 +63,14 @@ int main(const int argc, const char* const argv[]) try
             // Application name and application version present.
             // Print application name and application version normally.
             std::cout << application->get_name() << " " << application->get_version() <<
-                ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
+                    ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
         }
         else if (!application->get_name().empty())
         {
             // Application name present but application version not present.
             // Print Ylikuutio version as the application version.
             std::cout << application->get_name() << " " << yli::ontology::Universe::version <<
-                ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
+                    ", powered by Ylikuutio " << yli::ontology::Universe::version << "\n";
         }
         else
         {
@@ -87,7 +87,8 @@ int main(const int argc, const char* const argv[]) try
     // 2. Valid command line argument keys are requested
     //    by calling `Application::get_valid_keys`.
 
-    if (const std::vector<std::string> valid_keys = application->get_valid_keys(); !application->command_line_master.check_keys(valid_keys))
+    if (const std::vector<std::string> valid_keys = application->get_valid_keys();
+        !application->command_line_master.check_keys(valid_keys))
     {
         std::cerr << "ERROR: `main`: 1 or more invalid command line parameters given.\n";
 
@@ -118,7 +119,8 @@ int main(const int argc, const char* const argv[]) try
 
     const std::string application_name = application->get_name();
 
-    if (const std::string application_version = application->get_version(); !application_name.empty() && !application_version.empty())
+    if (const std::string application_version = application->get_version();
+        !application_name.empty() && !application_version.empty())
     {
         std::cout << application_name << " " << application_version << " exited successfully!\n";
     }

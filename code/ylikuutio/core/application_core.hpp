@@ -51,18 +51,18 @@ namespace yli::core
 
     class ApplicationCore
     {
-        public:
-            ApplicationCore(Application& application, const ontology::UniverseStruct& universe_struct);
+    public:
+        ApplicationCore(Application& application, const ontology::UniverseStruct& universe_struct);
 
-            ontology::Universe& get_universe() const;
+        ontology::Universe& get_universe() const;
 
-            memory::MemorySystem<> memory_system { data::Datatype::UNIVERSE };
-            ontology::EntityFactory<data::Datatype> entity_factory;
-            SystemFactory<data::Datatype> system_factory;
-            ontology::Universe* const universe     { nullptr };
-            event::EventSystem* const event_system { nullptr };
-            input::InputSystem* const input_system { nullptr };
-            audio::AudioSystem* const audio_system { nullptr };
+        memory::MemorySystem<> memory_system { data::Datatype::UNIVERSE };
+        ontology::EntityFactory<data::Datatype> entity_factory;
+        SystemFactory<data::Datatype> system_factory;
+        ontology::Universe* const universe { nullptr };
+        event::EventSystem* const event_system { nullptr };
+        input::InputSystem* const input_system { nullptr };
+        audio::AudioSystem* const audio_system { nullptr };
     };
 }
 

@@ -21,9 +21,9 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 
 // Include standard headers
-#include <memory>  // std::unique_ptr
-#include <string>  // std::string
-#include <vector>  // std::vector
+#include <memory> // std::unique_ptr
+#include <string> // std::string
+#include <vector> // std::vector
 
 namespace yli::audio
 {
@@ -58,39 +58,40 @@ namespace yli::core
 {
     class Application
     {
-        public:
-            Application(int argc, const char* const argv[]);
+    public:
+        Application(int argc, const char* const argv[]);
 
-            Application(const Application&) = delete;            // Delete copy constructor.
-            Application& operator=(const Application&) = delete; // Delete copy assignment.
+        Application(const Application&) = delete;            // Delete copy constructor.
+        Application& operator=(const Application&) = delete; // Delete copy assignment.
 
-            virtual ~Application() = default;
+        virtual ~Application() = default;
 
-            virtual std::string get_name() const;    // Note: this is not the global name or the local name of the `Application`.
-            virtual std::string get_version() const; // `Application` version.
+        virtual std::string
+        get_name() const;    // Note: this is not the global name or the local name of the `Application`.
+        virtual std::string get_version() const; // `Application` version.
 
-            virtual std::vector<std::string> get_valid_keys() const = 0;
+        virtual std::vector<std::string> get_valid_keys() const = 0;
 
-            virtual memory::GenericMemorySystem& get_generic_memory_system() const = 0;
+        virtual memory::GenericMemorySystem& get_generic_memory_system() const = 0;
 
-            virtual memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const = 0;
+        virtual memory::GenericMemoryAllocator& get_generic_memory_allocator(const int type) const = 0;
 
-            virtual ontology::GenericEntityFactory& get_generic_entity_factory() const = 0;
+        virtual ontology::GenericEntityFactory& get_generic_entity_factory() const = 0;
 
-            virtual event::EventSystem* get_event_system() const;
+        virtual event::EventSystem* get_event_system() const;
 
-            virtual input::InputSystem* get_input_system() const;
+        virtual input::InputSystem* get_input_system() const;
 
-            virtual audio::AudioSystem* get_audio_system() const;
+        virtual audio::AudioSystem* get_audio_system() const;
 
-            virtual bool is_universe(ontology::Entity* entity) const = 0;
+        virtual bool is_universe(ontology::Entity* entity) const = 0;
 
-            virtual ontology::Universe& get_universe() const = 0;
+        virtual ontology::Universe& get_universe() const = 0;
 
-            // This method can be used e.g. to instantiate different Entities before entering the main loop.
-            virtual bool create_and_start_simulation() = 0;
+        // This method can be used e.g. to instantiate different Entities before entering the main loop.
+        virtual bool create_and_start_simulation() = 0;
 
-            command_line::CommandLineMaster command_line_master;
+        command_line::CommandLineMaster command_line_master;
     };
 
     std::unique_ptr<Application> create_application();

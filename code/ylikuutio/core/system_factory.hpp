@@ -31,54 +31,53 @@ namespace yli::ontology
 namespace yli::core
 {
     template<typename TypeEnumType>
-        class SystemFactory
+    class SystemFactory
+    {
+    public:
+        explicit SystemFactory(
+            memory::MemorySystem<TypeEnumType>& memory_system)
+            : memory_system { memory_system }
+        { }
+
+        event::EventSystem* create_event_system(ontology::Universe& universe)
         {
-            public:
-                explicit SystemFactory(
-                        memory::MemorySystem<TypeEnumType>& memory_system)
-                    : memory_system { memory_system }
-                {
-                }
+            using EventSystemMemoryAllocator = memory::MemoryAllocator<event::EventSystem, 1>;
 
-                event::EventSystem* create_event_system(ontology::Universe& universe)
-                {
-                    using EventSystemMemoryAllocator = memory::MemoryAllocator<event::EventSystem, 1>;
+            memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<EventSystemMemoryAllocator>(
+                        static_cast<int>(data::Datatype::EVENT_SYSTEM));
+            auto& allocator = static_cast<EventSystemMemoryAllocator&>(generic_allocator);
 
-                    memory::GenericMemoryAllocator& generic_allocator =
-                        this->memory_system.template get_or_create_allocator<EventSystemMemoryAllocator>(
-                                static_cast<int>(data::Datatype::EVENT_SYSTEM));
-                    auto& allocator = static_cast<EventSystemMemoryAllocator&>(generic_allocator);
+            return allocator.build_in(universe);
+        }
 
-                    return allocator.build_in(universe);
-                }
+        input::InputSystem* create_input_system(ontology::Universe& universe)
+        {
+            using InputSystemMemoryAllocator = memory::MemoryAllocator<input::InputSystem, 1>;
 
-                input::InputSystem* create_input_system(ontology::Universe& universe)
-                {
-                    using InputSystemMemoryAllocator = memory::MemoryAllocator<input::InputSystem, 1>;
+            memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<InputSystemMemoryAllocator>(
+                        static_cast<int>(data::Datatype::INPUT_SYSTEM));
+            auto& allocator = static_cast<InputSystemMemoryAllocator&>(generic_allocator);
 
-                    memory::GenericMemoryAllocator& generic_allocator =
-                        this->memory_system.template get_or_create_allocator<InputSystemMemoryAllocator>(
-                                static_cast<int>(data::Datatype::INPUT_SYSTEM));
-                    auto& allocator = static_cast<InputSystemMemoryAllocator&>(generic_allocator);
+            return allocator.build_in(universe);
+        }
 
-                    return allocator.build_in(universe);
-                }
+        audio::AudioSystem* create_audio_system(ontology::Universe& universe)
+        {
+            using AudioSystemMemoryAllocator = memory::MemoryAllocator<audio::AudioSystem, 1>;
 
-                audio::AudioSystem* create_audio_system(ontology::Universe& universe)
-                {
-                    using AudioSystemMemoryAllocator = memory::MemoryAllocator<audio::AudioSystem, 1>;
+            memory::GenericMemoryAllocator& generic_allocator =
+                    this->memory_system.template get_or_create_allocator<AudioSystemMemoryAllocator>(
+                        static_cast<int>(data::Datatype::AUDIO_SYSTEM));
+            auto& allocator = static_cast<AudioSystemMemoryAllocator&>(generic_allocator);
 
-                    memory::GenericMemoryAllocator& generic_allocator =
-                        this->memory_system.template get_or_create_allocator<AudioSystemMemoryAllocator>(
-                                static_cast<int>(data::Datatype::AUDIO_SYSTEM));
-                    auto& allocator = static_cast<AudioSystemMemoryAllocator&>(generic_allocator);
+            return allocator.build_in(universe);
+        }
 
-                    return allocator.build_in(universe);
-                }
-
-            private:
-                memory::MemorySystem<TypeEnumType>& memory_system;
-        };
+    private:
+        memory::MemorySystem<TypeEnumType>& memory_system;
+    };
 }
 
 #endif
