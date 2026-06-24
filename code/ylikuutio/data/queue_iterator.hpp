@@ -46,9 +46,9 @@ namespace yli::data
         QueueIterator& operator=(const QueueIterator&) = default;
 
         // assignment of `std::array` iterator.
-        QueueIterator& operator=(std::array<std::size_t, QueueMaxSize>::iterator it)
+        QueueIterator& operator=(std::array<std::size_t, QueueMaxSize>::iterator new_it)
         {
-            this->it = it;
+            this->it = new_it;
             return *this;
         }
 
