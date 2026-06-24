@@ -59,7 +59,7 @@ namespace yli::core
     class Application
     {
         public:
-            Application(const int argc, const char* const argv[]);
+            Application(int argc, const char* const argv[]);
 
             Application(const Application&) = delete;            // Delete copy constructor.
             Application& operator=(const Application&) = delete; // Delete copy assignment.
