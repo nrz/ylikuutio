@@ -56,7 +56,7 @@ namespace yli::core
 
             yli::ontology::Universe& get_universe() const;
 
-            yli::memory::MemorySystem<yli::data::Datatype> memory_system { yli::data::Datatype::UNIVERSE };
+            yli::memory::MemorySystem<> memory_system { yli::data::Datatype::UNIVERSE };
             yli::ontology::EntityFactory<yli::data::Datatype> entity_factory;
             SystemFactory<yli::data::Datatype> system_factory;
             yli::ontology::Universe* const universe     { nullptr };
