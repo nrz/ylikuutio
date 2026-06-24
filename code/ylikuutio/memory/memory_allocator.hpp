@@ -175,7 +175,7 @@ namespace yli::memory
             : datatype { datatype }
         { }
 
-        ~MemoryAllocator()
+        ~MemoryAllocator() override
         {
             for (auto* const instance : this->instances)
             {
