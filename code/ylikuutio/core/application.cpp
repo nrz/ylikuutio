@@ -57,17 +57,17 @@ namespace yli::core
         return ""; // `override` this in the inherited class.
     }
 
-    yli::event::EventSystem* Application::get_event_system() const
+    event::EventSystem* Application::get_event_system() const
     {
         return nullptr; // `override` this in the inherited class.
     }
 
-    yli::input::InputSystem* Application::get_input_system() const
+    input::InputSystem* Application::get_input_system() const
     {
         return nullptr; // `override` this in the inherited class.
     }
 
-    yli::audio::AudioSystem* Application::get_audio_system() const
+    audio::AudioSystem* Application::get_audio_system() const
     {
         return nullptr; // `override` this in the inherited class.
     }
