@@ -18,6 +18,12 @@
 #ifndef YLIKUUTIO_DATA_DATA_TEMPLATES_HPP_INCLUDED
 #define YLIKUUTIO_DATA_DATA_TEMPLATES_HPP_INCLUDED
 
+// Include GLM
+#ifndef __GLM_GLM_HPP_INCLUDED
+#define __GLM_GLM_HPP_INCLUDED
+#include <glm/glm.hpp> // glm
+#endif
+
 // Include standard headers
 #include <cstdint>  // std::int8_t, std::int16_t, std::int32_t, std::uint8_t, std::uint16_t, std::uint32_t
 #include <memory>   // std::shared_ptr
