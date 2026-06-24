@@ -23,11 +23,11 @@
 
 namespace yli::console
 {
-    static constexpr std::uint32_t left_ctrl_pressed   = 1;
-    static constexpr std::uint32_t right_ctrl_pressed  = 1 << 1;
-    static constexpr std::uint32_t left_alt_pressed    = 1 << 2;
-    static constexpr std::uint32_t right_alt_pressed   = 1 << 3;
-    static constexpr std::uint32_t left_shift_pressed  = 1 << 4;
+    static constexpr std::uint32_t left_ctrl_pressed = 1;
+    static constexpr std::uint32_t right_ctrl_pressed = 1 << 1;
+    static constexpr std::uint32_t left_alt_pressed = 1 << 2;
+    static constexpr std::uint32_t right_alt_pressed = 1 << 3;
+    static constexpr std::uint32_t left_shift_pressed = 1 << 4;
     static constexpr std::uint32_t right_shift_pressed = 1 << 5;
 
     enum ModifierState : std::uint32_t

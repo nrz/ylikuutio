@@ -30,8 +30,7 @@ namespace yli::console
 {
     CompletionModule::CompletionModule(ontology::Console& console)
         : console { console }
-    {
-    }
+    { }
 
     void CompletionModule::complete()
     {
@@ -55,7 +54,7 @@ namespace yli::console
             lisp::legacy_parse(input_string, command, parameter_vector);
 
             if (command.empty() ||
-                    (parameter_vector.empty() && input_string.back() != ' '))
+                (parameter_vector.empty() && input_string.back() != ' '))
             {
                 // If `input_string` is empty, then complete the command.
                 // Also if there are no parameters and `input_string` does not end with a space, then complete the command.

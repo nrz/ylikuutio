@@ -35,98 +35,112 @@ namespace yli::console
     {
         // `TextInput` provides functionality for receiving text input from the user.
 
-        public:
-            using value_type = char;
+    public:
+        using value_type = char;
 
-            // Iterator typedefs.
-            typedef TextInputIterator      iterator;
-            typedef TextInputConstIterator const_iterator;
+        // Iterator typedefs.
+        typedef TextInputIterator iterator;
+        typedef TextInputConstIterator const_iterator;
 
-            explicit TextInput(const TextInputType type);
-            TextInput(std::string&& string, const TextInputType type);
+        explicit TextInput(const TextInputType type);
 
-            TextInput(const TextInput&) = default;
-            TextInput& operator=(const TextInput&) = default;
+        TextInput(std::string&& string, const TextInputType type);
 
-            ~TextInput() = default;
+        TextInput(const TextInput&) = default;
 
-            bool operator==(const TextInput& other) const
-            {
-                return this->input == other.input;
-            }
+        TextInput& operator=(const TextInput&) = default;
 
-            bool operator!=(const TextInput& other) const
-            {
-                return this->input != other.input;
-            }
+        ~TextInput() = default;
 
-            void add_character(char character);
+        bool operator==(const TextInput& other) const
+        {
+            return this->input == other.input;
+        }
 
-            template<typename Alloc, template<typename, typename> typename Type>
-                void add_characters(const Type<char, Alloc>& char_container)
-                {
-                    // Assume there is memory available.
-                    // Insert 0 or more characters starting from `begin` iterator (inclusive) to `end` iterator (exclusive).
-                    this->input.insert(this->input.end(), char_container.begin(), char_container.end());
-                    this->cursor_index += char_container.size();
-                    this->cursor_it = this->input.begin() + this->cursor_index;
-                }
+        bool operator!=(const TextInput& other) const
+        {
+            return this->input != other.input;
+        }
 
-            void add_characters(std::string_view char_container);
+        void add_character(char character);
 
-            void emplace_back(char character);
-            void push_back(char character);
+        template<typename Alloc, template<typename, typename> typename Type>
+        void add_characters(const Type<char, Alloc>& char_container)
+        {
+            // Assume there is memory available.
+            // Insert 0 or more characters starting from `begin` iterator (inclusive) to `end` iterator (exclusive).
+            this->input.insert(this->input.end(), char_container.begin(), char_container.end());
+            this->cursor_index += char_container.size();
+            this->cursor_it = this->input.begin() + this->cursor_index;
+        }
 
-            std::optional<char> get_character_at_current_index() const;
-            std::optional<char> get_character_to_the_left() const;
+        void add_characters(std::string_view char_container);
 
-            bool delete_character();
-            void ctrl_w();
-            void clear();
-            bool move_cursor_left();
-            bool move_cursor_right();
-            void move_cursor_to_start_of_line();
-            void move_cursor_to_end_of_line();
-            std::size_t size() const;
-            bool empty() const;
-            const std::string& data() const;
+        void emplace_back(char character);
 
-            std::size_t get_cursor_index() const;
-            TextInputType get_type() const;
+        void push_back(char character);
 
-            void on_change(ConsoleState old_state, ConsoleState new_state);
+        std::optional<char> get_character_at_current_index() const;
 
-            // Iterator functions.
-            iterator begin()
-            {
-                return iterator(this->input.begin());
-            }
+        std::optional<char> get_character_to_the_left() const;
 
-            iterator end()
-            {
-                return iterator(this->input.end());
-            }
+        bool delete_character();
 
-            const_iterator cbegin() const
-            {
-                return const_iterator(this->input.cbegin());
-            }
+        void ctrl_w();
 
-            const_iterator cend() const
-            {
-                return const_iterator(this->input.cend());
-            }
+        void clear();
 
-            std::string::iterator get_cursor_it() const
-            {
-                return this->cursor_it;
-            }
+        bool move_cursor_left();
 
-        private:
-            std::string input; // This is used for actual inputs.
-            std::string::iterator cursor_it { this->input.begin() };
-            std::size_t cursor_index { 0 };
-            TextInputType type;
+        bool move_cursor_right();
+
+        void move_cursor_to_start_of_line();
+
+        void move_cursor_to_end_of_line();
+
+        std::size_t size() const;
+
+        bool empty() const;
+
+        const std::string& data() const;
+
+        std::size_t get_cursor_index() const;
+
+        TextInputType get_type() const;
+
+        void on_change(ConsoleState old_state, ConsoleState new_state);
+
+        // Iterator functions.
+        iterator begin()
+        {
+            return iterator(this->input.begin());
+        }
+
+        iterator end()
+        {
+            return iterator(this->input.end());
+        }
+
+        const_iterator cbegin() const
+        {
+            return const_iterator(this->input.cbegin());
+        }
+
+        const_iterator cend() const
+        {
+            return const_iterator(this->input.cend());
+        }
+
+        std::string::iterator get_cursor_it() const
+        {
+            return this->cursor_it;
+        }
+
+    private:
+        std::string input; // This is used for actual inputs.
+        std::string::iterator cursor_it { this->input.begin() };
+        std::size_t cursor_index { 0 };
+        TextInputType type;
     };
 }
 

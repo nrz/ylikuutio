@@ -28,73 +28,72 @@ namespace yli::console
 {
     class ScrollbackBufferIterator
     {
-        public:
-            using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = std::string;
-            using difference_type   = std::ptrdiff_t;
-            using pointer           = std::string*;
-            using reference         = std::string&;
+    public:
+        using iterator_category = std::bidirectional_iterator_tag;
+        using value_type = std::string;
+        using difference_type = std::ptrdiff_t;
+        using pointer = std::string*;
+        using reference = std::string&;
 
-            explicit ScrollbackBufferIterator(std::vector<std::string>::iterator it)
-                : it { it }
-            {
-            }
+        explicit ScrollbackBufferIterator(std::vector<std::string>::iterator it)
+            : it { it }
+        { }
 
-            // copy constructor.
-            ScrollbackBufferIterator(const ScrollbackBufferIterator&) = default;
+        // copy constructor.
+        ScrollbackBufferIterator(const ScrollbackBufferIterator&) = default;
 
-            // copy assignment.
-            ScrollbackBufferIterator& operator=(const ScrollbackBufferIterator&) = default;
+        // copy assignment.
+        ScrollbackBufferIterator& operator=(const ScrollbackBufferIterator&) = default;
 
-            // assignment of `std::vector` iterator.
-            ScrollbackBufferIterator& operator=(std::vector<std::string>::iterator it)
-            {
-                this->it = it;
-                return *this;
-            }
+        // assignment of `std::vector` iterator.
+        ScrollbackBufferIterator& operator=(std::vector<std::string>::iterator it)
+        {
+            this->it = it;
+            return *this;
+        }
 
-            ~ScrollbackBufferIterator() = default;
+        ~ScrollbackBufferIterator() = default;
 
-            bool operator==(const ScrollbackBufferIterator& other_it) const noexcept
-            {
-                return this->it == other_it.it;
-            }
+        bool operator==(const ScrollbackBufferIterator& other_it) const noexcept
+        {
+            return this->it == other_it.it;
+        }
 
-            bool operator!=(const ScrollbackBufferIterator& other_it) const = default;
+        bool operator!=(const ScrollbackBufferIterator& other_it) const = default;
 
-            ScrollbackBufferIterator& operator++()
-            {
-                ++this->it;
-                return *this;
-            }
+        ScrollbackBufferIterator& operator++()
+        {
+            ++this->it;
+            return *this;
+        }
 
-            ScrollbackBufferIterator& operator--()
-            {
-                --this->it;
-                return *this;
-            }
+        ScrollbackBufferIterator& operator--()
+        {
+            --this->it;
+            return *this;
+        }
 
-            ScrollbackBufferIterator& operator++(int)
-            {
-                ScrollbackBufferIterator& temp { *this };
-                ++this->it;
-                return temp;
-            }
+        ScrollbackBufferIterator& operator++(int)
+        {
+            ScrollbackBufferIterator& temp { *this };
+            ++this->it;
+            return temp;
+        }
 
-            ScrollbackBufferIterator& operator--(int)
-            {
-                ScrollbackBufferIterator& temp { *this };
-                --this->it;
-                return temp;
-            }
+        ScrollbackBufferIterator& operator--(int)
+        {
+            ScrollbackBufferIterator& temp { *this };
+            --this->it;
+            return temp;
+        }
 
-            std::string operator*() const
-            {
-                return *(this->it);
-            }
+        std::string operator*() const
+        {
+            return *(this->it);
+        }
 
-        private:
-            std::vector<std::string>::iterator it;
+    private:
+        std::vector<std::string>::iterator it;
     };
 }
 

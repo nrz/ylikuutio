@@ -29,271 +29,295 @@
 
 namespace yli::data
 {
-    class AnyValue;
+        class AnyValue;
 }
 
 namespace yli::ontology
 {
-    class GenericParentModule;
-    class Universe;
-    class CallbackEngine;
-    class CallbackObject;
-    class Console;
-    class ConsoleCallbackEngine;
-    class ConsoleCallbackObject;
+        class GenericParentModule;
+        class Universe;
+        class CallbackEngine;
+        class CallbackObject;
+        class Console;
+        class ConsoleCallbackEngine;
+        class ConsoleCallbackObject;
 }
 
 namespace yli::console
 {
-    class TextInput;
-    class TextInputHistory;
-    class ScrollbackBuffer;
+        class TextInput;
+        class TextInputHistory;
+        class ScrollbackBuffer;
 
-    class ConsoleLogicModule
-    {
+        class ConsoleLogicModule
+        {
         public:
-            ConsoleLogicModule(
-                    TextInput& new_input,
-                    TextInput& temp_input,
-                    TextInputHistory& text_input_history,
-                    ScrollbackBuffer& scrollback_buffer,
-                    std::size_t n_columns = 80,
-                    std::size_t n_rows = 24);
+                ConsoleLogicModule(
+                        TextInput& new_input,
+                        TextInput& temp_input,
+                        TextInputHistory& text_input_history,
+                        ScrollbackBuffer& scrollback_buffer,
+                        std::size_t n_columns = 80,
+                        std::size_t n_rows = 24);
 
-            // State transition functions.
-            // `ConsoleLogicModule` keeps track of the console state.
-            // Behavior:
-            // 1. potentially ask relevant 'modules' if they are ready to change
-            //    ('modules' may also do internal changes as a result).
-            // 2. do the state change in `ConsoleLogicModule`
-            //    (if needed based on the response from relevant 'modules').
-            // 3. signal the change to relevant 'modules'.
-            //
-            // If errors are encountered if any phase, return `std::nullopt`
-            // as a sign of failed state transition, but do not roll back changes.
-            std::optional<ConsoleState> activate();
-            std::optional<ConsoleState> deactivate();
-            std::optional<ConsoleState> enter_new_input();
-            std::optional<ConsoleState> enter_historical_input();
-            std::optional<ConsoleState> enter_temp_input();
-            std::optional<ConsoleState> enter_scrollback_buffer();
-            std::optional<ConsoleState> exit_scrollback_buffer();
-            TextInput* edit_input();
+                // State transition functions.
+                // `ConsoleLogicModule` keeps track of the console state.
+                // Behavior:
+                // 1. potentially ask relevant 'modules' if they are ready to change
+                //    ('modules' may also do internal changes as a result).
+                // 2. do the state change in `ConsoleLogicModule`
+                //    (if needed based on the response from relevant 'modules').
+                // 3. signal the change to relevant 'modules'.
+                //
+                // If errors are encountered if any phase, return `std::nullopt`
+                // as a sign of failed state transition, but do not roll back changes.
+                std::optional<ConsoleState> activate();
 
-            std::optional<ConsoleState> home();
-            std::optional<ConsoleState> end();
-            std::optional<ConsoleState> page_up();
-            std::optional<ConsoleState> page_down();
+                std::optional<ConsoleState> deactivate();
 
-            // State inquiry functions.
-            bool get_active_in_console() const;
-            bool get_active_in_new_input() const;
-            bool get_active_in_historical_input() const;
-            bool get_active_in_temp_input() const;
-            bool get_active_in_scrollback_buffer() const;
+                std::optional<ConsoleState> enter_new_input();
 
-            ConsoleState get() const;
+                std::optional<ConsoleState> enter_historical_input();
 
-            // Module inquiry functions.
-            TextInput& get_new_input() const;
-            TextInput& get_temp_input() const;
-            TextInputHistory& get_text_input_history() const;
-            ScrollbackBuffer& get_scrollback_buffer() const;
-            const TextInput* get_visible_input() const; // The currently selected input, can be: new input, historical input, or temp input.
-            std::optional<std::size_t> get_n_lines_of_visible_input() const;
-            std::size_t get_temp_input_index() const;   // Index of the current temp input, or `std::numeric_limits<std::size_t>::max()` if none.
+                std::optional<ConsoleState> enter_temp_input();
 
-            std::size_t get_n_columns() const;
-            std::size_t get_n_rows() const;
+                std::optional<ConsoleState> enter_scrollback_buffer();
 
-            void invalidate_temp_input();
+                std::optional<ConsoleState> exit_scrollback_buffer();
 
-            // Public callbacks.
+                TextInput* edit_input();
 
-            // Action mode keypress callbacks begin here.
+                std::optional<ConsoleState> home();
 
-            static std::optional<data::AnyValue> enter_console(
-                    ontology::Universe& universe,
-                    ontology::CallbackEngine*,
-                    ontology::CallbackObject*,
-                    ontology::GenericParentModule&,
-                    const data::AnyValue&);
+                std::optional<ConsoleState> end();
 
-            // Console mode keyrelease callbacks begin here.
+                std::optional<ConsoleState> page_up();
 
-            static std::optional<data::AnyValue> release_left_control_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                std::optional<ConsoleState> page_down();
 
-            static std::optional<data::AnyValue> release_right_control_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                // State inquiry functions.
+                bool get_active_in_console() const;
 
-            static std::optional<data::AnyValue> release_left_alt_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                bool get_active_in_new_input() const;
 
-            static std::optional<data::AnyValue> release_right_alt_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                bool get_active_in_historical_input() const;
 
-            static std::optional<data::AnyValue> release_left_shift_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                bool get_active_in_temp_input() const;
 
-            static std::optional<data::AnyValue> release_right_shift_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                bool get_active_in_scrollback_buffer() const;
 
-            // yli::ontology::Console mode keypress callbacks begin here.
+                ConsoleState get() const;
 
-            static std::optional<data::AnyValue> exit_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                // Module inquiry functions.
+                TextInput& get_new_input() const;
 
-            static std::optional<data::AnyValue> press_left_control_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                TextInput& get_temp_input() const;
 
-            static std::optional<data::AnyValue> press_right_control_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                TextInputHistory& get_text_input_history() const;
 
-            static std::optional<data::AnyValue> press_left_alt_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                ScrollbackBuffer& get_scrollback_buffer() const;
 
-            static std::optional<data::AnyValue> press_right_alt_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                const TextInput*
+                get_visible_input() const; // The currently selected input, can be: new input, historical input, or temp input.
+                std::optional<std::size_t> get_n_lines_of_visible_input() const;
 
-            static std::optional<data::AnyValue> press_left_shift_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                std::size_t
+                get_temp_input_index() const;   // Index of the current temp input, or `std::numeric_limits<std::size_t>::max()` if none.
 
-            static std::optional<data::AnyValue> press_right_shift_in_console(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                std::size_t get_n_columns() const;
 
-            static std::optional<data::AnyValue> move_to_previous_input(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                std::size_t get_n_rows() const;
 
-            static std::optional<data::AnyValue> move_to_next_input(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                void invalidate_temp_input();
 
-            static std::optional<data::AnyValue> backspace(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                // Public callbacks.
 
-            static std::optional<data::AnyValue> tab(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console&);
+                // Action mode keypress callbacks begin here.
 
-            static std::optional<data::AnyValue> enter_key(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                static std::optional<data::AnyValue> enter_console(
+                        ontology::Universe& universe,
+                        ontology::CallbackEngine*,
+                        ontology::CallbackObject*,
+                        ontology::GenericParentModule&,
+                        const data::AnyValue&);
 
-            static std::optional<data::AnyValue> ctrl_c(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                // Console mode keyrelease callbacks begin here.
 
-            static std::optional<data::AnyValue> ctrl_w(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                static std::optional<data::AnyValue> release_left_control_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
 
-            static std::optional<data::AnyValue> page_up(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                static std::optional<data::AnyValue> release_right_control_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
 
-            static std::optional<data::AnyValue> page_down(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                static std::optional<data::AnyValue> release_left_alt_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
 
-            static std::optional<data::AnyValue> home(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                static std::optional<data::AnyValue> release_right_alt_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
 
-            static std::optional<data::AnyValue> end(
-                    ontology::ConsoleCallbackEngine*,
-                    ontology::ConsoleCallbackObject*,
-                    ontology::GenericParentModule&,
-                    ontology::Console& console);
+                static std::optional<data::AnyValue> release_left_shift_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
 
-            // Console command callbacks begin here.
+                static std::optional<data::AnyValue> release_right_shift_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
 
-            static std::optional<data::AnyValue> clear(
-                    ontology::Console& console);
+                // yli::ontology::Console mode keypress callbacks begin here.
 
-            // Public callbacks end here.
+                static std::optional<data::AnyValue> exit_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> press_left_control_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> press_right_control_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> press_left_alt_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> press_right_alt_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> press_left_shift_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> press_right_shift_in_console(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> move_to_previous_input(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> move_to_next_input(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> backspace(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> tab(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console&);
+
+                static std::optional<data::AnyValue> enter_key(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> ctrl_c(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> ctrl_w(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> page_up(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> page_down(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> home(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                static std::optional<data::AnyValue> end(
+                        ontology::ConsoleCallbackEngine*,
+                        ontology::ConsoleCallbackObject*,
+                        ontology::GenericParentModule&,
+                        ontology::Console& console);
+
+                // Console command callbacks begin here.
+
+                static std::optional<data::AnyValue> clear(
+                        ontology::Console& console);
+
+                // Public callbacks end here.
 
         private:
-            std::optional<ConsoleState> signal_state_change(const ConsoleState old_state, const ConsoleState new_state) const;
-            std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
+                std::optional<ConsoleState> signal_state_change(const ConsoleState old_state,
+                                                                const ConsoleState new_state) const;
 
-            ConsoleState state { ConsoleState::INACTIVE_IN_NEW_INPUT };
-            TextInput& new_input;
-            TextInput& temp_input;
-            TextInputHistory& text_input_history;
-            ScrollbackBuffer& scrollback_buffer;
+                std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
 
-            const std::size_t n_columns;
-            const std::size_t n_rows;
+                ConsoleState state { ConsoleState::INACTIVE_IN_NEW_INPUT };
+                TextInput& new_input;
+                TextInput& temp_input;
+                TextInputHistory& text_input_history;
+                ScrollbackBuffer& scrollback_buffer;
 
-            std::size_t temp_input_index { std::numeric_limits<std::size_t>::max() };
+                const std::size_t n_columns;
+                const std::size_t n_rows;
 
-            ModifierState modifier_state;
+                std::size_t temp_input_index { std::numeric_limits<std::size_t>::max() };
+
+                ModifierState modifier_state;
 
         public:
-            const std::string prompt { "$ " };
-    };
+                const std::string prompt { "$ " };
+        };
 }
 
 #endif

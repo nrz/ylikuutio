@@ -27,78 +27,77 @@ namespace yli::console
 {
     class TextInputConstIterator
     {
-        public:
-            using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = char;
-            using difference_type   = std::ptrdiff_t;
-            using pointer           = const char*;
-            using reference         = const char&;
+    public:
+        using iterator_category = std::bidirectional_iterator_tag;
+        using value_type = char;
+        using difference_type = std::ptrdiff_t;
+        using pointer = const char*;
+        using reference = const char&;
 
-            explicit TextInputConstIterator(std::string::const_iterator it)
-                : it { it }
-            {
-            }
+        explicit TextInputConstIterator(std::string::const_iterator it)
+            : it { it }
+        { }
 
-            // copy constructor.
-            TextInputConstIterator(const TextInputConstIterator&) = default;
+        // copy constructor.
+        TextInputConstIterator(const TextInputConstIterator&) = default;
 
-            // copy assignment.
-            TextInputConstIterator& operator=(const TextInputConstIterator&) = default;
+        // copy assignment.
+        TextInputConstIterator& operator=(const TextInputConstIterator&) = default;
 
-            // assignment of `std::string` const_iterator.
-            TextInputConstIterator& operator=(const std::string::const_iterator it)
-            {
-                this->it = it;
-                return *this;
-            }
+        // assignment of `std::string` const_iterator.
+        TextInputConstIterator& operator=(const std::string::const_iterator it)
+        {
+            this->it = it;
+            return *this;
+        }
 
-            ~TextInputConstIterator() = default;
+        ~TextInputConstIterator() = default;
 
-            bool operator==(const TextInputConstIterator& other_it) const noexcept
-            {
-                return this->it == other_it.it;
-            }
+        bool operator==(const TextInputConstIterator& other_it) const noexcept
+        {
+            return this->it == other_it.it;
+        }
 
-            bool operator!=(const TextInputConstIterator& other_it) const = default;
+        bool operator!=(const TextInputConstIterator& other_it) const = default;
 
-            TextInputConstIterator& operator++()
-            {
-                ++this->it;
-                return *this;
-            }
+        TextInputConstIterator& operator++()
+        {
+            ++this->it;
+            return *this;
+        }
 
-            TextInputConstIterator& operator--()
-            {
-                --this->it;
-                return *this;
-            }
+        TextInputConstIterator& operator--()
+        {
+            --this->it;
+            return *this;
+        }
 
-            TextInputConstIterator& operator++(int)
-            {
-                TextInputConstIterator& temp { *this };
-                ++this->it;
-                return temp;
-            }
+        TextInputConstIterator& operator++(int)
+        {
+            TextInputConstIterator& temp { *this };
+            ++this->it;
+            return temp;
+        }
 
-            TextInputConstIterator& operator--(int)
-            {
-                TextInputConstIterator& temp { *this };
-                --this->it;
-                return temp;
-            }
+        TextInputConstIterator& operator--(int)
+        {
+            TextInputConstIterator& temp { *this };
+            --this->it;
+            return temp;
+        }
 
-            char operator*() const
-            {
-                return *(this->it);
-            }
+        char operator*() const
+        {
+            return *(this->it);
+        }
 
-            std::string::const_iterator unwrap() const
-            {
-                return this->it;
-            }
+        std::string::const_iterator unwrap() const
+        {
+            return this->it;
+        }
 
-        private:
-            std::string::const_iterator it;
+    private:
+        std::string::const_iterator it;
     };
 }
 

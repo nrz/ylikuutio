@@ -30,8 +30,7 @@ namespace yli::console
 {
     TextInput::TextInput(const TextInputType type)
         : type { type }
-    {
-    }
+    { }
 
     TextInput::TextInput(std::string&& string, const TextInputType type)
         : type { type }

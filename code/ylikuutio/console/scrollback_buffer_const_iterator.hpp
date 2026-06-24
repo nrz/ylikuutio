@@ -28,73 +28,72 @@ namespace yli::console
 {
     class ScrollbackBufferConstIterator
     {
-        public:
-            using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = std::string;
-            using difference_type   = std::ptrdiff_t;
-            using pointer           = const std::string*;
-            using reference         = const std::string&;
+    public:
+        using iterator_category = std::bidirectional_iterator_tag;
+        using value_type = std::string;
+        using difference_type = std::ptrdiff_t;
+        using pointer = const std::string*;
+        using reference = const std::string&;
 
-            explicit ScrollbackBufferConstIterator(const std::vector<std::string>::const_iterator it)
-                : it { it }
-            {
-            }
+        explicit ScrollbackBufferConstIterator(const std::vector<std::string>::const_iterator it)
+            : it { it }
+        { }
 
-            // copy constructor.
-            ScrollbackBufferConstIterator(const ScrollbackBufferConstIterator&) = default;
+        // copy constructor.
+        ScrollbackBufferConstIterator(const ScrollbackBufferConstIterator&) = default;
 
-            // copy assignment.
-            ScrollbackBufferConstIterator& operator=(const ScrollbackBufferConstIterator&) = default;
+        // copy assignment.
+        ScrollbackBufferConstIterator& operator=(const ScrollbackBufferConstIterator&) = default;
 
-            // assignment of `std::vector` const_iterator.
-            ScrollbackBufferConstIterator& operator=(const std::vector<std::string>::const_iterator it)
-            {
-                this->it = it;
-                return *this;
-            }
+        // assignment of `std::vector` const_iterator.
+        ScrollbackBufferConstIterator& operator=(const std::vector<std::string>::const_iterator it)
+        {
+            this->it = it;
+            return *this;
+        }
 
-            ~ScrollbackBufferConstIterator() = default;
+        ~ScrollbackBufferConstIterator() = default;
 
-            bool operator==(const ScrollbackBufferConstIterator& other_it) const noexcept
-            {
-                return this->it == other_it.it;
-            }
+        bool operator==(const ScrollbackBufferConstIterator& other_it) const noexcept
+        {
+            return this->it == other_it.it;
+        }
 
-            bool operator!=(const ScrollbackBufferConstIterator& other_it) const = default;
+        bool operator!=(const ScrollbackBufferConstIterator& other_it) const = default;
 
-            ScrollbackBufferConstIterator& operator++()
-            {
-                ++this->it;
-                return *this;
-            }
+        ScrollbackBufferConstIterator& operator++()
+        {
+            ++this->it;
+            return *this;
+        }
 
-            ScrollbackBufferConstIterator& operator--()
-            {
-                --this->it;
-                return *this;
-            }
+        ScrollbackBufferConstIterator& operator--()
+        {
+            --this->it;
+            return *this;
+        }
 
-            ScrollbackBufferConstIterator& operator++(int)
-            {
-                ScrollbackBufferConstIterator& temp { *this };
-                ++this->it;
-                return temp;
-            }
+        ScrollbackBufferConstIterator& operator++(int)
+        {
+            ScrollbackBufferConstIterator& temp { *this };
+            ++this->it;
+            return temp;
+        }
 
-            ScrollbackBufferConstIterator& operator--(int)
-            {
-                ScrollbackBufferConstIterator& temp { *this };
-                --this->it;
-                return temp;
-            }
+        ScrollbackBufferConstIterator& operator--(int)
+        {
+            ScrollbackBufferConstIterator& temp { *this };
+            --this->it;
+            return temp;
+        }
 
-            std::string operator*() const
-            {
-                return *(this->it);
-            }
+        std::string operator*() const
+        {
+            return *(this->it);
+        }
 
-        private:
-            std::vector<std::string>::const_iterator it;
+    private:
+        std::vector<std::string>::const_iterator it;
     };
 }
 

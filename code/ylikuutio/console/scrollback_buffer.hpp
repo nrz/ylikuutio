@@ -34,74 +34,90 @@ namespace yli::console
 {
     class ScrollbackBuffer
     {
-        public:
-            // Iterator typedefs.
-            typedef ScrollbackBufferIterator      iterator;
-            typedef ScrollbackBufferConstIterator const_iterator;
+    public:
+        // Iterator typedefs.
+        typedef ScrollbackBufferIterator iterator;
+        typedef ScrollbackBufferConstIterator const_iterator;
 
-            explicit ScrollbackBuffer(const std::uint32_t n_columns = 80, const std::uint32_t n_rows = 24);
+        explicit ScrollbackBuffer(const std::uint32_t n_columns = 80, const std::uint32_t n_rows = 24);
 
-            ScrollbackBuffer(const ScrollbackBuffer&) = delete;
-            ScrollbackBuffer& operator=(const ScrollbackBuffer&) = delete;
+        ScrollbackBuffer(const ScrollbackBuffer&) = delete;
 
-            void add_to_buffer(const std::string& text);
-            void emplace_back(const std::string& text);
-            void push_back(const std::string& text);
+        ScrollbackBuffer& operator=(const ScrollbackBuffer&) = delete;
 
-            bool enter_buffer();
-            bool exit_buffer();
+        void add_to_buffer(const std::string& text);
 
-            bool move_to_previous();
-            bool move_to_next();
-            void move_to_first();
-            void move_to_last();
-            bool page_up();
-            bool page_down();
+        void emplace_back(const std::string& text);
 
-            void clear();
+        void push_back(const std::string& text);
 
-            std::span<const std::string> get_view(std::size_t top_index, std::size_t max_rows) const;
-            std::span<const std::string> get_view_to_last(std::size_t max_rows) const;
-            const std::string& at(std::size_t line_i) const;
+        bool enter_buffer();
 
-            bool get_is_active_in_buffer() const;
-            std::size_t size() const;
-            bool empty() const;
-            const std::vector<std::string>& data() const;
-            std::uint32_t get_n_columns() const;
-            std::uint32_t get_n_rows() const;
+        bool exit_buffer();
 
-            std::size_t get_buffer_index() const;
+        bool move_to_previous();
 
-            void on_change(ConsoleState old_state, ConsoleState new_state);
+        bool move_to_next();
 
-            // Iterator functions.
-            iterator begin()
-            {
-                return iterator(this->buffer.begin());
-            }
+        void move_to_first();
 
-            iterator end()
-            {
-                return iterator(this->buffer.end());
-            }
+        void move_to_last();
 
-            const_iterator cbegin() const
-            {
-                return const_iterator(this->buffer.cbegin());
-            }
+        bool page_up();
 
-            const_iterator cend() const
-            {
-                return const_iterator(this->buffer.cend());
-            }
+        bool page_down();
 
-        private:
-            std::vector<std::string> buffer;
-            const std::uint32_t n_columns;  // Number of columns must be at least 1.
-            const std::uint32_t n_rows;     // Number of rows must be at least 1.
-            std::vector<std::string>::iterator buffer_it { this->buffer.end() };
-            std::size_t buffer_index { std::numeric_limits<std::size_t>::max() };
+        void clear();
+
+        std::span<const std::string> get_view(std::size_t top_index, std::size_t max_rows) const;
+
+        std::span<const std::string> get_view_to_last(std::size_t max_rows) const;
+
+        const std::string& at(std::size_t line_i) const;
+
+        bool get_is_active_in_buffer() const;
+
+        std::size_t size() const;
+
+        bool empty() const;
+
+        const std::vector<std::string>& data() const;
+
+        std::uint32_t get_n_columns() const;
+
+        std::uint32_t get_n_rows() const;
+
+        std::size_t get_buffer_index() const;
+
+        void on_change(ConsoleState old_state, ConsoleState new_state);
+
+        // Iterator functions.
+        iterator begin()
+        {
+            return iterator(this->buffer.begin());
+        }
+
+        iterator end()
+        {
+            return iterator(this->buffer.end());
+        }
+
+        const_iterator cbegin() const
+        {
+            return const_iterator(this->buffer.cbegin());
+        }
+
+        const_iterator cend() const
+        {
+            return const_iterator(this->buffer.cend());
+        }
+
+    private:
+        std::vector<std::string> buffer;
+        const std::uint32_t n_columns;  // Number of columns must be at least 1.
+        const std::uint32_t n_rows;     // Number of rows must be at least 1.
+        std::vector<std::string>::iterator buffer_it { this->buffer.end() };
+        std::size_t buffer_index { std::numeric_limits<std::size_t>::max() };
     };
 }
 

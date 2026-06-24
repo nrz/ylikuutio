@@ -29,73 +29,72 @@ namespace yli::console
 {
     class TextInputHistoryIterator
     {
-        public:
-            using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = TextInput;
-            using difference_type   = std::ptrdiff_t;
-            using pointer           = TextInput*;
-            using reference         = TextInput&;
+    public:
+        using iterator_category = std::bidirectional_iterator_tag;
+        using value_type = TextInput;
+        using difference_type = std::ptrdiff_t;
+        using pointer = TextInput*;
+        using reference = TextInput&;
 
-            explicit TextInputHistoryIterator(std::vector<TextInput>::iterator it)
-                : it { it }
-            {
-            }
+        explicit TextInputHistoryIterator(std::vector<TextInput>::iterator it)
+            : it { it }
+        { }
 
-            // copy constructor.
-            TextInputHistoryIterator(const TextInputHistoryIterator&) = default;
+        // copy constructor.
+        TextInputHistoryIterator(const TextInputHistoryIterator&) = default;
 
-            // copy assignment.
-            TextInputHistoryIterator& operator=(const TextInputHistoryIterator&) = default;
+        // copy assignment.
+        TextInputHistoryIterator& operator=(const TextInputHistoryIterator&) = default;
 
-            // assignment of `std::vector` iterator.
-            TextInputHistoryIterator& operator=(std::vector<TextInput>::iterator it)
-            {
-                this->it = it;
-                return *this;
-            }
+        // assignment of `std::vector` iterator.
+        TextInputHistoryIterator& operator=(std::vector<TextInput>::iterator it)
+        {
+            this->it = it;
+            return *this;
+        }
 
-            ~TextInputHistoryIterator() = default;
+        ~TextInputHistoryIterator() = default;
 
-            bool operator==(const TextInputHistoryIterator& other_it) const noexcept
-            {
-                return this->it == other_it.it;
-            }
+        bool operator==(const TextInputHistoryIterator& other_it) const noexcept
+        {
+            return this->it == other_it.it;
+        }
 
-            bool operator!=(const TextInputHistoryIterator& other_it) const = default;
+        bool operator!=(const TextInputHistoryIterator& other_it) const = default;
 
-            TextInputHistoryIterator& operator++()
-            {
-                ++this->it;
-                return *this;
-            }
+        TextInputHistoryIterator& operator++()
+        {
+            ++this->it;
+            return *this;
+        }
 
-            TextInputHistoryIterator& operator--()
-            {
-                --this->it;
-                return *this;
-            }
+        TextInputHistoryIterator& operator--()
+        {
+            --this->it;
+            return *this;
+        }
 
-            TextInputHistoryIterator& operator++(int)
-            {
-                TextInputHistoryIterator& temp { *this };
-                ++this->it;
-                return temp;
-            }
+        TextInputHistoryIterator& operator++(int)
+        {
+            TextInputHistoryIterator& temp { *this };
+            ++this->it;
+            return temp;
+        }
 
-            TextInputHistoryIterator& operator--(int)
-            {
-                TextInputHistoryIterator& temp { *this };
-                --this->it;
-                return temp;
-            }
+        TextInputHistoryIterator& operator--(int)
+        {
+            TextInputHistoryIterator& temp { *this };
+            --this->it;
+            return temp;
+        }
 
-            TextInput operator*() const
-            {
-                return *(this->it);
-            }
+        TextInput operator*() const
+        {
+            return *(this->it);
+        }
 
-        private:
-            std::vector<TextInput>::iterator it;
+    private:
+        std::vector<TextInput>::iterator it;
     };
 }
 

@@ -129,20 +129,19 @@ namespace yli::console
     // -> 8. active, in temp input (edit historical input, that is, copy it to temp input for editing)
 
     ConsoleLogicModule::ConsoleLogicModule(
-            TextInput& new_input,
-            TextInput& temp_input,
-            TextInputHistory& text_input_history,
-            ScrollbackBuffer& scrollback_buffer,
-            const std::size_t n_columns,
-            const std::size_t n_rows)
+        TextInput& new_input,
+        TextInput& temp_input,
+        TextInputHistory& text_input_history,
+        ScrollbackBuffer& scrollback_buffer,
+        const std::size_t n_columns,
+        const std::size_t n_rows)
         : new_input { new_input },
-        temp_input { temp_input },
-        text_input_history { text_input_history },
-        scrollback_buffer { scrollback_buffer },
-        n_columns { n_columns },
-        n_rows { n_rows }
-    {
-    }
+          temp_input { temp_input },
+          text_input_history { text_input_history },
+          scrollback_buffer { scrollback_buffer },
+          n_columns { n_columns },
+          n_rows { n_rows }
+    { }
 
     // State transition functions.
 
@@ -179,7 +178,8 @@ namespace yli::console
     std::optional<ConsoleState> ConsoleLogicModule::enter_temp_input()
     {
         // If there is no temp input, then do not enter temp input.
-        if (this->text_input_history.empty() || this->temp_input_index == std::numeric_limits<std::size_t>::max()) [[unlikely]]
+        if (this->text_input_history.empty() || this->temp_input_index == std::numeric_limits<std::size_t>::max())
+        [[unlikely]]
         {
             return std::nullopt; // Transition failed.
         }
@@ -455,7 +455,8 @@ namespace yli::console
         this->temp_input_index = std::numeric_limits<std::size_t>::max();
     }
 
-    std::optional<ConsoleState> ConsoleLogicModule::signal_state_change(const ConsoleState old_state, const ConsoleState new_state) const
+    std::optional<ConsoleState> ConsoleLogicModule::signal_state_change(const ConsoleState old_state,
+                                                                        const ConsoleState new_state) const
     {
         // Signal the 'modules' that the state has changed.
 
@@ -504,11 +505,11 @@ namespace yli::console
     // Action mode keypress callbacks begin here.
 
     std::optional<data::AnyValue> ConsoleLogicModule::enter_console(
-            ontology::Universe& universe,
-            ontology::CallbackEngine*,
-            ontology::CallbackObject*,
-            ontology::GenericParentModule&,
-            const data::AnyValue&)
+        ontology::Universe& universe,
+        ontology::CallbackEngine*,
+        ontology::CallbackObject*,
+        ontology::GenericParentModule&,
+        const data::AnyValue&)
     {
         ontology::Console* const console = universe.get_active_console();
 
@@ -532,84 +533,90 @@ namespace yli::console
     // Console mode keyrelease callbacks begin here.
 
     std::optional<data::AnyValue> ConsoleLogicModule::release_left_control_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~left_ctrl_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state & (~left_ctrl_pressed));
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::release_right_control_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~right_ctrl_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state & (~right_ctrl_pressed));
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::release_left_alt_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~left_alt_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state & (~left_alt_pressed));
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::release_right_alt_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~right_alt_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state & (~right_alt_pressed));
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::release_left_shift_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~left_shift_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state & (~left_shift_pressed));
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::release_right_shift_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state & (~right_shift_pressed));
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state & (~right_shift_pressed));
         }
 
         return std::nullopt;
@@ -618,10 +625,10 @@ namespace yli::console
     // Console mode keypress callbacks begin here.
 
     std::optional<data::AnyValue> ConsoleLogicModule::exit_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() && console.exit_console())
         {
@@ -635,102 +642,109 @@ namespace yli::console
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::press_left_control_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | left_ctrl_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state | left_ctrl_pressed);
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::press_right_control_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | right_ctrl_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state | right_ctrl_pressed);
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::press_left_alt_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | left_alt_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state | left_alt_pressed);
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::press_right_alt_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | right_alt_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state | right_alt_pressed);
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::press_left_shift_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | left_shift_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state | left_shift_pressed);
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::press_right_shift_in_console(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
-            console.console_logic_module.modifier_state = static_cast<ModifierState>(console.console_logic_module.modifier_state | right_shift_pressed);
+            console.console_logic_module.modifier_state = static_cast<ModifierState>(
+                console.console_logic_module.modifier_state | right_shift_pressed);
         }
 
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::move_to_previous_input(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
             const std::size_t history_index = console.command_history.get_history_index();
 
-            if (const std::size_t temp_input_index = console.console_logic_module.get_temp_input_index(); console.console_logic_module.get_active_in_new_input() &&
-                                                                                                          !console.command_history.empty() &&
-                                                                                                          temp_input_index == console.command_history.size() - 1)
+            if (const std::size_t temp_input_index = console.console_logic_module.get_temp_input_index();
+                console.console_logic_module.get_active_in_new_input() &&
+                !console.command_history.empty() &&
+                temp_input_index == console.command_history.size() - 1)
             {
                 // OK, we moved from the new input to the last historical input, which happens to be the temp input.
                 console.console_logic_module.enter_historical_input();
@@ -738,14 +752,14 @@ namespace yli::console
                 console.temp_input.move_cursor_to_end_of_line();
             }
             else if (console.console_logic_module.get_active_in_new_input() &&
-                    !console.command_history.empty())
+                     !console.command_history.empty())
             {
                 // OK, we moved from the new input to the last historical input.
                 console.console_logic_module.enter_historical_input();
             }
             else if (console.console_logic_module.get_active_in_historical_input() &&
-                    history_index > 0 &&
-                    history_index - 1 == temp_input_index)
+                     history_index > 0 &&
+                     history_index - 1 == temp_input_index)
             {
                 // OK, we moved to the previous historical input, which happens to be the temp input.
                 console.command_history.move_to_previous();
@@ -769,46 +783,52 @@ namespace yli::console
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::move_to_next_input(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() && !console.command_history.empty())
         {
             const std::size_t history_index = console.command_history.get_history_index();
             const std::size_t temp_input_index = console.console_logic_module.get_temp_input_index();
 
-            if (console.console_logic_module.get_active_in_historical_input() && history_index == console.command_history.size() - 1)
+            if (console.console_logic_module.get_active_in_historical_input() &&
+                history_index == console.command_history.size() - 1)
             {
                 // OK, we moved from the last historical input to the new input.
                 console.console_logic_module.enter_new_input();
                 console.new_input.move_cursor_to_end_of_line();
             }
-            else if (console.console_logic_module.get_active_in_temp_input() && history_index == console.command_history.size() - 1)
+            else if (console.console_logic_module.get_active_in_temp_input() &&
+                     history_index == console.command_history.size() - 1)
             {
                 // OK, we moved from the edited last historical input (temp input) to the new input.
                 console.console_logic_module.enter_new_input();
                 console.new_input.move_cursor_to_end_of_line();
             }
             else if (console.console_logic_module.get_active_in_historical_input() &&
-                    history_index < console.command_history.size() - 1 &&
-                    history_index + 1 == temp_input_index)
+                     history_index < console.command_history.size() - 1 &&
+                     history_index + 1 == temp_input_index)
             {
                 // OK, we moved to the next historical input which happens to be the temp input.
                 console.command_history.move_to_next();
                 console.console_logic_module.enter_temp_input();
                 console.temp_input.move_cursor_to_end_of_line();
             }
-            else if (console.console_logic_module.get_active_in_historical_input() && history_index < console.command_history.size() - 1)
+            else if (console.console_logic_module.get_active_in_historical_input() &&
+                     history_index < console.command_history.size() - 1)
             {
                 // OK, we moved to the next historical input.
                 console.command_history.move_to_next();
             }
-            else if (console.console_logic_module.get_active_in_temp_input() && history_index < console.command_history.size() - 1)
+            else if (console.console_logic_module.get_active_in_temp_input() &&
+                     history_index < console.command_history.size() - 1)
             {
                 // OK, we moved to the next historical input from temp input.
-                console.console_logic_module.enter_historical_input(); // Entering historical input causes history index reset to last.
+
+                // Entering historical input causes history index reset to last.
+                console.console_logic_module.enter_historical_input();
                 console.command_history.move_to_nth(history_index + 1);
             }
         }
@@ -817,10 +837,10 @@ namespace yli::console
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::backspace(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -834,20 +854,20 @@ namespace yli::console
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::tab(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         console.completion_module.complete();
         return std::nullopt;
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::enter_key(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (!console.console_logic_module.get_active_in_console())
         {
@@ -879,7 +899,8 @@ namespace yli::console
 
         console.new_input.clear();
 
-        if (lisp::legacy_parse(console.command_history.at(console.command_history.size() - 1).data(), command, parameter_vector))
+        if (lisp::legacy_parse(console.command_history.at(console.command_history.size() - 1).data(), command,
+                               parameter_vector))
         {
             const std::optional<data::AnyValue> any_value = lisp::execute(console, command, parameter_vector);
             console.console_logic_module.enter_new_input();
@@ -893,14 +914,14 @@ namespace yli::console
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::ctrl_c(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() &&
-                (console.console_logic_module.modifier_state & (left_ctrl_pressed | right_ctrl_pressed)) &&
-                (!(console.console_logic_module.modifier_state & (~(left_ctrl_pressed | right_ctrl_pressed)))))
+            (console.console_logic_module.modifier_state & (left_ctrl_pressed | right_ctrl_pressed)) &&
+            (!(console.console_logic_module.modifier_state & (~(left_ctrl_pressed | right_ctrl_pressed)))))
         {
             console.new_input.clear();
             console.console_logic_module.enter_new_input();
@@ -911,14 +932,14 @@ namespace yli::console
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::ctrl_w(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console() &&
-                (console.console_logic_module.modifier_state & (left_ctrl_pressed | right_ctrl_pressed)) &&
-                (!(console.console_logic_module.modifier_state & (~(left_ctrl_pressed | right_ctrl_pressed)))))
+            (console.console_logic_module.modifier_state & (left_ctrl_pressed | right_ctrl_pressed)) &&
+            (!(console.console_logic_module.modifier_state & (~(left_ctrl_pressed | right_ctrl_pressed)))))
         {
             TextInput* const active_input = console.console_logic_module.edit_input();
 
@@ -935,10 +956,10 @@ namespace yli::console
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::page_up(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -949,10 +970,10 @@ namespace yli::console
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::page_down(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -963,10 +984,10 @@ namespace yli::console
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::home(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -977,10 +998,10 @@ namespace yli::console
     }
 
     std::optional<data::AnyValue> ConsoleLogicModule::end(
-            ontology::ConsoleCallbackEngine*,
-            ontology::ConsoleCallbackObject*,
-            ontology::GenericParentModule&,
-            ontology::Console& console)
+        ontology::ConsoleCallbackEngine*,
+        ontology::ConsoleCallbackObject*,
+        ontology::GenericParentModule&,
+        ontology::Console& console)
     {
         if (console.console_logic_module.get_active_in_console())
         {
@@ -993,7 +1014,7 @@ namespace yli::console
     // Console command callbacks begin here.
 
     std::optional<data::AnyValue> ConsoleLogicModule::clear(
-            ontology::Console& console)
+        ontology::Console& console)
     {
         console.console_logic_module.enter_new_input();
         console.new_input.clear();

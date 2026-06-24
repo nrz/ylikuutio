@@ -30,9 +30,8 @@ namespace yli::console
 {
     ScrollbackBuffer::ScrollbackBuffer(const std::uint32_t n_columns, const std::uint32_t n_rows)
         : n_columns { (n_columns > 0 ? n_columns : 1) },
-        n_rows      { (n_rows > 0 ? n_rows : 1) }
-    {
-    }
+          n_rows { (n_rows > 0 ? n_rows : 1) }
+    { }
 
     void ScrollbackBuffer::add_to_buffer(const std::string& text)
     {
@@ -138,7 +137,8 @@ namespace yli::console
         }
     }
 
-    std::span<const std::string> ScrollbackBuffer::get_view(const std::size_t top_index, const std::size_t max_rows) const
+    std::span<const std::string> ScrollbackBuffer::get_view(const std::size_t top_index,
+                                                            const std::size_t max_rows) const
     {
         if (top_index >= this->size()) [[unlikely]]
         {
@@ -217,14 +217,14 @@ namespace yli::console
         // Console state change.
 
         if (new_state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_NEW_INPUT ||
-                new_state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT ||
-                new_state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
+            new_state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_HISTORICAL_INPUT ||
+            new_state == ACTIVE_IN_SCROLLBACK_BUFFER_WHILE_IN_TEMP_INPUT)
         {
             this->enter_buffer();
         }
         else if (new_state == ACTIVE_IN_NEW_INPUT ||
-                new_state == ACTIVE_IN_HISTORICAL_INPUT ||
-                new_state == ACTIVE_IN_TEMP_INPUT)
+                 new_state == ACTIVE_IN_HISTORICAL_INPUT ||
+                 new_state == ACTIVE_IN_TEMP_INPUT)
         {
             // We exited scrollback buffer.
             this->exit_buffer();
@@ -258,8 +258,8 @@ namespace yli::console
         // That way it `ConsoleLogicModule` receives the information and
         // can do appropriate state transition instead.
         if (this->size() > 0 &&
-                this->get_is_active_in_buffer() &&
-                this->buffer_index + this->n_rows < this->size()) [[likely]]
+            this->get_is_active_in_buffer() &&
+            this->buffer_index + this->n_rows < this->size()) [[likely]]
         {
             this->buffer_index += this->n_rows;
             this->buffer_it = this->buffer.begin() + this->buffer_index;

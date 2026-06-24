@@ -32,68 +32,79 @@ namespace yli::console
 {
     class TextInputHistory
     {
-        public:
-            // Iterator typedefs.
-            typedef TextInputHistoryIterator      iterator;
-            typedef TextInputHistoryConstIterator const_iterator;
+    public:
+        // Iterator typedefs.
+        typedef TextInputHistoryIterator iterator;
+        typedef TextInputHistoryConstIterator const_iterator;
 
-            void add_to_history(const TextInput& text_input);
-            void emplace_back(const TextInput& text_input);
-            void push_back(const TextInput& text_input);
+        void add_to_history(const TextInput& text_input);
 
-            bool enter_history();
-            bool exit_history();
+        void emplace_back(const TextInput& text_input);
 
-            bool move_to_previous();
-            bool move_to_next();
-            void move_to_first();
-            void move_to_last();
-            bool move_to_nth(std::size_t new_history_index);
+        void push_back(const TextInput& text_input);
 
-            void clear();
+        bool enter_history();
 
-            const TextInput* get() const;
-            const TextInput& at(std::size_t input_i) const;
+        bool exit_history();
 
-            bool get_is_in_history() const;
-            std::size_t size() const;
-            bool empty() const;
-            const std::vector<TextInput>& data() const;
+        bool move_to_previous();
 
-            std::size_t get_history_index() const;
+        bool move_to_next();
 
-            void on_change(ConsoleState old_state, ConsoleState new_state);
+        void move_to_first();
 
-            // Iterator functions.
-            iterator begin()
-            {
-                return iterator(this->history.begin());
-            }
+        void move_to_last();
 
-            iterator end()
-            {
-                return iterator(this->history.end());
-            }
+        bool move_to_nth(std::size_t new_history_index);
 
-            const_iterator cbegin() const
-            {
-                return const_iterator(this->history.cbegin());
-            }
+        void clear();
 
-            const_iterator cend() const
-            {
-                return const_iterator(this->history.cend());
-            }
+        const TextInput* get() const;
 
-            std::vector<TextInput>::const_iterator get_history_it() const
-            {
-                return this->history_it;
-            }
+        const TextInput& at(std::size_t input_i) const;
 
-        private:
-            std::vector<TextInput> history;
-            std::vector<TextInput>::iterator history_it { this->history.end() };
-            std::size_t history_index { std::numeric_limits<std::size_t>::max() };
+        bool get_is_in_history() const;
+
+        std::size_t size() const;
+
+        bool empty() const;
+
+        const std::vector<TextInput>& data() const;
+
+        std::size_t get_history_index() const;
+
+        void on_change(ConsoleState old_state, ConsoleState new_state);
+
+        // Iterator functions.
+        iterator begin()
+        {
+            return iterator(this->history.begin());
+        }
+
+        iterator end()
+        {
+            return iterator(this->history.end());
+        }
+
+        const_iterator cbegin() const
+        {
+            return const_iterator(this->history.cbegin());
+        }
+
+        const_iterator cend() const
+        {
+            return const_iterator(this->history.cend());
+        }
+
+        std::vector<TextInput>::const_iterator get_history_it() const
+        {
+            return this->history_it;
+        }
+
+    private:
+        std::vector<TextInput> history;
+        std::vector<TextInput>::iterator history_it { this->history.end() };
+        std::size_t history_index { std::numeric_limits<std::size_t>::max() };
     };
 }
 

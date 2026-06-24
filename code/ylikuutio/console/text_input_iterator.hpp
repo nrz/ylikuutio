@@ -27,73 +27,72 @@ namespace yli::console
 {
     class TextInputIterator
     {
-        public:
-            using iterator_category = std::bidirectional_iterator_tag;
-            using value_type        = char;
-            using difference_type   = std::ptrdiff_t;
-            using pointer           = char*;
-            using reference         = char&;
+    public:
+        using iterator_category = std::bidirectional_iterator_tag;
+        using value_type = char;
+        using difference_type = std::ptrdiff_t;
+        using pointer = char*;
+        using reference = char&;
 
-            explicit TextInputIterator(std::string::iterator it)
-                : it { it }
-            {
-            }
+        explicit TextInputIterator(std::string::iterator it)
+            : it { it }
+        { }
 
-            // copy constructor.
-            TextInputIterator(const TextInputIterator&) = default;
+        // copy constructor.
+        TextInputIterator(const TextInputIterator&) = default;
 
-            // copy assignment.
-            TextInputIterator& operator=(const TextInputIterator&) = default;
+        // copy assignment.
+        TextInputIterator& operator=(const TextInputIterator&) = default;
 
-            // assignment of `std::vector` iterator.
-            TextInputIterator& operator=(const std::string::iterator it)
-            {
-                this->it = it;
-                return *this;
-            }
+        // assignment of `std::vector` iterator.
+        TextInputIterator& operator=(const std::string::iterator it)
+        {
+            this->it = it;
+            return *this;
+        }
 
-            ~TextInputIterator() = default;
+        ~TextInputIterator() = default;
 
-            bool operator==(const TextInputIterator& other_it) const noexcept
-            {
-                return this->it == other_it.it;
-            }
+        bool operator==(const TextInputIterator& other_it) const noexcept
+        {
+            return this->it == other_it.it;
+        }
 
-            bool operator!=(const TextInputIterator& other_it) const = default;
+        bool operator!=(const TextInputIterator& other_it) const = default;
 
-            TextInputIterator& operator++()
-            {
-                ++this->it;
-                return *this;
-            }
+        TextInputIterator& operator++()
+        {
+            ++this->it;
+            return *this;
+        }
 
-            TextInputIterator& operator--()
-            {
-                --this->it;
-                return *this;
-            }
+        TextInputIterator& operator--()
+        {
+            --this->it;
+            return *this;
+        }
 
-            TextInputIterator& operator++(int)
-            {
-                TextInputIterator& temp { *this };
-                ++this->it;
-                return temp;
-            }
+        TextInputIterator& operator++(int)
+        {
+            TextInputIterator& temp { *this };
+            ++this->it;
+            return temp;
+        }
 
-            TextInputIterator& operator--(int)
-            {
-                TextInputIterator& temp { *this };
-                --this->it;
-                return temp;
-            }
+        TextInputIterator& operator--(int)
+        {
+            TextInputIterator& temp { *this };
+            --this->it;
+            return temp;
+        }
 
-            char operator*() const
-            {
-                return *(this->it);
-            }
+        char operator*() const
+        {
+            return *(this->it);
+        }
 
-        private:
-            std::string::iterator it;
+    private:
+        std::string::iterator it;
     };
 }
 
