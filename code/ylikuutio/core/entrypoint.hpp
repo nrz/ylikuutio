@@ -111,9 +111,8 @@ int main(const int argc, const char* const argv[]) try
     }
 
     // 3. `Universe` must have been created by now by the `Application`.
-    yli::ontology::Universe& universe = application->get_universe();
 
-    if (!universe.create_window_and_setup_context())
+    if (yli::ontology::Universe& universe = application->get_universe(); !universe.create_window_and_setup_context())
     {
         std::cerr << "ERROR: `main`: creating window and setting up context failed!\n";
         return EXIT_FAILURE;
