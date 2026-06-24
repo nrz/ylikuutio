@@ -21,7 +21,6 @@
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/core/system_factory.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
-#include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/ontology/entity_factory.hpp"
 
 namespace yli::audio
