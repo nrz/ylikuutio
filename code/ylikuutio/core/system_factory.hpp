@@ -35,49 +35,49 @@ namespace yli::core
         {
             public:
                 explicit SystemFactory(
-                        yli::memory::MemorySystem<TypeEnumType>& memory_system)
+                        memory::MemorySystem<TypeEnumType>& memory_system)
                     : memory_system { memory_system }
                 {
                 }
 
-                yli::event::EventSystem* create_event_system(yli::ontology::Universe& universe)
+                event::EventSystem* create_event_system(ontology::Universe& universe)
                 {
-                    using EventSystemMemoryAllocator = yli::memory::MemoryAllocator<yli::event::EventSystem, 1>;
+                    using EventSystemMemoryAllocator = memory::MemoryAllocator<event::EventSystem, 1>;
 
-                    yli::memory::GenericMemoryAllocator& generic_allocator =
+                    memory::GenericMemoryAllocator& generic_allocator =
                         this->memory_system.template get_or_create_allocator<EventSystemMemoryAllocator>(
-                                static_cast<int>(yli::data::Datatype::EVENT_SYSTEM));
+                                static_cast<int>(data::Datatype::EVENT_SYSTEM));
                     EventSystemMemoryAllocator& allocator = static_cast<EventSystemMemoryAllocator&>(generic_allocator);
 
                     return allocator.build_in(universe);
                 }
 
-                yli::input::InputSystem* create_input_system(yli::ontology::Universe& universe)
+                input::InputSystem* create_input_system(ontology::Universe& universe)
                 {
-                    using InputSystemMemoryAllocator = yli::memory::MemoryAllocator<yli::input::InputSystem, 1>;
+                    using InputSystemMemoryAllocator = memory::MemoryAllocator<input::InputSystem, 1>;
 
-                    yli::memory::GenericMemoryAllocator& generic_allocator =
+                    memory::GenericMemoryAllocator& generic_allocator =
                         this->memory_system.template get_or_create_allocator<InputSystemMemoryAllocator>(
-                                static_cast<int>(yli::data::Datatype::INPUT_SYSTEM));
+                                static_cast<int>(data::Datatype::INPUT_SYSTEM));
                     InputSystemMemoryAllocator& allocator = static_cast<InputSystemMemoryAllocator&>(generic_allocator);
 
                     return allocator.build_in(universe);
                 }
 
-                yli::audio::AudioSystem* create_audio_system(yli::ontology::Universe& universe)
+                audio::AudioSystem* create_audio_system(ontology::Universe& universe)
                 {
-                    using AudioSystemMemoryAllocator = yli::memory::MemoryAllocator<yli::audio::AudioSystem, 1>;
+                    using AudioSystemMemoryAllocator = memory::MemoryAllocator<audio::AudioSystem, 1>;
 
-                    yli::memory::GenericMemoryAllocator& generic_allocator =
+                    memory::GenericMemoryAllocator& generic_allocator =
                         this->memory_system.template get_or_create_allocator<AudioSystemMemoryAllocator>(
-                                static_cast<int>(yli::data::Datatype::AUDIO_SYSTEM));
+                                static_cast<int>(data::Datatype::AUDIO_SYSTEM));
                     AudioSystemMemoryAllocator& allocator = static_cast<AudioSystemMemoryAllocator&>(generic_allocator);
 
                     return allocator.build_in(universe);
                 }
 
             private:
-                yli::memory::MemorySystem<TypeEnumType>& memory_system;
+                memory::MemorySystem<TypeEnumType>& memory_system;
         };
 }
 
