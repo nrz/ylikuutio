@@ -411,7 +411,7 @@ TEST(any_value_must_be_initialized_appropriately, int64_t_min)
     std::int64_t int64_t_min = std::numeric_limits<std::int64_t>::min();
     yli::data::AnyValue int64_t_min_value = yli::data::AnyValue(int64_t_min);
     ASSERT_TRUE(std::holds_alternative<std::int64_t>(int64_t_min_value.data));
-    ASSERT_EQ(std::get<std::int64_t>(int64_t_min_value.data), -9223372036854775808);
+    ASSERT_EQ(std::get<std::int64_t>(int64_t_min_value.data), -9223372036854775808u);
     ASSERT_EQ(std::get<std::int64_t>(int64_t_min_value.data), std::numeric_limits<std::int64_t>::min());
     ASSERT_EQ(std::char_traits<char>::length(int64_t_min_value.get_datatype().c_str()), std::char_traits<char>::length("std::int64_t"));
     ASSERT_EQ(std::strcmp(int64_t_min_value.get_datatype().c_str(), "std::int64_t"), 0);
