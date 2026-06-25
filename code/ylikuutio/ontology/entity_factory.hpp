@@ -213,7 +213,8 @@ namespace yli::ontology
         Universe* create_universe(const UniverseStruct& universe_struct)
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<memory::UniverseMemoryAllocator>(TypeEnumType::UNIVERSE);
+                    this->memory_system.template get_or_create_allocator<memory::UniverseMemoryAllocator>(
+                        TypeEnumType::UNIVERSE);
             auto& allocator = static_cast<memory::UniverseMemoryAllocator&>(generic_allocator);
 
             this->universe = allocator.build_in(
@@ -238,7 +239,8 @@ namespace yli::ontology
             data::AnyValue&& any_value) const final
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<memory::VariableMemoryAllocator>(TypeEnumType::VARIABLE);
+                    this->memory_system.template get_or_create_allocator<memory::VariableMemoryAllocator>(
+                        TypeEnumType::VARIABLE);
             auto& allocator = static_cast<memory::VariableMemoryAllocator&>(generic_allocator);
 
             Entity* entity_parent { nullptr };
@@ -471,7 +473,8 @@ namespace yli::ontology
         Ability* create_ability(const AbilityStruct& ability_struct) const final
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<memory::AbilityMemoryAllocator>(TypeEnumType::ABILITY);
+                    this->memory_system.template get_or_create_allocator<memory::AbilityMemoryAllocator>(
+                        TypeEnumType::ABILITY);
             auto& allocator = static_cast<memory::AbilityMemoryAllocator&>(generic_allocator);
 
             return allocator.build_in(
@@ -492,7 +495,8 @@ namespace yli::ontology
         Biont* create_biont(const BiontStruct& biont_struct) const final
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<memory::BiontMemoryAllocator>(TypeEnumType::BIONT);
+                    this->memory_system.template get_or_create_allocator<memory::BiontMemoryAllocator>(
+                        TypeEnumType::BIONT);
             auto& allocator = static_cast<memory::BiontMemoryAllocator&>(generic_allocator);
 
             return allocator.build_in(
@@ -506,7 +510,8 @@ namespace yli::ontology
         Skill* create_skill(const SkillStruct& skill_struct) const final
         {
             memory::GenericMemoryAllocator& generic_allocator =
-                    this->memory_system.template get_or_create_allocator<memory::SkillMemoryAllocator>(TypeEnumType::SKILL);
+                    this->memory_system.template get_or_create_allocator<memory::SkillMemoryAllocator>(
+                        TypeEnumType::SKILL);
             auto& allocator = static_cast<memory::SkillMemoryAllocator&>(generic_allocator);
 
             return allocator.build_in(
@@ -764,7 +769,8 @@ namespace yli::ontology
 
             memory::GenericMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<
-                        memory::GenericConsoleLispFunctionOverloadMemoryAllocator>(TypeEnumType::GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD);
+                        memory::GenericConsoleLispFunctionOverloadMemoryAllocator>(
+                        TypeEnumType::GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD);
 
             auto& allocator =
                     static_cast<memory::GenericConsoleLispFunctionOverloadMemoryAllocator&>(generic_allocator);
@@ -820,7 +826,8 @@ namespace yli::ontology
         }
 
     private:
-        template<EntityNotUniverse T, typename ParentModuleType, typename TypeAllocator, typename DataStruct, typename... Args>
+        template<EntityNotUniverse T, typename ParentModuleType, typename TypeAllocator, typename DataStruct,
+            typename... Args>
         T* create_child_of_universe(
             const TypeEnumType type,
             const DataStruct& data_struct,
