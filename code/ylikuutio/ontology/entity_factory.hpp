@@ -157,7 +157,7 @@ namespace yli::ontology
               memory_system { memory_system }
         { }
 
-        virtual ~EntityFactory() = default;
+        ~EntityFactory() override = default;
 
         EntityFactory<TypeEnumType>& get() const
         {
