@@ -28,7 +28,6 @@
 // `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/entity.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/universe_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -50,6 +49,7 @@ namespace yli::memory
 namespace yli::ontology
 {
     class Entity;
+    class Scene;
     class GenericEntityFactory;
 }
 
