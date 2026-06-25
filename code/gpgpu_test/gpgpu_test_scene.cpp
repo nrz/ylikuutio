@@ -198,9 +198,8 @@ namespace gpgpu_test
         vanish_west_pipeline_compute_task_struct.should_save_intermediate_results = true;
 
         std::cout << "Creating yli::ontology::ComputeTask* vanish_west_pipeline_compute_task ...\n";
-        yli::ontology::ComputeTask* const vanish_west_pipeline_compute_task = this->core.entity_factory.create_compute_task(vanish_west_pipeline_compute_task_struct);
 
-        if (vanish_west_pipeline_compute_task == nullptr)
+        if (yli::ontology::ComputeTask* const vanish_west_pipeline_compute_task = this->core.entity_factory.create_compute_task(vanish_west_pipeline_compute_task_struct); vanish_west_pipeline_compute_task == nullptr)
         {
             std::cerr << "Failed to create Vanish West `ComputeTask`.\n";
             return nullptr;
@@ -232,9 +231,8 @@ namespace gpgpu_test
         floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct.should_flip_texture = false;
 
         std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_pipeline_csv_unsigned_short_compute_task ...\n";
-        yli::ontology::ComputeTask* const floyd_warshall_pipeline_csv_unsigned_short_compute_task = this->core.entity_factory.create_compute_task(floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct);
 
-        if (floyd_warshall_pipeline_csv_unsigned_short_compute_task == nullptr)
+        if (yli::ontology::ComputeTask* const floyd_warshall_pipeline_csv_unsigned_short_compute_task = this->core.entity_factory.create_compute_task(floyd_warshall_pipeline_csv_unsigned_short_compute_task_struct); floyd_warshall_pipeline_csv_unsigned_short_compute_task == nullptr)
         {
             std::cerr << "Failed to create Floyd-Warshall CSV unsigned short `ComputeTask`.\n";
             return nullptr;
@@ -252,9 +250,8 @@ namespace gpgpu_test
         floyd_warshall_pipeline_csv_float_compute_task_struct.should_flip_texture = false;
 
         std::cout << "Creating yli::ontology::ComputeTask* floyd_warshall_pipeline_csv_float_compute_task ...\n";
-        yli::ontology::ComputeTask* const floyd_warshall_pipeline_csv_float_compute_task = this->core.entity_factory.create_compute_task(floyd_warshall_pipeline_csv_float_compute_task_struct);
 
-        if (floyd_warshall_pipeline_csv_float_compute_task == nullptr)
+        if (yli::ontology::ComputeTask* const floyd_warshall_pipeline_csv_float_compute_task = this->core.entity_factory.create_compute_task(floyd_warshall_pipeline_csv_float_compute_task_struct); floyd_warshall_pipeline_csv_float_compute_task == nullptr)
         {
             std::cerr << "Failed to create Floyd-Warshall CSV float `ComputeTask`.\n";
             return nullptr;
