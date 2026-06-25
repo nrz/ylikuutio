@@ -45,7 +45,7 @@ namespace yli::ontology
 
 namespace gpgpu_test
 {
-    yli::ontology::Scene* GpgpuTestApplication::create_gpgpu_test_scene()
+    yli::ontology::Scene* GpgpuTestApplication::create_gpgpu_test_scene() const
     {
         // GPGPU test `Scene` begins here.
         yli::ontology::SceneStruct scene_struct;

@@ -64,7 +64,7 @@ namespace gpgpu_test
             bool create_and_start_simulation() override;
 
         private:
-            yli::ontology::Scene* create_gpgpu_test_scene();
+            yli::ontology::Scene* create_gpgpu_test_scene() const;
 
             yli::core::ApplicationCore core;
     };
