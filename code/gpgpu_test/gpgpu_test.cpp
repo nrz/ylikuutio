@@ -57,7 +57,7 @@ namespace gpgpu_test
 {
     GpgpuTestApplication::GpgpuTestApplication(const int argc, const char* const argv[])
         : Application(argc, argv),
-        core(*this, this->get_universe_struct())
+        core(*this, get_universe_struct())
     {
         std::cout << "GpgpuTestApplication initialized!\n";
     }
