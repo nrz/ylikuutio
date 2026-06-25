@@ -88,8 +88,8 @@ namespace ajokki
 
         private:
             yli::ontology::Ecosystem* create_earth_ecosystem();
-            yli::ontology::Scene* create_helsinki_east_downtown_scene();
-            yli::ontology::Scene* create_joensuu_center_west_scene();
+            yli::ontology::Scene* create_helsinki_east_downtown_scene() const;
+            yli::ontology::Scene* create_joensuu_center_west_scene() const;
 
             yli::core::ApplicationCore core;
     };

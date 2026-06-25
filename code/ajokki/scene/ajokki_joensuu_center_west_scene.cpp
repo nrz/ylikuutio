@@ -51,7 +51,7 @@ namespace ajokki
 {
     using namespace yli::ontology;
 
-    Scene* AjokkiApplication::create_joensuu_center_west_scene()
+    Scene* AjokkiApplication::create_joensuu_center_west_scene() const
     {
         // Joensuu `Scene` begins here.
 

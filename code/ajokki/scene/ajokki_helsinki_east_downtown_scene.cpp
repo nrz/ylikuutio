@@ -62,7 +62,7 @@ namespace ajokki
 {
     using namespace yli::ontology;
 
-    Scene* AjokkiApplication::create_helsinki_east_downtown_scene()
+    Scene* AjokkiApplication::create_helsinki_east_downtown_scene() const
     {
         // Helsinki `Scene` begins here.
 
