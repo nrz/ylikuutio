@@ -97,7 +97,7 @@ namespace gpgpu_test
         return *this->core.universe;
     }
 
-    yli::ontology::UniverseStruct GpgpuTestApplication::get_universe_struct() const
+    yli::ontology::UniverseStruct GpgpuTestApplication::get_universe_struct()
     {
         yli::ontology::UniverseStruct universe_struct(yli::render::GraphicsApiBackend::OPENGL);
         universe_struct.application_name = "GPGPU test";
