@@ -159,9 +159,9 @@ namespace yli::ontology
 
         ~EntityFactory() override = default;
 
-        EntityFactory<TypeEnumType>& get() const
+        EntityFactory& get() const
         {
-            return const_cast<EntityFactory<TypeEnumType>&>(*this);
+            return const_cast<EntityFactory&>(*this);
         }
 
         template<EntityNotUniverse ChildType, typename ParentType>
