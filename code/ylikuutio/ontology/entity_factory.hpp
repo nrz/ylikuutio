@@ -680,7 +680,7 @@ namespace yli::ontology
 
         ConsoleCallbackParameter* create_console_callback_parameter(
             const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
-            const yli::data::AnyValue& any_value) const final
+            const data::AnyValue& any_value) const final
         {
             return this->create_child_of_known_parent_type<
                 ConsoleCallbackParameter, ConsoleCallbackObject, memory::ConsoleCallbackParameterMemoryAllocator,
