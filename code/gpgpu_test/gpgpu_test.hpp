@@ -45,7 +45,7 @@ namespace gpgpu_test
     class GpgpuTestApplication final : public yli::core::Application
     {
         public:
-            GpgpuTestApplication(const int argc, const char* const argv[]);
+            GpgpuTestApplication(int argc, const char* const argv[]);
 
             std::string get_name() const override;
 
@@ -72,7 +72,7 @@ namespace gpgpu_test
 
 namespace yli::core
 {
-    std::unique_ptr<Application> create_application(const int argc, const char* const argv[]);
+    std::unique_ptr<Application> create_application(int argc, const char* const argv[]);
 }
 
 #endif
