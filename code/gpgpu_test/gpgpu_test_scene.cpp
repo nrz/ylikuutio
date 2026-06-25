@@ -26,12 +26,6 @@
 #include "code/ylikuutio/ontology/compute_task_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
-
 // Include standard headers
 #include <iomanip>    // std::setfill, std::setw
 #include <ios>        // std::hex
