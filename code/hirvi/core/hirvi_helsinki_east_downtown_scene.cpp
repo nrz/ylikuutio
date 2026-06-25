@@ -75,7 +75,7 @@ namespace hirvi::core
         scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
         std::cout << "Creating Scene* helsinki_scene ...\n";
-        ontology::HirviScene* const helsinki_scene = this->entity_factory.create_scene_derivative<
+        auto* const helsinki_scene = this->entity_factory.create_scene_derivative<
             ontology::HirviScene,
             HirviSceneMemoryAllocator>(
             data::HIRVI_SCENE,
@@ -526,7 +526,7 @@ namespace hirvi::core
         LocomotionModuleStruct cat2_gallop_struct(12.5f); // 45 km/h.
         LocomotionModuleStruct cat2_climb_struct;
 
-        ontology::Cat* const cat2 = this->entity_factory.create_object_derivative<
+        auto* const cat2 = this->entity_factory.create_object_derivative<
             ontology::Cat,
             CatMemoryAllocator>(
             data::CAT,
