@@ -27,12 +27,6 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/input/input_system.hpp"
-
-#ifndef GOOGLE_TEST
-// Google Test provides its own `main` entrypoint.
-#include "code/ylikuutio/core/entrypoint.hpp"
-#endif
-
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // `yli::ontology` files included in the canonical order.
