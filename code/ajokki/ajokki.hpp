@@ -62,7 +62,7 @@ namespace ajokki
     class AjokkiApplication final : public yli::core::Application
     {
         public:
-            AjokkiApplication(const int argc, const char* const argv[]);
+            AjokkiApplication(int argc, const char* const argv[]);
 
             std::string get_name() const override;
 
@@ -97,7 +97,7 @@ namespace ajokki
 
 namespace yli::core
 {
-    std::unique_ptr<Application> create_application(const int argc, const char* const argv[]);
+    std::unique_ptr<Application> create_application(int argc, const char* const argv[]);
 }
 
 #endif
