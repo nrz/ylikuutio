@@ -17,13 +17,11 @@
 
 #include "code/ajokki/ajokki.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
-#include "code/ylikuutio/snippets/keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
-#include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"

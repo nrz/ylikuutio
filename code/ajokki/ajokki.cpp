@@ -24,23 +24,14 @@
 #include "code/ylikuutio/audio/audio_system.hpp"
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
-#include "code/ylikuutio/core/entrypoint.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/entity.hpp"
-#include "code/ylikuutio/ontology/movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/callback_object.hpp"
-#include "code/ylikuutio/ontology/callback_parameter.hpp"
-#include "code/ylikuutio/ontology/console_callback_object.hpp"
-#include "code/ylikuutio/ontology/ecosystem.hpp"
-#include "code/ylikuutio/ontology/pipeline.hpp"
-#include "code/ylikuutio/ontology/material.hpp"
-#include "code/ylikuutio/ontology/species.hpp"
-#include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/font_2d.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
@@ -64,12 +55,6 @@
 #include "code/ylikuutio/snippets/console_mode_keyboard_callback_creation_snippets.hpp"
 #include "code/ylikuutio/snippets/lisp_function_overload_creation_snippets.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
-
-// Include GLM
-#ifndef __GLM_GLM_HPP_INCLUDED
-#define __GLM_GLM_HPP_INCLUDED
-#include <glm/glm.hpp> // glm
-#endif
 
 // Include standard headers
 #include <cstdint>   // std::uint32_t
