@@ -99,7 +99,7 @@ namespace ajokki
     using namespace yli::ontology;
 
     AjokkiApplication::AjokkiApplication(const int argc, const char* const argv[])
-        : yli::core::Application(argc, argv),
+        : Application(argc, argv),
         core(*this, this->get_universe_struct())
     {
         std::cout << "AjokkiApplication initialized!\n";
@@ -538,7 +538,7 @@ namespace ajokki
 
 namespace yli::core
 {
-    std::unique_ptr<yli::core::Application> create_application(const int argc, const char* const argv[])
+    std::unique_ptr<Application> create_application(const int argc, const char* const argv[])
     {
         return std::make_unique<ajokki::AjokkiApplication>(argc, argv);
     }
