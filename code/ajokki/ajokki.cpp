@@ -25,7 +25,6 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
-#include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
 
@@ -83,6 +82,11 @@
 namespace yli::event
 {
     class EventSystem;
+}
+
+namespace yli::input
+{
+    class InputSystem;
 }
 
 namespace yli::memory
