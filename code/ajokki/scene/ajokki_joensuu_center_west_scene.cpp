@@ -84,7 +84,8 @@ namespace ajokki
         joensuu_center_west_pipeline_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating Pipeline* joensuu_center_west_pipeline ...\n";
-        Pipeline* const joensuu_center_west_pipeline = this->core.entity_factory.create_pipeline(joensuu_center_west_pipeline_struct);
+        Pipeline* const joensuu_center_west_pipeline = this->core.entity_factory.create_pipeline(
+            joensuu_center_west_pipeline_struct);
 
         if (joensuu_center_west_pipeline == nullptr)
         {
@@ -95,11 +96,15 @@ namespace ajokki
         joensuu_center_west_pipeline->set_global_name("joensuu_center_west_pipeline");
 
         // Create the material, store it in `joensuu_center_west_grass_material_struct`.
-        MaterialStruct joensuu_center_west_grass_material_struct { Request(joensuu_center_west_scene), Request(joensuu_center_west_pipeline), yli::ontology::TextureFileFormat::PNG };
+        MaterialStruct joensuu_center_west_grass_material_struct {
+            Request(joensuu_center_west_scene), Request(joensuu_center_west_pipeline),
+            yli::ontology::TextureFileFormat::PNG
+        };
         joensuu_center_west_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating Material* joensuu_center_west_grass_material ...\n";
-        Material* const joensuu_center_west_grass_material = this->core.entity_factory.create_material(joensuu_center_west_grass_material_struct);
+        Material* const joensuu_center_west_grass_material = this->core.entity_factory.create_material(
+            joensuu_center_west_grass_material_struct);
 
         if (joensuu_center_west_grass_material == nullptr)
         {
@@ -109,13 +114,17 @@ namespace ajokki
 
         joensuu_center_west_grass_material->set_global_name("joensuu_center_west_grass_material");
 
-        SpeciesStruct joensuu_center_west_terrain_species_struct { Request(joensuu_center_west_scene), Request(joensuu_center_west_grass_material) };
+        SpeciesStruct joensuu_center_west_terrain_species_struct {
+            Request(joensuu_center_west_scene), Request(joensuu_center_west_grass_material)
+        };
         joensuu_center_west_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
-        joensuu_center_west_terrain_species_struct.model_loader_struct.model_filename = "N5424G.asc"; // Joensuu center & western.
+        joensuu_center_west_terrain_species_struct.model_loader_struct.model_filename =
+                "N5424G.asc"; // Joensuu center & western.
         joensuu_center_west_terrain_species_struct.model_loader_struct.x_step = 4;
         joensuu_center_west_terrain_species_struct.model_loader_struct.y_step = 4;
         std::cout << "Creating Species* joensuu_center_west_terrain_species ...\n";
-        Species* const joensuu_center_west_terrain_species = this->core.entity_factory.create_species(joensuu_center_west_terrain_species_struct);
+        Species* const joensuu_center_west_terrain_species = this->core.entity_factory.create_species(
+            joensuu_center_west_terrain_species_struct);
 
         if (joensuu_center_west_terrain_species == nullptr)
         {
@@ -132,11 +141,15 @@ namespace ajokki
         this->core.entity_factory.create_object(joensuu_center_west_struct);
 
         // Create the material, store it in `orange_fur_material_joensuu`.
-        MaterialStruct orange_fur_material_joensuu_struct { Request(joensuu_center_west_scene), Request(joensuu_center_west_pipeline), yli::ontology::TextureFileFormat::PNG };
+        MaterialStruct orange_fur_material_joensuu_struct {
+            Request(joensuu_center_west_scene), Request(joensuu_center_west_pipeline),
+            yli::ontology::TextureFileFormat::PNG
+        };
         orange_fur_material_joensuu_struct.texture_filename = "orange_fur_texture.png";
 
         std::cout << "Creating Material* orange_fur_material_joensuu ...\n";
-        Material* const orange_fur_material_joensuu = this->core.entity_factory.create_material(orange_fur_material_joensuu_struct);
+        Material* const orange_fur_material_joensuu = this->core.entity_factory.create_material(
+            orange_fur_material_joensuu_struct);
 
         if (orange_fur_material_joensuu == nullptr)
         {

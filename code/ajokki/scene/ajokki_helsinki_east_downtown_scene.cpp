@@ -97,61 +97,76 @@ namespace ajokki
         go_west_callback_engine->create_callback_object(&yli::snippets::go_west);
 
         CallbackEngineStruct go_north_callback_engine_struct;
-        auto go_north_callback_engine = this->core.entity_factory.create_callback_engine(go_north_callback_engine_struct);
+        auto go_north_callback_engine = this->core.entity_factory.create_callback_engine(
+            go_north_callback_engine_struct);
         go_north_callback_engine->create_callback_object(&yli::snippets::go_north);
 
         CallbackEngineStruct go_south_callback_engine_struct;
-        auto go_south_callback_engine = this->core.entity_factory.create_callback_engine(go_south_callback_engine_struct);
+        auto go_south_callback_engine = this->core.entity_factory.create_callback_engine(
+            go_south_callback_engine_struct);
         go_south_callback_engine->create_callback_object(&yli::snippets::go_south);
 
         CallbackEngineStruct orient_to_east_callback_engine_struct;
-        auto orient_to_east_callback_engine = this->core.entity_factory.create_callback_engine(orient_to_east_callback_engine_struct);
+        auto orient_to_east_callback_engine = this->core.entity_factory.create_callback_engine(
+            orient_to_east_callback_engine_struct);
         orient_to_east_callback_engine->create_callback_object(&yli::snippets::orient_to_east);
 
         CallbackEngineStruct orient_to_west_callback_engine_struct;
-        auto orient_to_west_callback_engine = this->core.entity_factory.create_callback_engine(orient_to_west_callback_engine_struct);
+        auto orient_to_west_callback_engine = this->core.entity_factory.create_callback_engine(
+            orient_to_west_callback_engine_struct);
         orient_to_west_callback_engine->create_callback_object(&yli::snippets::orient_to_west);
 
         CallbackEngineStruct orient_to_north_callback_engine_struct;
-        auto orient_to_north_callback_engine = this->core.entity_factory.create_callback_engine(orient_to_north_callback_engine_struct);
+        auto orient_to_north_callback_engine = this->core.entity_factory.create_callback_engine(
+            orient_to_north_callback_engine_struct);
         orient_to_north_callback_engine->create_callback_object(&yli::snippets::orient_to_north);
 
         CallbackEngineStruct orient_to_south_callback_engine_struct;
-        auto orient_to_south_callback_engine = this->core.entity_factory.create_callback_engine(orient_to_south_callback_engine_struct);
+        auto orient_to_south_callback_engine = this->core.entity_factory.create_callback_engine(
+            orient_to_south_callback_engine_struct);
         orient_to_south_callback_engine->create_callback_object(&yli::snippets::orient_to_south);
 
         CallbackEngineStruct orient_and_go_east_callback_engine_struct;
-        auto orient_and_go_east_callback_engine = this->core.entity_factory.create_callback_engine(orient_and_go_east_callback_engine_struct);
+        auto orient_and_go_east_callback_engine = this->core.entity_factory.create_callback_engine(
+            orient_and_go_east_callback_engine_struct);
         orient_and_go_east_callback_engine->create_callback_object(&yli::snippets::orient_and_go_east);
 
         CallbackEngineStruct orient_and_go_west_callback_engine_struct;
-        auto orient_and_go_west_callback_engine = this->core.entity_factory.create_callback_engine(orient_and_go_west_callback_engine_struct);
+        auto orient_and_go_west_callback_engine = this->core.entity_factory.create_callback_engine(
+            orient_and_go_west_callback_engine_struct);
         orient_and_go_west_callback_engine->create_callback_object(&yli::snippets::orient_and_go_west);
 
         CallbackEngineStruct orient_and_go_north_callback_engine_struct;
-        auto orient_and_go_north_callback_engine = this->core.entity_factory.create_callback_engine(orient_and_go_north_callback_engine_struct);
+        auto orient_and_go_north_callback_engine = this->core.entity_factory.create_callback_engine(
+            orient_and_go_north_callback_engine_struct);
         orient_and_go_north_callback_engine->create_callback_object(&yli::snippets::orient_and_go_north);
 
         CallbackEngineStruct orient_and_go_south_callback_engine_struct;
-        auto orient_and_go_south_callback_engine = this->core.entity_factory.create_callback_engine(orient_and_go_south_callback_engine_struct);
+        auto orient_and_go_south_callback_engine = this->core.entity_factory.create_callback_engine(
+            orient_and_go_south_callback_engine_struct);
         orient_and_go_south_callback_engine->create_callback_object(&yli::snippets::orient_and_go_south);
 
         CallbackEngineStruct rotate_clockwise_callback_engine_struct;
-        auto rotate_clockwise_callback_engine = this->core.entity_factory.create_callback_engine(rotate_clockwise_callback_engine_struct);
+        auto rotate_clockwise_callback_engine = this->core.entity_factory.create_callback_engine(
+            rotate_clockwise_callback_engine_struct);
         rotate_clockwise_callback_engine->create_callback_object(&yli::snippets::rotate_clockwise);
 
         CallbackEngineStruct rotate_counterclockwise_callback_engine_struct;
-        auto rotate_counterclockwise_callback_engine = this->core.entity_factory.create_callback_engine(rotate_counterclockwise_callback_engine_struct);
+        auto rotate_counterclockwise_callback_engine = this->core.entity_factory.create_callback_engine(
+            rotate_counterclockwise_callback_engine_struct);
         rotate_counterclockwise_callback_engine->create_callback_object(&yli::snippets::rotate_counterclockwise);
 
         // Create the `MovableController`s.
 
         // `rest_movable_controller`.
-        MovableControllerStruct rest_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(rest_callback_engine) };
+        MovableControllerStruct rest_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(rest_callback_engine)
+        };
         rest_movable_controller_struct.global_name = "rest_movable_controller";
         rest_movable_controller_struct.local_name = "rest";
         std::cout << "Creating MovableController* rest_movable_controller ...\n";
-        MovableController* const rest_movable_controller = this->core.entity_factory.create_movable_controller(rest_movable_controller_struct);
+        MovableController* const rest_movable_controller = this->core.entity_factory.create_movable_controller(
+            rest_movable_controller_struct);
 
         if (rest_movable_controller == nullptr)
         {
@@ -160,7 +175,9 @@ namespace ajokki
         }
 
         // `go_east_movable_controller`.
-        MovableControllerStruct go_east_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(go_east_callback_engine) };
+        MovableControllerStruct go_east_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(go_east_callback_engine)
+        };
         go_east_movable_controller_struct.global_name = "go_east_movable_controller";
         go_east_movable_controller_struct.local_name = "go_east";
         std::cout << "Creating MovableController* go_east_movable_controller ...\n";
@@ -171,7 +188,9 @@ namespace ajokki
         }
 
         // `go_west_movable_controller`.
-        MovableControllerStruct go_west_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(go_west_callback_engine) };
+        MovableControllerStruct go_west_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(go_west_callback_engine)
+        };
         go_west_movable_controller_struct.global_name = "go_west_movable_controller";
         go_west_movable_controller_struct.local_name = "go_west";
         std::cout << "Creating MovableController* go_west_movable_controller ...\n";
@@ -182,7 +201,9 @@ namespace ajokki
         }
 
         // `go_north_movable_controller`.
-        MovableControllerStruct go_north_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(go_north_callback_engine) };
+        MovableControllerStruct go_north_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(go_north_callback_engine)
+        };
         go_north_movable_controller_struct.global_name = "go_north_movable_controller";
         go_north_movable_controller_struct.local_name = "go_north";
         std::cout << "Creating MovableController* go_north_movable_controller ...\n";
@@ -193,7 +214,9 @@ namespace ajokki
         }
 
         // `go_south_movable_controller`.
-        MovableControllerStruct go_south_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(go_south_callback_engine) };
+        MovableControllerStruct go_south_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(go_south_callback_engine)
+        };
         go_south_movable_controller_struct.global_name = "go_south_movable_controller";
         go_south_movable_controller_struct.local_name = "go_south";
         std::cout << "Creating MovableController* go_south_movable_controller ...\n";
@@ -204,7 +227,9 @@ namespace ajokki
         }
 
         // `orient_to_east_movable_controller`.
-        MovableControllerStruct orient_to_east_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(orient_to_east_callback_engine) };
+        MovableControllerStruct orient_to_east_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(orient_to_east_callback_engine)
+        };
         orient_to_east_movable_controller_struct.global_name = "orient_to_east_movable_controller";
         orient_to_east_movable_controller_struct.local_name = "orient_to_east";
         std::cout << "Creating MovableController* orient_to_east_movable_controller ...\n";
@@ -215,7 +240,9 @@ namespace ajokki
         }
 
         // `orient_to_west_movable_controller`.
-        MovableControllerStruct orient_to_west_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(orient_to_west_callback_engine) };
+        MovableControllerStruct orient_to_west_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(orient_to_west_callback_engine)
+        };
         orient_to_west_movable_controller_struct.global_name = "orient_to_west_movable_controller";
         orient_to_west_movable_controller_struct.local_name = "orient_to_west";
         std::cout << "Creating MovableController* orient_to_west_movable_controller ...\n";
@@ -226,7 +253,9 @@ namespace ajokki
         }
 
         // `orient_to_north_movable_controller`.
-        MovableControllerStruct orient_to_north_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(orient_to_north_callback_engine) };
+        MovableControllerStruct orient_to_north_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(orient_to_north_callback_engine)
+        };
         orient_to_north_movable_controller_struct.global_name = "orient_to_north_movable_controller";
         orient_to_north_movable_controller_struct.local_name = "orient_to_north";
         std::cout << "Creating MovableController* orient_to_north_movable_controller ...\n";
@@ -237,7 +266,9 @@ namespace ajokki
         }
 
         // `orient_to_south_movable_controller`.
-        MovableControllerStruct orient_to_south_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(orient_to_south_callback_engine) };
+        MovableControllerStruct orient_to_south_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(orient_to_south_callback_engine)
+        };
         orient_to_south_movable_controller_struct.global_name = "orient_to_south_movable_controller";
         orient_to_south_movable_controller_struct.local_name = "orient_to_south";
         std::cout << "Creating MovableController* orient_to_south_movable_controller ...\n";
@@ -248,7 +279,9 @@ namespace ajokki
         }
 
         // `rotate_clockwise_movable_controller`.
-        MovableControllerStruct rotate_clockwise_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(rotate_clockwise_callback_engine) };
+        MovableControllerStruct rotate_clockwise_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(rotate_clockwise_callback_engine)
+        };
         rotate_clockwise_movable_controller_struct.global_name = "rotate_clockwise_movable_controller";
         rotate_clockwise_movable_controller_struct.local_name = "rotate_clockwise";
         std::cout << "Creating MovableController* rotate_clockwise_movable_controller ...\n";
@@ -259,55 +292,70 @@ namespace ajokki
         }
 
         // `orient_and_go_east_movable_controller`.
-        MovableControllerStruct orient_and_go_east_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(orient_and_go_east_callback_engine) };
+        MovableControllerStruct orient_and_go_east_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(orient_and_go_east_callback_engine)
+        };
         orient_and_go_east_movable_controller_struct.global_name = "orient_and_go_east_movable_controller";
         orient_and_go_east_movable_controller_struct.local_name = "orient_and_go_east";
         std::cout << "Creating MovableController* orient_and_go_east_movable_controller ...\n";
-        if (this->core.entity_factory.create_movable_controller(orient_and_go_east_movable_controller_struct) == nullptr)
+        if (this->core.entity_factory.create_movable_controller(orient_and_go_east_movable_controller_struct) ==
+            nullptr)
         {
             std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
         // `orient_and_go_west_movable_controller`.
-        MovableControllerStruct orient_and_go_west_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(orient_and_go_west_callback_engine) };
+        MovableControllerStruct orient_and_go_west_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(orient_and_go_west_callback_engine)
+        };
         orient_and_go_west_movable_controller_struct.global_name = "orient_and_go_west_movable_controller";
         orient_and_go_west_movable_controller_struct.local_name = "orient_and_go_west";
         std::cout << "Creating MovableController* orient_and_go_west_movable_controller ...\n";
-        if (this->core.entity_factory.create_movable_controller(orient_and_go_west_movable_controller_struct) == nullptr)
+        if (this->core.entity_factory.create_movable_controller(orient_and_go_west_movable_controller_struct) ==
+            nullptr)
         {
             std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
         // `orient_and_go_north_movable_controller`.
-        MovableControllerStruct orient_and_go_north_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(orient_and_go_north_callback_engine) };
+        MovableControllerStruct orient_and_go_north_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(orient_and_go_north_callback_engine)
+        };
         orient_and_go_north_movable_controller_struct.global_name = "orient_and_go_north_movable_controller";
         orient_and_go_north_movable_controller_struct.local_name = "orient_and_go_north";
         std::cout << "Creating MovableController* orient_and_go_north_movable_controller ...\n";
-        if (this->core.entity_factory.create_movable_controller(orient_and_go_north_movable_controller_struct) == nullptr)
+        if (this->core.entity_factory.create_movable_controller(orient_and_go_north_movable_controller_struct) ==
+            nullptr)
         {
             std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
         // `orient_and_go_south_movable_controller`.
-        MovableControllerStruct orient_and_go_south_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(orient_and_go_south_callback_engine) };
+        MovableControllerStruct orient_and_go_south_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(orient_and_go_south_callback_engine)
+        };
         orient_and_go_south_movable_controller_struct.global_name = "orient_and_go_south_movable_controller";
         orient_and_go_south_movable_controller_struct.local_name = "orient_and_go_south";
         std::cout << "Creating MovableController* orient_and_go_south_movable_controller ...\n";
-        if (this->core.entity_factory.create_movable_controller(orient_and_go_south_movable_controller_struct) == nullptr)
+        if (this->core.entity_factory.create_movable_controller(orient_and_go_south_movable_controller_struct) ==
+            nullptr)
         {
             std::cerr << "Failed to create MovableController.\n";
             return nullptr;
         }
 
         // `rotate_counterclockwise_movable_controller`.
-        MovableControllerStruct rotate_counterclockwise_movable_controller_struct { Request(helsinki_east_downtown_scene), Request(rotate_counterclockwise_callback_engine) };
+        MovableControllerStruct rotate_counterclockwise_movable_controller_struct {
+            Request(helsinki_east_downtown_scene), Request(rotate_counterclockwise_callback_engine)
+        };
         rotate_counterclockwise_movable_controller_struct.global_name = "rotate_counterclockwise_movable_controller";
         rotate_counterclockwise_movable_controller_struct.local_name = "rotate_counterclockwise";
         std::cout << "Creating MovableController* rotate_counterclockwise_movable_controller ...\n";
-        if (this->core.entity_factory.create_movable_controller(rotate_counterclockwise_movable_controller_struct) == nullptr)
+        if (this->core.entity_factory.create_movable_controller(rotate_counterclockwise_movable_controller_struct) ==
+            nullptr)
         {
             std::cerr << "Failed to create MovableController.\n";
             return nullptr;
@@ -321,7 +369,8 @@ namespace ajokki
         helsinki_east_downtown_pipeline_struct.fragment_shader = "standard_shading.frag";
 
         std::cout << "Creating Pipeline* helsinki_east_downtown_pipeline ...\n";
-        Pipeline* const helsinki_east_downtown_pipeline = this->core.entity_factory.create_pipeline(helsinki_east_downtown_pipeline_struct);
+        Pipeline* const helsinki_east_downtown_pipeline = this->core.entity_factory.create_pipeline(
+            helsinki_east_downtown_pipeline_struct);
 
         if (helsinki_east_downtown_pipeline == nullptr)
         {
@@ -344,11 +393,14 @@ namespace ajokki
         }
 
         // Create the material, store it in `helsinki_east_downtown_grass_material`.
-        MaterialStruct helsinki_east_downtown_grass_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline), TextureFileFormat::PNG };
+        MaterialStruct helsinki_east_downtown_grass_material_struct {
+            Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline), TextureFileFormat::PNG
+        };
         helsinki_east_downtown_grass_material_struct.texture_filename = "GrassGreenTexture0002.png";
 
         std::cout << "Creating Material* helsinki_east_downtown_grass_material ...\n";
-        Material* const helsinki_east_downtown_grass_material = this->core.entity_factory.create_material(helsinki_east_downtown_grass_material_struct);
+        Material* const helsinki_east_downtown_grass_material = this->core.entity_factory.create_material(
+            helsinki_east_downtown_grass_material_struct);
 
         if (helsinki_east_downtown_grass_material == nullptr)
         {
@@ -359,11 +411,14 @@ namespace ajokki
         helsinki_east_downtown_grass_material->set_global_name("helsinki_east_downtown_grass_material");
 
         // Create the material, store it in `pink_geometric_tiles_material`.
-        MaterialStruct pink_geometric_tiles_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline), TextureFileFormat::PNG };
+        MaterialStruct pink_geometric_tiles_material_struct {
+            Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline), TextureFileFormat::PNG
+        };
         pink_geometric_tiles_material_struct.texture_filename = "pavers1b2.png";
 
         std::cout << "Creating Material* pink_geometric_tiles_material ...\n";
-        Material* const pink_geometric_tiles_material = this->core.entity_factory.create_material(pink_geometric_tiles_material_struct);
+        Material* const pink_geometric_tiles_material = this->core.entity_factory.create_material(
+            pink_geometric_tiles_material_struct);
 
         if (pink_geometric_tiles_material == nullptr)
         {
@@ -374,7 +429,9 @@ namespace ajokki
         pink_geometric_tiles_material->set_global_name("helsinki_east_downtown_pink_geometric_tiles_material");
 
         // Create the material, store it in `orange_fur_material`.
-        MaterialStruct orange_fur_material_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline), TextureFileFormat::PNG };
+        MaterialStruct orange_fur_material_struct {
+            Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_pipeline), TextureFileFormat::PNG
+        };
         orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
 
         std::cout << "Creating Material* orange_fur_material ...\n";
@@ -388,13 +445,17 @@ namespace ajokki
 
         orange_fur_material->set_global_name("helsinki_east_downtown_orange_fur_material");
 
-        SpeciesStruct helsinki_east_downtown_terrain_species_struct { Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_grass_material) };
+        SpeciesStruct helsinki_east_downtown_terrain_species_struct {
+            Request(helsinki_east_downtown_scene), Request(helsinki_east_downtown_grass_material)
+        };
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_file_format = "ASCII_grid";
-        helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_filename = "L4133D.asc"; // Helsinki eastern downtown.
+        helsinki_east_downtown_terrain_species_struct.model_loader_struct.model_filename =
+                "L4133D.asc"; // Helsinki eastern downtown.
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.x_step = 4;
         helsinki_east_downtown_terrain_species_struct.model_loader_struct.y_step = 4;
         std::cout << "Creating Species* helsinki_east_downtown_terrain_species ...\n";
-        Species* const helsinki_east_downtown_terrain_species = this->core.entity_factory.create_species(helsinki_east_downtown_terrain_species_struct);
+        Species* const helsinki_east_downtown_terrain_species = this->core.entity_factory.create_species(
+            helsinki_east_downtown_terrain_species_struct);
 
         if (helsinki_east_downtown_terrain_species == nullptr)
         {
@@ -436,13 +497,13 @@ namespace ajokki
             {
                 const std::string index_string = std::to_string(i * cat_i_upper_bound + j);
 
-                constexpr float first_cat_x {   0.00f };
-                constexpr float first_cat_y {   0.00f };
+                constexpr float first_cat_x { 0.00f };
+                constexpr float first_cat_y { 0.00f };
                 constexpr float first_cat_z { 100.00f };
 
                 constexpr float translation_x { 100.00f };
                 constexpr float translation_y { -50.00f };
-                constexpr float translation_z {   0.00f };
+                constexpr float translation_z { 0.00f };
 
                 constexpr float first_cat_scale { 10.0f };
 
@@ -455,9 +516,9 @@ namespace ajokki
                 cat_object_struct1.initial_rotate_angles = { 0.5f * static_cast<float>(std::numbers::pi) };
                 cat_object_struct1.original_scale_vector = glm::vec3(first_cat_scale, first_cat_scale, first_cat_scale);
                 cat_object_struct1.cartesian_coordinates = CartesianCoordinatesModule(
-                        first_cat_x + static_cast<float>(i) * translation_x,
-                        first_cat_y + static_cast<float>(j) * translation_y,
-                        first_cat_z + static_cast<float>(j) * translation_z);
+                    first_cat_x + static_cast<float>(i) * translation_x,
+                    first_cat_y + static_cast<float>(j) * translation_y,
+                    first_cat_z + static_cast<float>(j) * translation_z);
                 if (this->core.entity_factory.create_object(cat_object_struct1) == nullptr)
                 {
                     std::cerr << "Failed to create cat1 Object.\n";
@@ -468,21 +529,26 @@ namespace ajokki
             std::cout << "So far " << (i + 1) * cat_j_upper_bound << " cats created!\n";
         }
 
-        Entity* const turbo_polizei_png_symbiosis_entity = this->get_universe().get_entity("turbo_polizei_png_symbiosis");
+        Entity* const turbo_polizei_png_symbiosis_entity = this->get_universe().get_entity(
+            "turbo_polizei_png_symbiosis");
 
         const auto turbo_polizei_png_symbiosis = dynamic_cast<Symbiosis*>(turbo_polizei_png_symbiosis_entity);
 
         if (turbo_polizei_png_symbiosis != nullptr)
         {
-            HolobiontStruct turbo_polizei_png_holobiont_struct1 { Request(helsinki_east_downtown_scene), Request(turbo_polizei_png_symbiosis) };
+            HolobiontStruct turbo_polizei_png_holobiont_struct1 {
+                Request(helsinki_east_downtown_scene), Request(turbo_polizei_png_symbiosis)
+            };
             turbo_polizei_png_holobiont_struct1.movable_controller_master = Request(rest_movable_controller);
             turbo_polizei_png_holobiont_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
             turbo_polizei_png_holobiont_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
             turbo_polizei_png_holobiont_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-            turbo_polizei_png_holobiont_struct1.cartesian_coordinates = CartesianCoordinatesModule(85.00f, -160.00f, 30.00f);
+            turbo_polizei_png_holobiont_struct1.cartesian_coordinates = CartesianCoordinatesModule(
+                85.00f, -160.00f, 30.00f);
 
             std::cout << "Creating Holobiont* turbo_polizei_png1 ...\n";
-            Holobiont* const turbo_polizei_png1 = this->core.entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct1);
+            Holobiont* const turbo_polizei_png1 = this->core.entity_factory.create_holobiont(
+                turbo_polizei_png_holobiont_struct1);
 
             if (turbo_polizei_png1 == nullptr)
             {
@@ -493,15 +559,19 @@ namespace ajokki
             turbo_polizei_png1->set_global_name("turbo_polizei_png1");
             turbo_polizei_png1->set_local_name("sinivuokko1");
 
-            HolobiontStruct turbo_polizei_png_holobiont_struct2 { Request(helsinki_east_downtown_scene), Request(turbo_polizei_png_symbiosis) };
+            HolobiontStruct turbo_polizei_png_holobiont_struct2 {
+                Request(helsinki_east_downtown_scene), Request(turbo_polizei_png_symbiosis)
+            };
             turbo_polizei_png_holobiont_struct2.movable_controller_master = Request(rest_movable_controller);
             turbo_polizei_png_holobiont_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
             turbo_polizei_png_holobiont_struct2.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
             turbo_polizei_png_holobiont_struct2.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-            turbo_polizei_png_holobiont_struct2.cartesian_coordinates = CartesianCoordinatesModule(85.00f, -175.00f, 30.00f);
+            turbo_polizei_png_holobiont_struct2.cartesian_coordinates = CartesianCoordinatesModule(
+                85.00f, -175.00f, 30.00f);
 
             std::cout << "Creating Holobiont* turbo_polizei_png2 ...\n";
-            Holobiont* const turbo_polizei_png2 = this->core.entity_factory.create_holobiont(turbo_polizei_png_holobiont_struct2);
+            Holobiont* const turbo_polizei_png2 = this->core.entity_factory.create_holobiont(
+                turbo_polizei_png_holobiont_struct2);
 
             if (turbo_polizei_png2 == nullptr)
             {

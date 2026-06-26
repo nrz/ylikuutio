@@ -72,7 +72,8 @@ namespace ajokki
         turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
 
         std::cout << "Creating Symbiosis* turbo_polizei_png_symbiosis ...\n";
-        Symbiosis* const turbo_polizei_png_symbiosis = this->core.entity_factory.create_symbiosis(turbo_polizei_png_symbiosis_struct);
+        Symbiosis* const turbo_polizei_png_symbiosis = this->core.entity_factory.create_symbiosis(
+            turbo_polizei_png_symbiosis_struct);
 
         if (turbo_polizei_png_symbiosis == nullptr)
         {

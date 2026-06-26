@@ -100,7 +100,7 @@ namespace ajokki
 
     AjokkiApplication::AjokkiApplication(const int argc, const char* const argv[])
         : Application(argc, argv),
-        core(*this, this->get_universe_struct())
+          core(*this, this->get_universe_struct())
     {
         std::cout << "AjokkiApplication initialized!\n";
     }
@@ -139,19 +139,19 @@ namespace ajokki
     {
         return {
             "help",
-                "version",
-                "silent",
-                "fullscreen",
-                "desktop-fullscreen",
-                "headless",
-                "window-width",
-                "window-height",
-                "framebuffer-width",
-                "framebuffer-height",
-                "speed",
-                "turbo-factor",
-                "twin-turbo-factor",
-                "mouse-speed"
+            "version",
+            "silent",
+            "fullscreen",
+            "desktop-fullscreen",
+            "headless",
+            "window-width",
+            "window-height",
+            "framebuffer-width",
+            "framebuffer-height",
+            "speed",
+            "turbo-factor",
+            "twin-turbo-factor",
+            "mouse-speed"
         };
     }
 
@@ -192,49 +192,55 @@ namespace ajokki
         }
 
         if (this->command_line_master.is_key("window-width") &&
-                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-width")))
+            yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-width")))
         {
             universe_struct.window_width = this->command_line_master.get_value_or_throw<std::uint32_t>("window-width");
         }
 
         if (this->command_line_master.is_key("window-height") &&
-                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-height")))
+            yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-height")))
         {
-            universe_struct.window_height = this->command_line_master.get_value_or_throw<std::uint32_t>("window-height");
+            universe_struct.window_height =
+                    this->command_line_master.get_value_or_throw<std::uint32_t>("window-height");
         }
 
         if (this->command_line_master.is_key("framebuffer-width") &&
-                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("framebuffer-width")))
+            yli::string::check_if_unsigned_integer_string<char>(
+                this->command_line_master.get_value("framebuffer-width")))
         {
-            universe_struct.framebuffer_module_struct.texture_width = this->command_line_master.get_value_or_throw<std::uint32_t>("framebuffer-width");
+            universe_struct.framebuffer_module_struct.texture_width =
+                    this->command_line_master.get_value_or_throw<std::uint32_t>("framebuffer-width");
         }
 
         if (this->command_line_master.is_key("framebuffer-height") &&
-                yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("framebuffer-height")))
+            yli::string::check_if_unsigned_integer_string<char>(
+                this->command_line_master.get_value("framebuffer-height")))
         {
-            universe_struct.framebuffer_module_struct.texture_height = this->command_line_master.get_value_or_throw<std::uint32_t>("framebuffer-height");
+            universe_struct.framebuffer_module_struct.texture_height =
+                    this->command_line_master.get_value_or_throw<std::uint32_t>("framebuffer-height");
         }
 
         if (this->command_line_master.is_key("speed") &&
-                yli::string::check_if_float_string<char>(this->command_line_master.get_value("speed")))
+            yli::string::check_if_float_string<char>(this->command_line_master.get_value("speed")))
         {
             universe_struct.speed = this->command_line_master.get_value_or_throw<float>("speed");
         }
 
         if (this->command_line_master.is_key("turbo-factor") &&
-                yli::string::check_if_float_string<char>(this->command_line_master.get_value("turbo-factor")))
+            yli::string::check_if_float_string<char>(this->command_line_master.get_value("turbo-factor")))
         {
             universe_struct.turbo_factor = this->command_line_master.get_value_or_throw<float>("turbo-factor");
         }
 
         if (this->command_line_master.is_key("twin-turbo_factor") &&
-                yli::string::check_if_float_string<char>(this->command_line_master.get_value("twin-turbo-factor")))
+            yli::string::check_if_float_string<char>(this->command_line_master.get_value("twin-turbo-factor")))
         {
-            universe_struct.twin_turbo_factor = this->command_line_master.get_value_or_throw<float>("twin-turbo-factor");
+            universe_struct.twin_turbo_factor =
+                    this->command_line_master.get_value_or_throw<float>("twin-turbo-factor");
         }
 
         if (this->command_line_master.is_key("mouse-speed") &&
-                yli::string::check_if_float_string<char>(this->command_line_master.get_value("mouse-speed")))
+            yli::string::check_if_float_string<char>(this->command_line_master.get_value("mouse-speed")))
         {
             universe_struct.mouse_speed = this->command_line_master.get_value_or_throw<float>("mouse-speed");
         }
@@ -370,65 +376,75 @@ namespace ajokki
         // Callback code for D: delete cat species.
         const std::string cat_species_string = "cat_species";
         CallbackEngineStruct delete_cat_species_callback_engine_struct;
-        auto delete_cat_species_callback_engine = this->core.entity_factory.create_callback_engine(delete_cat_species_callback_engine_struct);
+        auto delete_cat_species_callback_engine = this->core.entity_factory.create_callback_engine(
+            delete_cat_species_callback_engine_struct);
         auto delete_cat_species_callback_object = delete_cat_species_callback_engine->create_callback_object(
-                &yli::snippets::delete_entity);
+            &yli::snippets::delete_entity);
         delete_cat_species_callback_object->create_callback_parameter("", yli::data::AnyValue(cat_species_string));
 
         // Callback code for G: switch to grass material.
         const std::string grass_material_string = "helsinki_east_downtown_grass_material";
         CallbackEngineStruct switch_to_grass_material_callback_engine_struct;
-        auto switch_to_grass_material_callback_engine = this->core.entity_factory.create_callback_engine(switch_to_grass_material_callback_engine_struct);
-        auto switch_to_grass_material_callback_object = switch_to_grass_material_callback_engine->create_callback_object(
-                &yli::snippets::switch_to_new_material);
+        auto switch_to_grass_material_callback_engine = this->core.entity_factory.create_callback_engine(
+            switch_to_grass_material_callback_engine_struct);
+        auto switch_to_grass_material_callback_object =
+                switch_to_grass_material_callback_engine->create_callback_object(
+                    &yli::snippets::switch_to_new_material);
         switch_to_grass_material_callback_object->create_callback_parameter(
-                "",
-                yli::data::AnyValue(cat_species_string));
+            "",
+            yli::data::AnyValue(cat_species_string));
         switch_to_grass_material_callback_object->create_callback_parameter(
-                "",
-                yli::data::AnyValue(grass_material_string));
+            "",
+            yli::data::AnyValue(grass_material_string));
 
         // Callback code for O: switch to orange fur material.
         const std::string orange_fur_material_string = "helsinki_east_downtown_orange_fur_material";
         CallbackEngineStruct switch_to_orange_fur_material_callback_engine_struct;
-        auto switch_to_orange_fur_material_callback_engine = this->core.entity_factory.create_callback_engine(switch_to_orange_fur_material_callback_engine_struct);
-        auto switch_to_orange_fur_material_callback_object = switch_to_orange_fur_material_callback_engine->create_callback_object(
-                &yli::snippets::switch_to_new_material);
+        auto switch_to_orange_fur_material_callback_engine = this->core.entity_factory.create_callback_engine(
+            switch_to_orange_fur_material_callback_engine_struct);
+        auto switch_to_orange_fur_material_callback_object =
+                switch_to_orange_fur_material_callback_engine->create_callback_object(
+                    &yli::snippets::switch_to_new_material);
         switch_to_orange_fur_material_callback_object->create_callback_parameter(
-                "",
-                yli::data::AnyValue(cat_species_string));
+            "",
+            yli::data::AnyValue(cat_species_string));
         switch_to_orange_fur_material_callback_object->create_callback_parameter(
-                "",
-                yli::data::AnyValue(orange_fur_material_string));
+            "",
+            yli::data::AnyValue(orange_fur_material_string));
 
         // Callback code for P: switch to pink_geometric_tiles_material.
         const std::string pink_geometric_tiles_material_string = "helsinki_east_downtown_pink_geometric_tiles_material";
         CallbackEngineStruct switch_to_pink_geometric_tiles_material_callback_engine_struct;
-        auto switch_to_pink_geometric_tiles_material_callback_engine = this->core.entity_factory.create_callback_engine(switch_to_pink_geometric_tiles_material_callback_engine_struct);
-        auto switch_to_pink_geometric_tiles_material_callback_object = switch_to_pink_geometric_tiles_material_callback_engine->create_callback_object(
-                &yli::snippets::switch_to_new_material);
+        auto switch_to_pink_geometric_tiles_material_callback_engine = this->core.entity_factory.create_callback_engine(
+            switch_to_pink_geometric_tiles_material_callback_engine_struct);
+        auto switch_to_pink_geometric_tiles_material_callback_object =
+                switch_to_pink_geometric_tiles_material_callback_engine->create_callback_object(
+                    &yli::snippets::switch_to_new_material);
         switch_to_pink_geometric_tiles_material_callback_object->create_callback_parameter(
-                "",
-                yli::data::AnyValue(cat_species_string));
+            "",
+            yli::data::AnyValue(cat_species_string));
         switch_to_pink_geometric_tiles_material_callback_object->create_callback_parameter(
-                "",
-                yli::data::AnyValue(pink_geometric_tiles_material_string));
+            "",
+            yli::data::AnyValue(pink_geometric_tiles_material_string));
 
         // Callback code for T: transform `cat1` into terrain.
         const std::string helsinki_species_string = "helsinki_east_downtown_terrain_species";
         const std::string cat1_string = "cat1";
         CallbackEngineStruct transform_into_terrain_callback_engine_struct;
-        auto transform_into_terrain_callback_engine = this->core.entity_factory.create_callback_engine(transform_into_terrain_callback_engine_struct);
+        auto transform_into_terrain_callback_engine = this->core.entity_factory.create_callback_engine(
+            transform_into_terrain_callback_engine_struct);
         auto transform_into_terrain_callback_object = transform_into_terrain_callback_engine->create_callback_object(
-                &yli::snippets::transform_into_new_species);
+            &yli::snippets::transform_into_new_species);
         transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(cat1_string));
-        transform_into_terrain_callback_object->create_callback_parameter("", yli::data::AnyValue(helsinki_species_string));
+        transform_into_terrain_callback_object->create_callback_parameter(
+            "", yli::data::AnyValue(helsinki_species_string));
 
         // Callback code for A: transform `cat1` back into monkey.
         CallbackEngineStruct transform_into_monkey_callback_engine_struct;
-        auto transform_into_monkey_callback_engine = this->core.entity_factory.create_callback_engine(transform_into_monkey_callback_engine_struct);
+        auto transform_into_monkey_callback_engine = this->core.entity_factory.create_callback_engine(
+            transform_into_monkey_callback_engine_struct);
         auto transform_into_monkey_callback_object = transform_into_monkey_callback_engine->create_callback_object(
-                &yli::snippets::transform_into_new_species);
+            &yli::snippets::transform_into_new_species);
         transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(cat1_string));
         transform_into_monkey_callback_object->create_callback_parameter("", yli::data::AnyValue(cat_species_string));
 
@@ -447,18 +463,31 @@ namespace ajokki
         // Action mode input mode.
         InputModeStruct action_mode_input_mode_struct;
         action_mode_input_mode_struct.global_name = "action_mode_input_mode";
-        InputMode* const action_mode_input_mode = this->core.entity_factory.create_input_mode(action_mode_input_mode_struct);
+        InputMode* const action_mode_input_mode = this->core.entity_factory.create_input_mode(
+            action_mode_input_mode_struct);
 
         // Keypress callbacks for action mode.
         yli::snippets::set_action_mode_keypress_callback_engines_or_throw(*action_mode_input_mode);
 
         // Ajokki-specific keypress callbacks for action mode.
-        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_D, Request<GenericCallbackEngine>(delete_cat_species_callback_engine));
-        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_G, Request<GenericCallbackEngine>(switch_to_grass_material_callback_engine));
-        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_O, Request<GenericCallbackEngine>(switch_to_orange_fur_material_callback_engine));
-        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_P, Request<GenericCallbackEngine>(switch_to_pink_geometric_tiles_material_callback_engine));
-        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_T, Request<GenericCallbackEngine>(transform_into_terrain_callback_engine));
-        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_A, Request<GenericCallbackEngine>(transform_into_monkey_callback_engine));
+        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_D,
+                                                             Request<GenericCallbackEngine>(
+                                                                 delete_cat_species_callback_engine));
+        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_G,
+                                                             Request<GenericCallbackEngine>(
+                                                                 switch_to_grass_material_callback_engine));
+        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_O,
+                                                             Request<GenericCallbackEngine>(
+                                                                 switch_to_orange_fur_material_callback_engine));
+        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_P,
+                                                             Request<GenericCallbackEngine>(
+                                                                 switch_to_pink_geometric_tiles_material_callback_engine));
+        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_T,
+                                                             Request<GenericCallbackEngine>(
+                                                                 transform_into_terrain_callback_engine));
+        action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_A,
+                                                             Request<GenericCallbackEngine>(
+                                                                 transform_into_monkey_callback_engine));
 
         // Keyrelease callbacks for action mode.
         yli::snippets::set_action_mode_keyrelease_callback_engines_or_throw(*action_mode_input_mode);
@@ -472,7 +501,8 @@ namespace ajokki
         my_console_mode_input_mode_struct.console_master = Request<Console>("my_console");
         my_console_mode_input_mode_struct.global_name = "my_console_mode_input_mode";
         my_console_mode_input_mode_struct.is_text_input_mode = true;
-        InputMode* const my_console_mode_input_mode = this->core.entity_factory.create_input_mode(my_console_mode_input_mode_struct);
+        InputMode* const my_console_mode_input_mode = this->core.entity_factory.create_input_mode(
+            my_console_mode_input_mode_struct);
 
         // Keypress callbacks for `my_console`.
         yli::snippets::set_console_mode_keypress_callback_engines_or_throw(*my_console_mode_input_mode, "my_console");
@@ -484,13 +514,16 @@ namespace ajokki
         mini_console_mode_input_mode_struct.console_master = Request<Console>("mini_console");
         mini_console_mode_input_mode_struct.global_name = "mini_console_mode_input_mode";
         mini_console_mode_input_mode_struct.is_text_input_mode = true;
-        InputMode* const mini_console_mode_input_mode = this->core.entity_factory.create_input_mode(mini_console_mode_input_mode_struct);
+        InputMode* const mini_console_mode_input_mode = this->core.entity_factory.create_input_mode(
+            mini_console_mode_input_mode_struct);
 
         // Keypress callbacks for `mini_console`.
-        yli::snippets::set_console_mode_keypress_callback_engines_or_throw(*mini_console_mode_input_mode, "mini_console");
+        yli::snippets::set_console_mode_keypress_callback_engines_or_throw(
+            *mini_console_mode_input_mode, "mini_console");
 
         // Keyrelease callbacks for `mini_console`.
-        yli::snippets::set_console_mode_keyrelease_callback_engines_or_throw(*mini_console_mode_input_mode, "mini_console");
+        yli::snippets::set_console_mode_keyrelease_callback_engines_or_throw(
+            *mini_console_mode_input_mode, "mini_console");
 
         /*********************************************************************
          * Callback engines for console commands begin here.                 *
@@ -504,28 +537,37 @@ namespace ajokki
         yli::snippets::create_all_console_lisp_function_builtin_overloads(this->core.entity_factory, *my_console);
 
         // Ajokki-specific callbacks.
-        this->core.entity_factory.create_console_lisp_function_overload("version", Request<Console>("my_console"), &ajokki::version);
+        this->core.entity_factory.create_console_lisp_function_overload("version", Request<Console>("my_console"),
+                                                                        &ajokki::version);
 
         // mini-console callbacks.
-        this->core.entity_factory.create_console_lisp_function_overload("miniactivate", Request<Console>("mini_console"), &Universe::activate_entity);
-        this->core.entity_factory.create_console_lisp_function_overload("miniinfo", Request<Console>("mini_console"), &Universe::info0);
-        this->core.entity_factory.create_console_lisp_function_overload("miniinfo", Request<Console>("mini_console"), &Universe::info1);
+        this->core.entity_factory.create_console_lisp_function_overload(
+            "miniactivate", Request<Console>("mini_console"), &Universe::activate_entity);
+        this->core.entity_factory.create_console_lisp_function_overload("miniinfo", Request<Console>("mini_console"),
+                                                                        &Universe::info0);
+        this->core.entity_factory.create_console_lisp_function_overload("miniinfo", Request<Console>("mini_console"),
+                                                                        &Universe::info1);
 
         if (this->core.audio_system != nullptr)
         {
-            this->core.audio_system->add_to_playlist("Ajokki_playlist", "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
+            this->core.audio_system->add_to_playlist("Ajokki_playlist",
+                                                     "414257__sss-samples__chipland-loop-120-bpm-a-major.wav");
             this->core.audio_system->add_to_playlist("Ajokki_playlist", "414270__greek555__sample-97-bpm.wav");
             this->core.audio_system->play_playlist("Ajokki_playlist");
         }
 
         std::cout << "Setting up framebuffer size ...\n";
-        yli::snippets::set_framebuffer_size(&this->get_universe(), this->get_universe().framebuffer_module.get_texture_width(), this->get_universe().framebuffer_module.get_texture_height());
+        yli::snippets::set_framebuffer_size(&this->get_universe(),
+                                            this->get_universe().framebuffer_module.get_texture_width(),
+                                            this->get_universe().framebuffer_module.get_texture_height());
         std::cout << "Setting up background colors ...\n";
         yli::snippets::set_background_colors(&this->get_universe(), 0.0f, 0.0f, 1.0f, 0.0f);
         std::cout << "Setting up wireframe state ...\n";
         yli::snippets::set_wireframe(&this->get_universe(), false);
         std::cout << "Setting up movement ...\n";
-        yli::snippets::set_movement(&this->get_universe(), this->get_universe().speed, this->get_universe().turbo_factor, this->get_universe().twin_turbo_factor, this->get_universe().mouse_speed);
+        yli::snippets::set_movement(&this->get_universe(), this->get_universe().speed,
+                                    this->get_universe().turbo_factor, this->get_universe().twin_turbo_factor,
+                                    this->get_universe().mouse_speed);
         std::cout << "Setting up location and orientation ...\n";
         yli::snippets::set_location_and_orientation(&this->get_universe(), 100.0f, 100.0f, 300.0f);
         std::cout << "Setting up debug variables ...\n";

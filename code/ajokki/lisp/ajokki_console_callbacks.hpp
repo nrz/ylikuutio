@@ -31,7 +31,7 @@ namespace yli::ontology
 namespace ajokki
 {
     std::optional<yli::data::AnyValue> version(
-            yli::ontology::Console& console);
+        yli::ontology::Console& console);
 }
 
 #endif
