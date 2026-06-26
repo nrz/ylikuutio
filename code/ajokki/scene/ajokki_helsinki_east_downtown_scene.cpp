@@ -427,8 +427,8 @@ namespace ajokki
 
         // Create some cats.
 
-        const std::size_t cat_i_upper_bound { 2 };
-        const std::size_t cat_j_upper_bound { 100 };
+        constexpr std::size_t cat_i_upper_bound { 2 };
+        constexpr std::size_t cat_j_upper_bound { 100 };
 
         for (std::size_t i = 0; i < cat_i_upper_bound; i++)
         {
@@ -436,15 +436,15 @@ namespace ajokki
             {
                 const std::string index_string = std::to_string(i * cat_i_upper_bound + j);
 
-                const float first_cat_x {   0.00f };
-                const float first_cat_y {   0.00f };
-                const float first_cat_z { 100.00f };
+                constexpr float first_cat_x {   0.00f };
+                constexpr float first_cat_y {   0.00f };
+                constexpr float first_cat_z { 100.00f };
 
-                const float translation_x { 100.00f };
-                const float translation_y { -50.00f };
-                const float translation_z {   0.00f };
+                constexpr float translation_x { 100.00f };
+                constexpr float translation_y { -50.00f };
+                constexpr float translation_z {   0.00f };
 
-                const float first_cat_scale { 10.0f };
+                constexpr float first_cat_scale { 10.0f };
 
                 ObjectStruct cat_object_struct1 { Request(helsinki_east_downtown_scene) };
                 cat_object_struct1.species_master = Request(cat_species);
