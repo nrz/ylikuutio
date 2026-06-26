@@ -25,7 +25,6 @@
 #include "code/ylikuutio/command_line/command_line_master.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/core/entrypoint.hpp"
-#include "code/ylikuutio/event/event_system.hpp"
 #include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/graphics_api_backend.hpp"
@@ -80,6 +79,11 @@
 #include <stdexcept> // std::logic_error
 #include <string>    // std::string
 #include <vector>    // std::vector
+
+namespace yli::event
+{
+    class EventSystem;
+}
 
 namespace yli::memory
 {
