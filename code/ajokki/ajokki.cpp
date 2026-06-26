@@ -39,7 +39,6 @@
 #include "code/ylikuutio/ontology/callback_parameter.hpp"
 #include "code/ylikuutio/ontology/console_callback_object.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
@@ -90,6 +89,7 @@ namespace yli::memory
 
 namespace yli::ontology
 {
+    class Scene;
     class GenericEntityFactory;
 }
 
