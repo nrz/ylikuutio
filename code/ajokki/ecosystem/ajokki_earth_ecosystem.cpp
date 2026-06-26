@@ -17,7 +17,6 @@
 
 #include "code/ajokki/ajokki.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
-#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
@@ -30,6 +29,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Pipeline;
 }
 
 namespace ajokki
