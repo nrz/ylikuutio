@@ -36,7 +36,7 @@ namespace ajokki
 {
     using namespace yli::ontology;
 
-    Ecosystem* AjokkiApplication::create_earth_ecosystem()
+    Ecosystem* AjokkiApplication::create_earth_ecosystem() const
     {
         // Earth `Ecosystem` begins here.
 
