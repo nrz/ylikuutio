@@ -27,7 +27,6 @@
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/camera.hpp"
-#include "code/ylikuutio/ontology/movable_controller.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
@@ -55,6 +54,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class MovableController;
     class Pipeline;
 }
 
