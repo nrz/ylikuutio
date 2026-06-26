@@ -168,7 +168,7 @@ namespace ajokki
         horse_object_struct1.original_scale_vector = glm::vec3(5.0f, 5.0f, 5.0f);
         horse_object_struct1.cartesian_coordinates = CartesianCoordinatesModule(2150.00f, -1990.00f, 200.00f);
         Entity* const horse1_entity = this->core.entity_factory.create_object(horse_object_struct1);
-        auto const horse1 = dynamic_cast<Object*>(horse1_entity);
+        const auto horse1 = dynamic_cast<Object*>(horse1_entity);
 
         if (horse1 == nullptr)
         {
