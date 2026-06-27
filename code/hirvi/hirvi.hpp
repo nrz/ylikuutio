@@ -46,8 +46,19 @@ namespace yli::input
     class InputSystem;
 }
 
-using namespace yli::memory;
-using namespace yli::ontology;
+namespace yli::memory
+{
+    class GenericMemorySystem;
+    class GenericMemoryAllocator;
+}
+
+namespace yli::ontology
+{
+    class Entity;
+    class Universe;
+    class GenericEntityFactory;
+    struct UniverseStruct;
+}
 
 namespace hirvi
 {
@@ -60,9 +71,9 @@ namespace hirvi
 
         std::vector<std::string> get_valid_keys() const override;
 
-        GenericMemorySystem& get_generic_memory_system() const override;
+        yli::memory::GenericMemorySystem& get_generic_memory_system() const override;
 
-        MemorySystem<data::Datatype>& get_memory_system() const;
+        yli::memory::MemorySystem<data::Datatype>& get_memory_system() const;
 
         bool has_memory_allocator(const data::Datatype type) const
         {
@@ -70,14 +81,14 @@ namespace hirvi
         }
 
         template<typename Type>
-        MemoryAllocator<Type>& get_memory_allocator(const data::Datatype type) const
+        yli::memory::MemoryAllocator<Type>& get_memory_allocator(const data::Datatype type) const
         {
             return this->core.memory_system.get_allocator<Type>(type);
         }
 
-        GenericEntityFactory& get_generic_entity_factory() const override;
+        ontology::GenericEntityFactory& get_generic_entity_factory() const override;
 
-        EntityFactory<data::Datatype>& get_entity_factory() const
+        ontology::EntityFactory<data::Datatype>& get_entity_factory() const
         {
             return this->core.entity_factory.get();
         }
@@ -88,11 +99,11 @@ namespace hirvi
 
         yli::audio::AudioSystem* get_audio_system() const override;
 
-        bool is_universe(Entity* entity) const override;
+        bool is_universe(ontology::Entity* entity) const override;
 
-        Universe& get_universe() const override;
+        ontology::Universe& get_universe() const override;
 
-        UniverseStruct get_universe_struct() const;
+        ontology::UniverseStruct get_universe_struct() const;
 
         bool create_and_start_simulation() override;
 
