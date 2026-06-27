@@ -72,20 +72,20 @@ namespace hirvi::core
     class HirviCore
     {
     public:
-        HirviCore(yli::core::Application& application, const ontology::UniverseStruct& universe_struct);
+        HirviCore(yli::core::Application& application, const yli::ontology::UniverseStruct& universe_struct);
 
-        [[nodiscard]] ontology::Universe& get_universe() const;
+        [[nodiscard]] yli::ontology::Universe& get_universe() const;
 
         bool create_and_start_simulation(HirviApplicationCallback hirvi_application_callback);
 
         [[nodiscard]] ontology::HirviScene* create_helsinki_scene() const;
 
-        [[nodiscard]] ontology::Ecosystem* create_earth_ecosystem() const;
+        [[nodiscard]] yli::ontology::Ecosystem* create_earth_ecosystem() const;
 
         yli::memory::MemorySystem<data::Datatype> memory_system { data::UNIVERSE };
-        ontology::EntityFactory<data::Datatype> entity_factory;
+        yli::ontology::EntityFactory<data::Datatype> entity_factory;
         yli::core::SystemFactory<data::Datatype> system_factory;
-        ontology::Universe* const universe { nullptr };
+        yli::ontology::Universe* const universe { nullptr };
         yli::event::EventSystem* const event_system { nullptr };
         yli::input::InputSystem* const input_system { nullptr };
         yli::audio::AudioSystem* const audio_system { nullptr };

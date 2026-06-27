@@ -24,17 +24,14 @@
 
 namespace hirvi::ontology
 {
-    using namespace yli::core;
-    using namespace yli::ontology;
-
-    class HirviScene final : public Scene
+    class HirviScene final : public yli::ontology::Scene
     {
     public:
         HirviScene(
-            Application& application,
-            Universe& universe,
-            const SceneStruct& scene_struct,
-            GenericParentModule* universe_parent_module);
+            yli::core::Application& application,
+            yli::ontology::Universe& universe,
+            const yli::ontology::SceneStruct& scene_struct,
+            yli::ontology::GenericParentModule* universe_parent_module);
 
         ~HirviScene() override = default;
 

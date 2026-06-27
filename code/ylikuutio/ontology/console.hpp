@@ -83,12 +83,6 @@ namespace yli::ontology
     class ConsoleCallbackEngine;
     struct ConsoleStruct;
 
-    using console::TextInput;
-    using console::TextInputHistory;
-    using console::ScrollbackBuffer;
-    using console::ConsoleLogicModule;
-    using console::CompletionModule;
-
     class Console final : public LispContext
     {
     public:
@@ -192,12 +186,12 @@ namespace yli::ontology
         const std::uint32_t n_columns;
         const std::uint32_t n_rows;
 
-        TextInput new_input; // This is used for new inputs.
-        TextInput temp_input; // This is used as copy of a unchanged historical input, for editing.
-        TextInputHistory command_history;
-        ScrollbackBuffer scrollback_buffer;
-        ConsoleLogicModule console_logic_module;
-        CompletionModule completion_module;
+        console::TextInput new_input; // This is used for new inputs.
+        console::TextInput temp_input; // This is used as copy of a unchanged historical input, for editing.
+        console::TextInputHistory command_history;
+        console::ScrollbackBuffer scrollback_buffer;
+        console::ConsoleLogicModule console_logic_module;
+        console::CompletionModule completion_module;
     };
 
     template<>

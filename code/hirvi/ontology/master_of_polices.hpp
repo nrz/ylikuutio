@@ -32,14 +32,12 @@ namespace yli::ontology
 
 namespace hirvi::ontology
 {
-    using namespace yli::ontology;
-
-    class MasterOfPolices final : GenericMasterModule
+    class MasterOfPolices final : yli::ontology::GenericMasterModule
     {
     public:
         MasterOfPolices(
-            Scene& master_scene,
-            Registry* registry,
+            yli::ontology::Scene& master_scene,
+            yli::ontology::Registry* registry,
             const std::string& name);
 
         void store_data();

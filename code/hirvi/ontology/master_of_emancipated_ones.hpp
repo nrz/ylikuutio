@@ -31,14 +31,12 @@ namespace yli::ontology
 
 namespace hirvi::ontology
 {
-    using namespace yli::ontology;
-
-    class MasterOfEmancipatedOnes final : GenericMasterModule
+    class MasterOfEmancipatedOnes final : yli::ontology::GenericMasterModule
     {
     public:
         MasterOfEmancipatedOnes(
-            Scene& master_scene,
-            Registry* registry,
+            yli::ontology::Scene& master_scene,
+            yli::ontology::Registry* registry,
             const std::string& name);
     };
 }

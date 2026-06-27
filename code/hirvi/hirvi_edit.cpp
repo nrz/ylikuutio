@@ -65,11 +65,23 @@ namespace yli::ontology
 
 namespace hirvi
 {
-    using namespace yli::console;
-    using namespace yli::ontology;
+    using yli::core::Application;
+    using yli::memory::GenericMemorySystem;
+    using yli::memory::MemorySystem;
+    using yli::audio::AudioSystem;
+    using yli::event::EventSystem;
+    using yli::input::InputSystem;
+    using yli::ontology::Entity;
+    using yli::ontology::Universe;
+    using yli::ontology::Console;
+    using yli::ontology::Request;
+    using yli::ontology::UniverseStruct;
+    using yli::ontology::GenericEntityFactory;
+    using yli::string::check_if_float_string;
+    using yli::string::check_if_unsigned_integer_string;
 
     HirviEditApplication::HirviEditApplication(const int argc, const char* const argv[])
-        : yli::core::Application(argc, argv),
+        : Application(argc, argv),
           core(*this, this->get_universe_struct())
     {
         std::cout << "HirviEditApplication initialized!\n";
@@ -100,12 +112,12 @@ namespace hirvi
         };
     }
 
-    yli::memory::GenericMemorySystem& HirviEditApplication::get_generic_memory_system() const
+    GenericMemorySystem& HirviEditApplication::get_generic_memory_system() const
     {
         return this->core.memory_system.get();
     }
 
-    yli::memory::MemorySystem<data::Datatype>& HirviEditApplication::get_memory_system() const
+    MemorySystem<data::Datatype>& HirviEditApplication::get_memory_system() const
     {
         return this->core.memory_system.get();
     }
@@ -115,17 +127,17 @@ namespace hirvi
         return this->core.entity_factory.get();
     }
 
-    yli::event::EventSystem* HirviEditApplication::get_event_system() const
+    EventSystem* HirviEditApplication::get_event_system() const
     {
         return this->core.event_system;
     }
 
-    yli::input::InputSystem* HirviEditApplication::get_input_system() const
+    InputSystem* HirviEditApplication::get_input_system() const
     {
         return this->core.input_system;
     }
 
-    yli::audio::AudioSystem* HirviEditApplication::get_audio_system() const
+    AudioSystem* HirviEditApplication::get_audio_system() const
     {
         return this->core.audio_system;
     }

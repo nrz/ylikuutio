@@ -65,11 +65,23 @@ namespace yli::ontology
 
 namespace hirvi
 {
-    using namespace yli::console;
-    using namespace yli::ontology;
+    using yli::core::Application;
+    using yli::memory::GenericMemorySystem;
+    using yli::memory::MemorySystem;
+    using yli::audio::AudioSystem;
+    using yli::event::EventSystem;
+    using yli::input::InputSystem;
+    using yli::ontology::Entity;
+    using yli::ontology::Universe;
+    using yli::ontology::Console;
+    using yli::ontology::Request;
+    using yli::ontology::UniverseStruct;
+    using yli::ontology::GenericEntityFactory;
+    using yli::string::check_if_float_string;
+    using yli::string::check_if_unsigned_integer_string;
 
     HirviApplication::HirviApplication(const int argc, const char* const argv[])
-        : yli::core::Application(argc, argv),
+        : Application(argc, argv),
           core(*this, this->get_universe_struct())
     {
         std::cout << "HirviApplication initialized!\n";
@@ -100,12 +112,12 @@ namespace hirvi
         };
     }
 
-    yli::memory::GenericMemorySystem& HirviApplication::get_generic_memory_system() const
+    GenericMemorySystem& HirviApplication::get_generic_memory_system() const
     {
         return this->core.memory_system.get();
     }
 
-    yli::memory::MemorySystem<data::Datatype>& HirviApplication::get_memory_system() const
+    MemorySystem<data::Datatype>& HirviApplication::get_memory_system() const
     {
         return this->core.memory_system.get();
     }
@@ -115,17 +127,17 @@ namespace hirvi
         return this->core.entity_factory.get();
     }
 
-    yli::event::EventSystem* HirviApplication::get_event_system() const
+    EventSystem* HirviApplication::get_event_system() const
     {
         return this->core.event_system;
     }
 
-    yli::input::InputSystem* HirviApplication::get_input_system() const
+    InputSystem* HirviApplication::get_input_system() const
     {
         return this->core.input_system;
     }
 
-    yli::audio::AudioSystem* HirviApplication::get_audio_system() const
+    AudioSystem* HirviApplication::get_audio_system() const
     {
         return this->core.audio_system;
     }
@@ -175,20 +187,20 @@ namespace hirvi
         }
 
         if (this->command_line_master.is_key("window-width") &&
-            yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-width")))
+            check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-width")))
         {
             universe_struct.window_width = this->command_line_master.get_value_or_throw<std::uint32_t>("window-width");
         }
 
         if (this->command_line_master.is_key("window-height") &&
-            yli::string::check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-height")))
+            check_if_unsigned_integer_string<char>(this->command_line_master.get_value("window-height")))
         {
             universe_struct.window_height = this->command_line_master.get_value_or_throw<
                 std::uint32_t>("window-height");
         }
 
         if (this->command_line_master.is_key("framebuffer-width") &&
-            yli::string::check_if_unsigned_integer_string<char>(
+            check_if_unsigned_integer_string<char>(
                 this->command_line_master.get_value("framebuffer-width")))
         {
             universe_struct.framebuffer_module_struct.texture_width = this->command_line_master.get_value_or_throw<
@@ -196,7 +208,7 @@ namespace hirvi
         }
 
         if (this->command_line_master.is_key("framebuffer-height") &&
-            yli::string::check_if_unsigned_integer_string<char>(
+            check_if_unsigned_integer_string<char>(
                 this->command_line_master.get_value("framebuffer-height")))
         {
             universe_struct.framebuffer_module_struct.texture_height = this->command_line_master.get_value_or_throw<
@@ -204,26 +216,26 @@ namespace hirvi
         }
 
         if (this->command_line_master.is_key("speed") &&
-            yli::string::check_if_float_string<char>(this->command_line_master.get_value("speed")))
+            check_if_float_string<char>(this->command_line_master.get_value("speed")))
         {
             universe_struct.speed = this->command_line_master.get_value_or_throw<float>("speed");
         }
 
         if (this->command_line_master.is_key("turbo-factor") &&
-            yli::string::check_if_float_string<char>(this->command_line_master.get_value("turbo-factor")))
+            check_if_float_string<char>(this->command_line_master.get_value("turbo-factor")))
         {
             universe_struct.turbo_factor = this->command_line_master.get_value_or_throw<float>("turbo-factor");
         }
 
         if (this->command_line_master.is_key("twin-turbo_factor") &&
-            yli::string::check_if_float_string<char>(this->command_line_master.get_value("twin-turbo-factor")))
+            check_if_float_string<char>(this->command_line_master.get_value("twin-turbo-factor")))
         {
             universe_struct.twin_turbo_factor = this->command_line_master.get_value_or_throw<
                 float>("twin-turbo-factor");
         }
 
         if (this->command_line_master.is_key("mouse-speed") &&
-            yli::string::check_if_float_string<char>(this->command_line_master.get_value("mouse-speed")))
+            check_if_float_string<char>(this->command_line_master.get_value("mouse-speed")))
         {
             universe_struct.mouse_speed = this->command_line_master.get_value_or_throw<float>("mouse-speed");
         }
