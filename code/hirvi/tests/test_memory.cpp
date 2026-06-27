@@ -38,7 +38,7 @@ TEST(memory_system_must_be_initialized_appropriately, hirvi_application)
 
     for (int datatype = 0; datatype < hirvi::data::MAX_VALUE; datatype++)
     {
-        if (bool has_allocator = memory_system.has_allocator(static_cast<hirvi::data::Datatype>(datatype)))
+        if (memory_system.has_allocator(static_cast<hirvi::data::Datatype>(datatype)))
         {
             n_allocators++;
             const auto& memory_allocator = memory_system.get_generic_allocator(
