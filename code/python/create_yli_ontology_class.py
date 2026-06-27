@@ -198,7 +198,7 @@ if base_class_name != "":
 include_standard_headers_line = "// Include standard headers"
 standard_headers_include_lines = include_standard_headers_line + "\n"\
 "#include <cstddef> // std::size_t"
-cstddef_uintptr_t_include_line = include_space_smaller_than + "cstddef> // uintptr_t"
+cstint_uintptr_t_include_line = include_space_smaller_than + "cstdint> // uintptr_t"
 limits_std_numeric_limits_include_line = include_space_smaller_than + "limits>  // std::numeric_limits"
 
 parent_module_type_and_name = "GenericParentModule* const parent_module"
@@ -638,7 +638,7 @@ with open(test_filename, 'w') as f:
     print(struct_file_include_line_from_project_root, file = f)
     print(file = f)
     print(include_standard_headers_line, file = f)
-    print(cstddef_uintptr_t_include_line, file = f)
+    print(cstint_uintptr_t_include_line, file = f)
     print(limits_std_numeric_limits_include_line, file = f)
     print(file = f)
     print(test_class_instance_init_parent_pointer, file = f)
