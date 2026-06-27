@@ -162,7 +162,7 @@ TEST(token_must_be_initialized_appropriately, unsigned_integer_18446744073709551
 {
     std::string_view integer_18446744073709551615 { "18446744073709551615" };
     TextPosition text_position(integer_18446744073709551615.cbegin(), integer_18446744073709551615.cend());
-    Token token(TokenType::UNSIGNED_INTEGER, std::string(integer_18446744073709551615), text_position, static_cast<std::uint64_t>(18446744073709551615u));
+    Token token(TokenType::UNSIGNED_INTEGER, std::string(integer_18446744073709551615), text_position, 18446744073709551615u);
     ASSERT_EQ(token.get_type(), TokenType::UNSIGNED_INTEGER);
     ASSERT_EQ(token.get_lexeme(), "18446744073709551615");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
@@ -218,7 +218,7 @@ TEST(token_must_be_initialized_appropriately, signed_integer_9223372036854775807
 {
     std::string_view integer_9223372036854775807 { "9223372036854775807" };
     TextPosition text_position(integer_9223372036854775807.cbegin(), integer_9223372036854775807.cend());
-    Token token(TokenType::SIGNED_INTEGER, std::string(integer_9223372036854775807), text_position, static_cast<std::int64_t>(9223372036854775807));
+    Token token(TokenType::SIGNED_INTEGER, std::string(integer_9223372036854775807), text_position, 9223372036854775807);
     ASSERT_EQ(token.get_type(), TokenType::SIGNED_INTEGER);
     ASSERT_EQ(token.get_lexeme(), "9223372036854775807");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
@@ -246,7 +246,7 @@ TEST(token_must_be_initialized_appropriately, floating_point_0_dot_0)
 {
     std::string_view floating_point_0_dot_0 { "0.0" };
     TextPosition text_position(floating_point_0_dot_0.cbegin(), floating_point_0_dot_0.cend());
-    Token token(TokenType::FLOATING_POINT, std::string(floating_point_0_dot_0), text_position, static_cast<double>(0.0));
+    Token token(TokenType::FLOATING_POINT, std::string(floating_point_0_dot_0), text_position, 0.0);
     ASSERT_EQ(token.get_type(), TokenType::FLOATING_POINT);
     ASSERT_EQ(token.get_lexeme(), "0.0");
     ASSERT_EQ(token.get_text_position().get_line(), 1);
@@ -260,7 +260,7 @@ TEST(token_must_be_initialized_appropriately, floating_point_3_dot_14159)
 {
     std::string_view floating_point_3_dot_14159 { "3.14159" };
     TextPosition text_position(floating_point_3_dot_14159.cbegin(), floating_point_3_dot_14159.cend());
-    Token token(TokenType::FLOATING_POINT, std::string(floating_point_3_dot_14159), text_position, static_cast<double>(3.14159));
+    Token token(TokenType::FLOATING_POINT, std::string(floating_point_3_dot_14159), text_position, 3.14159);
     ASSERT_EQ(token.get_type(), TokenType::FLOATING_POINT);
     ASSERT_EQ(token.get_lexeme(), "3.14159");
     ASSERT_EQ(token.get_text_position().get_line(), 1);

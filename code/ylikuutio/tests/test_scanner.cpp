@@ -444,7 +444,7 @@ TEST(integer_literal_must_be_scanned_appropriately, unsigned_integer_18446744073
 
     {
         TextPosition text_position(integer_literal_18446744073709551615_string.cbegin(), integer_literal_18446744073709551615_string.cend());
-        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "18446744073709551615", text_position, static_cast<std::uint64_t>(18446744073709551615u)));
+        ASSERT_EQ(token_list.at(0), Token(TokenType::UNSIGNED_INTEGER, "18446744073709551615", text_position, 18446744073709551615u));
         ASSERT_EQ(token_list.at(0).get_line(), 1u);
         ASSERT_EQ(token_list.at(0).get_column(), 1u);
     }
@@ -486,7 +486,7 @@ TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_litera
 
     {
         TextPosition text_position(floating_point_literal_0_dot_0_string.cbegin(), floating_point_literal_0_dot_0_string.cend());
-        ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "0.0", text_position, static_cast<double>(0.0)));
+        ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "0.0", text_position, 0.0));
         ASSERT_EQ(token_list.at(0).get_line(), 1u);
         ASSERT_EQ(token_list.at(0).get_column(), 1u);
     }
@@ -507,7 +507,7 @@ TEST(floating_point_literal_must_be_scanned_appropriately, floating_point_litera
 
     {
         TextPosition text_position(floating_point_literal_minus_0_dot_0_string.cbegin(), floating_point_literal_minus_0_dot_0_string.cend());
-        ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "-0.0", text_position, static_cast<double>(0.0)));
+        ASSERT_EQ(token_list.at(0), Token(TokenType::FLOATING_POINT, "-0.0", text_position, 0.0));
         ASSERT_EQ(token_list.at(0).get_line(), 1u);
         ASSERT_EQ(token_list.at(0).get_column(), 1u);
     }
