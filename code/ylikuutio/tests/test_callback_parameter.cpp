@@ -25,8 +25,8 @@
 #include "code/ylikuutio/ontology/callback_parameter_struct.hpp"
 
 // Include standard headers
-#include <cstddef>  // std::size_t, uintptr_t
-#include <cstdint>  // std::int32_t
+#include <cstdint>  // std::int32_t, uintptr_t
+#include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
 #include <utility>  // std::move
 
