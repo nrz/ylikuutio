@@ -54,6 +54,8 @@ namespace yli::memory
 {
     class GenericMemorySystem;
     class GenericMemoryAllocator;
+    template<typename TypeEnumType>
+    class MemorySystem;
 }
 
 namespace yli::ontology
