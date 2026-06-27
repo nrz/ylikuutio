@@ -35,8 +35,7 @@
 
 // Include standard headers
 #include <cmath>    // NAN, std::isnan
-#include <cstddef>  // uintptr_t
-#include <cstdint>  // std::int32_t, std::uint32_t
+#include <cstdint>  // std::int32_t, std::uint32_t, uintptr_t
 #include <limits>   // std::numeric_limits
 #include <optional> // std::optional
 #include <variant>  // std::holds_alternative
