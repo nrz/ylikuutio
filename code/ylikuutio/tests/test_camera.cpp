@@ -31,7 +31,8 @@
 #endif
 
 // Include standard headers
-#include <cstddef> // std::size_t, uintptr_t
+#include <cstdint> // uintptr_t
+#include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
 
 TEST(camera_must_be_initialized_and_must_bind_to_scene_appropriately, headless_with_parent_provided_as_valid_pointer)

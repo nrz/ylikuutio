@@ -20,7 +20,8 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t, uintptr_t
+#include <cstdint> // uintptr_t
+#include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
 
 TEST(universe_must_be_initialized_appropriately, headless)

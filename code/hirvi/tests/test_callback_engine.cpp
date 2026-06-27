@@ -22,7 +22,7 @@
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstdint> // uintptr_t
 
 TEST(callback_engine_must_be_initialized_appropriately, hirvi_callback_engine)
 {

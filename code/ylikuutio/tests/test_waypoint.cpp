@@ -26,8 +26,9 @@
 #include "code/ylikuutio/ontology/waypoint_struct.hpp"
 
 // Include standard headers
+#include <cstdint> // uintptr_t
+#include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
-#include <cstddef> // std::size_t, uintptr_t
 
 namespace yli::ontology
 {

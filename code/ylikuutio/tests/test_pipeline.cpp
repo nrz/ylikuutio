@@ -32,7 +32,8 @@
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t, uintptr_t
+#include <cstdint> // uintptr_t
+#include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
 
 namespace yli::ontology

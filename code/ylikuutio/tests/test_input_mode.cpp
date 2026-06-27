@@ -24,7 +24,7 @@
 #include "code/ylikuutio/ontology/console_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstdint> // uintptr_t
 
 TEST(input_mode_must_be_initialized_appropriately, headless_universe_no_console_master)
 {

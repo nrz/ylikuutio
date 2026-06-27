@@ -35,7 +35,7 @@
 #include "code/ylikuutio/ontology/text_3d_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstdint> // uintptr_t
 
 namespace yli::ontology
 {

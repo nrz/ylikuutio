@@ -23,7 +23,7 @@
 #include "code/ylikuutio/ontology/symbiont_material_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstdint> // uintptr_t
 #include <limits>  // std::numeric_limits
 
 namespace yli::ontology

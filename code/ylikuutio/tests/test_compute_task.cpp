@@ -29,7 +29,8 @@
 #include "code/ylikuutio/ontology/compute_task_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // std::size_t, uintptr_t
+#include <cstdint> // uintptr_t
+#include <cstddef> // std::size_t
 #include <limits>  // std::numeric_limits
 
 TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, headless_pipeline_is_a_child_of_an_ecosystem_pipeline_parent_provided_as_valid_pointer)

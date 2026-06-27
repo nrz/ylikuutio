@@ -39,7 +39,7 @@
 #endif
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstdint> // uintptr_t
 #include <numbers> // std::numbers::pi
 
 namespace hirvi::ontology

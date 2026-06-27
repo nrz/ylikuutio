@@ -26,7 +26,7 @@
 #include "code/ylikuutio/ontology/material_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstdint> // uintptr_t
 
 namespace yli::ontology
 {

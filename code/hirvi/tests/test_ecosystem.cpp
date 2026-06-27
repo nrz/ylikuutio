@@ -22,7 +22,7 @@
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 
 // Include standard headers
-#include <cstddef> // uintptr_t
+#include <cstdint> // uintptr_t
 
 TEST(ecosystem_must_be_initialized_appropriately, hirvi_ecosystem)
 {
