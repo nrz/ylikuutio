@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_HIRVI_CORE_HPP_INCLUDED
-#define HIRVI_HIRVI_CORE_HPP_INCLUDED
+#ifndef HIRVI_CORE_HIRVI_CORE_HPP_INCLUDED
+#define HIRVI_CORE_HIRVI_CORE_HPP_INCLUDED
 
 #include "hirvi_application_callback.hpp"
 #include "code/hirvi/ontology/hirvi_scene.hpp"

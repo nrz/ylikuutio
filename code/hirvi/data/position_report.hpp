@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_ONTOLOGY_POSITION_REPORT_HPP_INCLUDED
-#define HIRVI_ONTOLOGY_POSITION_REPORT_HPP_INCLUDED
+#ifndef HIRVI_DATA_POSITION_REPORT_HPP_INCLUDED
+#define HIRVI_DATA_POSITION_REPORT_HPP_INCLUDED
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

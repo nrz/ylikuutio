@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef HIRVI_ONTOLOGY_TRIVIAL_DATA_ANALYZER_HPP_INCLUDED
-#define HIRVI_ONTOLOGY_TRIVIAL_DATA_ANALYZER_HPP_INCLUDED
+#ifndef HIRVI_DATA_TRIVIAL_DATA_ANALYZER_HPP_INCLUDED
+#define HIRVI_DATA_TRIVIAL_DATA_ANALYZER_HPP_INCLUDED
 
 #include "data_analyzer.hpp"
 
