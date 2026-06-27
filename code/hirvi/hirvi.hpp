@@ -86,9 +86,9 @@ namespace hirvi
             return this->core.memory_system.get_allocator<Type>(type);
         }
 
-        yli::ontology::GenericEntityFactory& get_generic_entity_factory() const override;
+        ontology::GenericEntityFactory& get_generic_entity_factory() const override;
 
-        yli::ontology::EntityFactory<data::Datatype>& get_entity_factory() const
+        ontology::EntityFactory<data::Datatype>& get_entity_factory() const
         {
             return this->core.entity_factory.get();
         }
@@ -99,11 +99,11 @@ namespace hirvi
 
         yli::audio::AudioSystem* get_audio_system() const override;
 
-        bool is_universe(yli::ontology::Entity* entity) const override;
+        bool is_universe(ontology::Entity* entity) const override;
 
-        yli::ontology::Universe& get_universe() const override;
+        ontology::Universe& get_universe() const override;
 
-        yli::ontology::UniverseStruct get_universe_struct() const;
+        ontology::UniverseStruct get_universe_struct() const;
 
         bool create_and_start_simulation() override;
 
