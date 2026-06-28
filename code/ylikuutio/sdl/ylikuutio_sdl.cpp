@@ -169,6 +169,17 @@ namespace yli::sdl
         return create_window(display_id, window_width, window_height, title, flags);
     }
 
+    [[nodiscard]] bool set_window_position(SDL_Window* window)
+    {
+        if (SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED))
+        {
+            return true;
+        }
+
+        print_sdl_error();
+        return false;
+    }
+
     [[nodiscard]] SDL_GLContext create_context(SDL_Window* const window)
     {
         SDL_GLContext context = SDL_GL_CreateContext(window);

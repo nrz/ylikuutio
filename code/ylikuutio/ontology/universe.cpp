@@ -1125,6 +1125,18 @@ namespace yli::ontology
         return true;
     }
 
+    [[nodiscard]] bool Universe::set_window_position() const
+    {
+        if (sdl::set_window_position(this->window))
+        {
+            std::cout << "SDL Window positioned successfully.\n";
+            return true;
+        }
+
+        std::cerr << "ERROR: `Universe::set_window_position`: setting SDL Window position failed!\n";
+        return false;
+    }
+
     [[nodiscard]] bool Universe::setup_context() const
     {
         // Set up graphics context only when OpenGL or Vulkan is in use.
@@ -1149,6 +1161,11 @@ namespace yli::ontology
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) [[likely]]
         {
             if (!this->create_window()) [[unlikely]]
+            {
+                return false;
+            }
+
+            if (this->is_fullscreen && !this->set_window_position())
             {
                 return false;
             }

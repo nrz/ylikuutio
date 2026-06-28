@@ -238,6 +238,8 @@ namespace yli::ontology
 
         [[nodiscard]] bool create_window();
 
+        [[nodiscard]] bool set_window_position() const;
+
         [[nodiscard]] bool setup_context() const;
 
         [[nodiscard]] bool create_window_and_setup_context();

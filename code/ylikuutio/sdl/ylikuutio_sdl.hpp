@@ -43,6 +43,8 @@ namespace yli::sdl
         const char* title,
         SDL_WindowFlags flags);
 
+    [[nodiscard]] bool set_window_position(SDL_Window* window);
+
     [[nodiscard]] SDL_Window* create_hidden_window(SDL_DisplayID display_id, int window_width, int window_height,
                                                    const char* title, bool is_fullscreen);
 
