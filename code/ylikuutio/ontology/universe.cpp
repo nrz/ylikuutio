@@ -1085,7 +1085,7 @@ namespace yli::ontology
         // Create the window only when OpenGL or Vulkan is in use.
         if (this->get_is_opengl_in_use() || this->get_is_vulkan_in_use()) [[likely]]
         {
-            SDL_WindowFlags flags = SDL_WINDOW_HIGH_PIXEL_DENSITY;
+            SDL_WindowFlags flags = 0;
 
             if (this->is_fullscreen)
             {
