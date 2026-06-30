@@ -323,6 +323,7 @@ namespace yli::ontology
         }
 
         sdl::flush_sdl_event_queue();
+        input::enable_relative_mouse_mode(this->window);
 
         // This method contains the main simulation loop.
 
