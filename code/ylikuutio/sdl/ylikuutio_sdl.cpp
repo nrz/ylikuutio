@@ -182,9 +182,7 @@ namespace yli::sdl
 
     [[nodiscard]] SDL_GLContext create_context(SDL_Window* const window)
     {
-        SDL_GLContext context = SDL_GL_CreateContext(window);
-
-        if (context != nullptr)
+        if (SDL_GLContext context = SDL_GL_CreateContext(window); context != nullptr)
         {
             std::cout << "OpenGL context created successfully.\n";
             return context;
