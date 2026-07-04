@@ -32,7 +32,6 @@
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
-#include "code/ylikuutio/ontology/symbiont_species.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/ontology/biont.hpp"
 #include "code/ylikuutio/ontology/shapeshifter_sequence.hpp"
