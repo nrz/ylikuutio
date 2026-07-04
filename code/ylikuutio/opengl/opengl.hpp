@@ -20,7 +20,6 @@
 
 #include "code/ylikuutio/memory/memory_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t

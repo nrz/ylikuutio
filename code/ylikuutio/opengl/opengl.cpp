@@ -18,7 +18,6 @@
 #include "opengl.hpp"
 #include "code/ylikuutio/file/file_writer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t
