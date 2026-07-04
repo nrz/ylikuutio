@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#ifndef YLIKUUTIO_RENDER_RENDER_STRUCT_HPP_INCLUDED
+#define YLIKUUTIO_RENDER_RENDER_STRUCT_HPP_INCLUDED
+
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 namespace yli::ontology
@@ -33,3 +36,5 @@ namespace yli::render
         bool should_change_depth_test { true };
     };
 }
+
+#endif
