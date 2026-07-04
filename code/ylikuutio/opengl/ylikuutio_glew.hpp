@@ -18,15 +18,9 @@
 #ifndef YLIKUUTIO_OPENGL_YLIKUUTIO_GLEW_HPP_INCLUDED
 #define YLIKUUTIO_OPENGL_YLIKUUTIO_GLEW_HPP_INCLUDED
 
-#ifndef __ANDROID__ // do not `#include <GL/glew.h>` for Android.
 // Include GLEW
 #ifndef GL_GLEW_H_INCLUDED
 #define GL_GLEW_H_INCLUDED
 #include <GL/glew.h> // GLfloat, GLuint etc.
 #endif
-#else
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_opengles2.h>
-#endif
-
 #endif
