@@ -30,8 +30,8 @@ namespace yli::opengl
     // Load texture from memory.
     bool prepare_opengl_texture(
         const std::vector<std::uint8_t>& image_data,
-        const std::size_t image_width,
-        const std::size_t image_height,
+        std::size_t image_width,
+        std::size_t image_height,
         GLuint& textureID);
 }
 
