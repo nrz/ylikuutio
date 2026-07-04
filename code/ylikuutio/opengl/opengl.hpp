@@ -40,29 +40,29 @@ namespace yli::opengl
 
     void cull_triangles();
 
-    void set_background_color(const float red, const float green, const float blue, const float alpha);
+    void set_background_color(float red, float green, float blue, float alpha);
 
     void set_filtering_parameters();
 
     void set_nearest_filtering_parameters();
 
-    void set_wireframe(const bool wireframe);
+    void set_wireframe(bool wireframe);
 
-    bool uniform_1i(const GLint location, const GLint v0);
+    bool uniform_1i(GLint location, GLint v0);
 
-    bool enable_vertex_attrib_array(const GLint attribute);
+    bool enable_vertex_attrib_array(GLint attribute);
 
-    bool disable_vertex_attrib_array(const GLint attribute);
+    bool disable_vertex_attrib_array(GLint attribute);
 
-    void bind_gl_framebuffer(const GLuint framebuffer);
+    void bind_gl_framebuffer(GLuint framebuffer);
 
-    void bind_gl_read_framebuffer(const GLuint framebuffer);
+    void bind_gl_read_framebuffer(GLuint framebuffer);
 
-    void bind_gl_draw_framebuffer(const GLuint framebuffer);
+    void bind_gl_draw_framebuffer(GLuint framebuffer);
 
-    std::size_t get_n_color_channels(const GLenum format);
+    std::size_t get_n_color_channels(GLenum format);
 
-    std::size_t get_size_of_component(const GLenum type);
+    std::size_t get_size_of_component(GLenum type);
 
     template<typename T1>
     std::vector<T1> copy_data_from_gpu_texture_to_cpu_array(
@@ -95,23 +95,23 @@ namespace yli::opengl
     }
 
     void save_data_from_gpu_texture_into_file(
-        const GLenum format,
-        const GLenum type,
-        const std::size_t texture_width,
-        const std::size_t texture_height,
-        const std::size_t texture_depth,
+        GLenum format,
+        GLenum type,
+        std::size_t texture_width,
+        std::size_t texture_height,
+        std::size_t texture_depth,
         const std::string& filename,
-        const bool should_flip_texture);
+        bool should_flip_texture);
 
     void save_data_from_gpu_texture_into_file(
-        const GLenum format,
-        const GLenum type,
-        const std::size_t texture_width,
-        const std::size_t texture_height,
+        GLenum format,
+        GLenum type,
+        std::size_t texture_width,
+        std::size_t texture_height,
         const std::string& filename,
-        const bool should_flip_texture);
+        bool should_flip_texture);
 
-    GLenum get_base_format(const GLenum format);
+    GLenum get_base_format(GLenum format);
 }
 
 #endif
