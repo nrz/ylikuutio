@@ -74,7 +74,7 @@ namespace yli::opengl
         const bool should_flip_texture)
     {
         // Transfer data from the GPU texture to a CPU array.
-        const std::size_t n_color_channels = yli::opengl::get_n_color_channels(format);
+        const std::size_t n_color_channels = get_n_color_channels(format);
         const std::size_t n_texels = texture_width * texture_height * texture_depth;
         const std::size_t size_of_texture = n_color_channels * n_texels;
         T1* const result_array = new T1[size_of_texture];
@@ -84,7 +84,7 @@ namespace yli::opengl
 
         if (should_flip_texture)
         {
-            yli::memory::flip_vertically(result_array, n_color_channels * texture_width, texture_height);
+            memory::flip_vertically(result_array, n_color_channels * texture_width, texture_height);
         }
 
         std::vector<T1> result_vector(result_array, result_array + size_of_texture);

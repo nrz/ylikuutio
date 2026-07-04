@@ -39,7 +39,7 @@ namespace yli::opengl
         {
             LIGHT_POSITION_WORLDSPACE = 0, // vec4
             WATER_LEVEL = sizeof(glm::vec4), // float
-            TOTAL_SIZE = yli::opengl::scene_ubo::SceneUboBlockOffsets::WATER_LEVEL + sizeof(float)
+            TOTAL_SIZE = WATER_LEVEL + sizeof(float)
         };
     }
 
@@ -48,7 +48,7 @@ namespace yli::opengl
         enum MovableUboBlockOffsets
         {
             MVP = 0, // mat4
-            M = yli::opengl::movable_ubo::MovableUboBlockOffsets::MVP + sizeof(glm::mat4), // mat4
+            M = MVP + sizeof(glm::mat4), // mat4
             TOTAL_SIZE = yli::opengl::movable_ubo::MovableUboBlockOffsets::M + sizeof(glm::mat4)
         };
     }
@@ -58,7 +58,7 @@ namespace yli::opengl
         enum CameraUboBlockOffsets
         {
             V = 0, // mat4
-            TOTAL_SIZE = yli::opengl::camera_ubo::CameraUboBlockOffsets::V + sizeof(glm::mat4)
+            TOTAL_SIZE = V + sizeof(glm::mat4)
         };
     }
 }
