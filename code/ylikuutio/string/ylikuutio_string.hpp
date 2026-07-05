@@ -537,11 +537,11 @@ namespace yli::string
 
         for (auto it = my_string.begin(); it != my_string.end(); ++it)
         {
-            const CharType data_byte = *it;
-            const char data_char = (data_byte >= 0x20 && data_byte <= 0x7f ? static_cast<char>(data_byte) : '.');
+            const CharType data_unit = *it;
+            const char data_char = (data_unit >= 0x20 && data_unit <= 0x7f ? static_cast<char>(data_unit) : '.');
             current_line_ascii += data_char;
 
-            const auto data_32_bit = static_cast<std::uint32_t>(data_byte);
+            const auto data_32_bit = static_cast<std::uint32_t>(data_unit);
             // to get the hexadecimal representation instead of the actual value.
             std::stringstream my_stream;
             my_stream << std::setfill('0') << std::setw(sizeof(CharType) / 4) << std::hex << data_32_bit << std::dec;
