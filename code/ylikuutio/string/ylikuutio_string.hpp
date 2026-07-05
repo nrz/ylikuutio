@@ -19,7 +19,7 @@
 #define YLIKUUTIO_STRING_YLIKUUTIO_STRING_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>     // std::byte, std::size_t
+#include <cstddef>     // std::size_t
 #include <cstdint>     // std::int8_t, std::int16_t, std::int32_t, std::int64_t, std::uint8_t, std::uint16_t, std::uint32_t, std::uint64_t
 #include <cstdlib>     // std::strtod, std::strtof, std::strtoll, std::strtoull
 #include <iomanip>     // std::setfill, std::setw

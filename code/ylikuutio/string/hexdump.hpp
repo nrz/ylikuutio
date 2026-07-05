@@ -20,7 +20,7 @@
 
 // Include standard headers
 #include <cstddef>     // std::byte, std::size_t
-#include <cstdint>     // std::int8_t, std::int16_t, std::int32_t, std::int64_t, std::uint8_t, std::uint16_t, std::uint32_t, std::uint64_t
+#include <cstdint>     // std::uint32_t
 #include <iomanip>     // std::setfill, std::setw
 #include <ios>         // std::hex
 #include <iostream>    // std::cout, std::cerr
