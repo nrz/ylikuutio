@@ -845,11 +845,12 @@ add_library(ylikuutio STATIC
     code/ylikuutio/shaders/text_vertex_shader.vert
 
     # string, in alphabetical order
+    code/ylikuutio/string/hexdump.cpp
+    code/ylikuutio/string/hexdump.hpp
     code/ylikuutio/string/string_set.cpp
     code/ylikuutio/string/string_set.hpp
     code/ylikuutio/string/unicode.cpp
     code/ylikuutio/string/unicode.hpp
-    code/ylikuutio/string/ylikuutio_string.cpp
     code/ylikuutio/string/ylikuutio_string.hpp
 
     # time, in alphabetical order

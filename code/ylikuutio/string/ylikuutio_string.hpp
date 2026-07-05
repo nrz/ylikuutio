@@ -522,53 +522,6 @@ namespace yli::string
         constexpr std::size_t maximum_safe_length_for_double_string = 308;
         return check_if_floating_point_string(my_string, maximum_safe_length_for_double_string);
     }
-
-    void print_hexdump(const std::byte* start_address, const std::byte* end_address);
-
-    // `begin` is inclusive, `end is exclusive.
-
-    template<typename CharType>
-    void print_hexdump(std::basic_string_view<CharType> my_string)
-    {
-        const std::size_t line_width_in_bytes = 16 / sizeof(CharType);
-        std::size_t characters_on_this_line = 0;
-        std::string current_line_ascii;
-        std::string current_line_hex;
-
-        for (auto it = my_string.begin(); it != my_string.end(); ++it)
-        {
-            const CharType data_unit = *it;
-            const char data_char = (data_unit >= 0x20 && data_unit <= 0x7f ? static_cast<char>(data_unit) : '.');
-            current_line_ascii += data_char;
-
-            const auto data_32_bit = static_cast<std::uint32_t>(data_unit);
-            // to get the hexadecimal representation instead of the actual value.
-            std::stringstream my_stream;
-            my_stream << std::setfill('0') << std::setw(sizeof(CharType) / 4) << std::hex << data_32_bit << std::dec;
-            // std::hex does not work on char values.
-            current_line_hex += my_stream.str();
-            current_line_hex += " ";
-
-            if (++characters_on_this_line >= line_width_in_bytes)
-            {
-                std::cout << current_line_hex << " " << current_line_ascii << "\n";
-                current_line_hex = "";
-                current_line_ascii = "";
-                characters_on_this_line = 0;
-            }
-        }
-
-        if (characters_on_this_line > 0)
-        {
-            const std::size_t size_of_each_bytes_hexdump = sizeof(CharType) / 4 + 1;
-            // each byte's hexdump takes some characters.
-            const std::size_t number_of_spaces_needed =
-                    (line_width_in_bytes - characters_on_this_line) * size_of_each_bytes_hexdump + 1;
-            std::cout << current_line_hex << std::string(number_of_spaces_needed, ' ') << current_line_ascii << "\n";
-        }
-
-        std::cout << "\n";
-    }
 }
 
 #endif
