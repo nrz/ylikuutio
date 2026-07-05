@@ -17,6 +17,7 @@
 
 #include "obj_loader.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
+#include "code/ylikuutio/string/match_string.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLM
