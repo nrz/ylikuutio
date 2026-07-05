@@ -845,6 +845,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/shaders/text_vertex_shader.vert
 
     # string, in alphabetical order
+    code/ylikuutio/string/convert_string_to_value.hpp
+    code/ylikuutio/string/extract_string.hpp
     code/ylikuutio/string/hexdump.cpp
     code/ylikuutio/string/hexdump.hpp
     code/ylikuutio/string/match_string.hpp

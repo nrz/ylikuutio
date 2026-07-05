@@ -30,7 +30,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"
-#include "code/ylikuutio/string/ylikuutio_string.hpp"
+#include "code/ylikuutio/string/extract_string.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t

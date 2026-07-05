@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/string/ylikuutio_string.hpp"
+#include "code/ylikuutio/string/extract_string.hpp"
 
 // Include standard headers
 #include <cstddef>     // std::size_t

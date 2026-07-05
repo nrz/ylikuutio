@@ -24,8 +24,8 @@
 #include "code/ylikuutio/triangulation/triangulate_quads_struct.hpp"
 #include "code/ylikuutio/triangulation/quad_triangulation.hpp"
 #include "code/ylikuutio/file/file_loader.hpp"
+#include "code/ylikuutio/string/extract_string.hpp"
 #include "code/ylikuutio/string/match_string.hpp"
-#include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED

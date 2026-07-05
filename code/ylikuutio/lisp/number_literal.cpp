@@ -20,6 +20,7 @@
 #include "error_log.hpp"
 #include "error_type.hpp"
 #include "token.hpp"
+#include "code/ylikuutio/string/convert_string_to_value.hpp"
 #include "code/ylikuutio/string/ylikuutio_string.hpp"
 
 // Include standard headers
