@@ -19,7 +19,7 @@
 #define YLIKUUTIO_LOAD_CSV_LOADER_HPP_INCLUDED
 
 #include "code/ylikuutio/file/file_loader.hpp"
-#include "code/ylikuutio/string/extract_string.hpp"
+#include "code/ylikuutio/string/extract_value.hpp"
 #include "code/ylikuutio/string/match_string.hpp"
 
 // Include standard headers

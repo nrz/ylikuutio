@@ -847,6 +847,7 @@ add_library(ylikuutio STATIC
     # string, in alphabetical order
     code/ylikuutio/string/convert_string_to_value.hpp
     code/ylikuutio/string/extract_string.hpp
+    code/ylikuutio/string/extract_value.hpp
     code/ylikuutio/string/hexdump.cpp
     code/ylikuutio/string/hexdump.hpp
     code/ylikuutio/string/match_string.hpp

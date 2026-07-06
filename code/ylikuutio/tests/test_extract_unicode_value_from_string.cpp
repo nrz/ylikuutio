@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/string/extract_string.hpp"
+#include "code/ylikuutio/string/extract_value.hpp"
 
 TEST(unicode_value_from_string, char_only_a)
 {

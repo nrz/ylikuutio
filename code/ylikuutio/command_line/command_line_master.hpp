@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_COMMAND_LINE_COMMAND_LINE_MASTER_HPP_INCLUDED
 #define YLIKUUTIO_COMMAND_LINE_COMMAND_LINE_MASTER_HPP_INCLUDED
 
-#include "code/ylikuutio/string/extract_string.hpp"
+#include "code/ylikuutio/string/extract_value.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
