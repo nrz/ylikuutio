@@ -592,6 +592,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/audio_track.cpp
     code/ylikuutio/ontology/audio_track.hpp
     code/ylikuutio/ontology/audio_track_struct.hpp
+    code/ylikuutio/ontology/bind_child_to_parent.hpp
     code/ylikuutio/ontology/biont.cpp
     code/ylikuutio/ontology/biont.hpp
     code/ylikuutio/ontology/biont_struct.hpp

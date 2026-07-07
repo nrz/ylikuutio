@@ -18,6 +18,7 @@
 #include "generic_parent_module.hpp"
 #include "registry.hpp"
 #include "entity.hpp"
+#include "bind_child_to_parent.hpp"
 #include "family_templates.hpp"
 #include "code/ylikuutio/memory/generic_memory_allocator.hpp"
 
