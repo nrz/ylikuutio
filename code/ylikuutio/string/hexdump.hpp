@@ -77,7 +77,6 @@ namespace yli::string
 
         std::cout << "\n";
     }
-
 }
 
 #endif

@@ -103,7 +103,6 @@ namespace yli::string
             data_index,
             std::basic_string<CharType>(1, separator));
     }
-
 }
 
 #endif
