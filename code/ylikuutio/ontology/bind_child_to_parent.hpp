@@ -33,12 +33,12 @@ namespace yli::ontology
     class Entity;
 
     template<typename T1>
-        void bind_child_to_parent(
-                T1& child,
-                std::vector<T1*>& child_pointer_vector,
-                std::queue<std::size_t>& free_childID_queue,
-                std::size_t& number_of_children,
-                Registry& registry) noexcept
+    void bind_child_to_parent(
+        T1& child,
+        std::vector<T1*>& child_pointer_vector,
+        std::queue<std::size_t>& free_childID_queue,
+        std::size_t& number_of_children,
+        Registry& registry) noexcept
     {
         // If a class' instances have parents, this function must be
         // called in the constructor. The call must be done only once
@@ -57,7 +57,8 @@ namespace yli::ontology
 
         child.set_childID(hierarchy::request_childID(child_pointer_vector, free_childID_queue));
         // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-        hierarchy::set_child_pointer(child.get_childID(), &child, child_pointer_vector, free_childID_queue, number_of_children);
+        hierarchy::set_child_pointer(child.get_childID(), &child, child_pointer_vector, free_childID_queue,
+                                     number_of_children);
 
         if (const std::string& name = child.get_local_name(); !name.empty() && !registry.is_name(name))
         {
@@ -66,12 +67,12 @@ namespace yli::ontology
     }
 
     template<typename T1>
-        void bind_child_to_parent(
-                const T1& child,
-                std::vector<T1*>& child_pointer_vector,
-                std::queue<std::size_t>& free_childID_queue,
-                std::size_t& number_of_children,
-                std::unordered_map<std::string, Entity*>& entity_map) noexcept
+    void bind_child_to_parent(
+        const T1& child,
+        std::vector<T1*>& child_pointer_vector,
+        std::queue<std::size_t>& free_childID_queue,
+        std::size_t& number_of_children,
+        std::unordered_map<std::string, Entity*>& entity_map) noexcept
     {
         // If a class' instances have parents, this function must be
         // called in the constructor. The call must be done only once
@@ -90,7 +91,8 @@ namespace yli::ontology
 
         child.set_childID(hierarchy::request_childID(child_pointer_vector, free_childID_queue));
         // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-        hierarchy::set_child_pointer(child.get_childID(), &child, child_pointer_vector, free_childID_queue, number_of_children);
+        hierarchy::set_child_pointer(child.get_childID(), &child, child_pointer_vector, free_childID_queue,
+                                     number_of_children);
 
         if (const std::string& name = child->get_local_name(); !name.empty() && !entity_map.contains(name))
         {

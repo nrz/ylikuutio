@@ -33,14 +33,15 @@
 namespace yli::ontology
 {
     class Entity;
-    template <typename T1>
-        void unbind_child_from_parent(
-                const std::size_t childID,
-                const std::string& name,
-                std::vector<T1>& child_pointer_vector,
-                std::queue<std::size_t>& free_childID_queue,
-                std::size_t& number_of_children,
-                Registry& registry) noexcept
+
+    template<typename T1>
+    void unbind_child_from_parent(
+        const std::size_t childID,
+        const std::string& name,
+        std::vector<T1>& child_pointer_vector,
+        std::queue<std::size_t>& free_childID_queue,
+        std::size_t& number_of_children,
+        Registry& registry) noexcept
     {
         // requirements:
         // `child_pointer->childID` must not be `std::numeric_limits<std::size_t>::max()`.
@@ -60,21 +61,21 @@ namespace yli::ontology
 
         // Set pointer to this child to `nullptr` in the old parent.
         hierarchy::set_child_pointer(
-                childID,
-                static_cast<T1>(nullptr),
-                child_pointer_vector,
-                free_childID_queue,
-                number_of_children);
+            childID,
+            static_cast<T1>(nullptr),
+            child_pointer_vector,
+            free_childID_queue,
+            number_of_children);
     }
 
-    template <typename T1>
-        void unbind_child_from_parent(
-                const std::size_t childID,
-                const std::string& name,
-                std::vector<T1>& child_pointer_vector,
-                std::queue<std::size_t>& free_childID_queue,
-                std::size_t& number_of_children,
-                std::unordered_map<std::string, Entity*>& entity_map) noexcept
+    template<typename T1>
+    void unbind_child_from_parent(
+        const std::size_t childID,
+        const std::string& name,
+        std::vector<T1>& child_pointer_vector,
+        std::queue<std::size_t>& free_childID_queue,
+        std::size_t& number_of_children,
+        std::unordered_map<std::string, Entity*>& entity_map) noexcept
     {
         // requirements:
         // `child_pointer->childID` must not be `std::numeric_limits<std::size_t>::max()`.
@@ -93,7 +94,8 @@ namespace yli::ontology
         }
 
         // Set pointer to this child to `nullptr` in the old parent.
-        hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue, number_of_children);
+        hierarchy::set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue,
+                                     number_of_children);
     }
 }
 
