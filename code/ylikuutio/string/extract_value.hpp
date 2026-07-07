@@ -103,17 +103,17 @@ namespace yli::string
 
     template<typename CharType, typename ValueType>
     std::optional<ValueType> extract_value_from_string(
-        std::string_view data_string,
+        const std::string_view data_string,
         std::size_t& data_index,
-        std::string_view char_end_string,
-        std::string_view description)
+        const std::string_view char_end_string,
+        const std::string_view description)
     {
-        std::string string = extract_string_with_several_endings<CharType>(
+        const std::string string = extract_string_with_several_endings<CharType>(
             data_string,
             data_index,
             char_end_string);
 
-        std::optional<ValueType> value = convert_string_to_value<ValueType>(string);
+        const std::optional<ValueType> value = convert_string_to_value<ValueType>(string);
 
         if (!value)
         {
@@ -130,10 +130,10 @@ namespace yli::string
 
     template<typename CharType, typename ValueType>
     ValueType extract_value_or_throw(
-        std::basic_string_view<CharType> data_string,
+        const std::basic_string_view<CharType> data_string,
         std::size_t& data_index,
-        std::basic_string_view<CharType> char_end_string,
-        std::basic_string_view<CharType> description)
+        const std::basic_string_view<CharType> char_end_string,
+        const std::basic_string_view<CharType> description)
     {
         std::optional<ValueType> value = extract_value_from_string<CharType, ValueType>(
             data_string, data_index, char_end_string, description);

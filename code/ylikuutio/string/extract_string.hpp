@@ -33,9 +33,9 @@ namespace yli::string
 
     template<typename CharType>
     std::basic_string<CharType> extract_string_with_several_endings(
-        std::basic_string_view<CharType> data_string,
+        const std::basic_string_view<CharType> data_string,
         std::size_t& data_index,
-        std::basic_string_view<CharType> char_end_string)
+        const std::basic_string_view<CharType> char_end_string)
     {
         // This function copies characters from `src_data_pointer` until a character matches.
         if (data_index >= data_string.size())
@@ -43,7 +43,7 @@ namespace yli::string
             return "";
         }
 
-        std::size_t original_data_index = data_index;
+        const std::size_t original_data_index = data_index;
 
         while (data_index < data_string.size())
         {
@@ -70,7 +70,7 @@ namespace yli::string
 
     template<typename CharType>
     std::basic_string<CharType> extract_last_part_of_string(
-        std::basic_string_view<CharType> data_string,
+        const std::basic_string_view<CharType> data_string,
         const CharType separator)
     {
         auto separator_it = data_string.end(); // by default no last part.
@@ -94,7 +94,7 @@ namespace yli::string
 
     template<typename CharType>
     std::basic_string<CharType> extract_string(
-        std::basic_string_view<CharType> data_string,
+        const std::basic_string_view<CharType> data_string,
         std::size_t& data_index,
         const CharType separator)
     {

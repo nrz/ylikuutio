@@ -28,7 +28,7 @@ namespace yli::string
 {
     template<typename CharType>
     bool check_and_report_if_some_string_matches(
-        std::basic_string_view<CharType> data_string,
+        const std::basic_string_view<CharType> data_string,
         const std::size_t data_index,
         const std::vector<std::basic_string<CharType>>& identifier_strings_vector)
     {
