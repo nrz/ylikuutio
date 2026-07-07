@@ -19,8 +19,8 @@
 #define YLIKUUTIO_ONTOLOGY_FAMILY_TEMPLATES_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>       // std::size_t
-#include <vector>        // std::vector
+#include <cstddef> // std::size_t
+#include <vector>  // std::vector
 
 namespace yli::ontology
 {
