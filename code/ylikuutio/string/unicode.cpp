@@ -44,7 +44,7 @@ namespace yli::string
         {
             if (std::optional<char32_t> codepoint = read_codepoint(it, my_string.cend()); codepoint.has_value())
             {
-                u32_string.push_back(static_cast<char32_t>(codepoint.value()));
+                u32_string.push_back(codepoint.value());
             }
             else
             {
