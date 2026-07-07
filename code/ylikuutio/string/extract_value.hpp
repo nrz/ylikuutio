@@ -77,7 +77,7 @@ namespace yli::string
         // valid format.
         std::basic_string<CharType> hex_string;
 
-        // unicode string beginning with '&'
+        // Unicode string beginning with '&'
         while (*++unicode_char_pointer != ';')
         {
             if (*unicode_char_pointer == '\0')
