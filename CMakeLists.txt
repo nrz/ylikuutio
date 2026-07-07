@@ -650,7 +650,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/entity_variable_activation.hpp
     code/ylikuutio/ontology/entity_variable_read.cpp
     code/ylikuutio/ontology/entity_variable_read.hpp
-    code/ylikuutio/ontology/get_number_of_descendants.hpp
     code/ylikuutio/ontology/font_2d.cpp
     code/ylikuutio/ontology/font_2d.hpp
     code/ylikuutio/ontology/font_struct.hpp
@@ -670,6 +669,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/generic_parent_module.cpp
     code/ylikuutio/ontology/generic_parent_module.hpp
     code/ylikuutio/ontology/get_content_callback.hpp
+    code/ylikuutio/ontology/get_number_of_descendants.hpp
     code/ylikuutio/ontology/gl_attrib_locations.cpp
     code/ylikuutio/ontology/gl_attrib_locations.hpp
     code/ylikuutio/ontology/glyph.cpp
