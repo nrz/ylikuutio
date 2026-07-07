@@ -23,7 +23,6 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <iostream>      // std::cout, std::cerr
 #include <queue>         // std::queue
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
