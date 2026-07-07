@@ -24,7 +24,7 @@
 #include "vertical_alignment.hpp"
 #include "console_struct.hpp"
 #include "print_console_struct.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/console/text_input_type.hpp"
 #include "code/ylikuutio/console/text_input.hpp"
 #include "code/ylikuutio/data/any_value.hpp"

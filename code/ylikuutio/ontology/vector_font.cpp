@@ -22,7 +22,7 @@
 #include "material.hpp"
 #include "text_3d.hpp"
 #include "generic_entity_factory.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "request.hpp"
 #include "vector_font_struct.hpp"
 #include "glyph_struct.hpp"

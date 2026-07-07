@@ -28,7 +28,7 @@
 #include "symbiont_material_struct.hpp"
 #include "symbiont_species_struct.hpp"
 #include "ability_struct.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"

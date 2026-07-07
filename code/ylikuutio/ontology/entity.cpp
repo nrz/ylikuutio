@@ -18,7 +18,7 @@
 #include "entity.hpp"
 #include "variable.hpp"
 #include "universe.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "generic_entity_factory.hpp"
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"

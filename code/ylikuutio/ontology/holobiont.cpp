@@ -29,7 +29,7 @@
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
 #include "skill_struct.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/render_system.hpp"

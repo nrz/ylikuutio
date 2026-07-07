@@ -24,7 +24,7 @@
 #include "print_text_struct.hpp"
 #include "print_console_struct.hpp"
 #include "texture_file_format.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"

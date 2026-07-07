@@ -19,7 +19,7 @@
 #include "pipeline.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_material_struct.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.

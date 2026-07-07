@@ -20,7 +20,7 @@
 #include "material.hpp"
 #include "shapeshifter_sequence.hpp"
 #include "shapeshifter_transformation_struct.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
 #include "code/ylikuutio/render/render_templates.hpp"

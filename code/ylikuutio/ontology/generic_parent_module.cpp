@@ -20,7 +20,7 @@
 #include "entity.hpp"
 #include "bind_child_to_parent.hpp"
 #include "unbind_child_from_parent.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/memory/generic_memory_allocator.hpp"
 
 // Include standard headers

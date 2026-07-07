@@ -23,7 +23,7 @@
 #include "generic_entity_factory.hpp"
 #include "generic_callback_engine_struct.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 

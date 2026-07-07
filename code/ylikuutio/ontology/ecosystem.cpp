@@ -17,7 +17,7 @@
 
 #include "ecosystem.hpp"
 #include "ecosystem_struct.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t

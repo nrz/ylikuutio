@@ -22,7 +22,7 @@
 #include "pipeline.hpp"
 #include "material_struct.hpp"
 #include "texture_file_format.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"

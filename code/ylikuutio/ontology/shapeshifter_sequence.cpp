@@ -19,7 +19,7 @@
 #include "entity.hpp"
 #include "shapeshifter_transformation.hpp"
 #include "shapeshifter_sequence_struct.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 
 // Include standard headers
 #include <cstddef>   // std::size_t

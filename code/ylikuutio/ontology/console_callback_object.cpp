@@ -18,7 +18,7 @@
 #include "console_callback_object.hpp"
 #include "console_callback_engine.hpp"
 #include "console_callback_object_struct.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers

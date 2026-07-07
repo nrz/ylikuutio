@@ -650,7 +650,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/entity_variable_activation.hpp
     code/ylikuutio/ontology/entity_variable_read.cpp
     code/ylikuutio/ontology/entity_variable_read.hpp
-    code/ylikuutio/ontology/family_templates.hpp
+    code/ylikuutio/ontology/get_number_of_descendants.hpp
     code/ylikuutio/ontology/font_2d.cpp
     code/ylikuutio/ontology/font_2d.hpp
     code/ylikuutio/ontology/font_struct.hpp

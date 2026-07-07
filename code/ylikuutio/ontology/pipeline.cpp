@@ -20,7 +20,7 @@
 #include "ecosystem.hpp"
 #include "scene.hpp"
 #include "pipeline_struct.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/shader_loader.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"

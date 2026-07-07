@@ -20,7 +20,7 @@
 #include "generic_console_lisp_function_overload.hpp"
 #include "result.hpp"
 #include "console_lisp_function_struct.hpp"
-#include "family_templates.hpp"
+#include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
 // Include standard headers
