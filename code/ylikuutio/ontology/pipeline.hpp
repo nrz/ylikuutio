@@ -24,7 +24,6 @@
 #include "generic_master_module.hpp"
 #include "master_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
@@ -108,11 +107,6 @@ namespace yli::ontology
 
         template<typename T1, std::size_t DataSize>
         friend class memory::MemoryStorage;
-
-        template<typename T1>
-        friend void hierarchy::bind_child_to_parent(const T1& child, std::vector<T1>& child_pointer_vector,
-                                                    std::queue<std::size_t>& free_childID_queue,
-                                                    std::size_t& number_of_children) noexcept;
 
         ChildModule child_of_ecosystem_or_scene;
         GenericParentModule parent_of_compute_tasks;

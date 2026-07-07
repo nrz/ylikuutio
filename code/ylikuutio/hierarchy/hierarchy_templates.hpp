@@ -125,33 +125,6 @@ namespace yli::hierarchy
     }
 
     template<typename T1>
-    void bind_child_to_parent(
-        const T1& child,
-        std::vector<T1>& child_pointer_vector,
-        std::queue<std::size_t>& free_childID_queue,
-        std::size_t& number_of_children) noexcept
-    {
-        // If a class' instances have parents, this function must be
-        // called in the constructor. The call must be done only once
-        // in each constructor, usually after setting
-        // `this->parent`. So, get `childID` from the parent,
-        // because every child deserves a unique ID!
-        // If `yli::ontology::ChildModule` is used, then it will
-        // take care of calling this function and in that case
-        // this function must not be called elsewhere.
-        // Note: this function modifies child's `childID` and thus
-        // the child must define this function template as a `friend`.
-        // Note: this function must be used only for child-parent
-        // relationships. Other binding relationships, that is
-        // master-apprentice relationships, must be implemented
-        // using `bind_apprentice_to_master`, not this function.
-
-        child.childID = request_childID(child_pointer_vector, free_childID_queue);
-        // set pointer to the child in parent's child pointer vector so that parent knows about children's whereabouts!
-        set_child_pointer(child.childID, &child, child_pointer_vector, free_childID_queue, number_of_children);
-    }
-
-    template<typename T1>
     void bind_apprentice_to_master(
         T1& apprentice,
         std::vector<T1*>& apprentice_pointer_vector,
