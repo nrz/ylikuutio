@@ -70,7 +70,7 @@ namespace yli::string
                                        (static_cast<char32_t>(byte2) & 0b0011'1111);
             return codepoint;
         }
-        else if (byte1 < 0b1111'0000)
+        if (byte1 < 0b1111'0000)
         {
             // 3 bytes.
             if (it == cend)
@@ -102,7 +102,7 @@ namespace yli::string
                                        (static_cast<char32_t>(byte3) & 0b0011'1111);
             return codepoint;
         }
-        else if (byte1 < 0b1111'1000)
+        if (byte1 < 0b1111'1000)
         {
             // 4 bytes.
             if (it == cend)
@@ -147,11 +147,8 @@ namespace yli::string
                                        (static_cast<char32_t>(byte4) & 0b0011'1111);
             return codepoint;
         }
-        else
-        {
-            // Invalid codepoint.
-            return std::nullopt;
-        }
+        // Invalid codepoint.
+        return std::nullopt;
     }
 }
 
