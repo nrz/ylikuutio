@@ -455,6 +455,7 @@ add_library(ylikuutio STATIC
 
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/bind_apprentice_to_master.hpp
+    code/ylikuutio/hierarchy/get_first_child.hpp
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
     code/ylikuutio/hierarchy/request_childID.hpp
     code/ylikuutio/hierarchy/set_child_pointer.hpp

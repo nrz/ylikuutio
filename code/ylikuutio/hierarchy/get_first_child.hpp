@@ -15,35 +15,32 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_HIERARCHY_HIERARCHY_TEMPLATES_HPP_INCLUDED
-#define YLIKUUTIO_HIERARCHY_HIERARCHY_TEMPLATES_HPP_INCLUDED
-
-#include "set_child_pointer.hpp"
+#ifndef YLIKUUTIO_HIERARCHY_GET_FIRST_CHILD_HPP_INCLUDED
+#define YLIKUUTIO_HIERARCHY_GET_FIRST_CHILD_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>       // std::size_t
-#include <limits>        // std::numeric_limits
-#include <queue>         // std::queue
-#include <vector>        // std::vector
+#include <cstddef> // std::size_t
+#include <vector>  // std::vector
 
 namespace yli::hierarchy
 {
     template<typename T1>
-    void unbind_child_from_parent(
-        const std::size_t childID,
-        std::vector<T1>& child_pointer_vector,
-        std::queue<std::size_t>& free_childID_queue,
-        std::size_t& number_of_children) noexcept
+    T1 get_first_child(const std::vector<T1>& child_pointer_vector, const std::size_t number_of_children) noexcept
     {
-        if (childID == std::numeric_limits<std::size_t>::max())
+        if (number_of_children == 0)
         {
-            // Nothing to do.
-            return;
+            return nullptr;
         }
 
-        // Set pointer to this child to `nullptr` in the old parent.
-        set_child_pointer(childID, static_cast<T1>(nullptr), child_pointer_vector, free_childID_queue,
-                          number_of_children);
+        for (T1 child : child_pointer_vector)
+        {
+            if (child != nullptr)
+            {
+                return child;
+            }
+        }
+
+        return nullptr;
     }
 }
 
