@@ -25,11 +25,9 @@
 
 // Include standard headers
 #include <cstddef>    // std::byte, std::size_t
-#include <functional> // std::reference_wrapper
 #include <iostream>   // std::cerr
 #include <limits>     // std::numeric_limits
 #include <memory>     // std::make_unique, std::unique_ptr
-#include <optional>   // std::optional
 #include <utility>    // std::forward, std::move
 #include <vector>     // std::vector
 
@@ -104,21 +102,21 @@ namespace yli::memory
             return DataSize;
         }
 
-        std::optional<std::reference_wrapper<MemoryStorage<T1, DataSize>>> get_storage(
+        MemoryStorage<T1, DataSize>* get_storage(
             const std::size_t storage_i) const noexcept
         {
             if (storage_i == std::numeric_limits<std::size_t>::max())
             {
                 std::cerr <<
                         "ERROR: `MemoryAllocator::get_storage`: trying to get storage with an invalid `storage_i`!\n";
-                return std::nullopt;
+                return nullptr;
             }
 
             if (storage_i >= this->get_number_of_storages())
             {
                 std::cerr << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i <<
                         " is out of bounds, size is " << this->get_number_of_storages() << "\n";
-                return std::nullopt;
+                return nullptr;
             }
 
             auto raw_storage_pointer = this->storages.at(storage_i).get();
@@ -126,10 +124,10 @@ namespace yli::memory
             if (raw_storage_pointer == nullptr)
             {
                 std::cerr << "ERROR: `MemoryAllocator::get_storage`: `storage_i` " << storage_i << " is `nullptr`!\n";
-                return std::nullopt;
+                return nullptr;
             }
 
-            return *raw_storage_pointer;
+            return raw_storage_pointer;
         }
 
         void destroy(const ConstructibleModule& constructible_module) noexcept override
@@ -156,9 +154,9 @@ namespace yli::memory
 
             auto storage = this->get_storage(constructible_module.storage_i);
 
-            if (storage)
+            if (storage != nullptr)
             {
-                (*storage).get().destroy(constructible_module.slot_i);
+                storage->destroy(constructible_module.slot_i);
             }
         }
 
@@ -224,14 +222,14 @@ namespace yli::memory
             return this->instances.size();
         }
 
-        std::optional<std::reference_wrapper<MemoryStorage<ontology::GenericConsoleLispFunctionOverload, DataSize>>>
+        MemoryStorage<ontology::GenericConsoleLispFunctionOverload, DataSize>*
         get_storage(const std::size_t /* storage_i */) const noexcept
         {
             std::cerr <<
                     "ERROR: `MemoryAllocator<yli::ontology::GenericConsoleLispFunctionOverload, DataSize>::get_storage`: "
                     <<
                     "this function is not implemented for this specialization!\n";
-            return std::nullopt;
+            return nullptr;
         }
 
         void destroy(const ConstructibleModule& constructible_module) noexcept override
