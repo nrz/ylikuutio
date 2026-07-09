@@ -37,6 +37,7 @@
 #endif
 
 // Include standard headers
+#include <iostream> // std::cerr
 #include <numbers>  // std::numbers::pi
 #include <optional> // std::optional
 
