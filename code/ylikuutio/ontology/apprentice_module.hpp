@@ -18,13 +18,33 @@
 #ifndef YLIKUUTIO_ONTOLOGY_APPRENTICE_MODULE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_APPRENTICE_MODULE_HPP_INCLUDED
 
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
-
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <queue>   // std::queue
 #include <limits>  // std::numeric_limits
 #include <vector>  // std::vector
+
+namespace yli::hierarchy
+{
+    template<typename T1>
+    void set_child_pointer(
+        std::size_t childID,
+        T1 child_pointer,
+        std::vector<T1>& child_pointer_vector,
+        std::queue<std::size_t>& free_childID_queue,
+        std::size_t& number_of_children) noexcept;
+
+    template<typename T1>
+    std::size_t request_childID(std::vector<T1>& child_pointer_vector,
+                                std::queue<std::size_t>& free_childID_queue) noexcept;
+
+    template<typename T1>
+    void bind_apprentice_to_master(
+        T1& apprentice,
+        std::vector<T1*>& apprentice_pointer_vector,
+        std::queue<std::size_t>& free_apprenticeID_queue,
+        std::size_t& number_of_apprentices) noexcept;
+}
 
 namespace yli::ontology
 {
