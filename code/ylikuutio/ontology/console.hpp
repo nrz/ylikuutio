@@ -29,7 +29,6 @@
 #include "code/ylikuutio/console/text_input_history.hpp"
 #include "code/ylikuutio/console/scrollback_buffer.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 
 // Include standard headers
@@ -63,6 +62,16 @@
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::hierarchy
+{
+    template<typename T1>
+        void hierarchy::bind_apprentice_to_master(
+                T1& apprentice,
+                std::vector<T1*>& apprentice_pointer_vector,
+                std::queue<std::size_t>& free_apprenticeID_queue,
+                std::size_t& number_of_apprentices) noexcept;
 }
 
 namespace yli::memory
