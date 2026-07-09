@@ -49,7 +49,7 @@
 #include "code/ylikuutio/hierarchy/get_first_child.hpp"
 #include "code/ylikuutio/hierarchy/request_childID.hpp"
 #include "code/ylikuutio/hierarchy/set_child_pointer.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/hierarchy/unbind_child_from_parent.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_system.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"

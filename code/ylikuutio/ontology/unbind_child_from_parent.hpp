@@ -19,7 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_UNBIND_CHILD_FROM_PARENT_HPP_INCLUDED
 
 #include "registry.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/hierarchy/set_child_pointer.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t

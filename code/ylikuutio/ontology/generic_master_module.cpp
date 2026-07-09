@@ -20,7 +20,7 @@
 #include "apprentice_module.hpp"
 #include "entity.hpp"
 #include "code/ylikuutio/hierarchy/bind_apprentice_to_master.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/hierarchy/unbind_child_from_parent.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
