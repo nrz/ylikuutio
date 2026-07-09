@@ -18,6 +18,7 @@
 #ifndef YLIKUUTIO_HIERARCHY_HIERARCHY_TEMPLATES_HPP_INCLUDED
 #define YLIKUUTIO_HIERARCHY_HIERARCHY_TEMPLATES_HPP_INCLUDED
 
+#include "request_childID.hpp"
 #include "set_child_pointer.hpp"
 
 // Include standard headers
@@ -28,44 +29,6 @@
 
 namespace yli::hierarchy
 {
-    template<typename T1>
-    std::size_t request_childID(std::vector<T1>& child_pointer_vector,
-                                std::queue<std::size_t>& free_childID_queue) noexcept
-    {
-        // This function is called eg. from `bind_child_to_parent`,
-        // so that child instance gets an appropriate `childID`.
-        std::size_t childID;
-
-        while (!free_childID_queue.empty())
-        {
-            // return the first (oldest) free childID.
-            childID = free_childID_queue.front();
-            free_childID_queue.pop();
-
-            // check that the child index does not exceed current child pointer vector.
-            if (childID >= child_pointer_vector.size())
-            {
-                // Child index exceeds current child pointer vector.
-                continue;
-            }
-
-            if (child_pointer_vector.at(childID) == nullptr)
-            {
-                // OK, child index does not exceed current child pointer vector and the index is free.
-                return childID;
-            }
-        }
-
-        // OK, the queue is empty.
-        // A new child index must be created.
-        childID = child_pointer_vector.size();
-
-        // child pointer vector must also be extended with an appropriate nullptr pointer.
-        child_pointer_vector.emplace_back(nullptr);
-
-        return childID;
-    }
-
     template<typename T1>
     void bind_apprentice_to_master(
         T1& apprentice,

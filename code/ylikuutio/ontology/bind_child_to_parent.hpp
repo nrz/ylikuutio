@@ -19,7 +19,8 @@
 #define YLIKUUTIO_ONTOLOGY_BIND_CHILD_TO_PARENT_HPP_INCLUDED
 
 #include "registry.hpp"
-#include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
+#include "code/ylikuutio/hierarchy/request_childID.hpp"
+#include "code/ylikuutio/hierarchy/set_child_pointer.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t

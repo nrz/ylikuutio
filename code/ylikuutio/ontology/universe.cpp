@@ -46,6 +46,8 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/event/event_system.hpp"
 #include "code/ylikuutio/geometry/radians_to_degrees.hpp"
+#include "code/ylikuutio/hierarchy/request_childID.hpp"
+#include "code/ylikuutio/hierarchy/set_child_pointer.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 #include "code/ylikuutio/input/input.hpp"
 #include "code/ylikuutio/input/input_system.hpp"
