@@ -53,68 +53,72 @@ namespace yli::ontology
     class Scene;
 
     template<typename M>
-        class MasterModule;
+    class MasterModule;
 
     class ApprenticeModule
     {
-        public:
-            void bind_to_generic_master_module() noexcept;
-            void unbind_from_generic_master_module() const noexcept;
+    public:
+        void bind_to_generic_master_module() noexcept;
 
-        private:
-            void bind_to_new_generic_master_module(
-                    GenericMasterModule* new_generic_master) noexcept;
+        void unbind_from_generic_master_module() const noexcept;
 
-        public:
-            void unbind_from_any_master_belonging_to_other_scene(
-                    const Scene& scene) const noexcept;
+    private:
+        void bind_to_new_generic_master_module(
+            GenericMasterModule* new_generic_master) noexcept;
 
-            void unbind_and_bind_to_new_generic_master_module(
-                    GenericMasterModule* new_generic_master) noexcept;
+    public:
+        void unbind_from_any_master_belonging_to_other_scene(
+            const Scene& scene) const noexcept;
 
-            ApprenticeModule(
-                    GenericMasterModule* generic_master_module,
-                    Entity* apprentice) noexcept;
+        void unbind_and_bind_to_new_generic_master_module(
+            GenericMasterModule* new_generic_master) noexcept;
 
-            virtual ~ApprenticeModule();
+        ApprenticeModule(
+            GenericMasterModule* generic_master_module,
+            Entity* apprentice) noexcept;
 
-            [[nodiscard]] Entity* get_master() const noexcept;
-            [[nodiscard]] Entity* get_apprentice() const noexcept;
-            [[nodiscard]] std::size_t get_apprenticeID() const noexcept;
+        virtual ~ApprenticeModule();
 
-            void release() noexcept;
+        [[nodiscard]] Entity* get_master() const noexcept;
 
-            ApprenticeModule(const ApprenticeModule&) = delete;            // Delete copy constructor.
-            ApprenticeModule& operator=(const ApprenticeModule&) = delete; // Delete copy assignment.
+        [[nodiscard]] Entity* get_apprentice() const noexcept;
 
-            friend class GenericMasterModule;
+        [[nodiscard]] std::size_t get_apprenticeID() const noexcept;
 
-            template<typename M>
-                friend class MasterModule;
+        void release() noexcept;
 
-            template<typename T1>
-                friend void hierarchy::set_child_pointer(
-                        std::size_t childID,
-                        T1 child_pointer,
-                        std::vector<T1>& child_pointer_vector,
-                        std::queue<std::size_t>& free_childID_queue,
-                        std::size_t& number_of_children) noexcept;
+        ApprenticeModule(const ApprenticeModule&) = delete;            // Delete copy constructor.
+        ApprenticeModule& operator=(const ApprenticeModule&) = delete; // Delete copy assignment.
 
-            template<typename T1>
-                friend std::size_t hierarchy::request_childID(std::vector<T1>& child_pointer_vector, std::queue<std::size_t>& free_childID_queue) noexcept;
+        friend class GenericMasterModule;
 
-            template<typename T1>
-                friend void hierarchy::bind_apprentice_to_master(
-                        T1& apprentice,
-                        std::vector<T1*>& apprentice_pointer_vector,
-                        std::queue<std::size_t>& free_apprenticeID_queue,
-                        std::size_t& number_of_apprentices) noexcept;
+        template<typename M>
+        friend class MasterModule;
 
-        private:
-            GenericMasterModule* generic_master_module { nullptr };
+        template<typename T1>
+        friend void hierarchy::set_child_pointer(
+            std::size_t childID,
+            T1 child_pointer,
+            std::vector<T1>& child_pointer_vector,
+            std::queue<std::size_t>& free_childID_queue,
+            std::size_t& number_of_children) noexcept;
 
-            Entity* const apprentice;
-            std::size_t apprenticeID { std::numeric_limits<std::size_t>::max() };
+        template<typename T1>
+        friend std::size_t hierarchy::request_childID(std::vector<T1>& child_pointer_vector,
+                                                      std::queue<std::size_t>& free_childID_queue) noexcept;
+
+        template<typename T1>
+        friend void hierarchy::bind_apprentice_to_master(
+            T1& apprentice,
+            std::vector<T1*>& apprentice_pointer_vector,
+            std::queue<std::size_t>& free_apprenticeID_queue,
+            std::size_t& number_of_apprentices) noexcept;
+
+    private:
+        GenericMasterModule* generic_master_module { nullptr };
+
+        Entity* const apprentice;
+        std::size_t apprenticeID { std::numeric_limits<std::size_t>::max() };
     };
 }
 
