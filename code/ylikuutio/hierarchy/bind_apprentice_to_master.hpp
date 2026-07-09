@@ -22,9 +22,9 @@
 #include "set_child_pointer.hpp"
 
 // Include standard headers
-#include <cstddef>       // std::size_t
-#include <queue>         // std::queue
-#include <vector>        // std::vector
+#include <cstddef> // std::size_t
+#include <queue>   // std::queue
+#include <vector>  // std::vector
 
 namespace yli::hierarchy
 {
