@@ -19,6 +19,7 @@
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
 #include "entity.hpp"
+#include "code/ylikuutio/hierarchy/bind_apprentice_to_master.hpp"
 #include "code/ylikuutio/hierarchy/hierarchy_templates.hpp"
 
 // Include standard headers

@@ -18,7 +18,6 @@
 #ifndef YLIKUUTIO_HIERARCHY_HIERARCHY_TEMPLATES_HPP_INCLUDED
 #define YLIKUUTIO_HIERARCHY_HIERARCHY_TEMPLATES_HPP_INCLUDED
 
-#include "request_childID.hpp"
 #include "set_child_pointer.hpp"
 
 // Include standard headers
@@ -29,25 +28,6 @@
 
 namespace yli::hierarchy
 {
-    template<typename T1>
-    void bind_apprentice_to_master(
-        T1& apprentice,
-        std::vector<T1*>& apprentice_pointer_vector,
-        std::queue<std::size_t>& free_apprenticeID_queue,
-        std::size_t& number_of_apprentices) noexcept
-    {
-        // Note: this function must be used only for
-        // master-apprentice relationships.
-        //
-        // Child-parent relationships must be implemented
-        // using `yli::hierarchy::bind_child_to_parent`.
-
-        apprentice.apprenticeID = request_childID(apprentice_pointer_vector, free_apprenticeID_queue);
-        // set pointer to the apprentice in master's apprentice pointer vector so that master knows about apprentices' whereabouts!
-        set_child_pointer(apprentice.apprenticeID, &apprentice, apprentice_pointer_vector, free_apprenticeID_queue,
-                          number_of_apprentices);
-    }
-
     template<typename T1>
     void unbind_child_from_parent(
         const std::size_t childID,
