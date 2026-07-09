@@ -455,6 +455,7 @@ add_library(ylikuutio STATIC
 
     # hierarchy, in alphabetical order.
     code/ylikuutio/hierarchy/hierarchy_templates.hpp
+    code/ylikuutio/hierarchy/set_child_pointer.hpp
 
     # input, in alphabetical order
     code/ylikuutio/input/input.cpp
