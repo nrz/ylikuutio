@@ -19,11 +19,11 @@
 #define YLIKUUTIO_HIERARCHY_SET_CHILD_POINTER_HPP_INCLUDED
 
 // Include standard headers
-#include <cstddef>       // std::size_t
-#include <iostream>      // std::cerr
-#include <limits>        // std::numeric_limits
-#include <queue>         // std::queue
-#include <vector>        // std::vector
+#include <cstddef>  // std::size_t
+#include <iostream> // std::cerr
+#include <limits>   // std::numeric_limits
+#include <queue>    // std::queue
+#include <vector>   // std::vector
 
 namespace yli::hierarchy
 {
