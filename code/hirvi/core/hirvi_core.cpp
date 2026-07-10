@@ -92,7 +92,12 @@ namespace hirvi::core
 
         // Create an Earth `Ecosystem`.
 
-        this->create_earth_ecosystem();
+        std::cout << "Creating Ecosystem* earth_ecosystem ...\n";
+
+        if (const Ecosystem* const earth_ecosystem = this->create_earth_ecosystem(); earth_ecosystem == nullptr)
+        {
+            return false;
+        }
 
         // Create the `Scene`s.
         // The `Scene`s will be created in the following order:
