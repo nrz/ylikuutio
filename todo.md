@@ -4,9 +4,10 @@
 ## Fixes needed
 - [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
+- [ ] BUG/HIRVI Turbo polizei are not rendered.
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] HIRVI/AI Implement `PoliceOperationsCenter` class that inherits `GenericMasterModule` class.
+- [ ] HIRVI/AI Implement `MasterOfPolices` class that inherits `GenericMasterModule` class.
 - [ ] HIRVI/AI Implement `Emancipable` class.
 - [ ] HIRVI/AI Make `PoliceHorse` and `PoliceDog` inherit `Emancipable`.
 - [ ] HIRVI/AI Make `EmancipationModule` inherit `ApprenticeModule`.
