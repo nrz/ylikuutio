@@ -35,86 +35,88 @@ namespace yli::ontology
 
 namespace yli::map
 {
-    template <typename T1>
-        std::vector<std::string> get_keys(const std::unordered_map<std::string, T1>& unordered_map)
+    template<typename T1>
+    std::vector<std::string> get_keys(const std::unordered_map<std::string, T1>& unordered_map)
+    {
+        std::vector<std::string> key_vector;
+        key_vector.reserve(unordered_map.size());
+
+        for (auto& key_and_value : unordered_map)
         {
-            std::vector<std::string> key_vector;
-            key_vector.reserve(unordered_map.size());
-
-            for (auto& key_and_value : unordered_map)
-            {
-                key_vector.emplace_back(key_and_value.first); // key.
-            }
-
-            // sort key vector alphabetically.
-            std::ranges::sort(key_vector);
-
-            return key_vector;
+            key_vector.emplace_back(key_and_value.first); // key.
         }
 
-    template <typename T1>
-        std::vector<std::pair<std::string, T1>> get_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
+        // sort key vector alphabetically.
+        std::ranges::sort(key_vector);
+
+        return key_vector;
+    }
+
+    template<typename T1>
+    std::vector<std::pair<std::string, T1>> get_keys_and_values(
+        const std::unordered_map<std::string, T1>& unordered_map)
+    {
+        std::vector<std::pair<std::string, T1>> key_and_value_vector;
+        key_and_value_vector.reserve(unordered_map.size());
+
+        for (auto& [key, value] : unordered_map)
         {
-            std::vector<std::pair<std::string, T1>> key_and_value_vector;
-            key_and_value_vector.reserve(unordered_map.size());
-
-            for (auto& [key, value] : unordered_map)
-            {
-                key_and_value_vector.emplace_back(std::pair<std::string, T1>(key, value));
-            }
-
-            // sort key and value vector alphabetically.
-            std::ranges::sort(key_and_value_vector);
-
-            return key_and_value_vector;
+            key_and_value_vector.emplace_back(std::pair<std::string, T1>(key, value));
         }
 
-    template <typename T1>
-        void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, ontology::Console& console)
-        {
-            std::vector<std::string> key_vector = map::get_keys(unordered_map);
-            yli::ontology::print_words_to_console(console, key_vector);
-        }
+        // sort key and value vector alphabetically.
+        std::ranges::sort(key_and_value_vector);
 
-    template <typename T1, typename T2>
-        void print_keys_of_specific_type_to_console(const std::unordered_map<std::string, T1>& unordered_map, ontology::Console& console)
-        {
-            std::vector<std::pair<std::string, T1>> keys_and_values = get_keys_and_values(unordered_map);
+        return key_and_value_vector;
+    }
 
-            for (auto& [key, value] : keys_and_values)
+    template<typename T1>
+    void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, ontology::Console& console)
+    {
+        std::vector<std::string> key_vector = map::get_keys(unordered_map);
+        yli::ontology::print_words_to_console(console, key_vector);
+    }
+
+    template<typename T1, typename T2>
+    void print_keys_of_specific_type_to_console(const std::unordered_map<std::string, T1>& unordered_map,
+                                                ontology::Console& console)
+    {
+        std::vector<std::pair<std::string, T1>> keys_and_values = get_keys_and_values(unordered_map);
+
+        for (auto& [key, value] : keys_and_values)
+        {
+            T2 inherited_type = dynamic_cast<T2>(value);
+
+            if (inherited_type != nullptr)
             {
-                T2 inherited_type = dynamic_cast<T2>(value);
-
-                if (inherited_type != nullptr)
-                {
-                    ontology::print_to_console(console, key);
-                }
+                ontology::print_to_console(console, key);
             }
         }
+    }
 
-    template <typename T1>
-        void print_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
+    template<typename T1>
+    void print_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
+    {
+        if (unordered_map.size() == 0)
         {
-            if (unordered_map.size() == 0)
+            std::cout << "no keys.\n";
+            return;
+        }
+
+        std::vector<std::string> key_vector = map::get_keys(unordered_map);
+
+        for (std::string key : key_vector)
+        {
+            if (unordered_map.at(key).empty())
             {
-                std::cout << "no keys.\n";
-                return;
+                std::cout << key << " (no value)\n";
             }
-
-            std::vector<std::string> key_vector = map::get_keys(unordered_map);
-
-            for (std::string key : key_vector)
+            else
             {
-                if (unordered_map.at(key).empty())
-                {
-                    std::cout << key << " (no value)\n";
-                }
-                else
-                {
-                    std::cout << key << " = " << unordered_map.at(key) << "\n";
-                }
+                std::cout << key << " = " << unordered_map.at(key) << "\n";
             }
         }
+    }
 }
 
 #endif
