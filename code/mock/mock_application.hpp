@@ -75,7 +75,7 @@ namespace mock
 
 namespace yli::core
 {
-    std::unique_ptr<Application> create_application(const int argc, const char* const argv[]);
+    std::unique_ptr<Application> create_application(int argc, const char* const argv[]);
 }
 
 #endif
