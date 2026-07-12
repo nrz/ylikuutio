@@ -58,10 +58,10 @@ namespace yli::core
         memory::MemorySystem<> memory_system { data::Datatype::UNIVERSE };
         ontology::EntityFactory<data::Datatype> entity_factory;
         SystemFactory<data::Datatype> system_factory;
-        ontology::Universe* const universe { nullptr };
-        event::EventSystem* const event_system { nullptr };
-        input::InputSystem* const input_system { nullptr };
-        audio::AudioSystem* const audio_system { nullptr };
+        ontology::Universe* const universe;
+        event::EventSystem* const event_system;
+        input::InputSystem* const input_system;
+        audio::AudioSystem* const audio_system;
     };
 }
 
