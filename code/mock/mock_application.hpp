@@ -48,7 +48,7 @@ namespace mock
         public:
             MockApplication();
 
-            ~MockApplication() = default;
+            ~MockApplication() override = default;
 
             yli::ontology::EntityFactory<yli::data::Datatype>& get_entity_factory();
 
