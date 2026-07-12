@@ -68,7 +68,7 @@ namespace mock
 
     std::vector<std::string> MockApplication::get_valid_keys() const
     {
-        return std::vector<std::string>();
+        return {};
     }
 
     yli::memory::GenericMemorySystem& MockApplication::get_generic_memory_system() const
