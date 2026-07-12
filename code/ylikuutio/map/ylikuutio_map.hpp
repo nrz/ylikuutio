@@ -18,7 +18,6 @@
 #ifndef YLIKUUTIO_MAP_YLIKUUTIO_MAP_HPP_INCLUDED
 #define YLIKUUTIO_MAP_YLIKUUTIO_MAP_HPP_INCLUDED
 
-#include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/console_printing.hpp"
 
 // Include standard headers
