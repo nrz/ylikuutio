@@ -62,7 +62,7 @@ namespace mock
 
             yli::ontology::Universe& get_universe() const override;
 
-            yli::ontology::UniverseStruct get_universe_struct() const;
+            static yli::ontology::UniverseStruct get_universe_struct();
 
             bool create_and_start_simulation() override;
 

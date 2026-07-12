@@ -96,7 +96,7 @@ namespace mock
         return *this->universe;
     }
 
-    yli::ontology::UniverseStruct MockApplication::get_universe_struct() const
+    yli::ontology::UniverseStruct MockApplication::get_universe_struct()
     {
         return yli::ontology::UniverseStruct(yli::render::GraphicsApiBackend::HEADLESS);
     }
