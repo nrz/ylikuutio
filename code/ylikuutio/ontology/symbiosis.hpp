@@ -177,8 +177,8 @@ namespace yli::ontology
     private:
         void create_symbionts();
 
-        std::string model_filename; // filename of the model file.
-        std::string model_file_format; // type of the model file, eg. `"fbx"`.
+        const std::string model_filename; // filename of the model file.
+        const std::string model_file_format; // type of the model file, eg. `"fbx"`.
 
         std::vector<std::vector<glm::vec3>> vertices; // vertices of the object.
         std::vector<std::vector<glm::vec2>> uvs; // UVs of the object.
