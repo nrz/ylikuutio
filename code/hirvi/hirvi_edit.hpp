@@ -50,7 +50,6 @@ namespace yli::input
 namespace yli::memory
 {
     class GenericMemorySystem;
-    class GenericMemoryAllocator;
 }
 
 namespace yli::ontology
