@@ -21,7 +21,7 @@
 #include "code/ylikuutio/ontology/console_printing.hpp"
 
 // Include standard headers
-#include <algorithm>     // std::sort
+#include <algorithm>     // std::ranges::sort
 #include <iostream>      // std::cout, std::cerr
 #include <string>        // std::string
 #include <unordered_map> // std::unordered_map
@@ -47,7 +47,7 @@ namespace yli::map
             }
 
             // sort key vector alphabetically.
-            std::sort(key_vector.begin(), key_vector.end());
+            std::ranges::sort(key_vector);
 
             return key_vector;
         }
@@ -64,7 +64,7 @@ namespace yli::map
             }
 
             // sort key and value vector alphabetically.
-            std::sort(key_and_value_vector.begin(), key_and_value_vector.end());
+            std::ranges::sort(key_and_value_vector);
 
             return key_and_value_vector;
         }
