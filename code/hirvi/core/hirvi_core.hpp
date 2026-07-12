@@ -85,10 +85,10 @@ namespace hirvi::core
         yli::memory::MemorySystem<data::Datatype> memory_system { data::UNIVERSE };
         yli::ontology::EntityFactory<data::Datatype> entity_factory;
         yli::core::SystemFactory<data::Datatype> system_factory;
-        yli::ontology::Universe* const universe { nullptr };
-        yli::event::EventSystem* const event_system { nullptr };
-        yli::input::InputSystem* const input_system { nullptr };
-        yli::audio::AudioSystem* const audio_system { nullptr };
+        yli::ontology::Universe* const universe;
+        yli::event::EventSystem* const event_system;
+        yli::input::InputSystem* const input_system;
+        yli::audio::AudioSystem* const audio_system;
     };
 }
 
