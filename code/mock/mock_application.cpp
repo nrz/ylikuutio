@@ -54,7 +54,7 @@ namespace yli::ontology
 namespace mock
 {
     MockApplication::MockApplication()
-        : yli::core::Application(0, nullptr),
+        : Application(0, nullptr),
         entity_factory(*this, this->memory_system),
         universe { this->entity_factory.create_universe(this->get_universe_struct()) }
     {
@@ -110,7 +110,7 @@ namespace mock
 
 namespace yli::core
 {
-    std::unique_ptr<yli::core::Application> create_application(const int /* argc */, const char* const /* argv */ [])
+    std::unique_ptr<Application> create_application(const int /* argc */, const char* const /* argv */ [])
     {
         return std::make_unique<mock::MockApplication>();
     }
