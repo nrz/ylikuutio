@@ -50,7 +50,7 @@ namespace mock
 
             ~MockApplication() override = default;
 
-            yli::ontology::EntityFactory<yli::data::Datatype>& get_entity_factory();
+            yli::ontology::EntityFactory<yli::data::Datatype>& get_entity_factory() const;
 
             std::vector<std::string> get_valid_keys() const override;
 
