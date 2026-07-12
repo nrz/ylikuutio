@@ -40,66 +40,78 @@ namespace yli::ontology
 
     class MeshModule final
     {
-        public:
-            MeshModule(
-                    Universe& universe,
-                    const MeshProviderStruct& mesh_provider_struct,
-                    Pipeline* pipeline);
+    public:
+        MeshModule(
+            Universe& universe,
+            const MeshProviderStruct& mesh_provider_struct,
+            Pipeline* pipeline);
 
-            MeshModule(const MeshModule&) = delete;            // Delete copy constructor.
-            MeshModule& operator=(const MeshModule&) = delete; // Delete copy assignment.
+        MeshModule(const MeshModule&) = delete;            // Delete copy constructor.
+        MeshModule& operator=(const MeshModule&) = delete; // Delete copy assignment.
 
-            ~MeshModule();
+        ~MeshModule();
 
-            std::size_t get_number_of_vertices() const;
-            const std::vector<glm::vec3>& get_vertices() const;
-            const std::vector<glm::vec2>& get_uvs() const;
-            const std::vector<glm::vec3>& get_normals() const;
-            const std::vector<std::uint32_t>& get_indices() const;
+        std::size_t get_number_of_vertices() const;
 
-            std::size_t get_indices_size() const;
+        const std::vector<glm::vec3>& get_vertices() const;
 
-            GLint get_vertex_position_modelspace_id() const;
-            GLint get_vertex_uv_id() const;
-            GLint get_vertex_normal_modelspace_id() const;
+        const std::vector<glm::vec2>& get_uvs() const;
 
-            GLuint get_vao() const;
-            GLuint get_vertex_buffer() const;
-            GLuint get_uv_buffer() const;
-            GLuint get_normal_buffer() const;
-            GLuint get_element_buffer() const;
+        const std::vector<glm::vec3>& get_normals() const;
 
-            void set_vertex_position_modelspace_id(GLint vertex_position_modelspace_id);
-            void set_vertex_uv_id(GLint vertex_uv_id);
-            void set_vertex_normal_modelspace_id(GLint vertex_normal_modelspace_id);
+        const std::vector<std::uint32_t>& get_indices() const;
 
-            std::uint32_t image_width  { 0 };
-            std::uint32_t image_height { 0 };
+        std::size_t get_indices_size() const;
 
-        private:
-            std::vector<glm::vec3> vertices; // Vertices of the `MeshModule`.
-            std::vector<glm::vec2> uvs;      // UVs of the `MeshModule`.
-            std::vector<glm::vec3> normals;  // Normals of the `MeshModule`.
+        GLint get_vertex_position_modelspace_id() const;
 
-        public:
-            GLint vertex_position_modelspace_id { 0 }; // Dummy value.
-            GLint vertex_uv_id                  { 0 }; // Dummy value.
-            GLint vertex_normal_modelspace_id   { 0 }; // Dummy value.
+        GLint get_vertex_uv_id() const;
 
-        private:
-            std::vector<std::uint32_t> indices;
-            std::vector<glm::vec3> indexed_vertices;
-            std::vector<glm::vec2> indexed_uvs;
-            std::vector<glm::vec3> indexed_normals;
+        GLint get_vertex_normal_modelspace_id() const;
 
-            GLuint vao            { 0 }; // Dummy value.
-            GLuint vertex_buffer  { 0 }; // Dummy value.
-            GLuint uv_buffer      { 0 }; // Dummy value.
-            GLuint normal_buffer  { 0 }; // Dummy value.
-            GLuint element_buffer { 0 }; // Dummy value.
+        GLuint get_vao() const;
 
-            bool use_real_texture_coordinates   { true };
-            bool are_opengl_buffers_initialized { false };
+        GLuint get_vertex_buffer() const;
+
+        GLuint get_uv_buffer() const;
+
+        GLuint get_normal_buffer() const;
+
+        GLuint get_element_buffer() const;
+
+        void set_vertex_position_modelspace_id(GLint vertex_position_modelspace_id);
+
+        void set_vertex_uv_id(GLint vertex_uv_id);
+
+        void set_vertex_normal_modelspace_id(GLint vertex_normal_modelspace_id);
+
+        std::uint32_t image_width { 0 };
+        std::uint32_t image_height { 0 };
+
+    private:
+        std::vector<glm::vec3> vertices; // Vertices of the `MeshModule`.
+        std::vector<glm::vec2> uvs;      // UVs of the `MeshModule`.
+        std::vector<glm::vec3> normals;  // Normals of the `MeshModule`.
+
+    public:
+        GLint vertex_position_modelspace_id { 0 }; // Dummy value.
+        GLint vertex_uv_id { 0 };                  // Dummy value.
+        GLint vertex_normal_modelspace_id { 0 };   // Dummy value.
+
+    private:
+        std::vector<std::uint32_t> indices;
+        std::vector<glm::vec3> indexed_vertices;
+        std::vector<glm::vec2> indexed_uvs;
+        std::vector<glm::vec3> indexed_normals;
+
+        GLuint vao { 0 };            // Dummy value.
+        GLuint vertex_buffer { 0 };  // Dummy value.
+        GLuint uv_buffer { 0 };      // Dummy value.
+        GLuint normal_buffer { 0 };  // Dummy value.
+        GLuint element_buffer { 0 }; // Dummy value.
+
+        bool use_real_texture_coordinates { true };
+        bool are_opengl_buffers_initialized { false };
     };
 }
 
