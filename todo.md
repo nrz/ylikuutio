@@ -4,7 +4,6 @@
 ## Fixes needed
 - [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
 - [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
-- [ ] BUG/HIRVI Turbo polizei are not rendered.
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
 - [ ] HIRVI/AI Implement `MasterOfPolices` class that inherits `GenericMasterModule` class.
@@ -409,3 +408,4 @@
 - [x] BUG/DISPLAY/HIRVI Hirvi fullscreen window opens in an external display and not in the laptop's higher resolution WQUXGA display.
 - [x] BUG/DISPLAY/HIRVI Hirvi game view is rendered only on the bottom left quarter of the WQUXGA display.
 - [x] BUG/UI/HIRVI Camera control with mouse is broken.
+- [x] BUG/HIRVI Fix `Symbiosis` rendering.
