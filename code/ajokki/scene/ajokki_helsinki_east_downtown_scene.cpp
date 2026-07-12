@@ -487,10 +487,11 @@ namespace ajokki
         // Create some cats.
 
         constexpr std::size_t cat_i_upper_bound { 2 };
-        constexpr std::size_t cat_j_upper_bound { 100 };
 
         for (std::size_t i = 0; i < cat_i_upper_bound; i++)
         {
+            constexpr std::size_t cat_j_upper_bound { 100 };
+
             for (std::size_t j = 0; j < cat_j_upper_bound; j++)
             {
                 const std::string index_string = std::to_string(i * cat_i_upper_bound + j);
