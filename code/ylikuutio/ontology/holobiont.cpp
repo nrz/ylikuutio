@@ -20,7 +20,6 @@
 #include "universe.hpp"
 #include "scene.hpp"
 #include "symbiosis.hpp"
-#include "symbiont_species.hpp"
 #include "biont.hpp"
 #include "cartesian_coordinates_module.hpp"
 #include "generic_entity_factory.hpp"
@@ -49,6 +48,7 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
     class Entity;
+    class SymbiontSpecies;
 
     Holobiont::Holobiont(
         core::Application& application,
