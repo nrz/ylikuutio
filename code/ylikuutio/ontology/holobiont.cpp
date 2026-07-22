@@ -22,7 +22,6 @@
 #include "symbiosis.hpp"
 #include "symbiont_species.hpp"
 #include "biont.hpp"
-#include "skill.hpp"
 #include "cartesian_coordinates_module.hpp"
 #include "generic_entity_factory.hpp"
 #include "request.hpp"
@@ -33,7 +32,6 @@
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/render/render_system.hpp"
-#include "code/ylikuutio/render/render_templates.hpp"
 
 // Include standard headers
 #include <cstdint>   // std::uintptr_t
