@@ -21,7 +21,7 @@
 // Include standard headers
 #include <string>  // std::string
 #include <utility> // std::move
-#include <variant> // std::monostate, std::variant
+#include <variant> // std::holds_alternative, std::monostate, std::variant
 
 namespace yli::ontology
 {
@@ -41,6 +41,19 @@ namespace yli::ontology
         explicit Request(const std::string& name)
             : data { name }
         { }
+
+        template<typename DerivedType>
+        explicit Request(Request<DerivedType>&& request)
+        {
+            if (std::holds_alternative<DerivedType*>(request.data))
+            {
+                this->data = std::get<DerivedType*>(std::move(request.data));
+            }
+            else if (std::holds_alternative<std::string>(request.data))
+            {
+                this->data = std::get<std::string>(std::move(request.data));
+            }
+        }
 
         std::variant<std::monostate, Type*, std::string> data;
     };

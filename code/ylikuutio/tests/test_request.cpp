@@ -25,7 +25,11 @@
 
 namespace foo
 {
-    class Bar;
+    class Bar
+    { };
+
+    class Baz : public Bar
+    { };
 }
 
 TEST(request_must_be_initialized_appropriately, uninitialized_request_must_have_a_valid_empty_state)
@@ -58,4 +62,18 @@ TEST(request_must_be_initialized_appropriately, const_string)
     ASSERT_TRUE(std::holds_alternative<std::string>(request.data));
     std::string baz_string = std::get<std::string>(request.data);
     ASSERT_EQ(baz_string, "baz");
+}
+
+TEST(request_must_be_initialized_appropriately, from_request_of_derived_type)
+{
+    foo::Baz baz;
+    yli::ontology::Request baz_request(&baz);
+    ASSERT_TRUE(std::holds_alternative<foo::Baz*>(baz_request.data));
+    foo::Baz* const baz_pointer2 = std::get<foo::Baz*>(baz_request.data);
+    ASSERT_EQ(baz_pointer2, &baz);
+
+    const yli::ontology::Request<foo::Bar> bar_request(std::move(baz_request));
+    ASSERT_TRUE(std::holds_alternative<foo::Bar*>(bar_request.data));
+    foo::Bar* const bar_pointer = std::get<foo::Bar*>(bar_request.data);
+    ASSERT_EQ(bar_pointer, &baz);
 }
