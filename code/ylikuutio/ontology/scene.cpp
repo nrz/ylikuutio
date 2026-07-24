@@ -233,16 +233,6 @@ namespace yli::ontology
 
         // It is OK to disactivate the active camera by setting `active_camera` to `nullptr`.
         this->active_camera = camera;
-
-        // requirements for further actions:
-        // `this->parent` must not be `nullptr`.
-
-        Scene* const active_scene = this->universe.get_active_scene();
-
-        if (active_scene == nullptr)
-        {
-            return;
-        }
     }
 
     Entity* Scene::get_parent() const
