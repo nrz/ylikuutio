@@ -34,14 +34,14 @@ namespace foo
 
 TEST(request_must_be_initialized_appropriately, uninitialized_request_must_have_a_valid_empty_state)
 {
-    yli::ontology::Request<foo::Bar> request;
+    const yli::ontology::Request<foo::Bar> request;
     ASSERT_TRUE(std::holds_alternative<std::monostate>(request.data));
 }
 
 TEST(request_must_be_initialized_appropriately, pointer)
 {
     foo::Bar* const bar_pointer1 { nullptr };
-    yli::ontology::Request request(bar_pointer1);
+    const yli::ontology::Request request(bar_pointer1);
     ASSERT_TRUE(std::holds_alternative<foo::Bar*>(request.data));
     foo::Bar* const bar_pointer2 = std::get<foo::Bar*>(request.data);
     ASSERT_EQ(bar_pointer1, bar_pointer2);
@@ -49,18 +49,18 @@ TEST(request_must_be_initialized_appropriately, pointer)
 
 TEST(request_must_be_initialized_appropriately, string)
 {
-    yli::ontology::Request<foo::Bar> request("baz");
+    const yli::ontology::Request<foo::Bar> request("baz");
     ASSERT_TRUE(std::holds_alternative<std::string>(request.data));
-    std::string baz_string = std::get<std::string>(request.data);
+    const std::string baz_string = std::get<std::string>(request.data);
     ASSERT_EQ(baz_string, "baz");
 }
 
 TEST(request_must_be_initialized_appropriately, const_string)
 {
     const std::string baz_const_string { "baz" };
-    yli::ontology::Request<foo::Bar> request(baz_const_string);
+    const yli::ontology::Request<foo::Bar> request(baz_const_string);
     ASSERT_TRUE(std::holds_alternative<std::string>(request.data));
-    std::string baz_string = std::get<std::string>(request.data);
+    const std::string baz_string = std::get<std::string>(request.data);
     ASSERT_EQ(baz_string, "baz");
 }
 
