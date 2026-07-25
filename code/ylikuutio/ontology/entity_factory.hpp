@@ -188,6 +188,7 @@ namespace yli::ontology
                 return master->template get_generic_master_module<ApprenticeType>();
             }
 
+            std::cerr << "ERROR: `EntityFactory::get_generic_master_module`: `master` is `nullptr`!\n";
             return nullptr;
         }
 
