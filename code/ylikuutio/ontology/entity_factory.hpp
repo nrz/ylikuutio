@@ -174,6 +174,7 @@ namespace yli::ontology
                 return parent->template get_generic_parent_module<ChildType>();
             }
 
+            std::cerr << "ERROR: `EntityFactory::get_generic_parent_module`: `parent` is `nullptr`!\n";
             return nullptr;
         }
 
