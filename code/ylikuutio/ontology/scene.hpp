@@ -103,7 +103,7 @@ namespace yli::ontology
         void do_physics();
 
         // Intentional actors (AIs and keyboard controlled ones).
-        void update();
+        void update() const;
 
         void activate() override;
 
