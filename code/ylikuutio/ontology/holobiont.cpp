@@ -95,7 +95,7 @@ namespace yli::ontology
             return;
         }
 
-        if (Scene* const scene = this->get_scene();
+        if (const Scene* const scene = this->get_scene();
             target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
             // Different `Scene`s, do not render.
