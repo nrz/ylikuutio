@@ -165,9 +165,7 @@ namespace yli::ontology
 
         for (Entity* const movable_controller_entity : this->parent_of_movable_controllers.child_pointer_vector)
         {
-            MovableController* const movable_controller = static_cast<MovableController*>(movable_controller_entity);
-
-            if (movable_controller != nullptr)
+            if (const auto movable_controller = static_cast<MovableController*>(movable_controller_entity); movable_controller != nullptr)
             {
                 movable_controller->update();
             }
