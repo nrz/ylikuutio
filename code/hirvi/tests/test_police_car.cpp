@@ -72,8 +72,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     rest_movable_controller_struct.global_name = "rest_movable_controller";
     rest_movable_controller_struct.local_name = "rest";
     MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().
-            create_movable_controller(
-                rest_movable_controller_struct);
+            create_movable_controller(rest_movable_controller_struct);
 
     PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
