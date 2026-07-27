@@ -71,8 +71,9 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     MovableControllerStruct rest_movable_controller_struct { Request(helsinki_scene), Request(rest_callback_engine) };
     rest_movable_controller_struct.global_name = "rest_movable_controller";
     rest_movable_controller_struct.local_name = "rest";
-    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(
-        rest_movable_controller_struct);
+    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().
+            create_movable_controller(
+                rest_movable_controller_struct);
 
     PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
@@ -85,8 +86,8 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request(helsinki_scene), Request(helsinki_pipeline) };
     turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
     turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
-    Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.get_entity_factory().create_symbiosis(
-        turbo_polizei_png_symbiosis_struct);
+    Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.get_entity_factory().
+            create_symbiosis(turbo_polizei_png_symbiosis_struct);
 
     HolobiontStruct turbo_polizei_png_police_car_struct1 {
         Request(helsinki_scene), Request(rest_movable_controller), Request(turbo_polizei_png_symbiosis)
