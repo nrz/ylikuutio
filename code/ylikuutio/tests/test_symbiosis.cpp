@@ -57,6 +57,7 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately,
         symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
+    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
 
     const yli::ontology::GenericParentModule* const parent_of_symbiont_materials =
             symbiosis->get_generic_parent_module<yli::ontology::SymbiontMaterial>();
@@ -109,6 +110,7 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately,
         symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
+    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -156,6 +158,7 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately,
     };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
         symbiosis_struct);
+    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -202,6 +205,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_scene_provided_as_val
     };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
         symbiosis_struct);
+    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -245,6 +249,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_scene_provided_as_val
     };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
         symbiosis_struct);
+    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -288,6 +293,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_scene_provided_as_inv
     };
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
         symbiosis_struct);
+    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
