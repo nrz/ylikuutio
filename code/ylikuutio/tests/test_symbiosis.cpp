@@ -321,6 +321,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei_scene_p
     symbiosis_struct.model_file_format = "FBX";
     yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
             symbiosis_struct);
+    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 5);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
