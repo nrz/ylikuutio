@@ -134,7 +134,7 @@ namespace yli::load
         std::vector<float> vertex_data;
         vertex_data.reserve(image_width * image_height);
 
-        const std::uint8_t* image_pointer = &(*file_content)[0]; // start from northwestern corner.
+        const std::uint8_t* image_pointer = &file_content->at(0); // start from northwestern corner.
 
         // start processing heightmap data.
         // 90 meters is for equator.
@@ -174,6 +174,6 @@ namespace yli::load
         triangulate_quads_struct.y_step = heightmap_loader_struct.y_step;
         triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
 
-        return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_uvs, out_normals);
+        return yli::triangulation::triangulate_quads(&vertex_data.at(0), triangulate_quads_struct, out_vertices, out_uvs, out_normals);
     }
 }
