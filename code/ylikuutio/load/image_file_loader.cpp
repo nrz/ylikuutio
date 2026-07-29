@@ -49,7 +49,7 @@ namespace yli::load
             return nullptr;
         }
 
-        if (const auto suffix = std::string(&filename[dot_position]); suffix == ".png")
+        if (const auto suffix = std::string(&filename.at(dot_position)); suffix == ".png")
         {
             return load_png_file(filename, image_loader_struct, image_width, image_height, image_size, n_color_channels);
         }
