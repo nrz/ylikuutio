@@ -127,7 +127,7 @@ namespace yli::load
         auto image_data = std::make_shared<std::vector<std::uint8_t>>();
         image_data->resize(image_height * line_width_in_bytes);
         n_color_channels = (image_data->size() / image_size);
-        std::uint8_t* image_data_pointer = &(*image_data)[0];
+        std::uint8_t* image_data_pointer = &image_data->at(0);
 
         for (std::uint32_t row_i = 0; row_i < image_height; row_i++)
         {
@@ -147,7 +147,7 @@ namespace yli::load
 
         if (image_loader_struct.should_flip_vertically)
         {
-            memory::flip_vertically(&(*image_data)[0], line_width_in_bytes, image_height);
+            memory::flip_vertically(&(*image_data).at(0), line_width_in_bytes, image_height);
         }
 
         png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);
