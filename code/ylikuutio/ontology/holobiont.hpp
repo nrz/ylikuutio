@@ -72,7 +72,7 @@ namespace yli::ontology
 
         ~Holobiont() override = default;
 
-        Entity* get_parent() const final;
+        Entity* get_parent() const override;
 
         void update_x(float x);
 
@@ -127,7 +127,7 @@ namespace yli::ontology
         template<typename ChildType>
         GenericParentModule* get_generic_parent_module() = delete;
 
-        Scene* get_scene() const final;
+        Scene* get_scene() const override;
 
         Symbiosis* get_symbiosis() const;
 
