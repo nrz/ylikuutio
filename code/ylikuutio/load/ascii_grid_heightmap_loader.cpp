@@ -250,7 +250,7 @@ namespace yli::load
             triangulate_quads_struct.y_step = heightmap_loader_struct.y_step;
             triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
 
-            return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_uvs, out_normals);
+            return yli::triangulation::triangulate_quads(&vertex_data.at(0), triangulate_quads_struct, out_vertices, out_uvs, out_normals);
         }
 
         // No triangulation.
@@ -262,7 +262,7 @@ namespace yli::load
 
             for (std::uint32_t x = 0; x < image_width; x++)
             {
-                glm::vec3 vertex { static_cast<float>(x), scene_y, vertex_data[i++] };
+                glm::vec3 vertex { static_cast<float>(x), scene_y, vertex_data.at(i++) };
                 out_vertices.emplace_back(vertex);
             }
         }
