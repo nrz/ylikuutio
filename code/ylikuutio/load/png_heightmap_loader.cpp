@@ -112,7 +112,7 @@ namespace yli::load
         }
 
         std::cout << n_color_channels << " color channel" << (n_color_channels > 1 ? "s" : "") << " in use.\n";
-        memory::flip_vertically(&(*image_data)[0], static_cast<std::size_t>(n_color_channels) * static_cast<std::size_t>(image_width), image_height);
+        memory::flip_vertically(&(*image_data).at(0), static_cast<std::size_t>(n_color_channels) * static_cast<std::size_t>(image_width), image_height);
 
         // Define terrain size.
         const std::size_t terrain_size = static_cast<std::size_t>(image_width) * static_cast<std::size_t>(image_height);
@@ -125,7 +125,7 @@ namespace yli::load
         // start processing image_data.
         for (std::size_t y = 0; y < image_height; y++)
         {
-            const std::uint8_t* image_pointer = &(*image_data)[0] + y * line_size_in_bytes;
+            const std::uint8_t* image_pointer = &(*image_data).at(0) + y * line_size_in_bytes;
 
             for (std::size_t x = 0; x < image_width; x++)
             {
@@ -173,6 +173,6 @@ namespace yli::load
         triangulate_quads_struct.y_step = heightmap_loader_struct.y_step;
         triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
 
-        return yli::triangulation::triangulate_quads(&vertex_data[0], triangulate_quads_struct, out_vertices, out_uvs, out_normals);
+        return yli::triangulation::triangulate_quads(&vertex_data.at(0), triangulate_quads_struct, out_vertices, out_uvs, out_normals);
     }
 }
