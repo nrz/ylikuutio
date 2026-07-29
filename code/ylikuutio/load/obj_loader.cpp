@@ -198,14 +198,14 @@ namespace yli::load
         for (std::size_t i = 0; i < vertex_indices.size(); i++)
         {
             // Get the indices of its attributes
-            std::int32_t vertex_index = vertex_indices[i];
-            std::int32_t uv_index = uv_indices[i];
-            std::int32_t normal_index = normal_indices[i];
+            std::int32_t vertex_index = vertex_indices.at(i);
+            std::int32_t uv_index = uv_indices.at(i);
+            std::int32_t normal_index = normal_indices.at(i);
 
             // Get the attributes thanks to the index
-            glm::vec3 vertex = temp_vertices[vertex_index - 1];
-            glm::vec2 uv = temp_uvs[uv_index - 1];
-            glm::vec3 normal = temp_normals[normal_index - 1];
+            glm::vec3 vertex = temp_vertices.at(vertex_index - 1);
+            glm::vec2 uv = temp_uvs.at(uv_index - 1);
+            glm::vec3 normal = temp_normals.at(normal_index - 1);
 
             // Put the attributes in buffers
             out_vertices.emplace_back(vertex);
