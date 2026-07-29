@@ -46,12 +46,12 @@
 namespace yli::load
 {
     bool load_ascii_grid_terrain(
-            const HeightmapLoaderStruct& heightmap_loader_struct,
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_uvs,
-            std::vector<glm::vec3>& out_normals,
-            std::uint32_t& image_width,
-            std::uint32_t& image_height)
+        const HeightmapLoaderStruct& heightmap_loader_struct,
+        std::vector<glm::vec3>& out_vertices,
+        std::vector<glm::vec2>& out_uvs,
+        std::vector<glm::vec3>& out_normals,
+        std::uint32_t& image_width,
+        std::uint32_t& image_height)
     {
         // Beginning of `L4133D.asc`.
         //
@@ -76,13 +76,15 @@ namespace yli::load
 
         if (heightmap_loader_struct.x_step < 1)
         {
-            std::cerr << "ERROR: `yli::load::load_ascii_grid_terrain`: `heightmap_loader_struct.x_step` is less than 1.\n";
+            std::cerr <<
+                    "ERROR: `yli::load::load_ascii_grid_terrain`: `heightmap_loader_struct.x_step` is less than 1.\n";
             return false;
         }
 
         if (heightmap_loader_struct.y_step < 1)
         {
-            std::cerr << "ERROR: `yli::load::load_ascii_grid_terrain`: `heightmap_loader_struct.y_step` is less than 1.\n";
+            std::cerr <<
+                    "ERROR: `yli::load::load_ascii_grid_terrain`: `heightmap_loader_struct.y_step` is less than 1.\n";
             return false;
         }
 
@@ -91,25 +93,29 @@ namespace yli::load
 
         if (!file_content || file_content->empty())
         {
-            std::cerr << "ERROR: " << heightmap_loader_struct.filename << " could not be opened, or the file is empty.\n";
+            std::cerr << "ERROR: " << heightmap_loader_struct.filename <<
+                    " could not be opened, or the file is empty.\n";
             return false;
         }
 
         std::size_t file_content_i = 0;
 
         // All possible block identifier strings.
-        const std::vector<std::string> number_strings_vector = { "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        const std::vector<std::string> number_strings_vector = {
+            "-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+        };
 
-        while (!string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
+        while (!string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i,
+                                                                      number_strings_vector))
         {
             file_content_i++;
         }
 
         std::optional<std::int32_t> image_width_int32_t = string::extract_value_from_string<char, std::int32_t>(
-                *file_content,
-                file_content_i,
-                " \n",
-                "ncols");
+            *file_content,
+            file_content_i,
+            " \n",
+            "ncols");
 
         if (!image_width_int32_t.has_value())
         {
@@ -117,16 +123,17 @@ namespace yli::load
             return false;
         }
 
-        while (!string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
+        while (!string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i,
+                                                                      number_strings_vector))
         {
             file_content_i++;
         }
 
         std::optional<std::int32_t> image_height_int32_t = yli::string::extract_value_from_string<char, std::int32_t>(
-                *file_content,
-                file_content_i,
-                " \n",
-                "nrows");
+            *file_content,
+            file_content_i,
+            " \n",
+            "nrows");
 
         if (!image_height_int32_t.has_value())
         {
@@ -134,49 +141,53 @@ namespace yli::load
             return false;
         }
 
-        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
+        while (!yli::string::check_and_report_if_some_string_matches<char>(
+            *file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
 
         yli::string::extract_value_from_string<char, float>(
-                *file_content,
-                file_content_i,
-                " \n",
-                "xllcorner");
+            *file_content,
+            file_content_i,
+            " \n",
+            "xllcorner");
 
-        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
+        while (!yli::string::check_and_report_if_some_string_matches<char>(
+            *file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
 
         yli::string::extract_value_from_string<char, float>(
-                *file_content,
-                file_content_i,
-                " \n",
-                "yllcorner");
+            *file_content,
+            file_content_i,
+            " \n",
+            "yllcorner");
 
-        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
+        while (!yli::string::check_and_report_if_some_string_matches<char>(
+            *file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
 
         yli::string::extract_value_from_string<char, float>(
-                *file_content,
-                file_content_i,
-                " \n",
-                "cellsize");
+            *file_content,
+            file_content_i,
+            " \n",
+            "cellsize");
 
-        while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
+        while (!yli::string::check_and_report_if_some_string_matches<char>(
+            *file_content, file_content_i, number_strings_vector))
         {
             file_content_i++;
         }
 
         yli::string::extract_value_from_string<char, float>(
-                *file_content,
-                file_content_i,
-                " \n",
-                "nodata_value");
+            *file_content,
+            file_content_i,
+            " \n",
+            "nodata_value");
 
         if (image_width_int32_t < 2)
         {
@@ -205,7 +216,8 @@ namespace yli::load
             for (std::uint32_t y = 0; y < image_height; y++)
             {
                 // show progress in percents.
-                std::int32_t current_percent = static_cast<std::int32_t>(floor(100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
+                std::int32_t current_percent = static_cast<std::int32_t>(floor(
+                    100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
 
                 if (current_percent > last_percent)
                 {
@@ -215,16 +227,17 @@ namespace yli::load
 
                 for (std::uint32_t x = 0; x < image_width; x++)
                 {
-                    while (!yli::string::check_and_report_if_some_string_matches<char>(*file_content, file_content_i, number_strings_vector))
+                    while (!yli::string::check_and_report_if_some_string_matches<char>(
+                        *file_content, file_content_i, number_strings_vector))
                     {
                         file_content_i++;
                     }
 
                     std::optional<float> z_coordinate = yli::string::extract_value_from_string<char, float>(
-                            *file_content,
-                            file_content_i,
-                            " \n",
-                            std::string_view(""));
+                        *file_content,
+                        file_content_i,
+                        " \n",
+                        std::string_view(""));
 
                     if (!z_coordinate.has_value())
                     {
@@ -248,9 +261,11 @@ namespace yli::load
             triangulate_quads_struct.image_height = image_height;
             triangulate_quads_struct.x_step = heightmap_loader_struct.x_step;
             triangulate_quads_struct.y_step = heightmap_loader_struct.y_step;
-            triangulate_quads_struct.use_real_texture_coordinates = heightmap_loader_struct.use_real_texture_coordinates;
+            triangulate_quads_struct.use_real_texture_coordinates =
+                    heightmap_loader_struct.use_real_texture_coordinates;
 
-            return yli::triangulation::triangulate_quads(&vertex_data.at(0), triangulate_quads_struct, out_vertices, out_uvs, out_normals);
+            return yli::triangulation::triangulate_quads(&vertex_data.at(0), triangulate_quads_struct, out_vertices,
+                                                         out_uvs, out_normals);
         }
 
         // No triangulation.
