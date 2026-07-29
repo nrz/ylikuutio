@@ -73,11 +73,6 @@ namespace yli::ontology
               "skills"),
           apprentice_of_symbiosis(symbiosis_master_module, this)
     {
-        if (this->Holobiont::get_parent() != nullptr && this->get_symbiosis() != nullptr)
-        {
-            create_bionts(*this, holobiont_struct.should_render_bionts_vector);
-        }
-
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Holobiont*";
         this->can_be_erased = true;

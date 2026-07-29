@@ -817,7 +817,7 @@ namespace yli::ontology
             const HolobiontStruct& holobiont_struct,
             ModuleArgs&&... module_args) const
         {
-            return static_cast<T*>(this->template create_child_of_known_parent_type<
+            T* const holobiont_derivative = static_cast<T*>(this->template create_child_of_known_parent_type<
                 Holobiont, Scene, HolobiontDerivativeMemoryAllocator, HolobiontStruct>(
                 holobiont_derivative_type,
                 holobiont_struct.scene,
@@ -825,6 +825,14 @@ namespace yli::ontology
                 this->get_generic_master_module<Movable, MovableController>(holobiont_struct.movable_controller_master),
                 this->get_generic_master_module<Holobiont, Symbiosis>(holobiont_struct.symbiosis_master),
                 std::forward<ModuleArgs>(module_args)...));
+
+            if (holobiont_derivative != nullptr)
+            {
+                Holobiont::create_bionts(*holobiont_derivative,
+                                         holobiont_struct.should_render_bionts_vector);
+            }
+
+            return holobiont_derivative;
         }
 
     private:

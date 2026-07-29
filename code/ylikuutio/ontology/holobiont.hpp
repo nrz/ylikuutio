@@ -52,6 +52,9 @@ namespace yli::ontology
     struct HolobiontStruct;
     struct SkillStruct;
 
+    template<typename TypeEnumType>
+    class EntityFactory;
+
     class Holobiont : public Movable
     {
     protected:
@@ -112,6 +115,9 @@ namespace yli::ontology
 
         template<typename T1, std::size_t DataSize>
         friend class memory::MemoryStorage;
+
+        template<typename TypeEnumType>
+        friend class EntityFactory;
 
         ChildModule child_of_scene;
         GenericParentModule parent_of_bionts;
