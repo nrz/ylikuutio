@@ -922,8 +922,10 @@ namespace yli::ontology
                 std::cerr <<
                         "ERROR: `EntityFactory::create_child_of_universe`: both global and local names given for type: "
                         << instance->get_type() << "\n";
-                std::cerr << "which is a child of `Universe`. For children of the `Universe` global and local names\n";
-                std::cerr << "are the same and only 1 of them can be given. No name given to this instance of type: " <<
+                std::cerr <<
+                        "which is a child of `Universe`. For children of the `Universe` global and local names\n";
+                std::cerr <<
+                        "are the same and only 1 of them can be given. No name given to this instance of type: " <<
                         instance->get_type() << " !\n";
             }
 
