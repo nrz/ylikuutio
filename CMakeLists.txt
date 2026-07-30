@@ -976,6 +976,7 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/police_car_struct.hpp
     code/hirvi/ontology/police_dog.cpp
     code/hirvi/ontology/police_dog.hpp
+    code/hirvi/ontology/police_dog_struct.hpp
     code/hirvi/ontology/police_helicopter.cpp
     code/hirvi/ontology/police_helicopter.hpp
     code/hirvi/ontology/police_helicopter_struct.hpp
