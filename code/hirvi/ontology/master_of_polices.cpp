@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "master_of_polices.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
+#include "police_control_center.hpp"
 
 // Include standard headers
 #include <string> // std::string
@@ -33,10 +33,10 @@ namespace hirvi::ontology
     using namespace yli::ontology;
 
     MasterOfPolices::MasterOfPolices(
-        Scene& master_scene,
+        PoliceControlCenter& police_control_center,
         Registry* const registry,
         const std::string& name)
-        : GenericMasterModule(master_scene, registry, name)
+        : GenericMasterModule(police_control_center, registry, name)
     { }
 
     void MasterOfPolices::store_data()

@@ -18,8 +18,8 @@
 #ifndef YLI_ONTOLOGY_POLICE_CONTROL_CENTER_HPP_INCLUDED
 #define YLI_ONTOLOGY_POLICE_CONTROL_CENTER_HPP_INCLUDED
 
+#include "code/hirvi/ontology/master_of_polices.hpp"
 #include "code/ylikuutio/ontology/child_module.hpp"
-#include "code/ylikuutio/ontology/generic_master_module.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
 
 // Include standard headers
@@ -33,6 +33,7 @@ namespace yli::core
 namespace yli::ontology
 {
     class GenericParentModule;
+    class GenericMasterModule;
     class Movable;
     class Universe;
     class Scene;
@@ -69,7 +70,7 @@ namespace hirvi::ontology
         yli::ontology::Scene* get_scene() const override;
 
         yli::ontology::ChildModule child_of_hirvi_scene;
-        yli::ontology::GenericMasterModule master_of_polices;
+        MasterOfPolices master_of_polices;
     };
 
     template<>

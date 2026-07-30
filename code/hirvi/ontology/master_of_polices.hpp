@@ -26,17 +26,18 @@
 
 namespace yli::ontology
 {
-    class Scene;
     class Registry;
 }
 
 namespace hirvi::ontology
 {
-    class MasterOfPolices final : yli::ontology::GenericMasterModule
+    class PoliceControlCenter;
+
+    class MasterOfPolices final : public yli::ontology::GenericMasterModule
     {
     public:
         MasterOfPolices(
-            yli::ontology::Scene& master_scene,
+            PoliceControlCenter& police_control_center,
             yli::ontology::Registry* registry,
             const std::string& name);
 
