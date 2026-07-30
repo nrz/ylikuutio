@@ -140,15 +140,16 @@ namespace hirvi::data
         COMPUTE_TASK                = 280,
         // Custom datatypes of Hirvi.
         HIRVI_SCENE       = 1000,
-        CAT               = 1001,
-        ELK               = 1002,
-        POLICE_CAR        = 1003,
-        POLICE_DOG        = 1004,
-        POLICE_HELICOPTER = 1005,
-        POLICE_HORSE      = 1006,
-        POLICE_TRAIN      = 1007,
-        POLICE_TRAM       = 1008,
-        TRAIN             = 1009,
+        POLICE_CONTROL_CENTER = 1001,
+        CAT               = 1101,
+        ELK               = 1102,
+        POLICE_CAR        = 1103,
+        POLICE_DOG        = 1104,
+        POLICE_HELICOPTER = 1105,
+        POLICE_HORSE      = 1106,
+        POLICE_TRAIN      = 1107,
+        POLICE_TRAM       = 1108,
+        TRAIN             = 1109,
         MAX_VALUE         = TRAIN + 1
     };
 }

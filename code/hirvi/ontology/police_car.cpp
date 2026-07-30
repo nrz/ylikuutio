@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "police_car.hpp"
-#include "code/ylikuutio/ontology/holobiont.hpp"
+#include "police_car_struct.hpp"
 
 namespace yli::core
 {
@@ -27,8 +27,9 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class GenericMasterModule;
+    class Entity;
     class Universe;
-    struct HolobiontStruct;
+    class Scene;
     struct LocomotionModuleStruct;
 }
 
@@ -37,21 +38,34 @@ namespace hirvi::ontology
     PoliceCar::PoliceCar(
         yli::core::Application& application,
         yli::ontology::Universe& universe,
-        const yli::ontology::HolobiontStruct& police_car_struct,
-        yli::ontology::GenericParentModule* const scene_parent,
-        yli::ontology::GenericMasterModule* const symbiosis_master,
+        const PoliceCarStruct& police_car_struct,
+        yli::ontology::GenericParentModule* const hirvi_scene_parent,
         yli::ontology::GenericMasterModule* const movable_controller_master,
+        yli::ontology::GenericMasterModule* const symbiosis_master,
+        yli::ontology::GenericMasterModule* const police_control_center_master,
         const yli::ontology::LocomotionModuleStruct& road_vehicle_struct)
         : Holobiont(
               application,
               universe,
               police_car_struct,
-              scene_parent,
-              symbiosis_master,
-              movable_controller_master),
+              nullptr,
+              movable_controller_master,
+              symbiosis_master),
+          child_of_hirvi_scene(hirvi_scene_parent, *this),
+          police(police_control_center_master, this),
           road_vehicle(road_vehicle_struct)
     {
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::PoliceCar*";
+        this->type_string = "hirvi::ontology::PoliceCar*";
+    }
+
+    yli::ontology::Scene* PoliceCar::get_scene() const
+    {
+        return this->child_of_hirvi_scene.get_scene();
+    }
+
+    yli::ontology::Entity* PoliceCar::get_parent() const
+    {
+        return this->child_of_hirvi_scene.get_parent();
     }
 }

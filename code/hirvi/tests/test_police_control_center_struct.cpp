@@ -16,17 +16,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/hirvi/ontology/emancipation_module.hpp"
-#include "code/hirvi/ontology/police_module.hpp"
+#include "code/hirvi/ontology/police_control_center_struct.hpp"
 
-TEST(emancipation_must_function_properly, emancipation)
+TEST(police_control_center_struct_must_be_initialized_appropriately, police_control_center_struct)
 {
-    hirvi::ontology::PoliceModule police_module;
-    ASSERT_FALSE(police_module.get_is_emancipated());
-
-    hirvi::ontology::EmancipationModule emancipation_module(police_module);
-    ASSERT_FALSE(police_module.get_is_emancipated());
-
-    emancipation_module.emancipate();
-    ASSERT_TRUE(police_module.get_is_emancipated());
+    hirvi::ontology::PoliceControlCenterStruct police_control_center_struct;
 }

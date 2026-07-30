@@ -19,8 +19,9 @@
 #define HIRVI_CORE_HIRVI_CORE_HPP_INCLUDED
 
 #include "hirvi_application_callback.hpp"
-#include "code/hirvi/ontology/hirvi_scene.hpp"
 #include "code/hirvi/data/datatype.hpp"
+#include "code/hirvi/ontology/hirvi_scene.hpp"
+#include "code/hirvi/ontology/police_control_center.hpp"
 #include "code/ylikuutio/core/system_factory.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
@@ -61,17 +62,24 @@ namespace hirvi::ontology
     class Cat;
     class PoliceCar;
     class PoliceDog;
+    class PoliceHelicopter;
     class PoliceHorse;
+    class PoliceTrain;
+    class PoliceTram;
 }
 
 namespace hirvi::core
 {
     // Allocators for custom types.
     using HirviSceneMemoryAllocator = yli::memory::MemoryAllocator<ontology::HirviScene, 256>;
+    using PoliceControlCenterMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceControlCenter, 256>;
     using CatMemoryAllocator = yli::memory::MemoryAllocator<ontology::Cat, 256>;
     using PoliceCarMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceCar, 256>;
     using PoliceDogMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceDog, 256>;
+    using PoliceHelicopterMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceHelicopter, 256>;
     using PoliceHorseMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceHorse, 256>;
+    using PoliceTrainMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceTrain, 256>;
+    using PoliceTramMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceTram, 256>;
 
     class HirviCore
     {

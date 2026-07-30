@@ -20,10 +20,10 @@
 #include "code/hirvi/data/datatype.hpp"
 #include "code/hirvi/ontology/hirvi_scene.hpp"
 #include "code/hirvi/ontology/police_control_center.hpp"
-#include "code/hirvi/ontology/police_car.hpp"
+#include "code/hirvi/ontology/police_horse.hpp"
 #include "code/hirvi/ontology/hirvi_scene_struct.hpp"
 #include "code/hirvi/ontology/police_control_center_struct.hpp"
-#include "code/hirvi/ontology/police_car_struct.hpp"
+#include "code/hirvi/ontology/police_horse_struct.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -53,7 +53,7 @@ namespace yli::ontology
     class Symbiosis;
 }
 
-TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
+TEST(police_horse_must_be_initialized_appropriately, hirvi_police_horse)
 {
     using namespace hirvi::ontology;
     using namespace yli::ontology;
@@ -96,8 +96,8 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     };
     rest_movable_controller_struct.global_name = "rest_movable_controller";
     rest_movable_controller_struct.local_name = "rest";
-    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().
-            create_movable_controller(rest_movable_controller_struct);
+    MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(
+        rest_movable_controller_struct);
 
     PipelineStruct helsinki_pipeline_struct { Request<Scene>(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
@@ -107,48 +107,54 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     Pipeline* const helsinki_pipeline =
             hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
-    SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request<Scene>(helsinki_scene), Request(helsinki_pipeline) };
-    turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
-    turbo_polizei_png_symbiosis_struct.model_filename ="turbo_polizei_png_textures.fbx";
-    Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.get_entity_factory().
-            create_symbiosis(turbo_polizei_png_symbiosis_struct);
-    ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_ofbx_meshes(), 5); // To ensure proper loading of `Symbiosis`.
+    SymbiosisStruct police_horse_png_symbiosis_struct { Request<Scene>(helsinki_scene), Request(helsinki_pipeline) };
+    police_horse_png_symbiosis_struct.model_file_format = "fbx";
+    police_horse_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx"; // TODO: replace w/horse model!
+    Symbiosis* const police_horse_png_symbiosis = hirvi_application.get_entity_factory().create_symbiosis(
+        police_horse_png_symbiosis_struct);
+    ASSERT_EQ(police_horse_png_symbiosis->get_number_of_ofbx_meshes(), 5); // To ensure proper loading of `Symbiosis`.
 
     const GenericParentModule* const parent_of_symbiont_materials =
-            turbo_polizei_png_symbiosis->get_generic_parent_module<SymbiontMaterial>();
+            police_horse_png_symbiosis->get_generic_parent_module<SymbiontMaterial>();
     ASSERT_NE(parent_of_symbiont_materials, nullptr);
 
-    PoliceCarStruct turbo_polizei_png_police_car_struct1 {
-        Request<Scene>(helsinki_scene), Request(rest_movable_controller), Request(turbo_polizei_png_symbiosis)
+    PoliceHorseStruct police_horse_png_police_horse_struct1 {
+        Request<Scene>(helsinki_scene), Request(rest_movable_controller), Request(police_horse_png_symbiosis)
     };
-    turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
-    turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
-    turbo_polizei_png_police_car_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
-    turbo_polizei_png_police_car_struct1.cartesian_coordinates = CartesianCoordinatesModule(85.00f, 30.00f, 160.00f);
-    LocomotionModuleStruct road_vehicle_struct1;
+    police_horse_png_police_horse_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f) };
+    police_horse_png_police_horse_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
+    police_horse_png_police_horse_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+    police_horse_png_police_horse_struct1.cartesian_coordinates = CartesianCoordinatesModule(85.00f, 30.00f, 160.00f);
+    LocomotionModuleStruct police_horse1_walk_struct(1.0f); // 3.6 km/h.
+    LocomotionModuleStruct police_horse1_trot_struct(5.0f);
+    LocomotionModuleStruct police_horse1_canter_struct(10.0f);
+    LocomotionModuleStruct police_horse1_gallop_struct(12.5f); // 45 km/h.
 
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::HOLOBIONT));
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::BIONT));
-    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::POLICE_CAR));
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::POLICE_HORSE));
 
-    auto* const turbo_polizei1 = hirvi_application.get_entity_factory().create_holobiont_derivative<
-        PoliceCar,
-        hirvi::core::PoliceCarMemoryAllocator,
+    auto* const police_horse1 = hirvi_application.get_entity_factory().create_holobiont_derivative<
+        PoliceHorse,
+        hirvi::core::PoliceHorseMemoryAllocator,
         HirviScene,
-        PoliceCarStruct>(
-        hirvi::data::POLICE_CAR,
+        PoliceHorseStruct>(
+        hirvi::data::POLICE_HORSE,
         Request(helsinki_scene),
-        turbo_polizei_png_police_car_struct1,
+        police_horse_png_police_horse_struct1,
         helsinki_non_emancipated_control_center->get_generic_master_module<Movable>(),
-        road_vehicle_struct1);
-    ASSERT_NE(turbo_polizei1, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei1) % alignof(hirvi::ontology::PoliceCar), 0);
+        police_horse1_walk_struct,
+        police_horse1_trot_struct,
+        police_horse1_canter_struct,
+        police_horse1_gallop_struct);
+    ASSERT_NE(police_horse1, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(police_horse1) % alignof(hirvi::ontology::PoliceHorse), 0);
 
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::HOLOBIONT));
-    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::POLICE_CAR));
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::POLICE_HORSE));
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::BIONT));
 
-    const GenericParentModule* const parent_of_bionts = turbo_polizei1->get_generic_parent_module<Biont>();
+    const GenericParentModule* const parent_of_bionts = police_horse1->get_generic_parent_module<Biont>();
     ASSERT_NE(parent_of_bionts, nullptr);
 
     // `Entity` member functions of `Universe`.
@@ -157,30 +163,30 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(helsinki_scene->get_scene(), helsinki_scene);
     ASSERT_EQ(helsinki_scene->get_number_of_non_variable_children(),
-              7); // Default `Camera`, `MovableController`, `Pipeline`, `Symbiosis`, 2 `PoliceControlCenter`s, `turbo_polizei1`
+              7); // Default `Camera`, `MovableController`, `Pipeline`, `Symbiosis`, 2 `PoliceControlCenter`s, `police_horse1`
 
     // `Entity` member functions of `Pipeline`.
     ASSERT_EQ(helsinki_pipeline->get_scene(), helsinki_scene);
     ASSERT_EQ(helsinki_pipeline->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions of `Symbiosis`.
-    ASSERT_EQ(turbo_polizei_png_symbiosis->get_scene(), helsinki_scene);
-    ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_non_variable_children(), 2); // 2 `SymbiontMaterial`s.
+    ASSERT_EQ(police_horse_png_symbiosis->get_scene(), helsinki_scene);
+    ASSERT_EQ(police_horse_png_symbiosis->get_number_of_non_variable_children(), 2); // 2 `SymbiontMaterial`s.
 
     // `Entity` member functions.
-    ASSERT_EQ(turbo_polizei1->get_childID(), 0);
-    ASSERT_EQ(turbo_polizei1->get_type(), "hirvi::ontology::PoliceCar*");
-    ASSERT_TRUE(turbo_polizei1->get_can_be_erased());
-    ASSERT_EQ(turbo_polizei1->get_scene(), helsinki_scene);
-    ASSERT_EQ(turbo_polizei1->get_parent(), helsinki_scene);
-    ASSERT_EQ(turbo_polizei1->get_number_of_non_variable_children(), 5); // 5 `Biont`s.
+    ASSERT_EQ(police_horse1->get_childID(), 0);
+    ASSERT_EQ(police_horse1->get_type(), "hirvi::ontology::PoliceHorse*");
+    ASSERT_TRUE(police_horse1->get_can_be_erased());
+    ASSERT_EQ(police_horse1->get_scene(), helsinki_scene);
+    ASSERT_EQ(police_horse1->get_parent(), helsinki_scene);
+    ASSERT_EQ(police_horse1->get_number_of_non_variable_children(), 5); // 5 `Biont`s.
 
     // Even though `PoliceCar` is derived from `Holobiont`. `PoliceCar` should be allocated using its own allocator.
-    yli::memory::MemoryAllocator<PoliceCar*>& police_car_memory_allocator =
-            hirvi_application.get_memory_allocator<PoliceCar*>(hirvi::data::POLICE_CAR);
+    yli::memory::MemoryAllocator<PoliceHorse*>& police_horse_memory_allocator =
+            hirvi_application.get_memory_allocator<PoliceHorse*>(hirvi::data::POLICE_HORSE);
     // `PoliceCar` should be allocated using its own allocator.
-    ASSERT_EQ(police_car_memory_allocator.get_number_of_storages(), 1);
-    ASSERT_EQ(police_car_memory_allocator.get_number_of_instances(), 1);
+    ASSERT_EQ(police_horse_memory_allocator.get_number_of_storages(), 1);
+    ASSERT_EQ(police_horse_memory_allocator.get_number_of_instances(), 1);
     // The `Biont`s of the `PoliceCar` should be allocated using the `Biont` allocator.
     // There is 1 body + chassis `Biont`, and 4 wheel `Biont`s.
     yli::memory::MemoryAllocator<Biont*>& biont_memory_allocator = hirvi_application.get_memory_allocator<Biont*>(
@@ -188,9 +194,9 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     ASSERT_EQ(biont_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 5);
 
-    const yli::memory::ConstructibleModule turbo_polizei1_constructible_module =
-            turbo_polizei1->get_constructible_module();
-    ASSERT_EQ(turbo_polizei1_constructible_module.storage_i, 0);
-    ASSERT_EQ(turbo_polizei1_constructible_module.slot_i, 0);
-    ASSERT_EQ(turbo_polizei1_constructible_module.alive, true);
+    const yli::memory::ConstructibleModule police_horse1_constructible_module =
+            police_horse1->get_constructible_module();
+    ASSERT_EQ(police_horse1_constructible_module.storage_i, 0);
+    ASSERT_EQ(police_horse1_constructible_module.slot_i, 0);
+    ASSERT_EQ(police_horse1_constructible_module.alive, true);
 }

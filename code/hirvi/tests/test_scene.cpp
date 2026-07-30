@@ -41,4 +41,51 @@ TEST(scene_must_be_initialized_appropriately, hirvi_scene)
     ASSERT_EQ(scene_constructible_module.storage_i, 0);
     ASSERT_EQ(scene_constructible_module.slot_i, 0);
     ASSERT_EQ(scene_constructible_module.alive, true);
+
+    yli::ontology::GenericParentModule* const movable_controller_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::MovableController>();
+    ASSERT_NE(movable_controller_parent_module, nullptr);
+
+    yli::ontology::GenericParentModule* const waypoint_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::Waypoint>();
+    ASSERT_NE(waypoint_parent_module, nullptr);
+    ASSERT_GT(waypoint_parent_module, movable_controller_parent_module);
+
+    yli::ontology::GenericParentModule* const camera_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::Camera>();
+    ASSERT_NE(camera_parent_module, nullptr);
+    ASSERT_GT(camera_parent_module, waypoint_parent_module);
+
+    yli::ontology::GenericParentModule* const pipeline_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::Pipeline>();
+    ASSERT_NE(pipeline_parent_module, nullptr);
+    ASSERT_GT(pipeline_parent_module, camera_parent_module);
+
+    yli::ontology::GenericParentModule* const material_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::Material>();
+    ASSERT_NE(material_parent_module, nullptr);
+    ASSERT_GT(material_parent_module, pipeline_parent_module);
+
+    yli::ontology::GenericParentModule* const species_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::Species>();
+    ASSERT_NE(species_parent_module, nullptr);
+    ASSERT_GT(species_parent_module, material_parent_module);
+
+    yli::ontology::GenericParentModule* const object_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::Object>();
+    ASSERT_NE(object_parent_module, nullptr);
+    ASSERT_GT(object_parent_module, species_parent_module);
+
+    yli::ontology::GenericParentModule* const symbiosis_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::Symbiosis>();
+    ASSERT_NE(symbiosis_parent_module, nullptr);
+    ASSERT_GT(symbiosis_parent_module, object_parent_module);
+
+    yli::ontology::GenericParentModule* const holobiont_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::Holobiont>();
+    ASSERT_NE(holobiont_parent_module, nullptr);
+    ASSERT_GT(holobiont_parent_module, symbiosis_parent_module);
+
+    yli::ontology::GenericParentModule* const shapeshifter_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::Shapeshifter>();
+    ASSERT_NE(shapeshifter_parent_module, nullptr);
+    ASSERT_GT(shapeshifter_parent_module, holobiont_parent_module);
+
+    yli::ontology::GenericParentModule* const text_3d_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::Text3d>();
+    ASSERT_NE(text_3d_parent_module, nullptr);
+    ASSERT_GT(text_3d_parent_module, shapeshifter_parent_module);
+
+    yli::ontology::GenericParentModule* const glyph_object_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::GlyphObject>();
+    ASSERT_NE(glyph_object_parent_module, nullptr);
+    ASSERT_GT(glyph_object_parent_module, text_3d_parent_module);
 }

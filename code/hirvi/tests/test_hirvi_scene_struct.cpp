@@ -15,23 +15,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "police_module.hpp"
-#include "code/ylikuutio/ontology/apprentice_module.hpp"
+#include "gtest/gtest.h"
+#include "code/hirvi/ontology/hirvi_scene_struct.hpp"
 
-namespace hirvi::ontology
+TEST(hirvi_scene_struct_must_be_initialized_appropriately, universe_provided_as_valid_pointer)
 {
-    PoliceModule::PoliceModule(yli::ontology::GenericMasterModule* generic_master_module,
-                               yli::ontology::Entity* apprentice) noexcept
-        : ApprenticeModule(generic_master_module, apprentice)
-    { }
+}
 
-    void PoliceModule::emancipate()
-    {
-        this->is_emancipated = true;
-    }
-
-    bool PoliceModule::get_is_emancipated() const
-    {
-        return this->is_emancipated;
-    }
+TEST(hirvi_scene_struct_must_be_initialized_appropriately, universe_provided_as_valid_global_name)
+{
 }

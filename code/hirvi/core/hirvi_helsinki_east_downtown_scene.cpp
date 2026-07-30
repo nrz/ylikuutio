@@ -17,8 +17,12 @@
 
 #include "hirvi_core.hpp"
 #include "code/hirvi/ontology/hirvi_scene.hpp"
+#include "code/hirvi/ontology/police_control_center.hpp"
 #include "code/hirvi/ontology/cat.hpp"
 #include "code/hirvi/ontology/police_car.hpp"
+#include "code/hirvi/ontology/hirvi_scene_struct.hpp"
+#include "code/hirvi/ontology/police_control_center_struct.hpp"
+#include "code/hirvi/ontology/police_car_struct.hpp"
 #include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/ontology/locomotion_module_struct.hpp"
@@ -32,12 +36,10 @@
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
-#include "code/ylikuutio/ontology/scene_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/species_struct.hpp"
 #include "code/ylikuutio/ontology/object_struct.hpp"
-#include "code/ylikuutio/ontology/holobiont_struct.hpp"
 #include "code/ylikuutio/ontology/camera_struct.hpp"
 #include "code/ylikuutio/ontology/movable_controller_struct.hpp"
 
@@ -54,6 +56,7 @@
 namespace yli::ontology
 {
     class Entity;
+    class Movable;
 }
 
 namespace hirvi::core
@@ -65,16 +68,27 @@ namespace hirvi::core
         // Helsinki `Scene` begins here.
 
         std::cout << "Creating Entity* helsinki_scene_entity ...\n";
-        SceneStruct scene_struct;
+        ontology::PoliceControlCenterStruct helsinki_non_emancipated_control_center_struct;
+        helsinki_non_emancipated_control_center_struct.global_name = "helsinki_non_emancipated_control_center";
+        helsinki_non_emancipated_control_center_struct.local_name = "non_emancipated_control_center";
+        ontology::PoliceControlCenterStruct helsinki_emancipated_control_center_struct;
+        helsinki_emancipated_control_center_struct.global_name = "helsinki_emancipated_control_center";
+        helsinki_emancipated_control_center_struct.local_name = "emancipated_control_center";
+        ontology::HirviSceneStruct scene_struct;
         scene_struct.global_name = "helsinki_scene";
         scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
         scene_struct.water_level = 0.9f;
+        scene_struct.police_control_center_structs = {
+            helsinki_non_emancipated_control_center_struct, helsinki_emancipated_control_center_struct
+        };
         std::cout << "Creating Scene* helsinki_scene ...\n";
         auto* const helsinki_scene = this->entity_factory.create_scene_derivative<
             ontology::HirviScene,
-            HirviSceneMemoryAllocator>(
+            HirviSceneMemoryAllocator,
+            ontology::HirviSceneStruct>(
             data::HIRVI_SCENE,
-            scene_struct);
+            scene_struct,
+            *this);
 
         if (helsinki_scene == nullptr)
         {
@@ -84,6 +98,22 @@ namespace hirvi::core
 
         helsinki_scene->set_turbo_factor(5.0f);
         helsinki_scene->set_twin_turbo_factor(100.0f);
+
+        const auto helsinki_non_emancipated_control_center = dynamic_cast<ontology::PoliceControlCenter*>(
+            helsinki_scene->get_entity("non_emancipated_control_center"));
+        if (helsinki_non_emancipated_control_center == nullptr)
+        {
+            std::cerr << "Failed to create PoliceControlCenter.\n";
+            return nullptr;
+        }
+
+        const auto helsinki_emancipated_control_center = dynamic_cast<ontology::PoliceControlCenter*>(
+            helsinki_scene->get_entity("emancipated_control_center"));
+        if (helsinki_emancipated_control_center == nullptr)
+        {
+            std::cerr << "Failed to create PoliceControlCenter.\n";
+            return nullptr;
+        }
 
         // Create the `CallbackEngine`s for the `MovableController`s.
         CallbackEngineStruct rest_callback_engine_struct;
@@ -555,8 +585,10 @@ namespace hirvi::core
         Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "use-handbrake");
         Symbiosis::create_ability(*turbo_polizei_png_symbiosis, "tx-on-radio");
 
-        HolobiontStruct turbo_polizei_png_police_car_struct1 {
-            Request<Scene>("helsinki_scene"), Request(rest_movable_controller), Request(turbo_polizei_png_symbiosis)
+        ontology::PoliceCarStruct turbo_polizei_png_police_car_struct1 {
+            Request<Scene>("helsinki_scene"),
+            Request(rest_movable_controller),
+            Request(turbo_polizei_png_symbiosis)
         };
         turbo_polizei_png_police_car_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
         turbo_polizei_png_police_car_struct1.initial_rotate_angles = { static_cast<float>(std::numbers::pi) };
@@ -569,9 +601,13 @@ namespace hirvi::core
         std::cout << "Creating hirvi::PoliceCar* turbo_polizei_png1 ...\n";
         auto* const turbo_polizei_png1 = this->entity_factory.create_holobiont_derivative<
             ontology::PoliceCar,
-            PoliceCarMemoryAllocator>(
+            PoliceCarMemoryAllocator,
+            ontology::HirviScene,
+            ontology::PoliceCarStruct>(
             data::POLICE_CAR,
+            Request(helsinki_scene),
             turbo_polizei_png_police_car_struct1,
+            helsinki_non_emancipated_control_center->get_generic_master_module<Movable>(),
             road_vehicle_struct1);
 
         if (turbo_polizei_png1 == nullptr)
@@ -583,7 +619,7 @@ namespace hirvi::core
         turbo_polizei_png1->set_global_name("turbo_polizei_png1");
         turbo_polizei_png1->set_local_name("sinivuokko1");
 
-        HolobiontStruct turbo_polizei_png_police_car_struct2 {
+        ontology::PoliceCarStruct turbo_polizei_png_police_car_struct2 {
             Request<Scene>("helsinki_scene"), Request(rest_movable_controller), Request(turbo_polizei_png_symbiosis)
         };
         turbo_polizei_png_police_car_struct2.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
@@ -597,9 +633,13 @@ namespace hirvi::core
         std::cout << "Creating hirvi::PoliceCar* turbo_polizei_png2 ...\n";
         auto* const turbo_polizei_png2 = this->entity_factory.create_holobiont_derivative<
             ontology::PoliceCar,
-            PoliceCarMemoryAllocator>(
+            PoliceCarMemoryAllocator,
+            ontology::HirviScene,
+            ontology::PoliceCarStruct>(
             data::POLICE_CAR,
+            Request(helsinki_scene),
             turbo_polizei_png_police_car_struct2,
+            helsinki_non_emancipated_control_center->get_generic_master_module<Movable>(),
             road_vehicle_struct2);
 
         if (turbo_polizei_png2 == nullptr)

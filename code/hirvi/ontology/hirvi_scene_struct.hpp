@@ -15,25 +15,24 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "master_of_emancipated_ones.hpp"
-#include "code/ylikuutio/ontology/scene.hpp"
+#ifndef HIRVI_ONTOLOGY_HIRVI_SCENE_STRUCT_HPP_INCLUDED
+#define HIRVI_ONTOLOGY_HIRVI_SCENE_STRUCT_HPP_INCLUDED
+
+#include "code/ylikuutio/ontology/scene_struct.hpp"
+#include "police_control_center_struct.hpp"
 
 // Include standard headers
-#include <string> // std::string
-
-namespace yli::ontology
-{
-    class Registry;
-}
+#include <vector> // std::vector
 
 namespace hirvi::ontology
 {
-    using namespace yli::ontology;
+    struct HirviSceneStruct final : yli::ontology::SceneStruct
+    {
+        HirviSceneStruct()
+        = default;
 
-    MasterOfEmancipatedOnes::MasterOfEmancipatedOnes(
-        Scene& master_scene,
-        Registry* const registry,
-        const std::string& name)
-        : GenericMasterModule(master_scene, registry, name)
-    { }
+        std::vector<PoliceControlCenterStruct> police_control_center_structs;
+    };
 }
+
+#endif

@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "police_horse.hpp"
+#include "police_horse_struct.hpp"
 
 namespace yli::core
 {
@@ -26,9 +27,10 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class GenericMasterModule;
+    class Entity;
     class Universe;
+    class Scene;
     class Holobiont;
-    struct HolobiontStruct;
     struct LocomotionModuleStruct;
 }
 
@@ -37,10 +39,11 @@ namespace hirvi::ontology
     PoliceHorse::PoliceHorse(
         yli::core::Application& application,
         yli::ontology::Universe& universe,
-        const yli::ontology::HolobiontStruct& police_horse_struct,
-        yli::ontology::GenericParentModule* const scene_parent,
-        yli::ontology::GenericMasterModule* const symbiosis_master,
+        const PoliceHorseStruct& police_horse_struct,
+        yli::ontology::GenericParentModule* const hirvi_scene_parent,
         yli::ontology::GenericMasterModule* const movable_controller_master,
+        yli::ontology::GenericMasterModule* const symbiosis_master,
+        yli::ontology::GenericMasterModule* const master_of_polices,
         const yli::ontology::LocomotionModuleStruct& walk_struct,
         const yli::ontology::LocomotionModuleStruct& run_struct,
         const yli::ontology::LocomotionModuleStruct& canter_struct,
@@ -49,16 +52,28 @@ namespace hirvi::ontology
               application,
               universe,
               police_horse_struct,
-              scene_parent,
-              symbiosis_master,
-              movable_controller_master),
+              nullptr,
+              movable_controller_master,
+              symbiosis_master),
+          child_of_hirvi_scene(hirvi_scene_parent, *this),
+          police(master_of_polices, this),
+          emancipation(this->police),
           walk(walk_struct),
           run(run_struct),
           canter(canter_struct),
-          gallop(gallop_struct),
-          emancipation(this->police)
+          gallop(gallop_struct)
     {
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::PoliceHorse*";
+        this->type_string = "hirvi::ontology::PoliceHorse*";
+    }
+
+    yli::ontology::Scene* PoliceHorse::get_scene() const
+    {
+        return this->child_of_hirvi_scene.get_scene();
+    }
+
+    yli::ontology::Entity* PoliceHorse::get_parent() const
+    {
+        return this->child_of_hirvi_scene.get_parent();
     }
 }

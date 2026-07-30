@@ -108,7 +108,6 @@ namespace hirvi
 
         static void customize(core::HirviCore& hirvi_core);
 
-    private:
         core::HirviCore core;
     };
 }

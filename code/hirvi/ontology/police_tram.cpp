@@ -26,7 +26,9 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class GenericMasterModule;
+    class Entity;
     class Universe;
+    class Scene;
     class Holobiont;
     struct HolobiontStruct;
     struct LocomotionModuleStruct;
@@ -38,20 +40,33 @@ namespace hirvi::ontology
         yli::core::Application& application,
         yli::ontology::Universe& universe,
         const yli::ontology::HolobiontStruct& police_tram_struct,
-        yli::ontology::GenericParentModule* const scene_parent,
-        yli::ontology::GenericMasterModule* const symbiosis_master,
+        yli::ontology::GenericParentModule* const hirvi_scene_parent,
         yli::ontology::GenericMasterModule* const movable_controller_master,
+        yli::ontology::GenericMasterModule* const symbiosis_master,
+        yli::ontology::GenericMasterModule* police_control_center_master,
         const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct)
         : Holobiont(
               application,
               universe,
               police_tram_struct,
-              scene_parent,
-              symbiosis_master,
-              movable_controller_master),
+              nullptr,
+              movable_controller_master,
+              symbiosis_master),
+          child_of_hirvi_scene(hirvi_scene_parent, *this),
+          police(police_control_center_master, this),
           rail_vehicle(rail_vehicle_struct)
     {
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::PoliceTram*";
+        this->type_string = "hirvi::ontology::PoliceTram*";
+    }
+
+    yli::ontology::Scene* PoliceTram::get_scene() const
+    {
+        return this->child_of_hirvi_scene.get_scene();
+    }
+
+    yli::ontology::Entity* PoliceTram::get_parent() const
+    {
+        return this->child_of_hirvi_scene.get_parent();
     }
 }

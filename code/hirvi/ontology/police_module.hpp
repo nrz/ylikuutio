@@ -18,14 +18,22 @@
 #ifndef HIRVI_ONTOLOGY_POLICE_MODULE_HPP_INCLUDED
 #define HIRVI_ONTOLOGY_POLICE_MODULE_HPP_INCLUDED
 
+#include "code/ylikuutio/ontology/apprentice_module.hpp"
+
+namespace yli::ontology
+{
+    class GenericMasterModule;
+    class Entity;
+}
+
 namespace hirvi::ontology
 {
-    class PoliceModule
+    class PoliceModule : public yli::ontology::ApprenticeModule
     {
         // `PoliceModule` provides access to the knowledge shared in the police network.
 
     public:
-        PoliceModule() = default;
+        PoliceModule(yli::ontology::GenericMasterModule* generic_master_module, yli::ontology::Entity* apprentice) noexcept;
 
         void emancipate();
 

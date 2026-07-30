@@ -19,6 +19,7 @@
 #define HIRVI_ONTOLOGY_POLICE_HELICOPTER_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/child_module.hpp"
 #include "code/ylikuutio/snippets/locomotion/fly_module.hpp"
 #include "police_module.hpp"
 
@@ -31,23 +32,28 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class GenericMasterModule;
+    class Entity;
     class Universe;
+    class Scene;
     struct HolobiontStruct;
     struct LocomotionModuleStruct;
 }
 
 namespace hirvi::ontology
 {
+    struct PoliceHelicopterStruct;
+
     class PoliceHelicopter : public yli::ontology::Holobiont
     {
     public:
         explicit PoliceHelicopter(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            const yli::ontology::HolobiontStruct& police_helicopter_struct,
-            yli::ontology::GenericParentModule* scene_parent,
-            yli::ontology::GenericMasterModule* symbiosis_master,
+            const PoliceHelicopterStruct& police_helicopter_struct,
+            yli::ontology::GenericParentModule* hirvi_scene_parent,
             yli::ontology::GenericMasterModule* movable_controller_master,
+            yli::ontology::GenericMasterModule* symbiosis_master,
+            yli::ontology::GenericMasterModule* police_control_center_master,
             const yli::ontology::LocomotionModuleStruct& fly_struct);
 
         PoliceHelicopter(const PoliceHelicopter&) = delete; // Delete copy constructor.
@@ -55,8 +61,13 @@ namespace hirvi::ontology
 
         ~PoliceHelicopter() override = default;
 
-        yli::snippets::locomotion::FlyModule fly;
+        yli::ontology::Scene* get_scene() const override;
+
+        Entity* get_parent() const override;
+
+        yli::ontology::ChildModule child_of_hirvi_scene;
         PoliceModule police;
+        yli::snippets::locomotion::FlyModule fly;
     };
 }
 
