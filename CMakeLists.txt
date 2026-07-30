@@ -978,6 +978,7 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/police_dog.hpp
     code/hirvi/ontology/police_helicopter.cpp
     code/hirvi/ontology/police_helicopter.hpp
+    code/hirvi/ontology/police_helicopter_struct.hpp
     code/hirvi/ontology/police_horse.cpp
     code/hirvi/ontology/police_horse_struct.hpp
     code/hirvi/ontology/police_horse.hpp
@@ -987,8 +988,10 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/master_of_polices.hpp
     code/hirvi/ontology/police_train.cpp
     code/hirvi/ontology/police_train.hpp
+    code/hirvi/ontology/police_train_struct.hpp
     code/hirvi/ontology/police_tram.cpp
     code/hirvi/ontology/police_tram.hpp
+    code/hirvi/ontology/police_tram_struct.hpp
     code/hirvi/ontology/run_ability.cpp
     code/hirvi/ontology/run_ability.hpp
     code/hirvi/ontology/swim_ability.cpp
