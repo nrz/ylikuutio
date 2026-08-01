@@ -67,7 +67,7 @@ namespace yli::load
         std::uint32_t image_size = 0;
         std::uint32_t n_color_channels = 0;
 
-        std::shared_ptr<std::vector<std::uint8_t>> image_data = load_image_file(
+        const std::shared_ptr<std::vector<std::uint8_t>> image_data = load_image_file(
                 heightmap_loader_struct.filename,
                 ImageLoaderStruct(),
                 image_width,
@@ -112,7 +112,7 @@ namespace yli::load
         }
 
         std::cout << n_color_channels << " color channel" << (n_color_channels > 1 ? "s" : "") << " in use.\n";
-        memory::flip_vertically(&(*image_data).at(0), static_cast<std::size_t>(n_color_channels) * static_cast<std::size_t>(image_width), image_height);
+        memory::flip_vertically(&image_data->at(0), static_cast<std::size_t>(n_color_channels) * static_cast<std::size_t>(image_width), image_height);
 
         // Define terrain size.
         const std::size_t terrain_size = static_cast<std::size_t>(image_width) * static_cast<std::size_t>(image_height);
@@ -125,7 +125,7 @@ namespace yli::load
         // start processing image_data.
         for (std::size_t y = 0; y < image_height; y++)
         {
-            const std::uint8_t* image_pointer = &(*image_data).at(0) + y * line_size_in_bytes;
+            const std::uint8_t* image_pointer = &image_data->at(0) + y * line_size_in_bytes;
 
             for (std::size_t x = 0; x < image_width; x++)
             {

@@ -111,7 +111,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        std::optional<std::int32_t> image_width_int32_t = string::extract_value_from_string<char, std::int32_t>(
+        const std::optional<std::int32_t> image_width_int32_t = string::extract_value_from_string<char, std::int32_t>(
             *file_content,
             file_content_i,
             " \n",
@@ -129,7 +129,7 @@ namespace yli::load
             file_content_i++;
         }
 
-        std::optional<std::int32_t> image_height_int32_t = yli::string::extract_value_from_string<char, std::int32_t>(
+        const std::optional<std::int32_t> image_height_int32_t = yli::string::extract_value_from_string<char, std::int32_t>(
             *file_content,
             file_content_i,
             " \n",
@@ -216,7 +216,7 @@ namespace yli::load
             for (std::uint32_t y = 0; y < image_height; y++)
             {
                 // show progress in percents.
-                std::int32_t current_percent = static_cast<std::int32_t>(floor(
+                const std::int32_t current_percent = static_cast<std::int32_t>(floor(
                     100.0f * (static_cast<float>(y) / static_cast<float>(image_height - 1))));
 
                 if (current_percent > last_percent)

@@ -51,9 +51,9 @@ namespace yli::load
             return nullptr;
         }
 
-        png_voidp user_error_ptr = nullptr;
-        png_error_ptr error_fn = nullptr;
-        png_error_ptr warning_fn = nullptr;
+        const png_voidp user_error_ptr = nullptr;
+        const png_error_ptr error_fn = nullptr;
+        const png_error_ptr warning_fn = nullptr;
         png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, user_error_ptr, error_fn, warning_fn);
 
         if (png_ptr == nullptr)
@@ -122,7 +122,7 @@ namespace yli::load
 
         const std::size_t line_width_in_bytes = png_get_rowbytes(png_ptr, info_ptr);
 
-        png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
+        const png_bytepp row_pointers = png_get_rows(png_ptr, info_ptr);
 
         auto image_data = std::make_shared<std::vector<std::uint8_t>>();
         image_data->resize(image_height * line_width_in_bytes);
@@ -147,7 +147,7 @@ namespace yli::load
 
         if (image_loader_struct.should_flip_vertically)
         {
-            memory::flip_vertically(&(*image_data).at(0), line_width_in_bytes, image_height);
+            memory::flip_vertically(&image_data->at(0), line_width_in_bytes, image_height);
         }
 
         png_destroy_read_struct(&png_ptr, &info_ptr, nullptr);

@@ -73,7 +73,7 @@ namespace yli::load
         }
 
         // OpenFBX wants `u8` == `unsigned char`.
-        auto data = reinterpret_cast<const u8*>(data_vector->data());
+        const auto data = reinterpret_cast<const u8*>(data_vector->data());
         const std::int64_t size = data_vector->size();
 
         if (is_debug_mode)
@@ -81,8 +81,8 @@ namespace yli::load
             std::cout << "Loaded FBX data vector size: " << size << "\n";
         }
 
-        const std::uint64_t flags = (std::uint64_t) ofbx::LoadFlags::TRIANGULATE;
-        const ofbx::IScene* ofbx_iscene = ofbx::load(data, size, flags);
+        constexpr std::uint64_t flags = static_cast<std::uint64_t>(ofbx::LoadFlags::TRIANGULATE);
+        const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
 
         if (ofbx_iscene == nullptr)
         {
@@ -153,9 +153,7 @@ namespace yli::load
                     continue;
                 }
 
-                const ofbx::Texture* diffuse_texture = material->getTexture(ofbx::Texture::DIFFUSE);
-
-                if (diffuse_texture == nullptr)
+                if (const ofbx::Texture* const diffuse_texture = material->getTexture(ofbx::Texture::DIFFUSE); diffuse_texture == nullptr)
                 {
                     if (is_debug_mode)
                     {
@@ -283,9 +281,7 @@ namespace yli::load
 
             std::vector<glm::vec2> mesh_out_uvs;
 
-            const ofbx::Vec2* uvs = geometry->getUVs();
-
-            if (uvs == nullptr)
+            if (const ofbx::Vec2* const uvs = geometry->getUVs(); uvs == nullptr)
             {
                 // `uvs` should not be `nullptr`.
                 std::cerr << "ERROR: `uvs` is `nullptr`!\n";
