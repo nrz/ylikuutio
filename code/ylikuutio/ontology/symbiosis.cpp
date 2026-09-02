@@ -35,7 +35,6 @@
 #include "code/ylikuutio/load/symbiosis_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
-#include <ofbx.h>
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -263,43 +262,38 @@ namespace yli::ontology
             this->vertices,
             this->uvs,
             this->normals,
-            this->ofbx_diffuse_texture_mesh_map,
-            this->ofbx_meshes,
-            this->ofbx_diffuse_texture_vector,
-            this->ofbx_normal_texture_vector,
-            this->ofbx_count_texture_vector,
-            this->ofbx_mesh_count,
+            this->fbx_material_mesh_map,
+            this->fbx_materials,
+            this->fbx_meshes,
+            this->ufbx_mesh_count,
             is_debug_mode))
         {
-            std::cout << "number of meshes: " << this->ofbx_mesh_count << "\n";
+            std::cout << "number of meshes: " << this->ufbx_mesh_count << "\n";
 
-            std::vector<const ofbx::Texture*> ofbx_diffuse_texture_pointer_vector;
-            ofbx_diffuse_texture_pointer_vector.reserve(this->ofbx_diffuse_texture_mesh_map.size());
-            this->biontID_symbiont_material_vector.resize(this->ofbx_mesh_count);
+            const std::size_t number_of_materials = this->fbx_material_mesh_map.size();
+            std::cout << "Number of materials: " << number_of_materials << "\n";
 
-            this->biontID_symbiont_species_vector.resize(this->ofbx_mesh_count);
-
-            for (const auto& key_and_value : this->ofbx_diffuse_texture_mesh_map)
-            {
-                ofbx_diffuse_texture_pointer_vector.emplace_back(key_and_value.first); // key.
-            }
+            this->biontID_symbiont_material_vector.resize(this->ufbx_mesh_count);
+            this->biontID_symbiont_species_vector.resize(this->ufbx_mesh_count);
 
             // Create `SymbiontMaterial`s.
-            for (const ofbx::Texture* const ofbx_texture : ofbx_diffuse_texture_pointer_vector)
+            for (std::size_t fbx_material_i = 0; fbx_material_i < this->fbx_materials.size(); fbx_material_i++)
             {
-                if (ofbx_texture == nullptr)
+                if (!this->fbx_material_mesh_map.contains(fbx_material_i))
                 {
                     continue;
                 }
 
-                const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>(ofbx_texture);
+                const load::FbxMaterial& fbx_material = this->fbx_materials.at(fbx_material_i);
+
+                const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>(&fbx_material);
                 std::stringstream memory_address_stringstream;
                 memory_address_stringstream << "0x" << std::hex << memory_address;
 
-                std::cout << "Creating `SymbiontMaterial*` based on `ofbx::Texture*` at 0x" <<
+                std::cout << "Creating `SymbiontMaterial*` based on `fbx_material*` at " <<
                         memory_address_stringstream.str() << " ...\n";
                 SymbiontMaterialStruct symbiont_material_struct { Request(this) };
-                symbiont_material_struct.ofbx_texture = ofbx_texture;
+                symbiont_material_struct.my_fbx_material = &fbx_material;
 
                 GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
                 auto symbiont_material = entity_factory.create_symbiont_material(symbiont_material_struct);
@@ -307,8 +301,10 @@ namespace yli::ontology
                 std::cout << "yli::ontology::SymbiontMaterial* successfully created.\n";
 
                 // Create `SymbiontSpecies`s.
-                // Care only about `ofbx::Texture*`s which are DIFFUSE textures.
-                for (const std::size_t mesh_i : this->ofbx_diffuse_texture_mesh_map.at(ofbx_texture))
+
+                for (const std::vector<std::size_t>& mesh_indices =
+                             this->fbx_material_mesh_map.at(fbx_material_i);
+                     const std::size_t mesh_i : mesh_indices)
                 {
                     SymbiontSpeciesStruct symbiont_species_struct { Request(symbiont_material) };
                     symbiont_species_struct.model_loader_struct.model_filename = this->model_filename;
@@ -425,10 +421,9 @@ namespace yli::ontology
         // return this->indices.at(biontID).size();
     }
 
-    std::size_t Symbiosis::get_number_of_ofbx_meshes() const
+    std::size_t Symbiosis::get_number_of_ufbx_meshes() const
     {
-        // the value of `ofbx_mesh_count` comes from OpenFBX.
-        return this->ofbx_mesh_count;
+        return this->ufbx_mesh_count;
     }
 
     bool Symbiosis::has_texture(const std::size_t biontID) const

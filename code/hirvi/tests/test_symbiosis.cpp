@@ -80,7 +80,7 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
         turbo_polizei_png_symbiosis_struct);
     ASSERT_NE(turbo_polizei_png_symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei_png_symbiosis) % alignof(Symbiosis), 0);
-    ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_ofbx_meshes(), 5);
+    ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_ufbx_meshes(), 5);
 
     const yli::memory::ConstructibleModule symbiosis_constructible_module =
             turbo_polizei_png_symbiosis->get_constructible_module();
@@ -105,5 +105,5 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
     ASSERT_TRUE(turbo_polizei_png_symbiosis->get_can_be_erased());
     ASSERT_EQ(turbo_polizei_png_symbiosis->get_scene(), helsinki_scene);
     ASSERT_EQ(turbo_polizei_png_symbiosis->get_parent(), helsinki_scene);
-    ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_non_variable_children(), 2);
+    ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_non_variable_children(), 8);
 }

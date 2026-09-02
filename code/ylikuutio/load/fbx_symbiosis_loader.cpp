@@ -16,11 +16,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "fbx_symbiosis_loader.hpp"
-#include "code/ylikuutio/file/file_loader.hpp"
-#include <ofbx.h>
-
-// OpenFBX wants `u8` == `unsigned char`.
-typedef unsigned char u8;
+#include "create_fbx_scene.hpp"
+#include "fbx_material.hpp"
+#include "fbx_mesh.hpp"
+#include <ufbx.h>
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -30,7 +29,6 @@ typedef unsigned char u8;
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <cstdint>       // std::int32_t, std::int64_t, std::uint8_t, std::uint64_t
 #include <ios>           // std::dec, std::hex
 #include <iostream>      // std::cout, std::cerr
 #include <string>        // std::string
@@ -40,276 +38,170 @@ typedef unsigned char u8;
 namespace yli::load
 {
     bool load_fbx(
-            const std::string& filename,
-            std::vector<std::vector<glm::vec3>>& out_vertices,
-            std::vector<std::vector<glm::vec2>>& out_uvs,
-            std::vector<std::vector<glm::vec3>>& out_normals,
-            std::unordered_map<const ofbx::Texture*, std::vector<std::int32_t>>& ofbx_diffuse_texture_mesh_map,
-            std::vector<const ofbx::Mesh*>& ofbx_meshes,
-            std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
-            std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
-            std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
-            std::size_t& mesh_count,
-            const bool is_debug_mode)
+        const std::string& filename,
+        std::vector<std::vector<glm::vec3>>& out_vertices,
+        std::vector<std::vector<glm::vec2>>& out_uvs,
+        std::vector<std::vector<glm::vec3>>& out_normals,
+        std::unordered_map<std::size_t, std::vector<std::size_t>>& fbx_material_mesh_map,
+        std::vector<FbxMaterial>& fbx_materials,
+        std::vector<FbxMesh>& fbx_meshes,
+        std::size_t& mesh_count,
+        const bool is_debug_mode)
     {
-        // Functions and data of interest in OpenFBX:
-        // struct TakeInfo
-        // {
-        //     DataView name;
-        //     DataView filename;
-        //     double local_time_from;
-        //     double local_time_to;
-        //     double reference_time_from;
-        //     double reference_time_to;
-        // };
-        //
-        // IScene* load(const u8* data, int size)
-        const std::optional<std::vector<std::uint8_t>> data_vector = file::binary_slurp(filename);
+        ufbx_load_opts load_opts {};
+        load_opts.evaluate_skinning = false;
+        load_opts.load_external_files = false;
+        load_opts.ignore_missing_external_files = true;
+        load_opts.generate_missing_normals = false;
+        load_opts.use_root_transform = false;
+        load_opts.root_transform.rotation = ufbx_identity_quat;
+        load_opts.target_unit_meters = 1.0f;
+        load_opts.target_axes = {
+            .right = UFBX_COORDINATE_AXIS_NEGATIVE_Y,
+            .up = UFBX_COORDINATE_AXIS_POSITIVE_Z,
+            .front = UFBX_COORDINATE_AXIS_POSITIVE_X
+        };
 
-        if (!data_vector || data_vector->empty())
+        constexpr ufbx_real scale = 1.0f;
+        load_opts.root_transform.scale = ufbx_vec3 { .x = scale, .y = scale, .z = scale };
+
+        ufbx_error error;
+        ufbx_scene* const original_scene = ufbx_load_file(filename.c_str(), &load_opts, &error);
+
+        if (original_scene == nullptr)
         {
-            std::cerr << filename << " could not be opened, or the file is empty.\n";
+            std::cerr << "ERROR: `yli::load::load_fbx`: loading FBX file " << filename << " failed!\n";
+            char buffer[4096];
+            ufbx_format_error(buffer, sizeof(buffer), &error);
+            std::cerr << buffer << "\n";
             return false;
         }
 
-        // OpenFBX wants `u8` == `unsigned char`.
-        const auto data = reinterpret_cast<const u8*>(data_vector->data());
-        const std::int64_t size = data_vector->size();
+        constexpr std::size_t subdivision_level { 0 };
+        constexpr bool needs_subdivision { true };
+        const std::optional<FbxScene> maybe_fbx_scene = create_fbx_scene(
+            *original_scene, subdivision_level, needs_subdivision, is_debug_mode);
 
-        if (is_debug_mode)
+        if (!maybe_fbx_scene.has_value())
         {
-            std::cout << "Loaded FBX data vector size: " << size << "\n";
-        }
-
-        constexpr std::uint64_t flags = static_cast<std::uint64_t>(ofbx::LoadFlags::TRIANGULATE);
-        const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
-
-        if (ofbx_iscene == nullptr)
-        {
-            std::cerr << "ERROR: `ofbx_iscene` is `nullptr`!\n";
+            std::cerr << "ERROR: `yli::load::load_fbx`: reading scene of FBX file " << filename << " failed!\n";
+            ufbx_free_scene(original_scene);
             return false;
         }
 
-        const int temp_mesh_count = ofbx_iscene->getMeshCount(); // `getMeshCount()` returns `int`.
+        const FbxScene& fbx_scene = maybe_fbx_scene.value();
 
-        if (temp_mesh_count < 0)
-        {
-            std::cerr << "ERROR: mesh count is negative!\n";
-            return false;
-        }
+        std::cout << "fbx_scene.nodes.size(): " << fbx_scene.nodes.size() << "\n";
 
-        mesh_count = static_cast<std::size_t>(temp_mesh_count);
+        mesh_count = fbx_scene.meshes.size();
+        std::cout << "mesh_count: " << mesh_count << "\n";
+        fbx_meshes.reserve(mesh_count);
 
-        ofbx_meshes.reserve(mesh_count);
+        // NOTE: The material count is from scene, not from mesh.
+        const std::size_t material_count = fbx_scene.materials.size();
+        std::cout << "material_count: " << material_count << "\n";
+
+        std::cout << "fbx_scene.nodes.size(): " << fbx_scene.nodes.size() << "\n";
 
         for (std::size_t mesh_i = 0; mesh_i < mesh_count; mesh_i++)
         {
-            const ofbx::Mesh* mesh = ofbx_iscene->getMesh(mesh_i);
-            ofbx_meshes[mesh_i] = mesh;
+            const FbxMesh& mesh = fbx_scene.meshes.at(mesh_i);
+            fbx_meshes.emplace_back(mesh);
 
-            if (mesh == nullptr)
+            const std::size_t mesh_vertex_count = mesh.vertices.size();
+            std::cout << "Mesh " << mesh_i << " has " << mesh_vertex_count << " vertices.\n";
+
             {
-                std::cerr << "ERROR: `mesh` is `nullptr`!\n";
-                return false;
+                std::vector<glm::vec3> mesh_out_vertices;
+                std::vector<glm::vec2> mesh_out_uvs;
+                std::vector<glm::vec3> mesh_out_normals;
+
+                for (std::size_t mesh_vertex_i = 0; mesh_vertex_i < mesh_vertex_count; mesh_vertex_i++)
+                {
+                    const glm::vec3 vertex = {
+                        mesh.vertices[mesh_vertex_i].position.x,
+                        mesh.vertices[mesh_vertex_i].position.y,
+                        mesh.vertices[mesh_vertex_i].position.z
+                    };
+                    mesh_out_vertices.emplace_back(vertex);
+
+                    const glm::vec2 uv = {
+                        mesh.vertices[mesh_vertex_i].uv.x,
+                        mesh.vertices[mesh_vertex_i].uv.y
+                    };
+                    mesh_out_uvs.emplace_back(uv);
+
+                    const glm::vec3 normal = {
+                        mesh.vertices[mesh_vertex_i].normal.x,
+                        mesh.vertices[mesh_vertex_i].normal.y,
+                        mesh.vertices[mesh_vertex_i].normal.z
+                    };
+                    mesh_out_normals.emplace_back(normal);
+                }
+
+                out_vertices.emplace_back(mesh_out_vertices);
+                out_uvs.emplace_back(mesh_out_uvs);
+                out_normals.emplace_back(mesh_out_normals);
             }
-
-            const ofbx::Geometry* geometry = mesh->getGeometry();
-
-            if (geometry == nullptr)
-            {
-                std::cerr << "ERROR: `geometry` is `nullptr`!\n";
-                return false;
-            }
-
-            // TODO: finalize the implementation of `yli::ontology::Symbiosis`
-            // to be able to support for different materials!
-            const int temp_material_count = mesh->getMaterialCount(); // TODO: use this in  `yli::ontology::Symbiosis` entities!
-
-            if (is_debug_mode)
-            {
-                std::cout << filename << ": mesh " << mesh_i << ": getMaterialCount(): " << temp_material_count << "\n";
-            }
-
-            if (temp_material_count < 0)
-            {
-                std::cerr << "ERROR: material count is negative!\n";
-                return false;
-            }
-
-            const auto material_count = static_cast<std::size_t>(temp_material_count);
 
             for (std::size_t material_i = 0; material_i < material_count; material_i++)
             {
-                if (is_debug_mode)
+                const FbxMaterial& material = fbx_scene.materials.at(material_i);
+                fbx_materials.emplace_back(material);
+
+                if (!fbx_material_mesh_map.contains(material_i))
                 {
-                    std::cout << "mesh " << mesh_i << ", material " << material_i << "\n";
+                    fbx_material_mesh_map[material_i] = std::vector<std::size_t> {};
+                }
+                if (material.has_alpha)
+                {
+                    std::cout << "Material " << material_i << " has alpha.\n";
+                }
+                if (material.has_metallic)
+                {
+                    std::cout << "Material " << material_i << " has metallic.\n";
+                }
+                if (material.has_specular)
+                {
+                    std::cout << "Material " << material_i << " has specular.\n";
                 }
 
-                const ofbx::Material* material = mesh->getMaterial(material_i);
-
-                if (material == nullptr)
+                if (material.cast_shadows)
                 {
-                    // Material should not be `nullptr`.
-                    continue;
+                    std::cout << "Material " << material_i << " casts shadows.\n";
+                }
+                else
+                {
+                    std::cout << "Material " << material_i << " does not cast shadows.\n";
                 }
 
-                if (const ofbx::Texture* const diffuse_texture = material->getTexture(ofbx::Texture::DIFFUSE); diffuse_texture == nullptr)
+                // TODO: rest of material!
+            }
+
+            if (mesh.material_i < std::numeric_limits<std::size_t>::max())
+            {
+                if (mesh.material_i >= material_count)
                 {
-                    if (is_debug_mode)
-                    {
-                        std::cout << "mesh " << mesh_i << ", DIFFUSE texture is `nullptr`\n";
-                    }
+                    std::cerr << "ERROR: `yli::load::load_fbx`: invalid `mesh.material_i`!\n";
                 }
                 else
                 {
                     if (is_debug_mode)
                     {
-                        std::cout << "mesh " << mesh_i << ", DIFFUSE texture at " << std::hex << reinterpret_cast<std::uintptr_t>(diffuse_texture) << std::dec << "\n";
+                        std::cout << "Adding mesh " << mesh_i << " to material at " << std::hex <<
+                                reinterpret_cast<std::uintptr_t>(&mesh.material_i) << std::dec << "\n";
                     }
 
-                    // Add new texture to map.
-                    if (ofbx_diffuse_texture_mesh_map.count(diffuse_texture) != 1)
-                    {
-                        // This `const ofbx::Material*` is not in `ofbx_diffuse_texture_mesh_map` yet.
-                        ofbx_diffuse_texture_mesh_map[diffuse_texture] = std::vector<std::int32_t>();
-                    }
-
-                    if (is_debug_mode)
-                    {
-                        std::cout << "Adding mesh " << mesh_i << " to DIFFUSE texture at " << std::hex << reinterpret_cast<std::uintptr_t>(diffuse_texture) << std::dec << "\n";
-                    }
-
-                    ofbx_diffuse_texture_mesh_map[diffuse_texture].emplace_back(mesh_i);
-
-                    if (is_debug_mode)
-                    {
-                        std::cout << "Adding mesh " << mesh_i << " to DIFFUSE textures.\n";
-                    }
-
-                    ofbx_diffuse_texture_vector.emplace_back(diffuse_texture);
-                }
-
-                if (const ofbx::Texture* normal_texture = material->getTexture(ofbx::Texture::NORMAL); normal_texture == nullptr)
-                {
-                    if (is_debug_mode)
-                    {
-                        std::cout << "Mesh " << mesh_i << ", NORMAL texture is `nullptr`\n";
-                    }
-                }
-                else
-                {
-                    if (is_debug_mode)
-                    {
-                        std::cout << "Mesh " << mesh_i << ", NORMAL texture at " << std::hex << (void*) normal_texture << std::dec << "\n";
-                    }
-
-                    // TODO: store NORMAL textures similarly as DIFFUSE textures.
-
-                    if (is_debug_mode)
-                    {
-                        std::cout << "Adding mesh " << mesh_i << " to NORMAL textures.\n";
-                    }
-
-                    ofbx_normal_texture_vector.emplace_back(normal_texture);
-                }
-
-                if (const ofbx::Texture* count_texture = material->getTexture(ofbx::Texture::COUNT); count_texture == nullptr)
-                {
-                    if (is_debug_mode)
-                    {
-                        std::cout << "Mesh " << mesh_i << ", COUNT texture is `nullptr`\n";
-                    }
-                }
-                else
-                {
-                    if (is_debug_mode)
-                    {
-                        std::cout << "Mesh " << mesh_i << ", COUNT texture at " << std::hex << (void*) count_texture << std::dec << "\n";
-                    }
-
-                    // TODO: store COUNT textures similarly as DIFFUSE textures.
-
-                    if (is_debug_mode)
-                    {
-                        std::cout << "Adding mesh " << mesh_i << " to COUNT textures.\n";
-                    }
-                    ofbx_count_texture_vector.emplace_back(count_texture);
+                    fbx_material_mesh_map.at(mesh.material_i).emplace_back(mesh_i);
                 }
             }
-
-            const int temp_vertex_count = geometry->getVertexCount();
-
-            if (is_debug_mode)
-            {
-                std::cout << filename << ": mesh " << mesh_i << ": getVertexCount(): " << temp_vertex_count << "\n";
-            }
-
-            if (temp_vertex_count < 0)
-            {
-                std::cerr << "ERROR: vertex count is negative!\n";
-                return false;
-            }
-
-            const std::size_t vertex_count = static_cast<std::size_t>(temp_vertex_count);
-
-            const ofbx::Vec3* vertices = geometry->getVertices();
-
-            if (vertices == nullptr)
-            {
-                std::cerr << "ERROR: `vertices` is `nullptr`!\n";
-                return false;
-            }
-
-            const ofbx::Vec3* normals = geometry->getNormals();
-
-            if (normals == nullptr)
-            {
-                std::cerr << "ERROR: `normals` is `nullptr`!\n";
-                return false;
-            }
-
-            std::vector<glm::vec3> mesh_out_vertices;
-
-            for (std::size_t i = 0; i < vertex_count; i++)
-            {
-                // vertices.
-                glm::vec3 vertex = { vertices[i].x, vertices[i].y, vertices[i].z };
-                mesh_out_vertices.emplace_back(vertex);
-            }
-
-            out_vertices.emplace_back(mesh_out_vertices);
-
-            std::vector<glm::vec2> mesh_out_uvs;
-
-            if (const ofbx::Vec2* const uvs = geometry->getUVs(); uvs == nullptr)
-            {
-                // `uvs` should not be `nullptr`.
-                std::cerr << "ERROR: `uvs` is `nullptr`!\n";
-            }
-            else
-            {
-                for (std::size_t vertex_i = 0; vertex_i < vertex_count; vertex_i++)
-                {
-                    // UVs.
-                    glm::vec2 uv = { uvs[vertex_i].x, uvs[vertex_i].y };
-                    mesh_out_uvs.emplace_back(uv);
-                }
-            }
-
-            out_uvs.emplace_back(mesh_out_uvs);
-
-            std::vector<glm::vec3> mesh_out_normals;
-
-            for (std::size_t i = 0; i < vertex_count; i++)
-            {
-                // Normals.
-                glm::vec3 normal = { normals[i].x, normals[i].y, normals[i].z };
-                mesh_out_normals.emplace_back(normal);
-            }
-
-            out_normals.emplace_back(mesh_out_normals);
         }
 
+        // TODO: Compute the world-space bounding box!
+
+        // TODO: rest of FBX loading!
+
+        ufbx_free_scene(original_scene);
         return true;
     }
 }

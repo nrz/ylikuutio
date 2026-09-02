@@ -179,7 +179,7 @@ include_directories(
     external/FastNoiseSIMD/
     external/glew-2.0.0/include/
     external/glm/
-    external/OpenFBX/src/
+    external/ufbx/
     external/pugixml/src/
     .
     )
@@ -213,8 +213,7 @@ set(ALL_LIBS
     ${OPENGL_LIBRARY}
     GLEW_200
     pugixml
-    miniz
-    OpenFBX
+    ufbx
     )
 
 if (COMPILE_SDL_MIXER_FROM_SOURCE)
@@ -542,15 +541,41 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
     code/ylikuutio/load/common_texture_loader.cpp
     code/ylikuutio/load/common_texture_loader.hpp
+    code/ylikuutio/load/convert_ufbx_matrix_to_glm_mat4.cpp
+    code/ylikuutio/load/convert_ufbx_matrix_to_glm_mat4.hpp
+    code/ylikuutio/load/create_fbx_scene.cpp
+    code/ylikuutio/load/create_fbx_scene.hpp
     code/ylikuutio/load/csv_loader.hpp
     code/ylikuutio/load/csv_texture_loader.cpp
     code/ylikuutio/load/csv_texture_loader.hpp
+    code/ylikuutio/load/fbx_anim.hpp
+    code/ylikuutio/load/fbx_blend_channel.hpp
+    code/ylikuutio/load/fbx_blend_channel_anim.hpp
+    code/ylikuutio/load/fbx_buffer_resource.hpp
+    code/ylikuutio/load/fbx_context_resource.hpp
+    code/ylikuutio/load/fbx_image.hpp
+    code/ylikuutio/load/fbx_image_resource.hpp
+    code/ylikuutio/load/fbx_material.hpp
+    code/ylikuutio/load/fbx_mesh.hpp
+    code/ylikuutio/load/fbx_mesh_part.hpp
+    code/ylikuutio/load/fbx_mesh_vertex.hpp
     code/ylikuutio/load/fbx_model_loader.cpp
     code/ylikuutio/load/fbx_model_loader.hpp
+    code/ylikuutio/load/fbx_node.hpp
+    code/ylikuutio/load/fbx_node_anim.hpp
+    code/ylikuutio/load/fbx_pass_resource.hpp
+    code/ylikuutio/load/fbx_pipeline_resource.hpp
+    code/ylikuutio/load/fbx_pixel_16.hpp
+    code/ylikuutio/load/fbx_scene.hpp
+    code/ylikuutio/load/fbx_shader_resource.hpp
+    code/ylikuutio/load/fbx_skin_vertex.hpp
     code/ylikuutio/load/fbx_symbiosis_loader.cpp
     code/ylikuutio/load/fbx_symbiosis_loader.hpp
+    code/ylikuutio/load/fbx_texture.hpp
     code/ylikuutio/load/fbx_texture_loader.cpp
     code/ylikuutio/load/fbx_texture_loader.hpp
+    code/ylikuutio/load/fbx_triangle.hpp
+    code/ylikuutio/load/fbx_triangle_info.hpp
     code/ylikuutio/load/heightmap_loader_struct.hpp
     code/ylikuutio/load/image_file_loader.cpp
     code/ylikuutio/load/image_file_loader.hpp
@@ -564,6 +589,20 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/png_heightmap_loader.hpp
     code/ylikuutio/load/png_loader.cpp
     code/ylikuutio/load/png_loader.hpp
+    code/ylikuutio/load/read_fbx_anim_stack.cpp
+    code/ylikuutio/load/read_fbx_anim_stack.hpp
+    code/ylikuutio/load/read_fbx_blend_channel.cpp
+    code/ylikuutio/load/read_fbx_blend_channel.hpp
+    code/ylikuutio/load/read_fbx_blend_channel_anim.cpp
+    code/ylikuutio/load/read_fbx_blend_channel_anim.hpp
+    code/ylikuutio/load/read_fbx_mesh.cpp
+    code/ylikuutio/load/read_fbx_mesh.hpp
+    code/ylikuutio/load/read_fbx_node.cpp
+    code/ylikuutio/load/read_fbx_node.hpp
+    code/ylikuutio/load/read_fbx_node_anim.cpp
+    code/ylikuutio/load/read_fbx_node_anim.hpp
+    code/ylikuutio/load/setup_fbx_texture.cpp
+    code/ylikuutio/load/setup_fbx_texture.hpp
     code/ylikuutio/load/shader_loader.cpp
     code/ylikuutio/load/shader_loader.hpp
     code/ylikuutio/load/srtm_heightmap_loader.cpp
@@ -1226,19 +1265,19 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
 
     if (DEFINED "PNG_LIBRARIES")
         if(COMPILE_SDL_FROM_SOURCE)
-            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
-            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio ufbx SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio ufbx SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
         else()
-            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
-            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio ufbx SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
+            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio ufbx SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
         endif()
     else()
         if(COMPILE_SDL_FROM_SOURCE)
-            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
-            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio ufbx SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio ufbx SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
         else()
-            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
-            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+            target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio ufbx SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
+            target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio ufbx SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
         endif()
     endif()
 

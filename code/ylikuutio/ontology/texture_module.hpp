@@ -20,7 +20,6 @@
 
 #include "texture_file_format.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include <ofbx.h>
 
 // Include standard headers
 #include <cstdint>  // std::uint32_t
@@ -29,6 +28,7 @@
 namespace yli::load
 {
     struct ImageLoaderStruct;
+    struct FbxMaterial;
 }
 
 namespace yli::ontology
@@ -50,7 +50,7 @@ namespace yli::ontology
             TextureModule(
                     Universe& universe,
                     Registry* registry,
-                    const ofbx::Texture* ofbx_texture,
+                    const load::FbxMaterial* fbx_material,
                     const load::ImageLoaderStruct& image_loader_struct,
                     const std::string& name);
 
@@ -71,7 +71,7 @@ namespace yli::ontology
         private:
             std::string texture_filename;
             TextureFileFormat texture_file_format;
-            const ofbx::Texture* ofbx_texture { nullptr };
+            const load::FbxMaterial* my_fbx_material { nullptr };
             std::uint32_t image_width         { 0 };
             std::uint32_t image_height        { 0 };
             std::uint32_t image_size          { 0 };

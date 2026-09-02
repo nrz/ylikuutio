@@ -18,7 +18,7 @@
 #include "symbiosis_loader.hpp"
 #include "symbiosis_loader_struct.hpp"
 #include "fbx_symbiosis_loader.hpp"
-#include <ofbx.h>
+#include "fbx_material.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -28,9 +28,7 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <cstdint>       // std::int32_t
 #include <iostream>      // std::cout, std::cerr
-#include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
 namespace yli::load
@@ -40,11 +38,9 @@ namespace yli::load
             std::vector<std::vector<glm::vec3>>& out_vertices,
             std::vector<std::vector<glm::vec2>>& out_uvs,
             std::vector<std::vector<glm::vec3>>& out_normals,
-            std::unordered_map<const ofbx::Texture*, std::vector<std::int32_t>>& ofbx_diffuse_texture_mesh_map,
-            std::vector<const ofbx::Mesh*>& ofbx_meshes,
-            std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
-            std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
-            std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
+            std::unordered_map<std::size_t, std::vector<std::size_t>>& fbx_material_mesh_map,
+            std::vector<FbxMaterial>& fbx_materials,
+            std::vector<FbxMesh>& fbx_meshes,
             std::size_t& mesh_count,
             const bool is_debug_mode)
     {
@@ -57,11 +53,9 @@ namespace yli::load
                     out_vertices,
                     out_uvs,
                     out_normals,
-                    ofbx_diffuse_texture_mesh_map,
-                    ofbx_meshes,
-                    ofbx_diffuse_texture_vector,
-                    ofbx_normal_texture_vector,
-                    ofbx_count_texture_vector,
+                    fbx_material_mesh_map,
+                    fbx_materials,
+                    fbx_meshes,
                     mesh_count,
                     is_debug_mode);
         }
@@ -72,7 +66,6 @@ namespace yli::load
             return false;
         }
 
-        // TODO: Compute the graphs of the meshes of this `Symbiosis` to enable object vertex modification!
         return model_loading_result;
     }
 }

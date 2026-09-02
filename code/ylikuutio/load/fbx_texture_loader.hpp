@@ -20,8 +20,6 @@
 
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
-#include <ofbx.h>
-
 // Include standard headers
 #include <cstdint> // std::uint32_t
 
@@ -32,9 +30,11 @@ namespace yli::render
 
 namespace yli::load
 {
+    struct FbxMaterial;
+
     // Load texture from memory.
     bool load_fbx_texture(
-            const ofbx::Texture* ofbx_texture,
+            const FbxMaterial& fbx_material,
             std::uint32_t& image_width,
             std::uint32_t& image_height,
             std::uint32_t& image_size,

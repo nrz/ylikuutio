@@ -24,10 +24,9 @@
 // Include standard headers
 #include <utility> // std::move
 
-namespace ofbx
+namespace yli::load
 {
-    // OpenFBX.
-    struct Texture;
+    struct FbxMaterial;
 }
 
 namespace yli::ontology
@@ -42,7 +41,7 @@ namespace yli::ontology
         }
 
         Request<Symbiosis> symbiosis_parent {};
-        const ofbx::Texture* ofbx_texture          { nullptr };
+        const load::FbxMaterial* my_fbx_material { nullptr };
     };
 }
 

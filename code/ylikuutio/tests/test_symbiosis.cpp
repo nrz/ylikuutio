@@ -57,7 +57,7 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately,
         symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
-    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_ufbx_meshes(), 0);
 
     const yli::ontology::GenericParentModule* const parent_of_symbiont_materials =
             symbiosis->get_generic_parent_module<yli::ontology::SymbiontMaterial>();
@@ -110,7 +110,7 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately,
         symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
-    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_ufbx_meshes(), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -160,7 +160,7 @@ TEST(symbiosis_must_be_initialized_and_must_bind_to_ecosystem_appropriately,
         symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
-    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_ufbx_meshes(), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -209,7 +209,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_scene_provided_as_val
         symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
-    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_ufbx_meshes(), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -255,7 +255,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_scene_provided_as_val
         symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
-    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_ufbx_meshes(), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -301,7 +301,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_scene_provided_as_inv
         symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
-    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 0);
+    ASSERT_EQ(symbiosis->get_number_of_ufbx_meshes(), 0);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -348,7 +348,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei_scene_p
         symbiosis_struct);
     ASSERT_NE(symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiosis) % alignof(yli::ontology::Symbiosis), 0);
-    ASSERT_EQ(symbiosis->get_number_of_ofbx_meshes(), 5);
+    ASSERT_EQ(symbiosis->get_number_of_ufbx_meshes(), 5);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);
@@ -371,7 +371,7 @@ TEST(symbiosis_must_be_initialized_appropriately, headless_turbo_polizei_scene_p
     ASSERT_TRUE(symbiosis->get_can_be_erased());
     ASSERT_EQ(symbiosis->get_scene(), scene);
     ASSERT_EQ(symbiosis->get_parent(), scene);
-    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 2);    // 2 `SymbiontMaterial`s.
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 8);    // 8 `SymbiontMaterial`s.
 }
 
 TEST(adding_abilities_to_symbiosis_must_work_properly, headless_turbo_polizei_scene_provided_as_valid_pointer)
@@ -417,7 +417,7 @@ TEST(adding_abilities_to_symbiosis_must_work_properly, headless_turbo_polizei_sc
     ASSERT_TRUE(symbiosis->get_can_be_erased());
     ASSERT_EQ(symbiosis->get_scene(), scene);
     ASSERT_EQ(symbiosis->get_parent(), scene);
-    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 3);    // 2 `SymbiontMaterial`s and 1 `Ability`.
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 9);    // 8 `SymbiontMaterial`s and 1 `Ability`.
 }
 
 TEST(symbiosis_must_bind_to_ecosystem_appropriately, ecosystem_provided_as_valid_pointer)

@@ -16,11 +16,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "fbx_model_loader.hpp"
-#include "code/ylikuutio/file/file_loader.hpp"
-#include <ofbx.h>
-
-// OpenFBX wants `u8` == `unsigned char`.
-typedef unsigned char u8;
+#include "create_fbx_scene.hpp"
+#include "fbx_scene.hpp"
+#include "fbx_mesh.hpp"
+#include "fbx_mesh_vertex.hpp"
+#include <ufbx.h>
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -30,7 +30,6 @@ typedef unsigned char u8;
 
 // Include standard headers
 #include <cstddef>  // std::size_t
-#include <cstdint>  // std::uint64_t
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
 #include <string>   // std::string
@@ -39,148 +38,128 @@ typedef unsigned char u8;
 namespace yli::load
 {
     bool load_fbx(
-            const std::string& filename,
-            const std::size_t mesh_i,
-            std::vector<glm::vec3>& out_vertices,
-            std::vector<glm::vec2>& out_uvs,
-            std::vector<glm::vec3>& out_normals,
-            const bool is_debug_mode)
+        const std::string& filename,
+        const std::size_t mesh_i,
+        std::vector<glm::vec3>& out_vertices,
+        std::vector<glm::vec2>& out_uvs,
+        std::vector<glm::vec3>& out_normals,
+        const bool is_debug_mode)
     {
-        // Functions and data of interest in OpenFBX:
-        // struct TakeInfo
-        // {
-        //     DataView name;
-        //     DataView filename;
-        //     double local_time_from;
-        //     double local_time_to;
-        //     double reference_time_from;
-        //     double reference_time_to;
-        // };
-        //
-        // IScene* load(const u8* data, int size)
-        const std::optional<std::vector<unsigned char>> data_vector = file::binary_slurp(filename);
+        /*
+        constexpr ufbx_load_opts opts {
+            .evaluate_skinning = true,
+            .load_external_files = false,
+            .ignore_missing_external_files = true,
+            .generate_missing_normals = true,
+            .target_axes = {
+                .right = UFBX_COORDINATE_AXIS_NEGATIVE_Y,
+                .up = UFBX_COORDINATE_AXIS_POSITIVE_Z,
+                .front = UFBX_COORDINATE_AXIS_POSITIVE_X
+            },
+            .target_unit_meters = 1.0f
+        };
+        */
+        ufbx_load_opts load_opts {};
+        load_opts.evaluate_skinning = true;
+        load_opts.load_external_files = true;
+        load_opts.ignore_missing_external_files = true;
+        load_opts.generate_missing_normals = false;
+        load_opts.use_root_transform = false;
+        load_opts.root_transform.rotation = ufbx_identity_quat;
+        load_opts.target_unit_meters = 1.0f;
+        load_opts.target_axes = {
+            .right = UFBX_COORDINATE_AXIS_NEGATIVE_Y,
+            .up = UFBX_COORDINATE_AXIS_POSITIVE_Z,
+            .front = UFBX_COORDINATE_AXIS_POSITIVE_X
+        };
 
-        if (!data_vector || data_vector->empty())
+        constexpr ufbx_real scale = 1.0f;
+        load_opts.root_transform.scale = ufbx_vec3 { .x = scale, .y = scale, .z = scale };
+
+        ufbx_error error;
+        ufbx_scene* const original_scene = ufbx_load_file(filename.c_str(), &load_opts, &error);
+
+        if (original_scene == nullptr)
         {
-            std::cerr << filename << " could not be opened, or the file is empty.\n";
+            std::cerr << "ERROR: `yli::load::load_fbx`: loading FBX file " << filename << " failed!\n";
+            char buffer[4096];
+            ufbx_format_error(buffer, sizeof(buffer), &error);
+            std::cerr << buffer << "\n";
             return false;
         }
 
-        // OpenFBX wants `u8` == `unsigned char`.
-        const auto data = reinterpret_cast<const u8*>(data_vector->data());
-        const int size = data_vector->size();
+        constexpr std::size_t subdivision_level { 0 };
+        constexpr bool needs_subdivision { true };
+        const std::optional<FbxScene> maybe_fbx_scene = create_fbx_scene(
+            *original_scene, subdivision_level, needs_subdivision, is_debug_mode);
 
-        if (is_debug_mode)
+        if (!maybe_fbx_scene.has_value())
         {
-            std::cout << "Loaded FBX data vector size: " << size << "\n";
-        }
-
-        constexpr std::uint64_t flags = static_cast<std::uint64_t>(ofbx::LoadFlags::TRIANGULATE);
-        const ofbx::IScene* const ofbx_iscene = ofbx::load(data, size, flags);
-
-        if (ofbx_iscene == nullptr)
-        {
-            std::cerr << "ERROR: `ofbx_iscene` is `nullptr`!\n";
+            std::cerr << "ERROR: `yli::load::load_fbx`: reading scene of FBX file " << filename << " failed!\n";
+            ufbx_free_scene(original_scene);
             return false;
         }
 
-        const int temp_mesh_count = ofbx_iscene->getMeshCount(); // `getMeshCount()` returns `int`.
+        const FbxScene& fbx_scene = maybe_fbx_scene.value();
 
-        if (temp_mesh_count < 0)
-        {
-            std::cerr << "ERROR: mesh count is negative!\n";
-            return false;
-        }
+        std::cout << "fbx_scene.nodes.size(): " << fbx_scene.nodes.size() << "\n";
 
-        if (const auto mesh_count = static_cast<std::size_t>(temp_mesh_count); mesh_i >= mesh_count)
+        // Process the mesh indexed by argument `mesh_i`.
+        const auto mesh_count = fbx_scene.meshes.size();
+        std::cout << "mesh_count: " << mesh_count << "\n";
+
+        if (mesh_i >= mesh_count)
         {
             std::cerr << "ERROR: `mesh_i` >= `mesh_count`\n";
+            ufbx_free_scene(original_scene);
             return false;
         }
 
-        const ofbx::Mesh* mesh = ofbx_iscene->getMesh(mesh_i);
-
-        if (mesh == nullptr)
-        {
-            std::cerr << "ERROR: `mesh` is `nullptr`!\n";
-            return false;
-        }
-
-        const ofbx::Geometry* geometry = mesh->getGeometry();
-
-        if (geometry == nullptr)
-        {
-            std::cerr << "ERROR: `geometry` is `nullptr`!\n";
-            return false;
-        }
-
-        const int material_count = mesh->getMaterialCount();
+        const FbxMesh& mesh = fbx_scene.meshes.at(mesh_i);
+        const std::size_t mesh_vertex_count = mesh.vertices.size();
 
         if (is_debug_mode)
         {
-            std::cout << filename << ": mesh " << mesh_i << ": getMaterialCount(): " << material_count << "\n";
+            std::cout << filename << ": fbx_mesh " << mesh_i << "\n";
+            std::cout << "mesh.blend_channel_indices.size(): " << mesh.blend_channel_indices.size() <<
+                    "\n";
+            std::cout << "mesh.num_bones: " << mesh.num_bones << "\n";
+            std::cout << "mesh.bone_indices.size(): " << mesh.bone_indices.size() << "\n";
+            std::cout << "mesh.bone_matrices.size(): " << mesh.bone_matrices.size() << "\n";
+            std::cout << "mesh.instance_node_indices.size(): " << mesh.instance_node_indices.size() << "\n";
+            std::cout << "mesh.num_parts: " << mesh.num_parts << "\n";
+            std::cout << "mesh.parts.size(): " << mesh.parts.size() << "\n";
+            std::cout << "Mesh " << mesh_i << " has " << mesh_vertex_count << " vertices.\n";
         }
 
-        const int temp_vertex_count = geometry->getVertexCount();
-
-        if (is_debug_mode)
+        for (std::size_t mesh_vertex_i = 0; mesh_vertex_i < mesh_vertex_count; mesh_vertex_i++)
         {
-            std::cout << filename << ": mesh " << mesh_i << ": getVertexCount(): " << temp_vertex_count << "\n";
-        }
-
-        if (temp_vertex_count < 0)
-        {
-            std::cerr << "ERROR: vertex count is negative!\n";
-            return false;
-        }
-
-        const std::size_t vertex_count = static_cast<std::size_t>(temp_vertex_count);
-
-        const ofbx::Vec3* vertices = geometry->getVertices();
-
-        if (vertices == nullptr)
-        {
-            std::cerr << "ERROR: `vertices` is `nullptr`!\n";
-            return false;
-        }
-
-        const ofbx::Vec3* normals = geometry->getNormals();
-
-        if (normals == nullptr)
-        {
-            std::cerr << "ERROR: `normals` is `nullptr`!\n";
-            return false;
-        }
-
-        for (std::size_t i = 0; i < vertex_count; i++)
-        {
-            // vertices.
-            glm::vec3 vertex = { vertices[i].x, vertices[i].y, vertices[i].z };
+            glm::vec3 vertex = {
+                mesh.vertices[mesh_vertex_i].position.x,
+                mesh.vertices[mesh_vertex_i].position.y,
+                mesh.vertices[mesh_vertex_i].position.z
+            };
             out_vertices.emplace_back(vertex);
-        }
 
-        if (const ofbx::Vec2* const uvs = geometry->getUVs(); uvs == nullptr)
-        {
-            // `uvs` should not be `nullptr`.
-            std::cerr << "ERROR: `uvs` is `nullptr`!\n";
-        }
-        else
-        {
-            for (std::size_t vertex_i = 0; vertex_i < vertex_count; vertex_i++)
-            {
-                // UVs.
-                glm::vec2 uv = { uvs[vertex_i].x, uvs[vertex_i].y };
-                out_uvs.emplace_back(uv);
-            }
-        }
+            glm::vec2 uv = {
+                mesh.vertices[mesh_vertex_i].uv.x,
+                mesh.vertices[mesh_vertex_i].uv.y
+            };
+            out_uvs.emplace_back(uv);
 
-        for (std::size_t i = 0; i < vertex_count; i++)
-        {
-            // Normals.
-            glm::vec3 normal = { normals[i].x, normals[i].y, normals[i].z };
+            glm::vec3 normal = {
+                mesh.vertices[mesh_vertex_i].normal.x,
+                mesh.vertices[mesh_vertex_i].normal.y,
+                mesh.vertices[mesh_vertex_i].normal.z
+            };
             out_normals.emplace_back(normal);
         }
 
+        // TODO: Compute the world-space bounding box!
+
+        // TODO: rest of FBX loading!
+
+        ufbx_free_scene(original_scene);
         return true;
     }
 }

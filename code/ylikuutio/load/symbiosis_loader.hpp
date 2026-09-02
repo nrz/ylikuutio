@@ -19,7 +19,8 @@
 #define YLIKUUTIO_LOAD_SYMBIOSIS_LOADER_HPP_INCLUDED
 
 #include "symbiosis_loader_struct.hpp"
-#include <ofbx.h>
+#include "fbx_material.hpp"
+#include "fbx_mesh.hpp"
 
 // Include GLM
 #ifndef GLM_GLM_HPP_INCLUDED
@@ -29,7 +30,6 @@
 
 // Include standard headers
 #include <cstddef>       // std::size_t
-#include <cstdint>       // std::int32_t
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
@@ -40,11 +40,9 @@ namespace yli::load
             std::vector<std::vector<glm::vec3>>& out_vertices,
             std::vector<std::vector<glm::vec2>>& out_uvs,
             std::vector<std::vector<glm::vec3>>& out_normals,
-            std::unordered_map<const ofbx::Texture*, std::vector<std::int32_t>>& ofbx_diffuse_texture_mesh_map,
-            std::vector<const ofbx::Mesh*>& ofbx_meshes,
-            std::vector<const ofbx::Texture*>& ofbx_diffuse_texture_vector,
-            std::vector<const ofbx::Texture*>& ofbx_normal_texture_vector,
-            std::vector<const ofbx::Texture*>& ofbx_count_texture_vector,
+            std::unordered_map<std::size_t, std::vector<std::size_t>>& fbx_material_mesh_map,
+            std::vector<FbxMaterial>& fbx_materials,
+            std::vector<FbxMesh>& fbx_meshes,
             std::size_t& mesh_count,
             bool is_debug_mode);
 }

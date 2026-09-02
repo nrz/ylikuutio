@@ -4,9 +4,6 @@
 [submodule "external/glm"]
 	path = external/glm
 	url = https://github.com/g-truc/glm.git
-[submodule "external/OpenFBX"]
-	path = external/OpenFBX
-	url = https://github.com/nem0/OpenFBX.git
 [submodule "external/pugixml"]
 	path = external/pugixml
 	url = https://github.com/zeux/pugixml.git
@@ -25,3 +22,6 @@
 [submodule "external/SDL_mixer"]
 	path = external/SDL_mixer
 	url = https://github.com/libsdl-org/SDL_mixer
+[submodule "external/ufbx"]
+	path = external/ufbx
+	url = https://github.com/ufbx/ufbx.git

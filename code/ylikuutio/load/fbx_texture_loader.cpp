@@ -17,13 +17,11 @@
 
 #include "fbx_texture_loader.hpp"
 #include "common_texture_loader.hpp"
+#include "fbx_material.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/string/hexdump.hpp"
 #include "code/ylikuutio/string/extract_string.hpp"
-
-// Include OpenFBX
-#include <ofbx.h>
 
 // Include standard headers
 #include <cstdint>  // std::uint32_t
@@ -39,25 +37,22 @@ namespace yli::load
 {
     // Load texture from memory.
     bool load_fbx_texture(
-            const ofbx::Texture* const ofbx_texture,
-            std::uint32_t& image_width,
-            std::uint32_t& image_height,
-            std::uint32_t& image_size,
-            std::uint32_t& n_color_channels,
-            GLuint& textureID,
-            const render::GraphicsApiBackend graphics_api_backend)
+        const FbxMaterial& fbx_material,
+        std::uint32_t& image_width,
+        std::uint32_t& image_height,
+        std::uint32_t& image_size,
+        std::uint32_t& n_color_channels,
+        GLuint& textureID,
+        const render::GraphicsApiBackend graphics_api_backend)
     {
-        // Requirements:
-        // `ofbx_texture` must not be `nullptr`.
-
-        if (ofbx_texture == nullptr)
-        {
-            std::cerr << "ERROR: `yli::load::load_fbx_texture`: `ofbx_texture` is `nullptr`!\n";
-            return false;
-        }
-
         // Load the texture.
-        const auto filename = std::string(ofbx_texture->getFileName().begin, ofbx_texture->getFileName().end);
+        std::cout << "fbx_material = " << std::hex << (uint64_t) &fbx_material << std::dec << "\n";
+
+        const FbxTexture& base_color_texture = fbx_material.base_color;
+
+        const std::string filename = base_color_texture.filename;
+        std::cout << std::hex << &filename << std::dec << "\n";
+        std::cout << "Loading texture from FBX file: " << filename << "\n";
 
         yli::string::print_hexdump<char>(filename);
 
@@ -65,8 +60,8 @@ namespace yli::load
         constexpr char separator = '/'; // FIXME: don't assume slash as some operating systems may use other characters.
 
         const std::string filename_buffer = yli::string::extract_last_part_of_string<char>(
-                filename,
-                separator);
+            filename,
+            separator);
 
         std::cout << "Filename length: " << filename_buffer.size() << " characters.\n";
 
@@ -76,8 +71,8 @@ namespace yli::load
         constexpr char suffix_separator = '.';
 
         const std::string file_suffix_buffer = yli::string::extract_last_part_of_string<char>(
-                filename_buffer,
-                suffix_separator);
+            filename_buffer,
+            suffix_separator);
 
         std::cout << "Texture file suffix: " << file_suffix_buffer << "\n";
 
@@ -86,7 +81,8 @@ namespace yli::load
             ImageLoaderStruct image_loader_struct;
             image_loader_struct.should_discard_alpha_channel = true;
             image_loader_struct.should_flip_vertically = true;
-            return load_common_texture(filename_buffer, image_loader_struct, image_width, image_height, image_size, n_color_channels, textureID, graphics_api_backend);
+            return load_common_texture(filename_buffer, image_loader_struct, image_width, image_height, image_size,
+                                       n_color_channels, textureID, graphics_api_backend);
         }
 
         return false;

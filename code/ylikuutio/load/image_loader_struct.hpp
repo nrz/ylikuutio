@@ -18,14 +18,14 @@
 #ifndef YLIKUUTIO_LOAD_IMAGE_LOADER_STRUCT_HPP_INCLUDED
 #define YLIKUUTIO_LOAD_IMAGE_LOADER_STRUCT_HPP_INCLUDED
 
-#include <ofbx.h>
-
 // Include standard headers
 #include <utility> // std::pair
 #include <vector>  // std::vector
 
 namespace yli::load
 {
+    struct FbxMaterial;
+
     enum class ImageLoadingFlags
     {
         SHOULD_CONVERT_GRAYSCALE_TO_RGB,
@@ -56,7 +56,7 @@ namespace yli::load
             }
         }
 
-        ofbx::Texture* ofbx_texture          { nullptr };
+        FbxMaterial* fbx_material            { nullptr };
         bool should_convert_grayscale_to_rgb { false };
         bool should_discard_alpha_channel    { false };
         bool should_flip_vertically          { false };

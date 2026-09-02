@@ -54,7 +54,7 @@ namespace yli::ontology
           texture(
               universe,
               &this->registry,
-              symbiont_material_struct.ofbx_texture,
+              symbiont_material_struct.my_fbx_material,
               load::ImageLoaderStruct(),
               "texture")
     {

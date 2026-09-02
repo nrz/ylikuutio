@@ -23,7 +23,7 @@ include_directories(
     glew-2.0.0/include/
     glm/
     pugixml/src/
-    OpenFBX/src/
+    ufbx/
     )
 
 # Compile external dependencies
@@ -104,17 +104,12 @@ if(COMPILE_LIBPNG_FROM_SOURCE)
     add_subdirectory(libpng-1.6.44)
 endif()
 
-add_library(miniz STATIC
-    OpenFBX/src/miniz.c
-    OpenFBX/src/miniz.h
+add_library(ufbx STATIC)
+target_sources(ufbx PRIVATE
+    ufbx/ufbx.c
+    ufbx/ufbx.h
     )
-add_library(OpenFBX STATIC
-    OpenFBX/src/ofbx.cpp
-    OpenFBX/src/ofbx.h
-    )
-add_dependencies(OpenFBX miniz)
-target_link_libraries(OpenFBX miniz)
-set_property(TARGET OpenFBX PROPERTY COMPILE_FLAGS "-std=c++14")
+set_property(TARGET ufbx PROPERTY CPP_STANDARD 11)
 
 if(COMPILE_SDL_FROM_SOURCE)
     set(BUILD_SHARED_LIBS OFF)

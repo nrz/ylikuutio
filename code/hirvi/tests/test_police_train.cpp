@@ -112,7 +112,7 @@ TEST(police_train_must_be_initialized_appropriately, hirvi_police_train)
     turbo_polizei_png_symbiosis_struct.model_filename ="turbo_polizei_png_textures.fbx";
     Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.get_entity_factory().
             create_symbiosis(turbo_polizei_png_symbiosis_struct);
-    ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_ofbx_meshes(), 5); // To ensure proper loading of `Symbiosis`.
+    ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_ufbx_meshes(), 5); // To ensure proper loading of `Symbiosis`.
 
     const GenericParentModule* const parent_of_symbiont_materials =
             turbo_polizei_png_symbiosis->get_generic_parent_module<SymbiontMaterial>();
@@ -165,7 +165,7 @@ TEST(police_train_must_be_initialized_appropriately, hirvi_police_train)
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(turbo_polizei_png_symbiosis->get_scene(), helsinki_scene);
-    ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_non_variable_children(), 2); // 2 `SymbiontMaterial`s.
+    ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_non_variable_children(), 8); // 8 `SymbiontMaterial`s.
 
     // `Entity` member functions.
     ASSERT_EQ(turbo_polizei1->get_childID(), 0);

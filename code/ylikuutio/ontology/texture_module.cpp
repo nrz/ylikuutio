@@ -22,7 +22,7 @@
 #include "code/ylikuutio/load/fbx_texture_loader.hpp"
 #include "code/ylikuutio/load/image_loader_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include <ofbx.h>
+#include <ufbx.h>
 
 // Include standard headers
 #include <cstdint>  // std::uint32_t
@@ -42,7 +42,7 @@ namespace yli::ontology
             const std::string& /* name */)
         : texture_filename { texture_filename },
         texture_file_format { texture_file_format },
-        ofbx_texture { image_loader_struct.ofbx_texture }
+        my_fbx_material { image_loader_struct.fbx_material }
     {
         // If software rendering is in use, the texture can not be loaded into GPU memory,
         // but it can still be loaded into CPU memory to be used by the software rendering.
@@ -80,12 +80,13 @@ namespace yli::ontology
     }
 
     TextureModule::TextureModule(
-            Universe& universe,
-            Registry* const /* registry */,
-            const ofbx::Texture* ofbx_texture,
-            const load::ImageLoaderStruct& /* image_loader_struct */,
-            const std::string& /* name */)
-        : ofbx_texture { ofbx_texture }
+        Universe& universe,
+        Registry* const /* registry */,
+        const load::FbxMaterial* fbx_material,
+        const load::ImageLoaderStruct& /* image_loader_struct */,
+        const std::string& /* name */)
+        : texture_file_format {},
+          my_fbx_material { fbx_material }
     {
         // If software rendering is in use, the texture can not be loaded into GPU memory,
         // but it can still be loaded into CPU memory to be used by the software rendering.
@@ -96,8 +97,14 @@ namespace yli::ontology
 
         if (should_load_texture)
         {
-            bool is_texture_loading_successful = load::load_fbx_texture(
-                    this->ofbx_texture,
+            if (this->my_fbx_material == nullptr)
+            {
+                std::cerr << "ERROR: `TextureModule::TextureModule`: `this->my_fbx_material` is `nullptr`!\n";
+            }
+            else
+            {
+                const bool is_texture_loading_successful = load::load_fbx_texture(
+                    *this->my_fbx_material,
                     this->image_width,
                     this->image_height,
                     this->image_size,
@@ -105,9 +112,10 @@ namespace yli::ontology
                     this->texture,
                     universe.get_graphics_api_backend());
 
-            if (!is_texture_loading_successful)
-            {
-                std::cerr << "ERROR: `TextureModule::TextureModule`: loading texture failed!\n";
+                if (!is_texture_loading_successful)
+                {
+                    std::cerr << "ERROR: `TextureModule::TextureModule`: loading texture failed!\n";
+                }
             }
         }
     }

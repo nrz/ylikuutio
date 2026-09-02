@@ -112,7 +112,7 @@ TEST(police_dog_must_be_initialized_appropriately, hirvi_police_dog)
     police_dog_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx"; // TODO: replace w/dog model!
     Symbiosis* const police_dog_png_symbiosis = hirvi_application.get_entity_factory().create_symbiosis(
         police_dog_png_symbiosis_struct);
-    ASSERT_EQ(police_dog_png_symbiosis->get_number_of_ofbx_meshes(), 5); // To ensure proper loading of `Symbiosis`.
+    ASSERT_EQ(police_dog_png_symbiosis->get_number_of_ufbx_meshes(), 5); // To ensure proper loading of `Symbiosis`.
 
     PoliceDogStruct police_dog_png_police_dog_struct1 {
         Request<Scene>(helsinki_scene), Request(rest_movable_controller), Request(police_dog_png_symbiosis)
@@ -167,7 +167,7 @@ TEST(police_dog_must_be_initialized_appropriately, hirvi_police_dog)
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(police_dog_png_symbiosis->get_scene(), helsinki_scene);
-    ASSERT_EQ(police_dog_png_symbiosis->get_number_of_non_variable_children(), 2); // 2 `SymbiontMaterial`s.
+    ASSERT_EQ(police_dog_png_symbiosis->get_number_of_non_variable_children(), 8); // 8 `SymbiontMaterial`s.
 
     // `Entity` member functions.
     ASSERT_EQ(police_dog1->get_childID(), 0);

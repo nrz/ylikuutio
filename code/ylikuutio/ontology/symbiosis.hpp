@@ -29,17 +29,16 @@
 #include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/load/fbx_material.hpp"
+#include "code/ylikuutio/load/fbx_mesh.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include <ofbx.h>
+#include <ufbx.h>
 
 // Include GLM
 #ifndef GLM_GLM_HPP_INCLUDED
 #define GLM_GLM_HPP_INCLUDED
 #include <glm/glm.hpp> // glm
 #endif
-
-// OpenFBX wants `u8` == `unsigned char`.
-typedef unsigned char u8;
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -149,7 +148,7 @@ namespace yli::ontology
 
         std::size_t get_indices_size(std::size_t biontID) const;
 
-        std::size_t get_number_of_ofbx_meshes() const;
+        std::size_t get_number_of_ufbx_meshes() const;
 
         bool has_texture(std::size_t biontID) const;
 
@@ -185,19 +184,16 @@ namespace yli::ontology
         std::vector<std::vector<glm::vec3>> normals; // normals of the object.
 
         std::vector<std::vector<std::uint32_t>> indices;
-        // the deleted vertices will be reused (though it is not required, if there's enough memory).
         std::vector<std::vector<glm::vec3>> indexed_vertices;
         std::vector<std::vector<glm::vec2>> indexed_uvs;
         std::vector<std::vector<glm::vec3>> indexed_normals;
 
-        std::unordered_map<const ofbx::Texture*, std::vector<std::int32_t>> ofbx_diffuse_texture_mesh_map;
+        std::unordered_map<std::size_t, std::vector<std::size_t>> fbx_material_mesh_map;
         std::vector<SymbiontMaterial*> biontID_symbiont_material_vector;
         std::vector<SymbiontSpecies*> biontID_symbiont_species_vector;
-        std::vector<const ofbx::Mesh*> ofbx_meshes;
-        std::vector<const ofbx::Texture*> ofbx_diffuse_texture_vector;
-        std::vector<const ofbx::Texture*> ofbx_normal_texture_vector; // currently not in use.
-        std::vector<const ofbx::Texture*> ofbx_count_texture_vector; // currently not in use.
-        std::size_t ofbx_mesh_count { 0 }; // the value of `ofbx_mesh_count` comes from OpenFBX.
+        std::vector<load::FbxMaterial> fbx_materials;
+        std::vector<load::FbxMesh> fbx_meshes;
+        std::size_t ufbx_mesh_count { 0 };
     };
 
     template<>

@@ -184,7 +184,7 @@ TEST(holobiont_must_be_initialized_appropriately, headless_turbo_polizei)
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_scene(), scene);
-    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 2);     // 2 `SymbiontMaterial`s.
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 8);     // 8 `SymbiontMaterial`s.
 
     // `Entity` member functions.
     ASSERT_EQ(holobiont->get_childID(), 0);
@@ -234,7 +234,7 @@ TEST(adding_skills_to_holobiont_must_work_properly, headless_turbo_polizei)
 
     // `Entity` member functions of `Symbiosis`.
     ASSERT_EQ(symbiosis->get_scene(), scene);
-    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 2);     // 2 `SymbiontMaterial`s.
+    ASSERT_EQ(symbiosis->get_number_of_non_variable_children(), 8);     // 8 `SymbiontMaterial`s.
 
     // `Entity` member functions.
     ASSERT_EQ(holobiont->get_childID(), 0);
