@@ -3,14 +3,12 @@
 
 ## Fixes needed
 - [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
-- [ ] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
 - [ ] HIRVI/AI Implement `MasterOfPolices` class that inherits `GenericMasterModule` class.
 - [ ] HIRVI/AI Implement `Emancipable` class.
 - [ ] HIRVI/AI Make `PoliceHorse` and `PoliceDog` inherit `Emancipable`.
 - [ ] HIRVI/AI Make `EmancipationModule` inherit `ApprenticeModule`.
-- [ ] LIBRARIES Replace OpenFBX with fastgltf. https://github.com/spnda/fastgltf
 - [ ] AI/YLILISP Implement new `GenericLispModule` class that supports YliLisp.
 - [ ] AI/YLILISP Implement new `ConsoleLispModule` class that inherits `GenericLispModule` and can be composited into `Console`.
 - [ ] AI/YLILISP Implement new `BrainLispModule` class, inherits `GenericLispModule`, knows `ParentOfSkillsModule`, can be composited into derived types of `Movable`.
@@ -409,3 +407,5 @@
 - [x] BUG/DISPLAY/HIRVI Hirvi game view is rendered only on the bottom left quarter of the WQUXGA display.
 - [x] BUG/UI/HIRVI Camera control with mouse is broken.
 - [x] BUG/HIRVI Fix `Symbiosis` rendering.
+- [x] LIBRARIES Replace OpenFBX with ufbx. https://github.com/ufbx/ufbx
+- [x] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
