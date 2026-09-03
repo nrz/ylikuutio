@@ -341,8 +341,8 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
    based on [https://www.opengl-tutorial.org/](https://www.opengl-tutorial.org/),
    which I really recommend for anyone interested in learning
    OpenGL programming. Ylikuutio also uses external libraries such as
-   (in alphabetical order) GLEW, GLM, libpng, OpenFBX, pugixml,
-   SDL, and zlib.
+   (in alphabetical order) GLEW, GLM, libpng, pugixml,
+   SDL, ufbx, and zlib.
    The rest is written from scratch.
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
@@ -410,7 +410,7 @@ A: YLisp does not clearly communicate that the language is related to Ylikuutio
 * [libpng](http://libpng.org/pub/png/libpng.html) is licensed under [PNG Reference Library License version 2](http://www.libpng.org/pub/png/src/libpng-LICENSE.txt).
 * [OpenGL Mathematics (GLM)](https://glm.g-truc.net/) is licensed under [The Happy Bunny License (Modified MIT License) and MIT License](https://glm.g-truc.net/copying.txt).
 * [The OpenGL Extension Wrangler Library (GLEW)](http://glew.sourceforge.net/) is licensed under [the Modified BSD License, the Mesa 3-D License (MIT) and the Khronos License (MIT)](https://github.com/nigels-com/glew#copyright-and-licensing).
-* [OpenFBX](https://github.com/nem0/OpenFBX) is licensed under [the MIT license](https://github.com/nem0/OpenFBX/blob/master/LICENSE).
+* [ufbx](https://github.com/ufbx/ufbx) is licensed under [the MIT license](https://github.com/ufbx/ufbx/blob/main/LICENSE).
 * [SDL3](https://www.libsdl.org/) is licensed under [the zlib license](https://www.libsdl.org/).
 * [pugixml](https://pugixml.org/) is licensed under [the MIT license](https://github.com/zeux/pugixml/blob/master/README.md).
 * [zlib](https://zlib.net/) is licensed under [the zlib license](https://zlib.net/zlib_license.html).
