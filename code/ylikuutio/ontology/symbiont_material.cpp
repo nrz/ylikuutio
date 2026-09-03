@@ -60,9 +60,7 @@ namespace yli::ontology
     {
         if (this->texture.get_is_texture_loaded())
         {
-            Pipeline* const pipeline = this->get_pipeline();
-
-            if (pipeline != nullptr)
+            if (const Pipeline* const pipeline = this->get_pipeline(); pipeline != nullptr)
             {
                 this->opengl_texture_id = glGetUniformLocation(pipeline->get_program_id(), "texture_sampler");
             }
