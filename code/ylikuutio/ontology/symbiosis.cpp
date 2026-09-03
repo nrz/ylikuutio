@@ -187,7 +187,7 @@ namespace yli::ontology
             return;
         }
 
-        Scene* const scene = this->get_scene();
+        const Scene* const scene = this->get_scene();
 
         if (target_scene != nullptr && scene != nullptr && scene != target_scene)
         {
@@ -255,7 +255,7 @@ namespace yli::ontology
     {
         load::SymbiosisLoaderStruct symbiosis_loader_struct(this->model_filename, model_file_format);
 
-        const bool is_debug_mode = true;
+        constexpr bool is_debug_mode = true;
 
         if (load::load_symbiosis(
             symbiosis_loader_struct,
