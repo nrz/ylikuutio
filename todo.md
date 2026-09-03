@@ -5,6 +5,7 @@
 - [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] ONTOLOGY/MEMORY Design and implement 'handle to index'-based system for parent-child and master-apprentice relationships of derived classes of `Entity`.
 - [ ] HIRVI/AI Implement `MasterOfPolices` class that inherits `GenericMasterModule` class.
 - [ ] HIRVI/AI Implement `Emancipable` class.
 - [ ] HIRVI/AI Make `PoliceHorse` and `PoliceDog` inherit `Emancipable`.
