@@ -38,45 +38,52 @@ namespace yli::ontology
 
     class TextureModule final
     {
-        public:
-            TextureModule(
-                    Universe& universe,
-                    Registry* registry,
-                    const std::string& texture_filename,
-                    TextureFileFormat texture_file_format,
-                    const load::ImageLoaderStruct& image_loader_struct,
-                    const std::string& name);
+    public:
+        TextureModule(
+            Universe& universe,
+            Registry* registry,
+            const std::string& texture_filename,
+            TextureFileFormat texture_file_format,
+            const load::ImageLoaderStruct& image_loader_struct,
+            const std::string& name);
 
-            TextureModule(
-                    Universe& universe,
-                    Registry* registry,
-                    const load::FbxMaterial* fbx_material,
-                    const load::ImageLoaderStruct& image_loader_struct,
-                    const std::string& name);
+        TextureModule(
+            Universe& universe,
+            Registry* registry,
+            const load::FbxMaterial* fbx_material,
+            const load::ImageLoaderStruct& image_loader_struct,
+            const std::string& name);
 
-            TextureModule(const TextureModule&) = delete;            // Delete copy constructor.
-            TextureModule &operator=(const TextureModule&) = delete; // Delete copy assignment.
+        TextureModule(const TextureModule&) = delete;            // Delete copy constructor.
+        TextureModule& operator=(const TextureModule&) = delete; // Delete copy assignment.
 
-            ~TextureModule();
+        ~TextureModule();
 
-            const std::string& get_texture_filename() const;
-            TextureFileFormat get_texture_file_format() const;
-            std::uint32_t get_image_width() const;
-            std::uint32_t get_image_height() const;
-            std::uint32_t get_image_size() const;
-            std::uint32_t get_n_color_channels() const;
-            GLuint get_texture() const;
-            bool get_is_texture_loaded() const;
+        const std::string& get_texture_filename() const;
 
-        private:
-            std::string texture_filename;
-            TextureFileFormat texture_file_format;
-            const load::FbxMaterial* my_fbx_material { nullptr };
-            std::uint32_t image_width         { 0 };
-            std::uint32_t image_height        { 0 };
-            std::uint32_t image_size          { 0 };
-            std::uint32_t n_color_channels    { 0 };
-            GLuint texture                    { GL_INVALID_VALUE };
+        TextureFileFormat get_texture_file_format() const;
+
+        std::uint32_t get_image_width() const;
+
+        std::uint32_t get_image_height() const;
+
+        std::uint32_t get_image_size() const;
+
+        std::uint32_t get_n_color_channels() const;
+
+        GLuint get_texture() const;
+
+        bool get_is_texture_loaded() const;
+
+    private:
+        std::string texture_filename;
+        TextureFileFormat texture_file_format;
+        const load::FbxMaterial* my_fbx_material { nullptr };
+        std::uint32_t image_width { 0 };
+        std::uint32_t image_height { 0 };
+        std::uint32_t image_size { 0 };
+        std::uint32_t n_color_channels { 0 };
+        GLuint texture { GL_INVALID_VALUE };
     };
 }
 
