@@ -34,7 +34,7 @@ namespace yli::ontology
     class Registry;
 
     TextureModule::TextureModule(
-        Universe& universe,
+        const Universe& universe,
         Registry* const /* registry */,
         const std::string& texture_filename,
         const TextureFileFormat texture_file_format,
@@ -80,7 +80,7 @@ namespace yli::ontology
     }
 
     TextureModule::TextureModule(
-        Universe& universe,
+        const Universe& universe,
         Registry* const /* registry */,
         const load::FbxMaterial* fbx_material,
         const load::ImageLoaderStruct& /* image_loader_struct */,

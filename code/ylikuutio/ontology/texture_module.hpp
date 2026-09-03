@@ -40,7 +40,7 @@ namespace yli::ontology
     {
     public:
         TextureModule(
-            Universe& universe,
+            const Universe& universe,
             Registry* registry,
             const std::string& texture_filename,
             TextureFileFormat texture_file_format,
@@ -48,7 +48,7 @@ namespace yli::ontology
             const std::string& name);
 
         TextureModule(
-            Universe& universe,
+            const Universe& universe,
             Registry* registry,
             const load::FbxMaterial* fbx_material,
             const load::ImageLoaderStruct& image_loader_struct,
