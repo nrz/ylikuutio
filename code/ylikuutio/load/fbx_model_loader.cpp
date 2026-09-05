@@ -45,20 +45,6 @@ namespace yli::load
         std::vector<glm::vec3>& out_normals,
         const bool is_debug_mode)
     {
-        /*
-        constexpr ufbx_load_opts opts {
-            .evaluate_skinning = true,
-            .load_external_files = false,
-            .ignore_missing_external_files = true,
-            .generate_missing_normals = true,
-            .target_axes = {
-                .right = UFBX_COORDINATE_AXIS_NEGATIVE_Y,
-                .up = UFBX_COORDINATE_AXIS_POSITIVE_Z,
-                .front = UFBX_COORDINATE_AXIS_POSITIVE_X
-            },
-            .target_unit_meters = 1.0f
-        };
-        */
         ufbx_load_opts load_opts {};
         load_opts.evaluate_skinning = true;
         load_opts.load_external_files = true;
