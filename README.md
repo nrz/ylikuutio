@@ -347,13 +347,13 @@ A: Some parts of Ylikuutio (some shaders, some file loaders, etc.) are
 
 Q: Does Ylikuutio use right-handed or left-handed world coordinates?
 A: Ylikuutio uses right-handed world coordinates,
-   so X grows eastward, Z grows southward, and Y grows upwards.
+   so X grows eastward, Y grows northward, and Z grows upwards.
 
 Q: Is there a scripting language in Ylikuutio?
 A: YliLisp scripting language is a work in progress. See [YliLisp design notes](doc/ylilisp.txt).
 
-Q: Why the scripting language of Ylikuutio is called YliLisp and not YLisp?
-A: YLisp does not clearly communicate that the language is related to Ylikuutio
+Q: Why the scripting language of Ylikuutio is called "YliLisp" and not "YLisp"?
+A: "YLisp" does not clearly communicate that the language is related to Ylikuutio
    game engine and also that it is simultaneously a Lisp-inspired language.
    Additionally, YLISP already exists for HP-95LX palmtop.
 
@@ -363,7 +363,7 @@ A: YLisp does not clearly communicate that the language is related to Ylikuutio
 * support for different height map formats (SRTM, PNG)
 * instant rebinding of instances of classes belonging to ontological hierarchy
 * callbacks
-* fully functioning in-game console
+* in-game console
 * multiple scenes in the same `Universe` (`activate` console command)
 * option for wireframe models (`set wireframe true`, `set wireframe false`)
 * GPGPU using `yli::ontology::ComputeTask` class (see also [Skrolli 2019.2](https://skrolli.fi/numerot/2019-2/) for an article in Finnish).
