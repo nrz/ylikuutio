@@ -52,7 +52,7 @@ namespace yli::load
 
         const std::string filename = base_color_texture.filename;
         std::cout << std::hex << &filename << std::dec << "\n";
-        std::cout << "Loading texture from FBX file: " << filename << "\n";
+        std::cout << "Texture filename stored in FBX file: " << filename << "\n";
 
         yli::string::print_hexdump<char>(filename);
 
