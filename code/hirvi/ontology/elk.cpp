@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "elk.hpp"
+#include "elk_struct.hpp"
 
 namespace yli::core
 {
@@ -26,9 +27,10 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class GenericMasterModule;
+    class Entity;
     class Universe;
+    class Scene;
     class Holobiont;
-    struct HolobiontStruct;
     struct LocomotionModuleStruct;
 }
 
@@ -37,10 +39,10 @@ namespace hirvi::ontology
     Elk::Elk(
         yli::core::Application& application,
         yli::ontology::Universe& universe,
-        const yli::ontology::HolobiontStruct& elk_struct,
-        yli::ontology::GenericParentModule* const scene_parent,
-        yli::ontology::GenericMasterModule* const symbiosis_master,
+        const ElkStruct& elk_struct,
+        yli::ontology::GenericParentModule* const hirvi_scene_parent,
         yli::ontology::GenericMasterModule* const movable_controller_master,
+        yli::ontology::GenericMasterModule* const symbiosis_master,
         const yli::ontology::LocomotionModuleStruct& walk_struct,
         const yli::ontology::LocomotionModuleStruct& trot_struct,
         const yli::ontology::LocomotionModuleStruct& canter_struct,
@@ -49,9 +51,10 @@ namespace hirvi::ontology
               application,
               universe,
               elk_struct,
-              scene_parent,
-              symbiosis_master,
-              movable_controller_master),
+              nullptr,
+              movable_controller_master,
+              symbiosis_master),
+          child_of_hirvi_scene(hirvi_scene_parent, *this),
           walk(walk_struct),
           trot(trot_struct),
           canter(canter_struct),
@@ -59,5 +62,15 @@ namespace hirvi::ontology
     {
         // `yli::ontology::Entity` member variables begin here.
         this->type_string = "hirvi::Elk*";
+    }
+
+    yli::ontology::Scene* Elk::get_scene() const
+    {
+        return this->child_of_hirvi_scene.get_scene();
+    }
+
+    yli::ontology::Entity* Elk::get_parent() const
+    {
+        return this->child_of_hirvi_scene.get_parent();
     }
 }

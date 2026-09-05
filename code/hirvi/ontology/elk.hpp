@@ -19,6 +19,7 @@
 #define HIRVI_ONTOLOGY_ELK_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/child_module.hpp"
 #include "code/ylikuutio/snippets/locomotion/gait_module.hpp"
 
 namespace yli::core
@@ -30,23 +31,26 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class GenericMasterModule;
+    class Entity;
     class Universe;
-    struct HolobiontStruct;
+    class Scene;
     struct LocomotionModuleStruct;
 }
 
 namespace hirvi::ontology
 {
+    struct ElkStruct;
+
     class Elk : public yli::ontology::Holobiont
     {
     public:
         explicit Elk(
             yli::core::Application& application,
             yli::ontology::Universe& universe,
-            const yli::ontology::HolobiontStruct& elk_struct,
-            yli::ontology::GenericParentModule* scene_parent,
-            yli::ontology::GenericMasterModule* symbiosis_master,
+            const ElkStruct& elk_struct,
+            yli::ontology::GenericParentModule* hirvi_scene_parent,
             yli::ontology::GenericMasterModule* movable_controller_master,
+            yli::ontology::GenericMasterModule* symbiosis_master,
             const yli::ontology::LocomotionModuleStruct& walk_struct,
             const yli::ontology::LocomotionModuleStruct& trot_struct,
             const yli::ontology::LocomotionModuleStruct& canter_struct,
@@ -57,6 +61,11 @@ namespace hirvi::ontology
 
         ~Elk() override = default;
 
+        yli::ontology::Scene* get_scene() const override;
+
+        Entity* get_parent() const override;
+
+        yli::ontology::ChildModule child_of_hirvi_scene;
         yli::snippets::locomotion::GaitModule walk;
         yli::snippets::locomotion::GaitModule trot;
         yli::snippets::locomotion::GaitModule canter;
