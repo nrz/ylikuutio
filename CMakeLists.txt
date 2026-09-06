@@ -996,6 +996,7 @@ add_library(hirvi_lib STATIC
     code/hirvi/data/trivial_data_analyzer.hpp
     code/hirvi/ontology/elk.cpp
     code/hirvi/ontology/elk.hpp
+    code/hirvi/ontology/elk_struct.hpp
     code/hirvi/ontology/emancipation_module.cpp
     code/hirvi/ontology/emancipation_module.hpp
     code/hirvi/ontology/fly_ability.cpp
