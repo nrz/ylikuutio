@@ -143,13 +143,14 @@ namespace hirvi::data
         POLICE_CONTROL_CENTER = 1001,
         CAT               = 1101,
         ELK               = 1102,
-        POLICE_CAR        = 1103,
-        POLICE_DOG        = 1104,
-        POLICE_HELICOPTER = 1105,
-        POLICE_HORSE      = 1106,
-        POLICE_TRAIN      = 1107,
-        POLICE_TRAM       = 1108,
-        TRAIN             = 1109,
+        POLICE_BEAR       = 1110,
+        POLICE_CAR        = 1111,
+        POLICE_DOG        = 1112,
+        POLICE_HELICOPTER = 1113,
+        POLICE_HORSE      = 1114,
+        POLICE_TRAIN      = 1115,
+        POLICE_TRAM       = 1116,
+        TRAIN             = 1200,
         MAX_VALUE         = TRAIN + 1
     };
 }
