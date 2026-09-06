@@ -61,7 +61,7 @@ namespace hirvi::ontology
           gallop(gallop_struct)
     {
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::Elk*";
+        this->type_string = "hirvi::ontology::Elk*";
     }
 
     yli::ontology::Scene* Elk::get_scene() const
