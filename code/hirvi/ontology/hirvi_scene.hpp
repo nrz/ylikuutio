@@ -64,6 +64,7 @@ namespace hirvi::ontology
 {
     class PoliceControlCenter;
     class Elk;
+    class PoliceBear;
     class PoliceCar;
     class PoliceDog;
     class PoliceHelicopter;
@@ -105,6 +106,7 @@ namespace hirvi::ontology
 
         yli::ontology::GenericParentModule parent_of_police_control_centers;
         yli::ontology::GenericParentModule parent_of_elks;
+        yli::ontology::GenericParentModule parent_of_police_bears;
         yli::ontology::GenericParentModule parent_of_police_cars;
         yli::ontology::GenericParentModule parent_of_police_dogs;
         yli::ontology::GenericParentModule parent_of_police_helicopters;
@@ -195,6 +197,12 @@ namespace hirvi::ontology
     inline yli::ontology::GenericParentModule* HirviScene::get_generic_parent_module<Elk>()
     {
         return &this->parent_of_elks;
+    }
+
+    template<>
+    inline yli::ontology::GenericParentModule* HirviScene::get_generic_parent_module<PoliceBear>()
+    {
+        return &this->parent_of_police_bears;
     }
 
     template<>

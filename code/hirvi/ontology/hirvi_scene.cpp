@@ -54,6 +54,10 @@ namespace hirvi::ontology
               *this,
               this->registry,
               "elks"),
+          parent_of_police_bears(
+              *this,
+              this->registry,
+              "police_bears"),
           parent_of_police_cars(
               *this,
               this->registry,
@@ -90,6 +94,7 @@ namespace hirvi::ontology
         return this->Scene::get_number_of_children() +
                this->parent_of_police_control_centers.get_number_of_children() +
                this->parent_of_elks.get_number_of_children() +
+               this->parent_of_police_bears.get_number_of_children() +
                this->parent_of_police_cars.get_number_of_children() +
                this->parent_of_police_dogs.get_number_of_children() +
                this->parent_of_police_helicopters.get_number_of_children() +
@@ -103,6 +108,7 @@ namespace hirvi::ontology
         return this->Scene::get_number_of_descendants() +
                ontology::get_number_of_descendants(this->parent_of_police_control_centers.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_elks.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_police_bears.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_police_cars.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_police_dogs.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_police_helicopters.child_pointer_vector) +
