@@ -61,6 +61,7 @@ namespace hirvi::ontology
 {
     class Cat;
     class Elk;
+    class PoliceBear;
     class PoliceCar;
     class PoliceDog;
     class PoliceHelicopter;
@@ -76,6 +77,7 @@ namespace hirvi::core
     using PoliceControlCenterMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceControlCenter, 256>;
     using CatMemoryAllocator = yli::memory::MemoryAllocator<ontology::Cat, 256>;
     using ElkMemoryAllocator = yli::memory::MemoryAllocator<ontology::Elk, 256>;
+    using PoliceBearMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceBear, 256>;
     using PoliceCarMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceCar, 256>;
     using PoliceDogMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceDog, 256>;
     using PoliceHelicopterMemoryAllocator = yli::memory::MemoryAllocator<ontology::PoliceHelicopter, 256>;
