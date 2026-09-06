@@ -67,6 +67,24 @@ namespace hirvi::core
             return nullptr;
         }
 
+        SymbiosisStruct elk_symbiosis_struct {
+            Request<Ecosystem>("earth_ecosystem"), Request<Pipeline>("earth_pipeline")
+        };
+        elk_symbiosis_struct.model_file_format = "fbx";
+        elk_symbiosis_struct.model_filename = "elk_animated.fbx";
+
+        std::cout << "Creating Symbiosis* elk_symbiosis ...\n";
+        Symbiosis* const elk_symbiosis = this->entity_factory.create_symbiosis(
+            elk_symbiosis_struct);
+
+        if (elk_symbiosis == nullptr)
+        {
+            std::cerr << "Failed to create elk Symbiosis.\n";
+            return nullptr;
+        }
+
+        elk_symbiosis->set_global_name("elk_symbiosis");
+
         SymbiosisStruct turbo_polizei_png_symbiosis_struct {
             Request<Ecosystem>("earth_ecosystem"), Request<Pipeline>("earth_pipeline")
         };

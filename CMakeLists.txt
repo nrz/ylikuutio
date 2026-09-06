@@ -294,6 +294,15 @@ configure_file(code/ylikuutio/shaders/text_vertex_shader.vert text_vertex_shader
 configure_file(code/ylikuutio/shaders/text_vertex_shader.frag text_vertex_shader.frag COPYONLY)
 
 # 3D models.
+# Elk
+configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/elk_animated.fbx elk_animated.fbx COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/a_c_elk_01_head_000_c0_000_nm.png a_c_elk_01_head_000_c0_000_nm.png COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/a_c_elk_01_head_000_c0_001_ab_upscayl_3x_realesrgan-x4plus.png a_c_elk_01_head_000_c0_001_ab_upscayl_3x_realesrgan-x4plus.png COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/a_c_elk_01_lowr_000_c0_000_nm.png a_c_elk_01_lowr_000_c0_000_nm.png COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/a_c_elk_01_lowr_000_c0_001_ab.png a_c_elk_01_lowr_000_c0_001_ab.png COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/a_c_elk_01_teef_000_c0_000_ab.png a_c_elk_01_teef_000_c0_000_ab.png COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/a_c_elk_01_uppr_000_c0_000_nm.png a_c_elk_01_uppr_000_c0_000_nm.png COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/a_c_elk_01_uppr_000_c0_001_ab_upscayl_3x_realesrgan-x4plus.png a_c_elk_01_uppr_000_c0_001_ab_upscayl_3x_realesrgan-x4plus.png COPYONLY)
 # Suzanne.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/custom/suzanne_old.obj suzanne_old.obj COPYONLY)
@@ -1242,6 +1251,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_hirvi_scene_struct.cpp
         code/hirvi/tests/test_callback_engine.cpp
         code/hirvi/tests/test_cat.cpp
+        code/hirvi/tests/test_elk.cpp
         code/hirvi/tests/test_ecosystem.cpp
         code/hirvi/tests/test_material.cpp
         code/hirvi/tests/test_memory.cpp
