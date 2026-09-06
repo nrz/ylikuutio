@@ -1008,6 +1008,9 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/jump_ability.hpp
     code/hirvi/ontology/moo_ability.cpp
     code/hirvi/ontology/moo_ability.hpp
+    code/hirvi/ontology/police_bear.cpp
+    code/hirvi/ontology/police_bear.hpp
+    code/hirvi/ontology/police_bear_struct.hpp
     code/hirvi/ontology/police_control_center.cpp
     code/hirvi/ontology/police_control_center.hpp
     code/hirvi/ontology/police_control_center_struct.hpp
