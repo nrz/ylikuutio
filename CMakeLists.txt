@@ -303,6 +303,13 @@ configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f
 configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/a_c_elk_01_teef_000_c0_000_ab.png a_c_elk_01_teef_000_c0_000_ab.png COPYONLY)
 configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/a_c_elk_01_uppr_000_c0_000_nm.png a_c_elk_01_uppr_000_c0_000_nm.png COPYONLY)
 configure_file(res/objects/sketchfab.com/realistic-animated-elk-3d-model-787834f9caa2474d9f1814b807c072d7/a_c_elk_01_uppr_000_c0_001_ab_upscayl_3x_realesrgan-x4plus.png a_c_elk_01_uppr_000_c0_001_ab_upscayl_3x_realesrgan-x4plus.png COPYONLY)
+# Bear.
+configure_file(res/objects/sketchfab.com/realistic-animated-bear-3d-model-bffc3c87d2d148ff8533e1cc8a11c9f1/bear_animated.fbx bear_animated.fbx COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-bear-3d-model-bffc3c87d2d148ff8533e1cc8a11c9f1/a_c_bear_01_head_000_c0_000_ab_upscayl_3x_realesrgan-x4plus.png a_c_bear_01_head_000_c0_000_ab_upscayl_3x_realesrgan-x4plus.png COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-bear-3d-model-bffc3c87d2d148ff8533e1cc8a11c9f1/a_c_bear_01_head_000_c0_000_nm.png a_c_bear_01_head_000_c0_000_nm.png COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-bear-3d-model-bffc3c87d2d148ff8533e1cc8a11c9f1/a_c_bear_01_teef_001_c0_000_ab.png a_c_bear_01_teef_001_c0_000_ab.png COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-bear-3d-model-bffc3c87d2d148ff8533e1cc8a11c9f1/a_c_bear_01_uppr_000_c0_000_ab_upscayl_3x_realesrgan-x4plus.png a_c_bear_01_uppr_000_c0_000_ab_upscayl_3x_realesrgan-x4plus.png COPYONLY)
+configure_file(res/objects/sketchfab.com/realistic-animated-bear-3d-model-bffc3c87d2d148ff8533e1cc8a11c9f1/a_c_bear_01_uppr_000_c0_000_nm.png a_c_bear_01_uppr_000_c0_000_nm.png COPYONLY)
 # Suzanne.
 configure_file(res/objects/custom/suzanne.obj suzanne.obj COPYONLY)
 configure_file(res/objects/custom/suzanne_old.obj suzanne_old.obj COPYONLY)
