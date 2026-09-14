@@ -59,7 +59,7 @@ namespace yli::load
         load_opts.target_axes = {
             .right = UFBX_COORDINATE_AXIS_NEGATIVE_Y,
             .up = UFBX_COORDINATE_AXIS_POSITIVE_Z,
-            .front = UFBX_COORDINATE_AXIS_POSITIVE_X
+            .front = UFBX_COORDINATE_AXIS_NEGATIVE_X
         };
 
         constexpr ufbx_real scale = 1.0f;
