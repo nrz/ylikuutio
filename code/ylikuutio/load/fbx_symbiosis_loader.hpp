@@ -35,6 +35,7 @@
 
 namespace yli::load
 {
+    struct LoadFbxStruct;
     struct FbxMaterial;
 
     bool load_fbx(
@@ -46,7 +47,7 @@ namespace yli::load
         std::vector<FbxMaterial>& fbx_materials,
         std::vector<FbxMesh>& fbx_meshes,
         std::size_t& mesh_count,
-        bool is_debug_mode);
+        const LoadFbxStruct& load_fbx_struct);
 }
 
 #endif

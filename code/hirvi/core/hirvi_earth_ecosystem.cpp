@@ -23,6 +23,7 @@
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 #include "code/ylikuutio/ontology/pipeline_struct.hpp"
 #include "code/ylikuutio/ontology/symbiosis_struct.hpp"
+#include <ufbx.h>
 
 // Include standard headers
 #include <iostream> // std::cout, std::cerr
@@ -72,6 +73,14 @@ namespace hirvi::core
         };
         elk_symbiosis_struct.model_file_format = "fbx";
         elk_symbiosis_struct.model_filename = "elk_animated.fbx";
+        elk_symbiosis_struct.load_fbx_struct.load_opts.generate_missing_normals = false;
+        elk_symbiosis_struct.load_fbx_struct.load_opts.use_root_transform = true;
+        constexpr ufbx_vec3 elk_rotations { .x = 0.0f, .y = 0.0f, .z = 90.0f };
+        constexpr ufbx_rotation_order elk_rotation_order { UFBX_ROTATION_ORDER_XYZ };
+        elk_symbiosis_struct.load_fbx_struct.load_opts.root_transform.rotation = ufbx_euler_to_quat(
+            elk_rotations, elk_rotation_order);
+        elk_symbiosis_struct.load_fbx_struct.force_apply_to_root_to_vertices = true;
+        elk_symbiosis_struct.load_fbx_struct.is_debug_mode = true;
 
         std::cout << "Creating Symbiosis* elk_symbiosis ...\n";
         Symbiosis* const elk_symbiosis = this->entity_factory.create_symbiosis(
@@ -84,6 +93,31 @@ namespace hirvi::core
         }
 
         elk_symbiosis->set_global_name("elk_symbiosis");
+
+        SymbiosisStruct police_bear_symbiosis_struct {
+            Request<Ecosystem>("earth_ecosystem"), Request<Pipeline>("earth_pipeline")
+        };
+        police_bear_symbiosis_struct.model_file_format = "fbx";
+        police_bear_symbiosis_struct.model_filename = "bear_animated.fbx";
+        police_bear_symbiosis_struct.load_fbx_struct.load_opts.use_root_transform = true;
+        constexpr ufbx_vec3 police_bear_rotations { .x = 0.0f, .y = 0.0f, .z = 90.0f };
+        constexpr ufbx_rotation_order police_bear_rotation_order { UFBX_ROTATION_ORDER_XYZ };
+        police_bear_symbiosis_struct.load_fbx_struct.load_opts.root_transform.rotation = ufbx_euler_to_quat(
+            police_bear_rotations, police_bear_rotation_order);
+        police_bear_symbiosis_struct.load_fbx_struct.force_apply_to_root_to_vertices = true;
+        police_bear_symbiosis_struct.load_fbx_struct.is_debug_mode = true;
+
+        std::cout << "Creating Symbiosis* police_bear_symbiosis ...\n";
+        Symbiosis* const police_bear_symbiosis = this->entity_factory.create_symbiosis(
+            police_bear_symbiosis_struct);
+
+        if (police_bear_symbiosis == nullptr)
+        {
+            std::cerr << "Failed to create police_bear Symbiosis.\n";
+            return nullptr;
+        }
+
+        police_bear_symbiosis->set_global_name("police_bear_symbiosis");
 
         SymbiosisStruct turbo_polizei_png_symbiosis_struct {
             Request<Ecosystem>("earth_ecosystem"), Request<Pipeline>("earth_pipeline")

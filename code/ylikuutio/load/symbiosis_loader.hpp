@@ -35,6 +35,8 @@
 
 namespace yli::load
 {
+    struct LoadFbxStruct;
+
     bool load_symbiosis(
             const SymbiosisLoaderStruct& symbiosis_loader_struct,
             std::vector<std::vector<glm::vec3>>& out_vertices,
@@ -44,7 +46,7 @@ namespace yli::load
             std::vector<FbxMaterial>& fbx_materials,
             std::vector<FbxMesh>& fbx_meshes,
             std::size_t& mesh_count,
-            bool is_debug_mode);
+            const LoadFbxStruct& load_fbx_struct);
 }
 
 #endif

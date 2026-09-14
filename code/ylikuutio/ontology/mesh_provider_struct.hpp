@@ -21,6 +21,7 @@
 #include "entity_struct.hpp"
 #include "request.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
+#include "code/ylikuutio/load/load_fbx_struct.hpp"
 
 // Include GLM
 #ifndef GLM_GLM_HPP_INCLUDED
@@ -43,6 +44,7 @@ namespace yli::ontology
     struct MeshProviderStruct : EntityStruct
     {
         load::ModelLoaderStruct model_loader_struct;
+        load::LoadFbxStruct load_fbx_struct;
 
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec2> uvs;

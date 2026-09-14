@@ -33,6 +33,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/load/symbiosis_loader.hpp"
 #include "code/ylikuutio/load/symbiosis_loader_struct.hpp"
+#include "code/ylikuutio/load/load_fbx_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/render/render_system.hpp"
 
@@ -171,7 +172,8 @@ namespace yli::ontology
           apprentice_of_pipeline(pipeline_master_module, this),
           master_of_holobionts(*this, &this->registry, "holobionts"),
           model_filename { symbiosis_struct.model_filename },
-          model_file_format { symbiosis_struct.model_file_format }
+          model_file_format { symbiosis_struct.model_file_format },
+          load_fbx_struct { symbiosis_struct.load_fbx_struct }
     {
         this->create_symbionts();
 
@@ -255,8 +257,6 @@ namespace yli::ontology
     {
         load::SymbiosisLoaderStruct symbiosis_loader_struct(this->model_filename, model_file_format);
 
-        constexpr bool is_debug_mode = true;
-
         if (load::load_symbiosis(
             symbiosis_loader_struct,
             this->vertices,
@@ -266,7 +266,7 @@ namespace yli::ontology
             this->fbx_materials,
             this->fbx_meshes,
             this->ufbx_mesh_count,
-            is_debug_mode))
+            this->load_fbx_struct))
         {
             std::cout << "number of meshes: " << this->ufbx_mesh_count << "\n";
 
@@ -309,6 +309,7 @@ namespace yli::ontology
                     SymbiontSpeciesStruct symbiont_species_struct { Request(symbiont_material) };
                     symbiont_species_struct.model_loader_struct.model_filename = this->model_filename;
                     symbiont_species_struct.model_loader_struct.model_file_format = this->model_file_format;
+                    symbiont_species_struct.load_fbx_struct = load_fbx_struct;
                     symbiont_species_struct.vertex_count = mesh_i < this->vertices.size()
                                                                ? this->vertices.at(mesh_i).size()
                                                                : 0;

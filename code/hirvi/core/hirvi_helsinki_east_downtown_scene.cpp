@@ -19,9 +19,13 @@
 #include "code/hirvi/ontology/hirvi_scene.hpp"
 #include "code/hirvi/ontology/police_control_center.hpp"
 #include "code/hirvi/ontology/cat.hpp"
+#include "code/hirvi/ontology/elk.hpp"
+#include "code/hirvi/ontology/police_bear.hpp"
 #include "code/hirvi/ontology/police_car.hpp"
 #include "code/hirvi/ontology/hirvi_scene_struct.hpp"
 #include "code/hirvi/ontology/police_control_center_struct.hpp"
+#include "code/hirvi/ontology/elk_struct.hpp"
+#include "code/hirvi/ontology/police_bear_struct.hpp"
 #include "code/hirvi/ontology/police_car_struct.hpp"
 #include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
@@ -567,6 +571,117 @@ namespace hirvi::core
             std::cerr << "Failed to create cat2.\n";
             return nullptr;
         }
+
+        Entity* const elk_symbiosis_entity = this->get_universe().get_entity(
+            "elk_symbiosis");
+
+        const auto elk_symbiosis = dynamic_cast<Symbiosis*>(elk_symbiosis_entity);
+
+        if (elk_symbiosis == nullptr)
+        {
+            std::cerr << "Failed to create elk_symbiosis.\n";
+            return nullptr;
+        }
+
+        Symbiosis::create_ability(*elk_symbiosis, "walk");
+        Symbiosis::create_ability(*elk_symbiosis, "trot");
+        Symbiosis::create_ability(*elk_symbiosis, "canter");
+        Symbiosis::create_ability(*elk_symbiosis, "gallop");
+
+        ontology::ElkStruct elk_struct1 {
+            Request<Scene>("helsinki_scene"),
+            Request(rest_movable_controller),
+            Request(elk_symbiosis)
+        };
+        elk_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
+        elk_struct1.initial_rotate_angles = { static_cast<float>(0.5f * std::numbers::pi) };
+        elk_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        elk_struct1.cartesian_coordinates = CartesianCoordinatesModule(
+            105.00f, -255.00f, 35.00f);
+
+        LocomotionModuleStruct elk_walk_struct1;
+        LocomotionModuleStruct elk_trot_struct1;
+        LocomotionModuleStruct elk_canter_struct1;
+        LocomotionModuleStruct elk_gallop_struct1;
+
+        std::cout << "Creating hirvi::Elk* elk1 ...\n";
+        auto* const elk1 = this->entity_factory.create_holobiont_derivative<
+            ontology::Elk,
+            ElkMemoryAllocator,
+            ontology::HirviScene,
+            ontology::ElkStruct>(
+            data::ELK,
+            Request(helsinki_scene),
+            elk_struct1,
+            elk_walk_struct1,
+            elk_trot_struct1,
+            elk_canter_struct1,
+            elk_gallop_struct1);
+
+        if (elk1 == nullptr)
+        {
+            std::cerr << "Failed to create elk1.\n";
+            return nullptr;
+        }
+
+        elk1->set_global_name("elk1");
+        elk1->set_local_name("hirvi1");
+
+        Entity* const police_bear_symbiosis_entity = this->get_universe().get_entity(
+            "police_bear_symbiosis");
+
+        const auto police_bear_symbiosis = dynamic_cast<Symbiosis*>(police_bear_symbiosis_entity);
+
+        if (police_bear_symbiosis == nullptr)
+        {
+            std::cerr << "Failed to create police_bear_symbiosis.\n";
+            return nullptr;
+        }
+
+        Symbiosis::create_ability(*police_bear_symbiosis, "walk");
+        Symbiosis::create_ability(*police_bear_symbiosis, "trot");
+        Symbiosis::create_ability(*police_bear_symbiosis, "canter");
+        Symbiosis::create_ability(*police_bear_symbiosis, "gallop");
+
+        ontology::PoliceBearStruct police_bear_struct1 {
+            Request<Scene>("helsinki_scene"),
+            Request(rest_movable_controller),
+            Request(police_bear_symbiosis)
+        };
+        police_bear_struct1.initial_rotate_vectors = { glm::vec3(0.0f, 0.0f, 1.0f) };
+        police_bear_struct1.initial_rotate_angles = { static_cast<float>(0.5f * std::numbers::pi) };
+        police_bear_struct1.original_scale_vector = glm::vec3(1.0f, 1.0f, 1.0f);
+        police_bear_struct1.cartesian_coordinates = CartesianCoordinatesModule(
+            150.00f, -255.00f, 35.00f);
+
+        LocomotionModuleStruct police_bear_walk_struct1;
+        LocomotionModuleStruct police_bear_trot_struct1;
+        LocomotionModuleStruct police_bear_canter_struct1;
+        LocomotionModuleStruct police_bear_gallop_struct1;
+
+        std::cout << "Creating hirvi::PoliceBear* police_bear1 ...\n";
+        auto* const police_bear1 = this->entity_factory.create_holobiont_derivative<
+            ontology::PoliceBear,
+            PoliceBearMemoryAllocator,
+            ontology::HirviScene,
+            ontology::PoliceBearStruct>(
+            data::POLICE_BEAR,
+            Request(helsinki_scene),
+            police_bear_struct1,
+            helsinki_non_emancipated_control_center->get_generic_master_module<Movable>(),
+            police_bear_walk_struct1,
+            police_bear_trot_struct1,
+            police_bear_canter_struct1,
+            police_bear_gallop_struct1);
+
+        if (police_bear1 == nullptr)
+        {
+            std::cerr << "Failed to create police_bear1.\n";
+            return nullptr;
+        }
+
+        police_bear1->set_global_name("police_bear1");
+        police_bear1->set_local_name("karhu1");
 
         Entity* const turbo_polizei_png_symbiosis_entity = this->get_universe().get_entity(
             "turbo_polizei_png_symbiosis");

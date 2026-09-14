@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "fbx_symbiosis_loader.hpp"
+#include "load_fbx_struct.hpp"
 #include "create_fbx_scene.hpp"
 #include "fbx_material.hpp"
 #include "fbx_mesh.hpp"
@@ -46,27 +47,10 @@ namespace yli::load
         std::vector<FbxMaterial>& fbx_materials,
         std::vector<FbxMesh>& fbx_meshes,
         std::size_t& mesh_count,
-        const bool is_debug_mode)
+        const LoadFbxStruct& load_fbx_struct)
     {
-        ufbx_load_opts load_opts {};
-        load_opts.evaluate_skinning = false;
-        load_opts.load_external_files = false;
-        load_opts.ignore_missing_external_files = true;
-        load_opts.generate_missing_normals = false;
-        load_opts.use_root_transform = false;
-        load_opts.root_transform.rotation = ufbx_identity_quat;
-        load_opts.target_unit_meters = 1.0f;
-        load_opts.target_axes = {
-            .right = UFBX_COORDINATE_AXIS_NEGATIVE_Y,
-            .up = UFBX_COORDINATE_AXIS_POSITIVE_Z,
-            .front = UFBX_COORDINATE_AXIS_NEGATIVE_X
-        };
-
-        constexpr ufbx_real scale = 1.0f;
-        load_opts.root_transform.scale = ufbx_vec3 { .x = scale, .y = scale, .z = scale };
-
         ufbx_error error;
-        ufbx_scene* const original_scene = ufbx_load_file(filename.c_str(), &load_opts, &error);
+        ufbx_scene* const original_scene = ufbx_load_file(filename.c_str(), &load_fbx_struct.load_opts, &error);
 
         if (original_scene == nullptr)
         {
@@ -77,10 +61,8 @@ namespace yli::load
             return false;
         }
 
-        constexpr std::size_t subdivision_level { 0 };
-        constexpr bool needs_subdivision { true };
         const std::optional<FbxScene> maybe_fbx_scene = create_fbx_scene(
-            *original_scene, subdivision_level, needs_subdivision, is_debug_mode);
+            *original_scene, load_fbx_struct);
 
         if (!maybe_fbx_scene.has_value())
         {
@@ -186,10 +168,9 @@ namespace yli::load
                 }
                 else
                 {
-                    if (is_debug_mode)
+                    if (load_fbx_struct.is_debug_mode)
                     {
-                        std::cout << "Adding mesh " << mesh_i << " to material at " << std::hex <<
-                                reinterpret_cast<std::uintptr_t>(&mesh.material_i) << std::dec << "\n";
+                        std::cout << "Adding mesh " << mesh_i << " to material " << mesh.material_i << ".\n";
                     }
 
                     fbx_material_mesh_map.at(mesh.material_i).emplace_back(mesh_i);

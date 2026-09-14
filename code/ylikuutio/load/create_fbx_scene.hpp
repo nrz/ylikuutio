@@ -27,10 +27,10 @@
 
 namespace yli::load
 {
+    struct LoadFbxStruct;
+
     std::optional<FbxScene> create_fbx_scene(const ufbx_scene& original_scene,
-        std::size_t subdivision_level,
-        bool needs_subdivision,
-        bool is_debug_mode);
+                                             const LoadFbxStruct& load_fbx_struct);
 }
 
 #endif

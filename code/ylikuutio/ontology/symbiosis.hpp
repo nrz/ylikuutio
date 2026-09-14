@@ -53,6 +53,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::load
+{
+    struct LoadFbxStruct;
+}
+
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
@@ -194,6 +199,7 @@ namespace yli::ontology
         std::vector<load::FbxMaterial> fbx_materials;
         std::vector<load::FbxMesh> fbx_meshes;
         std::size_t ufbx_mesh_count { 0 };
+        const load::LoadFbxStruct& load_fbx_struct;
     };
 
     template<>

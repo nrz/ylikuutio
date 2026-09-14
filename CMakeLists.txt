@@ -596,6 +596,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/load/image_file_loader.cpp
     code/ylikuutio/load/image_file_loader.hpp
     code/ylikuutio/load/image_loader_struct.hpp
+    code/ylikuutio/load/load_fbx_struct.hpp
     code/ylikuutio/load/model_loader.cpp
     code/ylikuutio/load/model_loader.hpp
     code/ylikuutio/load/model_loader_struct.hpp
@@ -1264,6 +1265,7 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_memory.cpp
         code/hirvi/tests/test_movable_controller.cpp
         code/hirvi/tests/test_pipeline.cpp
+        code/hirvi/tests/test_police_bear.cpp
         code/hirvi/tests/test_police_car.cpp
         code/hirvi/tests/test_police_control_center.cpp
         code/hirvi/tests/test_police_control_center_struct.cpp

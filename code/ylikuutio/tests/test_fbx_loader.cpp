@@ -22,6 +22,7 @@
 #include "code/ylikuutio/load/fbx_scene.hpp"
 #include "code/ylikuutio/load/fbx_material.hpp"
 #include "code/ylikuutio/load/fbx_mesh.hpp"
+#include "code/ylikuutio/load/load_fbx_struct.hpp"
 #include <ufbx.h>
 
 // Include GLM
@@ -58,10 +59,12 @@ TEST(fbx_file_loading_with_ufbx_must_function_appropriately, rigged_and_animated
 
     ASSERT_NE(scene, nullptr);
 
-    constexpr std::size_t subdivision_level { 1 };
-    constexpr bool needs_subdivision { true };
-    constexpr bool is_debug_mode { false };
-    const std::optional<yli::load::FbxScene> maybe_fbx_scene = yli::load::create_fbx_scene(*scene, subdivision_level, needs_subdivision, is_debug_mode);
+    yli::load::LoadFbxStruct load_fbx_struct {};
+    load_fbx_struct.subdivision_level = 1;
+    load_fbx_struct.needs_subdivision = true;
+    load_fbx_struct.load_opts.use_root_transform = false;
+    const std::optional<yli::load::FbxScene> maybe_fbx_scene = yli::load::create_fbx_scene(
+        *scene, load_fbx_struct);
 
     ASSERT_TRUE(maybe_fbx_scene.has_value());
 
@@ -83,10 +86,11 @@ TEST(ufbx_must_function_appropriately, rigged_and_animated_cat)
     std::vector<yli::load::FbxMaterial> fbx_materials;
     std::vector<yli::load::FbxMesh> fbx_meshes;
     std::size_t mesh_count { 0 };
-    const bool is_debug_mode = true; // Travis fails for too much output.
+    yli::load::LoadFbxStruct load_fbx_struct {};
 
     const bool result = yli::load::load_fbx(filename, out_vertices, out_uvs, out_normals,
-                                            fbx_material_mesh_map, fbx_materials, fbx_meshes, mesh_count, is_debug_mode);
+                                            fbx_material_mesh_map, fbx_materials, fbx_meshes, mesh_count,
+                                            load_fbx_struct);
     ASSERT_TRUE(result);
     ASSERT_EQ(fbx_meshes.size(), 1);
     ASSERT_EQ(mesh_count, 1);
@@ -143,9 +147,9 @@ TEST(fbx_file_must_be_loaded_appropriately, rigged_and_animated_cat)
 
     const std::int32_t mesh_i = 0;
 
-    const bool is_debug_mode = true; // Travis fails for too much output.
+    yli::load::LoadFbxStruct load_fbx_struct {};
 
-    const bool result = yli::load::load_fbx(filename, mesh_i, out_vertices, out_uvs, out_normals, is_debug_mode);
+    const bool result = yli::load::load_fbx(filename, mesh_i, out_vertices, out_uvs, out_normals, load_fbx_struct);
     ASSERT_TRUE(result);
 }
 
@@ -158,8 +162,7 @@ TEST(fbx_file_must_be_loaded_appropriately, turbo_polizei)
 
     const std::int32_t mesh_i = 0;
 
-    const bool is_debug_mode = true; // Travis fails for too much output.
-
-    const bool result = yli::load::load_fbx(filename, mesh_i, out_vertices, out_uvs, out_normals, is_debug_mode);
+    yli::load::LoadFbxStruct load_fbx_struct {};
+    const bool result = yli::load::load_fbx(filename, mesh_i, out_vertices, out_uvs, out_normals, load_fbx_struct);
     ASSERT_TRUE(result);
 }

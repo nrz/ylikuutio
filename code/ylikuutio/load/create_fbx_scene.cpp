@@ -27,24 +27,27 @@
 #include "fbx_mesh.hpp"
 #include "fbx_mesh_vertex.hpp"
 #include "fbx_pixel_16.hpp"
+#include "load_fbx_struct.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <cstdint>  // std::uint32_t
 #include <iostream> // std::cerr
 #include <limits>   // std::numeric_limits
+#include <map>      // std::map
 #include <optional> // std::nullopt, std::optional
+#include <ranges>   // std::views::values
+
+#include "load_fbx_struct.hpp"
 
 namespace yli::load
 {
     std::optional<FbxScene> create_fbx_scene(const ufbx_scene& original_scene,
-                                             const std::size_t subdivision_level,
-                                             const bool needs_subdivision,
-                                             const bool is_debug_mode)
+                                             const LoadFbxStruct& load_fbx_struct)
     {
         // See `create_scene` of `picort.cpp` for a reference.
 
-        if (is_debug_mode)
+        if (load_fbx_struct.is_debug_mode)
         {
             std::cout << "original_scene.nodes.count: " << original_scene.nodes.count << "\n";
         }
@@ -56,7 +59,7 @@ namespace yli::load
         for (std::size_t node_i = 0; node_i < original_scene.nodes.count; node_i++)
         {
             const auto& node = *original_scene.nodes.data[node_i];
-            if (is_debug_mode)
+            if (load_fbx_struct.is_debug_mode)
             {
                 std::cout << "node.element.type: " << node.element.type << "\n";
             }
@@ -66,7 +69,7 @@ namespace yli::load
 
         fbx_scene.blend_channels.reserve(original_scene.blend_channels.count);
 
-        if (is_debug_mode)
+        if (load_fbx_struct.is_debug_mode)
         {
             std::cout << "original_scene.blend_channels.count: " << original_scene.blend_channels.count << "\n";
             std::cout << "original_scene.materials.count: " << original_scene.materials.count << "\n";
@@ -116,7 +119,7 @@ namespace yli::load
                         dest_material.base_color.image.width * dest_material.base_color.image.height;
                 const std::vector<FbxPixel16>& pixels = dest_material.base_color.image.pixels;
 
-                if (is_debug_mode)
+                if (load_fbx_struct.is_debug_mode)
                 {
                     std::cout << "Specular color filename: " << dest_material.specular_color.filename << "\n";
                     std::cout << "Base color image width: " << dest_material.base_color.image.width << "\n";
@@ -144,7 +147,7 @@ namespace yli::load
             fbx_scene.materials.emplace_back(dest_material);;
         }
 
-        if (is_debug_mode)
+        if (load_fbx_struct.is_debug_mode)
         {
             std::cout << "original_scene.meshes.count: " << original_scene.meshes.count << "\n";
         }
@@ -165,8 +168,9 @@ namespace yli::load
                 continue;
             }
 
-            ufbx_mesh* mesh = (needs_subdivision
-                                   ? ufbx_subdivide_mesh(original_mesh, subdivision_level, nullptr, nullptr)
+            ufbx_mesh* mesh = (load_fbx_struct.needs_subdivision
+                                   ? ufbx_subdivide_mesh(original_mesh, load_fbx_struct.subdivision_level, nullptr,
+                                                         nullptr)
                                    : original_mesh);
 
             if (mesh == nullptr)
@@ -180,8 +184,7 @@ namespace yli::load
                 indices.resize(3 * mesh->max_face_triangles);
             }
 
-            FbxMesh fbx_mesh {};
-            fbx_mesh.num_instances = mesh->instances.count;
+            std::map<ufbx_material*, FbxMesh> fbx_meshes {};
 
             // Iterate over all instances of the mesh.
             for (const ufbx_node* const node : mesh->instances)
@@ -196,9 +199,16 @@ namespace yli::load
                 // Iterate over all n-gon faces of the mesh.
                 for (std::size_t face_i = 0; face_i < mesh->num_faces; face_i++)
                 {
+                    const ufbx_face face = mesh->faces[face_i];
+
+                    if (face.num_indices < 3)
+                    {
+                        // Invalid face!
+                        continue;
+                    }
+
                     // Split the face into triangles.
-                    const std::size_t num_triangles = ufbx_triangulate_face(indices.data(), indices.size(), mesh,
-                                                                            mesh->faces[face_i]);
+                    const std::size_t num_triangles = ufbx_triangulate_face(indices.data(), indices.size(), mesh, face);
 
                     // Iterate over all split triangles.
                     for (std::size_t triangle_i = 0; triangle_i < num_triangles; triangle_i++)
@@ -209,58 +219,81 @@ namespace yli::load
 
                         if (mesh->face_material.count > 0)
                         {
-                            const ufbx_material* const material = mesh->materials.data[mesh->face_material[face_i]];
+                            ufbx_material* const material = mesh->materials.data[mesh->face_material[face_i]];
                             triangle_info.material = material->element.typed_id;
 
-                            if (fbx_mesh.material_i == std::numeric_limits<std::size_t>::max())
+                            if (load_fbx_struct.mesh_material_indices.size() > mesh_i &&
+                                load_fbx_struct.mesh_material_indices.at(mesh_i) <
+                                std::numeric_limits<std::size_t>::max())
                             {
-                                // Use the first listed material of the mesh.
-                                fbx_mesh.material_i = material->element.typed_id;
+                                if (!fbx_meshes.contains(material))
+                                {
+                                    // New mesh for the new material.
+                                    fbx_meshes[material] = FbxMesh {};
+                                }
+
+                                fbx_meshes[material].material_i = load_fbx_struct.mesh_material_indices.at(mesh_i);
                             }
-                        }
-
-                        for (std::size_t corner_i = 0; corner_i < 3; corner_i++)
-                        {
-                            const std::uint32_t index = indices[3 * triangle_i + corner_i];
-
-                            // Load the skinned vertex position at `index`.
-                            ufbx_vec3 vertex = ufbx_get_vertex_vec3(&mesh->skinned_position, index);
-
-                            ufbx_vec2 uv = mesh->vertex_uv.exists
-                                               ? ufbx_get_vertex_vec2(&mesh->vertex_uv, index)
-                                               : ufbx_vec2 {};
-                            ufbx_vec3 normal = ufbx_get_vertex_vec3(&mesh->skinned_normal, index);
-
-                            // If the skinned positions are local, we must apply 'to root' to get world coordinates.
-                            if (mesh->skinned_is_local)
+                            else if (!fbx_meshes.contains(material))
                             {
-                                // TODO: use these ufbx functions if needed there is need later on!
-                                // vertex = ufbx_transform_position(&node->geometry_to_world, vertex);
-                                // normal = ufbx_transform_direction(&normal_to_world, normal);
+                                // New mesh for the new material.
+                                fbx_meshes[material] = FbxMesh {};
+                                fbx_meshes[material].material_i = material->element.typed_id;
                             }
 
-                            FbxMeshVertex fbx_mesh_vertex {};
-                            fbx_mesh_vertex.position = {
-                                static_cast<float>(vertex.x),
-                                static_cast<float>(vertex.y),
-                                static_cast<float>(vertex.z)
-                            };
-                            fbx_mesh_vertex.normal = glm::normalize(
-                                glm::vec3 {
-                                    static_cast<float>(normal.x),
-                                    static_cast<float>(normal.y),
-                                    static_cast<float>(normal.z)
-                                });
-                            fbx_mesh_vertex.uv = { uv.x, uv.y };
-                            fbx_mesh_vertex.f_vertex_index = static_cast<float>(mesh->vertex_indices.data[triangle_i]);
+                            for (std::size_t corner_i = 0; corner_i < 3; corner_i++)
+                            {
+                                const std::uint32_t index = indices[3 * triangle_i + corner_i];
 
-                            fbx_mesh.vertices.emplace_back(fbx_mesh_vertex);
+                                // Load the skinned vertex position at `index`.
+                                ufbx_vec3 vertex = ufbx_get_vertex_vec3(&mesh->skinned_position, index);
 
-                            triangle_info.vertices[corner_i] = fbx_mesh_vertex.position;
-                            triangle_info.uvs[corner_i] = fbx_mesh_vertex.uv;
-                            triangle_info.normals[corner_i] = fbx_mesh_vertex.normal;
+                                ufbx_vec2 uv = mesh->vertex_uv.exists
+                                                   ? ufbx_get_vertex_vec2(&mesh->vertex_uv, index)
+                                                   : ufbx_vec2 {};
+                                ufbx_vec3 normal = ufbx_get_vertex_vec3(&mesh->skinned_normal, index);
 
-                            triangle.vertices[corner_i] = fbx_mesh_vertex.position;
+                                // If the skinned positions are local, we must apply 'to root' to get world coordinates.
+                                if ((mesh->skinned_is_local && load_fbx_struct.apply_to_root_to_vertices) ||
+                                    load_fbx_struct.force_apply_to_root_to_vertices)
+                                {
+                                    vertex = ufbx_transform_position(&node->geometry_to_world, vertex);
+                                }
+                                if ((mesh->skinned_is_local && load_fbx_struct.apply_to_root_to_normals) ||
+                                    load_fbx_struct.force_apply_to_root_to_normals)
+                                {
+                                    normal = ufbx_transform_direction(&normal_to_world, normal);
+                                }
+
+                                FbxMeshVertex fbx_mesh_vertex {};
+                                fbx_mesh_vertex.position = {
+                                    static_cast<float>(vertex.x),
+                                    static_cast<float>(vertex.y),
+                                    static_cast<float>(vertex.z)
+                                };
+                                fbx_mesh_vertex.normal = glm::normalize(
+                                    glm::vec3 {
+                                        static_cast<float>(normal.x),
+                                        static_cast<float>(normal.y),
+                                        static_cast<float>(normal.z)
+                                    });
+                                fbx_mesh_vertex.uv = { uv.x, uv.y };
+                                fbx_mesh_vertex.f_vertex_index = static_cast<float>(mesh->vertex_indices.data[
+                                    triangle_i]);
+
+                                if (!fbx_meshes.contains(material))
+                                {
+                                    // New mesh for the new material.
+                                    fbx_meshes[material] = FbxMesh {};
+                                }
+                                fbx_meshes[material].vertices.emplace_back(fbx_mesh_vertex);
+
+                                triangle_info.vertices[corner_i] = fbx_mesh_vertex.position;
+                                triangle_info.uvs[corner_i] = fbx_mesh_vertex.uv;
+                                triangle_info.normals[corner_i] = fbx_mesh_vertex.normal;
+
+                                triangle.vertices[corner_i] = fbx_mesh_vertex.position;
+                            }
                         }
 
                         triangles.emplace_back(triangle);
@@ -269,7 +302,10 @@ namespace yli::load
                 }
             }
 
-            fbx_scene.meshes.emplace_back(fbx_mesh);
+            for (auto fbx_mesh : fbx_meshes | std::views::values)
+            {
+                fbx_scene.meshes.emplace_back(fbx_mesh);
+            }
 
             if (mesh != original_mesh)
             {

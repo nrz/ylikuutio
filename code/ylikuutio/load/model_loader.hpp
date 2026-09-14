@@ -38,6 +38,7 @@ namespace yli::render
 namespace yli::load
 {
     struct ModelLoaderStruct;
+    struct LoadFbxStruct;
 
     bool load_model(
             const ModelLoaderStruct& model_loader_struct,
@@ -53,8 +54,8 @@ namespace yli::load
             GLuint& uv_buffer,
             GLuint& normal_buffer,
             GLuint& element_buffer,
-            render::GraphicsApiBackend graphics_api_backend,
-            bool is_debug_mode);
+            const LoadFbxStruct& load_fbx_struct,
+            render::GraphicsApiBackend graphics_api_backend);
 }
 
 #endif

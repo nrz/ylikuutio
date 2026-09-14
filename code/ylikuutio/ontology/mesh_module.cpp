@@ -62,10 +62,9 @@ namespace yli::ontology
             this->vertex_normal_modelspace_id = glGetAttribLocation(pipeline->get_program_id(), "vertex_normal_modelspace");
 
             load::ModelLoaderStruct model_loader_struct = mesh_provider_struct.model_loader_struct;
-            model_loader_struct.image_width_pointer           = &this->image_width;
-            model_loader_struct.image_height_pointer          = &this->image_height;
-
-            constexpr bool is_debug_mode = true;
+            load::LoadFbxStruct load_fbx_struct = mesh_provider_struct.load_fbx_struct;
+            model_loader_struct.image_width_pointer = &this->image_width;
+            model_loader_struct.image_height_pointer = &this->image_height;
 
             yli::load::load_model(
                     model_loader_struct,
@@ -81,8 +80,8 @@ namespace yli::ontology
                     this->uv_buffer,
                     this->normal_buffer,
                     this->element_buffer,
-                    universe.get_graphics_api_backend(),
-                    is_debug_mode);
+                    load_fbx_struct,
+                    universe.get_graphics_api_backend());
 
             this->are_opengl_buffers_initialized = true;
         }

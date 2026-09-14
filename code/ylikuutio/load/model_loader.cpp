@@ -41,6 +41,8 @@
 
 namespace yli::load
 {
+    struct LoadFbxStruct;
+
     bool load_model(
             const ModelLoaderStruct& model_loader_struct,
             std::vector<glm::vec3>& out_vertices,
@@ -55,8 +57,8 @@ namespace yli::load
             GLuint& uv_buffer,
             GLuint& normal_buffer,
             GLuint& element_buffer,
-            const render::GraphicsApiBackend graphics_api_backend,
-            const bool is_debug_mode)
+            const LoadFbxStruct& load_fbx_struct,
+            const render::GraphicsApiBackend graphics_api_backend)
     {
         bool model_loading_result = false;
 
@@ -76,7 +78,7 @@ namespace yli::load
                     out_vertices,
                     out_uvs,
                     out_normals,
-                    is_debug_mode);
+                    load_fbx_struct);
 
             std::cout << model_loader_struct.model_filename << " loaded successfully.\n";
         }

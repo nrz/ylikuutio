@@ -31,13 +31,15 @@
 
 namespace yli::load
 {
+    struct LoadFbxStruct;
+
     bool load_fbx(
             const std::string& filename,
             std::size_t mesh_i,
             std::vector<glm::vec3>& out_vertices,
             std::vector<glm::vec2>& out_uvs,
             std::vector<glm::vec3>& out_normals,
-            bool is_debug_mode);
+            const LoadFbxStruct& load_fbx_struct);
 }
 
 #endif

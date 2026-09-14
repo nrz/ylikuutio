@@ -20,6 +20,7 @@
 
 #include "entity_struct.hpp"
 #include "request.hpp"
+#include "code/ylikuutio/load/load_fbx_struct.hpp"
 
 // Include standard headers
 #include <string>  // std::string
@@ -56,6 +57,7 @@ namespace yli::ontology
 
         std::variant<Request<Ecosystem>, Request<Scene>> parent {};
         Request<Pipeline> pipeline_master {};
+        load::LoadFbxStruct load_fbx_struct {};
     };
 }
 
