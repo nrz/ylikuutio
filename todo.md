@@ -6,7 +6,6 @@
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
 - [ ] ONTOLOGY/MEMORY Design and implement 'handle to index'-based system for parent-child and master-apprentice relationships of derived classes of `Entity`.
-- [ ] HIRVI/AI Implement `MasterOfPolices` class that inherits `GenericMasterModule` class.
 - [ ] HIRVI/AI Implement `Emancipable` class.
 - [ ] HIRVI/AI Make `PoliceHorse` and `PoliceDog` inherit `Emancipable`.
 - [ ] HIRVI/AI Make `EmancipationModule` inherit `ApprenticeModule`.
@@ -410,3 +409,4 @@
 - [x] BUG/HIRVI Fix `Symbiosis` rendering.
 - [x] LIBRARIES Replace OpenFBX with ufbx. https://github.com/ufbx/ufbx
 - [x] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
+- [x] HIRVI/AI Implement `PoliceControlCenter` class that inherits `GenericMasterModule` class.
