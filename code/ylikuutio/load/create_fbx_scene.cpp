@@ -302,7 +302,7 @@ namespace yli::load
                 }
             }
 
-            for (auto fbx_mesh : fbx_meshes | std::views::values)
+            for (const auto& fbx_mesh : fbx_meshes | std::views::values)
             {
                 fbx_scene.meshes.emplace_back(fbx_mesh);
             }
