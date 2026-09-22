@@ -8,7 +8,6 @@
 - [ ] ONTOLOGY/MEMORY Design and implement 'handle to index'-based system for parent-child and master-apprentice relationships of derived classes of `Entity`.
 - [ ] HIRVI/AI Implement `Emancipable` class.
 - [ ] HIRVI/AI Make `PoliceHorse`, `PoliceDog`, and `PoliceBear` inherit `Emancipable`.
-- [ ] HIRVI/AI Make `EmancipationModule` inherit `ApprenticeModule`.
 - [ ] AI/YLILISP Implement new `GenericLispModule` class that supports YliLisp.
 - [ ] AI/YLILISP Implement new `ConsoleLispModule` class that inherits `GenericLispModule` and can be composited into `Console`.
 - [ ] AI/YLILISP Implement new `BrainLispModule` class, inherits `GenericLispModule`, knows `ParentOfSkillsModule`, can be composited into derived types of `Movable`.
