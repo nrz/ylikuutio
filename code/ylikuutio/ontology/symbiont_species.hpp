@@ -20,7 +20,6 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
 #include "mesh_module.hpp"
 
