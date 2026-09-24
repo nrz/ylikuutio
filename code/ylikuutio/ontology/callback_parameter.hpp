@@ -45,7 +45,6 @@ namespace yli::ontology
 
     class CallbackParameter final : public Entity
     {
-    private:
         CallbackParameter(
             core::Application& application,
             Universe& universe,

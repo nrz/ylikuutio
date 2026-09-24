@@ -50,7 +50,6 @@ namespace yli::ontology
 
     class Ecosystem final : public Entity
     {
-    private:
         Ecosystem(
             core::Application& application,
             Universe& universe,
