@@ -42,7 +42,7 @@ namespace yli::ontology
 {
     class Entity;
 
-    std::optional<yli::data::AnyValue> Pipeline::bind_to_new_ecosystem_parent(
+    std::optional<data::AnyValue> Pipeline::bind_to_new_ecosystem_parent(
         Pipeline& pipeline,
         Ecosystem& new_parent)
     {
