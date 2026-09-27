@@ -740,6 +740,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/glyph_object_creation.hpp
     code/ylikuutio/ontology/glyph_object_struct.hpp
     code/ylikuutio/ontology/glyph_struct.hpp
+    code/ylikuutio/ontology/heightmap.cpp
+    code/ylikuutio/ontology/heightmap.hpp
     code/ylikuutio/ontology/holobiont.cpp
     code/ylikuutio/ontology/holobiont.hpp
     code/ylikuutio/ontology/holobiont_struct.hpp
@@ -813,8 +815,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/skill.cpp
     code/ylikuutio/ontology/skill.hpp
     code/ylikuutio/ontology/skill_struct.hpp
-    code/ylikuutio/ontology/terrain.cpp
-    code/ylikuutio/ontology/terrain.hpp
     code/ylikuutio/ontology/texture_file_format.hpp
     code/ylikuutio/ontology/unbind_child_from_parent.hpp
     code/ylikuutio/ontology/variable.cpp

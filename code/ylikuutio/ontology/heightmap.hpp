@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_TERRAIN_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_TERRAIN_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_HEIGHTMAP_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_HEIGHTMAP_HPP_INCLUDED
 
 #include "object.hpp"
 
@@ -32,10 +32,10 @@ namespace yli::ontology
     class Universe;
     struct ObjectStruct;
 
-    class Terrain final : public Object
+    class Heightmap final : public Object
     {
         public:
-            Terrain(
+            Heightmap(
                     core::Application& application,
                     Universe& universe,
                     const ObjectStruct& terrain_struct,
@@ -43,10 +43,10 @@ namespace yli::ontology
                     GenericMasterModule* species_master_module,
                     GenericMasterModule* /* movable_controller_master_module */);
 
-            ~Terrain() override = default;
+            ~Heightmap() override = default;
 
-            Terrain(const Terrain&) = delete;            // Delete copy constructor.
-            Terrain &operator=(const Terrain&) = delete; // Delete copy assignment.
+            Heightmap(const Heightmap&) = delete;            // Delete copy constructor.
+            Heightmap &operator=(const Heightmap&) = delete; // Delete copy assignment.
     };
 }
 

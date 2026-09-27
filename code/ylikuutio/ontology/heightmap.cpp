@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "terrain.hpp"
+#include "heightmap.hpp"
 #include "object.hpp"
 
 namespace yli::core
@@ -30,7 +30,7 @@ namespace yli::ontology
     class GenericMasterModule;
     struct HolobiontStruct;
 
-    Terrain::Terrain(
+    Heightmap::Heightmap(
             core::Application& application,
             Universe& universe,
             const ObjectStruct& terrain_struct,
@@ -40,6 +40,6 @@ namespace yli::ontology
         : Object(application, universe, terrain_struct, scene_parent_module, species_master_module, nullptr)
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Terrain*";
+        this->type_string = "yli::ontology::Heightmap*";
     }
 }
