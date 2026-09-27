@@ -51,7 +51,6 @@ namespace yli::ontology
 
     class InputMode final : public Entity
     {
-    private:
         InputMode(
             core::Application& application,
             Universe& universe,
