@@ -27,7 +27,6 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Universe;
-    class Scene;
     struct AbilityStruct;
 }
 
