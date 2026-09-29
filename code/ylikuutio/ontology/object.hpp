@@ -123,7 +123,6 @@ namespace yli::ontology
 
         std::size_t get_number_of_descendants() const final;
 
-    public:
         // this method renders this `Object`.
         void render(const Scene* target_scene);
 
