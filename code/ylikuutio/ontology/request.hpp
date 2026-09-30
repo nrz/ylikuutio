@@ -55,6 +55,16 @@ namespace yli::ontology
             }
         }
 
+        bool operator==(const Request& other) const
+        {
+            return this->data == other.data;
+        }
+
+        bool operator!=(const Request& other) const
+        {
+            return this->data != other.data;
+        }
+
         std::variant<std::monostate, Type*, std::string> data;
     };
 }
