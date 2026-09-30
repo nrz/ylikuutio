@@ -85,6 +85,7 @@ namespace yli::ontology
 
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Camera*";
+        this->can_be_erased = true;
     }
 
     Entity* Camera::get_parent() const

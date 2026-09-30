@@ -119,7 +119,6 @@ namespace yli::ontology
 
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Movable*";
-        this->can_be_erased = true;
     }
 
     const glm::vec3& Movable::get_cartesian_coordinates() const
