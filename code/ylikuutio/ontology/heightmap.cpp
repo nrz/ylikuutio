@@ -74,6 +74,6 @@ namespace yli::ontology
 
     std::size_t Heightmap::get_number_of_descendants() const
     {
-        return 0; // TODO: modify this line if this class has children!
+        return ontology::get_number_of_descendants(this->parent_of_heightmap_sheets.child_pointer_vector);
     }
 }
