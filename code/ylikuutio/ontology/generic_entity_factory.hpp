@@ -40,6 +40,8 @@ namespace yli::ontology
         class Material;
         class Species;
         class Object;
+        class Heightmap;
+        class HeightmapSheet;
         class Symbiosis;
         class SymbiontMaterial;
         class SymbiontSpecies;
@@ -77,6 +79,8 @@ namespace yli::ontology
         struct MaterialStruct;
         struct SpeciesStruct;
         struct ObjectStruct;
+        struct HeightmapStruct;
+        struct HeightmapSheetStruct;
         struct SymbiosisStruct;
         struct SymbiontMaterialStruct;
         struct SymbiontSpeciesStruct;
@@ -143,6 +147,10 @@ namespace yli::ontology
                 virtual Species* create_species(const SpeciesStruct& species_struct) const = 0;
 
                 virtual Object* create_object(const ObjectStruct& object_struct) const = 0;
+
+                virtual Heightmap* create_heightmap(const HeightmapStruct& heightmap_struct) const = 0;
+
+                virtual HeightmapSheet* create_heightmap_sheet(const HeightmapSheetStruct& heightmap_sheet_struct) const = 0;
 
                 virtual Symbiosis* create_symbiosis(const SymbiosisStruct& symbiosis_struct) const = 0;
 

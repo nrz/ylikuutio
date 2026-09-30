@@ -15,12 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLI_ONTOLOGY_HEIGHTMAP_HPP_INCLUDED
-#define YLI_ONTOLOGY_HEIGHTMAP_HPP_INCLUDED
+#ifndef YLI_ONTOLOGY_HEIGHTMAP_SHEET_HPP_INCLUDED
+#define YLI_ONTOLOGY_HEIGHTMAP_SHEET_HPP_INCLUDED
 
 #include "child_module.hpp"
-#include "generic_parent_module.hpp"
 #include "movable.hpp"
+#include "heightmap_sheet_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -32,29 +32,30 @@ namespace yli::core
 
 namespace yli::ontology
 {
+    class GenericParentModule;
     class GenericMasterModule;
     class Entity;
     class Universe;
     class Scene;
-    class HeightmapSheet;
-    struct HeightmapStruct;
+    class Heightmap;
+    struct HeightmapSheetStruct;
 
-    class Heightmap final : public Movable
+    class HeightmapSheet final : public Movable
     {
     public:
-        Heightmap(
+        HeightmapSheet(
             core::Application& application,
             Universe& universe,
-            const HeightmapStruct& heightmap_struct,
+            const HeightmapSheetStruct& heightmap_sheet_struct,
             GenericParentModule* scene_parent_module,
             GenericMasterModule* movable_controller_master_module);
 
-        Heightmap(const Heightmap&) = delete;            // Delete copy constructor.
-        Heightmap& operator=(const Heightmap&) = delete; // Delete copy assignment.
+        HeightmapSheet(const HeightmapSheet&) = delete;            // Delete copy constructor.
+        HeightmapSheet& operator=(const HeightmapSheet&) = delete; // Delete copy assignment.
 
-        virtual ~Heightmap() = default;
+        virtual ~HeightmapSheet() = default;
 
-        Scene* get_scene() const override;
+        Heightmap* get_heightmap() const;
 
         Entity* get_parent() const override;
 
@@ -62,21 +63,10 @@ namespace yli::ontology
 
         std::size_t get_number_of_descendants() const override;
 
-        template<typename ChildType>
-        GenericParentModule* get_generic_parent_module() = delete;
+        Scene* get_scene() const override;
 
-        template<typename T1, std::size_t DataSize>
-        friend class memory::MemoryStorage;
-
-        ChildModule child_of_scene;
-        GenericParentModule parent_of_heightmap_sheets;
+        ChildModule child_of_heightmap;
     };
-
-    template<>
-    inline GenericParentModule* Heightmap::get_generic_parent_module<HeightmapSheet>()
-    {
-        return &this->parent_of_heightmap_sheets;
-    }
 }
 
 #endif

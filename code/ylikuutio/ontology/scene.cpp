@@ -91,6 +91,10 @@ namespace yli::ontology
               *this,
               this->registry,
               "objects"),
+          parent_of_heightmaps(
+              *this,
+              this->registry,
+              "heightmaps"),
           parent_of_symbioses(
               *this,
               this->registry,
@@ -252,6 +256,7 @@ namespace yli::ontology
                this->parent_of_materials.get_number_of_children() +
                this->parent_of_species.get_number_of_children() +
                this->parent_of_objects.get_number_of_children() +
+               this->parent_of_heightmaps.get_number_of_children() +
                this->parent_of_symbioses.get_number_of_children() +
                this->parent_of_holobionts.get_number_of_children() +
                this->parent_of_shapeshifters.get_number_of_children() +
@@ -267,6 +272,7 @@ namespace yli::ontology
                ontology::get_number_of_descendants(this->parent_of_materials.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_species.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_objects.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_heightmaps.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_symbioses.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_holobionts.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_shapeshifters.child_pointer_vector) +

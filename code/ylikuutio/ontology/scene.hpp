@@ -75,6 +75,7 @@ namespace yli::ontology
     class Material;
     class Species;
     class Object;
+    class Heightmap;
     class Symbiosis;
     class Holobiont;
     class Shapeshifter;
@@ -153,6 +154,7 @@ namespace yli::ontology
         GenericParentModule parent_of_materials;
         GenericParentModule parent_of_species;
         GenericParentModule parent_of_objects;
+        GenericParentModule parent_of_heightmaps;
         GenericParentModule parent_of_symbioses;
         GenericParentModule parent_of_holobionts;
         GenericParentModule parent_of_shapeshifters;
@@ -237,6 +239,12 @@ namespace yli::ontology
     inline GenericParentModule* Scene::get_generic_parent_module<Object>()
     {
         return &this->parent_of_objects;
+    }
+
+    template<>
+    inline GenericParentModule* Scene::get_generic_parent_module<Heightmap>()
+    {
+        return &this->parent_of_heightmaps;
     }
 
     template<>

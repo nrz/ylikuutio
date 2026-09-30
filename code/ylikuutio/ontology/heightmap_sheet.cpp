@@ -15,10 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+#include "heightmap_sheet.hpp"
 #include "heightmap.hpp"
-#include "scene.hpp"
-#include "heightmap_struct.hpp"
-#include "get_number_of_descendants.hpp"
+#include "heightmap_sheet_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -34,46 +33,47 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
     class Universe;
+    class Scene;
 
-    Heightmap::Heightmap(
+    Heightmap* HeightmapSheet::get_heightmap() const
+    {
+        return static_cast<Heightmap*>(this->get_parent());
+    }
+
+    Entity* HeightmapSheet::get_parent() const
+    {
+        return this->child_of_heightmap.get_parent();
+    }
+
+    HeightmapSheet::HeightmapSheet(
         core::Application& application,
         Universe& universe,
-        const HeightmapStruct& heightmap_struct,
-        GenericParentModule* const scene_parent_module,
-        GenericMasterModule* const movable_controller_master_module)
+        const HeightmapSheetStruct& heightmap_sheet_struct,
+        GenericParentModule* scene_parent_module,
+        GenericMasterModule* movable_controller_master_module)
         : Movable(
               application,
               universe,
-              heightmap_struct,
+              heightmap_sheet_struct,
               movable_controller_master_module),
-          child_of_scene(scene_parent_module, *this),
-          parent_of_heightmap_sheets(
-              *this,
-              this->registry,
-              "heightmap_sheets")
+          child_of_heightmap(scene_parent_module, *this)
     {
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::Heightmap*";
-        this->can_be_erased = true;
+        this->type_string = "yli::ontology::HeightmapSheet*";
     }
 
-    Scene* Heightmap::get_scene() const
+    std::size_t HeightmapSheet::get_number_of_children() const
     {
-        return static_cast<Scene*>(this->child_of_scene.get_parent());
+        return 0; // `HeightmapSheet` has no children.
     }
 
-    Entity* Heightmap::get_parent() const
+    std::size_t HeightmapSheet::get_number_of_descendants() const
     {
-        return this->child_of_scene.get_parent();
+        return 0; // `HeightmapSheet` has no children.
     }
 
-    std::size_t Heightmap::get_number_of_children() const
+    Scene* HeightmapSheet::get_scene() const
     {
-        return this->parent_of_heightmap_sheets.get_number_of_children();
-    }
-
-    std::size_t Heightmap::get_number_of_descendants() const
-    {
-        return 0; // TODO: modify this line if this class has children!
+        return this->child_of_heightmap.get_scene();
     }
 }
