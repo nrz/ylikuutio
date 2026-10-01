@@ -18,6 +18,9 @@
 #include "trivial_data_analyzer.hpp"
 #include "position_report.hpp"
 
+#ifndef GLM_ENABLE_EXPERIMENTAL
+#define GLM_ENABLE_EXPERIMENTAL
+#endif
 #include <glm/gtx/hash.hpp>
 
 // Include standard headers
