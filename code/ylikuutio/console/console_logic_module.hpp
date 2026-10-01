@@ -302,7 +302,7 @@ namespace yli::console
 
                 std::optional<ConsoleState> switch_to_state(ConsoleState new_state);
 
-                ConsoleState state { ConsoleState::INACTIVE_IN_NEW_INPUT };
+                ConsoleState state { INACTIVE_IN_NEW_INPUT };
                 TextInput& new_input;
                 TextInput& temp_input;
                 TextInputHistory& text_input_history;
