@@ -297,10 +297,10 @@ namespace yli::console
                 // Public callbacks end here.
 
         private:
-                std::optional<ConsoleState> signal_state_change(const ConsoleState old_state,
-                                                                const ConsoleState new_state) const;
+                std::optional<ConsoleState> signal_state_change(ConsoleState old_state,
+                                                                ConsoleState new_state) const;
 
-                std::optional<ConsoleState> switch_to_state(const ConsoleState new_state);
+                std::optional<ConsoleState> switch_to_state(ConsoleState new_state);
 
                 ConsoleState state { ConsoleState::INACTIVE_IN_NEW_INPUT };
                 TextInput& new_input;
