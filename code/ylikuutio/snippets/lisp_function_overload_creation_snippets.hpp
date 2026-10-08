@@ -41,134 +41,186 @@
 namespace yli::snippets
 {
     template<typename EntityFactoryType>
-        void create_console_lisp_function_overloads_for_variable_callbacks(EntityFactoryType& entity_factory, ontology::Console& console)
-        {
-            // Variable callbacks.
-            entity_factory.create_console_lisp_function_overload("variables", ontology::Request(&console), &ontology::Entity::print_variables0);
-            entity_factory.create_console_lisp_function_overload("variables", ontology::Request(&console), &ontology::Entity::print_variables1);
-            entity_factory.create_console_lisp_function_overload("create-variable", ontology::Request(&console), &ontology::Entity::create_variable_with_parent_name_type_value);
-            entity_factory.create_console_lisp_function_overload("set", ontology::Request(&console), &ontology::Variable::set_variable_const_std_string);
-            entity_factory.create_console_lisp_function_overload("copy", ontology::Request(&console), &ontology::Variable::set_variable_variable);
-            entity_factory.create_console_lisp_function_overload("print", ontology::Request(&console), &ontology::Variable::print_value1);
-
-        }
-
-    template<typename EntityFactoryType>
-        void create_console_lisp_function_overloads_for_object_callbacks(EntityFactoryType& entity_factory, ontology::Console& console)
-        {
-            // Object callbacks.
-            entity_factory.create_console_lisp_function_overload("create-object", ontology::Request(&console), &ontology::Object::with_parent_name_x_y_z);
-            entity_factory.create_console_lisp_function_overload("create-object", ontology::Request(&console), &ontology::Object::with_parent_name_x_y_z_yaw_pitch);
-            entity_factory.create_console_lisp_function_overload("create-object", ontology::Request(&console), &ontology::Object::with_parent_name_x_y_z_roll_yaw_pitch);
-        }
+    void create_console_lisp_function_overloads_for_variable_callbacks(EntityFactoryType& entity_factory,
+                                                                       ontology::Console& console)
+    {
+        // Variable callbacks.
+        entity_factory.create_console_lisp_function_overload("variables", ontology::Request(&console),
+                                                             &ontology::Entity::print_variables0);
+        entity_factory.create_console_lisp_function_overload("variables", ontology::Request(&console),
+                                                             &ontology::Entity::print_variables1);
+        entity_factory.create_console_lisp_function_overload("create-variable", ontology::Request(&console),
+                                                             &ontology::Entity::create_variable_with_parent_name_type_value);
+        entity_factory.create_console_lisp_function_overload("set", ontology::Request(&console),
+                                                             &ontology::Variable::set_variable_const_std_string);
+        entity_factory.create_console_lisp_function_overload("copy", ontology::Request(&console),
+                                                             &ontology::Variable::set_variable_variable);
+        entity_factory.create_console_lisp_function_overload("print", ontology::Request(&console),
+                                                             &ontology::Variable::print_value1);
+    }
 
     template<typename EntityFactoryType>
-        void create_console_lisp_function_overloads_for_holobiont_callbacks(EntityFactoryType& entity_factory, ontology::Console& console)
-        {
-            // Holobiont callbacks.
-            entity_factory.create_console_lisp_function_overload("create-holobiont", ontology::Request(&console), &ontology::Holobiont::create_holobiont_with_parent_name_x_y_z);
-            entity_factory.create_console_lisp_function_overload("create-holobiont", ontology::Request(&console), &ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch);
-            entity_factory.create_console_lisp_function_overload("create-holobiont", ontology::Request(&console), &ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch);
-        }
+    void create_console_lisp_function_overloads_for_object_callbacks(EntityFactoryType& entity_factory,
+                                                                     ontology::Console& console)
+    {
+        // Object callbacks.
+        entity_factory.create_console_lisp_function_overload("create-object", ontology::Request(&console),
+                                                             &ontology::Object::with_parent_name_x_y_z);
+        entity_factory.create_console_lisp_function_overload("create-object", ontology::Request(&console),
+                                                             &ontology::Object::with_parent_name_x_y_z_yaw_pitch);
+        entity_factory.create_console_lisp_function_overload("create-object", ontology::Request(&console),
+                                                             &ontology::Object::with_parent_name_x_y_z_roll_yaw_pitch);
+    }
 
     template<typename EntityFactoryType>
-        void create_console_lisp_function_overloads_for_entity_callbacks(EntityFactoryType& entity_factory, ontology::Console& console)
-        {
-            // `Entity` handling callbacks.
-            entity_factory.create_console_lisp_function_overload("entities", ontology::Request(&console), &ontology::Universe::print_entities);
-            entity_factory.create_console_lisp_function_overload("parent", ontology::Request(&console), &ontology::Universe::print_parent);
-            entity_factory.create_console_lisp_function_overload("children", ontology::Request(&console), &ontology::Entity::print_children);
-            entity_factory.create_console_lisp_function_overload("activate", ontology::Request(&console), &ontology::Universe::activate_entity);
-            entity_factory.create_console_lisp_function_overload("delete", ontology::Request(&console), &ontology::Universe::delete_entity);
-            entity_factory.create_console_lisp_function_overload("info", ontology::Request(&console), &ontology::Universe::info0);
-            entity_factory.create_console_lisp_function_overload("info", ontology::Request(&console), &ontology::Universe::info1);
-        }
+    void create_console_lisp_function_overloads_for_holobiont_callbacks(EntityFactoryType& entity_factory,
+                                                                        ontology::Console& console)
+    {
+        // Holobiont callbacks.
+        entity_factory.create_console_lisp_function_overload("create-holobiont", ontology::Request(&console),
+                                                             &ontology::Holobiont::create_holobiont_with_parent_name_x_y_z);
+        entity_factory.create_console_lisp_function_overload("create-holobiont", ontology::Request(&console),
+                                                             &ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_yaw_pitch);
+        entity_factory.create_console_lisp_function_overload("create-holobiont", ontology::Request(&console),
+                                                             &ontology::Holobiont::create_holobiont_with_parent_name_x_y_z_roll_yaw_pitch);
+    }
 
     template<typename EntityFactoryType>
-        void create_console_lisp_function_overloads_for_entity_binding(EntityFactoryType& entity_factory, ontology::Console& console)
-        {
-            // `Entity` binding callbacks, `Movable`.
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Movable::bind_to_new_movable_controller);
-            entity_factory.create_console_lisp_function_overload("unbind-from-movable-controller", ontology::Request(&console), &ontology::Movable::unbind_from_movable_controller);
-
-            // `Entity` binding callbacks, `Pipeline`.
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Pipeline::bind_to_new_ecosystem_parent);
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Pipeline::bind_to_new_scene_parent);
-
-            // `Entity` binding callbacks, `Material`.
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Material::bind_to_new_ecosystem_parent);
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Material::bind_to_new_scene_parent);
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Material::bind_to_new_pipeline);
-
-            // `Entity` binding callbacks, `Species`.
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Species::bind_to_new_ecosystem_parent);
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Species::bind_to_new_scene_parent);
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Species::bind_to_new_material);
-
-            // `Entity` binding callbacks, `Object`.
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Object::bind_to_new_scene_parent);
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Object::bind_to_new_species_master);
-
-            // `Entity` binding callbacks, `Symbiosis`.
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Symbiosis::bind_to_new_ecosystem_parent);
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Symbiosis::bind_to_new_scene_parent);
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Symbiosis::bind_to_new_pipeline);
-
-            // `Entity` binding callbacks, `ShapeshifterTransformation`.
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::ShapeshifterTransformation::bind_to_new_material_parent);
-
-            // `Entity` binding callbacks, `Text2d`.
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Text2d::bind_to_new_font_2d_parent);
-
-            // `Entity` binding callbacks, `Text3d`.
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Text3d::bind_to_new_scene_parent);
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Text3d::bind_to_new_vector_font_master);
-
-            // `Entity` binding callbacks, `Console`.
-            entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console), &ontology::Console::bind_to_new_font_2d);
-        }
+    void create_console_lisp_function_overloads_for_entity_callbacks(EntityFactoryType& entity_factory,
+                                                                     ontology::Console& console)
+    {
+        // `Entity` handling callbacks.
+        entity_factory.create_console_lisp_function_overload("entities", ontology::Request(&console),
+                                                             &ontology::Universe::print_entities);
+        entity_factory.create_console_lisp_function_overload("parent", ontology::Request(&console),
+                                                             &ontology::Universe::print_parent);
+        entity_factory.create_console_lisp_function_overload("children", ontology::Request(&console),
+                                                             &ontology::Entity::print_children);
+        entity_factory.create_console_lisp_function_overload("activate", ontology::Request(&console),
+                                                             &ontology::Universe::activate_entity);
+        entity_factory.create_console_lisp_function_overload("delete", ontology::Request(&console),
+                                                             &ontology::Universe::delete_entity);
+        entity_factory.create_console_lisp_function_overload("info", ontology::Request(&console),
+                                                             &ontology::Universe::info0);
+        entity_factory.create_console_lisp_function_overload("info", ontology::Request(&console),
+                                                             &ontology::Universe::info1);
+    }
 
     template<typename EntityFactoryType>
-        void create_console_lisp_function_overloads_for_entity_naming(EntityFactoryType& entity_factory, ontology::Console& console)
-        {
-            // `Entity` naming callbacks.
-            entity_factory.create_console_lisp_function_overload("set-global-name", ontology::Request(&console), &ontology::Universe::set_global_name_for_entity);
-            entity_factory.create_console_lisp_function_overload("set-local-name", ontology::Request(&console), &ontology::Universe::set_local_name_for_entity);
-        }
+    void create_console_lisp_function_overloads_for_entity_binding(EntityFactoryType& entity_factory,
+                                                                   ontology::Console& console)
+    {
+        // `Entity` binding callbacks, `Movable`.
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Movable::bind_to_new_movable_controller);
+        entity_factory.create_console_lisp_function_overload("unbind-from-movable-controller",
+                                                             ontology::Request(&console),
+                                                             &ontology::Movable::unbind_from_movable_controller);
+
+        // `Entity` binding callbacks, `Pipeline`.
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Pipeline::bind_to_new_ecosystem_parent);
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Pipeline::bind_to_new_scene_parent);
+
+        // `Entity` binding callbacks, `Material`.
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Material::bind_to_new_ecosystem_parent);
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Material::bind_to_new_scene_parent);
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Material::bind_to_new_pipeline);
+
+        // `Entity` binding callbacks, `Species`.
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Species::bind_to_new_ecosystem_parent);
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Species::bind_to_new_scene_parent);
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Species::bind_to_new_material);
+
+        // `Entity` binding callbacks, `Object`.
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Object::bind_to_new_scene_parent);
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Object::bind_to_new_species_master);
+
+        // `Entity` binding callbacks, `Symbiosis`.
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Symbiosis::bind_to_new_ecosystem_parent);
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Symbiosis::bind_to_new_scene_parent);
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Symbiosis::bind_to_new_pipeline);
+
+        // `Entity` binding callbacks, `ShapeshifterTransformation`.
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::ShapeshifterTransformation::bind_to_new_material_parent);
+
+        // `Entity` binding callbacks, `Text2d`.
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Text2d::bind_to_new_font_2d_parent);
+
+        // `Entity` binding callbacks, `Text3d`.
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Text3d::bind_to_new_scene_parent);
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Text3d::bind_to_new_vector_font_master);
+
+        // `Entity` binding callbacks, `Console`.
+        entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
+                                                             &ontology::Console::bind_to_new_font_2d);
+    }
 
     template<typename EntityFactoryType>
-        void create_console_lisp_function_overloads_for_exit_program(EntityFactoryType& entity_factory, ontology::Console& console)
-        {
-            // Exit program callbacks.
-            entity_factory.create_console_lisp_function_overload("bye", ontology::Request(&console), &quit);
-            entity_factory.create_console_lisp_function_overload("chau", ontology::Request(&console), &quit);
-            entity_factory.create_console_lisp_function_overload("ciao", ontology::Request(&console), &quit);
-            entity_factory.create_console_lisp_function_overload("heippa", ontology::Request(&console), &quit);
-            entity_factory.create_console_lisp_function_overload("quit", ontology::Request(&console), &quit);
-            entity_factory.create_console_lisp_function_overload("sayonara", ontology::Request(&console), &quit);
-        }
+    void create_console_lisp_function_overloads_for_entity_naming(EntityFactoryType& entity_factory,
+                                                                  ontology::Console& console)
+    {
+        // `Entity` naming callbacks.
+        entity_factory.create_console_lisp_function_overload("set-global-name", ontology::Request(&console),
+                                                             &ontology::Universe::set_global_name_for_entity);
+        entity_factory.create_console_lisp_function_overload("set-local-name", ontology::Request(&console),
+                                                             &ontology::Universe::set_local_name_for_entity);
+    }
 
     template<typename EntityFactoryType>
-        void create_console_lisp_function_overloads_for_other_callbacks(EntityFactoryType& entity_factory, ontology::Console& console)
-        {
-            // Other callbacks.
-            entity_factory.create_console_lisp_function_overload("help", ontology::Request(&console), &help);
-            entity_factory.create_console_lisp_function_overload("clear", ontology::Request(&console), &console::ConsoleLogicModule::clear);
-            entity_factory.create_console_lisp_function_overload("screenshot", ontology::Request(&console), &ontology::Universe::screenshot);
-        }
+    void create_console_lisp_function_overloads_for_exit_program(EntityFactoryType& entity_factory,
+                                                                 ontology::Console& console)
+    {
+        // Exit program callbacks.
+        entity_factory.create_console_lisp_function_overload("bye", ontology::Request(&console), &quit);
+        entity_factory.create_console_lisp_function_overload("chau", ontology::Request(&console), &quit);
+        entity_factory.create_console_lisp_function_overload("ciao", ontology::Request(&console), &quit);
+        entity_factory.create_console_lisp_function_overload("heippa", ontology::Request(&console), &quit);
+        entity_factory.create_console_lisp_function_overload("quit", ontology::Request(&console), &quit);
+        entity_factory.create_console_lisp_function_overload("sayonara", ontology::Request(&console), &quit);
+    }
 
     template<typename EntityFactoryType>
-        void create_all_console_lisp_function_builtin_overloads(EntityFactoryType& entity_factory, ontology::Console& console)
-        {
-            create_console_lisp_function_overloads_for_variable_callbacks<EntityFactoryType>(entity_factory, console);
-            create_console_lisp_function_overloads_for_object_callbacks<EntityFactoryType>(entity_factory, console);
-            create_console_lisp_function_overloads_for_holobiont_callbacks<EntityFactoryType>(entity_factory, console);
-            create_console_lisp_function_overloads_for_entity_callbacks<EntityFactoryType>(entity_factory, console);
-            create_console_lisp_function_overloads_for_entity_binding<EntityFactoryType>(entity_factory, console);
-            create_console_lisp_function_overloads_for_entity_naming<EntityFactoryType>(entity_factory, console);
-            create_console_lisp_function_overloads_for_exit_program<EntityFactoryType>(entity_factory, console);
-            create_console_lisp_function_overloads_for_other_callbacks<EntityFactoryType>(entity_factory, console);
-        }
+    void create_console_lisp_function_overloads_for_other_callbacks(EntityFactoryType& entity_factory,
+                                                                    ontology::Console& console)
+    {
+        // Other callbacks.
+        entity_factory.create_console_lisp_function_overload("help", ontology::Request(&console), &help);
+        entity_factory.create_console_lisp_function_overload("clear", ontology::Request(&console),
+                                                             &console::ConsoleLogicModule::clear);
+        entity_factory.create_console_lisp_function_overload("screenshot", ontology::Request(&console),
+                                                             &ontology::Universe::screenshot);
+    }
+
+    template<typename EntityFactoryType>
+    void create_all_console_lisp_function_builtin_overloads(EntityFactoryType& entity_factory,
+                                                            ontology::Console& console)
+    {
+        create_console_lisp_function_overloads_for_variable_callbacks<EntityFactoryType>(entity_factory, console);
+        create_console_lisp_function_overloads_for_object_callbacks<EntityFactoryType>(entity_factory, console);
+        create_console_lisp_function_overloads_for_holobiont_callbacks<EntityFactoryType>(entity_factory, console);
+        create_console_lisp_function_overloads_for_entity_callbacks<EntityFactoryType>(entity_factory, console);
+        create_console_lisp_function_overloads_for_entity_binding<EntityFactoryType>(entity_factory, console);
+        create_console_lisp_function_overloads_for_entity_naming<EntityFactoryType>(entity_factory, console);
+        create_console_lisp_function_overloads_for_exit_program<EntityFactoryType>(entity_factory, console);
+        create_console_lisp_function_overloads_for_other_callbacks<EntityFactoryType>(entity_factory, console);
+    }
 }
 
 #endif
