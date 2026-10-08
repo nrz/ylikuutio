@@ -83,7 +83,7 @@ namespace yli::ontology
             should_render_variable_struct.activate_callback = &activate_should_render;
             should_render_variable_struct.read_callback = &read_should_render;
             should_render_variable_struct.should_call_activate_callback_now = true;
-            this->create_variable(should_render_variable_struct, yli::data::AnyValue(this->should_render));
+            this->create_variable(should_render_variable_struct, data::AnyValue(this->should_render));
         }
     }
 
