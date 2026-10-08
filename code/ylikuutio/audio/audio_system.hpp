@@ -44,44 +44,55 @@ namespace yli::audio
 {
     class AudioSystem final
     {
-        public:
-            explicit AudioSystem(ontology::Universe& universe);
+    public:
+        explicit AudioSystem(ontology::Universe& universe);
 
-            AudioSystem(const AudioSystem&) = delete;            // Delete copy constructor.
-            AudioSystem& operator=(const AudioSystem&) = delete; // Delete copy assignment.
+        AudioSystem(const AudioSystem&) = delete;            // Delete copy constructor.
+        AudioSystem& operator=(const AudioSystem&) = delete; // Delete copy assignment.
 
-            ~AudioSystem();
+        ~AudioSystem();
 
-            bool init();
-            void terminate();
+        bool init();
 
-            bool load_and_play(const std::string& audio_file);
-            void add_to_playlist(const std::string& playlist, const std::string& audio_file);
-            void remove_from_playlist(const std::string& playlist, const std::string& audio_file);
-            void play_playlist(const std::string& playlist);
-            void update();
-            void next_song_from_playlist();
-            void pause();
-            void continue_after_pause();
-            void clear_playlist(const std::string& playlist);
-            void erase_playlist(const std::string& playlist);
+        void terminate();
+
+        bool load_and_play(const std::string& audio_file);
+
+        void add_to_playlist(const std::string& playlist, const std::string& audio_file);
+
+        void remove_from_playlist(const std::string& playlist, const std::string& audio_file);
+
+        void play_playlist(const std::string& playlist);
+
+        void update();
+
+        void next_song_from_playlist();
+
+        void pause();
+
+        void continue_after_pause();
+
+        void clear_playlist(const std::string& playlist);
+
+        void erase_playlist(const std::string& playlist);
 
         template<typename T1, std::size_t DataSize>
         friend class memory::MemoryAllocator;
 
-        private:
-            memory::ConstructibleModule constructible_module;
+    private:
+        memory::ConstructibleModule constructible_module;
 
-            ontology::Universe& universe;
+        ontology::Universe& universe;
 
-            MIX_Mixer* mixer        { nullptr };
-            MIX_Track* music_track  { nullptr };
+        MIX_Mixer* mixer { nullptr };
+        MIX_Track* music_track { nullptr };
 
-            std::unordered_map<std::string, std::list<std::string>> playlist_map; // key: name of playlist, value: list of filenames.
-            std::string current_playlist;                                         // name of current playlist.
-            std::list<std::string>::iterator current_playlist_sound_iterator;
-            Uint32 bytes_put { 0 };
-            bool loop { false };
+        std::unordered_map<std::string, std::list<std::string>>
+        playlist_map; // key: name of playlist, value: list of filenames.
+        std::string current_playlist;                                         // name of current playlist.
+        std::list<std::string>::iterator current_playlist_sound_iterator;
+        Uint32 bytes_put { 0 };
+        bool loop { false };
     };
 }
 

@@ -92,7 +92,8 @@ namespace yli::audio
             MIX_Audio* const audio = MIX_LoadAudio(this->mixer, audio_file_path, false);
             if (audio == nullptr)
             {
-                std::cerr << "ERROR: `AudioSystem::load_and_play`: loading audio file " << std::string(audio_file_path) << " failed!\n";
+                std::cerr << "ERROR: `AudioSystem::load_and_play`: loading audio file " << std::string(audio_file_path)
+                        << " failed!\n";
                 yli::sdl::print_sdl_error();
                 return false;
             }
@@ -121,7 +122,7 @@ namespace yli::audio
     {
         if (this->playlist_map.count(playlist) == 1)
         {
-            for (auto it = this->playlist_map[playlist].begin(); it != this->playlist_map[playlist].end(); )
+            for (auto it = this->playlist_map[playlist].begin(); it != this->playlist_map[playlist].end();)
             {
                 if (it->compare(audio_file) == 0)
                 {
