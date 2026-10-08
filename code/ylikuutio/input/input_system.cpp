@@ -51,7 +51,7 @@ namespace yli::input
         {
             bool is_pressed = false;
 
-            if (input_method == yli::input::InputMethod::KEYBOARD)
+            if (input_method == InputMethod::KEYBOARD)
             {
                 if (current_key_states[i]) // `true` = pressed, `false` = not pressed.
                 {
