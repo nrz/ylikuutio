@@ -56,7 +56,6 @@ TEST(pipeline_must_be_initialized_appropriately, hirvi_pipeline)
     ASSERT_EQ(reinterpret_cast<uintptr_t>(helsinki_pipeline) % alignof(Pipeline), 0);
     const yli::memory::ConstructibleModule pipeline_constructible_module =
             helsinki_pipeline->get_constructible_module();
-    ASSERT_EQ(pipeline_constructible_module.storage_i, 0);
     ASSERT_EQ(pipeline_constructible_module.slot_i, 0);
     ASSERT_EQ(pipeline_constructible_module.alive, true);
 }

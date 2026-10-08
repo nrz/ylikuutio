@@ -28,10 +28,8 @@ TEST(constructible_module_must_be_initialized_appropriately, constructible_modul
     yli::memory::MemoryAllocator memory_allocator(yli::data::Datatype::UNIVERSE);
 
     // Some arbitrary values.
-    const std::uint32_t storage_i = 2002;
     const std::uint32_t slot_i = 3003;
 
-    yli::memory::ConstructibleModule constructible_module(memory_allocator, storage_i, slot_i);
-    ASSERT_EQ(constructible_module.storage_i, storage_i);
+    yli::memory::ConstructibleModule constructible_module(memory_allocator, slot_i);
     ASSERT_EQ(constructible_module.slot_i, slot_i);
 }

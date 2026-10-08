@@ -84,7 +84,6 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
 
     const yli::memory::ConstructibleModule symbiosis_constructible_module =
             turbo_polizei_png_symbiosis->get_constructible_module();
-    ASSERT_EQ(symbiosis_constructible_module.storage_i, 0);
     ASSERT_EQ(symbiosis_constructible_module.slot_i, 0);
     ASSERT_EQ(symbiosis_constructible_module.alive, true);
 

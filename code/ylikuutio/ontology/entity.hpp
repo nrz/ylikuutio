@@ -38,9 +38,6 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
-
-    template<typename T1, std::size_t DataSize>
-    class MemoryStorage;
 }
 
 namespace yli::ontology
@@ -177,9 +174,6 @@ namespace yli::ontology
 
         template<typename T1, std::size_t DataSize>
         friend class memory::MemoryAllocator;
-
-        template<typename T1, std::size_t DataSize>
-        friend class memory::MemoryStorage;
 
     private:
         memory::ConstructibleModule constructible_module;

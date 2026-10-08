@@ -77,7 +77,7 @@ namespace yli::hierarchy
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-    class MemoryStorage;
+    class MemoryAllocator;
 }
 
 namespace yli::ontology
@@ -138,7 +138,7 @@ namespace yli::ontology
         GenericMasterModule* get_generic_master_module() = delete;
 
         template<typename T1, std::size_t DataSize>
-        friend class memory::MemoryStorage;
+        friend class memory::MemoryAllocator;
 
         ChildModule child_of_universe;
         GenericParentModule parent_of_console_callback_engines;

@@ -58,7 +58,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+        class MemoryAllocator;
 }
 
 namespace yli::ontology
@@ -94,7 +94,7 @@ namespace yli::ontology
             void update() const;
 
             template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+                friend class memory::MemoryAllocator;
 
             ChildModule child_of_scene;
             ApprenticeModule apprentice_of_callback_engine;

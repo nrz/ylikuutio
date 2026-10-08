@@ -37,7 +37,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-    class MemoryStorage;
+    class MemoryAllocator;
 }
 
 namespace yli::ontology
@@ -83,7 +83,7 @@ namespace yli::ontology
         std::optional<data::AnyValue> execute(const data::AnyValue& any_value) override;
 
         template<typename T1, std::size_t DataSize>
-        friend class memory::MemoryStorage;
+        friend class memory::MemoryAllocator;
 
     private:
         std::vector<std::optional<data::AnyValue>> return_values;

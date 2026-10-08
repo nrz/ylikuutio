@@ -32,7 +32,7 @@
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-        class MemoryStorage;
+    class MemoryAllocator;
 }
 
 namespace yli::ontology
@@ -66,8 +66,8 @@ namespace yli::audio
             void clear_playlist(const std::string& playlist);
             void erase_playlist(const std::string& playlist);
 
-            template<typename T1, std::size_t DataSize>
-                friend class memory::MemoryStorage;
+        template<typename T1, std::size_t DataSize>
+        friend class memory::MemoryAllocator;
 
         private:
             memory::ConstructibleModule constructible_module;

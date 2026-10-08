@@ -136,11 +136,9 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     // Even though `Cat` is derived from `Object`. `Cat` should be allocated using its own allocator.
     yli::memory::MemoryAllocator<hirvi::ontology::Cat*>& cat_memory_allocator =
             hirvi_application.get_memory_allocator<hirvi::ontology::Cat*>(hirvi::data::CAT);
-    ASSERT_EQ(cat_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(cat_memory_allocator.get_number_of_instances(), 1);
 
     const yli::memory::ConstructibleModule cat1_constructible_module = cat1->get_constructible_module();
-    ASSERT_EQ(cat1_constructible_module.storage_i, 0);
     ASSERT_EQ(cat1_constructible_module.slot_i, 0);
     ASSERT_EQ(cat1_constructible_module.alive, true);
 }

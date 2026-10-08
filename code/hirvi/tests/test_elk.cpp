@@ -170,17 +170,14 @@ TEST(elk_must_be_initialized_appropriately, hirvi_elk)
     yli::memory::MemoryAllocator<Elk*>& elk_memory_allocator =
             hirvi_application.get_memory_allocator<Elk*>(hirvi::data::ELK);
     // `Elk` should be allocated using its own allocator.
-    ASSERT_EQ(elk_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(elk_memory_allocator.get_number_of_instances(), 1);
     // The `Biont`s of the `Elk` should be allocated using the `Biont` allocator.
     yli::memory::MemoryAllocator<Biont*>& biont_memory_allocator = hirvi_application.get_memory_allocator<Biont*>(
         hirvi::data::BIONT);
-    ASSERT_EQ(biont_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 4);
 
     const yli::memory::ConstructibleModule elk1_constructible_module =
             elk1->get_constructible_module();
-    ASSERT_EQ(elk1_constructible_module.storage_i, 0);
     ASSERT_EQ(elk1_constructible_module.slot_i, 0);
     ASSERT_EQ(elk1_constructible_module.alive, true);
 }

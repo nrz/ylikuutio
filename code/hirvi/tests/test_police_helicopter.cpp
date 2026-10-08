@@ -179,18 +179,15 @@ TEST(police_helicopter_must_be_initialized_appropriately, hirvi_police_helicopte
     yli::memory::MemoryAllocator<PoliceHelicopter*>& police_helicopter_memory_allocator =
             hirvi_application.get_memory_allocator<PoliceHelicopter*>(hirvi::data::POLICE_HELICOPTER);
     // `PoliceHelicopter` should be allocated using its own allocator.
-    ASSERT_EQ(police_helicopter_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(police_helicopter_memory_allocator.get_number_of_instances(), 1);
     // The `Biont`s of the `PoliceHelicopter` should be allocated using the `Biont` allocator.
     // There is 1 body + chassis `Biont`, and 4 wheel `Biont`s.
     yli::memory::MemoryAllocator<Biont*>& biont_memory_allocator = hirvi_application.get_memory_allocator<Biont*>(
         hirvi::data::BIONT);
-    ASSERT_EQ(biont_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 5);
 
     const yli::memory::ConstructibleModule turbo_polizei1_constructible_module =
             turbo_polizei1->get_constructible_module();
-    ASSERT_EQ(turbo_polizei1_constructible_module.storage_i, 0);
     ASSERT_EQ(turbo_polizei1_constructible_module.slot_i, 0);
     ASSERT_EQ(turbo_polizei1_constructible_module.alive, true);
 }

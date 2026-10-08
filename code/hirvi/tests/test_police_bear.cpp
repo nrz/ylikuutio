@@ -186,17 +186,14 @@ TEST(police_bear_must_be_initialized_appropriately, hirvi_police_bear)
     yli::memory::MemoryAllocator<PoliceBear*>& police_bear_memory_allocator =
             hirvi_application.get_memory_allocator<PoliceBear*>(hirvi::data::POLICE_BEAR);
     // `PoliceBear` should be allocated using its own allocator.
-    ASSERT_EQ(police_bear_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(police_bear_memory_allocator.get_number_of_instances(), 1);
     // The `Biont`s of the `PoliceBear` should be allocated using the `Biont` allocator.
     yli::memory::MemoryAllocator<Biont*>& biont_memory_allocator = hirvi_application.get_memory_allocator<Biont*>(
         hirvi::data::BIONT);
-    ASSERT_EQ(biont_memory_allocator.get_number_of_storages(), 1);
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 3);
 
     const yli::memory::ConstructibleModule police_bear1_constructible_module =
             police_bear1->get_constructible_module();
-    ASSERT_EQ(police_bear1_constructible_module.storage_i, 0);
     ASSERT_EQ(police_bear1_constructible_module.slot_i, 0);
     ASSERT_EQ(police_bear1_constructible_module.alive, true);
 }

@@ -19,7 +19,6 @@
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/memory/memory_system.hpp"
-#include "code/ylikuutio/memory/memory_storage.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 

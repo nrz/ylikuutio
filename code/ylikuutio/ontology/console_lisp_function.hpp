@@ -37,7 +37,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-    class MemoryStorage;
+    class MemoryAllocator;
 }
 
 namespace yli::ontology
@@ -75,7 +75,7 @@ namespace yli::ontology
         std::optional<data::AnyValue> execute(const std::vector<std::string>& parameter_vector) const;
 
         template<typename T1, std::size_t DataSize>
-        friend class memory::MemoryStorage;
+        friend class memory::MemoryAllocator;
 
         ChildModule child_of_console;
         GenericParentModule parent_of_generic_console_lisp_function_overloads;

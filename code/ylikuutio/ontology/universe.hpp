@@ -70,7 +70,7 @@ namespace yli::memory
     class GenericMemoryAllocator;
 
     template<typename T1, std::size_t DataSize>
-    class MemoryStorage;
+    class MemoryAllocator;
 }
 
 namespace yli::render
@@ -367,7 +367,7 @@ namespace yli::ontology
         // Public callbacks end here.
 
         template<typename T1, std::size_t DataSize>
-        friend class memory::MemoryStorage;
+        friend class memory::MemoryAllocator;
 
         // Ylikuutio version.
         static const std::string version;

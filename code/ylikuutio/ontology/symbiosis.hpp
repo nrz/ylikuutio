@@ -61,7 +61,7 @@ namespace yli::load
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-    class MemoryStorage;
+    class MemoryAllocator;
 }
 
 namespace yli::ontology
@@ -164,7 +164,7 @@ namespace yli::ontology
         static void create_ability(Symbiosis& symbiosis, const std::string& ability_name);
 
         template<typename T1, std::size_t DataSize>
-        friend class memory::MemoryStorage;
+        friend class memory::MemoryAllocator;
 
         ChildModule child_of_ecosystem_or_scene;
         GenericParentModule parent_of_symbiont_materials;

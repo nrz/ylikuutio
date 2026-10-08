@@ -39,7 +39,7 @@ namespace yli::core
 namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
-    class MemoryStorage;
+    class MemoryAllocator;
 }
 
 namespace yli::ontology
@@ -104,7 +104,7 @@ namespace yli::ontology
         friend class PipelineCompare;
 
         template<typename T1, std::size_t DataSize>
-        friend class memory::MemoryStorage;
+        friend class memory::MemoryAllocator;
 
         ChildModule child_of_ecosystem_or_scene;
         GenericParentModule parent_of_compute_tasks;

@@ -66,7 +66,6 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
     ASSERT_EQ(reinterpret_cast<uintptr_t>(orange_fur_material) % alignof(Material), 0);
     const yli::memory::ConstructibleModule orange_fur_material_constructible_module =
             orange_fur_material->get_constructible_module();
-    ASSERT_EQ(orange_fur_material_constructible_module.storage_i, 0);
     ASSERT_EQ(orange_fur_material_constructible_module.slot_i, 0);
     ASSERT_EQ(orange_fur_material_constructible_module.alive, true);
 }

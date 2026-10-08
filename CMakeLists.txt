@@ -637,7 +637,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/memory/generic_memory_system.hpp
     code/ylikuutio/memory/memory_allocator.hpp
     code/ylikuutio/memory/memory_allocator_types.hpp
-    code/ylikuutio/memory/memory_storage.hpp
     code/ylikuutio/memory/memory_system.hpp
     code/ylikuutio/memory/memory_templates.hpp
 
@@ -1206,7 +1205,6 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/ylikuutio/tests/test_material.cpp
         code/ylikuutio/tests/test_material_struct.cpp
         code/ylikuutio/tests/test_memory_allocator.cpp
-        code/ylikuutio/tests/test_memory_storage.cpp
         code/ylikuutio/tests/test_memory_system.cpp
         code/ylikuutio/tests/test_memory_templates.cpp
         code/ylikuutio/tests/test_model_struct.cpp

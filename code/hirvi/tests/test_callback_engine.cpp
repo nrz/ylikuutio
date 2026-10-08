@@ -38,7 +38,6 @@ TEST(callback_engine_must_be_initialized_appropriately, hirvi_callback_engine)
     ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_callback_engine) % alignof(yli::ontology::CallbackEngine), 0);
     const yli::memory::ConstructibleModule callback_engine_constructible_module =
             rest_callback_engine->get_constructible_module();
-    ASSERT_EQ(callback_engine_constructible_module.storage_i, 0);
     ASSERT_EQ(callback_engine_constructible_module.slot_i, 0);
     ASSERT_EQ(callback_engine_constructible_module.alive, true);
 }

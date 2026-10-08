@@ -61,7 +61,6 @@ TEST(movable_controller_must_be_initialized_appropriately, hirvi_movable_control
     ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_movable_controller) % alignof(MovableController), 0);
     const yli::memory::ConstructibleModule movable_controller_constructible_module =
             rest_movable_controller->get_constructible_module();
-    ASSERT_EQ(movable_controller_constructible_module.storage_i, 0);
     ASSERT_EQ(movable_controller_constructible_module.slot_i, 0);
     ASSERT_EQ(movable_controller_constructible_module.alive, true);
 }
