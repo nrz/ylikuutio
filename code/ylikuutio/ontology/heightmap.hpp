@@ -30,6 +30,12 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    template<typename T1, std::size_t DataSize>
+    class MemoryStorage;
+}
+
 namespace yli::ontology
 {
     class GenericMasterModule;
