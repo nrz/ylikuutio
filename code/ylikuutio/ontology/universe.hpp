@@ -67,8 +67,6 @@ namespace yli::input
 
 namespace yli::memory
 {
-    class GenericMemoryAllocator;
-
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
 }
