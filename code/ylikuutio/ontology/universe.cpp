@@ -89,11 +89,6 @@
 #include <utility>   // std::move
 #include <vector>    // std::vector
 
-namespace yli::memory
-{
-    class GenericMemoryAllocator;
-}
-
 namespace yli::ontology
 {
     class GenericParentModule;
