@@ -34,7 +34,6 @@
 #include <numbers>    // std::numbers::pi
 #include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
-#include <utility>    // std::move
 #include <variant>    // std::holds_alternative
 
 namespace yli::ontology
