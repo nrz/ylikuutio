@@ -21,6 +21,6 @@
 
 TEST(memory_allocator_must_be_initialized_appropriately, default_memory_allocator_universe_datatype)
 {
-    yli::memory::MemoryAllocator memory_allocator(yli::data::Datatype::UNIVERSE);
+    const yli::memory::MemoryAllocator memory_allocator(yli::data::Datatype::UNIVERSE);
     ASSERT_EQ(memory_allocator.get_datatype(), yli::data::Datatype::UNIVERSE);
 }
