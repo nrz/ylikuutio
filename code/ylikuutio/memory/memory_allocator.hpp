@@ -116,7 +116,7 @@ namespace yli::memory
         {
             if (this->number_of_instances >= DataSize) [[unlikely]]
             {
-                // This `MemoryStorage` is already full, can't build anything.
+                // This `MemoryAllocator` is already full, can't build anything.
                 return nullptr;
             }
 
