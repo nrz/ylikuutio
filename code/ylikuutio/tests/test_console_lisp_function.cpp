@@ -27,15 +27,18 @@
 #include <limits>  // std::numeric_limits
 
 using yli::ontology::Console;
+using yli::ontology::ConsoleLispFunction;
+using yli::ontology::ConsoleLispFunctionStruct;
+using yli::ontology::ConsoleStruct;
 
 TEST(console_lisp_function_must_be_initialized_appropriately, console_provided_as_valid_pointer)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
+    ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
     Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
-    yli::ontology::ConsoleLispFunctionStruct console_lisp_function_struct { yli::ontology::Request(console) };
-    yli::ontology::ConsoleLispFunction* const console_lisp_function = application.get_generic_entity_factory().create_console_lisp_function(
+    ConsoleLispFunctionStruct console_lisp_function_struct { yli::ontology::Request(console) };
+    ConsoleLispFunction* const console_lisp_function = application.get_generic_entity_factory().create_console_lisp_function(
             console_lisp_function_struct);
     ASSERT_NE(console_lisp_function, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console_lisp_function) % alignof(yli::ontology::ConsoleLispFunction), 0);
@@ -55,8 +58,8 @@ TEST(console_lisp_function_must_be_initialized_appropriately, console_provided_a
 TEST(console_lisp_function_must_be_initialized_appropriately, console_provided_as_nullptr)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleLispFunctionStruct console_lisp_function_struct { yli::ontology::Request<Console>(nullptr) };
-    yli::ontology::ConsoleLispFunction* const console_lisp_function = application.get_generic_entity_factory().create_console_lisp_function(
+    ConsoleLispFunctionStruct console_lisp_function_struct { yli::ontology::Request<Console>(nullptr) };
+    ConsoleLispFunction* const console_lisp_function = application.get_generic_entity_factory().create_console_lisp_function(
             console_lisp_function_struct);
     ASSERT_NE(console_lisp_function, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console_lisp_function) % alignof(yli::ontology::ConsoleLispFunction), 0);
@@ -73,12 +76,12 @@ TEST(console_lisp_function_must_be_initialized_appropriately, console_provided_a
 TEST(console_lisp_function_must_be_initialized_appropriately, console_provided_as_valid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
+    ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
     console_struct.global_name = "foo";
     Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
-    yli::ontology::ConsoleLispFunctionStruct console_lisp_function_struct { yli::ontology::Request<Console>("foo") };
-    yli::ontology::ConsoleLispFunction* const console_lisp_function = application.get_generic_entity_factory().create_console_lisp_function(
+    ConsoleLispFunctionStruct console_lisp_function_struct { yli::ontology::Request<Console>("foo") };
+    ConsoleLispFunction* const console_lisp_function = application.get_generic_entity_factory().create_console_lisp_function(
             console_lisp_function_struct);
     ASSERT_NE(console_lisp_function, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console_lisp_function) % alignof(yli::ontology::ConsoleLispFunction), 0);
@@ -98,12 +101,12 @@ TEST(console_lisp_function_must_be_initialized_appropriately, console_provided_a
 TEST(console_lisp_function_must_be_initialized_appropriately, console_provided_as_invalid_global_name)
 {
     mock::MockApplication application;
-    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
+    ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
     console_struct.global_name = "foo";
     Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
-    yli::ontology::ConsoleLispFunctionStruct console_lisp_function_struct { yli::ontology::Request<Console>("bar") };
-    yli::ontology::ConsoleLispFunction* const console_lisp_function = application.get_generic_entity_factory().create_console_lisp_function(
+    ConsoleLispFunctionStruct console_lisp_function_struct { yli::ontology::Request<Console>("bar") };
+    ConsoleLispFunction* const console_lisp_function = application.get_generic_entity_factory().create_console_lisp_function(
             console_lisp_function_struct);
     ASSERT_NE(console_lisp_function, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console_lisp_function) % alignof(yli::ontology::ConsoleLispFunction), 0);
