@@ -34,7 +34,7 @@ TEST(console_lisp_function_must_be_initialized_appropriately, console_provided_a
     yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
     Console* const console = application.get_generic_entity_factory().create_console(
             console_struct);
-    yli::ontology::ConsoleLispFunctionStruct console_lisp_function_struct { yli::ontology::Request<Console>(console) };
+    yli::ontology::ConsoleLispFunctionStruct console_lisp_function_struct { yli::ontology::Request(console) };
     yli::ontology::ConsoleLispFunction* const console_lisp_function = application.get_generic_entity_factory().create_console_lisp_function(
             console_lisp_function_struct);
     ASSERT_NE(console_lisp_function, nullptr);
