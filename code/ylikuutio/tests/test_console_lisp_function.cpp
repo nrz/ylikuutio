@@ -20,6 +20,7 @@
 #include "code/ylikuutio/ontology/console_lisp_function.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/console_struct.hpp"
 #include "code/ylikuutio/ontology/console_lisp_function_struct.hpp"
 
 // Include standard headers
