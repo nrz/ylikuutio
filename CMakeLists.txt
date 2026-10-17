@@ -1265,6 +1265,8 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
         code/hirvi/tests/test_hirvi_scene_struct.cpp
         code/hirvi/tests/test_callback_engine.cpp
         code/hirvi/tests/test_cat.cpp
+        code/hirvi/tests/test_console_lisp_function.cpp
+        code/hirvi/tests/test_console_lisp_function_overload.cpp
         code/hirvi/tests/test_elk.cpp
         code/hirvi/tests/test_ecosystem.cpp
         code/hirvi/tests/test_material.cpp
