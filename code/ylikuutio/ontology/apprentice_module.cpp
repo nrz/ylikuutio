@@ -37,11 +37,12 @@ namespace yli::ontology
     }
 
     void ApprenticeModule::unbind_from_any_master_belonging_to_other_scene(
-            const Scene& scene) const noexcept
+        const Scene& scene) const noexcept
     {
         if (const Entity* const master = this->get_master(); master != nullptr)
         {
-            if (const Scene* const master_scene = master->get_scene(); master_scene != nullptr && master_scene != &scene)
+            if (const Scene* const master_scene = master->get_scene();
+                master_scene != nullptr && master_scene != &scene)
             {
                 // Master belongs to a different `Scene` compared to what apprentice plans to bind to.
                 // Therefore, apprentice will unbind from master.
@@ -59,14 +60,14 @@ namespace yli::ontology
     }
 
     void ApprenticeModule::bind_to_new_generic_master_module(
-            GenericMasterModule* const new_generic_master) noexcept
+        GenericMasterModule* const new_generic_master) noexcept
     {
         this->generic_master_module = new_generic_master;
         this->bind_to_generic_master_module();
     }
 
     void ApprenticeModule::unbind_and_bind_to_new_generic_master_module(
-            GenericMasterModule* const new_generic_master) noexcept
+        GenericMasterModule* const new_generic_master) noexcept
     {
         if (new_generic_master != this->generic_master_module)
         {
@@ -76,10 +77,10 @@ namespace yli::ontology
     }
 
     ApprenticeModule::ApprenticeModule(
-            GenericMasterModule* const generic_master_module,
-            Entity* const apprentice) noexcept
+        GenericMasterModule* const generic_master_module,
+        Entity* const apprentice) noexcept
         : generic_master_module(generic_master_module),
-        apprentice(apprentice)
+          apprentice(apprentice)
     {
         this->bind_to_generic_master_module();
     }
