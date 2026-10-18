@@ -56,61 +56,65 @@ namespace yli::ontology
 
     class GenericMasterModule : public Indexable
     {
-        public:
-            // Iterator typedefs.
-            typedef ApprenticeIterator       iterator;
-            typedef ApprenticeIterator const_iterator;
+    public:
+        // Iterator typedefs.
+        typedef ApprenticeIterator iterator;
+        typedef ApprenticeIterator const_iterator;
 
-            void bind_apprentice_module(ApprenticeModule& apprentice_module);
-            void unbind_apprentice_module(std::size_t apprenticeID) noexcept;
-            void unbind_all_apprentice_modules_belonging_to_other_scenes(const Scene* scene) noexcept;
+        void bind_apprentice_module(ApprenticeModule& apprentice_module);
 
-            GenericMasterModule(Entity& generic_master, Registry* registry, const std::string& name) noexcept;
+        void unbind_apprentice_module(std::size_t apprenticeID) noexcept;
 
-            GenericMasterModule(const GenericMasterModule&) = delete;            // Delete copy constructor.
-            GenericMasterModule& operator=(const GenericMasterModule&) = delete; // Delete copy assignment.
+        void unbind_all_apprentice_modules_belonging_to_other_scenes(const Scene* scene) noexcept;
 
-            ~GenericMasterModule() override;
+        GenericMasterModule(Entity& generic_master, Registry* registry, const std::string& name) noexcept;
 
-            [[nodiscard]] Entity& get_generic_master() const noexcept;
+        GenericMasterModule(const GenericMasterModule&) = delete;            // Delete copy constructor.
+        GenericMasterModule& operator=(const GenericMasterModule&) = delete; // Delete copy assignment.
 
-            std::vector<ApprenticeModule*>& get_apprentice_module_pointer_vector_reference() noexcept;
-            [[nodiscard]] const std::vector<ApprenticeModule*>& get_apprentice_module_pointer_vector_const_reference() const noexcept;
+        ~GenericMasterModule() override;
 
-            [[nodiscard]] std::size_t get_number_of_apprentices() const noexcept;
+        [[nodiscard]] Entity& get_generic_master() const noexcept;
 
-            [[nodiscard]] Entity* get(std::size_t index) const noexcept override;
+        std::vector<ApprenticeModule*>& get_apprentice_module_pointer_vector_reference() noexcept;
 
-            // Iterator functions.
-            iterator begin()
-            {
-                return iterator(this->apprentice_module_pointer_vector.begin());
-            }
+        [[nodiscard]] const std::vector<ApprenticeModule*>&
+        get_apprentice_module_pointer_vector_const_reference() const noexcept;
 
-            iterator end()
-            {
-                return iterator(this->apprentice_module_pointer_vector.end());
-            }
+        [[nodiscard]] std::size_t get_number_of_apprentices() const noexcept;
 
-            const_iterator cbegin()
-            {
-                return const_iterator(this->apprentice_module_pointer_vector.begin());
-            }
+        [[nodiscard]] Entity* get(std::size_t index) const noexcept override;
 
-            const_iterator cend()
-            {
-                return const_iterator(this->apprentice_module_pointer_vector.end());
-            }
+        // Iterator functions.
+        iterator begin()
+        {
+            return iterator(this->apprentice_module_pointer_vector.begin());
+        }
 
-        private:
-            Entity& generic_master; // The `Entity` that owns this `GenericMasterModule`.
+        iterator end()
+        {
+            return iterator(this->apprentice_module_pointer_vector.end());
+        }
 
-        protected:
-            std::vector<ApprenticeModule*> apprentice_module_pointer_vector;
+        const_iterator cbegin()
+        {
+            return const_iterator(this->apprentice_module_pointer_vector.begin());
+        }
 
-        private:
-            std::queue<std::size_t> free_apprenticeID_queue;
-            std::size_t number_of_apprentices { 0 };
+        const_iterator cend()
+        {
+            return const_iterator(this->apprentice_module_pointer_vector.end());
+        }
+
+    private:
+        Entity& generic_master; // The `Entity` that owns this `GenericMasterModule`.
+
+    protected:
+        std::vector<ApprenticeModule*> apprentice_module_pointer_vector;
+
+    private:
+        std::queue<std::size_t> free_apprenticeID_queue;
+        std::size_t number_of_apprentices { 0 };
     };
 }
 

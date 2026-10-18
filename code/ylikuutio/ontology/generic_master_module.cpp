@@ -36,10 +36,10 @@ namespace yli::ontology
     void GenericMasterModule::bind_apprentice_module(ApprenticeModule& apprentice_module)
     {
         yli::hierarchy::bind_apprentice_to_master<ApprenticeModule>(
-                apprentice_module,
-                this->apprentice_module_pointer_vector,
-                this->free_apprenticeID_queue,
-                this->number_of_apprentices);
+            apprentice_module,
+            this->apprentice_module_pointer_vector,
+            this->free_apprenticeID_queue,
+            this->number_of_apprentices);
     }
 
     void GenericMasterModule::unbind_apprentice_module(const std::size_t apprenticeID) noexcept
@@ -52,7 +52,7 @@ namespace yli::ontology
         if (apprenticeID >= this->apprentice_module_pointer_vector.size())
         {
             std::cerr << "ERROR: `GenericMasterModule::unbind_apprentice_module`: `apprenticeID` " << apprenticeID <<
-                " is out of bounds, size is " << this->apprentice_module_pointer_vector.size() << "\n";
+                    " is out of bounds, size is " << this->apprentice_module_pointer_vector.size() << "\n";
             return; // No changes happened.
         }
 
@@ -65,10 +65,10 @@ namespace yli::ontology
         }
 
         yli::hierarchy::unbind_child_from_parent<ApprenticeModule*>(
-                apprenticeID,
-                this->apprentice_module_pointer_vector,
-                this->free_apprenticeID_queue,
-                this->number_of_apprentices);
+            apprenticeID,
+            this->apprentice_module_pointer_vector,
+            this->free_apprenticeID_queue,
+            this->number_of_apprentices);
 
         apprentice_module->release();
     }
@@ -93,7 +93,8 @@ namespace yli::ontology
         }
     }
 
-    GenericMasterModule::GenericMasterModule(Entity& generic_master, Registry* const registry, const std::string& name) noexcept
+    GenericMasterModule::GenericMasterModule(Entity& generic_master, Registry* const registry,
+                                             const std::string& name) noexcept
         : generic_master { generic_master }
     {
         registry->add_indexable(*this, name);
@@ -123,7 +124,8 @@ namespace yli::ontology
         return this->apprentice_module_pointer_vector;
     }
 
-    const std::vector<ApprenticeModule*>& GenericMasterModule::get_apprentice_module_pointer_vector_const_reference() const noexcept
+    const std::vector<ApprenticeModule*>&
+    GenericMasterModule::get_apprentice_module_pointer_vector_const_reference() const noexcept
     {
         return this->apprentice_module_pointer_vector;
     }
