@@ -36,11 +36,11 @@ namespace yli::ontology
     void GenericParentModule::bind_child(Entity& child) noexcept
     {
         bind_child_to_parent<Entity>(
-                child,
-                this->child_pointer_vector,
-                this->free_childID_queue,
-                this->number_of_children,
-                this->entity.registry);
+            child,
+            this->child_pointer_vector,
+            this->free_childID_queue,
+            this->number_of_children,
+            this->entity.registry);
     }
 
     void GenericParentModule::unbind_child(const std::size_t childID) noexcept
@@ -53,7 +53,7 @@ namespace yli::ontology
         if (childID >= this->child_pointer_vector.size()) [[unlikely]]
         {
             std::cerr << "ERROR: `GenericParentModule::unbind_child`: `childID` " << childID <<
-                " is out of bounds, size is " << this->child_pointer_vector.size() << "\n";
+                    " is out of bounds, size is " << this->child_pointer_vector.size() << "\n";
             return; // No changes happened.
         }
 
@@ -67,20 +67,20 @@ namespace yli::ontology
         const std::string name = child->get_local_name();
 
         unbind_child_from_parent<Entity*>(
-                childID,
-                name,
-                this->child_pointer_vector,
-                this->free_childID_queue,
-                this->number_of_children,
-                this->entity.registry);
+            childID,
+            name,
+            this->child_pointer_vector,
+            this->free_childID_queue,
+            this->number_of_children,
+            this->entity.registry);
 
         child->release();
     }
 
     GenericParentModule::GenericParentModule(
-            Entity& entity,
-            Registry& registry,
-            const std::string& name) noexcept
+        Entity& entity,
+        Registry& registry,
+        const std::string& name) noexcept
         : entity { entity }
     {
         registry.add_indexable(*this, name);
@@ -104,7 +104,8 @@ namespace yli::ontology
 
         if (this->number_of_children != 0)
         {
-            std::cerr << "ERROR: `GenericParentModule::~GenericParentModule`: `number_of_children` is " << this->number_of_children << " even though it should be 0!\n";
+            std::cerr << "ERROR: `GenericParentModule::~GenericParentModule`: `number_of_children` is " <<
+                    this->number_of_children << " even though it should be 0!\n";
         }
     }
 

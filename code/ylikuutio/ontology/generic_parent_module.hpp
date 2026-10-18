@@ -35,63 +35,66 @@ namespace yli::ontology
 
     class GenericParentModule : public Indexable
     {
-        public:
-            // Iterator typedefs.
-            typedef ChildIterator       iterator;
-            typedef ChildIterator const_iterator;
+    public:
+        // Iterator typedefs.
+        typedef ChildIterator iterator;
+        typedef ChildIterator const_iterator;
 
-            virtual void bind_child(Entity& child) noexcept;
-            virtual void unbind_child(std::size_t childID) noexcept;
+        virtual void bind_child(Entity& child) noexcept;
 
-            GenericParentModule(
-                    Entity& entity,
-                    Registry& registry,
-                    const std::string& name) noexcept;
+        virtual void unbind_child(std::size_t childID) noexcept;
 
-            GenericParentModule(const GenericParentModule&) = delete;            // Delete copy constructor.
-            GenericParentModule& operator=(const GenericParentModule&) = delete; // Delete copy assignment.
+        GenericParentModule(
+            Entity& entity,
+            Registry& registry,
+            const std::string& name) noexcept;
 
-            ~GenericParentModule() override;
+        GenericParentModule(const GenericParentModule&) = delete;            // Delete copy constructor.
+        GenericParentModule& operator=(const GenericParentModule&) = delete; // Delete copy assignment.
 
-            // This function exists simply to be able to pass `GenericParentModule` as non-const parameter.
-            GenericParentModule* get() const noexcept;
+        ~GenericParentModule() override;
 
-            Entity* get_entity() const noexcept;
-            std::size_t get_number_of_children() const noexcept;
-            std::size_t get_number_of_descendants() const noexcept;
+        // This function exists simply to be able to pass `GenericParentModule` as non-const parameter.
+        GenericParentModule* get() const noexcept;
 
-            Scene* get_scene() const noexcept;
+        Entity* get_entity() const noexcept;
 
-            Entity* get(std::size_t index) const noexcept override;
+        std::size_t get_number_of_children() const noexcept;
 
-            // Iterator functions.
-            iterator begin()
-            {
-                return iterator(this->child_pointer_vector.begin());
-            }
+        std::size_t get_number_of_descendants() const noexcept;
 
-            iterator end()
-            {
-                return iterator(this->child_pointer_vector.end());
-            }
+        Scene* get_scene() const noexcept;
 
-            const_iterator cbegin()
-            {
-                return const_iterator(this->child_pointer_vector.begin());
-            }
+        Entity* get(std::size_t index) const noexcept override;
 
-            const_iterator cend()
-            {
-                return const_iterator(this->child_pointer_vector.end());
-            }
+        // Iterator functions.
+        iterator begin()
+        {
+            return iterator(this->child_pointer_vector.begin());
+        }
 
-            std::vector<Entity*> child_pointer_vector;
+        iterator end()
+        {
+            return iterator(this->child_pointer_vector.end());
+        }
 
-        protected:
-            std::queue<std::size_t> free_childID_queue;
-            std::size_t number_of_children { 0 };
+        const_iterator cbegin()
+        {
+            return const_iterator(this->child_pointer_vector.begin());
+        }
 
-            Entity& entity; // The `Entity` that owns this `GenericParentModule`.
+        const_iterator cend()
+        {
+            return const_iterator(this->child_pointer_vector.end());
+        }
+
+        std::vector<Entity*> child_pointer_vector;
+
+    protected:
+        std::queue<std::size_t> free_childID_queue;
+        std::size_t number_of_children { 0 };
+
+        Entity& entity; // The `Entity` that owns this `GenericParentModule`.
     };
 }
 
