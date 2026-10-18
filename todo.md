@@ -5,6 +5,8 @@
 - [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] ONTOLOGY Remove `std::string local_name` from `Entity` and keep track of local name in `ChildModule` instead.
+- [ ] CAMERA/VARIABLE/RENDERING Add a support for defining the FOV angle of each camera.
 - [ ] ONTOLOGY/MEMORY Design and implement 'handle to index'-based system for parent-child and master-apprentice relationships of derived classes of `Entity`.
 - [ ] HIRVI/AI Implement `Emancipable` class.
 - [ ] HIRVI/AI Make `PoliceHorse`, `PoliceDog`, and `PoliceBear` inherit `Emancipable`.
