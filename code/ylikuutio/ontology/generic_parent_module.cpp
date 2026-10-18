@@ -93,9 +93,9 @@ namespace yli::ontology
             if (child != nullptr)
             {
                 this->GenericParentModule::unbind_child(child->get_childID());
-                auto constructible_module = child->get_constructible_module();
 
-                if (constructible_module.alive && constructible_module.generic_allocator != nullptr)
+                if (auto constructible_module = child->get_constructible_module();
+                    constructible_module.alive && constructible_module.generic_allocator != nullptr)
                 {
                     constructible_module.generic_allocator->destroy(constructible_module);
                 }
@@ -112,7 +112,7 @@ namespace yli::ontology
     GenericParentModule* GenericParentModule::get() const noexcept
     {
         // This function exists simply to be able to pass `GenericParentModule` as non-const parameter.
-        GenericParentModule* generic_parent_module = const_cast<GenericParentModule*>(this);
+        const auto generic_parent_module = const_cast<GenericParentModule*>(this);
         return generic_parent_module;
     }
 
