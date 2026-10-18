@@ -55,7 +55,8 @@ namespace yli::ontology
         }
         if (this->parent_module == nullptr) [[unlikely]]
         {
-            std::cerr << "ERROR: `ChildModule::~ChildModule`: `ChildModule` has no parent but `childID` is not properly released!\n";
+            std::cerr <<
+                    "ERROR: `ChildModule::~ChildModule`: `ChildModule` has no parent but `childID` is not properly released!\n";
             this->release();
             return;
         }
@@ -113,7 +114,7 @@ namespace yli::ontology
     }
 
     void ChildModule::set_parent_module_and_bind_to_new_parent(
-            GenericParentModule* const new_parent_module) noexcept
+        GenericParentModule* const new_parent_module) noexcept
     {
         if (new_parent_module == nullptr)
         {
@@ -125,7 +126,7 @@ namespace yli::ontology
     }
 
     void ChildModule::unbind_and_bind_to_new_parent(
-            GenericParentModule* const new_parent_module) noexcept
+        GenericParentModule* const new_parent_module) noexcept
     {
         if (new_parent_module != this->parent_module)
         {

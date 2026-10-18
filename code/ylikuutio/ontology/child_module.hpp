@@ -29,40 +29,44 @@ namespace yli::ontology
 
     class ChildModule
     {
-        public:
-            ChildModule(GenericParentModule* const parent_module, Entity& entity) noexcept
-                : parent_module { parent_module },
-                entity { entity }
-            {
-                this->bind_to_parent_module();
-            }
+    public:
+        ChildModule(GenericParentModule* const parent_module, Entity& entity) noexcept
+            : parent_module { parent_module },
+              entity { entity }
+        {
+            this->bind_to_parent_module();
+        }
 
-            ChildModule(const ChildModule&) = delete;            // Delete copy constructor.
-            ChildModule& operator=(const ChildModule&) = delete; // Delete copy assignment.
+        ChildModule(const ChildModule&) = delete;            // Delete copy constructor.
+        ChildModule& operator=(const ChildModule&) = delete; // Delete copy assignment.
 
-            ~ChildModule();
+        ~ChildModule();
 
-            Entity* get_parent() const noexcept;
-            Entity* get_child() const noexcept;
-            void release() noexcept;
+        Entity* get_parent() const noexcept;
 
-            Scene* get_scene() const noexcept;
-            std::size_t get_childID() const noexcept;
+        Entity* get_child() const noexcept;
 
-        private:
-            void unbind_child() const noexcept;
-            void set_parent_module_and_bind_to_new_parent(
-                    GenericParentModule* new_parent_module) noexcept;
+        void release() noexcept;
 
-        public:
-            void unbind_and_bind_to_new_parent(
-                    GenericParentModule* new_parent_module) noexcept;
+        Scene* get_scene() const noexcept;
 
-        private:
-            void bind_to_parent_module() const noexcept;
+        std::size_t get_childID() const noexcept;
 
-            GenericParentModule* parent_module;
-            Entity& entity;
+    private:
+        void unbind_child() const noexcept;
+
+        void set_parent_module_and_bind_to_new_parent(
+            GenericParentModule* new_parent_module) noexcept;
+
+    public:
+        void unbind_and_bind_to_new_parent(
+            GenericParentModule* new_parent_module) noexcept;
+
+    private:
+        void bind_to_parent_module() const noexcept;
+
+        GenericParentModule* parent_module;
+        Entity& entity;
     };
 }
 
