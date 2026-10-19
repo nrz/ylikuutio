@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
-#include "generic_lisp_function_overload.hpp"
+#include "abstract_lisp_function_overload.hpp"
 #include "child_module.hpp"
 
 // Include standard headers
@@ -42,7 +42,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
 
-    class GenericConsoleLispFunctionOverload : public GenericLispFunctionOverload
+    class GenericConsoleLispFunctionOverload : public AbstractLispFunctionOverload
     {
     public:
         GenericConsoleLispFunctionOverload(

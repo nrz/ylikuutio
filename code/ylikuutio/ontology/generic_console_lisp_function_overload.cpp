@@ -30,7 +30,7 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Entity;
-    class GenericLispFunctionOverload;
+    class AbstractLispFunctionOverload;
     class Universe;
     class Scene;
 
@@ -38,7 +38,7 @@ namespace yli::ontology
         core::Application& application,
         Universe& universe,
         GenericParentModule* const console_lisp_function_parent_module)
-        : GenericLispFunctionOverload(application, universe),
+        : AbstractLispFunctionOverload(application, universe),
           child_of_console_lisp_function(console_lisp_function_parent_module, *this)
     {
         // `yli::ontology::Entity` member variables begin here.

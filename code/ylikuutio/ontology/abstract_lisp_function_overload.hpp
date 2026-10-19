@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_GENERIC_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_GENERIC_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_ABSTRACT_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_ABSTRACT_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "result.hpp"
@@ -34,16 +34,16 @@ namespace yli::ontology
 {
     class Universe;
 
-    class GenericLispFunctionOverload : public Entity
+    class AbstractLispFunctionOverload : public Entity
     {
     protected:
-        GenericLispFunctionOverload(core::Application& application, Universe& universe);
+        AbstractLispFunctionOverload(core::Application& application, Universe& universe);
 
     public:
-        GenericLispFunctionOverload(const GenericLispFunctionOverload&) = delete; // Delete copy constructor.
-        GenericLispFunctionOverload& operator=(const GenericLispFunctionOverload&) = delete; // Delete copy assignment.
+        AbstractLispFunctionOverload(const AbstractLispFunctionOverload&) = delete; // Delete copy constructor.
+        AbstractLispFunctionOverload& operator=(const AbstractLispFunctionOverload&) = delete; // Delete copy assignment.
 
-        ~GenericLispFunctionOverload() override = default;
+        ~AbstractLispFunctionOverload() override = default;
 
         virtual Result execute(const std::vector<std::string>& parameter_vector) = 0;
     };

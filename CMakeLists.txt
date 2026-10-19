@@ -722,7 +722,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/generic_console_lisp_function_overload.hpp
     code/ylikuutio/ontology/abstract_entity_factory.hpp
     code/ylikuutio/ontology/generic_lisp_function_overload.cpp
-    code/ylikuutio/ontology/generic_lisp_function_overload.hpp
+    code/ylikuutio/ontology/abstract_lisp_function_overload.hpp
     code/ylikuutio/ontology/generic_master_module.cpp
     code/ylikuutio/ontology/generic_master_module.hpp
     code/ylikuutio/ontology/generic_parent_module.cpp

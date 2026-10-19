@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "generic_lisp_function_overload.hpp"
+#include "abstract_lisp_function_overload.hpp"
 #include "entity.hpp"
 #include "entity_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -29,10 +29,10 @@ namespace yli::ontology
 {
     class Universe;
 
-    GenericLispFunctionOverload::GenericLispFunctionOverload(core::Application& application, Universe& universe)
+    AbstractLispFunctionOverload::AbstractLispFunctionOverload(core::Application& application, Universe& universe)
         : Entity(application, universe, EntityStruct())
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::GenericLispFunctionOverload*";
+        this->type_string = "yli::ontology::AbstractLispFunctionOverload*";
     }
 }
