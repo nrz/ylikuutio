@@ -21,9 +21,6 @@
 #include "entity.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
-// Include standard headers
-#include <cstddef>  // std::size_t
-
 namespace yli::core
 {
     class Application;
