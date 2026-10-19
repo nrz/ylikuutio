@@ -29,7 +29,7 @@
 
 namespace yli::ontology
 {
-    class GenericCallbackEngine;
+    class AbstractCallbackEngine;
 }
 
 namespace yli::snippets
@@ -38,7 +38,7 @@ namespace yli::snippets
     using ontology::InputMode;
     using ontology::Console;
     using ontology::ConsoleCallbackEngineStruct;
-    using ontology::GenericCallbackEngine;
+    using ontology::AbstractCallbackEngine;
     using ontology::Request;
     using ontology::AbstractEntityFactory;
 
@@ -222,34 +222,34 @@ namespace yli::snippets
     {
         // Keypress callbacks for `Console`.
         // Keypresses are checked in the order of this struct.
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_GRAVE, Request<GenericCallbackEngine>(console_global_name + "_exit_console"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_LCTRL, Request<GenericCallbackEngine>(console_global_name + "_press_left_control"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_RCTRL, Request<GenericCallbackEngine>(console_global_name + "_press_right_control"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_LALT, Request<GenericCallbackEngine>(console_global_name + "_press_left_alt"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_RALT, Request<GenericCallbackEngine>(console_global_name + "_press_right_alt"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_LSHIFT, Request<GenericCallbackEngine>(console_global_name + "_press_left_shift"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_RSHIFT, Request<GenericCallbackEngine>(console_global_name + "_press_right_shift"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_UP, Request<GenericCallbackEngine>(console_global_name + "_move_to_previous_input"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_DOWN, Request<GenericCallbackEngine>(console_global_name + "_move_to_next_input"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_BACKSPACE, Request<GenericCallbackEngine>(console_global_name + "_backspace"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_TAB, Request<GenericCallbackEngine>(console_global_name + "_tab"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_RETURN, Request<GenericCallbackEngine>(console_global_name + "_enter"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_C, Request<GenericCallbackEngine>(console_global_name + "_ctrl_c"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_W, Request<GenericCallbackEngine>(console_global_name + "_ctrl_w"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_PAGEUP, Request<GenericCallbackEngine>(console_global_name + "_page_up"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_PAGEDOWN, Request<GenericCallbackEngine>(console_global_name + "_page_down"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_HOME, Request<GenericCallbackEngine>(console_global_name + "_home"));
-        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_END, Request<GenericCallbackEngine>(console_global_name + "_end"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_GRAVE, Request<AbstractCallbackEngine>(console_global_name + "_exit_console"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_LCTRL, Request<AbstractCallbackEngine>(console_global_name + "_press_left_control"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_RCTRL, Request<AbstractCallbackEngine>(console_global_name + "_press_right_control"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_LALT, Request<AbstractCallbackEngine>(console_global_name + "_press_left_alt"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_RALT, Request<AbstractCallbackEngine>(console_global_name + "_press_right_alt"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_LSHIFT, Request<AbstractCallbackEngine>(console_global_name + "_press_left_shift"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_RSHIFT, Request<AbstractCallbackEngine>(console_global_name + "_press_right_shift"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_UP, Request<AbstractCallbackEngine>(console_global_name + "_move_to_previous_input"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_DOWN, Request<AbstractCallbackEngine>(console_global_name + "_move_to_next_input"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_BACKSPACE, Request<AbstractCallbackEngine>(console_global_name + "_backspace"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_TAB, Request<AbstractCallbackEngine>(console_global_name + "_tab"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_RETURN, Request<AbstractCallbackEngine>(console_global_name + "_enter"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_C, Request<AbstractCallbackEngine>(console_global_name + "_ctrl_c"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_W, Request<AbstractCallbackEngine>(console_global_name + "_ctrl_w"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_PAGEUP, Request<AbstractCallbackEngine>(console_global_name + "_page_up"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_PAGEDOWN, Request<AbstractCallbackEngine>(console_global_name + "_page_down"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_HOME, Request<AbstractCallbackEngine>(console_global_name + "_home"));
+        console_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_END, Request<AbstractCallbackEngine>(console_global_name + "_end"));
     }
 
     void set_console_mode_keyrelease_callback_engines_or_throw(InputMode& console_mode_input_mode, const std::string& console_global_name)
     {
         // Keyrelease callbacks for `Console`.
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, Request<GenericCallbackEngine>(console_global_name + "_release_left_control"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, Request<GenericCallbackEngine>(console_global_name + "_release_right_control"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LALT, Request<GenericCallbackEngine>(console_global_name + "_release_left_alt"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RALT, Request<GenericCallbackEngine>(console_global_name + "_release_right_alt"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LSHIFT, Request<GenericCallbackEngine>(console_global_name + "_release_left_shift"));
-        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RSHIFT, Request<GenericCallbackEngine>(console_global_name + "_release_right_shift"));
+        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, Request<AbstractCallbackEngine>(console_global_name + "_release_left_control"));
+        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, Request<AbstractCallbackEngine>(console_global_name + "_release_right_control"));
+        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LALT, Request<AbstractCallbackEngine>(console_global_name + "_release_left_alt"));
+        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RALT, Request<AbstractCallbackEngine>(console_global_name + "_release_right_alt"));
+        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LSHIFT, Request<AbstractCallbackEngine>(console_global_name + "_release_left_shift"));
+        console_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RSHIFT, Request<AbstractCallbackEngine>(console_global_name + "_release_right_shift"));
     }
 }

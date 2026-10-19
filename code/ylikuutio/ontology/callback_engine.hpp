@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_CALLBACK_ENGINE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CALLBACK_ENGINE_HPP_INCLUDED
 
-#include "generic_callback_engine.hpp"
+#include "abstract_callback_engine.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "generic_master_module.hpp"
@@ -49,7 +49,7 @@ namespace yli::ontology
     class MovableController;
     struct CallbackEngineStruct;
 
-    class CallbackEngine : public GenericCallbackEngine
+    class CallbackEngine : public AbstractCallbackEngine
     {
         // `CallbackEngine` is an object that contains some callbacks and hashmaps that are used for input and output parameters.
         // `CallbackEngine` provides a way to create callback chains.

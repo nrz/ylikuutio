@@ -42,7 +42,7 @@ namespace yli::ontology
         Universe& universe,
         const ConsoleCallbackEngineStruct&,
         GenericParentModule* const console_parent_module)
-        : GenericCallbackEngine(application, universe, GenericCallbackEngineStruct()),
+        : AbstractCallbackEngine(application, universe, GenericCallbackEngineStruct()),
           child_of_console(console_parent_module, *this),
           parent_of_console_callback_objects(
               *this,

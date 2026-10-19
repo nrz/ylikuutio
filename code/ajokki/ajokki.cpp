@@ -464,22 +464,22 @@ namespace ajokki
 
         // Ajokki-specific keypress callbacks for action mode.
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_D,
-                                                             Request<GenericCallbackEngine>(
+                                                             Request<AbstractCallbackEngine>(
                                                                  delete_cat_species_callback_engine));
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_G,
-                                                             Request<GenericCallbackEngine>(
+                                                             Request<AbstractCallbackEngine>(
                                                                  switch_to_grass_material_callback_engine));
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_O,
-                                                             Request<GenericCallbackEngine>(
+                                                             Request<AbstractCallbackEngine>(
                                                                  switch_to_orange_fur_material_callback_engine));
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_P,
-                                                             Request<GenericCallbackEngine>(
+                                                             Request<AbstractCallbackEngine>(
                                                                  switch_to_pink_geometric_tiles_material_callback_engine));
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_T,
-                                                             Request<GenericCallbackEngine>(
+                                                             Request<AbstractCallbackEngine>(
                                                                  transform_into_terrain_callback_engine));
         action_mode_input_mode->set_keypress_callback_engine(SDL_SCANCODE_A,
-                                                             Request<GenericCallbackEngine>(
+                                                             Request<AbstractCallbackEngine>(
                                                                  transform_into_monkey_callback_engine));
 
         // Keyrelease callbacks for action mode.

@@ -43,7 +43,7 @@ namespace yli::ontology
     class ParentOfInputModesModule;
     class GenericMasterModule;
     class Universe;
-    class GenericCallbackEngine;
+    class AbstractCallbackEngine;
     struct InputModeStruct;
 
     template<typename Type>
@@ -65,25 +65,25 @@ namespace yli::ontology
 
         void deactivate() const;
 
-        GenericCallbackEngine* get_keypress_callback_engine(std::uint32_t keycode) const;
+        AbstractCallbackEngine* get_keypress_callback_engine(std::uint32_t keycode) const;
 
-        GenericCallbackEngine* get_keyrelease_callback_engine(std::uint32_t keycode) const;
+        AbstractCallbackEngine* get_keyrelease_callback_engine(std::uint32_t keycode) const;
 
-        GenericCallbackEngine* get_continuous_keypress_callback_engine(std::uint32_t keycode) const;
+        AbstractCallbackEngine* get_continuous_keypress_callback_engine(std::uint32_t keycode) const;
 
-        void set_keypress_callback_engine(std::uint32_t keycode, const Request<GenericCallbackEngine>& callback_engine);
+        void set_keypress_callback_engine(std::uint32_t keycode, const Request<AbstractCallbackEngine>& callback_engine);
 
         void set_keyrelease_callback_engine(std::uint32_t keycode,
-                                            const Request<GenericCallbackEngine>& callback_engine);
+                                            const Request<AbstractCallbackEngine>& callback_engine);
 
         void set_continuous_keypress_callback_engine(std::uint32_t keycode,
-                                                     const Request<GenericCallbackEngine>& callback_engine);
+                                                     const Request<AbstractCallbackEngine>& callback_engine);
 
-        const std::vector<GenericCallbackEngine*>* get_keypress_callback_engines() const;
+        const std::vector<AbstractCallbackEngine*>* get_keypress_callback_engines() const;
 
-        const std::vector<GenericCallbackEngine*>* get_keyrelease_callback_engines() const;
+        const std::vector<AbstractCallbackEngine*>* get_keyrelease_callback_engines() const;
 
-        const std::vector<GenericCallbackEngine*>* get_continuous_keypress_callback_engines() const;
+        const std::vector<AbstractCallbackEngine*>* get_continuous_keypress_callback_engines() const;
 
         Entity* get_parent() const override;
 
@@ -103,9 +103,9 @@ namespace yli::ontology
         InputMode(const InputMode&) = delete; // Delete copy constructor.
         InputMode& operator=(const InputMode&) = delete; // Delete copy assignment.
 
-        std::vector<GenericCallbackEngine*> keypress_callback_engines;
-        std::vector<GenericCallbackEngine*> keyrelease_callback_engines;
-        std::vector<GenericCallbackEngine*> continuous_keypress_callback_engines;
+        std::vector<AbstractCallbackEngine*> keypress_callback_engines;
+        std::vector<AbstractCallbackEngine*> keyrelease_callback_engines;
+        std::vector<AbstractCallbackEngine*> continuous_keypress_callback_engines;
 
         const bool is_text_input_mode;
     };

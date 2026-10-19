@@ -18,7 +18,7 @@
 #include "event_system.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/generic_callback_engine.hpp"
+#include "code/ylikuutio/ontology/abstract_callback_engine.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console.hpp"
 #include "code/ylikuutio/ontology/callback_magic_numbers.hpp"
@@ -48,12 +48,12 @@ namespace yli::event
             {
                 const auto scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
-                if (ontology::GenericCallbackEngine* const generic_callback_engine =
+                if (ontology::AbstractCallbackEngine* const abstract_callback_engine =
                             input_mode.get_keypress_callback_engine(scancode);
-                    generic_callback_engine != nullptr)
+                    abstract_callback_engine != nullptr)
                 {
                     if (const std::optional<data::AnyValue> any_value =
-                                generic_callback_engine->execute(data::AnyValue());
+                                abstract_callback_engine->execute(data::AnyValue());
                         any_value &&
                         std::holds_alternative<std::uint32_t>(any_value->data) &&
                         std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)
@@ -66,15 +66,15 @@ namespace yli::event
             {
                 const auto scancode = static_cast<std::uint32_t>(sdl_event.key.scancode);
 
-                ontology::GenericCallbackEngine* const generic_callback_engine =
+                ontology::AbstractCallbackEngine* const abstract_callback_engine =
                         input_mode.get_keyrelease_callback_engine(scancode);
 
-                if (generic_callback_engine == nullptr)
+                if (abstract_callback_engine == nullptr)
                 {
                     continue;
                 }
 
-                if (const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue());
+                if (const std::optional<data::AnyValue> any_value = abstract_callback_engine->execute(data::AnyValue());
                     any_value &&
                     std::holds_alternative<std::uint32_t>(any_value->data) &&
                     std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)

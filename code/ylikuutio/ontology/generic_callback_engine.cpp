@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "generic_callback_engine.hpp"
+#include "abstract_callback_engine.hpp"
 #include "generic_callback_engine_struct.hpp"
 
 namespace yli::core
@@ -28,13 +28,13 @@ namespace yli::ontology
     class Entity;
     class Universe;
 
-    GenericCallbackEngine::GenericCallbackEngine(
+    AbstractCallbackEngine::AbstractCallbackEngine(
         core::Application& application,
         Universe& universe,
         const GenericCallbackEngineStruct& generic_callback_engine_struct)
         : Entity(application, universe, generic_callback_engine_struct)
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::GenericCallbackEngine*";
+        this->type_string = "yli::ontology::AbstractCallbackEngine*";
     }
 }

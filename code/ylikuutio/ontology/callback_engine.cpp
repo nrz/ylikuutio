@@ -40,7 +40,7 @@ namespace yli::ontology
         Universe& universe,
         const CallbackEngineStruct&,
         GenericParentModule* const entity_parent_module)
-        : GenericCallbackEngine(application, universe, GenericCallbackEngineStruct()),
+        : AbstractCallbackEngine(application, universe, GenericCallbackEngineStruct()),
           child_of_entity(entity_parent_module, *this),
           parent_of_callback_objects(
               *this,

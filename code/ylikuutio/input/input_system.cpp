@@ -20,7 +20,7 @@
 #include "code/ylikuutio/data/any_value.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
-#include "code/ylikuutio/ontology/generic_callback_engine.hpp"
+#include "code/ylikuutio/ontology/abstract_callback_engine.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/callback_magic_numbers.hpp"
 
@@ -39,7 +39,7 @@ namespace yli::input
     {
         int array_size;
         const bool* const current_key_states = SDL_GetKeyboardState(&array_size);
-        const std::vector<ontology::GenericCallbackEngine*>* const continuous_keypress_callback_engines = input_mode.
+        const std::vector<ontology::AbstractCallbackEngine*>* const continuous_keypress_callback_engines = input_mode.
                 get_continuous_keypress_callback_engines();
         if (continuous_keypress_callback_engines == nullptr)
         {
@@ -73,15 +73,15 @@ namespace yli::input
 
             if (is_pressed)
             {
-                ontology::GenericCallbackEngine* const generic_callback_engine = continuous_keypress_callback_engines->
+                ontology::AbstractCallbackEngine* const abstract_callback_engine = continuous_keypress_callback_engines->
                         at(i);
 
-                if (generic_callback_engine == nullptr)
+                if (abstract_callback_engine == nullptr)
                 {
                     continue;
                 }
 
-                if (const std::optional<data::AnyValue> any_value = generic_callback_engine->execute(data::AnyValue());
+                if (const std::optional<data::AnyValue> any_value = abstract_callback_engine->execute(data::AnyValue());
                     any_value &&
                     std::holds_alternative<std::uint32_t>(any_value->data) &&
                     std::get<std::uint32_t>(any_value->data) == ontology::CallbackMagicNumber::EXIT_PROGRAM)

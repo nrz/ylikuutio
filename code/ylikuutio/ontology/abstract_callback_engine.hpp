@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_GENERIC_CALLBACK_ENGINE_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_GENERIC_CALLBACK_ENGINE_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_ABSTRACT_CALLBACK_ENGINE_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_ABSTRACT_CALLBACK_ENGINE_HPP_INCLUDED
 
 #include "entity.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -34,18 +34,18 @@ namespace yli::ontology
     class Universe;
     struct GenericCallbackEngineStruct;
 
-    class GenericCallbackEngine : public Entity
+    class AbstractCallbackEngine : public Entity
     {
     public:
-        GenericCallbackEngine(
+        AbstractCallbackEngine(
             core::Application& application,
             Universe& universe,
             const GenericCallbackEngineStruct& generic_callback_engine_struct);
 
-        GenericCallbackEngine(const GenericCallbackEngine&) = delete; // Delete copy constructor.
-        GenericCallbackEngine& operator=(const GenericCallbackEngine&) = delete; // Delete copy assignment.
+        AbstractCallbackEngine(const AbstractCallbackEngine&) = delete; // Delete copy constructor.
+        AbstractCallbackEngine& operator=(const AbstractCallbackEngine&) = delete; // Delete copy assignment.
 
-        ~GenericCallbackEngine() override = default;
+        ~AbstractCallbackEngine() override = default;
 
         // execute all callbacks with a parameter.
         virtual std::optional<data::AnyValue> execute(const data::AnyValue& any_value) = 0;

@@ -27,13 +27,13 @@
 
 namespace yli::ontology
 {
-    class GenericCallbackEngine;
+    class AbstractCallbackEngine;
 }
 
 namespace yli::snippets
 {
     using console::ConsoleLogicModule;
-    using ontology::GenericCallbackEngine;
+    using ontology::AbstractCallbackEngine;
     using ontology::CallbackEngine;
     using ontology::Request;
     using ontology::CallbackEngineStruct;
@@ -175,33 +175,33 @@ namespace yli::snippets
     void set_action_mode_keypress_callback_engines_or_throw(yli::ontology::InputMode& action_mode_input_mode)
     {
         // Keypress callbacks for action mode.
-        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_GRAVE, Request<GenericCallbackEngine>("enter_console_callback_engine"));
-        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_ESCAPE, Request<GenericCallbackEngine>("exit_program_callback_engine"));
-        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_LCTRL, Request<GenericCallbackEngine>("first_turbo_callback_engine"));
-        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_RCTRL, Request<GenericCallbackEngine>("second_turbo_callback_engine"));
-        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_I, Request<GenericCallbackEngine>("toggle_invert_mouse_callback_engine"));
-        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_F, Request<GenericCallbackEngine>("toggle_flight_mode_callback_engine"));
-        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_F1, Request<GenericCallbackEngine>("toggle_help_mode_callback_engine"));
+        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_GRAVE, Request<AbstractCallbackEngine>("enter_console_callback_engine"));
+        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_ESCAPE, Request<AbstractCallbackEngine>("exit_program_callback_engine"));
+        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_LCTRL, Request<AbstractCallbackEngine>("first_turbo_callback_engine"));
+        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_RCTRL, Request<AbstractCallbackEngine>("second_turbo_callback_engine"));
+        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_I, Request<AbstractCallbackEngine>("toggle_invert_mouse_callback_engine"));
+        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_F, Request<AbstractCallbackEngine>("toggle_flight_mode_callback_engine"));
+        action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_F1, Request<AbstractCallbackEngine>("toggle_help_mode_callback_engine"));
     }
 
     void set_action_mode_keyrelease_callback_engines_or_throw(yli::ontology::InputMode& action_mode_input_mode)
     {
         // Keyrelease callbacks for action mode.
-        action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, Request<GenericCallbackEngine>("release_first_turbo_callback_engine"));
-        action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, Request<GenericCallbackEngine>("release_second_turbo_callback_engine"));
-        action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_I, Request<GenericCallbackEngine>("enable_toggle_invert_mouse_callback_engine"));
-        action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_F, Request<GenericCallbackEngine>("enable_toggle_flight_mode_callback_engine"));
-        action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_F1, Request<GenericCallbackEngine>("enable_toggle_help_mode_callback_engine"));
+        action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, Request<AbstractCallbackEngine>("release_first_turbo_callback_engine"));
+        action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_RCTRL, Request<AbstractCallbackEngine>("release_second_turbo_callback_engine"));
+        action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_I, Request<AbstractCallbackEngine>("enable_toggle_invert_mouse_callback_engine"));
+        action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_F, Request<AbstractCallbackEngine>("enable_toggle_flight_mode_callback_engine"));
+        action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_F1, Request<AbstractCallbackEngine>("enable_toggle_help_mode_callback_engine"));
     }
 
     void set_action_mode_continuous_keypress_callback_engines_or_throw(yli::ontology::InputMode& action_mode_input_mode)
     {
         // Continuous keypress callbacks for action mode.
-        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_UP, Request<GenericCallbackEngine>("move_forward_callback_engine"));
-        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_DOWN, Request<GenericCallbackEngine>("move_backward_callback_engine"));
-        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_LEFT, Request<GenericCallbackEngine>("strafe_left_callback_engine"));
-        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_RIGHT, Request<GenericCallbackEngine>("strafe_right_callback_engine"));
-        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_SPACE, Request<GenericCallbackEngine>("ascent_callback_engine"));
-        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_RETURN, Request<GenericCallbackEngine>("descent_callback_engine"));
+        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_UP, Request<AbstractCallbackEngine>("move_forward_callback_engine"));
+        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_DOWN, Request<AbstractCallbackEngine>("move_backward_callback_engine"));
+        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_LEFT, Request<AbstractCallbackEngine>("strafe_left_callback_engine"));
+        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_RIGHT, Request<AbstractCallbackEngine>("strafe_right_callback_engine"));
+        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_SPACE, Request<AbstractCallbackEngine>("ascent_callback_engine"));
+        action_mode_input_mode.set_continuous_keypress_callback_engine(SDL_SCANCODE_RETURN, Request<AbstractCallbackEngine>("descent_callback_engine"));
     }
 }

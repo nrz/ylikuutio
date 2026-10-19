@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CONSOLE_CALLBACK_ENGINE_HPP_INCLUDED
 
-#include "generic_callback_engine.hpp"
+#include "abstract_callback_engine.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
@@ -49,7 +49,7 @@ namespace yli::ontology
     class ConsoleCallbackObject;
     struct ConsoleCallbackEngineStruct;
 
-    class ConsoleCallbackEngine final : public GenericCallbackEngine
+    class ConsoleCallbackEngine final : public AbstractCallbackEngine
     {
         ConsoleCallbackEngine(
             core::Application& application,
