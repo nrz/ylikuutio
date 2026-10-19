@@ -54,7 +54,7 @@ TEST(memory_allocator_must_allocate_appropriately, default_memory_allocator_cons
     mock::MockApplication application;
 
     yli::ontology::ConsoleStruct my_console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    yli::ontology::Console* const my_console = application.get_generic_entity_factory().create_console(
+    yli::ontology::Console* const my_console = application.get_abstract_entity_factory().create_console(
         my_console_struct);
 
     yli::memory::MemoryAllocator<yli::ontology::GenericConsoleLispFunctionOverload> memory_allocator(

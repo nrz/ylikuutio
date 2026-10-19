@@ -30,11 +30,11 @@ TEST(heightmap_must_be_initialized_and_appropriately, scene_parent_provided_as_v
 {
     const mock::MockApplication application;
     const yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
         scene_struct);
 
     const yli::ontology::HeightmapStruct heightmap_struct { yli::ontology::Request(scene) };
-    yli::ontology::Heightmap* const heightmap = application.get_generic_entity_factory().create_heightmap(
+    yli::ontology::Heightmap* const heightmap = application.get_abstract_entity_factory().create_heightmap(
         heightmap_struct);
     ASSERT_NE(heightmap, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(heightmap) % alignof(yli::ontology::Heightmap), 0);
@@ -56,11 +56,11 @@ TEST(heightmap_must_be_initialized_and_appropriately, scene_parent_provided_as_v
     const mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     scene_struct.global_name = "foo";
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
         scene_struct);
 
     const yli::ontology::HeightmapStruct heightmap_struct(yli::ontology::Request<yli::ontology::Scene>("foo"));
-    yli::ontology::Heightmap* const heightmap = application.get_generic_entity_factory().create_heightmap(
+    yli::ontology::Heightmap* const heightmap = application.get_abstract_entity_factory().create_heightmap(
         heightmap_struct);
     ASSERT_NE(heightmap, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(heightmap) % alignof(yli::ontology::Heightmap), 0);
@@ -82,10 +82,10 @@ TEST(heightmap_must_be_initialized_appropriately, scene_provided_as_invalid_glob
     const mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     scene_struct.global_name = "foo";
-    const yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(scene_struct);
+    const yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(scene_struct);
 
     const yli::ontology::HeightmapStruct heightmap_struct(yli::ontology::Request<yli::ontology::Scene>("bar"));
-    yli::ontology::Heightmap* const heightmap = application.get_generic_entity_factory().create_heightmap(
+    yli::ontology::Heightmap* const heightmap = application.get_abstract_entity_factory().create_heightmap(
         heightmap_struct);
     ASSERT_NE(heightmap, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(heightmap) % alignof(yli::ontology::Heightmap), 0);

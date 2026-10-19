@@ -48,7 +48,7 @@ namespace yli::memory
 namespace yli::ontology
 {
     class Entity;
-    class GenericEntityFactory;
+    class AbstractEntityFactory;
 }
 
 namespace mock
@@ -76,7 +76,7 @@ namespace mock
         return this->memory_system.get();
     }
 
-    yli::ontology::GenericEntityFactory& MockApplication::get_generic_entity_factory() const
+    yli::ontology::AbstractEntityFactory& MockApplication::get_abstract_entity_factory() const
     {
         return this->entity_factory.get();
     }

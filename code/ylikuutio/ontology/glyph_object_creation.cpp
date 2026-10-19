@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "glyph_object_creation.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "scene.hpp"
 #include "vector_font.hpp"
 #include "text_3d.hpp"
@@ -78,7 +78,7 @@ namespace yli::ontology
             glyph_object_struct.original_scale_vector = text_3d.original_scale_vector;
             glyph_object_struct.cartesian_coordinates = text_3d.location; // TODO: adjust this as needed.
 
-            GenericEntityFactory& entity_factory = text_3d.get_application().get_generic_entity_factory();
+            AbstractEntityFactory& entity_factory = text_3d.get_application().get_abstract_entity_factory();
             entity_factory.create_glyph_object(glyph_object_struct);
         }
 

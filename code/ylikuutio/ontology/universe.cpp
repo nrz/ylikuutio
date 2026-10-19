@@ -31,7 +31,7 @@
 #include "text_2d.hpp"
 #include "camera.hpp"
 #include "console.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"
 #include "request.hpp"
@@ -247,7 +247,7 @@ namespace yli::ontology
             return;
         }
 
-        GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
+        AbstractEntityFactory& entity_factory = this->application.get_abstract_entity_factory();
 
         auto* const font_2d = static_cast<Font2d*>(
             hierarchy::get_first_child(

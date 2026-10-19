@@ -48,11 +48,11 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_NE(pipeline, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(pipeline) % alignof(yli::ontology::Pipeline), 0);
@@ -89,11 +89,11 @@ TEST(pipeline_must_be_initialized_appropriately, headless_with_scene_parent_prov
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     // `Entity` member functions of `Universe`.
@@ -120,11 +120,11 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
     ecosystem_struct.global_name = "foo";
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Ecosystem>("foo") };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_NE(pipeline, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(pipeline) % alignof(yli::ontology::Pipeline), 0);
@@ -153,11 +153,11 @@ TEST(pipeline_must_be_initialized_appropriately, headless_with_scene_parent_prov
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     scene_struct.global_name = "foo";
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Scene>("foo") };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     // `Entity` member functions of `Universe`.
@@ -184,11 +184,11 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
     ecosystem_struct.global_name = "foo";
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Ecosystem>("bar") };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_NE(pipeline, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(pipeline) % alignof(yli::ontology::Pipeline), 0);
@@ -217,11 +217,11 @@ TEST(pipeline_must_be_initialized_appropriately, headless_with_scene_parent_prov
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     scene_struct.global_name = "foo";
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Scene>("bar") };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     // `Entity` member functions of `Universe`.
@@ -247,11 +247,11 @@ TEST(pipeline_must_be_initialized_and_must_bind_to_ecosystem_appropriately, head
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Ecosystem>(nullptr) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_NE(pipeline, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(pipeline) % alignof(yli::ontology::Pipeline), 0);
@@ -279,11 +279,11 @@ TEST(pipeline_must_be_initialized_appropriately, headless_with_scene_parent_prov
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     // `Entity` member functions of `Universe`.
@@ -309,17 +309,17 @@ TEST(pipeline_must_bind_to_ecosystem_appropriately, headless_with_ecosystem_pare
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem1 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem1 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem1) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_EQ(pipeline->get_scene(), nullptr);
     ASSERT_EQ(pipeline->get_parent(), ecosystem1);
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 1);
 
-    yli::ontology::Ecosystem* const ecosystem2 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem2 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     ASSERT_EQ(pipeline->get_scene(), nullptr);
@@ -345,17 +345,17 @@ TEST(pipeline_must_bind_to_scene_appropriately, headless_with_scene_parents_prov
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene1) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_EQ(pipeline->get_scene(), scene1);
     ASSERT_EQ(pipeline->get_parent(), scene1);
     ASSERT_EQ(scene1->get_number_of_non_variable_children(), 2);
 
-    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_abstract_entity_factory().create_scene(
             scene_struct);
     ASSERT_EQ(pipeline->get_scene(), scene1);
     ASSERT_EQ(pipeline->get_parent(), scene1);
@@ -380,15 +380,15 @@ TEST(pipeline_must_bind_to_ecosystem_appropriately_after_binding_to_scene, headl
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
     ASSERT_EQ(pipeline->get_scene(), scene);
     ASSERT_EQ(pipeline->get_parent(), scene);
@@ -413,15 +413,15 @@ TEST(pipeline_must_bind_to_scene_appropriately_after_binding_to_ecosystem, headl
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
     ASSERT_EQ(pipeline->get_scene(), nullptr);
     ASSERT_EQ(pipeline->get_parent(), ecosystem);
@@ -446,11 +446,11 @@ TEST(pipeline_must_be_given_a_global_name_appropriately, headless_with_scene_par
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
@@ -468,11 +468,11 @@ TEST(pipeline_must_be_given_a_local_name_appropriately, headless_with_scene_pare
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
@@ -490,11 +490,11 @@ TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_global_n
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
@@ -517,11 +517,11 @@ TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_local_nam
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
@@ -544,11 +544,11 @@ TEST(pipeline_must_be_given_a_global_name_appropriately_after_setting_a_local_na
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
@@ -571,11 +571,11 @@ TEST(pipeline_must_be_given_a_local_name_appropriately_after_setting_a_global_na
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
     ASSERT_EQ(pipeline->get_global_name(), "");
     ASSERT_EQ(pipeline->get_local_name(), "");
@@ -598,15 +598,15 @@ TEST(pipeline_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_abstract_entity_factory().create_scene(
             scene_struct1);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene1) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_abstract_entity_factory().create_scene(
             scene_struct2);
 
     pipeline->set_local_name("foo");
@@ -629,15 +629,15 @@ TEST(pipeline_must_maintain_the_local_name_after_binding_to_a_new_parent, headle
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_abstract_entity_factory().create_scene(
             scene_struct1);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene1) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_abstract_entity_factory().create_scene(
             scene_struct2);
 
     pipeline->set_global_name("foo");
@@ -665,19 +665,19 @@ TEST(pipeline_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_abstract_entity_factory().create_scene(
             scene_struct1);
 
     yli::ontology::PipelineStruct pipeline_struct1 { yli::ontology::Request(scene1) };
-    yli::ontology::Pipeline* const pipeline1 = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline1 = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct1);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_abstract_entity_factory().create_scene(
             scene_struct2);
 
     yli::ontology::PipelineStruct pipeline_struct2 { yli::ontology::Request(scene2) };
-    yli::ontology::Pipeline* const pipeline2 = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline2 = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct2);
 
     pipeline1->set_local_name("foo");
@@ -695,19 +695,19 @@ TEST(pipeline_must_not_bind_to_a_new_parent_when_local_name_is_already_in_use, h
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct1;
-    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_abstract_entity_factory().create_scene(
             scene_struct1);
 
     yli::ontology::PipelineStruct pipeline_struct1 { yli::ontology::Request(scene1) };
-    yli::ontology::Pipeline* const pipeline1 = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline1 = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct1);
 
     yli::ontology::SceneStruct scene_struct2;
-    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_abstract_entity_factory().create_scene(
             scene_struct2);
 
     yli::ontology::PipelineStruct pipeline_struct2 { yli::ontology::Request(scene2) };
-    yli::ontology::Pipeline* const pipeline2 = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline2 = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct2);
 
     pipeline1->set_global_name("foo");
@@ -731,24 +731,24 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(pipeline),
             yli::ontology::TextureFileFormat::PNG };
-    application.get_generic_entity_factory().create_material(
+    application.get_abstract_entity_factory().create_material(
             material_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::Pipeline::bind_to_new_ecosystem_parent(*pipeline, *ecosystem);
@@ -759,23 +759,23 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_an_e
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::SymbiosisStruct symbiosis_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(pipeline) };
-    application.get_generic_entity_factory().create_symbiosis(
+    application.get_abstract_entity_factory().create_symbiosis(
             symbiosis_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
 
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::Pipeline::bind_to_new_ecosystem_parent(*pipeline, *ecosystem);
@@ -786,18 +786,18 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(pipeline),
             yli::ontology::TextureFileFormat::PNG };
-    application.get_generic_entity_factory().create_material(
+    application.get_abstract_entity_factory().create_material(
             material_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
@@ -810,17 +810,17 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::SymbiosisStruct symbiosis_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(pipeline) };
-    application.get_generic_entity_factory().create_symbiosis(
+    application.get_abstract_entity_factory().create_symbiosis(
             symbiosis_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
@@ -833,24 +833,24 @@ TEST(pipeline_must_not_unbind_any_of_its_apprentice_modules_when_binding_to_the_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(pipeline),
             yli::ontology::TextureFileFormat::PNG };
-    application.get_generic_entity_factory().create_material(
+    application.get_abstract_entity_factory().create_material(
             material_struct);
 
     yli::ontology::SymbiosisStruct symbiosis_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(pipeline) };
-    application.get_generic_entity_factory().create_symbiosis(
+    application.get_abstract_entity_factory().create_symbiosis(
             symbiosis_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 2);
@@ -863,23 +863,23 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene1) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene1),
             yli::ontology::Request(pipeline),
             yli::ontology::TextureFileFormat::PNG };
-    application.get_generic_entity_factory().create_material(
+    application.get_abstract_entity_factory().create_material(
             material_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
 
-    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::Pipeline::bind_to_new_scene_parent(*pipeline, *scene2);
@@ -890,22 +890,22 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene1) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::SymbiosisStruct symbiosis_struct {
             yli::ontology::Request(scene1),
             yli::ontology::Request(pipeline) };
-    application.get_generic_entity_factory().create_symbiosis(
+    application.get_abstract_entity_factory().create_symbiosis(
             symbiosis_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 1);
 
-    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::Pipeline::bind_to_new_scene_parent(*pipeline, *scene2);
@@ -916,29 +916,29 @@ TEST(pipeline_must_unbind_all_of_its_apprentice_modules_when_binding_to_a_differ
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene1 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene1 = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene1) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene1),
             yli::ontology::Request(pipeline),
             yli::ontology::TextureFileFormat::PNG };
-    application.get_generic_entity_factory().create_material(
+    application.get_abstract_entity_factory().create_material(
             material_struct);
 
     yli::ontology::SymbiosisStruct symbiosis_struct {
             yli::ontology::Request(scene1),
             yli::ontology::Request(pipeline) };
-    application.get_generic_entity_factory().create_symbiosis(
+    application.get_abstract_entity_factory().create_symbiosis(
             symbiosis_struct);
 
     ASSERT_EQ(pipeline->get_number_of_apprentices(), 2);
 
-    yli::ontology::Scene* const scene2 = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene2 = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::Pipeline::bind_to_new_scene_parent(*pipeline, *scene2);

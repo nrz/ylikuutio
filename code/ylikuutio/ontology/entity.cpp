@@ -19,7 +19,7 @@
 #include "variable.hpp"
 #include "universe.hpp"
 #include "get_number_of_descendants.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "entity_variable_activation.hpp"
 #include "entity_variable_read.hpp"
 #include "entity_struct.hpp"
@@ -233,7 +233,7 @@ namespace yli::ontology
 
     void Entity::create_variable(const VariableStruct& variable_struct, data::AnyValue&& any_value)
     {
-        const GenericEntityFactory& entity_factory = this->application.get_generic_entity_factory();
+        const AbstractEntityFactory& entity_factory = this->application.get_abstract_entity_factory();
 
         const VariableStruct new_variable_struct(this, variable_struct);
         entity_factory.create_variable(new_variable_struct, std::move(any_value));

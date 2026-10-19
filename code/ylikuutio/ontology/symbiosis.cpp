@@ -22,7 +22,7 @@
 #include "pipeline.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "request.hpp"
 #include "symbiosis_struct.hpp"
 #include "symbiont_material_struct.hpp"
@@ -295,7 +295,7 @@ namespace yli::ontology
                 SymbiontMaterialStruct symbiont_material_struct { Request(this) };
                 symbiont_material_struct.my_fbx_material = &fbx_material;
 
-                GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+                AbstractEntityFactory& entity_factory = this->get_application().get_abstract_entity_factory();
                 auto symbiont_material = entity_factory.create_symbiont_material(symbiont_material_struct);
 
                 std::cout << "yli::ontology::SymbiontMaterial* successfully created.\n";
@@ -371,7 +371,7 @@ namespace yli::ontology
         AbilityStruct ability_struct { Request(&symbiosis) };
         ability_struct.local_name = ability_name;
 
-        GenericEntityFactory& entity_factory = symbiosis.get_application().get_generic_entity_factory();
+        AbstractEntityFactory& entity_factory = symbiosis.get_application().get_abstract_entity_factory();
         entity_factory.create_ability(ability_struct);
     }
 

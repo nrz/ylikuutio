@@ -454,7 +454,7 @@ mock_application_line = "    mock::MockApplication application;"
 parent_class_struct_line = "    " + fully_qualified_parent_struct_name + " " + snake_case_parent_struct_name + "(nullptr); // TODO: modify as needed!"
 parent_struct_global_name_foo_line = "    " + snake_case_parent_struct_name + ".global_name = \"foo\";"
 parent_class_instance_line = "    " + fully_qualified_parent_class_name +  "* const " + snake_case_parent_class_name + \
-        " = application.get_generic_entity_factory().create_" + snake_case_parent_class_name + "(\n" \
+        " = application.get_abstract_entity_factory().create_" + snake_case_parent_class_name + "(\n" \
         "            " + snake_case_parent_struct_name + ");"
 class_struct_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + ";"
 class_struct_from_parent_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + "(" + snake_case_parent_class_name + ");"
@@ -462,7 +462,7 @@ class_struct_from_nullptr_line = "    " + fully_qualified_struct_variable_type +
 class_struct_from_foo_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + "(\"foo\");"
 class_struct_from_bar_line = "    " + fully_qualified_struct_variable_type + " " + struct_name + "(\"bar\");"
 class_instance_line = "    " + fully_qualified_class_name + "* const " + snake_case_class_name + \
-        " = application.get_generic_entity_factory().create_" + snake_case_class_name + "(\n" \
+        " = application.get_abstract_entity_factory().create_" + snake_case_class_name + "(\n" \
         "            " + struct_name + ");"
 assert_class_instance_not_nullptr_line = "    ASSERT_NE(" + snake_case_class_name + ", nullptr);"
 assert_class_instance_gets_proper_alignment = "    ASSERT_EQ(reinterpret_cast<uintptr_t>(" + snake_case_class_name + ") % alignof(" + \

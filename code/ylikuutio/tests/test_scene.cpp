@@ -45,7 +45,7 @@ TEST(scene_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
     ASSERT_NE(scene, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(scene) % alignof(yli::ontology::Scene), 0);
@@ -109,7 +109,7 @@ TEST(scene_must_be_activated_appropriately, scene)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     ASSERT_EQ(application.get_universe().get_active_scene(), scene);
@@ -123,7 +123,7 @@ TEST(scene_must_be_given_a_global_name_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
@@ -140,7 +140,7 @@ TEST(scene_must_be_given_a_local_name_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
@@ -157,7 +157,7 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_global_name
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
@@ -177,7 +177,7 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_local_name, 
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
@@ -197,7 +197,7 @@ TEST(scene_must_be_given_a_global_name_appropriately_after_setting_a_local_name,
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");
@@ -217,7 +217,7 @@ TEST(scene_must_be_given_a_local_name_appropriately_after_setting_a_global_name,
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
     ASSERT_EQ(scene->get_global_name(), "");
     ASSERT_EQ(scene->get_local_name(), "");

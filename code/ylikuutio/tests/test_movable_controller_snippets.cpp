@@ -42,13 +42,13 @@ TEST(rest_movable_controller_must_not_change_location_or_orientation, object_wit
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rest;
 
     yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
-    yli::ontology::CallbackEngine* const rest_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const rest_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             rest_callback_engine_struct);
 
     rest_callback_engine->create_callback_object(callback);
@@ -56,7 +56,7 @@ TEST(rest_movable_controller_must_not_change_location_or_orientation, object_wit
     yli::ontology::MovableControllerStruct rest_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rest_callback_engine) };
-    yli::ontology::MovableController* const rest_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const rest_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             rest_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -64,7 +64,7 @@ TEST(rest_movable_controller_must_not_change_location_or_orientation, object_wit
             yli::ontology::Request(rest_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -84,13 +84,13 @@ TEST(rest_movable_controller_must_not_change_location_or_orientation, object_wit
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rest;
 
     yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
-    yli::ontology::CallbackEngine* const rest_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const rest_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             rest_callback_engine_struct);
 
     rest_callback_engine->create_callback_object(callback);
@@ -98,7 +98,7 @@ TEST(rest_movable_controller_must_not_change_location_or_orientation, object_wit
     yli::ontology::MovableControllerStruct rest_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rest_callback_engine) };
-    yli::ontology::MovableController* const rest_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const rest_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             rest_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -106,7 +106,7 @@ TEST(rest_movable_controller_must_not_change_location_or_orientation, object_wit
             yli::ontology::Request(rest_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -126,13 +126,13 @@ TEST(go_east_movable_controller_must_go_east, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_east;
 
     yli::ontology::CallbackEngineStruct go_east_callback_engine_struct;
-    yli::ontology::CallbackEngine* const go_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const go_east_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             go_east_callback_engine_struct);
 
     go_east_callback_engine->create_callback_object(callback);
@@ -140,7 +140,7 @@ TEST(go_east_movable_controller_must_go_east, object_with_speed_1)
     yli::ontology::MovableControllerStruct go_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_east_callback_engine) };
-    yli::ontology::MovableController* const go_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const go_east_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             go_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -148,7 +148,7 @@ TEST(go_east_movable_controller_must_go_east, object_with_speed_1)
             yli::ontology::Request(go_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -170,13 +170,13 @@ TEST(go_east_movable_controller_must_go_east, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_east;
 
     yli::ontology::CallbackEngineStruct go_east_callback_engine_struct;
-    yli::ontology::CallbackEngine* const go_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const go_east_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             go_east_callback_engine_struct);
 
     go_east_callback_engine->create_callback_object(callback);
@@ -184,7 +184,7 @@ TEST(go_east_movable_controller_must_go_east, object_with_speed_2)
     yli::ontology::MovableControllerStruct go_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_east_callback_engine) };
-    yli::ontology::MovableController* const go_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const go_east_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             go_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -192,7 +192,7 @@ TEST(go_east_movable_controller_must_go_east, object_with_speed_2)
             yli::ontology::Request(go_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -214,13 +214,13 @@ TEST(go_west_movable_controller_must_go_west, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_west;
 
     yli::ontology::CallbackEngineStruct go_west_callback_engine_struct;
-    yli::ontology::CallbackEngine* const go_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const go_west_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             go_west_callback_engine_struct);
 
     go_west_callback_engine->create_callback_object(callback);
@@ -228,7 +228,7 @@ TEST(go_west_movable_controller_must_go_west, object_with_speed_1)
     yli::ontology::MovableControllerStruct go_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_west_callback_engine) };
-    yli::ontology::MovableController* const go_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const go_west_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             go_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -236,7 +236,7 @@ TEST(go_west_movable_controller_must_go_west, object_with_speed_1)
             yli::ontology::Request(go_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -258,13 +258,13 @@ TEST(go_west_movable_controller_must_go_west, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_west;
 
     yli::ontology::CallbackEngineStruct go_west_callback_engine_struct;
-    yli::ontology::CallbackEngine* const go_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const go_west_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             go_west_callback_engine_struct);
 
     go_west_callback_engine->create_callback_object(callback);
@@ -272,7 +272,7 @@ TEST(go_west_movable_controller_must_go_west, object_with_speed_2)
     yli::ontology::MovableControllerStruct go_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_west_callback_engine) };
-    yli::ontology::MovableController* const go_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const go_west_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             go_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -280,7 +280,7 @@ TEST(go_west_movable_controller_must_go_west, object_with_speed_2)
             yli::ontology::Request(go_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -302,13 +302,13 @@ TEST(go_north_movable_controller_must_go_north, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_north;
 
     yli::ontology::CallbackEngineStruct go_north_callback_engine_struct;
-    yli::ontology::CallbackEngine* const go_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const go_north_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             go_north_callback_engine_struct);
 
     go_north_callback_engine->create_callback_object(callback);
@@ -316,7 +316,7 @@ TEST(go_north_movable_controller_must_go_north, object_with_speed_1)
     yli::ontology::MovableControllerStruct go_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_north_callback_engine) };
-    yli::ontology::MovableController* const go_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const go_north_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             go_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -324,7 +324,7 @@ TEST(go_north_movable_controller_must_go_north, object_with_speed_1)
             yli::ontology::Request(go_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -346,13 +346,13 @@ TEST(go_north_movable_controller_must_go_north, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_north;
 
     yli::ontology::CallbackEngineStruct go_north_callback_engine_struct;
-    yli::ontology::CallbackEngine* const go_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const go_north_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             go_north_callback_engine_struct);
 
     go_north_callback_engine->create_callback_object(callback);
@@ -360,7 +360,7 @@ TEST(go_north_movable_controller_must_go_north, object_with_speed_2)
     yli::ontology::MovableControllerStruct go_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_north_callback_engine) };
-    yli::ontology::MovableController* const go_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const go_north_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             go_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -368,7 +368,7 @@ TEST(go_north_movable_controller_must_go_north, object_with_speed_2)
             yli::ontology::Request(go_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -390,13 +390,13 @@ TEST(go_south_movable_controller_must_go_south, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_south;
 
     yli::ontology::CallbackEngineStruct go_south_callback_engine_struct;
-    yli::ontology::CallbackEngine* const go_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const go_south_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             go_south_callback_engine_struct);
 
     go_south_callback_engine->create_callback_object(callback);
@@ -404,7 +404,7 @@ TEST(go_south_movable_controller_must_go_south, object_with_speed_1)
     yli::ontology::MovableControllerStruct go_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_south_callback_engine) };
-    yli::ontology::MovableController* const go_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const go_south_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             go_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -412,7 +412,7 @@ TEST(go_south_movable_controller_must_go_south, object_with_speed_1)
             yli::ontology::Request(go_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -434,13 +434,13 @@ TEST(go_south_movable_controller_must_go_south, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::go_south;
 
     yli::ontology::CallbackEngineStruct go_south_callback_engine_struct;
-    yli::ontology::CallbackEngine* const go_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const go_south_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             go_south_callback_engine_struct);
 
     go_south_callback_engine->create_callback_object(callback);
@@ -448,7 +448,7 @@ TEST(go_south_movable_controller_must_go_south, object_with_speed_2)
     yli::ontology::MovableControllerStruct go_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(go_south_callback_engine) };
-    yli::ontology::MovableController* const go_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const go_south_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             go_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -456,7 +456,7 @@ TEST(go_south_movable_controller_must_go_south, object_with_speed_2)
             yli::ontology::Request(go_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -478,13 +478,13 @@ TEST(orient_to_east_movable_controller_must_orient_to_east, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_east;
 
     yli::ontology::CallbackEngineStruct orient_to_east_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_to_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_to_east_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_to_east_callback_engine_struct);
 
     orient_to_east_callback_engine->create_callback_object(callback);
@@ -492,7 +492,7 @@ TEST(orient_to_east_movable_controller_must_orient_to_east, object_with_speed_1)
     yli::ontology::MovableControllerStruct orient_to_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_east_callback_engine) };
-    yli::ontology::MovableController* const orient_to_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_to_east_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_to_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -500,7 +500,7 @@ TEST(orient_to_east_movable_controller_must_orient_to_east, object_with_speed_1)
             yli::ontology::Request(orient_to_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -522,13 +522,13 @@ TEST(orient_to_east_movable_controller_must_orient_to_east, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_east;
 
     yli::ontology::CallbackEngineStruct orient_to_east_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_to_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_to_east_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_to_east_callback_engine_struct);
 
     orient_to_east_callback_engine->create_callback_object(callback);
@@ -536,7 +536,7 @@ TEST(orient_to_east_movable_controller_must_orient_to_east, object_with_speed_2)
     yli::ontology::MovableControllerStruct orient_to_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_east_callback_engine) };
-    yli::ontology::MovableController* const orient_to_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_to_east_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_to_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -544,7 +544,7 @@ TEST(orient_to_east_movable_controller_must_orient_to_east, object_with_speed_2)
             yli::ontology::Request(orient_to_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -566,13 +566,13 @@ TEST(orient_to_west_movable_controller_must_orient_to_west, object_with_speed_1)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_west;
 
     yli::ontology::CallbackEngineStruct orient_to_west_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_to_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_to_west_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_to_west_callback_engine_struct);
 
     orient_to_west_callback_engine->create_callback_object(callback);
@@ -580,7 +580,7 @@ TEST(orient_to_west_movable_controller_must_orient_to_west, object_with_speed_1)
     yli::ontology::MovableControllerStruct orient_to_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_west_callback_engine) };
-    yli::ontology::MovableController* const orient_to_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_to_west_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_to_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -588,7 +588,7 @@ TEST(orient_to_west_movable_controller_must_orient_to_west, object_with_speed_1)
             yli::ontology::Request(orient_to_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -610,13 +610,13 @@ TEST(orient_to_west_movable_controller_must_orient_to_west, object_with_speed_2)
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_west;
 
     yli::ontology::CallbackEngineStruct orient_to_west_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_to_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_to_west_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_to_west_callback_engine_struct);
 
     orient_to_west_callback_engine->create_callback_object(callback);
@@ -624,7 +624,7 @@ TEST(orient_to_west_movable_controller_must_orient_to_west, object_with_speed_2)
     yli::ontology::MovableControllerStruct orient_to_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_west_callback_engine) };
-    yli::ontology::MovableController* const orient_to_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_to_west_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_to_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -632,7 +632,7 @@ TEST(orient_to_west_movable_controller_must_orient_to_west, object_with_speed_2)
             yli::ontology::Request(orient_to_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -654,13 +654,13 @@ TEST(orient_to_north_movable_controller_must_orient_to_north, object_with_speed_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_north;
 
     yli::ontology::CallbackEngineStruct orient_to_north_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_to_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_to_north_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_to_north_callback_engine_struct);
 
     orient_to_north_callback_engine->create_callback_object(callback);
@@ -668,7 +668,7 @@ TEST(orient_to_north_movable_controller_must_orient_to_north, object_with_speed_
     yli::ontology::MovableControllerStruct orient_to_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_north_callback_engine) };
-    yli::ontology::MovableController* const orient_to_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_to_north_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_to_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -676,7 +676,7 @@ TEST(orient_to_north_movable_controller_must_orient_to_north, object_with_speed_
             yli::ontology::Request(orient_to_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -698,13 +698,13 @@ TEST(orient_to_north_movable_controller_must_orient_to_north, object_with_speed_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_north;
 
     yli::ontology::CallbackEngineStruct orient_to_north_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_to_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_to_north_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_to_north_callback_engine_struct);
 
     orient_to_north_callback_engine->create_callback_object(callback);
@@ -712,7 +712,7 @@ TEST(orient_to_north_movable_controller_must_orient_to_north, object_with_speed_
     yli::ontology::MovableControllerStruct orient_to_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_north_callback_engine) };
-    yli::ontology::MovableController* const orient_to_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_to_north_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_to_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -720,7 +720,7 @@ TEST(orient_to_north_movable_controller_must_orient_to_north, object_with_speed_
             yli::ontology::Request(orient_to_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -742,13 +742,13 @@ TEST(orient_to_south_movable_controller_must_orient_to_south, object_with_speed_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_south;
 
     yli::ontology::CallbackEngineStruct orient_to_south_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_to_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_to_south_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_to_south_callback_engine_struct);
 
     orient_to_south_callback_engine->create_callback_object(callback);
@@ -756,7 +756,7 @@ TEST(orient_to_south_movable_controller_must_orient_to_south, object_with_speed_
     yli::ontology::MovableControllerStruct orient_to_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_south_callback_engine) };
-    yli::ontology::MovableController* const orient_to_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_to_south_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_to_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -764,7 +764,7 @@ TEST(orient_to_south_movable_controller_must_orient_to_south, object_with_speed_
             yli::ontology::Request(orient_to_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -786,13 +786,13 @@ TEST(orient_to_south_movable_controller_must_orient_to_south, object_with_speed_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_to_south;
 
     yli::ontology::CallbackEngineStruct orient_to_south_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_to_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_to_south_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_to_south_callback_engine_struct);
 
     orient_to_south_callback_engine->create_callback_object(callback);
@@ -800,7 +800,7 @@ TEST(orient_to_south_movable_controller_must_orient_to_south, object_with_speed_
     yli::ontology::MovableControllerStruct orient_to_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_to_south_callback_engine) };
-    yli::ontology::MovableController* const orient_to_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_to_south_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_to_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -808,7 +808,7 @@ TEST(orient_to_south_movable_controller_must_orient_to_south, object_with_speed_
             yli::ontology::Request(orient_to_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -830,13 +830,13 @@ TEST(orient_and_go_east_movable_controller_must_orient_and_go_east, object_with_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_east;
 
     yli::ontology::CallbackEngineStruct orient_and_go_east_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_and_go_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_and_go_east_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_and_go_east_callback_engine_struct);
 
     orient_and_go_east_callback_engine->create_callback_object(callback);
@@ -844,7 +844,7 @@ TEST(orient_and_go_east_movable_controller_must_orient_and_go_east, object_with_
     yli::ontology::MovableControllerStruct orient_and_go_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_east_callback_engine) };
-    yli::ontology::MovableController* const orient_and_go_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_and_go_east_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_and_go_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -852,7 +852,7 @@ TEST(orient_and_go_east_movable_controller_must_orient_and_go_east, object_with_
             yli::ontology::Request(orient_and_go_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -875,13 +875,13 @@ TEST(orient_and_go_east_movable_controller_must_orient_and_go_east, object_with_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_east;
 
     yli::ontology::CallbackEngineStruct orient_and_go_east_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_and_go_east_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_and_go_east_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_and_go_east_callback_engine_struct);
 
     orient_and_go_east_callback_engine->create_callback_object(callback);
@@ -889,7 +889,7 @@ TEST(orient_and_go_east_movable_controller_must_orient_and_go_east, object_with_
     yli::ontology::MovableControllerStruct orient_and_go_east_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_east_callback_engine) };
-    yli::ontology::MovableController* const orient_and_go_east_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_and_go_east_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_and_go_east_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -897,7 +897,7 @@ TEST(orient_and_go_east_movable_controller_must_orient_and_go_east, object_with_
             yli::ontology::Request(orient_and_go_east_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -920,13 +920,13 @@ TEST(orient_and_go_west_movable_controller_must_orient_and_go_west, object_with_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_west;
 
     yli::ontology::CallbackEngineStruct orient_and_go_west_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_and_go_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_and_go_west_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_and_go_west_callback_engine_struct);
 
     orient_and_go_west_callback_engine->create_callback_object(callback);
@@ -934,7 +934,7 @@ TEST(orient_and_go_west_movable_controller_must_orient_and_go_west, object_with_
     yli::ontology::MovableControllerStruct orient_and_go_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_west_callback_engine) };
-    yli::ontology::MovableController* const orient_and_go_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_and_go_west_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_and_go_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -942,7 +942,7 @@ TEST(orient_and_go_west_movable_controller_must_orient_and_go_west, object_with_
             yli::ontology::Request(orient_and_go_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -965,13 +965,13 @@ TEST(orient_and_go_west_movable_controller_must_orient_and_go_west, object_with_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_west;
 
     yli::ontology::CallbackEngineStruct orient_and_go_west_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_and_go_west_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_and_go_west_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_and_go_west_callback_engine_struct);
 
     orient_and_go_west_callback_engine->create_callback_object(callback);
@@ -979,7 +979,7 @@ TEST(orient_and_go_west_movable_controller_must_orient_and_go_west, object_with_
     yli::ontology::MovableControllerStruct orient_and_go_west_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_west_callback_engine) };
-    yli::ontology::MovableController* const orient_and_go_west_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_and_go_west_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_and_go_west_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -987,7 +987,7 @@ TEST(orient_and_go_west_movable_controller_must_orient_and_go_west, object_with_
             yli::ontology::Request(orient_and_go_west_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -1010,13 +1010,13 @@ TEST(orient_and_go_north_movable_controller_must_orient_and_go_north, object_wit
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_north;
 
     yli::ontology::CallbackEngineStruct orient_and_go_north_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_and_go_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_and_go_north_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_and_go_north_callback_engine_struct);
 
     orient_and_go_north_callback_engine->create_callback_object(callback);
@@ -1024,7 +1024,7 @@ TEST(orient_and_go_north_movable_controller_must_orient_and_go_north, object_wit
     yli::ontology::MovableControllerStruct orient_and_go_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_north_callback_engine) };
-    yli::ontology::MovableController* const orient_and_go_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_and_go_north_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_and_go_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -1032,7 +1032,7 @@ TEST(orient_and_go_north_movable_controller_must_orient_and_go_north, object_wit
             yli::ontology::Request(orient_and_go_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -1055,13 +1055,13 @@ TEST(orient_and_go_north_movable_controller_must_orient_and_go_north, object_wit
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_north;
 
     yli::ontology::CallbackEngineStruct orient_and_go_north_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_and_go_north_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_and_go_north_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_and_go_north_callback_engine_struct);
 
     orient_and_go_north_callback_engine->create_callback_object(callback);
@@ -1069,7 +1069,7 @@ TEST(orient_and_go_north_movable_controller_must_orient_and_go_north, object_wit
     yli::ontology::MovableControllerStruct orient_and_go_north_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_north_callback_engine) };
-    yli::ontology::MovableController* const orient_and_go_north_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_and_go_north_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_and_go_north_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -1077,7 +1077,7 @@ TEST(orient_and_go_north_movable_controller_must_orient_and_go_north, object_wit
             yli::ontology::Request(orient_and_go_north_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -1100,13 +1100,13 @@ TEST(orient_and_go_south_movable_controller_must_orient_and_go_south, object_wit
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_south;
 
     yli::ontology::CallbackEngineStruct orient_and_go_south_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_and_go_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_and_go_south_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_and_go_south_callback_engine_struct);
 
     orient_and_go_south_callback_engine->create_callback_object(callback);
@@ -1114,7 +1114,7 @@ TEST(orient_and_go_south_movable_controller_must_orient_and_go_south, object_wit
     yli::ontology::MovableControllerStruct orient_and_go_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_south_callback_engine) };
-    yli::ontology::MovableController* const orient_and_go_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_and_go_south_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_and_go_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -1122,7 +1122,7 @@ TEST(orient_and_go_south_movable_controller_must_orient_and_go_south, object_wit
             yli::ontology::Request(orient_and_go_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -1145,13 +1145,13 @@ TEST(orient_and_go_south_movable_controller_must_orient_and_go_south, object_wit
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::orient_and_go_south;
 
     yli::ontology::CallbackEngineStruct orient_and_go_south_callback_engine_struct;
-    yli::ontology::CallbackEngine* const orient_and_go_south_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const orient_and_go_south_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             orient_and_go_south_callback_engine_struct);
 
     orient_and_go_south_callback_engine->create_callback_object(callback);
@@ -1159,7 +1159,7 @@ TEST(orient_and_go_south_movable_controller_must_orient_and_go_south, object_wit
     yli::ontology::MovableControllerStruct orient_and_go_south_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(orient_and_go_south_callback_engine) };
-    yli::ontology::MovableController* const orient_and_go_south_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const orient_and_go_south_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             orient_and_go_south_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -1167,7 +1167,7 @@ TEST(orient_and_go_south_movable_controller_must_orient_and_go_south, object_wit
             yli::ontology::Request(orient_and_go_south_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -1190,13 +1190,13 @@ TEST(rotate_clockwise_movable_controller_must_rotate_clockwise, object_with_spee
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_clockwise;
 
     yli::ontology::CallbackEngineStruct rotate_clockwise_callback_engine_struct;
-    yli::ontology::CallbackEngine* const rotate_clockwise_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const rotate_clockwise_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             rotate_clockwise_callback_engine_struct);
 
     rotate_clockwise_callback_engine->create_callback_object(callback);
@@ -1204,7 +1204,7 @@ TEST(rotate_clockwise_movable_controller_must_rotate_clockwise, object_with_spee
     yli::ontology::MovableControllerStruct rotate_clockwise_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rotate_clockwise_callback_engine) };
-    yli::ontology::MovableController* const rotate_clockwise_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const rotate_clockwise_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             rotate_clockwise_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -1212,7 +1212,7 @@ TEST(rotate_clockwise_movable_controller_must_rotate_clockwise, object_with_spee
             yli::ontology::Request(rotate_clockwise_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -1238,13 +1238,13 @@ TEST(rotate_clockwise_movable_controller_must_rotate_clockwise, object_with_spee
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_clockwise;
 
     yli::ontology::CallbackEngineStruct rotate_clockwise_callback_engine_struct;
-    yli::ontology::CallbackEngine* const rotate_clockwise_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const rotate_clockwise_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             rotate_clockwise_callback_engine_struct);
 
     rotate_clockwise_callback_engine->create_callback_object(callback);
@@ -1252,7 +1252,7 @@ TEST(rotate_clockwise_movable_controller_must_rotate_clockwise, object_with_spee
     yli::ontology::MovableControllerStruct rotate_clockwise_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rotate_clockwise_callback_engine) };
-    yli::ontology::MovableController* const rotate_clockwise_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const rotate_clockwise_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             rotate_clockwise_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -1260,7 +1260,7 @@ TEST(rotate_clockwise_movable_controller_must_rotate_clockwise, object_with_spee
             yli::ontology::Request(rotate_clockwise_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 
@@ -1286,13 +1286,13 @@ TEST(rotate_counterclockwise_movable_controller_must_rotate_counterclockwise, ob
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_counterclockwise;
 
     yli::ontology::CallbackEngineStruct rotate_counterclockwise_callback_engine_struct;
-    yli::ontology::CallbackEngine* const rotate_counterclockwise_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const rotate_counterclockwise_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             rotate_counterclockwise_callback_engine_struct);
 
     rotate_counterclockwise_callback_engine->create_callback_object(callback);
@@ -1300,7 +1300,7 @@ TEST(rotate_counterclockwise_movable_controller_must_rotate_counterclockwise, ob
     yli::ontology::MovableControllerStruct rotate_counterclockwise_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rotate_counterclockwise_callback_engine) };
-    yli::ontology::MovableController* const rotate_counterclockwise_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const rotate_counterclockwise_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             rotate_counterclockwise_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -1308,7 +1308,7 @@ TEST(rotate_counterclockwise_movable_controller_must_rotate_counterclockwise, ob
             yli::ontology::Request(rotate_counterclockwise_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 1.0f;
 
@@ -1334,13 +1334,13 @@ TEST(rotate_counterclockwise_movable_controller_must_rotate_counterclockwise, ob
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback = &yli::snippets::rotate_counterclockwise;
 
     yli::ontology::CallbackEngineStruct rotate_counterclockwise_callback_engine_struct;
-    yli::ontology::CallbackEngine* const rotate_counterclockwise_callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const rotate_counterclockwise_callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             rotate_counterclockwise_callback_engine_struct);
 
     rotate_counterclockwise_callback_engine->create_callback_object(callback);
@@ -1348,7 +1348,7 @@ TEST(rotate_counterclockwise_movable_controller_must_rotate_counterclockwise, ob
     yli::ontology::MovableControllerStruct rotate_counterclockwise_movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(rotate_counterclockwise_callback_engine) };
-    yli::ontology::MovableController* const rotate_counterclockwise_movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const rotate_counterclockwise_movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             rotate_counterclockwise_movable_controller_struct);
 
     yli::ontology::ObjectStruct object_struct {
@@ -1356,7 +1356,7 @@ TEST(rotate_counterclockwise_movable_controller_must_rotate_counterclockwise, ob
             yli::ontology::Request(rotate_counterclockwise_movable_controller) };
     object_struct.cartesian_coordinates = { 1.0f, 2.0f, 3.0f }; // Whatever except NANs.
     object_struct.orientation =           { 4.0f, 5.0f, 6.0f }; // Whatever except NANs.
-    yli::ontology::Object* const object = application.get_generic_entity_factory().create_object(
+    yli::ontology::Object* const object = application.get_abstract_entity_factory().create_object(
             object_struct);
     object->speed = 2.0f;
 

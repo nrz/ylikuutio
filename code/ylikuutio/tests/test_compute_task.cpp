@@ -37,15 +37,15 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request(pipeline) };
-    yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
+    yli::ontology::ComputeTask* const compute_task = application.get_abstract_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(compute_task) % alignof(yli::ontology::ComputeTask), 0);
@@ -75,15 +75,15 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request(pipeline) };
-    yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
+    yli::ontology::ComputeTask* const compute_task = application.get_abstract_entity_factory().create_compute_task(
             compute_task_struct);
 
     // `Entity` member functions of `Universe`.
@@ -111,15 +111,15 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
-    yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
+    yli::ontology::ComputeTask* const compute_task = application.get_abstract_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(compute_task) % alignof(yli::ontology::ComputeTask), 0);
@@ -148,16 +148,16 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
     pipeline_struct.global_name = "foo";
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request<yli::ontology::Pipeline>("foo") };
-    yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
+    yli::ontology::ComputeTask* const compute_task = application.get_abstract_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(compute_task) % alignof(yli::ontology::ComputeTask), 0);
@@ -187,16 +187,16 @@ TEST(compute_task_must_be_initialized_and_must_bind_to_pipeline_appropriately, h
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
     pipeline_struct.global_name = "foo";
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::ComputeTaskStruct compute_task_struct { yli::ontology::Request<yli::ontology::Pipeline>("bar") };
-    yli::ontology::ComputeTask* const compute_task = application.get_generic_entity_factory().create_compute_task(
+    yli::ontology::ComputeTask* const compute_task = application.get_abstract_entity_factory().create_compute_task(
             compute_task_struct);
     ASSERT_NE(compute_task, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(compute_task) % alignof(yli::ontology::ComputeTask), 0);

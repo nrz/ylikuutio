@@ -40,11 +40,11 @@ TEST(console_callback_object_must_be_initialized_appropriately, headless_with_pa
 {
     mock::MockApplication application;
     yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct { yli::ontology::Request<yli::ontology::Console>(nullptr) };
-    yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
+    yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_abstract_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
 
     const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct { yli::ontology::Request(console_callback_engine) };
-    yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_generic_entity_factory().create_console_callback_object(
+    yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_abstract_entity_factory().create_console_callback_object(
             console_callback_object_struct);
     ASSERT_NE(console_callback_object, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console_callback_object) % alignof(yli::ontology::ConsoleCallbackObject), 0);
@@ -74,11 +74,11 @@ TEST(console_callback_object_must_be_initialized_appropriately, headless_with_pa
 {
     mock::MockApplication application;
     yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct { yli::ontology::Request<yli::ontology::Console>(nullptr) };
-    yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
+    yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_abstract_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
 
     const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct { yli::ontology::Request<yli::ontology::ConsoleCallbackEngine>(nullptr) };
-    yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_generic_entity_factory().create_console_callback_object(
+    yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_abstract_entity_factory().create_console_callback_object(
             console_callback_object_struct);
     ASSERT_NE(console_callback_object, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console_callback_object) % alignof(yli::ontology::ConsoleCallbackObject), 0);
@@ -105,11 +105,11 @@ TEST(console_callback_object_must_be_initialized_appropriately, parent_provided_
     mock::MockApplication application;
     yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct { yli::ontology::Request<yli::ontology::Console>(nullptr) };
     console_callback_engine_struct.global_name = "foo";
-    yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
+    yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_abstract_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
 
     const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct { yli::ontology::Request<yli::ontology::ConsoleCallbackEngine>("foo") };
-    yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_generic_entity_factory().create_console_callback_object(
+    yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_abstract_entity_factory().create_console_callback_object(
             console_callback_object_struct);
     ASSERT_NE(console_callback_object, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console_callback_object) % alignof(yli::ontology::ConsoleCallbackObject), 0);
@@ -136,11 +136,11 @@ TEST(console_callback_object_must_be_initialized_appropriately, parent_provided_
     mock::MockApplication application;
     yli::ontology::ConsoleCallbackEngineStruct console_callback_engine_struct { yli::ontology::Request<yli::ontology::Console>(nullptr) };
     console_callback_engine_struct.global_name = "foo";
-    yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_generic_entity_factory().create_console_callback_engine(
+    yli::ontology::ConsoleCallbackEngine* const console_callback_engine = application.get_abstract_entity_factory().create_console_callback_engine(
             console_callback_engine_struct);
 
     const yli::ontology::ConsoleCallbackObjectStruct console_callback_object_struct { yli::ontology::Request<yli::ontology::ConsoleCallbackEngine>("bar") };
-    yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_generic_entity_factory().create_console_callback_object(
+    yli::ontology::ConsoleCallbackObject* const console_callback_object = application.get_abstract_entity_factory().create_console_callback_object(
             console_callback_object_struct);
     ASSERT_NE(console_callback_object, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(console_callback_object) % alignof(yli::ontology::ConsoleCallbackObject), 0);

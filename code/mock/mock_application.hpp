@@ -37,7 +37,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
-    class GenericEntityFactory;
+    class AbstractEntityFactory;
     struct UniverseStruct;
 }
 
@@ -56,7 +56,7 @@ namespace mock
 
             yli::memory::GenericMemorySystem& get_generic_memory_system() const override;
 
-            yli::ontology::GenericEntityFactory& get_generic_entity_factory() const override;
+            yli::ontology::AbstractEntityFactory& get_abstract_entity_factory() const override;
 
             bool is_universe(yli::ontology::Entity* entity) const override;
 

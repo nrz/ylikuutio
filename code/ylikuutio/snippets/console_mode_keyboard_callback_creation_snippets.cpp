@@ -19,7 +19,7 @@
 #include "code/ylikuutio/console/console_logic_module.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine.hpp"
-#include "code/ylikuutio/ontology/generic_entity_factory.hpp"
+#include "code/ylikuutio/ontology/abstract_entity_factory.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/console_callback_engine_struct.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -40,9 +40,9 @@ namespace yli::snippets
     using ontology::ConsoleCallbackEngineStruct;
     using ontology::GenericCallbackEngine;
     using ontology::Request;
-    using ontology::GenericEntityFactory;
+    using ontology::AbstractEntityFactory;
 
-    void create_console_mode_keypress_callbacks(GenericEntityFactory& entity_factory, const std::string& console_global_name)
+    void create_console_mode_keypress_callbacks(AbstractEntityFactory& entity_factory, const std::string& console_global_name)
     {
         {
             // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
@@ -172,7 +172,7 @@ namespace yli::snippets
         }
     }
 
-    void create_console_mode_keyrelease_callbacks(GenericEntityFactory& entity_factory, const std::string& console_global_name)
+    void create_console_mode_keyrelease_callbacks(AbstractEntityFactory& entity_factory, const std::string& console_global_name)
     {
         {
             // Callback code for left Control release.

@@ -50,7 +50,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
-    class GenericEntityFactory;
+    class AbstractEntityFactory;
     struct UniverseStruct;
 }
 
@@ -74,7 +74,7 @@ namespace yli::core
 
         virtual memory::GenericMemorySystem& get_generic_memory_system() const = 0;
 
-        virtual ontology::GenericEntityFactory& get_generic_entity_factory() const = 0;
+        virtual ontology::AbstractEntityFactory& get_abstract_entity_factory() const = 0;
 
         virtual event::EventSystem* get_event_system() const;
 

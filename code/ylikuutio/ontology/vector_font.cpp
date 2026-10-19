@@ -21,7 +21,7 @@
 #include "pipeline.hpp"
 #include "material.hpp"
 #include "text_3d.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "get_number_of_descendants.hpp"
 #include "request.hpp"
 #include "vector_font_struct.hpp"
@@ -167,7 +167,7 @@ namespace yli::ontology
                 std::string unicode_string = glyph_struct.unicode_char_pointer;
                 std::cout << "Creating Glyph \"" << glyph_name_string << "\", Unicode: \"" << unicode_string << "\"\n";
 
-                GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+                AbstractEntityFactory& entity_factory = this->get_application().get_abstract_entity_factory();
                 Glyph* glyph = entity_factory.create_glyph(glyph_struct);
 
                 // So that each `Glyph` can be referred to,

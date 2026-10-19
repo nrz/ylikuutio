@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_ENTITY_FACTORY_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_ENTITY_FACTORY_HPP_INCLUDED
 
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "generic_master_module.hpp"
 #include "entity.hpp"
 #include "abstract_movable.hpp"
@@ -163,7 +163,7 @@ namespace yli::ontology
             std::derived_from<T, HolobiontStruct>;
 
     template<typename TypeEnumType>
-    class EntityFactory : public GenericEntityFactory
+    class EntityFactory : public AbstractEntityFactory
     {
     public:
         EntityFactory(

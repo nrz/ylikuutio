@@ -75,7 +75,7 @@ namespace yli::memory
 
 namespace yli::ontology
 {
-    class GenericEntityFactory;
+    class AbstractEntityFactory;
 }
 
 namespace yli_edit
@@ -133,7 +133,7 @@ namespace yli_edit
         return this->core.memory_system.get();
     }
 
-    yli::ontology::GenericEntityFactory& YliEditApplication::get_generic_entity_factory() const
+    yli::ontology::AbstractEntityFactory& YliEditApplication::get_abstract_entity_factory() const
     {
         return this->core.entity_factory.get();
     }

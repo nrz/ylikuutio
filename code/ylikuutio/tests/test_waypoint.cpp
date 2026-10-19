@@ -39,19 +39,19 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             movable_controller_struct);
 
     yli::ontology::WaypointStruct waypoint_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(movable_controller) };
-    yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
+    yli::ontology::Waypoint* const waypoint = application.get_abstract_entity_factory().create_waypoint(
             waypoint_struct);
     ASSERT_NE(waypoint, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(waypoint) % alignof(yli::ontology::Waypoint), 0);
@@ -77,19 +77,19 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             movable_controller_struct);
 
     yli::ontology::WaypointStruct waypoint_struct {
             yli::ontology::Request<yli::ontology::Scene>(nullptr),
             yli::ontology::Request(movable_controller) };
-    yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
+    yli::ontology::Waypoint* const waypoint = application.get_abstract_entity_factory().create_waypoint(
             waypoint_struct);
     ASSERT_NE(waypoint, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(waypoint) % alignof(yli::ontology::Waypoint), 0);
@@ -116,19 +116,19 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     scene_struct.global_name = "foo";
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             movable_controller_struct);
 
     yli::ontology::WaypointStruct waypoint_struct {
             yli::ontology::Request<yli::ontology::Scene>("foo"),
             yli::ontology::Request(movable_controller) };
-    yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
+    yli::ontology::Waypoint* const waypoint = application.get_abstract_entity_factory().create_waypoint(
             waypoint_struct);
     ASSERT_NE(waypoint, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(waypoint) % alignof(yli::ontology::Waypoint), 0);
@@ -155,19 +155,19 @@ TEST(waypoint_must_be_initialized_appropriately, headless_with_parent_provided_a
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     scene_struct.global_name = "foo";
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             movable_controller_struct);
 
     yli::ontology::WaypointStruct waypoint_struct {
             yli::ontology::Request<yli::ontology::Scene>("bar"),
             yli::ontology::Request(movable_controller) };
-    yli::ontology::Waypoint* const waypoint = application.get_generic_entity_factory().create_waypoint(
+    yli::ontology::Waypoint* const waypoint = application.get_abstract_entity_factory().create_waypoint(
             waypoint_struct);
     ASSERT_NE(waypoint, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(waypoint) % alignof(yli::ontology::Waypoint), 0);

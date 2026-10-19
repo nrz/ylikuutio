@@ -56,7 +56,7 @@ namespace yli::ontology
 {
     class Entity;
     class Universe;
-    class GenericEntityFactory;
+    class AbstractEntityFactory;
     struct UniverseStruct;
 }
 
@@ -86,7 +86,7 @@ namespace hirvi
             return this->core.memory_system.get_allocator<Type>(type);
         }
 
-        yli::ontology::GenericEntityFactory& get_generic_entity_factory() const override;
+        yli::ontology::AbstractEntityFactory& get_abstract_entity_factory() const override;
 
         yli::ontology::EntityFactory<data::Datatype>& get_entity_factory() const
         {

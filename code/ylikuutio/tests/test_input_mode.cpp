@@ -31,7 +31,7 @@ TEST(input_mode_must_be_initialized_appropriately, headless_universe_no_console_
     mock::MockApplication application;
 
     yli::ontology::InputModeStruct input_mode_struct;
-    yli::ontology::InputMode* const input_mode = application.get_generic_entity_factory().create_input_mode(input_mode_struct);
+    yli::ontology::InputMode* const input_mode = application.get_abstract_entity_factory().create_input_mode(input_mode_struct);
     ASSERT_NE(input_mode, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(input_mode) % alignof(yli::ontology::InputMode), 0);
 
@@ -52,11 +52,11 @@ TEST(input_mode_must_be_initialized_appropriately, headless_universe_and_console
     mock::MockApplication application;
 
     yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    yli::ontology::Console* console = application.get_generic_entity_factory().create_console(console_struct);
+    yli::ontology::Console* console = application.get_abstract_entity_factory().create_console(console_struct);
 
     yli::ontology::InputModeStruct input_mode_struct;
     input_mode_struct.console_master = yli::ontology::Request(console);
-    yli::ontology::InputMode* const input_mode = application.get_generic_entity_factory().create_input_mode(input_mode_struct);
+    yli::ontology::InputMode* const input_mode = application.get_abstract_entity_factory().create_input_mode(input_mode_struct);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_number_of_non_variable_children(), 2); // `Console`, `InputMode`.

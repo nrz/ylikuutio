@@ -47,7 +47,7 @@ namespace yli::ontology
 {
     class Entity;
     class Scene;
-    class GenericEntityFactory;
+    class AbstractEntityFactory;
 }
 
 namespace gpgpu_test
@@ -74,7 +74,7 @@ namespace gpgpu_test
         return this->core.memory_system.get();
     }
 
-    yli::ontology::GenericEntityFactory& GpgpuTestApplication::get_generic_entity_factory() const
+    yli::ontology::AbstractEntityFactory& GpgpuTestApplication::get_abstract_entity_factory() const
     {
         return this->core.entity_factory.get();
     }

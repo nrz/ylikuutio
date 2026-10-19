@@ -17,7 +17,7 @@
 
 #include "callback_engine.hpp"
 #include "callback_object.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "request.hpp"
 #include "generic_callback_engine_struct.hpp"
 #include "callback_object_struct.hpp"
@@ -57,7 +57,7 @@ namespace yli::ontology
 
     CallbackObject* CallbackEngine::create_callback_object()
     {
-        const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        const AbstractEntityFactory& entity_factory = this->get_application().get_abstract_entity_factory();
 
         const CallbackObjectStruct callback_object_struct { Request(this) };
         return entity_factory.create_callback_object(callback_object_struct);
@@ -66,7 +66,7 @@ namespace yli::ontology
     CallbackObject* CallbackEngine::create_callback_object(
         const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback)
     {
-        const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        const AbstractEntityFactory& entity_factory = this->get_application().get_abstract_entity_factory();
 
         const CallbackObjectStruct callback_object_struct { Request(this) };
         const auto callback_object = entity_factory.create_callback_object(callback_object_struct);

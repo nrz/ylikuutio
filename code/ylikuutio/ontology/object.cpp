@@ -24,7 +24,7 @@
 #include "scene.hpp"
 #include "species.hpp"
 #include "text_3d.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "request.hpp"
 #include "object_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
@@ -366,7 +366,7 @@ namespace yli::ontology
         const std::string& yaw,
         const std::string& pitch)
     {
-        GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
+        AbstractEntityFactory& entity_factory = parent.get_application().get_abstract_entity_factory();
 
         data::AnyValue x_any_value("float", x);
         data::AnyValue y_any_value("float", y);

@@ -24,7 +24,7 @@
 #include "pipeline.hpp"
 #include "camera.hpp"
 #include "movable_controller.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "request.hpp"
 #include "scene_struct.hpp"
 #include "camera_struct.hpp"
@@ -142,7 +142,7 @@ namespace yli::ontology
         // create the default `Camera`.
         CameraStruct camera_struct = scene_struct.default_camera_struct;
         camera_struct.scene = Request(this);
-        this->get_application().get_generic_entity_factory().create_default_camera(camera_struct);
+        this->get_application().get_abstract_entity_factory().create_default_camera(camera_struct);
 
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::Scene*";

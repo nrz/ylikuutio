@@ -34,13 +34,13 @@ TEST(symbiont_material_struct_must_be_initialized_appropriately, symbiont_materi
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::SymbiosisStruct symbiosis_struct {
             yli::ontology::Request(ecosystem),
             yli::ontology::Request<yli::ontology::Pipeline>(nullptr) };
-    yli::ontology::Symbiosis* const symbiosis = application.get_generic_entity_factory().create_symbiosis(
+    yli::ontology::Symbiosis* const symbiosis = application.get_abstract_entity_factory().create_symbiosis(
             symbiosis_struct);
 
     const yli::ontology::SymbiontMaterialStruct test_symbiont_material_struct { yli::ontology::Request(symbiosis) };

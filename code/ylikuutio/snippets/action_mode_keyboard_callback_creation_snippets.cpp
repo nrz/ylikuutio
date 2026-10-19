@@ -20,7 +20,7 @@
 #include "code/ylikuutio/console/console_logic_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/input_mode.hpp"
-#include "code/ylikuutio/ontology/generic_entity_factory.hpp"
+#include "code/ylikuutio/ontology/abstract_entity_factory.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/callback_engine_struct.hpp"
 #include "code/ylikuutio/sdl/ylikuutio_sdl.hpp"
@@ -38,7 +38,7 @@ namespace yli::snippets
     using ontology::Request;
     using ontology::CallbackEngineStruct;
 
-    void create_action_mode_keypress_callbacks(ontology::GenericEntityFactory& entity_factory)
+    void create_action_mode_keypress_callbacks(ontology::AbstractEntityFactory& entity_factory)
     {
         {
             // Callback code for `SDL_SCANCODE_GRAVE` (tilde key above Tab, usually used for console).
@@ -133,7 +133,7 @@ namespace yli::snippets
         }
     }
 
-    void create_action_mode_keyrelease_callbacks(yli::ontology::GenericEntityFactory& entity_factory)
+    void create_action_mode_keyrelease_callbacks(yli::ontology::AbstractEntityFactory& entity_factory)
     {
         {
             // Callback code for left Control release: release first turbo.

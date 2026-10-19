@@ -37,11 +37,11 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     font_struct.screen_width = application.get_universe().get_window_width();
     font_struct.screen_height = application.get_universe().get_window_height();
     font_struct.text_size = application.get_universe().get_text_size();
-    yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
+    yli::ontology::Font2d* const font_2d = application.get_abstract_entity_factory().create_font_2d(
             font_struct);
 
     yli::ontology::TextStruct text_struct { yli::ontology::Request(font_2d) };
-    yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
+    yli::ontology::Text2d* const text_2d = application.get_abstract_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2d), 0);
@@ -70,11 +70,11 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     font_struct.screen_width = application.get_universe().get_window_width();
     font_struct.screen_height = application.get_universe().get_window_height();
     font_struct.text_size = application.get_universe().get_text_size();
-    yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
+    yli::ontology::Font2d* const font_2d = application.get_abstract_entity_factory().create_font_2d(
             font_struct);
 
     yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>(nullptr) };
-    yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
+    yli::ontology::Text2d* const text_2d = application.get_abstract_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2d), 0);
@@ -103,11 +103,11 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     font_struct.screen_width = application.get_universe().get_window_width();
     font_struct.screen_height = application.get_universe().get_window_height();
     font_struct.text_size = application.get_universe().get_text_size();
-    yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
+    yli::ontology::Font2d* const font_2d = application.get_abstract_entity_factory().create_font_2d(
             font_struct);
 
     yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>("foo") };
-    yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
+    yli::ontology::Text2d* const text_2d = application.get_abstract_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2d), 0);
@@ -137,11 +137,11 @@ TEST(text_2d_must_be_initialized_appropriately, headless_font_2d_parent_provided
     font_struct.screen_width = application.get_universe().get_window_width();
     font_struct.screen_height = application.get_universe().get_window_height();
     font_struct.text_size = application.get_universe().get_text_size();
-    yli::ontology::Font2d* const font_2d = application.get_generic_entity_factory().create_font_2d(
+    yli::ontology::Font2d* const font_2d = application.get_abstract_entity_factory().create_font_2d(
             font_struct);
 
     yli::ontology::TextStruct text_struct { yli::ontology::Request<yli::ontology::Font2d>("bar") };
-    yli::ontology::Text2d* const text_2d = application.get_generic_entity_factory().create_text_2d(
+    yli::ontology::Text2d* const text_2d = application.get_abstract_entity_factory().create_text_2d(
             text_struct);
     ASSERT_NE(text_2d, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(text_2d) % alignof(yli::ontology::Text2d), 0);

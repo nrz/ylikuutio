@@ -83,7 +83,7 @@ namespace yli::memory
 namespace yli::ontology
 {
     class Scene;
-    class GenericEntityFactory;
+    class AbstractEntityFactory;
 }
 
 namespace ajokki
@@ -108,7 +108,7 @@ namespace ajokki
         return this->core.memory_system.get();
     }
 
-    GenericEntityFactory& AjokkiApplication::get_generic_entity_factory() const
+    AbstractEntityFactory& AjokkiApplication::get_abstract_entity_factory() const
     {
         return this->core.entity_factory.get();
     }

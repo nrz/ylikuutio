@@ -60,7 +60,7 @@ namespace yli::memory
 
 namespace yli::ontology
 {
-    class GenericEntityFactory;
+    class AbstractEntityFactory;
 }
 
 namespace hirvi
@@ -76,7 +76,7 @@ namespace hirvi
     using yli::ontology::Console;
     using yli::ontology::Request;
     using yli::ontology::UniverseStruct;
-    using yli::ontology::GenericEntityFactory;
+    using yli::ontology::AbstractEntityFactory;
     using yli::string::check_if_float_string;
     using yli::string::check_if_unsigned_integer_string;
 
@@ -122,7 +122,7 @@ namespace hirvi
         return this->core.memory_system.get();
     }
 
-    GenericEntityFactory& HirviEditApplication::get_generic_entity_factory() const
+    AbstractEntityFactory& HirviEditApplication::get_abstract_entity_factory() const
     {
         return this->core.entity_factory.get();
     }

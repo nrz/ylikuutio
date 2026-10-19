@@ -26,7 +26,7 @@ TEST(audio_tracks_must_be_initialized_appropriately, headless)
     mock::MockApplication application;
     yli::ontology::AudioTrackStruct audio_track_struct("419588__greek555__dreaming-of-me.ogg");
     audio_track_struct.global_name = "dreaming_of_me";
-    yli::ontology::AudioTrack* const audio_track = application.get_generic_entity_factory().create_audio_track(
+    yli::ontology::AudioTrack* const audio_track = application.get_abstract_entity_factory().create_audio_track(
             audio_track_struct);
     ASSERT_NE(audio_track, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(audio_track) % alignof(yli::ontology::AudioTrack), 0);

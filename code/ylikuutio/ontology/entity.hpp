@@ -46,7 +46,7 @@ namespace yli::ontology
     class Variable;
     class Scene;
     class Console;
-    class GenericEntityFactory;
+    class AbstractEntityFactory;
     struct EntityStruct;
     struct VariableStruct;
 

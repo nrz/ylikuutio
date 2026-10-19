@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_GENERIC_ENTITY_FACTORY_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_GENERIC_ENTITY_FACTORY_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_ABSTRACT_ENTITY_FACTORY_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_ABSTRACT_ENTITY_FACTORY_HPP_INCLUDED
 
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
 
@@ -108,10 +108,10 @@ namespace yli::ontology
         struct CallbackParameterStruct;
         struct ComputeTaskStruct;
 
-        class GenericEntityFactory
+        class AbstractEntityFactory
         {
         public:
-                virtual ~GenericEntityFactory() = default;
+                virtual ~AbstractEntityFactory() = default;
 
                 virtual Variable* create_variable(
                         const VariableStruct& variable_struct,

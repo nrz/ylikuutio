@@ -20,7 +20,7 @@
 #include "console_callback_object.hpp"
 #include "request.hpp"
 #include "console_callback_object_struct.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "generic_callback_engine_struct.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
 #include "get_number_of_descendants.hpp"
@@ -82,7 +82,7 @@ namespace yli::ontology
     ConsoleCallbackObject* ConsoleCallbackEngine::create_console_callback_object(
         const InputParametersToAnyValueCallbackWithConsole callback)
     {
-        const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        const AbstractEntityFactory& entity_factory = this->get_application().get_abstract_entity_factory();
 
         ConsoleCallbackObjectStruct console_callback_object_struct { Request(this) };
         console_callback_object_struct.console_callback = callback;

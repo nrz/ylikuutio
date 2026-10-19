@@ -46,26 +46,26 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(ecosystem),
             yli::ontology::Request(pipeline),
             yli::ontology::TextureFileFormat::PNG };
-    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+    yli::ontology::Material* const material = application.get_abstract_entity_factory().create_material(
             material_struct);
 
     yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request(material) };
-    yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
+    yli::ontology::VectorFont* const vector_font = application.get_abstract_entity_factory().create_vector_font(
             vector_font_struct);
 
     // `Entity` member functions of `Scene`.
@@ -74,7 +74,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::Text3dStruct text_3d_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(vector_font) };
-    yli::ontology::Text3d* text_3d = application.get_generic_entity_factory().create_text_3d(
+    yli::ontology::Text3d* text_3d = application.get_abstract_entity_factory().create_text_3d(
             text_3d_struct);
     ASSERT_NE(text_3d, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(text_3d) % alignof(yli::ontology::Text3d), 0);
@@ -112,22 +112,22 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
-    yli::ontology::Pipeline* const pipeline = application.get_generic_entity_factory().create_pipeline(
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
             pipeline_struct);
 
     yli::ontology::MaterialStruct material_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(pipeline),
             yli::ontology::TextureFileFormat::PNG };
-    yli::ontology::Material* const material = application.get_generic_entity_factory().create_material(
+    yli::ontology::Material* const material = application.get_abstract_entity_factory().create_material(
             material_struct);
 
     yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request(material) };
-    yli::ontology::VectorFont* const vector_font = application.get_generic_entity_factory().create_vector_font(
+    yli::ontology::VectorFont* const vector_font = application.get_abstract_entity_factory().create_vector_font(
             vector_font_struct);
 
     // `Entity` member functions of `Scene`.
@@ -136,7 +136,7 @@ TEST(text_3d_must_be_initialized_and_must_bind_to_material_appropriately, headle
     yli::ontology::Text3dStruct text_3d_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request(vector_font) };
-    yli::ontology::Text3d* text_3d = application.get_generic_entity_factory().create_text_3d(
+    yli::ontology::Text3d* text_3d = application.get_abstract_entity_factory().create_text_3d(
             text_3d_struct);
 
     // `Entity` member functions of `Universe`.

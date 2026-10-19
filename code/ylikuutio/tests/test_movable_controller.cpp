@@ -39,13 +39,13 @@ TEST(movable_controller_must_be_initialized_appropriately, headless_with_parent_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
             yli::ontology::Request(scene),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             movable_controller_struct);
     ASSERT_NE(movable_controller, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(movable_controller) % alignof(yli::ontology::MovableController), 0);
@@ -76,13 +76,13 @@ TEST(movable_controller_must_be_initialized_appropriately, headless_with_parent_
 {
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
             yli::ontology::Request<yli::ontology::Scene>(nullptr),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             movable_controller_struct);
     ASSERT_NE(movable_controller, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(movable_controller) % alignof(yli::ontology::MovableController), 0);
@@ -112,13 +112,13 @@ TEST(movable_controller_must_be_initialized_appropriately, headless_with_parent_
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     scene_struct.global_name = "foo";
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
             yli::ontology::Request<yli::ontology::Scene>("foo"),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             movable_controller_struct);
     ASSERT_NE(movable_controller, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(movable_controller) % alignof(yli::ontology::MovableController), 0);
@@ -148,13 +148,13 @@ TEST(movable_controller_must_be_initialized_appropriately, headless_with_parent_
     mock::MockApplication application;
     yli::ontology::SceneStruct scene_struct;
     scene_struct.global_name = "foo";
-    yli::ontology::Scene* const scene = application.get_generic_entity_factory().create_scene(
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
             scene_struct);
 
     yli::ontology::MovableControllerStruct movable_controller_struct {
             yli::ontology::Request<yli::ontology::Scene>("bar"),
             yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::MovableController* const movable_controller = application.get_generic_entity_factory().create_movable_controller(
+    yli::ontology::MovableController* const movable_controller = application.get_abstract_entity_factory().create_movable_controller(
             movable_controller_struct);
     ASSERT_NE(movable_controller, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(movable_controller) % alignof(yli::ontology::MovableController), 0);

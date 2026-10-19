@@ -19,7 +19,7 @@
 #include "generic_parent_module.hpp"
 #include "callback_engine.hpp"
 #include "callback_parameter.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "request.hpp"
 #include "callback_object_struct.hpp"
 #include "callback_parameter_struct.hpp"
@@ -77,7 +77,7 @@ namespace yli::ontology
         const std::string& name,
         data::AnyValue&& any_value)
     {
-        const GenericEntityFactory& entity_factory = this->get_application().get_generic_entity_factory();
+        const AbstractEntityFactory& entity_factory = this->get_application().get_abstract_entity_factory();
 
         CallbackParameterStruct callback_parameter_struct { Request(this) };
         callback_parameter_struct.local_name = name;

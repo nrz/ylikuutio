@@ -37,7 +37,7 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct1;
-    yli::ontology::Ecosystem* const ecosystem1 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem1 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct1);
     ASSERT_NE(ecosystem1, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(ecosystem1) % alignof(yli::ontology::Ecosystem), 0);
@@ -71,7 +71,7 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 0);
 
     yli::ontology::EcosystemStruct ecosystem_struct2;
-    yli::ontology::Ecosystem* const ecosystem2 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem2 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct2);
     ASSERT_NE(ecosystem2, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(ecosystem2) % alignof(yli::ontology::Ecosystem), 0);
@@ -92,7 +92,7 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     ASSERT_EQ(ecosystem2->get_number_of_non_variable_children(), 0);
 
     yli::ontology::EcosystemStruct ecosystem_struct3;
-    yli::ontology::Ecosystem* const ecosystem3 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem3 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct3);
     ASSERT_NE(ecosystem3, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(ecosystem3) % alignof(yli::ontology::Ecosystem), 0);
@@ -113,7 +113,7 @@ TEST(ecosystems_must_be_initialized_appropriately, headless)
     ASSERT_EQ(ecosystem3->get_number_of_non_variable_children(), 0);
 
     yli::ontology::EcosystemStruct ecosystem_struct4;
-    yli::ontology::Ecosystem* const ecosystem4 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem4 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct4);
     ASSERT_NE(ecosystem4, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(ecosystem4) % alignof(yli::ontology::Ecosystem), 0);
@@ -138,7 +138,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct1;
-    yli::ontology::Ecosystem* const ecosystem1 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem1 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct1);
 
     // `Universe` member functions.
@@ -159,7 +159,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
 
     application.get_generic_memory_system().destroy(ecosystem1->get_constructible_module());
     yli::ontology::EcosystemStruct ecosystem_struct2;
-    yli::ontology::Ecosystem* const ecosystem2 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem2 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct2);
 
     // `Universe` member functions.
@@ -179,7 +179,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
 
     application.get_generic_memory_system().destroy(ecosystem2->get_constructible_module());
     yli::ontology::EcosystemStruct ecosystem_struct3;
-    yli::ontology::Ecosystem* const ecosystem3 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem3 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct3);
 
     // `Universe` member functions.
@@ -200,7 +200,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_the_earli
 
     application.get_generic_memory_system().destroy(ecosystem3->get_constructible_module());
     yli::ontology::EcosystemStruct ecosystem_struct4;
-    yli::ontology::Ecosystem* const ecosystem4 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem4 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct4);
 
     // `Universe` member functions.
@@ -223,7 +223,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct1;
-    yli::ontology::Ecosystem* const ecosystem1 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem1 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct1);
 
     // `Universe` member functions.
@@ -243,7 +243,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
     ASSERT_EQ(ecosystem1->get_number_of_non_variable_children(), 0);
 
     yli::ontology::EcosystemStruct ecosystem_struct2;
-    yli::ontology::Ecosystem* const ecosystem2 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem2 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct2);
 
     // `Universe` member functions.
@@ -264,7 +264,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
 
     application.get_generic_memory_system().destroy(ecosystem1->get_constructible_module());
     yli::ontology::EcosystemStruct ecosystem_struct3;
-    yli::ontology::Ecosystem* const ecosystem3 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem3 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct3);
 
     // `Universe` member functions.
@@ -284,7 +284,7 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
     ASSERT_EQ(ecosystem3->get_number_of_non_variable_children(), 0);
 
     yli::ontology::EcosystemStruct ecosystem_struct4;
-    yli::ontology::Ecosystem* const ecosystem4 = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem4 = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct4);
 
     // `Universe` member functions.
@@ -308,7 +308,7 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
@@ -325,7 +325,7 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately, headless)
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
@@ -342,7 +342,7 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_global_
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
@@ -362,7 +362,7 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_local_na
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
@@ -382,7 +382,7 @@ TEST(ecosystem_must_be_given_a_global_name_appropriately_after_setting_a_local_n
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");
@@ -402,7 +402,7 @@ TEST(ecosystem_must_be_given_a_local_name_appropriately_after_setting_a_global_n
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
     ASSERT_EQ(ecosystem->get_global_name(), "");
     ASSERT_EQ(ecosystem->get_local_name(), "");

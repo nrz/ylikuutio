@@ -721,7 +721,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
     // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     float x = 1234.25f;
     yli::ontology::VariableStruct x_variable_struct(application.get_universe(), &application.get_universe());
@@ -748,7 +748,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
     // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     float y = 1234.25f;
     yli::ontology::VariableStruct y_variable_struct(application.get_universe(), &application.get_universe());
@@ -775,7 +775,7 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_variable_univ
 
     // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     float z = 1234.25f;
     yli::ontology::VariableStruct z_variable_struct(application.get_universe(), &application.get_universe());
@@ -1009,7 +1009,7 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
 
     // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     float x = 1234.25f;
     float y = 2345.50f;
@@ -1082,7 +1082,7 @@ TEST(variables_must_be_initialized_appropriately, headless_universe_variable_uni
 
     // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     float x = 1234.25f;
     float y = 2345.50f;
@@ -1155,7 +1155,7 @@ TEST(variable_value_must_be_modified_appropriately, headless_universe_variable_u
 
     // Creating a `Scene` also creates its default `Camera` and makes the `Scene` the active `Scene` if there is none.
     yli::ontology::SceneStruct scene_struct;
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     float x = 1234.25f;
     float y = 2345.50f;
@@ -2608,12 +2608,12 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     bool bool_true = true;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), ecosystem);
-    yli::ontology::Variable* const variable = application.get_generic_entity_factory().create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    yli::ontology::Variable* const variable = application.get_abstract_entity_factory().create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
     ASSERT_NE(variable, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(variable) % alignof(yli::ontology::Variable), 0);
@@ -2645,12 +2645,12 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
 {
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     bool bool_true = true;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), nullptr);
-    yli::ontology::Variable* const variable = application.get_generic_entity_factory().create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    yli::ontology::Variable* const variable = application.get_abstract_entity_factory().create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
     ASSERT_NE(variable, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(variable) % alignof(yli::ontology::Variable), 0);
@@ -2681,12 +2681,12 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
     ecosystem_struct.global_name = "foo";
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     bool bool_true = true;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), "foo");
-    yli::ontology::Variable* const variable = application.get_generic_entity_factory().create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    yli::ontology::Variable* const variable = application.get_abstract_entity_factory().create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
     ASSERT_NE(variable, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(variable) % alignof(yli::ontology::Variable), 0);
@@ -2719,12 +2719,12 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     mock::MockApplication application;
     yli::ontology::EcosystemStruct ecosystem_struct;
     ecosystem_struct.global_name = "foo";
-    yli::ontology::Ecosystem* const ecosystem = application.get_generic_entity_factory().create_ecosystem(
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
             ecosystem_struct);
 
     bool bool_true = true;
     yli::ontology::VariableStruct variable_struct(application.get_universe(), "bar");
-    yli::ontology::Variable* const variable = application.get_generic_entity_factory().create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    yli::ontology::Variable* const variable = application.get_abstract_entity_factory().create_variable(variable_struct, yli::data::AnyValue(bool_true));
 
     ASSERT_NE(variable, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(variable) % alignof(yli::ontology::Variable), 0);

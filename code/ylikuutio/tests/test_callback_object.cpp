@@ -39,11 +39,11 @@ TEST(callback_object_must_be_initialized_appropriately, headless_with_parent_pro
 {
     mock::MockApplication application;
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    yli::ontology::CallbackEngine* const callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             callback_engine_struct);
 
     const yli::ontology::CallbackObjectStruct callback_object_struct { yli::ontology::Request(callback_engine) };
-    yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
+    yli::ontology::CallbackObject* const callback_object = application.get_abstract_entity_factory().create_callback_object(
             callback_object_struct);
     ASSERT_NE(callback_object, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_object) % alignof(yli::ontology::CallbackObject), 0);
@@ -72,11 +72,11 @@ TEST(callback_object_must_be_initialized_appropriately, headless_with_parent_pro
 {
     mock::MockApplication application;
     yli::ontology::CallbackEngineStruct callback_engine_struct;
-    yli::ontology::CallbackEngine* const callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             callback_engine_struct);
 
     const yli::ontology::CallbackObjectStruct callback_object_struct { yli::ontology::Request<yli::ontology::CallbackEngine>(nullptr) };
-    yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
+    yli::ontology::CallbackObject* const callback_object = application.get_abstract_entity_factory().create_callback_object(
             callback_object_struct);
     ASSERT_NE(callback_object, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_object) % alignof(yli::ontology::CallbackObject), 0);
@@ -103,11 +103,11 @@ TEST(callback_object_must_be_initialized_appropriately, parent_provided_as_valid
     mock::MockApplication application;
     yli::ontology::CallbackEngineStruct callback_engine_struct;
     callback_engine_struct.global_name = "foo";
-    yli::ontology::CallbackEngine* const callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             callback_engine_struct);
 
     const yli::ontology::CallbackObjectStruct callback_object_struct { yli::ontology::Request<yli::ontology::CallbackEngine>("foo") };
-    yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
+    yli::ontology::CallbackObject* const callback_object = application.get_abstract_entity_factory().create_callback_object(
             callback_object_struct);
     ASSERT_NE(callback_object, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_object) % alignof(yli::ontology::CallbackObject), 0);
@@ -134,11 +134,11 @@ TEST(callback_object_must_be_initialized_appropriately, parent_provided_as_inval
     mock::MockApplication application;
     yli::ontology::CallbackEngineStruct callback_engine_struct;
     callback_engine_struct.global_name = "foo";
-    yli::ontology::CallbackEngine* const callback_engine = application.get_generic_entity_factory().create_callback_engine(
+    yli::ontology::CallbackEngine* const callback_engine = application.get_abstract_entity_factory().create_callback_engine(
             callback_engine_struct);
 
     const yli::ontology::CallbackObjectStruct callback_object_struct { yli::ontology::Request<yli::ontology::CallbackEngine>("bar") };
-    yli::ontology::CallbackObject* const callback_object = application.get_generic_entity_factory().create_callback_object(
+    yli::ontology::CallbackObject* const callback_object = application.get_abstract_entity_factory().create_callback_object(
             callback_object_struct);
     ASSERT_NE(callback_object, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(callback_object) % alignof(yli::ontology::CallbackObject), 0);

@@ -22,7 +22,7 @@
 #include "symbiosis.hpp"
 #include "biont.hpp"
 #include "cartesian_coordinates_module.hpp"
-#include "generic_entity_factory.hpp"
+#include "abstract_entity_factory.hpp"
 #include "request.hpp"
 #include "holobiont_struct.hpp"
 #include "biont_struct.hpp"
@@ -108,7 +108,7 @@ namespace yli::ontology
         SkillStruct skill_struct { Request(&holobiont) };
         skill_struct.local_name = skill_name;
 
-        const GenericEntityFactory& entity_factory = holobiont.get_application().get_generic_entity_factory();
+        const AbstractEntityFactory& entity_factory = holobiont.get_application().get_abstract_entity_factory();
         entity_factory.create_skill(skill_struct);
     }
 
@@ -174,7 +174,7 @@ namespace yli::ontology
 
             std::cout << "Creating biont with biontID " << biontID << " ...\n";
 
-            GenericEntityFactory& entity_factory = holobiont.get_application().get_generic_entity_factory();
+            AbstractEntityFactory& entity_factory = holobiont.get_application().get_abstract_entity_factory();
             entity_factory.create_biont(biont_struct);
         }
     }
@@ -285,7 +285,7 @@ namespace yli::ontology
         const std::string& yaw,
         const std::string& pitch)
     {
-        const GenericEntityFactory& entity_factory = parent.get_application().get_generic_entity_factory();
+        const AbstractEntityFactory& entity_factory = parent.get_application().get_abstract_entity_factory();
 
         data::AnyValue x_any_value("float", x);
         data::AnyValue y_any_value("float", y);

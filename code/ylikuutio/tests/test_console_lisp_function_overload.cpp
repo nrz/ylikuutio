@@ -46,7 +46,7 @@ TEST(variables_console_lisp_function_overload_must_function_appropriately, varia
     mock::MockApplication application;
 
     ConsoleStruct my_console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
+    Console* const my_console = application.get_abstract_entity_factory().create_console(my_console_struct);
     ASSERT_NE(my_console, nullptr);
 
     const std::string console_lisp_function_name = "variables";
@@ -69,7 +69,7 @@ TEST(set_console_lisp_function_overload_must_function_appropriately, set)
     mock::MockApplication application;
 
     ConsoleStruct my_console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
+    Console* const my_console = application.get_abstract_entity_factory().create_console(my_console_struct);
     ASSERT_NE(my_console, nullptr);
 
     const std::string console_lisp_function_name = "set";
@@ -88,7 +88,7 @@ TEST(set_must_set_global_x, set_x)
     yli::ontology::Universe& universe = application.get_universe();
 
     ConsoleStruct my_console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
+    Console* const my_console = application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
     GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
@@ -100,7 +100,7 @@ TEST(set_must_set_global_x, set_x)
 
     yli::ontology::SceneStruct scene_struct;
     // Creating a `Scene` creates a default `Camera` and makes it the currently active `Camera`.
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     float x = 1234.25f;
     yli::ontology::VariableStruct x_variable_struct(universe, &universe);
@@ -129,7 +129,7 @@ TEST(set_must_set_global_y, set_y)
     yli::ontology::Universe& universe = application.get_universe();
 
     ConsoleStruct my_console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
+    Console* const my_console = application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
     GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
@@ -140,7 +140,7 @@ TEST(set_must_set_global_y, set_y)
 
     yli::ontology::SceneStruct scene_struct;
     // Creating a `Scene` creates a default `Camera` and makes it the currently active `Camera`.
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     float y = 1234.25f;
     yli::ontology::VariableStruct y_variable_struct(universe, &universe);
@@ -169,7 +169,7 @@ TEST(set_must_set_global_z, set_z)
     yli::ontology::Universe& universe = application.get_universe();
 
     ConsoleStruct my_console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
+    Console* const my_console = application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
     GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
@@ -180,7 +180,7 @@ TEST(set_must_set_global_z, set_z)
 
     yli::ontology::SceneStruct scene_struct;
     // Creating a `Scene` creates a default `Camera` and makes it the currently active `Camera`.
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     float z = 1234.25f;
     yli::ontology::VariableStruct z_variable_struct(universe, &universe);
@@ -209,7 +209,7 @@ TEST(set_must_set_global_roll, set_roll)
     yli::ontology::Universe& universe = application.get_universe();
 
     ConsoleStruct my_console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
+    Console* const my_console = application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
     GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
@@ -220,7 +220,7 @@ TEST(set_must_set_global_roll, set_roll)
 
     yli::ontology::SceneStruct scene_struct;
     // Creating a `Scene` creates a default `Camera` and makes it the currently active `Camera`.
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     const float roll = 0.0f;
     yli::ontology::VariableStruct roll_variable_struct(universe, &universe);
@@ -248,7 +248,7 @@ TEST(set_must_set_global_yaw, set_yaw)
     yli::ontology::Universe& universe = application.get_universe();
 
     ConsoleStruct my_console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
+    Console* const my_console = application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
     GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
@@ -259,7 +259,7 @@ TEST(set_must_set_global_yaw, set_yaw)
 
     yli::ontology::SceneStruct scene_struct;
     // Creating a `Scene` creates a default `Camera` and makes it the currently active `Camera`.
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     const float yaw = 0.0f;
     yli::ontology::VariableStruct yaw_variable_struct(universe, &universe);
@@ -287,7 +287,7 @@ TEST(set_must_set_global_pitch, set_pitch)
     yli::ontology::Universe& universe = application.get_universe();
 
     ConsoleStruct my_console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
+    Console* const my_console = application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
     GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
@@ -298,7 +298,7 @@ TEST(set_must_set_global_pitch, set_pitch)
 
     yli::ontology::SceneStruct scene_struct;
     // Creating a `Scene` creates a default `Camera` and makes it the currently active `Camera`.
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     const float pitch = 0.0f;
     yli::ontology::VariableStruct pitch_variable_struct(universe, &universe);
@@ -326,7 +326,7 @@ TEST(set_must_set_global_azimuth, set_azimuth)
     yli::ontology::Universe& universe = application.get_universe();
 
     ConsoleStruct my_console_struct(0, 39, 15, 0); // Some dummy dimensions.
-    Console* const my_console = application.get_generic_entity_factory().create_console(my_console_struct);
+    Console* const my_console = application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
     GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
@@ -337,7 +337,7 @@ TEST(set_must_set_global_azimuth, set_azimuth)
 
     yli::ontology::SceneStruct scene_struct;
     // Creating a `Scene` creates a default `Camera` and makes it the currently active `Camera`.
-    application.get_generic_entity_factory().create_scene(scene_struct);
+    application.get_abstract_entity_factory().create_scene(scene_struct);
 
     const float azimuth = 0.0f;
     yli::ontology::VariableStruct azimuth_variable_struct(universe, &universe);
