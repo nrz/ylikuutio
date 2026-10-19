@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "generic_console_lisp_function_overload.hpp"
+#include "abstract_console_lisp_function_overload.hpp"
 
 // Include standard headers
 #include <stdexcept> // std::runtime_error
@@ -34,7 +34,7 @@ namespace yli::ontology
     class Universe;
     class Scene;
 
-    GenericConsoleLispFunctionOverload::GenericConsoleLispFunctionOverload(
+    AbstractConsoleLispFunctionOverload::AbstractConsoleLispFunctionOverload(
         core::Application& application,
         Universe& universe,
         GenericParentModule* const console_lisp_function_parent_module)
@@ -42,32 +42,32 @@ namespace yli::ontology
           child_of_console_lisp_function(console_lisp_function_parent_module, *this)
     {
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::GenericConsoleLispFunctionOverload*";
+        this->type_string = "yli::ontology::AbstractConsoleLispFunctionOverload*";
     }
 
-    Entity* GenericConsoleLispFunctionOverload::get_parent() const
+    Entity* AbstractConsoleLispFunctionOverload::get_parent() const
     {
         return this->child_of_console_lisp_function.get_parent();
     }
 
-    std::size_t GenericConsoleLispFunctionOverload::get_number_of_children() const
+    std::size_t AbstractConsoleLispFunctionOverload::get_number_of_children() const
     {
-        return 0; // `GenericConsoleLispFunctionOverload` has no children.
+        return 0; // `AbstractConsoleLispFunctionOverload` has no children.
     }
 
-    std::size_t GenericConsoleLispFunctionOverload::get_number_of_descendants() const
+    std::size_t AbstractConsoleLispFunctionOverload::get_number_of_descendants() const
     {
-        return 0; // `GenericConsoleLispFunctionOverload` has no children.
+        return 0; // `AbstractConsoleLispFunctionOverload` has no children.
     }
 
-    Scene* GenericConsoleLispFunctionOverload::get_scene() const
+    Scene* AbstractConsoleLispFunctionOverload::get_scene() const
     {
         const Entity* const console_lisp_function_parent = this->get_parent();
 
         if (console_lisp_function_parent == nullptr) [[unlikely]]
         {
             throw std::runtime_error(
-                "ERROR: `GenericConsoleLispFunctionOverload::get_scene`: `console_lisp_function_parent` is `nullptr`!");
+                "ERROR: `AbstractConsoleLispFunctionOverload::get_scene`: `console_lisp_function_parent` is `nullptr`!");
         }
 
         return console_lisp_function_parent->get_scene();

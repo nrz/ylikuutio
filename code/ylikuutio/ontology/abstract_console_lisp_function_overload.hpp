@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_ABSTRACT_CONSOLE_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_ABSTRACT_CONSOLE_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
 #include "abstract_lisp_function_overload.hpp"
 #include "child_module.hpp"
@@ -42,22 +42,22 @@ namespace yli::ontology
     class Universe;
     class Scene;
 
-    class GenericConsoleLispFunctionOverload : public AbstractLispFunctionOverload
+    class AbstractConsoleLispFunctionOverload : public AbstractLispFunctionOverload
     {
     public:
-        GenericConsoleLispFunctionOverload(
+        AbstractConsoleLispFunctionOverload(
             core::Application& application,
             Universe& universe,
             GenericParentModule* console_lisp_function_parent_module);
 
-        GenericConsoleLispFunctionOverload(const GenericConsoleLispFunctionOverload&) = delete;
+        AbstractConsoleLispFunctionOverload(const AbstractConsoleLispFunctionOverload&) = delete;
 
         // Delete copy constructor.
-        GenericConsoleLispFunctionOverload& operator=(const GenericConsoleLispFunctionOverload&) = delete;
+        AbstractConsoleLispFunctionOverload& operator=(const AbstractConsoleLispFunctionOverload&) = delete;
 
         // Delete copy assignment.
 
-        ~GenericConsoleLispFunctionOverload() override = default;
+        ~AbstractConsoleLispFunctionOverload() override = default;
 
         template<typename T1, std::size_t DataSize>
         friend class memory::MemoryAllocator;

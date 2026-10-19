@@ -36,7 +36,7 @@
 
 namespace yli::ontology
 {
-    class GenericConsoleLispFunctionOverload;
+    class AbstractConsoleLispFunctionOverload;
 }
 
 namespace yli::memory
@@ -190,7 +190,7 @@ namespace yli::memory
     };
 
     template<std::size_t DataSize>
-    class MemoryAllocator<ontology::GenericConsoleLispFunctionOverload, DataSize> : public GenericMemoryAllocator
+    class MemoryAllocator<ontology::AbstractConsoleLispFunctionOverload, DataSize> : public GenericMemoryAllocator
     {
     public:
         explicit MemoryAllocator(const int datatype)
@@ -209,9 +209,9 @@ namespace yli::memory
         MemoryAllocator& operator=(const MemoryAllocator&) = delete; // Delete copy assignment.
 
         template<typename... Args>
-        ontology::GenericConsoleLispFunctionOverload* build_in(Args&&... args)
+        ontology::AbstractConsoleLispFunctionOverload* build_in(Args&&... args)
         {
-            ontology::GenericConsoleLispFunctionOverload* function_overload =
+            ontology::AbstractConsoleLispFunctionOverload* function_overload =
                     new ontology::ConsoleLispFunctionOverload(std::forward<Args>(args)...);
 
             if (this->free_slotID_queue.empty())
@@ -250,7 +250,7 @@ namespace yli::memory
 
     private:
         const int datatype;
-        std::vector<ontology::GenericConsoleLispFunctionOverload*> instances;
+        std::vector<ontology::AbstractConsoleLispFunctionOverload*> instances;
         std::queue<std::size_t> free_slotID_queue;
     };
 }

@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_CONSOLE_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CONSOLE_LISP_FUNCTION_OVERLOAD_HPP_INCLUDED
 
-#include "generic_console_lisp_function_overload.hpp"
+#include "abstract_console_lisp_function_overload.hpp"
 #include "console.hpp"
 #include "console_lisp_function.hpp"
 #include "result.hpp"
@@ -64,14 +64,14 @@ namespace yli::ontology
     class GenericParentModule;
 
     template<typename... Types>
-    class ConsoleLispFunctionOverload final : public GenericConsoleLispFunctionOverload
+    class ConsoleLispFunctionOverload final : public AbstractConsoleLispFunctionOverload
     {
         ConsoleLispFunctionOverload(
             core::Application& application,
             Universe& universe,
             GenericParentModule* const console_lisp_function_parent_module,
             std::optional<data::AnyValue> (*callback)(Types...))
-            : GenericConsoleLispFunctionOverload(application, universe, console_lisp_function_parent_module),
+            : AbstractConsoleLispFunctionOverload(application, universe, console_lisp_function_parent_module),
               callback(callback)
         {
             // `Entity` member variables begin here.

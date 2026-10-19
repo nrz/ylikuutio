@@ -34,11 +34,11 @@
 
 namespace yli::ontology
 {
-    class GenericConsoleLispFunctionOverload;
+    class AbstractConsoleLispFunctionOverload;
 }
 
 using yli::ontology::Console;
-using yli::ontology::GenericConsoleLispFunctionOverload;
+using yli::ontology::AbstractConsoleLispFunctionOverload;
 using yli::ontology::ConsoleStruct;
 
 TEST(variables_console_lisp_function_overload_must_function_appropriately, variables)
@@ -52,7 +52,7 @@ TEST(variables_console_lisp_function_overload_must_function_appropriately, varia
     ASSERT_NE(my_console, nullptr);
 
     const std::string console_lisp_function_name = "variables";
-    GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
+    AbstractConsoleLispFunctionOverload* const console_lisp_function_overload =
             hirvi_application.get_entity_factory().create_console_lisp_function_overload(
                 console_lisp_function_name,
                 yli::ontology::Request(my_console),
@@ -77,7 +77,7 @@ TEST(set_console_lisp_function_overload_must_function_appropriately, set)
     ASSERT_NE(my_console, nullptr);
 
     const std::string console_lisp_function_name = "set";
-    GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
+    AbstractConsoleLispFunctionOverload* const console_lisp_function_overload =
             hirvi_application.get_entity_factory().create_console_lisp_function_overload(
                 console_lisp_function_name,
                 yli::ontology::Request(my_console),
@@ -98,7 +98,7 @@ TEST(set_must_set_global_x, set_x)
     Console* const my_console = hirvi_application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
-    GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
+    AbstractConsoleLispFunctionOverload* const console_lisp_function_overload =
             hirvi_application.get_entity_factory().
             create_console_lisp_function_overload(
                 console_lisp_function_name,
@@ -142,7 +142,7 @@ TEST(set_must_set_global_y, set_y)
     Console* const my_console = hirvi_application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
-    GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
+    AbstractConsoleLispFunctionOverload* const console_lisp_function_overload =
             hirvi_application.get_entity_factory().create_console_lisp_function_overload(
                 console_lisp_function_name,
                 yli::ontology::Request(my_console),
@@ -185,7 +185,7 @@ TEST(set_must_set_global_z, set_z)
     Console* const my_console = hirvi_application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
-    GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
+    AbstractConsoleLispFunctionOverload* const console_lisp_function_overload =
             hirvi_application.get_entity_factory().create_console_lisp_function_overload(
                 console_lisp_function_name,
                 yli::ontology::Request(my_console),
@@ -228,7 +228,7 @@ TEST(set_must_set_global_roll, set_roll)
     Console* const my_console = hirvi_application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
-    GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
+    AbstractConsoleLispFunctionOverload* const console_lisp_function_overload =
             hirvi_application.get_entity_factory().create_console_lisp_function_overload(
                 console_lisp_function_name,
                 yli::ontology::Request(my_console),
@@ -270,7 +270,7 @@ TEST(set_must_set_global_yaw, set_yaw)
     Console* const my_console = hirvi_application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
-    GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
+    AbstractConsoleLispFunctionOverload* const console_lisp_function_overload =
             hirvi_application.get_entity_factory().create_console_lisp_function_overload(
                 console_lisp_function_name,
                 yli::ontology::Request(my_console),
@@ -312,7 +312,7 @@ TEST(set_must_set_global_pitch, set_pitch)
     Console* const my_console = hirvi_application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
-    GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
+    AbstractConsoleLispFunctionOverload* const console_lisp_function_overload =
             hirvi_application.get_entity_factory().create_console_lisp_function_overload(
                 console_lisp_function_name,
                 yli::ontology::Request(my_console),
@@ -354,7 +354,7 @@ TEST(set_must_set_global_azimuth, set_azimuth)
     Console* const my_console = hirvi_application.get_abstract_entity_factory().create_console(my_console_struct);
 
     const std::string console_lisp_function_name = "set";
-    GenericConsoleLispFunctionOverload* const console_lisp_function_overload =
+    AbstractConsoleLispFunctionOverload* const console_lisp_function_overload =
             hirvi_application.get_entity_factory().create_console_lisp_function_overload(
                 console_lisp_function_name,
                 yli::ontology::Request(my_console),

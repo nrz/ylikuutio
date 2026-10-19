@@ -63,7 +63,7 @@
 #include "console_callback_parameter.hpp"
 #include "compute_task.hpp"
 #include "console_lisp_function.hpp"
-#include "generic_console_lisp_function_overload.hpp"
+#include "abstract_console_lisp_function_overload.hpp"
 #include "request.hpp"
 #include "request_resolver.hpp"
 #include "variable_struct.hpp"
@@ -769,7 +769,7 @@ namespace yli::ontology
         }
 
         template<typename... Args>
-        GenericConsoleLispFunctionOverload* create_console_lisp_function_overload(
+        AbstractConsoleLispFunctionOverload* create_console_lisp_function_overload(
             const std::string& name,
             const Request<Console>& console_request,
             std::optional<data::AnyValue> (*callback)(Args...))
@@ -824,13 +824,13 @@ namespace yli::ontology
             auto& allocator =
                     static_cast<memory::GenericConsoleLispFunctionOverloadMemoryAllocator&>(generic_allocator);
 
-            GenericConsoleLispFunctionOverload* const generic_console_lisp_function_overload = allocator.build_in(
+            AbstractConsoleLispFunctionOverload* const abstract_console_lisp_function_overload = allocator.build_in(
                 this->application,
                 this->get_universe(),
                 &console_lisp_function->parent_of_generic_console_lisp_function_overloads,
                 callback);
-            generic_console_lisp_function_overload->set_global_name(name);
-            return generic_console_lisp_function_overload;
+            abstract_console_lisp_function_overload->set_global_name(name);
+            return abstract_console_lisp_function_overload;
         }
 
         template<SceneDerivative T, typename SceneDerivativeMemoryAllocator,

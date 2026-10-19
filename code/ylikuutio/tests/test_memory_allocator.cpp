@@ -24,7 +24,7 @@
 
 namespace yli::ontology
 {
-    class GenericConsoleLispFunctionOverload;
+    class AbstractConsoleLispFunctionOverload;
 }
 
 TEST(memory_allocator_must_be_initialized_appropriately, default_memory_allocator_universe_datatype)
@@ -57,9 +57,9 @@ TEST(memory_allocator_must_allocate_appropriately, default_memory_allocator_cons
     yli::ontology::Console* const my_console = application.get_abstract_entity_factory().create_console(
         my_console_struct);
 
-    yli::memory::MemoryAllocator<yli::ontology::GenericConsoleLispFunctionOverload> memory_allocator(
+    yli::memory::MemoryAllocator<yli::ontology::AbstractConsoleLispFunctionOverload> memory_allocator(
         yli::data::Datatype::CONSOLE_LISP_FUNCTION_OVERLOAD);
-    yli::ontology::GenericConsoleLispFunctionOverload* console_lisp_function_overload =
+    yli::ontology::AbstractConsoleLispFunctionOverload* console_lisp_function_overload =
             memory_allocator.build_in(
                 application,
                 application.get_universe(),

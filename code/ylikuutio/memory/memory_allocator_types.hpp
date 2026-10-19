@@ -59,7 +59,7 @@
 #include "code/ylikuutio/ontology/console_callback_parameter.hpp"
 #include "code/ylikuutio/ontology/compute_task.hpp"
 #include "code/ylikuutio/ontology/console_lisp_function.hpp"
-#include "code/ylikuutio/ontology/generic_console_lisp_function_overload.hpp"
+#include "code/ylikuutio/ontology/abstract_console_lisp_function_overload.hpp"
 
 namespace yli::memory
 {
@@ -104,7 +104,7 @@ namespace yli::memory
     using ConsoleCallbackParameterMemoryAllocator    = MemoryAllocator<ontology::ConsoleCallbackParameter, 256>;
     using ComputeTaskMemoryAllocator                 = MemoryAllocator<ontology::ComputeTask, 256>;
     using ConsoleLispFunctionMemoryAllocator                = MemoryAllocator<ontology::ConsoleLispFunction, 256>;
-    using GenericConsoleLispFunctionOverloadMemoryAllocator = MemoryAllocator<ontology::GenericConsoleLispFunctionOverload, 256>;
+    using GenericConsoleLispFunctionOverloadMemoryAllocator = MemoryAllocator<ontology::AbstractConsoleLispFunctionOverload, 256>;
 }
 
 #endif

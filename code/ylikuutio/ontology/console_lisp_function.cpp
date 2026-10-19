@@ -17,7 +17,7 @@
 
 #include "console_lisp_function.hpp"
 #include "console.hpp"
-#include "generic_console_lisp_function_overload.hpp"
+#include "abstract_console_lisp_function_overload.hpp"
 #include "result.hpp"
 #include "console_lisp_function_struct.hpp"
 #include "get_number_of_descendants.hpp"
@@ -87,27 +87,27 @@ namespace yli::ontology
     std::optional<data::AnyValue> ConsoleLispFunction::execute(const std::vector<std::string>& parameter_vector) const
     {
         // The execution of a `ConsoleLispFunction` proceeds as follows:
-        // The execution of `GenericConsoleLispFunctionOverload` children of
+        // The execution of `AbstractConsoleLispFunctionOverload` children of
         // this `ConsoleLispFunction` is attempted in ID order, in
         // the order of the child pointer vector.
         //
         // If the variable binding succeeds, then that
-        // `GenericConsoleLispFunctionOverload` is called and its return value
+        // `AbstractConsoleLispFunctionOverload` is called and its return value
         // is returned.
         //
         // If the variable binding fails, then next
-        // `GenericConsoleLispFunctionOverload` in attempted etc.
+        // `AbstractConsoleLispFunctionOverload` in attempted etc.
         //
-        // If variable binding fails for all `GenericConsoleLispFunctionOverload`s,
+        // If variable binding fails for all `AbstractConsoleLispFunctionOverload`s,
         // then `std::nullopt` is returned.
         //
-        // If there are no `GenericConsoleLispFunctionOverload`s,
+        // If there are no `AbstractConsoleLispFunctionOverload`s,
         // then `std::nullopt` is returned as well.
 
         for (const auto it : this->parent_of_generic_console_lisp_function_overloads.child_pointer_vector)
         {
             Result result =
-                    static_cast<GenericConsoleLispFunctionOverload*>(it)->execute(parameter_vector);
+                    static_cast<AbstractConsoleLispFunctionOverload*>(it)->execute(parameter_vector);
 
             if (result)
             {
