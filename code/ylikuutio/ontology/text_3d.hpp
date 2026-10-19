@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_TEXT_3D_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_TEXT_3D_HPP_INCLUDED
 
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "child_module.hpp"
 #include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
@@ -46,7 +46,7 @@ namespace yli::ontology
     class GlyphObject;
     struct Text3dStruct;
 
-    class Text3d final : public Movable
+    class Text3d final : public AbstractMovable
     {
     public:
         // Disable all `GlyphObject`s of `text_3d`,

@@ -33,7 +33,7 @@
 namespace yli::ontology
 {
     class Entity;
-    class Movable;
+    class AbstractMovable;
     class Universe;
     class Ecosystem;
     class Scene;
@@ -145,15 +145,15 @@ namespace yli::data
     }
 
     template<>
-    inline std::string get_type_string(ontology::Movable*)
+    inline std::string get_type_string(ontology::AbstractMovable*)
     {
-        return "yli::ontology::Movable*";
+        return "yli::ontology::AbstractMovable*";
     }
 
     template<>
-    inline std::string get_type_string(const ontology::Movable*)
+    inline std::string get_type_string(const ontology::AbstractMovable*)
     {
-        return "const yli::ontology::Movable*";
+        return "const yli::ontology::AbstractMovable*";
     }
 
     template<>

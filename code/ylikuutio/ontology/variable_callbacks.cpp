@@ -17,7 +17,7 @@
 
 #include "entity.hpp"
 #include "variable.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -167,7 +167,7 @@ namespace yli::ontology
             Entity& entity,
             Variable& variable)
     {
-        Movable* const movable = dynamic_cast<Movable*>(&entity);
+        AbstractMovable* const movable = dynamic_cast<AbstractMovable*>(&entity);
 
         if (movable != nullptr)
         {

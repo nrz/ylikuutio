@@ -470,13 +470,13 @@ TEST(any_value_must_be_initialized_appropriately, object_as_movable)
 {
     const mock::MockApplication application;
     const yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
-    yli::ontology::Movable* const object_movable = application.get_generic_entity_factory().create_object(
+    yli::ontology::AbstractMovable* const object_movable = application.get_generic_entity_factory().create_object(
             object_struct);
 
     const auto movable_any_value = yli::data::AnyValue(*object_movable);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Movable>>(movable_any_value.data));
-    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::Movable>>(movable_any_value.data).get(), *object_movable);
-    ASSERT_EQ(std::strcmp(movable_any_value.get_datatype().c_str(), "yli::ontology::Movable&"), 0);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::AbstractMovable>>(movable_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<yli::ontology::AbstractMovable>>(movable_any_value.data).get(), *object_movable);
+    ASSERT_EQ(std::strcmp(movable_any_value.get_datatype().c_str(), "yli::ontology::AbstractMovable&"), 0);
     ASSERT_EQ(movable_any_value.get_entity_ref(), *object_movable);
     ASSERT_EQ(movable_any_value.get_const_entity_ref(), *object_movable);
 }
@@ -485,13 +485,13 @@ TEST(any_value_must_be_initialized_appropriately, object_as_const_movable)
 {
     const mock::MockApplication application;
     const yli::ontology::ObjectStruct object_struct { yli::ontology::Request<yli::ontology::Scene>(nullptr) };
-    const yli::ontology::Movable* const const_object_movable = application.get_generic_entity_factory().create_object(
+    const yli::ontology::AbstractMovable* const const_object_movable = application.get_generic_entity_factory().create_object(
             object_struct);
 
     const auto const_movable_any_value = yli::data::AnyValue(*const_object_movable);
-    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const yli::ontology::Movable>>(const_movable_any_value.data));
-    ASSERT_EQ(std::get<std::reference_wrapper<const yli::ontology::Movable>>(const_movable_any_value.data).get(), *const_object_movable);
-    ASSERT_EQ(std::strcmp(const_movable_any_value.get_datatype().c_str(), "const yli::ontology::Movable&"), 0);
+    ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<const yli::ontology::AbstractMovable>>(const_movable_any_value.data));
+    ASSERT_EQ(std::get<std::reference_wrapper<const yli::ontology::AbstractMovable>>(const_movable_any_value.data).get(), *const_object_movable);
+    ASSERT_EQ(std::strcmp(const_movable_any_value.get_datatype().c_str(), "const yli::ontology::AbstractMovable&"), 0);
     ASSERT_EQ(const_movable_any_value.get_const_entity_ref(), *const_object_movable);
 }
 

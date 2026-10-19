@@ -22,13 +22,13 @@
 #include "child_module.hpp"
 #include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
 
-// `MovableController` is a general purpose AI and controller class for `Movable`s.
-// Each `MovableController` instance may do some actions for the `Movable`s bound to the `MovableController`.
+// `MovableController` is a general purpose AI and controller class for `AbstractMovable`s.
+// Each `MovableController` instance may do some actions for the `AbstractMovable`s bound to the `MovableController`.
 // The actions the defined by the `CallbackEngine` master to which `MovableController` binds itself
 // with its `apprentice_of_callback_engine`.
 //
@@ -36,18 +36,18 @@
 // In the future, some of the callbacks will process YliLisp, with an API offered
 // to the YliLisp scripts. The API still needs to be defined.
 //
-// `MovableController` does not own the `Movable`s it controls.
-// Therefore, `MovableController`-`Movable` relationship is not a parent-child relationship.
-// Instead, `MovableController`-`Movable` relationship is a master-apprentice relationship.
+// `MovableController` does not own the `AbstractMovable`s it controls.
+// Therefore, `MovableController`-`AbstractMovable` relationship is not a parent-child relationship.
+// Instead, `MovableController`-`AbstractMovable` relationship is a master-apprentice relationship.
 // Therefore, binding is done using `yli::hierarchy::bind_apprentice_to_master`.
 //
-// Each `MovableController` acts upon its `Movable`s immediately after the physics simulation,
+// Each `MovableController` acts upon its `AbstractMovable`s immediately after the physics simulation,
 // still before rendering, on each frame.
 //
 // `MovableController` actions should not be considered limited to the actions of living or
-// conscious beings. For example, a planet `Movable` in a solar system may have a `MovableController`
-// that makes it orbit its host star, and likewise a moon `Movable` may have a `MovableController` that
-// makes it orbit its host planet. An electrical module `Movable` (e.g. a synthetizer module)
+// conscious beings. For example, a planet `AbstractMovable` in a solar system may have a `MovableController`
+// that makes it orbit its host star, and likewise a moon `AbstractMovable` may have a `MovableController` that
+// makes it orbit its host planet. An electrical module `AbstractMovable` (e.g. a synthetizer module)
 // may have a `MovableController` that defines how it processes its inputs and what kind of output it sends.
 
 namespace yli::core
@@ -107,7 +107,7 @@ namespace yli::ontology
     };
 
     template<>
-        inline GenericMasterModule* MovableController::get_generic_master_module<Movable>()
+        inline GenericMasterModule* MovableController::get_generic_master_module<AbstractMovable>()
         {
             return &this->master_of_movables;
         }

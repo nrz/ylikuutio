@@ -25,10 +25,10 @@ namespace yli::ontology
 
     void RigidBodyModule::add_rigid_body_module_to_scene(Scene& scene) const
     {
-        // `RigidBodyModule` can not ask the `Scene` using `Entity::get_scene`, because `Movable`
+        // `RigidBodyModule` can not ask the `Scene` using `Entity::get_scene`, because `AbstractMovable`
         // is not initialized before initialization of `RigidBodyModule` composited in it.
         // Trying to do that would lead to calling pure virtual method and program termination.
-        // Therefore `scene` needs to be passed to `Movable` constructor.
+        // Therefore `scene` needs to be passed to `AbstractMovable` constructor.
 
         // Add the rigid body to the dynamics world.
         scene.add_rigid_body_module(*this, scene);

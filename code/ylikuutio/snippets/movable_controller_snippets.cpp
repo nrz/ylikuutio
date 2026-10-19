@@ -17,7 +17,7 @@
 
 #include "movable_controller_snippets.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/ontology/movable.hpp"
+#include "code/ylikuutio/ontology/abstract_movable.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/holobiont.hpp"
 
@@ -56,7 +56,7 @@ namespace yli::snippets
     {
         if (any_value.has_movable_ref())
         {
-            ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::AbstractMovable& movable = any_value.get_movable_ref();
             movable.location.xyz.x += movable.speed;
             return std::nullopt;
         }
@@ -74,7 +74,7 @@ namespace yli::snippets
     {
         if (any_value.has_movable_ref())
         {
-            ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::AbstractMovable& movable = any_value.get_movable_ref();
             movable.location.xyz.x -= movable.speed;
             return std::nullopt;
         }
@@ -92,7 +92,7 @@ namespace yli::snippets
     {
         if (any_value.has_movable_ref())
         {
-            ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::AbstractMovable& movable = any_value.get_movable_ref();
             movable.location.xyz.y += movable.speed;
             return std::nullopt;
         }
@@ -110,7 +110,7 @@ namespace yli::snippets
     {
         if (any_value.has_movable_ref())
         {
-            ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::AbstractMovable& movable = any_value.get_movable_ref();
             movable.location.xyz.y -= movable.speed;
             return std::nullopt;
         }
@@ -128,7 +128,7 @@ namespace yli::snippets
     {
         if (any_value.has_movable_ref())
         {
-            ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::AbstractMovable& movable = any_value.get_movable_ref();
             movable.orientation.yaw = 0.0f;
             return std::nullopt;
         }
@@ -146,7 +146,7 @@ namespace yli::snippets
     {
         if (any_value.has_movable_ref())
         {
-            ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::AbstractMovable& movable = any_value.get_movable_ref();
             movable.orientation.yaw = static_cast<float>(std::numbers::pi);
             return std::nullopt;
         }
@@ -164,7 +164,7 @@ namespace yli::snippets
     {
         if (any_value.has_movable_ref())
         {
-            ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::AbstractMovable& movable = any_value.get_movable_ref();
             movable.orientation.yaw = 0.5f * static_cast<float>(std::numbers::pi);
             return std::nullopt;
         }
@@ -182,7 +182,7 @@ namespace yli::snippets
     {
         if (any_value.has_movable_ref())
         {
-            ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::AbstractMovable& movable = any_value.get_movable_ref();
             movable.orientation.yaw = -0.5f * static_cast<float>(std::numbers::pi);
             return std::nullopt;
         }
@@ -272,7 +272,7 @@ namespace yli::snippets
     {
         if (any_value.has_movable_ref())
         {
-            ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::AbstractMovable& movable = any_value.get_movable_ref();
             movable.orientation.yaw -= 0.1f * static_cast<float>(std::numbers::pi);
             return std::nullopt;
         }
@@ -290,7 +290,7 @@ namespace yli::snippets
     {
         if (any_value.has_movable_ref())
         {
-            ontology::Movable& movable = any_value.get_movable_ref();
+            ontology::AbstractMovable& movable = any_value.get_movable_ref();
             movable.orientation.yaw += 0.1f * static_cast<float>(std::numbers::pi);
             return std::nullopt;
         }

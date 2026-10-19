@@ -70,7 +70,7 @@ namespace yli::ontology
         const BiontStruct& biont_struct,
         GenericParentModule* const holobiont_parent_module,
         GenericMasterModule* const symbiont_species_master_module)
-        : Movable(
+        : AbstractMovable(
               application,
               universe,
               biont_struct,

@@ -393,7 +393,7 @@ TEST(object_must_bind_to_movable_controller_appropriately, headless_with_parent_
             object_struct);
 
     ASSERT_EQ(movable_controller->get_number_of_apprentices(), 0);
-    yli::ontology::Movable::bind_to_new_movable_controller(*object, *movable_controller);
+    yli::ontology::AbstractMovable::bind_to_new_movable_controller(*object, *movable_controller);
     ASSERT_EQ(movable_controller->get_number_of_apprentices(), 1);
 
     ASSERT_EQ(object->apprentice_of_movable_controller.get_master(), movable_controller);

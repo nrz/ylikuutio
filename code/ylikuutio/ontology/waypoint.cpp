@@ -45,7 +45,7 @@ namespace yli::ontology
         const WaypointStruct& waypoint_struct,
         GenericParentModule* const parent_module,
         GenericMasterModule* const movable_controller_master_module)
-        : Movable(
+        : AbstractMovable(
               application,
               universe,
               waypoint_struct,

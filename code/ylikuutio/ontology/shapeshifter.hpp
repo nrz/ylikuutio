@@ -20,7 +20,7 @@
 
 #include "child_module.hpp"
 #include "apprentice_module.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -39,7 +39,7 @@ namespace yli::ontology
     class Scene;
     struct ShapeshifterStruct;
 
-    class Shapeshifter : public Movable
+    class Shapeshifter : public AbstractMovable
     {
     public:
         Shapeshifter(

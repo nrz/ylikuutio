@@ -63,7 +63,7 @@ namespace hirvi::data
         GENERIC_LISP_FUNCTION_OVERLOAD = 113,
         CAPABILITY                     = 114,
         MESH_PROVIDER       = 116,
-        MOVABLE             = 117,
+        ABSTRACT_MOVABLE    = 117,
         // `yli::ontology` datatypes, 'universe' path.
         UNIVERSE            = 119,
         // `yli::ontology` datatypes, 'variable' path.

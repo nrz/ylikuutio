@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_CAMERA_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_CAMERA_HPP_INCLUDED
 
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "child_module.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -84,7 +84,7 @@ namespace yli::ontology
     class GenericMasterModule;
     struct CameraStruct;
 
-    class Camera final : public Movable
+    class Camera final : public AbstractMovable
     {
     private:
         Camera(

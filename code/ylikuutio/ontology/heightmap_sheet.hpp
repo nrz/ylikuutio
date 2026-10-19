@@ -19,7 +19,7 @@
 #define YLI_ONTOLOGY_HEIGHTMAP_SHEET_HPP_INCLUDED
 
 #include "child_module.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "heightmap_sheet_struct.hpp"
 
 // Include standard headers
@@ -40,7 +40,7 @@ namespace yli::ontology
     class Heightmap;
     struct HeightmapSheetStruct;
 
-    class HeightmapSheet final : public Movable
+    class HeightmapSheet final : public AbstractMovable
     {
     public:
         HeightmapSheet(

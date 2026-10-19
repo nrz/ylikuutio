@@ -46,7 +46,7 @@ namespace yli::ontology
         GenericParentModule* const scene_parent_module,
         GenericMasterModule* const movable_controller_master_module,
         GenericMasterModule* const shapeshifter_sequence_master_module)
-        : Movable(
+        : AbstractMovable(
               application,
               universe,
               shapeshifter_struct,

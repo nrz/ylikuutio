@@ -46,7 +46,7 @@
 namespace yli::ontology
 {
     class MovableController;
-    class Movable;
+    class AbstractMovable;
     class Pipeline;
     class Symbiosis;
 }

@@ -35,7 +35,7 @@
 namespace yli::ontology
 {
     class Entity;
-    class Movable;
+    class AbstractMovable;
     class Universe;
     class Ecosystem;
     class Scene;
@@ -78,9 +78,9 @@ namespace yli::data
 
         bool has_const_movable_ref() const;
 
-        ontology::Movable& get_movable_ref() const;
+        ontology::AbstractMovable& get_movable_ref() const;
 
-        const ontology::Movable& get_const_movable_ref() const;
+        const ontology::AbstractMovable& get_const_movable_ref() const;
 
         bool set_new_value(const std::string& value_string);
 
@@ -150,9 +150,9 @@ namespace yli::data
         // Ontology.
         explicit AnyValue(ontology::Entity& entity_ref);
 
-        explicit AnyValue(ontology::Movable& movable_ref);
+        explicit AnyValue(ontology::AbstractMovable& movable_ref);
 
-        explicit AnyValue(const ontology::Movable& const_movable_ref);
+        explicit AnyValue(const ontology::AbstractMovable& const_movable_ref);
 
         explicit AnyValue(ontology::Universe& universe_ref);
 
@@ -217,8 +217,8 @@ namespace yli::data
             // Ontology.
             // `yli::ontology` datatypes, 'entity' path.
             std::reference_wrapper<ontology::Entity>,
-            std::reference_wrapper<ontology::Movable>,
-            std::reference_wrapper<const yli::ontology::Movable>,
+            std::reference_wrapper<ontology::AbstractMovable>,
+            std::reference_wrapper<const yli::ontology::AbstractMovable>,
             // `yli::ontology` datatypes, 'universe' path.
             std::reference_wrapper<ontology::Universe>,
             // `yli::ontology` datatypes, 'ecosystem' path.

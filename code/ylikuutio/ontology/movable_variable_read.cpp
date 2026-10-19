@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "movable_variable_read.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "universe.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
@@ -36,7 +36,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> read_cartesian_coordinates(Entity& entity)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             return data::AnyValue(movable->location.xyz);
         }
@@ -51,7 +51,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> read_x(Entity& entity)
     {
-        if (const auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (const auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             return data::AnyValue(movable->location.get_x());
         }
@@ -66,7 +66,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> read_y(Entity& entity)
     {
-        if (const auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (const auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             return data::AnyValue(movable->location.get_y());
         }
@@ -81,7 +81,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> read_z(Entity& entity)
     {
-        if (const auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (const auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             return data::AnyValue(movable->location.get_z());
         }
@@ -96,7 +96,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> read_up(Entity& entity)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             return data::AnyValue(movable->up);
         }
@@ -111,7 +111,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> read_right(Entity& entity)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             return data::AnyValue(movable->right);
         }
@@ -126,7 +126,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> read_roll(Entity& entity)
     {
-        if (const auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (const auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             return data::AnyValue(movable->orientation.roll);
         }
@@ -141,7 +141,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> read_yaw(Entity& entity)
     {
-        if (const auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (const auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             return data::AnyValue(movable->orientation.yaw);
         }
@@ -156,7 +156,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> read_pitch(Entity& entity)
     {
-        if (const auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (const auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             return data::AnyValue(movable->orientation.pitch);
         }
@@ -171,7 +171,7 @@ namespace yli::ontology
 
     std::optional<data::AnyValue> read_azimuth(Entity& entity)
     {
-        if (const auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (const auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             const float azimuth = 0.5f * static_cast<float>(std::numbers::pi) - movable->orientation.yaw;
             return data::AnyValue(azimuth);

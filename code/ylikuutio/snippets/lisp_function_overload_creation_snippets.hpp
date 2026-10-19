@@ -23,7 +23,7 @@
 
 // `yli::ontology` files included in the canonical order.
 #include "code/ylikuutio/ontology/entity.hpp"
-#include "code/ylikuutio/ontology/movable.hpp"
+#include "code/ylikuutio/ontology/abstract_movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
@@ -110,12 +110,12 @@ namespace yli::snippets
     void create_console_lisp_function_overloads_for_entity_binding(EntityFactoryType& entity_factory,
                                                                    ontology::Console& console)
     {
-        // `Entity` binding callbacks, `Movable`.
+        // `Entity` binding callbacks, `AbstractMovable`.
         entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),
-                                                             &ontology::Movable::bind_to_new_movable_controller);
+                                                             &ontology::AbstractMovable::bind_to_new_movable_controller);
         entity_factory.create_console_lisp_function_overload("unbind-from-movable-controller",
                                                              ontology::Request(&console),
-                                                             &ontology::Movable::unbind_from_movable_controller);
+                                                             &ontology::AbstractMovable::unbind_from_movable_controller);
 
         // `Entity` binding callbacks, `Pipeline`.
         entity_factory.create_console_lisp_function_overload("bind", ontology::Request(&console),

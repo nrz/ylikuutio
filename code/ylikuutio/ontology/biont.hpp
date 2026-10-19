@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_BIONT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_BIONT_HPP_INCLUDED
 
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "child_module.hpp"
 #include "apprentice_module.hpp"
 
@@ -46,7 +46,7 @@ namespace yli::ontology
     class GenericMasterModule;
     struct BiontStruct;
 
-    class Biont final : public Movable
+    class Biont final : public AbstractMovable
     {
     private:
         Biont(

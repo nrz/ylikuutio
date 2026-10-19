@@ -48,7 +48,7 @@
 namespace yli::ontology
 {
     class MovableController;
-    class Movable;
+    class AbstractMovable;
     class Pipeline;
     class Symbiosis;
 }
@@ -142,7 +142,7 @@ TEST(police_bear_must_be_initialized_appropriately, hirvi_police_bear)
         hirvi::data::POLICE_BEAR,
         Request(helsinki_scene),
         police_bear_png_police_bear_struct1,
-        helsinki_non_emancipated_control_center->get_generic_master_module<Movable>(),
+        helsinki_non_emancipated_control_center->get_generic_master_module<AbstractMovable>(),
         police_bear1_walk_struct,
         police_bear1_trot_struct,
         police_bear1_canter_struct,

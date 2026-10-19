@@ -19,7 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_WAYPOINT_HPP_INCLUDED
 
 #include "child_module.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -38,7 +38,7 @@ namespace yli::ontology
     class Scene;
     struct WaypointStruct;
 
-    class Waypoint final : public Movable
+    class Waypoint final : public AbstractMovable
     {
     public:
         Waypoint(

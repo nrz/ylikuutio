@@ -31,7 +31,7 @@
 
 namespace yli::ontology
 {
-    class Movable;
+    class AbstractMovable;
     class CallbackEngine;
 }
 
@@ -50,7 +50,7 @@ TEST(movable_controller_must_be_initialized_appropriately, headless_with_parent_
     ASSERT_NE(movable_controller, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(movable_controller) % alignof(yli::ontology::MovableController), 0);
 
-    ASSERT_NE(movable_controller->get_generic_master_module<yli::ontology::Movable>(), nullptr);
+    ASSERT_NE(movable_controller->get_generic_master_module<yli::ontology::AbstractMovable>(), nullptr);
 
     // `Entity` member functions of `Universe`.
     ASSERT_EQ(application.get_universe().get_scene(), nullptr);

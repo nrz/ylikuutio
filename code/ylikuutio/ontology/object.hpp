@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_OBJECT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_OBJECT_HPP_INCLUDED
 
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "child_module.hpp"
 #include "apprentice_module.hpp"
 #include "object_struct.hpp"
@@ -50,7 +50,7 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
 
-    class Object : public Movable
+    class Object : public AbstractMovable
     {
     public:
         // Set pointer to `object` to `nullptr`, set parent according to the input,

@@ -20,7 +20,7 @@
 
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -45,7 +45,7 @@ namespace yli::ontology
     class HeightmapSheet;
     struct HeightmapStruct;
 
-    class Heightmap final : public Movable
+    class Heightmap final : public AbstractMovable
     {
     public:
         Heightmap(

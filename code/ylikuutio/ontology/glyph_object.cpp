@@ -46,7 +46,7 @@ namespace yli::ontology
         GenericParentModule* const scene_parent_module,
         GenericMasterModule* const glyph_master_module,
         GenericMasterModule* const text_3d_master_module)
-        : Movable(
+        : AbstractMovable(
               application,
               universe,
               glyph_object_struct,

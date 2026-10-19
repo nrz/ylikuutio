@@ -106,7 +106,7 @@ namespace yli::ontology
         GenericParentModule* const scene_parent_module,
         GenericMasterModule* const movable_controller_master_module,
         GenericMasterModule* const vector_font_master_module)
-        : Movable(
+        : AbstractMovable(
               application,
               universe,
               text_3d_struct,

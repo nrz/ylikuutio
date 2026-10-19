@@ -20,7 +20,7 @@
 #endif
 
 #include "camera.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "universe.hpp"
 #include "scene.hpp"
 #include "camera_struct.hpp"
@@ -60,7 +60,7 @@ namespace yli::ontology
         const CameraStruct& camera_struct,
         GenericParentModule* const scene_parent_module,
         GenericMasterModule* const movable_controller_master_module)
-        : Movable(
+        : AbstractMovable(
               application,
               universe,
               camera_struct,

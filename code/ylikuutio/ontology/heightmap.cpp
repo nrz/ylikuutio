@@ -41,7 +41,7 @@ namespace yli::ontology
         const HeightmapStruct& heightmap_struct,
         GenericParentModule* const scene_parent_module,
         GenericMasterModule* const movable_controller_master_module)
-        : Movable(
+        : AbstractMovable(
               application,
               universe,
               heightmap_struct,

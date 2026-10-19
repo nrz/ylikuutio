@@ -17,7 +17,7 @@
 
 #include "movable_variable_activation.hpp"
 #include "variable.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "universe.hpp"
 #include "holobiont.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -44,7 +44,7 @@ namespace yli::ontology
             Entity& entity,
             Variable& variable)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             if (const data::AnyValue& cartesian_coordinates_any_value = variable.variable_value; std::holds_alternative<std::reference_wrapper<glm::vec3>>(cartesian_coordinates_any_value.data))
             {
@@ -97,7 +97,7 @@ namespace yli::ontology
             Entity& entity,
             Variable& variable)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             const data::AnyValue& x_any_value = variable.variable_value;
 
@@ -141,7 +141,7 @@ namespace yli::ontology
             Entity& entity,
             Variable& variable)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             const data::AnyValue& y_any_value = variable.variable_value;
 
@@ -185,7 +185,7 @@ namespace yli::ontology
             Entity& entity,
             Variable& variable)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             const data::AnyValue& z_any_value = variable.variable_value;
 
@@ -229,7 +229,7 @@ namespace yli::ontology
             Entity& entity,
             Variable& variable)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             const data::AnyValue& roll_any_value = variable.variable_value;
 
@@ -264,7 +264,7 @@ namespace yli::ontology
             Entity& entity,
             Variable& variable)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             const data::AnyValue& yaw_any_value = variable.variable_value;
 
@@ -299,7 +299,7 @@ namespace yli::ontology
             Entity& entity,
             Variable& variable)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             const data::AnyValue& pitch_any_value = variable.variable_value;
 
@@ -334,7 +334,7 @@ namespace yli::ontology
             Entity& entity,
             Variable& variable)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             const data::AnyValue& azimuth_any_value = variable.variable_value;
 
@@ -369,7 +369,7 @@ namespace yli::ontology
             Entity& entity,
             Variable& variable)
     {
-        if (auto* const movable = dynamic_cast<Movable*>(&entity); movable != nullptr)
+        if (auto* const movable = dynamic_cast<AbstractMovable*>(&entity); movable != nullptr)
         {
             if (const data::AnyValue& scale_any_value = variable.variable_value; std::holds_alternative<float>(scale_any_value.data))
             {

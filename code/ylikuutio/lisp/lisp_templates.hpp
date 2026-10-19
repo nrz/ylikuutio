@@ -23,7 +23,7 @@
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/variable.hpp"
 #include "code/ylikuutio/ontology/movable_controller.hpp"
-#include "code/ylikuutio/ontology/movable.hpp"
+#include "code/ylikuutio/ontology/abstract_movable.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
@@ -388,7 +388,7 @@ namespace yli::lisp
         }
 
     template<>
-        inline std::optional<data::WrapAllButStrings<ontology::Movable&>::type> convert_string_to_value_and_advance_index<ontology::Movable&>(
+        inline std::optional<data::WrapAllButStrings<ontology::AbstractMovable&>::type> convert_string_to_value_and_advance_index<ontology::AbstractMovable&>(
                 ontology::Universe& universe,
                 ontology::Console&,
                 ontology::Entity*& environment,
@@ -402,7 +402,7 @@ namespace yli::lisp
 
             const std::string& my_string = parameter_vector.at(parameter_i++);
 
-            const auto value = dynamic_cast<ontology::Movable*>(universe.get_entity(my_string));
+            const auto value = dynamic_cast<ontology::AbstractMovable*>(universe.get_entity(my_string));
 
             if (value == nullptr)
             {
@@ -410,7 +410,7 @@ namespace yli::lisp
             }
 
             environment = value;
-            return data::WrapAllButStrings<ontology::Movable&>::type(*value);
+            return data::WrapAllButStrings<ontology::AbstractMovable&>::type(*value);
         }
 
     template<>

@@ -60,7 +60,7 @@
 namespace yli::ontology
 {
     class Entity;
-    class Movable;
+    class AbstractMovable;
 }
 
 namespace hirvi::core
@@ -668,7 +668,7 @@ namespace hirvi::core
             data::POLICE_BEAR,
             Request(helsinki_scene),
             police_bear_struct1,
-            helsinki_non_emancipated_control_center->get_generic_master_module<Movable>(),
+            helsinki_non_emancipated_control_center->get_generic_master_module<AbstractMovable>(),
             police_bear_walk_struct1,
             police_bear_trot_struct1,
             police_bear_canter_struct1,
@@ -722,7 +722,7 @@ namespace hirvi::core
             data::POLICE_CAR,
             Request(helsinki_scene),
             turbo_polizei_png_police_car_struct1,
-            helsinki_non_emancipated_control_center->get_generic_master_module<Movable>(),
+            helsinki_non_emancipated_control_center->get_generic_master_module<AbstractMovable>(),
             road_vehicle_struct1);
 
         if (turbo_polizei_png1 == nullptr)
@@ -754,7 +754,7 @@ namespace hirvi::core
             data::POLICE_CAR,
             Request(helsinki_scene),
             turbo_polizei_png_police_car_struct2,
-            helsinki_non_emancipated_control_center->get_generic_master_module<Movable>(),
+            helsinki_non_emancipated_control_center->get_generic_master_module<AbstractMovable>(),
             road_vehicle_struct2);
 
         if (turbo_polizei_png2 == nullptr)

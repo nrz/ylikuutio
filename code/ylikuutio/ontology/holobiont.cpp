@@ -57,7 +57,7 @@ namespace yli::ontology
         GenericParentModule* const scene_parent_module,
         GenericMasterModule* const movable_controller_master_module,
         GenericMasterModule* const symbiosis_master_module)
-        : Movable(
+        : AbstractMovable(
               application,
               universe,
               holobiont_struct,

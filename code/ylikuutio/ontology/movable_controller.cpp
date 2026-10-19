@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "movable_controller.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "universe.hpp"
 #include "callback_engine.hpp"
 #include "scene.hpp"
@@ -67,12 +67,12 @@ namespace yli::ontology
 
     std::size_t MovableController::get_number_of_children() const
     {
-        return 0; // `MovableController` has no children. `Movable`s controlled by `MovableController` are not its children.
+        return 0; // `MovableController` has no children. `AbstractMovable`s controlled by `MovableController` are not its children.
     }
 
     std::size_t MovableController::get_number_of_descendants() const
     {
-        return 0; // `MovableController` has no children. `Movable`s controlled by `MovableController` are not its children.
+        return 0; // `MovableController` has no children. `AbstractMovable`s controlled by `MovableController` are not its children.
     }
 
     Scene* MovableController::get_scene() const
@@ -82,7 +82,7 @@ namespace yli::ontology
 
     std::size_t MovableController::get_number_of_apprentices() const
     {
-        return this->master_of_movables.get_number_of_apprentices(); // `Movable`s controlled by `MovableController` are its apprentices.
+        return this->master_of_movables.get_number_of_apprentices(); // `AbstractMovable`s controlled by `MovableController` are its apprentices.
     }
 
     void MovableController::update() const
@@ -101,7 +101,7 @@ namespace yli::ontology
                 continue;
             }
 
-            if (auto* movable = static_cast<Movable*>(movable_apprentice_module->get_apprentice()); movable != nullptr)
+            if (auto* movable = static_cast<AbstractMovable*>(movable_apprentice_module->get_apprentice()); movable != nullptr)
             {
                 callback_engine_master->execute(data::AnyValue(*movable));
             }

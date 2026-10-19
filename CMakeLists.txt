@@ -781,8 +781,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/mission.cpp
     code/ylikuutio/ontology/mission.hpp
     code/ylikuutio/ontology/mission_struct.hpp
-    code/ylikuutio/ontology/movable.cpp
-    code/ylikuutio/ontology/movable.hpp
+    code/ylikuutio/ontology/abstract_movable.cpp
+    code/ylikuutio/ontology/abstract_movable.hpp
     code/ylikuutio/ontology/movable_controller.cpp
     code/ylikuutio/ontology/movable_controller.hpp
     code/ylikuutio/ontology/movable_controller_struct.hpp

@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "apprentice_module.hpp"
 #include "universe.hpp"
 #include "variable.hpp"
@@ -41,7 +41,7 @@
 #include <numbers>  // std::numbers::pi
 #include <optional> // std::optional
 
-// `Movable` is a mixin class, not intended to be instantiated.
+// `AbstractMovable` is a mixin class, not intended to be instantiated.
 
 namespace yli::core
 {
@@ -50,8 +50,8 @@ namespace yli::core
 
 namespace yli::ontology
 {
-    std::optional<data::AnyValue> Movable::bind_to_new_movable_controller(
-        Movable& movable,
+    std::optional<data::AnyValue> AbstractMovable::bind_to_new_movable_controller(
+        AbstractMovable& movable,
         MovableController& new_movable_controller) noexcept
     {
         // Set pointer to `movable` to `nullptr`, set movable_controller according to the input,
@@ -69,19 +69,19 @@ namespace yli::ontology
         else
         {
             std::cerr <<
-                    "ERROR: `Movable::bind_to_new_movable_controller`: master and apprentice can not belong to different `Scene`s!\n";
+                    "ERROR: `AbstractMovable::bind_to_new_movable_controller`: master and apprentice can not belong to different `Scene`s!\n";
         }
 
         return std::nullopt;
     }
 
-    std::optional<data::AnyValue> Movable::unbind_from_movable_controller(Movable& movable) noexcept
+    std::optional<data::AnyValue> AbstractMovable::unbind_from_movable_controller(AbstractMovable& movable) noexcept
     {
         movable.apprentice_of_movable_controller.unbind_and_bind_to_new_generic_master_module(nullptr);
         return std::nullopt;
     }
 
-    Movable::Movable(
+    AbstractMovable::AbstractMovable(
         core::Application& application,
         Universe& universe,
         const MovableStruct& movable_struct,
@@ -103,7 +103,7 @@ namespace yli::ontology
     {
         if (this->universe.get_is_opengl_in_use())
         {
-            // Uniform block for data related to this `Movable`.
+            // Uniform block for data related to this `AbstractMovable`.
 
             glGenBuffers(1, &this->movable_uniform_block);
             glBindBuffer(GL_UNIFORM_BUFFER, this->movable_uniform_block);
@@ -118,108 +118,108 @@ namespace yli::ontology
         this->create_coordinate_and_angle_variables();
 
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Movable*";
+        this->type_string = "yli::ontology::AbstractMovable*";
     }
 
-    const glm::vec3& Movable::get_cartesian_coordinates() const
+    const glm::vec3& AbstractMovable::get_cartesian_coordinates() const
     {
         return this->location.xyz;
     }
 
-    void Movable::set_cartesian_coordinates(const glm::vec3& cartesian_coordinates)
+    void AbstractMovable::set_cartesian_coordinates(const glm::vec3& cartesian_coordinates)
     {
         this->location.xyz = cartesian_coordinates;
     }
 
-    float Movable::get_roll() const
+    float AbstractMovable::get_roll() const
     {
         return this->orientation.roll;
     }
 
-    void Movable::set_roll(const float roll)
+    void AbstractMovable::set_roll(const float roll)
     {
         this->orientation.roll = roll;
     }
 
-    float Movable::get_yaw() const
+    float AbstractMovable::get_yaw() const
     {
         return this->orientation.yaw;
     }
 
-    void Movable::set_yaw(const float yaw)
+    void AbstractMovable::set_yaw(const float yaw)
     {
         this->orientation.yaw = yaw;
     }
 
-    float Movable::get_pitch() const
+    float AbstractMovable::get_pitch() const
     {
         return this->orientation.pitch;
     }
 
-    void Movable::set_pitch(const float pitch)
+    void AbstractMovable::set_pitch(const float pitch)
     {
         this->orientation.pitch = pitch;
     }
 
-    float Movable::get_azimuth() const
+    float AbstractMovable::get_azimuth() const
     {
         return 0.5f * static_cast<float>(std::numbers::pi) - this->orientation.yaw;
     }
 
-    void Movable::set_azimuth(const float azimuth)
+    void AbstractMovable::set_azimuth(const float azimuth)
     {
         this->orientation.yaw = 0.5f * static_cast<float>(std::numbers::pi) - azimuth;
     }
 
-    float Movable::get_scale() const
+    float AbstractMovable::get_scale() const
     {
         return this->scale;
     }
 
-    void Movable::set_scale(const float scale)
+    void AbstractMovable::set_scale(const float scale)
     {
         this->scale = scale;
     }
 
     // Public callbacks (to be called from AI scripts written in YliLisp).
 
-    void Movable::set_dest(Movable* const movable, const float x, const float y, const float z)
+    void AbstractMovable::set_dest(AbstractMovable* const movable, const float x, const float y, const float z)
     {
         // Set target towards which to move.
         movable->location.xyz = glm::vec3(x, y, z);
     }
 
-    float Movable::get_x(const Movable* const movable)
+    float AbstractMovable::get_x(const AbstractMovable* const movable)
     {
         // Get x coordinate of `movable`.
         return movable->location.get_x();
     }
 
-    float Movable::get_y(const Movable* const movable)
+    float AbstractMovable::get_y(const AbstractMovable* const movable)
     {
         // Get y coordinate of `movable`.
         return movable->location.get_y();
     }
 
-    float Movable::get_z(const Movable* const movable)
+    float AbstractMovable::get_z(const AbstractMovable* const movable)
     {
         // Get z coordinate of `movable`.
         return movable->location.get_z();
     }
 
-    float Movable::get_dest_x(const Movable* const movable)
+    float AbstractMovable::get_dest_x(const AbstractMovable* const movable)
     {
         // Get x destination coordinate of `movable`.
         return movable->dest_cartesian_coordinates.x;
     }
 
-    float Movable::get_dest_y(const Movable* const movable)
+    float AbstractMovable::get_dest_y(const AbstractMovable* const movable)
     {
         // Get y destination coordinate of `movable`.
         return movable->dest_cartesian_coordinates.y;
     }
 
-    float Movable::get_dest_z(const Movable* const movable)
+    float AbstractMovable::get_dest_z(const AbstractMovable* const movable)
     {
         // Get z destination coordinate of `movable`.
         return movable->dest_cartesian_coordinates.z;
@@ -227,7 +227,7 @@ namespace yli::ontology
 
     // Public callbacks end here.
 
-    void Movable::create_coordinate_and_angle_variables()
+    void AbstractMovable::create_coordinate_and_angle_variables()
     {
         float& float_x = this->location.xyz.x;
         float& float_y = this->location.xyz.y;

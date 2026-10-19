@@ -21,7 +21,7 @@
 #include "generic_entity_factory.hpp"
 #include "generic_master_module.hpp"
 #include "entity.hpp"
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "universe.hpp"
 #include "variable.hpp"
 #include "callback_engine.hpp"
@@ -398,7 +398,7 @@ namespace yli::ontology
                 TypeEnumType::WAYPOINT,
                 waypoint_struct.scene,
                 waypoint_struct,
-                this->get_generic_master_module<Movable, MovableController>(waypoint_struct.movable_controller_master));
+                this->get_generic_master_module<AbstractMovable, MovableController>(waypoint_struct.movable_controller_master));
         }
 
         Camera* create_camera(const CameraStruct& camera_struct) const final
@@ -408,7 +408,7 @@ namespace yli::ontology
                 TypeEnumType::CAMERA,
                 camera_struct.scene,
                 camera_struct,
-                this->get_generic_master_module<Movable, MovableController>(camera_struct.movable_controller_master));
+                this->get_generic_master_module<AbstractMovable, MovableController>(camera_struct.movable_controller_master));
         }
 
         Camera* create_default_camera(const CameraStruct& camera_struct) const final
@@ -418,7 +418,7 @@ namespace yli::ontology
                 TypeEnumType::CAMERA,
                 camera_struct.scene,
                 camera_struct,
-                this->get_generic_master_module<Movable, MovableController>(camera_struct.movable_controller_master));
+                this->get_generic_master_module<AbstractMovable, MovableController>(camera_struct.movable_controller_master));
         }
 
         // TODO: implement `create_camera_widget` here!
@@ -465,7 +465,7 @@ namespace yli::ontology
                 heightmap_struct.scene,
                 heightmap_struct,
                 // `MovableController` master.
-                this->get_generic_master_module<Movable,
+                this->get_generic_master_module<AbstractMovable,
                     MovableController>(heightmap_struct.movable_controller_master)));
         }
 
@@ -477,7 +477,7 @@ namespace yli::ontology
                 heightmap_sheet_struct.heightmap_parent,
                 heightmap_sheet_struct,
                 // `MovableController` master.
-                this->get_generic_master_module<Movable,
+                this->get_generic_master_module<AbstractMovable,
                     MovableController>(heightmap_sheet_struct.movable_controller_master)));
         }
 
@@ -608,7 +608,7 @@ namespace yli::ontology
                 shapeshifter_struct.scene,
                 shapeshifter_struct,
                 // `MovableController` master.
-                this->get_generic_master_module<Movable, MovableController>(
+                this->get_generic_master_module<AbstractMovable, MovableController>(
                     shapeshifter_struct.movable_controller_master),
                 // `ShapeshifterSequence` master.
                 this->get_generic_master_module<Shapeshifter, ShapeshifterSequence>(
@@ -670,7 +670,7 @@ namespace yli::ontology
                 TypeEnumType::TEXT_3D,
                 text_3d_struct.scene,
                 text_3d_struct,
-                this->get_generic_master_module<Movable, MovableController>(text_3d_struct.movable_controller_master),
+                this->get_generic_master_module<AbstractMovable, MovableController>(text_3d_struct.movable_controller_master),
                 this->get_generic_master_module<Text3d, VectorFont>(text_3d_struct.vector_font_master));
         }
 
@@ -874,7 +874,7 @@ namespace yli::ontology
                 holobiont_derivative_type,
                 scene,
                 holobiont_derivative_struct,
-                this->get_generic_master_module<Movable, MovableController>(
+                this->get_generic_master_module<AbstractMovable, MovableController>(
                     holobiont_derivative_struct.movable_controller_master),
                 this->get_generic_master_module<Holobiont, Symbiosis>(holobiont_derivative_struct.symbiosis_master),
                 std::forward<ModuleArgs>(module_args)...));
@@ -1016,7 +1016,7 @@ namespace yli::ontology
                 object_struct.scene,
                 object_struct,
                 // `MovableController` master.
-                this->get_generic_master_module<Movable,
+                this->get_generic_master_module<AbstractMovable,
                     MovableController>(object_struct.movable_controller_master),
                 // `Species` master.
                 this->get_generic_master_module<Object, Species>(object_struct.species_master),

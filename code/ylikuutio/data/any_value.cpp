@@ -23,7 +23,7 @@
 #include "any_value.hpp"
 #include "variant_templates.hpp"
 #include "code/ylikuutio/ontology/entity.hpp"
-#include "code/ylikuutio/ontology/movable.hpp"
+#include "code/ylikuutio/ontology/abstract_movable.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
@@ -200,17 +200,17 @@ namespace yli::data
             return std::get<std::reference_wrapper<ontology::Entity>>(this->data).get() ==
                    std::get<std::reference_wrapper<ontology::Entity>>(rhs.data).get();
         }
-        if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data) &&
-            std::holds_alternative<std::reference_wrapper<ontology::Movable>>(rhs.data))
+        if (std::holds_alternative<std::reference_wrapper<ontology::AbstractMovable>>(this->data) &&
+            std::holds_alternative<std::reference_wrapper<ontology::AbstractMovable>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<ontology::Movable>>(this->data).get() ==
-                   std::get<std::reference_wrapper<ontology::Movable>>(rhs.data).get();
+            return std::get<std::reference_wrapper<ontology::AbstractMovable>>(this->data).get() ==
+                   std::get<std::reference_wrapper<ontology::AbstractMovable>>(rhs.data).get();
         }
-        if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data) &&
-            std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(rhs.data))
+        if (std::holds_alternative<std::reference_wrapper<const ontology::AbstractMovable>>(this->data) &&
+            std::holds_alternative<std::reference_wrapper<const ontology::AbstractMovable>>(rhs.data))
         {
-            return std::get<std::reference_wrapper<const ontology::Movable>>(this->data).get() ==
-                   std::get<std::reference_wrapper<const ontology::Movable>>(rhs.data).get();
+            return std::get<std::reference_wrapper<const ontology::AbstractMovable>>(this->data).get() ==
+                   std::get<std::reference_wrapper<const ontology::AbstractMovable>>(rhs.data).get();
         }
         if (std::holds_alternative<std::reference_wrapper<ontology::Universe>>(this->data) &&
             std::holds_alternative<std::reference_wrapper<ontology::Universe>>(rhs.data))
@@ -409,13 +409,13 @@ namespace yli::data
         {
             return "yli::ontology::Entity&";
         }
-        if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<ontology::AbstractMovable>>(this->data))
         {
-            return "yli::ontology::Movable&";
+            return "yli::ontology::AbstractMovable&";
         }
-        if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<const ontology::AbstractMovable>>(this->data))
         {
-            return "const yli::ontology::Movable&";
+            return "const yli::ontology::AbstractMovable&";
         }
         if (std::holds_alternative<std::reference_wrapper<ontology::Universe>>(this->data))
         {
@@ -614,15 +614,15 @@ namespace yli::data
             any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
                 ontology::Entity>>(this->data)) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<ontology::AbstractMovable>>(this->data))
         {
             any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<
-                ontology::Movable>>(this->data)) << std::dec;
+                ontology::AbstractMovable>>(this->data)) << std::dec;
         }
-        else if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
+        else if (std::holds_alternative<std::reference_wrapper<const ontology::AbstractMovable>>(this->data))
         {
             any_value_stringstream << std::hex << reinterpret_cast<std::uint64_t>(&std::get<std::reference_wrapper<const
-                ontology::Movable>>(this->data)) << std::dec;
+                ontology::AbstractMovable>>(this->data)) << std::dec;
         }
         else if (std::holds_alternative<std::reference_wrapper<ontology::Universe>>(this->data))
         {
@@ -732,13 +732,13 @@ namespace yli::data
         {
             return std::get<std::reference_wrapper<ontology::Universe>>(this->data);
         }
-        if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<ontology::AbstractMovable>>(this->data))
         {
-            return std::get<std::reference_wrapper<ontology::Movable>>(this->data);
+            return std::get<std::reference_wrapper<ontology::AbstractMovable>>(this->data);
         }
-        if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<const ontology::AbstractMovable>>(this->data))
         {
-            throw std::runtime_error("Requested `Entity&` for `AnyValue` that holds `const Movable` reference!");
+            throw std::runtime_error("Requested `Entity&` for `AnyValue` that holds `const AbstractMovable` reference!");
         }
         if (std::holds_alternative<std::reference_wrapper<ontology::Ecosystem>>(this->data))
         {
@@ -802,9 +802,9 @@ namespace yli::data
 
     const yli::ontology::Entity& AnyValue::get_const_entity_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<const ontology::AbstractMovable>>(this->data))
         {
-            return std::get<std::reference_wrapper<const ontology::Movable>>(this->data);
+            return std::get<std::reference_wrapper<const ontology::AbstractMovable>>(this->data);
         }
 
         return this->get_entity_ref();
@@ -812,7 +812,7 @@ namespace yli::data
 
     bool AnyValue::has_movable_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<ontology::AbstractMovable>>(this->data))
         {
             return true;
         }
@@ -830,7 +830,7 @@ namespace yli::data
 
     bool AnyValue::has_const_movable_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<const ontology::AbstractMovable>>(this->data))
         {
             return true;
         }
@@ -838,15 +838,15 @@ namespace yli::data
         return this->has_movable_ref();
     }
 
-    ontology::Movable& AnyValue::get_movable_ref() const
+    ontology::AbstractMovable& AnyValue::get_movable_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<ontology::AbstractMovable>>(this->data))
         {
-            return std::get<std::reference_wrapper<ontology::Movable>>(this->data);
+            return std::get<std::reference_wrapper<ontology::AbstractMovable>>(this->data);
         }
-        if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<const ontology::AbstractMovable>>(this->data))
         {
-            throw std::runtime_error("Requested `Movable&` for `AnyValue` that holds `const Movable` reference!");
+            throw std::runtime_error("Requested `AbstractMovable&` for `AnyValue` that holds `const AbstractMovable` reference!");
         }
         if (std::holds_alternative<std::reference_wrapper<ontology::Object>>(this->data))
         {
@@ -857,14 +857,14 @@ namespace yli::data
             return std::get<std::reference_wrapper<ontology::Holobiont>>(this->data);
         }
 
-        throw std::runtime_error("Requested `Movable&` for `AnyValue` that didn't hold `Movable` reference!");
+        throw std::runtime_error("Requested `AbstractMovable&` for `AnyValue` that didn't hold `AbstractMovable` reference!");
     }
 
-    const ontology::Movable& AnyValue::get_const_movable_ref() const
+    const ontology::AbstractMovable& AnyValue::get_const_movable_ref() const
     {
-        if (std::holds_alternative<std::reference_wrapper<const ontology::Movable>>(this->data))
+        if (std::holds_alternative<std::reference_wrapper<const ontology::AbstractMovable>>(this->data))
         {
-            return std::get<std::reference_wrapper<const ontology::Movable>>(this->data);
+            return std::get<std::reference_wrapper<const ontology::AbstractMovable>>(this->data);
         }
 
         return this->get_movable_ref();
@@ -1021,8 +1021,8 @@ namespace yli::data
             std::reference_wrapper<const glm::vec4>,
             // Ontology.
             std::reference_wrapper<ontology::Entity>,
-            std::reference_wrapper<ontology::Movable>,
-            std::reference_wrapper<const ontology::Movable>,
+            std::reference_wrapper<ontology::AbstractMovable>,
+            std::reference_wrapper<const ontology::AbstractMovable>,
             std::reference_wrapper<ontology::Universe>,
             std::reference_wrapper<ontology::Ecosystem>,
             std::reference_wrapper<ontology::Scene>,
@@ -1146,11 +1146,11 @@ namespace yli::data
         : data(std::reference_wrapper(entity_ref))
     { }
 
-    AnyValue::AnyValue(ontology::Movable& movable_ref)
+    AnyValue::AnyValue(ontology::AbstractMovable& movable_ref)
         : data(std::reference_wrapper(movable_ref))
     { }
 
-    AnyValue::AnyValue(const ontology::Movable& const_movable_ref)
+    AnyValue::AnyValue(const ontology::AbstractMovable& const_movable_ref)
         : data(std::reference_wrapper(const_movable_ref))
     { }
 

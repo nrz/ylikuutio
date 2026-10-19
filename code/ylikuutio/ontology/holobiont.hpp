@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_ONTOLOGY_HOLOBIONT_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_HOLOBIONT_HPP_INCLUDED
 
-#include "movable.hpp"
+#include "abstract_movable.hpp"
 #include "child_module.hpp"
 #include "generic_parent_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
@@ -55,7 +55,7 @@ namespace yli::ontology
     template<typename TypeEnumType>
     class EntityFactory;
 
-    class Holobiont : public Movable
+    class Holobiont : public AbstractMovable
     {
     protected:
         Holobiont(

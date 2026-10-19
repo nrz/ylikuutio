@@ -48,7 +48,7 @@
 namespace yli::ontology
 {
     class MovableController;
-    class Movable;
+    class AbstractMovable;
     class Pipeline;
     class Symbiosis;
 }
@@ -139,7 +139,7 @@ TEST(police_helicopter_must_be_initialized_appropriately, hirvi_police_helicopte
         hirvi::data::POLICE_HELICOPTER,
         Request(helsinki_scene),
         turbo_polizei_png_police_helicopter_struct1,
-        helsinki_non_emancipated_control_center->get_generic_master_module<Movable>(),
+        helsinki_non_emancipated_control_center->get_generic_master_module<AbstractMovable>(),
         road_vehicle_struct1);
     ASSERT_NE(turbo_polizei1, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei1) % alignof(hirvi::ontology::PoliceHelicopter), 0);

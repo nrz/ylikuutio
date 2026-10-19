@@ -34,7 +34,7 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class GenericMasterModule;
-    class Movable;
+    class AbstractMovable;
     class Universe;
     class Scene;
 }
@@ -74,7 +74,7 @@ namespace hirvi::ontology
     };
 
     template<>
-    inline yli::ontology::GenericMasterModule* PoliceControlCenter::get_generic_master_module<yli::ontology::Movable>()
+    inline yli::ontology::GenericMasterModule* PoliceControlCenter::get_generic_master_module<yli::ontology::AbstractMovable>()
     {
         return &this->master_of_polices;
     }
