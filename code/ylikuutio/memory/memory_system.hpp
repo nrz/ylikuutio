@@ -19,7 +19,7 @@
 #define YLIKUUTIO_MEMORY_MEMORY_SYSTEM_HPP_INCLUDED
 
 #include "abstract_memory_system.hpp"
-#include "generic_memory_allocator.hpp"
+#include "abstract_memory_allocator.hpp"
 #include "memory_allocator.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
 
@@ -113,7 +113,7 @@ namespace yli::memory
             return this->memory_allocators.contains(type);
         }
 
-        [[nodiscard]] GenericMemoryAllocator& get_generic_allocator(const TypeEnumType type) const
+        [[nodiscard]] AbstractMemoryAllocator& get_generic_allocator(const TypeEnumType type) const
         {
             if (this->has_allocator(type)) [[likely]]
             {
@@ -142,13 +142,13 @@ namespace yli::memory
         {
             if (constructible_module.alive && constructible_module.generic_allocator != nullptr)
             {
-                GenericMemoryAllocator& allocator = *constructible_module.generic_allocator;
+                AbstractMemoryAllocator& allocator = *constructible_module.generic_allocator;
                 allocator.destroy(constructible_module);
             }
         }
 
         template<typename T1, typename... Args>
-        [[nodiscard]] GenericMemoryAllocator& get_or_create_allocator(TypeEnumType type, Args&&... args)
+        [[nodiscard]] AbstractMemoryAllocator& get_or_create_allocator(TypeEnumType type, Args&&... args)
         {
             if (this->has_allocator(type))
             {
@@ -161,7 +161,7 @@ namespace yli::memory
 
     private:
         // Allocators need to be created elsewhere and only stored here.
-        std::map<TypeEnumType, GenericMemoryAllocator*> memory_allocators;
+        std::map<TypeEnumType, AbstractMemoryAllocator*> memory_allocators;
         const TypeEnumType universe_datatype;
     };
 }

@@ -53,7 +53,7 @@ namespace yli::event
 namespace yli::memory
 {
     class AbstractMemorySystem;
-    class GenericMemoryAllocator;
+    class AbstractMemoryAllocator;
     template<typename TypeEnumType>
     class MemorySystem;
 }

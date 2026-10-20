@@ -29,7 +29,7 @@
 namespace yli::memory
 {
     class AbstractMemorySystem;
-    class GenericMemoryAllocator;
+    class AbstractMemoryAllocator;
 }
 
 namespace yli::ontology

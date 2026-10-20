@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_MEMORY_MEMORY_ALLOCATOR_HPP_INCLUDED
 #define YLIKUUTIO_MEMORY_MEMORY_ALLOCATOR_HPP_INCLUDED
 
-#include "generic_memory_allocator.hpp"
+#include "abstract_memory_allocator.hpp"
 #include "constructible_module.hpp"
 #include "code/ylikuutio/data/queue.hpp"
 #include "code/ylikuutio/ontology/console_lisp_function_overload.hpp"
@@ -42,7 +42,7 @@ namespace yli::ontology
 namespace yli::memory
 {
     template<typename T1 = std::byte, std::size_t DataSize = 1>
-    class MemoryAllocator : public GenericMemoryAllocator
+    class MemoryAllocator : public AbstractMemoryAllocator
     {
         // Each class instance takes care of the memory
         // management for some given storable datatype.
@@ -190,7 +190,7 @@ namespace yli::memory
     };
 
     template<std::size_t DataSize>
-    class MemoryAllocator<ontology::AbstractConsoleLispFunctionOverload, DataSize> : public GenericMemoryAllocator
+    class MemoryAllocator<ontology::AbstractConsoleLispFunctionOverload, DataSize> : public AbstractMemoryAllocator
     {
     public:
         explicit MemoryAllocator(const int datatype)

@@ -127,7 +127,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    class GenericMemoryAllocator;
+    class AbstractMemoryAllocator;
 }
 
 namespace yli::ontology
@@ -230,7 +230,7 @@ namespace yli::ontology
 
         Universe* create_universe(const UniverseStruct& universe_struct)
         {
-            memory::GenericMemoryAllocator& generic_allocator =
+            memory::AbstractMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<memory::UniverseMemoryAllocator>(
                         TypeEnumType::UNIVERSE);
             auto& allocator = static_cast<memory::UniverseMemoryAllocator&>(generic_allocator);
@@ -256,7 +256,7 @@ namespace yli::ontology
             const VariableStruct& variable_struct,
             data::AnyValue&& any_value) const final
         {
-            memory::GenericMemoryAllocator& generic_allocator =
+            memory::AbstractMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<memory::VariableMemoryAllocator>(
                         TypeEnumType::VARIABLE);
             auto& allocator = static_cast<memory::VariableMemoryAllocator&>(generic_allocator);
@@ -515,7 +515,7 @@ namespace yli::ontology
 
         Ability* create_ability(const AbilityStruct& ability_struct) const final
         {
-            memory::GenericMemoryAllocator& generic_allocator =
+            memory::AbstractMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<memory::AbilityMemoryAllocator>(
                         TypeEnumType::ABILITY);
             auto& allocator = static_cast<memory::AbilityMemoryAllocator&>(generic_allocator);
@@ -538,7 +538,7 @@ namespace yli::ontology
 
         Biont* create_biont(const BiontStruct& biont_struct) const final
         {
-            memory::GenericMemoryAllocator& generic_allocator =
+            memory::AbstractMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<memory::BiontMemoryAllocator>(
                         TypeEnumType::BIONT);
             auto& allocator = static_cast<memory::BiontMemoryAllocator&>(generic_allocator);
@@ -553,7 +553,7 @@ namespace yli::ontology
 
         Skill* create_skill(const SkillStruct& skill_struct) const final
         {
-            memory::GenericMemoryAllocator& generic_allocator =
+            memory::AbstractMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<memory::SkillMemoryAllocator>(
                         TypeEnumType::SKILL);
             auto& allocator = static_cast<memory::SkillMemoryAllocator&>(generic_allocator);
@@ -816,7 +816,7 @@ namespace yli::ontology
                 }
             }
 
-            memory::GenericMemoryAllocator& generic_allocator =
+            memory::AbstractMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<
                         memory::GenericConsoleLispFunctionOverloadMemoryAllocator>(
                         TypeEnumType::GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD);
@@ -895,7 +895,7 @@ namespace yli::ontology
             GenericParentModule* const generic_parent_module,
             Args&&... args) const
         {
-            memory::GenericMemoryAllocator& generic_allocator =
+            memory::AbstractMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<TypeAllocator>(type);
             auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
 
@@ -920,7 +920,7 @@ namespace yli::ontology
             ParentModuleType* const parent_module,
             Args&&... args) const
         {
-            memory::GenericMemoryAllocator& generic_allocator =
+            memory::AbstractMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<TypeAllocator>(type);
             auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
 
@@ -962,7 +962,7 @@ namespace yli::ontology
             const DataStruct& data_struct,
             Args&&... args) const
         {
-            memory::GenericMemoryAllocator& generic_allocator =
+            memory::AbstractMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<TypeAllocator>(type);
             auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
 
@@ -990,7 +990,7 @@ namespace yli::ontology
             // The type of the `Entity` must not be `Universe`.
             // The type of the parent of the `Entity` must not be `Universe`.
 
-            memory::GenericMemoryAllocator& generic_allocator =
+            memory::AbstractMemoryAllocator& generic_allocator =
                     this->memory_system.template get_or_create_allocator<TypeAllocator>(allocator_type);
             auto& allocator = static_cast<TypeAllocator&>(generic_allocator);
 

@@ -24,18 +24,18 @@
 
 namespace yli::memory
 {
-    class GenericMemoryAllocator;
+    class AbstractMemoryAllocator;
 
     struct ConstructibleModule
     {
         ConstructibleModule() = default;
 
-        ConstructibleModule(GenericMemoryAllocator& generic_allocator, const std::size_t slot_i)
+        ConstructibleModule(AbstractMemoryAllocator& generic_allocator, const std::size_t slot_i)
             : generic_allocator { &generic_allocator },
               slot_i { slot_i }
         { }
 
-        GenericMemoryAllocator* generic_allocator { nullptr };
+        AbstractMemoryAllocator* generic_allocator { nullptr };
         std::size_t slot_i { std::numeric_limits<std::size_t>::max() };
         bool alive { true };
     };
