@@ -717,7 +717,7 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/framebuffer_module_struct.hpp
     code/ylikuutio/ontology/abstract_callback_engine.cpp
     code/ylikuutio/ontology/abstract_callback_engine.hpp
-    code/ylikuutio/ontology/generic_callback_engine_struct.hpp
+    code/ylikuutio/ontology/abstract_callback_engine_struct.hpp
     code/ylikuutio/ontology/abstract_console_lisp_function_overload.cpp
     code/ylikuutio/ontology/abstract_console_lisp_function_overload.hpp
     code/ylikuutio/ontology/abstract_entity_factory.hpp

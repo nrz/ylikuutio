@@ -19,7 +19,7 @@
 #include "callback_object.hpp"
 #include "abstract_entity_factory.hpp"
 #include "request.hpp"
-#include "generic_callback_engine_struct.hpp"
+#include "abstract_callback_engine_struct.hpp"
 #include "callback_object_struct.hpp"
 #include "get_number_of_descendants.hpp"
 #include "input_parameters_and_any_value_to_any_value_callback_with_universe.hpp"
@@ -40,7 +40,7 @@ namespace yli::ontology
         Universe& universe,
         const CallbackEngineStruct&,
         GenericParentModule* const entity_parent_module)
-        : AbstractCallbackEngine(application, universe, GenericCallbackEngineStruct()),
+        : AbstractCallbackEngine(application, universe, AbstractCallbackEngineStruct()),
           child_of_entity(entity_parent_module, *this),
           parent_of_callback_objects(
               *this,

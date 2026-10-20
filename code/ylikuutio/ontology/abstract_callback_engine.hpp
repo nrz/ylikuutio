@@ -29,7 +29,7 @@ namespace yli::core
 namespace yli::ontology
 {
     class Universe;
-    struct GenericCallbackEngineStruct;
+    struct AbstractCallbackEngineStruct;
 
     class AbstractCallbackEngine : public Entity
     {
@@ -37,7 +37,7 @@ namespace yli::ontology
         AbstractCallbackEngine(
             core::Application& application,
             Universe& universe,
-            const GenericCallbackEngineStruct& generic_callback_engine_struct);
+            const AbstractCallbackEngineStruct& abstract_callback_engine_struct);
 
         AbstractCallbackEngine(const AbstractCallbackEngine&) = delete; // Delete copy constructor.
         AbstractCallbackEngine& operator=(const AbstractCallbackEngine&) = delete; // Delete copy assignment.

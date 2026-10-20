@@ -21,7 +21,7 @@
 #include "request.hpp"
 #include "console_callback_object_struct.hpp"
 #include "abstract_entity_factory.hpp"
-#include "generic_callback_engine_struct.hpp"
+#include "abstract_callback_engine_struct.hpp"
 #include "input_parameters_to_any_value_callback_with_console.hpp"
 #include "get_number_of_descendants.hpp"
 #include "code/ylikuutio/core/application.hpp"
@@ -42,7 +42,7 @@ namespace yli::ontology
         Universe& universe,
         const ConsoleCallbackEngineStruct&,
         GenericParentModule* const console_parent_module)
-        : AbstractCallbackEngine(application, universe, GenericCallbackEngineStruct()),
+        : AbstractCallbackEngine(application, universe, AbstractCallbackEngineStruct()),
           child_of_console(console_parent_module, *this),
           parent_of_console_callback_objects(
               *this,

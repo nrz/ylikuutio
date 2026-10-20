@@ -15,14 +15,14 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_GENERIC_CALLBACK_ENGINE_STRUCT_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_GENERIC_CALLBACK_ENGINE_STRUCT_HPP_INCLUDED
+#ifndef YLIKUUTIO_ONTOLOGY_ABSTRACT_CALLBACK_ENGINE_STRUCT_HPP_INCLUDED
+#define YLIKUUTIO_ONTOLOGY_ABSTRACT_CALLBACK_ENGINE_STRUCT_HPP_INCLUDED
 
 #include "entity_struct.hpp"
 
 namespace yli::ontology
 {
-    struct GenericCallbackEngineStruct final : EntityStruct
+    struct AbstractCallbackEngineStruct final : EntityStruct
     {
     };
 }

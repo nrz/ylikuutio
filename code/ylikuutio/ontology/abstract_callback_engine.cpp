@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "abstract_callback_engine.hpp"
-#include "generic_callback_engine_struct.hpp"
+#include "abstract_callback_engine_struct.hpp"
 
 namespace yli::core
 {
@@ -31,8 +31,8 @@ namespace yli::ontology
     AbstractCallbackEngine::AbstractCallbackEngine(
         core::Application& application,
         Universe& universe,
-        const GenericCallbackEngineStruct& generic_callback_engine_struct)
-        : Entity(application, universe, generic_callback_engine_struct)
+        const AbstractCallbackEngineStruct& abstract_callback_engine_struct)
+        : Entity(application, universe, abstract_callback_engine_struct)
     {
         // `Entity` member variables begin here.
         this->type_string = "yli::ontology::AbstractCallbackEngine*";
