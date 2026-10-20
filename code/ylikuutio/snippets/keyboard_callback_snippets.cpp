@@ -17,7 +17,7 @@
 
 #include "keyboard_callback_snippets.hpp"
 #include "code/ylikuutio/core/application.hpp"
-#include "code/ylikuutio/memory/generic_memory_system.hpp"
+#include "code/ylikuutio/memory/abstract_memory_system.hpp"
 #include "code/ylikuutio/ontology/callback_object.hpp"
 #include "code/ylikuutio/ontology/callback_magic_numbers.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
@@ -357,7 +357,7 @@ namespace yli::snippets
         }
 
         // Destroy the `Entity`.
-        universe.get_application().get_generic_memory_system().destroy(entity->get_constructible_module());
+        universe.get_application().get_abstract_memory_system().destroy(entity->get_constructible_module());
 
         return std::nullopt;
     }

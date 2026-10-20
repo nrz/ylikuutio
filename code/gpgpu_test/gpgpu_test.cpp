@@ -39,7 +39,7 @@
 
 namespace yli::memory
 {
-    class GenericMemorySystem;
+    class AbstractMemorySystem;
     class GenericMemoryAllocator;
 }
 
@@ -69,7 +69,7 @@ namespace gpgpu_test
         return { "help", "version" };
     }
 
-    yli::memory::GenericMemorySystem& GpgpuTestApplication::get_generic_memory_system() const
+    yli::memory::AbstractMemorySystem& GpgpuTestApplication::get_abstract_memory_system() const
     {
         return this->core.memory_system.get();
     }

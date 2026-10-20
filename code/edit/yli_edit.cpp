@@ -69,7 +69,7 @@
 
 namespace yli::memory
 {
-    class GenericMemorySystem;
+    class AbstractMemorySystem;
     class GenericMemoryAllocator;
 }
 
@@ -128,7 +128,7 @@ namespace yli_edit
         };
     }
 
-    yli::memory::GenericMemorySystem& YliEditApplication::get_generic_memory_system() const
+    yli::memory::AbstractMemorySystem& YliEditApplication::get_abstract_memory_system() const
     {
         return this->core.memory_system.get();
     }

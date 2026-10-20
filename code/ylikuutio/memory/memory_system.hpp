@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_MEMORY_MEMORY_SYSTEM_HPP_INCLUDED
 #define YLIKUUTIO_MEMORY_MEMORY_SYSTEM_HPP_INCLUDED
 
-#include "generic_memory_system.hpp"
+#include "abstract_memory_system.hpp"
 #include "generic_memory_allocator.hpp"
 #include "memory_allocator.hpp"
 #include "code/ylikuutio/data/datatype.hpp"
@@ -36,7 +36,7 @@ namespace yli::memory
 
     // `GetTypeEnumFunction` is a function template that return `TypeEnumType` values for different types.
     template<typename TypeEnumType = data::Datatype>
-    class MemorySystem final : public GenericMemorySystem
+    class MemorySystem final : public AbstractMemorySystem
     {
         // Each class instance takes care of memory
         // management for a given application.

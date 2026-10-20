@@ -41,7 +41,7 @@ namespace yli::data
 
 namespace yli::memory
 {
-    class GenericMemorySystem;
+    class AbstractMemorySystem;
     class GenericMemoryAllocator;
 }
 
@@ -71,7 +71,7 @@ namespace mock
         return {};
     }
 
-    yli::memory::GenericMemorySystem& MockApplication::get_generic_memory_system() const
+    yli::memory::AbstractMemorySystem& MockApplication::get_abstract_memory_system() const
     {
         return this->memory_system.get();
     }

@@ -42,7 +42,7 @@ namespace yli::input
 
 namespace yli::memory
 {
-    class GenericMemorySystem;
+    class AbstractMemorySystem;
     class GenericMemoryAllocator;
 }
 
@@ -72,7 +72,7 @@ namespace yli::core
 
         virtual std::vector<std::string> get_valid_keys() const = 0;
 
-        virtual memory::GenericMemorySystem& get_generic_memory_system() const = 0;
+        virtual memory::AbstractMemorySystem& get_abstract_memory_system() const = 0;
 
         virtual ontology::AbstractEntityFactory& get_abstract_entity_factory() const = 0;
 

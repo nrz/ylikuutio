@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_MEMORY_GENERIC_MEMORY_SYSTEM_HPP_INCLUDED
-#define YLIKUUTIO_MEMORY_GENERIC_MEMORY_SYSTEM_HPP_INCLUDED
+#ifndef YLIKUUTIO_MEMORY_ABSTRACT_MEMORY_SYSTEM_HPP_INCLUDED
+#define YLIKUUTIO_MEMORY_ABSTRACT_MEMORY_SYSTEM_HPP_INCLUDED
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -26,13 +26,13 @@ namespace yli::memory
     class GenericMemoryAllocator;
     struct ConstructibleModule;
 
-    class GenericMemorySystem
+    class AbstractMemorySystem
     {
-        // `GenericMemorySystem` provides an interface
+        // `AbstractMemorySystem` provides an interface
         // for the `MemorySystem` class template instantiations.
 
     public:
-        virtual ~GenericMemorySystem() = default;
+        virtual ~AbstractMemorySystem() = default;
 
         [[nodiscard]] virtual std::size_t get_number_of_allocators() const = 0;
 

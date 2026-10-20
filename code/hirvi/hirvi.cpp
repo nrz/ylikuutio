@@ -52,7 +52,7 @@ namespace yli::event
 
 namespace yli::memory
 {
-    class GenericMemorySystem;
+    class AbstractMemorySystem;
     class GenericMemoryAllocator;
     template<typename TypeEnumType>
     class MemorySystem;
@@ -66,7 +66,7 @@ namespace yli::ontology
 namespace hirvi
 {
     using yli::core::Application;
-    using yli::memory::GenericMemorySystem;
+    using yli::memory::AbstractMemorySystem;
     using yli::memory::MemorySystem;
     using yli::audio::AudioSystem;
     using yli::event::EventSystem;
@@ -112,7 +112,7 @@ namespace hirvi
         };
     }
 
-    GenericMemorySystem& HirviApplication::get_generic_memory_system() const
+    AbstractMemorySystem& HirviApplication::get_abstract_memory_system() const
     {
         return this->core.memory_system.get();
     }

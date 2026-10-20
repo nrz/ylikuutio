@@ -49,7 +49,7 @@ namespace yli::input
 
 namespace yli::memory
 {
-    class GenericMemorySystem;
+    class AbstractMemorySystem;
 }
 
 namespace yli::ontology
@@ -71,7 +71,7 @@ namespace hirvi
 
         std::vector<std::string> get_valid_keys() const override;
 
-        yli::memory::GenericMemorySystem& get_generic_memory_system() const override;
+        yli::memory::AbstractMemorySystem& get_abstract_memory_system() const override;
 
         yli::memory::MemorySystem<data::Datatype>& get_memory_system() const;
 

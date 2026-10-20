@@ -76,7 +76,7 @@ namespace yli::input
 
 namespace yli::memory
 {
-    class GenericMemorySystem;
+    class AbstractMemorySystem;
     class GenericMemoryAllocator;
 }
 
@@ -103,7 +103,7 @@ namespace ajokki
         return "Ajokki";
     }
 
-    yli::memory::GenericMemorySystem& AjokkiApplication::get_generic_memory_system() const
+    yli::memory::AbstractMemorySystem& AjokkiApplication::get_abstract_memory_system() const
     {
         return this->core.memory_system.get();
     }
