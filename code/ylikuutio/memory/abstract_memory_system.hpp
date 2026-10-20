@@ -23,7 +23,6 @@
 
 namespace yli::memory
 {
-    class GenericMemoryAllocator;
     struct ConstructibleModule;
 
     class AbstractMemorySystem
