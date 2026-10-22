@@ -67,10 +67,9 @@ namespace yli::memory
             this->free_slot_id_queue.move_to_beginning();
 
             // Sort.
-            for (
-                typename data::Queue<DataSize>::iterator left_it = this->free_slot_id_queue.begin();
-                left_it != this->free_slot_id_queue.last();
-                ++left_it)
+            for (typename data::Queue<DataSize>::iterator left_it = this->free_slot_id_queue.begin();
+                 left_it != this->free_slot_id_queue.last();
+                 ++left_it)
             {
                 typename data::Queue<DataSize>::iterator right_it = this->free_slot_id_queue.begin();
                 ++right_it;
@@ -88,10 +87,9 @@ namespace yli::memory
 
             typename data::Queue<DataSize>::iterator queue_it = this->free_slot_id_queue.begin();
 
-            for (
-                std::size_t slot_i = 0, count = 0;
-                count < this->number_of_instances;
-                slot_i++)
+            for (std::size_t slot_i = 0, count = 0;
+                 count < this->number_of_instances;
+                 slot_i++)
             {
                 if (queue_it != free_slot_id_queue.last() && slot_i == *queue_it)
                 {
