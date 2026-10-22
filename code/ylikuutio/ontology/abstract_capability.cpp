@@ -15,10 +15,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_CAPABILITY_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_CAPABILITY_HPP_INCLUDED
+#include "abstract_capability.hpp"
+#include "capability_struct.hpp"
 
-#include "entity.hpp"
+// Include standard headers
+#include <cstddef> // std::size_t
 
 namespace yli::core
 {
@@ -27,22 +28,16 @@ namespace yli::core
 
 namespace yli::ontology
 {
+    class Entity;
     class Universe;
-    struct CapabilityStruct;
 
-    class Capability : public Entity
+    AbstractCapability::AbstractCapability(
+            core::Application& application,
+            Universe& universe,
+            const CapabilityStruct& capability_struct)
+        : Entity(application, universe, capability_struct)
     {
-        public:
-            Capability(
-                    core::Application& application,
-                    Universe& universe,
-                    const CapabilityStruct& capability_struct);
-
-            Capability(const Capability&) = delete;            // Delete copy constructor.
-            Capability &operator=(const Capability&) = delete; // Delete copy assignment.
-
-            ~Capability() override = default;
-    };
+        // `yli::ontology::Entity` member variables begin here.
+        this->type_string = "yli::ontology::AbstractCapability*";
+    }
 }
-
-#endif

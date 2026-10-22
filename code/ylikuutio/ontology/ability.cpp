@@ -49,7 +49,7 @@ namespace yli::ontology
         Universe& universe,
         const AbilityStruct& ability_struct,
         GenericParentModule* const parent_module)
-        : Capability(application, universe, ability_struct),
+        : AbstractCapability(application, universe, ability_struct),
           child_of_symbiosis(parent_module, *this)
     {
         // `yli::ontology::Entity` member variables begin here.

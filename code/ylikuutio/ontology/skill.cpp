@@ -16,7 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "skill.hpp"
-#include "capability.hpp"
+#include "abstract_capability.hpp"
 #include "holobiont.hpp"
 #include "skill_struct.hpp"
 
@@ -50,7 +50,7 @@ namespace yli::ontology
         Universe& universe,
         const SkillStruct& skill_struct,
         GenericParentModule* const parent_module)
-        : Capability(application, universe, skill_struct),
+        : AbstractCapability(application, universe, skill_struct),
           child_of_holobiont(parent_module, *this)
     {
         // `yli::ontology::Entity` member variables begin here.

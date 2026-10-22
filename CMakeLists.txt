@@ -668,8 +668,8 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/camera.cpp
     code/ylikuutio/ontology/camera.hpp
     code/ylikuutio/ontology/camera_struct.hpp
-    code/ylikuutio/ontology/capability.cpp
-    code/ylikuutio/ontology/capability.hpp
+    code/ylikuutio/ontology/abstract_capability.cpp
+    code/ylikuutio/ontology/abstract_capability.hpp
     code/ylikuutio/ontology/capability_struct.hpp
     code/ylikuutio/ontology/cartesian_coordinates_module.cpp
     code/ylikuutio/ontology/cartesian_coordinates_module.hpp

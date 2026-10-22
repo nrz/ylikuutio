@@ -19,7 +19,7 @@
 #define YLIKUUTIO_ONTOLOGY_ABILITY_HPP_INCLUDED
 
 #include "child_module.hpp"
-#include "capability.hpp"
+#include "abstract_capability.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -38,7 +38,7 @@ namespace yli::ontology
     class Symbiosis;
     struct AbilityStruct;
 
-    class Ability : public Capability
+    class Ability : public AbstractCapability
     {
     public:
         Ability(
