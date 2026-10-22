@@ -49,7 +49,7 @@ namespace yli::ontology
             core::Application& application,
             Universe& universe,
             const CallbackParameterStruct& callback_parameter_struct,
-            GenericParentModule* const callback_object_parent_module,
+            GenericParentModule* callback_object_parent_module,
             data::AnyValue&& any_value);
 
         ~CallbackParameter() override = default;
