@@ -113,7 +113,7 @@ namespace yli::memory
             return this->memory_allocators.contains(type);
         }
 
-        [[nodiscard]] AbstractMemoryAllocator& get_generic_allocator(const TypeEnumType type) const
+        [[nodiscard]] AbstractMemoryAllocator& get_abstract_allocator(const TypeEnumType type) const
         {
             if (this->has_allocator(type)) [[likely]]
             {
@@ -121,7 +121,7 @@ namespace yli::memory
             }
 
             throw std::runtime_error(
-                "ERROR: `MemorySystem::get_generic_allocator`: allocator for type " + std::to_string(type) +
+                "ERROR: `MemorySystem::get_abstract_allocator`: allocator for type " + std::to_string(type) +
                 " does not exist!");
         }
 
@@ -152,11 +152,11 @@ namespace yli::memory
         {
             if (this->has_allocator(type))
             {
-                return this->get_generic_allocator(type);
+                return this->get_abstract_allocator(type);
             }
 
             this->template create_allocator<T1, Args...>(type, std::forward<Args>(args)...);
-            return this->get_generic_allocator(type);
+            return this->get_abstract_allocator(type);
         }
 
     private:
