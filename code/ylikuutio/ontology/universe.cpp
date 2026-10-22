@@ -86,6 +86,7 @@
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <string_view> // std::string_view
 #include <utility>   // std::move
 #include <vector>    // std::vector
 
@@ -197,9 +198,6 @@ namespace yli::ontology
             render::RenderSystemStruct render_system_struct;
             this->render_system = std::make_unique<render::RenderSystem>(*this, render_system_struct);
         }
-
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Universe*";
     }
 
     Universe::~Universe()
@@ -992,6 +990,11 @@ namespace yli::ontology
     Scene* Universe::get_active_scene() const
     {
         return this->active_scene;
+    }
+
+    std::string_view Universe::get_type() const
+    {
+        return "yli::ontology::Universe*";
     }
 
     Entity* Universe::get_parent() const

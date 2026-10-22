@@ -26,6 +26,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
+#include <string_view> // std::string_view
 
 // `ShapeshifterTransformation` is a series of `ShapeshifterForm`s that
 // make up the transition that may be e.g. a walk cycle or
@@ -68,6 +69,8 @@ namespace yli::ontology
             GenericParentModule* material_parent_module);
 
         ~ShapeshifterTransformation() override = default;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

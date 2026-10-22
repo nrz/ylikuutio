@@ -30,6 +30,7 @@
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -151,8 +152,12 @@ namespace yli::ontology
           mesh(universe, species_struct, this->get_pipeline())
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Species*";
         this->can_be_erased = true;
+    }
+
+    std::string_view Species::get_type() const
+    {
+        return "yli::ontology::Species*";
     }
 
     Entity* Species::get_parent() const

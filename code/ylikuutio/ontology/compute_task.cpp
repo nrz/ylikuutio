@@ -39,6 +39,7 @@
 #include <iostream>  // std::cerr
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
+#include <string_view> // std::string_view
 #include <utility>   // std::swap etc.
 #include <vector>    // std::vector
 
@@ -202,7 +203,6 @@ namespace yli::ontology
         }
 
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::ComputeTask*";
         this->can_be_erased = true;
     }
 
@@ -422,6 +422,11 @@ namespace yli::ontology
         this->universe.restore_onscreen_rendering();
 
         this->is_ready = true;
+    }
+
+    std::string_view ComputeTask::get_type() const
+    {
+        return "yli::ontology::ComputeTask*";
     }
 
     Entity* ComputeTask::get_parent() const

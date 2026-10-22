@@ -30,6 +30,7 @@
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -81,6 +82,8 @@ namespace yli::ontology
     public:
         Pipeline(const Pipeline&) = delete; // Delete copy constructor.
         Pipeline& operator=(const Pipeline&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Scene* get_scene() const override;
 

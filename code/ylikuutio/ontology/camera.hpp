@@ -30,6 +30,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <string_view> // std::string_view
 
 // How `Camera` class works:
 //
@@ -99,6 +100,8 @@ namespace yli::ontology
     public:
         Camera(const Camera&) = delete; // Delete copy constructor.
         Camera& operator=(const Camera&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

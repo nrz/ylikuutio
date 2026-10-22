@@ -31,6 +31,7 @@
 #include <optional>   // std::optional
 #include <stdexcept>  // std::runtime_error
 #include <string>     // std::string
+#include <string_view> // std::string_view
 #include <tuple>      // std::apply, std::tuple, std::tuple_cat
 #include <vector>     // std::vector
 
@@ -74,8 +75,6 @@ namespace yli::ontology
             : AbstractConsoleLispFunctionOverload(application, universe, console_lisp_function_parent_module),
               callback(callback)
         {
-            // `Entity` member variables begin here.
-            this->type_string = "yli::ontology::ConsoleLispFunctionOverload*";
         }
 
         ~ConsoleLispFunctionOverload() override = default;
@@ -83,6 +82,11 @@ namespace yli::ontology
     public:
         ConsoleLispFunctionOverload(const ConsoleLispFunctionOverload&) = delete; // Delete copy constructor.
         ConsoleLispFunctionOverload& operator=(const ConsoleLispFunctionOverload&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override
+        {
+            return "yli::ontology::ConsoleLispFunctionOverload*";
+        }
 
         Result execute(const std::vector<std::string>& parameter_vector) override
         {

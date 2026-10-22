@@ -34,7 +34,5 @@ namespace yli::ontology
         const AbstractCallbackEngineStruct& abstract_callback_engine_struct)
         : Entity(application, universe, abstract_callback_engine_struct)
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::AbstractCallbackEngine*";
     }
 }

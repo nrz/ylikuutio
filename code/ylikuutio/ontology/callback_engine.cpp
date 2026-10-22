@@ -29,6 +29,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
+#include <string_view> // std::string_view
 
 namespace yli::ontology
 {
@@ -51,8 +52,6 @@ namespace yli::ontology
               &this->registry,
               "movable_controllers")
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::CallbackEngine*";
     }
 
     CallbackObject* CallbackEngine::create_callback_object()
@@ -136,6 +135,11 @@ namespace yli::ontology
         }
 
         return this->return_values.back();
+    }
+
+    std::string_view CallbackEngine::get_type() const
+    {
+        return "yli::ontology::CallbackEngine*";
     }
 
     Entity* CallbackEngine::get_parent() const

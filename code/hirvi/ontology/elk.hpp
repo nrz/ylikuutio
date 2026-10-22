@@ -22,6 +22,9 @@
 #include "code/ylikuutio/ontology/child_module.hpp"
 #include "code/ylikuutio/snippets/locomotion/gait_module.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -60,6 +63,8 @@ namespace hirvi::ontology
         Elk& operator=(const Elk&) = delete; // Delete copy assignment.
 
         ~Elk() override = default;
+
+        std::string_view get_type() const override;
 
         yli::ontology::Scene* get_scene() const override;
 

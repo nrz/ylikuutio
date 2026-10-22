@@ -42,6 +42,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cerr
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -84,8 +85,12 @@ namespace yli::ontology
         this->activate();
 
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Camera*";
         this->can_be_erased = true;
+    }
+
+    std::string_view Camera::get_type() const
+    {
+        return "yli::ontology::Camera*";
     }
 
     Entity* Camera::get_parent() const

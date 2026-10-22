@@ -33,6 +33,7 @@
 #include <iostream> // std::cout, std::cerr
 #include <optional> // std::optional
 #include <string>   // std::string
+#include <string_view> // std::string_view
 #include <utility>  // std::move
 
 namespace yli::ontology
@@ -51,8 +52,6 @@ namespace yli::ontology
               this->registry,
               "callback_parameters")
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::CallbackObject*";
     }
 
     CallbackObject::CallbackObject(
@@ -69,8 +68,6 @@ namespace yli::ontology
               "callback_parameters"),
           callback { callback }
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::CallbackObject*";
     }
 
     CallbackParameter* CallbackObject::create_callback_parameter(
@@ -141,6 +138,11 @@ namespace yli::ontology
         }
 
         return std::nullopt;
+    }
+
+    std::string_view CallbackObject::get_type() const
+    {
+        return "yli::ontology::CallbackObject*";
     }
 
     Entity* CallbackObject::get_parent() const

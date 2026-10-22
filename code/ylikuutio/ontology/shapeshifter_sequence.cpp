@@ -24,6 +24,7 @@
 // Include standard headers
 #include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -54,8 +55,12 @@ namespace yli::ontology
         this->bounce_from_end = shapeshifter_sequence_struct.bounce_from_end;
 
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::ShapeshifterSequence*";
         this->can_be_erased = true;
+    }
+
+    std::string_view ShapeshifterSequence::get_type() const
+    {
+        return "yli::ontology::ShapeshifterSequence*";
     }
 
     Entity* ShapeshifterSequence::get_parent() const

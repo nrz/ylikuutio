@@ -22,6 +22,7 @@
 // Include standard headers
 #include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -44,8 +45,11 @@ namespace yli::ontology
           child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
           mesh(universe, shapeshifter_form_struct, this->get_pipeline())
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::ShapeshifterForm*";
+    }
+
+    std::string_view ShapeshifterForm::get_type() const
+    {
+        return "yli::ontology::ShapeshifterForm*";
     }
 
     Entity* ShapeshifterForm::get_parent() const

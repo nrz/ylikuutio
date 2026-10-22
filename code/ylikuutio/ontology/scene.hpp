@@ -33,6 +33,7 @@
 // Include standard headers
 #include <cmath>   // NAN
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 // How `Scene` class works:
 //
@@ -97,6 +98,8 @@ namespace yli::ontology
 
         Scene(const Scene&) = delete; // Delete copy constructor.
         Scene& operator=(const Scene&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

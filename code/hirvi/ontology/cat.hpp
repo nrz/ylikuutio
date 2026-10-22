@@ -22,6 +22,9 @@
 #include "code/ylikuutio/snippets/locomotion/gait_module.hpp"
 #include "code/ylikuutio/snippets/locomotion/climb_module.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -58,6 +61,8 @@ namespace hirvi::ontology
         Cat& operator=(const Cat&) = delete; // Delete copy assignment.
 
         ~Cat() override = default;
+
+        std::string_view get_type() const override;
 
         yli::snippets::locomotion::GaitModule walk;
         yli::snippets::locomotion::GaitModule trot;

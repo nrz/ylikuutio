@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -53,8 +54,12 @@ namespace yli::ontology
               "heightmap_sheets")
     {
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::Heightmap*";
         this->can_be_erased = true;
+    }
+
+    std::string_view Heightmap::get_type() const
+    {
+        return "yli::ontology::Heightmap*";
     }
 
     Scene* Heightmap::get_scene() const

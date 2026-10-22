@@ -37,7 +37,5 @@ namespace yli::ontology
             const CapabilityStruct& capability_struct)
         : Entity(application, universe, capability_struct)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::AbstractCapability*";
     }
 }

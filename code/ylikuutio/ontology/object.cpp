@@ -61,6 +61,7 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <string_view> // std::string_view
 
 namespace yli::ontology
 {
@@ -140,8 +141,12 @@ namespace yli::ontology
           apprentice_of_species(species_master_module, this)
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Object*";
         this->can_be_erased = true;
+    }
+
+    std::string_view Object::get_type() const
+    {
+        return "yli::ontology::Object*";
     }
 
     Entity* Object::get_parent() const

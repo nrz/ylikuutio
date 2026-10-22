@@ -24,6 +24,9 @@
 #include "emancipation_module.hpp"
 #include "police_module.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -64,6 +67,8 @@ namespace hirvi::ontology
         PoliceDog& operator=(const PoliceDog&) = delete; // Delete copy assignment.
 
         ~PoliceDog() override = default;
+
+        std::string_view get_type() const override;
 
         yli::ontology::Scene* get_scene() const override;
 

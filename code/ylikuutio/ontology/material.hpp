@@ -33,6 +33,7 @@
 #include <cstdint>  // std::uint32_t
 #include <optional> // std::optional
 #include <string>   // std::string
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -92,6 +93,8 @@ namespace yli::ontology
     public:
         Material(const Material&) = delete; // Delete copy constructor.
         Material& operator=(const Material&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

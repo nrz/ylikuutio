@@ -23,6 +23,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -51,6 +52,8 @@ namespace yli::ontology
             Mission &operator=(const Mission&) = delete; // Delete copy assignment.
 
             ~Mission() override = default;
+
+            std::string_view get_type() const override;
 
             Entity* get_parent() const override;
             std::size_t get_number_of_children() const override;

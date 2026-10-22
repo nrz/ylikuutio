@@ -62,6 +62,8 @@ namespace yli::ontology
         Ecosystem(const Ecosystem&) = delete; // Delete copy constructor.
         Ecosystem& operator=(const Ecosystem&) = delete; // Delete copy assignment.
 
+        std::string_view get_type() const override;
+
         Entity* get_parent() const override;
 
         template<typename ChildType>

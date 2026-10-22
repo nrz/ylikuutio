@@ -37,6 +37,7 @@
 #include <optional> // std::optional
 #include <queue>    // std::queue
 #include <string>   // std::string
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 // `Console` works through keypress callbacks and keyrelease callbacks.
@@ -154,6 +155,8 @@ namespace yli::ontology
             std::vector<T1*>& apprentice_pointer_vector,
             std::queue<std::size_t>& free_apprenticeID_queue,
             std::size_t& number_of_apprentices) noexcept;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

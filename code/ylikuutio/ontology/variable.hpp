@@ -28,6 +28,7 @@
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string
+#include <string_view> // std::string_view
 
 // `Variable` provides variable-related functionality.
 // `Variable`s must be bound to an `Entity`.
@@ -78,6 +79,8 @@ namespace yli::ontology
     public:
         Variable(const Variable&) = delete; // Delete copy constructor.
         Variable& operator=(const Variable&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

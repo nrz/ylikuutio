@@ -37,6 +37,7 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -177,7 +178,6 @@ namespace yli::ontology
         }
 
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Material*";
         this->can_be_erased = true;
     }
 
@@ -209,6 +209,11 @@ namespace yli::ontology
 
         render::RenderSystem::render_species(this->master_of_species, new_target_scene);
         render::RenderSystem::render_vector_fonts(this->parent_of_vector_fonts, new_target_scene);
+    }
+
+    std::string_view Material::get_type() const
+    {
+        return "yli::ontology::Material*";
     }
 
     Entity* Material::get_parent() const

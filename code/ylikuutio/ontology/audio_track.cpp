@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -38,6 +39,11 @@ namespace yli::ontology
         return this->filename;
     }
 
+    std::string_view AudioTrack::get_type() const
+    {
+        return "yli::ontology::AudioTrack*";
+    }
+
     Entity* AudioTrack::get_parent() const
     {
         return this->child_of_universe.get_parent();
@@ -53,7 +59,6 @@ namespace yli::ontology
           filename { audio_track_struct.filename }
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::AudioTrack*";
         this->can_be_erased = true;
     }
 

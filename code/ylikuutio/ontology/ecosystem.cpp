@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -57,8 +58,12 @@ namespace yli::ontology
               "symbioses")
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Ecosystem*";
         this->can_be_erased = true;
+    }
+
+    std::string_view Ecosystem::get_type() const
+    {
+        return "yli::ontology::Ecosystem*";
     }
 
     Entity* Ecosystem::get_parent() const

@@ -23,6 +23,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
+#include <string_view> // std::string_view
 #include <utility>  // std::move
 
 namespace yli::core
@@ -52,13 +53,16 @@ namespace yli::ontology
           child_of_callback_object(callback_object_parent_module, *this),
           any_value { std::move(any_value) }
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::CallbackParameter*";
     }
 
     const data::AnyValue& CallbackParameter::get_any_value() const
     {
         return this->any_value;
+    }
+
+    std::string_view CallbackParameter::get_type() const
+    {
+        return "yli::ontology::CallbackParameter*";
     }
 
     Entity* CallbackParameter::get_parent() const

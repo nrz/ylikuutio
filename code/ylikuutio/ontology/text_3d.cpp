@@ -26,6 +26,7 @@
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -126,8 +127,12 @@ namespace yli::ontology
         create_glyph_objects(this->text_string, *this);
 
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Text3d*";
         this->can_be_erased = true;
+    }
+
+    std::string_view Text3d::get_type() const
+    {
+        return "yli::ontology::Text3d*";
     }
 
     Entity* Text3d::get_parent() const

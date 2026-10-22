@@ -29,6 +29,7 @@
 // Include standard headers
 #include <cstddef>   // std::size_t
 #include <cstdint>   // std::uint32_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -64,6 +65,8 @@ namespace yli::ontology
     public:
         Font2d(const Font2d&) = delete; // Delete copy constructor.
         Font2d& operator=(const Font2d&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

@@ -35,6 +35,7 @@
 #include <iostream>  // std::cerr
 #include <optional>  // std::optional
 #include <string>    // std::string
+#include <string_view> // std::string_view
 #include <vector>    // std::vector
 
 namespace yli::core
@@ -111,7 +112,6 @@ namespace yli::ontology
           completion_module { *this }
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Console*";
         this->can_be_erased = true;
     }
 
@@ -209,6 +209,11 @@ namespace yli::ontology
         print_console_struct.prompt = this->get_prompt();
 
         font_2d->print_console(print_console_struct);
+    }
+
+    std::string_view Console::get_type() const
+    {
+        return "yli::ontology::Console*";
     }
 
     Entity* Console::get_parent() const

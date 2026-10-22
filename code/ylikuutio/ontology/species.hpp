@@ -29,6 +29,7 @@
 #include <cstddef>  // std::size_t
 #include <cstdint>  // std::uint32_t
 #include <optional> // std::optional
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -86,6 +87,8 @@ namespace yli::ontology
     public:
         Species(const Species&) = delete; // Delete copy constructor.
         Species& operator=(const Species&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

@@ -24,6 +24,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -49,8 +50,11 @@ namespace yli::ontology
               "console_callback_parameters"),
           console_callback { console_callback_object_struct.console_callback }
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::ConsoleCallbackObject*";
+    }
+
+    std::string_view ConsoleCallbackObject::get_type() const
+    {
+        return "yli::ontology::ConsoleCallbackObject*";
     }
 
     Entity* ConsoleCallbackObject::get_parent() const

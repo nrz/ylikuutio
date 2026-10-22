@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -56,6 +57,8 @@ namespace yli::ontology
         virtual ~HeightmapSheet() = default;
 
         Heightmap* get_heightmap() const;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

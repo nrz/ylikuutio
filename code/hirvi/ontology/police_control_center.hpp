@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -60,6 +61,8 @@ namespace hirvi::ontology
 
         template<typename ApprenticeType>
         yli::ontology::GenericMasterModule* get_generic_master_module() = delete;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

@@ -18,6 +18,9 @@
 #include "police_car.hpp"
 #include "police_car_struct.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -55,8 +58,11 @@ namespace hirvi::ontology
           police(police_control_center_master, this),
           road_vehicle(road_vehicle_struct)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::ontology::PoliceCar*";
+    }
+
+    std::string_view PoliceCar::get_type() const
+    {
+        return "hirvi::ontology::PoliceCar*";
     }
 
     yli::ontology::Scene* PoliceCar::get_scene() const

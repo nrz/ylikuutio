@@ -26,6 +26,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
+#include <string_view> // std::string_view
 
 // `SymbiontSpecies` master provides mesh for the `Biont` apprentices.
 
@@ -63,6 +64,8 @@ namespace yli::ontology
     public:
         SymbiontSpecies(const SymbiontSpecies&) = delete; // Delete copy constructor.
         SymbiontSpecies& operator=(const SymbiontSpecies&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

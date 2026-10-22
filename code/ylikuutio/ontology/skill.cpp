@@ -22,6 +22,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -40,6 +41,11 @@ namespace yli::ontology
         return static_cast<Holobiont*>(this->get_parent());
     }
 
+    std::string_view Skill::get_type() const
+    {
+        return "yli::ontology::Skill*";
+    }
+
     Entity* Skill::get_parent() const
     {
         return this->child_of_holobiont.get_parent();
@@ -53,8 +59,6 @@ namespace yli::ontology
         : AbstractCapability(application, universe, skill_struct),
           child_of_holobiont(parent_module, *this)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::Skill*";
     }
 
     std::size_t Skill::get_number_of_children() const

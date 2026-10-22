@@ -18,6 +18,9 @@
 #include "climb_ability.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -39,7 +42,10 @@ namespace hirvi::ontology
         yli::ontology::GenericParentModule* const parent_module)
         : Ability(application, universe, ability_struct, parent_module)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::ClimbAbility*";
+    }
+
+    std::string_view ClimbAbility::get_type() const
+    {
+        return "hirvi::ontology::ClimbAbility*";
     }
 }

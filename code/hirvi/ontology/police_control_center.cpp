@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -50,8 +51,11 @@ namespace hirvi::ontology
           child_of_hirvi_scene(hirvi_scene_parent_module, *this),
           master_of_polices(*this, &this->registry, "polices")
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::ontology::PoliceControlCenter*";
+    }
+
+    std::string_view PoliceControlCenter::get_type() const
+    {
+        return "hirvi::ontology::PoliceControlCenter*";
     }
 
     std::size_t PoliceControlCenter::get_number_of_children() const

@@ -23,6 +23,9 @@
 #include "code/ylikuutio/snippets/locomotion/fly_module.hpp"
 #include "police_module.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -60,6 +63,8 @@ namespace hirvi::ontology
         PoliceHelicopter& operator=(const PoliceHelicopter&) = delete; // Delete copy assignment.
 
         ~PoliceHelicopter() override = default;
+
+        std::string_view get_type() const override;
 
         yli::ontology::Scene* get_scene() const override;
 

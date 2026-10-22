@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -33,6 +34,11 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
     class Universe;
+
+    std::string_view GlyphObject::get_type() const
+    {
+        return "yli::ontology::GlyphObject*";
+    }
 
     Entity* GlyphObject::get_parent() const
     {
@@ -55,8 +61,6 @@ namespace yli::ontology
           apprentice_of_glyph(glyph_master_module, this),
           apprentice_of_text_3d(text_3d_master_module, this)
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::GlyphObject*";
     }
 
     std::size_t GlyphObject::get_number_of_children() const

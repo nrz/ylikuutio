@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -54,6 +55,8 @@ namespace yli::ontology
         GlyphObject& operator=(const GlyphObject&) = delete; // Delete copy assignment.
 
         ~GlyphObject() override = default;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

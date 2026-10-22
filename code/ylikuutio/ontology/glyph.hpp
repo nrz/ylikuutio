@@ -32,6 +32,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 namespace yli::core
@@ -69,6 +70,8 @@ namespace yli::ontology
         ~Glyph() override = default;
 
     public:
+        std::string_view get_type() const override;
+
         Entity* get_parent() const override;
 
         const char* get_unicode_char_pointer() const;

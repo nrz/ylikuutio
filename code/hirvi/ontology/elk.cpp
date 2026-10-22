@@ -18,6 +18,9 @@
 #include "elk.hpp"
 #include "elk_struct.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -60,8 +63,11 @@ namespace hirvi::ontology
           canter(canter_struct),
           gallop(gallop_struct)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::ontology::Elk*";
+    }
+
+    std::string_view Elk::get_type() const
+    {
+        return "hirvi::ontology::Elk*";
     }
 
     yli::ontology::Scene* Elk::get_scene() const

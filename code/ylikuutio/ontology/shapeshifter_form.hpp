@@ -24,6 +24,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <string_view> // std::string_view
 
 // `ShapeshifterForm` is a `Model` and a part of `ShapeshifterTransformation`.
 
@@ -59,6 +60,8 @@ namespace yli::ontology
         ~ShapeshifterForm() override = default;
 
     public:
+        std::string_view get_type() const override;
+
         Entity* get_parent() const override;
 
         template<typename T1, std::size_t DataSize>

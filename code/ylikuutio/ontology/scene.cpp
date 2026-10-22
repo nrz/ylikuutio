@@ -50,6 +50,7 @@
 #include <cstddef>   // std::size_t
 #include <iostream>  // std::cerr
 #include <stdexcept> // std::runtime_error
+#include <string_view> // std::string_view
 
 namespace yli::ontology
 {
@@ -145,7 +146,6 @@ namespace yli::ontology
         this->get_application().get_abstract_entity_factory().create_default_camera(camera_struct);
 
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Scene*";
         this->can_be_erased = true;
     }
 
@@ -235,6 +235,11 @@ namespace yli::ontology
 
         // It is OK to disactivate the active camera by setting `active_camera` to `nullptr`.
         this->active_camera = camera;
+    }
+
+    std::string_view Scene::get_type() const
+    {
+        return "yli::ontology::Scene*";
     }
 
     Entity* Scene::get_parent() const

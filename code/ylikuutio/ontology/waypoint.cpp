@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -33,6 +34,11 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
     class Universe;
+
+    std::string_view Waypoint::get_type() const
+    {
+        return "yli::ontology::Waypoint*";
+    }
 
     Entity* Waypoint::get_parent() const
     {
@@ -53,7 +59,6 @@ namespace yli::ontology
           child_of_scene(parent_module, *this)
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Waypoint*";
         this->can_be_erased = true;
     }
 

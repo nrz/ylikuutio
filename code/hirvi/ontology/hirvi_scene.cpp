@@ -23,6 +23,9 @@
 #include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/ontology/get_number_of_descendants.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -84,9 +87,6 @@ namespace hirvi::ontology
               "police_trams")
     {
         this->create_police_control_centers(hirvi_core, hirvi_scene_struct.police_control_center_structs);
-
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::ontology::HirviScene*";
     }
 
     std::size_t HirviScene::get_number_of_children() const
@@ -130,5 +130,10 @@ namespace hirvi::ontology
                 police_control_center_struct,
                 &this->parent_of_police_control_centers);
         }
+    }
+
+    std::string_view HirviScene::get_type() const
+    {
+        return "hirvi::ontology::HirviScene*";
     }
 }

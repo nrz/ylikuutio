@@ -25,6 +25,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <limits>   // std::numeric_limits
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -61,6 +62,8 @@ namespace yli::ontology
     public:
         Biont(const Biont&) = delete; // Delete copy constructor.
         Biont& operator=(const Biont&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

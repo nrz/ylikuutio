@@ -28,6 +28,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 namespace yli::core
@@ -99,6 +100,8 @@ namespace yli::ontology
 
         template<typename ChildType>
         GenericParentModule* get_generic_parent_module() = delete;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

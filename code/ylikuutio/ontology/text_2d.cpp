@@ -28,6 +28,7 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -105,9 +106,6 @@ namespace yli::ontology
 
             this->vertices_and_uvs_loaded = true;
         }
-
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Text2d*";
     }
 
     Text2d::~Text2d()
@@ -129,6 +127,11 @@ namespace yli::ontology
         text_struct.text = this->text;
         const Font2d* const font_2d_parent = static_cast<Font2d*>(this->get_parent());
         font_2d_parent->print_text_2d(text_struct);
+    }
+
+    std::string_view Text2d::get_type() const
+    {
+        return "yli::ontology::Text2d*";
     }
 
     Entity* Text2d::get_parent() const

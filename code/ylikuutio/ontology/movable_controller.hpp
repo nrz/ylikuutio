@@ -26,6 +26,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <string_view> // std::string_view
 
 // `MovableController` is a general purpose AI and controller class for `AbstractMovable`s.
 // Each `MovableController` instance may do some actions for the `AbstractMovable`s bound to the `MovableController`.
@@ -82,6 +83,8 @@ namespace yli::ontology
             ~MovableController() override = default;
 
         public:
+            std::string_view get_type() const override;
+
             Entity* get_parent() const override;
 
             CallbackEngine* get_callback_engine_master() const;

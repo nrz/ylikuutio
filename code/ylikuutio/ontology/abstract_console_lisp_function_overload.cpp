@@ -41,8 +41,6 @@ namespace yli::ontology
         : AbstractLispFunctionOverload(application, universe),
           child_of_console_lisp_function(console_lisp_function_parent_module, *this)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::AbstractConsoleLispFunctionOverload*";
     }
 
     Entity* AbstractConsoleLispFunctionOverload::get_parent() const

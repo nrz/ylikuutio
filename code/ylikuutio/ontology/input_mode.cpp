@@ -27,6 +27,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <cstdint>  // std::uint32_t
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 namespace yli::core
@@ -50,8 +51,6 @@ namespace yli::ontology
           apprentice_of_console(static_cast<MasterOfInputModesModule*>(console_master_module), this),
           is_text_input_mode { input_mode_struct.is_text_input_mode }
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::InputMode*";
     }
 
     void InputMode::activate()
@@ -156,6 +155,11 @@ namespace yli::ontology
     const std::vector<AbstractCallbackEngine*>* InputMode::get_continuous_keypress_callback_engines() const
     {
         return &this->continuous_keypress_callback_engines;
+    }
+
+    std::string_view InputMode::get_type() const
+    {
+        return "yli::ontology::InputMode*";
     }
 
     Entity* InputMode::get_parent() const

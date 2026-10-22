@@ -32,6 +32,7 @@
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -158,7 +159,6 @@ namespace yli::ontology
         }
 
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Pipeline*";
         this->can_be_erased = true;
     }
 
@@ -195,6 +195,11 @@ namespace yli::ontology
         render_system.render_compute_tasks(this->parent_of_compute_tasks, new_target_scene);
         render_system.render_materials(this->master_of_materials, new_target_scene);
         render_system.render_symbioses(this->master_of_symbioses, new_target_scene);
+    }
+
+    std::string_view Pipeline::get_type() const
+    {
+        return "yli::ontology::Pipeline*";
     }
 
     Scene* Pipeline::get_scene() const

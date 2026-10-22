@@ -23,6 +23,9 @@
 #include "code/ylikuutio/snippets/locomotion/rail_vehicle_module.hpp"
 #include "police_module.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -58,6 +61,8 @@ namespace hirvi::ontology
         PoliceTram& operator=(const PoliceTram&) = delete; // Delete copy assignment.
 
         ~PoliceTram() override = default;
+
+        std::string_view get_type() const override;
 
         yli::ontology::Scene* get_scene() const override;
 

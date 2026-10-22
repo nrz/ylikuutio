@@ -25,6 +25,7 @@
 // Include standard headers
 #include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -62,9 +63,11 @@ namespace yli::ontology
                 this->universe.get_is_software_rendering_in_use();
 
         // FIXME: implement mesh loading!
+    }
 
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Glyph*";
+    std::string_view Glyph::get_type() const
+    {
+        return "yli::ontology::Glyph*";
     }
 
     Entity* Glyph::get_parent() const

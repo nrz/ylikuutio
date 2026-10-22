@@ -18,6 +18,9 @@
 #include "police_dog.hpp"
 #include "police_dog_struct.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -63,8 +66,11 @@ namespace hirvi::ontology
           canter(canter_struct),
           gallop(gallop_struct)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::ontology::PoliceDog*";
+    }
+
+    std::string_view PoliceDog::get_type() const
+    {
+        return "hirvi::ontology::PoliceDog*";
     }
 
     yli::ontology::Scene* PoliceDog::get_scene() const

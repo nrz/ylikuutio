@@ -35,7 +35,6 @@ namespace yli::ontology
         : Entity(application, universe, lisp_context_struct)
     {
         // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::LispContext*";
         this->can_be_erased = true;
     }
 }

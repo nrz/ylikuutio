@@ -145,11 +145,6 @@ namespace yli::ontology
         this->childID = std::numeric_limits<std::size_t>::max();
     }
 
-    std::string Entity::get_type() const
-    {
-        return this->type_string;
-    }
-
     bool Entity::get_can_be_erased() const
     {
         return this->can_be_erased;

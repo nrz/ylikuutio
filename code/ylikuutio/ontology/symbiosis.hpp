@@ -45,6 +45,7 @@
 #include <cstdint>       // std::int32_t, std::uint32_t
 #include <optional>      // std::optional
 #include <string>        // std::string
+#include <string_view>   // std::string_view
 #include <unordered_map> // std::unordered_map
 #include <vector>        // std::vector
 
@@ -111,6 +112,8 @@ namespace yli::ontology
     public:
         Symbiosis(const Symbiosis&) = delete; // Delete copy constructor.
         Symbiosis& operator=(const Symbiosis&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

@@ -51,6 +51,7 @@
 #include <span>      // std::span
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <string_view> // std::string_view
 #include <utility>   // std::pair
 #include <vector>    // std::vector
 
@@ -124,9 +125,6 @@ namespace yli::ontology
                 std::cerr << "ERROR: `Font2d::Font2d`: Vulkan is not supported yet!\n";
             }
         }
-
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Font2d*";
     }
 
     Font2d::~Font2d()
@@ -143,6 +141,11 @@ namespace yli::ontology
             // Delete shader.
             glDeleteProgram(this->program_id);
         }
+    }
+
+    std::string_view Font2d::get_type() const
+    {
+        return "yli::ontology::Font2d*";
     }
 
     Entity* Font2d::get_parent() const

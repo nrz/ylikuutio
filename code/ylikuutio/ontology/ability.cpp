@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -39,6 +40,11 @@ namespace yli::ontology
         return static_cast<Symbiosis*>(this->get_parent());
     }
 
+    std::string_view Ability::get_type() const
+    {
+        return "yli::ontology::Ability*";
+    }
+
     Entity* Ability::get_parent() const
     {
         return this->child_of_symbiosis.get_parent();
@@ -52,8 +58,6 @@ namespace yli::ontology
         : AbstractCapability(application, universe, ability_struct),
           child_of_symbiosis(parent_module, *this)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::Ability*";
     }
 
     std::size_t Ability::get_number_of_children() const

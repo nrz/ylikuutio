@@ -27,6 +27,7 @@
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 namespace yli::core
@@ -71,6 +72,8 @@ namespace yli::ontology
         Holobiont& operator=(const Holobiont&) = delete; // Delete copy assignment.
 
         ~Holobiont() override = default;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

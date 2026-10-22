@@ -25,6 +25,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <cstdint>  // std::uint32_t
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 namespace yli::core
@@ -84,6 +85,8 @@ namespace yli::ontology
         const std::vector<AbstractCallbackEngine*>* get_keyrelease_callback_engines() const;
 
         const std::vector<AbstractCallbackEngine*>* get_continuous_keypress_callback_engines() const;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

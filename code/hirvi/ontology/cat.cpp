@@ -17,6 +17,9 @@
 
 #include "cat.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -59,7 +62,10 @@ namespace hirvi::ontology
           gallop(gallop_struct),
           climb(climb_struct)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::Cat*";
+    }
+
+    std::string_view Cat::get_type() const
+    {
+        return "hirvi::ontology::Cat*";
     }
 }

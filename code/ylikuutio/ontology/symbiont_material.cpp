@@ -27,6 +27,7 @@
 // Include standard headers
 #include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -65,9 +66,6 @@ namespace yli::ontology
                 this->opengl_texture_id = glGetUniformLocation(pipeline->get_program_id(), "texture_sampler");
             }
         }
-
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::SymbiontMaterial*";
     }
 
     Scene* SymbiontMaterial::get_scene() const
@@ -80,6 +78,11 @@ namespace yli::ontology
         }
 
         return symbiosis_parent->get_scene();
+    }
+
+    std::string_view SymbiontMaterial::get_type() const
+    {
+        return "yli::ontology::SymbiontMaterial*";
     }
 
     Entity* SymbiontMaterial::get_parent() const

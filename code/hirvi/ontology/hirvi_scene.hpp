@@ -23,6 +23,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 #include <vector>  // std::vector
 
 namespace yli::core
@@ -89,6 +90,8 @@ namespace hirvi::ontology
         std::size_t get_number_of_children() const override;
 
         std::size_t get_number_of_descendants() const override;
+
+        std::string_view get_type() const override;
 
         template<typename ChildType>
         yli::ontology::GenericParentModule* get_generic_parent_module() = delete;

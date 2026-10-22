@@ -21,6 +21,9 @@
 #include "code/ylikuutio/ontology/holobiont.hpp"
 #include "code/ylikuutio/snippets/locomotion/rail_vehicle_module.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -53,6 +56,8 @@ namespace hirvi::ontology
         Train& operator=(const Train&) = delete; // Delete copy assignment.
 
         ~Train() override = default;
+
+        std::string_view get_type() const override;
 
         yli::snippets::locomotion::RailVehicleModule rail_vehicle;
     };

@@ -30,6 +30,7 @@
 #include <iostream>  // std::cout, std::cerr
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -88,7 +89,6 @@ namespace yli::ontology
               "shapeshifter_sequences")
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::ShapeshifterTransformation*";
         this->can_be_erased = true;
     }
 
@@ -112,6 +112,11 @@ namespace yli::ontology
         render::RenderSystem& render_system = this->universe.get_render_system();
 
         render_system.render_shapeshifter_sequences(this->parent_of_shapeshifter_sequences, new_target_scene);
+    }
+
+    std::string_view ShapeshifterTransformation::get_type() const
+    {
+        return "yli::ontology::ShapeshifterTransformation*";
     }
 
     Entity* ShapeshifterTransformation::get_parent() const

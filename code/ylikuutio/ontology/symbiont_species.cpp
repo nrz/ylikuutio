@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -45,8 +46,11 @@ namespace yli::ontology
           master_of_bionts(*this, &this->registry, "bionts"),
           mesh(universe, symbiont_species_struct, this->get_pipeline())
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::SymbiontSpecies*";
+    }
+
+    std::string_view SymbiontSpecies::get_type() const
+    {
+        return "yli::ontology::SymbiontSpecies*";
     }
 
     Entity* SymbiontSpecies::get_parent() const

@@ -28,6 +28,7 @@
 #include <limits>        // std::numeric_limits
 #include <optional>      // std::optional
 #include <string>        // std::string
+#include <string_view>   // std::string_view
 
 namespace yli::core
 {
@@ -85,11 +86,11 @@ namespace yli::ontology
 
         void release();
 
-        std::string get_type() const;
-
         bool get_can_be_erased() const;
 
         Universe& get_universe() const;
+
+        virtual std::string_view get_type() const = 0;
 
         // Different classes are bound to `Scene` in different ways,
         // so they need to `override` this to provide the functionality.
@@ -191,8 +192,6 @@ namespace yli::ontology
     protected:
         Universe& universe;
         std::size_t entityID { std::numeric_limits<std::size_t>::max() };
-
-        std::string type_string;
 
         std::string global_name; // global name of this `Entity`.
         std::string local_name; // local name of this `Entity`.

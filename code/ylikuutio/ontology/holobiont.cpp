@@ -41,6 +41,7 @@
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <string_view> // std::string_view
 #include <vector>    // std::vector
 
 namespace yli::ontology
@@ -74,8 +75,12 @@ namespace yli::ontology
           apprentice_of_symbiosis(symbiosis_master_module, this)
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Holobiont*";
         this->can_be_erased = true;
+    }
+
+    std::string_view Holobiont::get_type() const
+    {
+        return "yli::ontology::Holobiont*";
     }
 
     Entity* Holobiont::get_parent() const

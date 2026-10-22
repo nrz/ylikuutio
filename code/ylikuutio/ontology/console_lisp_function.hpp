@@ -27,6 +27,7 @@
 #include <cstddef> // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 namespace yli::core
@@ -63,6 +64,8 @@ namespace yli::ontology
         ~ConsoleLispFunction() override = default;
 
         Console* get_console() const;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

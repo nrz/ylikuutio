@@ -24,6 +24,7 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string>  // std::string
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -52,6 +53,8 @@ namespace yli::ontology
         ~AudioTrack() override = default;
 
         const std::string& get_filename() const;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

@@ -28,6 +28,7 @@
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -81,6 +82,8 @@ namespace yli::ontology
 
         Text3d(const Text3d&) = delete; // Delete copy constructor.
         Text3d& operator=(const Text3d&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

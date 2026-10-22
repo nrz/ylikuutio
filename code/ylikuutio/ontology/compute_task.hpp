@@ -29,6 +29,7 @@
 #include <memory>   // std::shared_ptr
 #include <string>   // std::string
 #include <vector>   // std::vector
+#include <string_view> // std::string_view
 
 // `ComputeTask` is a class which contains the data for a single
 // computing task. `ComputeTask` does not have the OpenGL shaders used to process
@@ -75,6 +76,8 @@ namespace yli::ontology
     public:
         ComputeTask(const ComputeTask&) = delete; // Delete copy constructor.
         ComputeTask& operator=(const ComputeTask&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

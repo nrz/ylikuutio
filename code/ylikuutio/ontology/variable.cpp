@@ -26,6 +26,7 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <string_view> // std::string_view
 #include <utility>   // std::move
 
 namespace yli::core
@@ -53,8 +54,12 @@ namespace yli::ontology
           read_callback { variable_struct.read_callback }
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Variable*";
         this->can_be_erased = true;
+    }
+
+    std::string_view Variable::get_type() const
+    {
+        return "yli::ontology::Variable*";
     }
 
     Entity* Variable::get_parent() const

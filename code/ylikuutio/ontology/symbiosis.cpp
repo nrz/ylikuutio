@@ -52,6 +52,7 @@
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <string_view> // std::string_view
 #include <vector>    // std::vector
 
 namespace yli::ontology
@@ -178,7 +179,6 @@ namespace yli::ontology
         this->create_symbionts();
 
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Symbiosis*";
         this->can_be_erased = true;
     }
 
@@ -219,6 +219,11 @@ namespace yli::ontology
         }
 
         return number_of_symbiont_species;
+    }
+
+    std::string_view Symbiosis::get_type() const
+    {
+        return "yli::ontology::Symbiosis*";
     }
 
     Entity* Symbiosis::get_parent() const

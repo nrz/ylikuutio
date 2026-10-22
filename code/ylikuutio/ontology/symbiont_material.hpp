@@ -26,6 +26,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -59,6 +60,8 @@ namespace yli::ontology
     public:
         SymbiontMaterial(const SymbiontMaterial&) = delete; // Delete copy constructor.
         SymbiontMaterial& operator=(const SymbiontMaterial&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Scene* get_scene() const override;
 

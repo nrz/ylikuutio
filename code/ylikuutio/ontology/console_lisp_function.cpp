@@ -27,6 +27,7 @@
 #include <cstddef> // std::size_t
 #include <optional> // std::optional
 #include <string>   // std::string
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 namespace yli::core
@@ -46,6 +47,11 @@ namespace yli::ontology
         return static_cast<Console*>(this->get_parent());
     }
 
+    std::string_view ConsoleLispFunction::get_type() const
+    {
+        return "yli::ontology::ConsoleLispFunction*";
+    }
+
     Entity* ConsoleLispFunction::get_parent() const
     {
         return this->child_of_console.get_parent();
@@ -63,8 +69,6 @@ namespace yli::ontology
               this->registry,
               "generic_console_lisp_function_overloads")
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::ConsoleLispFunction*";
     }
 
     std::size_t ConsoleLispFunction::get_number_of_children() const

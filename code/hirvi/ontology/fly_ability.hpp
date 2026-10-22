@@ -20,6 +20,9 @@
 
 #include "code/ylikuutio/ontology/ability.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -47,6 +50,8 @@ namespace hirvi::ontology
         FlyAbility& operator=(const FlyAbility&) = delete; // Delete copy assignment.
 
         ~FlyAbility() override = default;
+
+        std::string_view get_type() const override;
     };
 }
 

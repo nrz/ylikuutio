@@ -40,6 +40,7 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
+#include <string_view> // std::string_view
 
 namespace yli::ontology
 {
@@ -113,7 +114,6 @@ namespace yli::ontology
         }
 
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::VectorFont*";
         this->can_be_erased = true;
 
         // Requirements for further actions:
@@ -197,6 +197,11 @@ namespace yli::ontology
         const Scene* const new_target_scene = (target_scene != nullptr ? target_scene : scene);
 
         render_system.render_glyphs(this->parent_of_glyphs, new_target_scene);
+    }
+
+    std::string_view VectorFont::get_type() const
+    {
+        return "yli::ontology::VectorFont*";
     }
 
     Entity* VectorFont::get_parent() const

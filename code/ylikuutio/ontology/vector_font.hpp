@@ -35,6 +35,7 @@
 #include <cstdint>       // std::int32_t
 #include <optional>      // std::optional
 #include <string>        // std::string
+#include <string_view>   // std::string_view
 #include <vector>        // std::vector
 #include <unordered_map> // std::unordered_map
 
@@ -80,6 +81,8 @@ namespace yli::ontology
     public:
         VectorFont(const VectorFont&) = delete; // Delete copy constructor.
         VectorFont& operator=(const VectorFont&) = delete; // Delete copy assignment.
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

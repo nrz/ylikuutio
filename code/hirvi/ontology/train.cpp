@@ -17,6 +17,9 @@
 
 #include "train.hpp"
 
+// Include standard headers
+#include <string_view> // std::string_view
+
 namespace yli::core
 {
     class Application;
@@ -51,7 +54,10 @@ namespace hirvi::ontology
               movable_controller_master),
           rail_vehicle(rail_vehicle_struct)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "hirvi::Train*";
+    }
+
+    std::string_view Train::get_type() const
+    {
+        return "hirvi::ontology::Train*";
     }
 }

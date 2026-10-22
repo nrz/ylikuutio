@@ -38,7 +38,5 @@ namespace yli::ontology
             const LispFunctionStruct& lisp_function_struct)
         : Entity(application, universe, lisp_function_struct)
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::LispFunction*";
     }
 }

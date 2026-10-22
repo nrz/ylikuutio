@@ -32,7 +32,5 @@ namespace yli::ontology
     AbstractLispFunctionOverload::AbstractLispFunctionOverload(core::Application& application, Universe& universe)
         : Entity(application, universe, EntityStruct())
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::AbstractLispFunctionOverload*";
     }
 }

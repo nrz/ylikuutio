@@ -27,6 +27,7 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -51,8 +52,12 @@ namespace yli::ontology
         master_of_movables(*this, &this->registry, "movables")
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::MovableController*";
         this->can_be_erased = true;
+    }
+
+    std::string_view MovableController::get_type() const
+    {
+        return "yli::ontology::MovableController*";
     }
 
     Entity* MovableController::get_parent() const

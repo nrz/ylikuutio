@@ -42,6 +42,7 @@
 #include <optional>      // std::optional
 #include <queue>         // std::queue
 #include <string>        // std::string
+#include <string_view>   // std::string_view
 #include <vector>        // std::vector
 
 namespace yli::audio
@@ -229,6 +230,8 @@ namespace yli::ontology
         std::size_t get_number_of_scenes() const;
 
         Scene* get_active_scene() const;
+
+        std::string_view get_type() const override;
 
         Entity* get_parent() const override;
 

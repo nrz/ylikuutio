@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -33,6 +34,11 @@ namespace yli::ontology
     class GenericMasterModule;
     class Entity;
     class Universe;
+
+    std::string_view Shapeshifter::get_type() const
+    {
+        return "yli::ontology::Shapeshifter*";
+    }
 
     Entity* Shapeshifter::get_parent() const
     {
@@ -55,7 +61,6 @@ namespace yli::ontology
           apprentice_of_shapeshifter_sequence(shapeshifter_sequence_master_module, this)
     {
         // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Shapeshifter*";
         this->can_be_erased = true;
     }
 

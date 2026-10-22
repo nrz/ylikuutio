@@ -116,9 +116,6 @@ namespace yli::ontology
         // These are to be used from the `MovableController` callbacks.
 
         this->create_coordinate_and_angle_variables();
-
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::AbstractMovable*";
     }
 
     const glm::vec3& AbstractMovable::get_cartesian_coordinates() const

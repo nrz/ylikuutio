@@ -20,6 +20,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -32,6 +33,11 @@ namespace yli::ontology
     class Entity;
     class Universe;
     class Scene;
+
+    std::string_view Mission::get_type() const
+    {
+        return "yli::ontology::Mission*";
+    }
 
     Entity* Mission::get_parent() const
     {
@@ -46,9 +52,6 @@ namespace yli::ontology
         : Entity(application, universe, mission_struct),
         child_of_universe(universe_parent_module, *this)
     {
-        // `Entity` member variables begin here.
-        this->type_string = "yli::ontology::Mission*";
-        // TODO: add other `Entity` member variables such as `can_be_erased` if needed!
     }
 
     Scene* Mission::get_scene() const

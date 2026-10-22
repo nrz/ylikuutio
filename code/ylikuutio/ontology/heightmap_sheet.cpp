@@ -21,6 +21,7 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <string_view> // std::string_view
 
 namespace yli::core
 {
@@ -38,6 +39,11 @@ namespace yli::ontology
     Heightmap* HeightmapSheet::get_heightmap() const
     {
         return static_cast<Heightmap*>(this->get_parent());
+    }
+
+    std::string_view HeightmapSheet::get_type() const
+    {
+        return "yli::ontology::HeightmapSheet*";
     }
 
     Entity* HeightmapSheet::get_parent() const
@@ -58,8 +64,6 @@ namespace yli::ontology
               movable_controller_master_module),
           child_of_heightmap(scene_parent_module, *this)
     {
-        // `yli::ontology::Entity` member variables begin here.
-        this->type_string = "yli::ontology::HeightmapSheet*";
     }
 
     std::size_t HeightmapSheet::get_number_of_children() const
