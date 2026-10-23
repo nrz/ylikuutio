@@ -130,7 +130,7 @@ namespace yli::ontology
         this->master_of_input_modes.set_current_input_mode(input_mode);
     }
 
-    void Console::print_text(const std::string& text)
+    void Console::print_text(const std::string_view text)
     {
         // This function is to be called from console command callbacks to print text on console.
         // Please note that it is not necessary to be in console to be able to print in console.

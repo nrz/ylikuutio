@@ -33,7 +33,7 @@ namespace yli::console
           n_rows { (n_rows > 0 ? n_rows : 1) }
     { }
 
-    void ScrollbackBuffer::add_to_buffer(const std::string& text)
+    void ScrollbackBuffer::add_to_buffer(const std::string_view text)
     {
         for (std::size_t text_i = 0; text_i < text.size(); text_i += this->n_columns)
         {

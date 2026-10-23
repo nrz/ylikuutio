@@ -28,6 +28,7 @@
 #include <limits>   // std::numeric_limits
 #include <span>     // std::span
 #include <string>   // std::string
+#include <string_view> // std::string_view
 #include <vector>   // std::vector
 
 namespace yli::console
@@ -45,7 +46,7 @@ namespace yli::console
 
         ScrollbackBuffer& operator=(const ScrollbackBuffer&) = delete;
 
-        void add_to_buffer(const std::string& text);
+        void add_to_buffer(std::string_view text);
 
         void emplace_back(const std::string& text);
 

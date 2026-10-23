@@ -120,7 +120,7 @@ namespace yli::ontology
 
         void set_input_mode(InputMode* input_mode);
 
-        void print_text(const std::string& text);
+        void print_text(std::string_view text);
 
         void print_help();
 

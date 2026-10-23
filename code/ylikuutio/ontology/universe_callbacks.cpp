@@ -139,7 +139,7 @@ namespace yli::ontology
     {
         // OK, let's find out information about this `Entity`.
 
-        console.print_text(std::string(entity.get_type()));
+        console.print_text(entity.get_type());
 
         const std::uintptr_t memory_address = reinterpret_cast<std::uintptr_t>(&entity);
         std::stringstream memory_address_stringstream;
