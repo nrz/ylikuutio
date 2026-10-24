@@ -67,7 +67,7 @@ namespace yli::lisp
                 is_uint64_t_string)
         {
             // OK, so this is a unsigned integer string.
-            std::optional<std::uint64_t> maybe_uint64_t = string::convert_string_to_value<std::uint64_t>(
+            const std::optional<std::uint64_t> maybe_uint64_t = string::convert_string_to_value<std::uint64_t>(
                     std::string_view(text_position.get_token_start_it(), text_position.get_it()));
 
             if (maybe_uint64_t.has_value()) [[likely]]
@@ -86,7 +86,7 @@ namespace yli::lisp
                 is_int64_t_string)
         {
             // OK, so this is a signed integer string.
-            std::optional<std::int64_t> maybe_int64_t = string::convert_string_to_value<std::int64_t>(
+            const std::optional<std::int64_t> maybe_int64_t = string::convert_string_to_value<std::int64_t>(
                     std::string_view(text_position.get_token_start_it(), text_position.get_it()));
 
             if (maybe_int64_t.has_value()) [[likely]]
@@ -105,7 +105,7 @@ namespace yli::lisp
                 is_double_string)
         {
             // OK, this is a floating point string that can fit in IEEE-754 double precision variable (`double` in C++).
-            std::optional<double> maybe_double = string::convert_string_to_value<double>(
+            const std::optional<double> maybe_double = string::convert_string_to_value<double>(
                     std::string_view(text_position.get_token_start_it(), text_position.get_it()));
 
             if (maybe_double.has_value()) [[likely]]
