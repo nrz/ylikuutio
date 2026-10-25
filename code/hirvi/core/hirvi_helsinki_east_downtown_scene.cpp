@@ -525,8 +525,11 @@ namespace hirvi::core
 
         if (this->entity_factory.create_object_derivative<
                 ontology::Cat,
-                CatMemoryAllocator>(
+                CatMemoryAllocator,
+                ontology::HirviScene,
+                ObjectStruct>(
                 data::CAT,
+                Request(helsinki_scene),
                 cat1_object_struct,
                 cat1_walk_struct,
                 cat1_trot_struct,
@@ -557,14 +560,18 @@ namespace hirvi::core
 
         auto* const cat2 = this->entity_factory.create_object_derivative<
             ontology::Cat,
-            CatMemoryAllocator>(
+            CatMemoryAllocator,
+            ontology::HirviScene,
+            ObjectStruct>(
             data::CAT,
+            Request(helsinki_scene),
             cat2_object_struct,
             cat2_walk_struct,
             cat2_trot_struct,
             cat2_canter_struct,
             cat2_gallop_struct,
-            cat2_climb_struct);
+            cat2_climb_struct
+        );
 
         if (cat2 == nullptr)
         {

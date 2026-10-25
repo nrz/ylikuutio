@@ -64,6 +64,7 @@ namespace hirvi::core
 namespace hirvi::ontology
 {
     class PoliceControlCenter;
+    class Cat;
     class Elk;
     class PoliceBear;
     class PoliceCar;
@@ -195,6 +196,12 @@ namespace hirvi::ontology
     inline yli::ontology::GenericParentModule* HirviScene::get_generic_parent_module<PoliceControlCenter>()
     {
         return &this->parent_of_police_control_centers;
+    }
+
+    template<>
+    inline yli::ontology::GenericParentModule* HirviScene::get_generic_parent_module<Cat>()
+    {
+        return &this->parent_of_cats;
     }
 
     template<>

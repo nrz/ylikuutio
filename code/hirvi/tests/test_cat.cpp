@@ -18,7 +18,9 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/data/datatype.hpp"
+#include "code/hirvi/ontology/hirvi_scene.hpp"
 #include "code/hirvi/ontology/cat.hpp"
+#include "code/hirvi/ontology/hirvi_scene_struct.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
@@ -60,24 +62,30 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     const char** const argv { nullptr };
     hirvi::HirviApplication hirvi_application(argc, argv);
 
-    SceneStruct scene_struct;
+    hirvi::ontology::HirviSceneStruct scene_struct;
     scene_struct.global_name = "helsinki_scene";
     scene_struct.light_position = { 0.0f, -100000.0f, 100000.0f, 1.0f };
     scene_struct.water_level = 0.9f;
-    Scene* const helsinki_scene = hirvi_application.get_entity_factory().create_scene(scene_struct);
+    hirvi::ontology::HirviScene* const helsinki_scene = hirvi_application.get_entity_factory().create_scene_derivative<
+        hirvi::ontology::HirviScene,
+        hirvi::core::HirviSceneMemoryAllocator,
+        hirvi::ontology::HirviSceneStruct>(
+        hirvi::data::HIRVI_SCENE,
+        scene_struct,
+        hirvi_application.core);
 
     CallbackEngineStruct rest_callback_engine_struct;
     auto rest_callback_engine = hirvi_application.get_entity_factory().create_callback_engine(
         rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    MovableControllerStruct rest_movable_controller_struct { Request(helsinki_scene), Request(rest_callback_engine) };
+    MovableControllerStruct rest_movable_controller_struct { Request<Scene>(helsinki_scene), Request(rest_callback_engine) };
     rest_movable_controller_struct.global_name = "rest_movable_controller";
     rest_movable_controller_struct.local_name = "rest";
     MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(
         rest_movable_controller_struct);
 
-    PipelineStruct helsinki_pipeline_struct { Request(helsinki_scene) };
+    PipelineStruct helsinki_pipeline_struct { Request<Scene>(helsinki_scene) };
     helsinki_pipeline_struct.global_name = "helsinki_pipeline";
     helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
@@ -86,20 +94,20 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
             hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
 
     MaterialStruct orange_fur_material_struct {
-        Request(helsinki_scene), Request(helsinki_pipeline), TextureFileFormat::PNG
+        Request<Scene>(helsinki_scene), Request(helsinki_pipeline), TextureFileFormat::PNG
     };
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
     Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(
         orange_fur_material_struct);
 
-    SpeciesStruct cat_species_struct { Request(helsinki_scene), Request(orange_fur_material) };
+    SpeciesStruct cat_species_struct { Request<Scene>(helsinki_scene), Request(orange_fur_material) };
     cat_species_struct.global_name = "cat_species";
     cat_species_struct.local_name = "cat";
     cat_species_struct.model_loader_struct.model_file_format = "fbx";
     cat_species_struct.model_loader_struct.model_filename = "cat.fbx";
     Species* const cat_species = hirvi_application.get_entity_factory().create_species(cat_species_struct);
 
-    ObjectStruct cat1_object_struct { Request(helsinki_scene), Request(rest_movable_controller), Request(cat_species) };
+    ObjectStruct cat1_object_struct { Request<Scene>(helsinki_scene), Request(rest_movable_controller), Request(cat_species) };
     cat1_object_struct.global_name = "cat1";
     cat1_object_struct.local_name = "kissa1";
     cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };
@@ -120,8 +128,11 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
 
     auto* const cat1 = hirvi_application.get_entity_factory().create_object_derivative<
         hirvi::ontology::Cat,
-        hirvi::core::CatMemoryAllocator>(
+        hirvi::core::CatMemoryAllocator,
+        hirvi::ontology::HirviScene,
+        ObjectStruct>(
         hirvi::data::CAT,
+        Request(helsinki_scene),
         cat1_object_struct,
         cat1_walk_struct,
         cat1_trot_struct,

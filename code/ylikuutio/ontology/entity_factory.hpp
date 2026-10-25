@@ -163,6 +163,10 @@ namespace yli::ontology
             std::derived_from<T, SceneStruct>;
 
     template<typename T>
+    concept ObjectStructDerivativeOrObjectStruct =
+            std::derived_from<T, ObjectStruct>;
+
+    template<typename T>
     concept HolobiontStructDerivativeOrHolobiontStruct =
             std::derived_from<T, HolobiontStruct>;
 
@@ -455,9 +459,10 @@ namespace yli::ontology
 
         Object* create_object(const ObjectStruct& object_struct) const final
         {
-            return this->create_object_or_object_derivative<
-                Object, memory::ObjectMemoryAllocator>(
+            return this->create_object_derivative<
+                Object, memory::ObjectMemoryAllocator, Scene, ObjectStruct>(
                 TypeEnumType::OBJECT,
+                object_struct.scene,
                 object_struct);
         }
 
@@ -853,14 +858,28 @@ namespace yli::ontology
                 std::forward<ModuleArgs>(module_args)...));
         }
 
-        template<ObjectDerivative T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
+        template<ObjectOrObjectDerivative T,
+            typename ObjectDerivativeMemoryAllocator,
+            SceneOrSceneDerivative SceneType,
+            ObjectStructDerivativeOrObjectStruct ObjectDerivativeStruct,
+            typename... ModuleArgs>
         T* create_object_derivative(
             TypeEnumType object_derivative_type,
-            const ObjectStruct& object_struct,
+            const Request<SceneType>& scene,
+            const ObjectDerivativeStruct& object_derivative_struct,
             ModuleArgs&&... module_args) const
         {
-            return this->template create_object_or_object_derivative<T, ObjectDerivativeMemoryAllocator, ModuleArgs...>(
-                object_derivative_type, object_struct, std::forward<ModuleArgs>(module_args)...);
+            T* const object_derivative = static_cast<T*>(this->template create_child_of_known_parent_type<
+                T, T, SceneType, ObjectDerivativeMemoryAllocator, ObjectDerivativeStruct>(
+                object_derivative_type,
+                scene,
+                object_derivative_struct,
+                this->get_generic_master_module<AbstractMovable, MovableController>(
+                    object_derivative_struct.movable_controller_master),
+                this->get_generic_master_module<Object, Species>(object_derivative_struct.species_master),
+                std::forward<ModuleArgs>(module_args)...));
+
+            return object_derivative;
         }
 
         template<HolobiontOrHolobiontDerivative T,
@@ -1008,24 +1027,6 @@ namespace yli::ontology
             instance->set_global_name(data_struct.global_name);
             instance->set_local_name(data_struct.local_name);
             return instance;
-        }
-
-        template<ObjectOrObjectDerivative T, typename ObjectDerivativeMemoryAllocator, typename... ModuleArgs>
-        T* create_object_or_object_derivative(TypeEnumType object_derivative_type, const ObjectStruct& object_struct,
-                                              ModuleArgs&&... module_args) const
-        {
-            return static_cast<T*>(this->template create_child_of_known_parent_type<
-                T, Object, Scene, ObjectDerivativeMemoryAllocator, ObjectStruct>(
-                object_derivative_type,
-                object_struct.scene,
-                object_struct,
-                // `MovableController` master.
-                this->get_generic_master_module<AbstractMovable,
-                    MovableController>(object_struct.movable_controller_master),
-                // `Species` master.
-                this->get_generic_master_module<Object, Species>(object_struct.species_master),
-                // Skill modules.
-                std::forward<ModuleArgs>(module_args)...));
         }
 
         core::Application& application;
