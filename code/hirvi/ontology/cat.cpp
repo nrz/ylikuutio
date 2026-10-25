@@ -61,8 +61,7 @@ namespace hirvi::ontology
           canter(canter_struct),
           gallop(gallop_struct),
           climb(climb_struct)
-    {
-    }
+    { }
 
     std::string_view Cat::get_type() const
     {
