@@ -55,17 +55,17 @@ namespace yli::ontology
         ~GenericParentModule() override;
 
         // This function exists simply to be able to pass `GenericParentModule` as non-const parameter.
-        GenericParentModule* get() const noexcept;
+        [[nodiscard]] GenericParentModule* get() const noexcept;
 
-        Entity* get_entity() const noexcept;
+        [[nodiscard]] Entity* get_entity() const noexcept;
 
-        std::size_t get_number_of_children() const noexcept;
+        [[nodiscard]] std::size_t get_number_of_children() const noexcept;
 
-        std::size_t get_number_of_descendants() const noexcept;
+        [[nodiscard]] std::size_t get_number_of_descendants() const noexcept;
 
-        Scene* get_scene() const noexcept;
+        [[nodiscard]] Scene* get_scene() const noexcept;
 
-        Entity* get(std::size_t index) const noexcept override;
+        [[nodiscard]] Entity* get(std::size_t index) const noexcept override;
 
         // Iterator functions.
         iterator begin()
