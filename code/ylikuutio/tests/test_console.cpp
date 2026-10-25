@@ -66,6 +66,28 @@ TEST(console_must_be_initialized_appropriately, no_font)
     ASSERT_EQ(console->apprentice_of_font_2d.get_apprenticeID(), std::numeric_limits<std::size_t>::max());
 }
 
+TEST(console_must_get_a_global_name_and_local_name_appropriately_in_the_constructor, headless_global_name_given)
+{
+    mock::MockApplication application;
+    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
+    console_struct.global_name = "foo";
+    yli::ontology::Console* const console = application.get_abstract_entity_factory().create_console(
+        console_struct);
+    ASSERT_EQ(console->get_global_name(), "foo");
+    ASSERT_EQ(console->get_local_name(), "foo");
+}
+
+TEST(console_must_get_a_global_name_and_local_name_appropriately_in_the_constructor, headless_local_name_given)
+{
+    mock::MockApplication application;
+    yli::ontology::ConsoleStruct console_struct(0, 39, 15, 0); // Some dummy dimensions.
+    console_struct.local_name = "foo";
+    yli::ontology::Console* const console = application.get_abstract_entity_factory().create_console(
+        console_struct);
+    ASSERT_EQ(console->get_global_name(), "foo");
+    ASSERT_EQ(console->get_local_name(), "foo");
+}
+
 TEST(setting_input_mode_of_the_console_must_function_appropriately, no_font)
 {
     mock::MockApplication application;

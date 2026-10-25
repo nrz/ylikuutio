@@ -83,3 +83,25 @@ TEST(font_2d_must_be_initialized_appropriately, headless_holstein)
     ASSERT_EQ(font_2d->get_parent(), &application.get_universe());
     ASSERT_EQ(font_2d->get_number_of_non_variable_children(), 0);
 }
+
+TEST(font_2d_must_get_a_global_name_and_local_name_appropriately_in_the_constructor, headless_global_name_given)
+{
+    mock::MockApplication application;
+    yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
+    font_struct.global_name = "foo";
+    yli::ontology::Font2d* const font_2d = application.get_abstract_entity_factory().create_font_2d(
+        font_struct);
+    ASSERT_EQ(font_2d->get_global_name(), "foo");
+    ASSERT_EQ(font_2d->get_local_name(), "foo");
+}
+
+TEST(font_2d_must_get_a_global_name_and_local_name_appropriately_in_the_constructor, headless_local_name_given)
+{
+    mock::MockApplication application;
+    yli::ontology::FontStruct font_struct { yli::ontology::TextureFileFormat::PNG };
+    font_struct.local_name = "foo";
+    yli::ontology::Font2d* const font_2d = application.get_abstract_entity_factory().create_font_2d(
+        font_struct);
+    ASSERT_EQ(font_2d->get_global_name(), "foo");
+    ASSERT_EQ(font_2d->get_local_name(), "foo");
+}

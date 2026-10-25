@@ -39,3 +39,25 @@ TEST(audio_tracks_must_be_initialized_appropriately, headless)
     ASSERT_EQ(audio_track->get_parent(), &application.get_universe());
     ASSERT_EQ(audio_track->get_number_of_non_variable_children(), 0);
 }
+
+TEST(audio_track_must_get_a_global_name_and_local_name_appropriately_in_the_constructor, headless_global_name_given)
+{
+    mock::MockApplication application;
+    yli::ontology::AudioTrackStruct audio_track_struct("419588__greek555__dreaming-of-me.ogg");
+    audio_track_struct.global_name = "foo";
+    yli::ontology::AudioTrack* const audio_track = application.get_abstract_entity_factory().create_audio_track(
+        audio_track_struct);
+    ASSERT_EQ(audio_track->get_global_name(), "foo");
+    ASSERT_EQ(audio_track->get_local_name(), "foo");
+}
+
+TEST(audio_track_must_get_a_global_name_and_local_name_appropriately_in_the_constructor, headless_local_name_given)
+{
+    mock::MockApplication application;
+    yli::ontology::AudioTrackStruct audio_track_struct("419588__greek555__dreaming-of-me.ogg");
+    audio_track_struct.local_name = "foo";
+    yli::ontology::AudioTrack* const audio_track = application.get_abstract_entity_factory().create_audio_track(
+        audio_track_struct);
+    ASSERT_EQ(audio_track->get_global_name(), "foo");
+    ASSERT_EQ(audio_track->get_local_name(), "foo");
+}

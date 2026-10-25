@@ -304,6 +304,28 @@ TEST(ecosystems_must_be_initialized_appropriately_after_having_deleted_some_earl
     ASSERT_EQ(ecosystem4->get_number_of_non_variable_children(), 0);
 }
 
+TEST(ecosystem_must_get_a_global_name_and_local_name_appropriately_in_the_constructor, headless_global_name_given)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    ecosystem_struct.global_name = "foo";
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
+        ecosystem_struct);
+    ASSERT_EQ(ecosystem->get_global_name(), "foo");
+    ASSERT_EQ(ecosystem->get_local_name(), "foo");
+}
+
+TEST(ecosystem_must_get_a_global_name_and_local_name_appropriately_in_the_constructor, headless_local_name_given)
+{
+    mock::MockApplication application;
+    yli::ontology::EcosystemStruct ecosystem_struct;
+    ecosystem_struct.local_name = "foo";
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
+        ecosystem_struct);
+    ASSERT_EQ(ecosystem->get_global_name(), "foo");
+    ASSERT_EQ(ecosystem->get_local_name(), "foo");
+}
+
 TEST(ecosystem_must_be_given_a_global_name_appropriately, headless)
 {
     mock::MockApplication application;

@@ -72,3 +72,25 @@ TEST(input_mode_must_be_initialized_appropriately, headless_universe_and_console
     // `Console` member functions.
     ASSERT_EQ(console->get_number_of_apprentices(), 1);
 }
+
+TEST(input_mode_must_get_a_global_name_and_local_name_appropriately_in_the_constructor, headless_global_name_given)
+{
+    mock::MockApplication application;
+    yli::ontology::InputModeStruct input_mode_struct;
+    input_mode_struct.global_name = "foo";
+    yli::ontology::InputMode* const input_mode = application.get_abstract_entity_factory().create_input_mode(
+        input_mode_struct);
+    ASSERT_EQ(input_mode->get_global_name(), "foo");
+    ASSERT_EQ(input_mode->get_local_name(), "foo");
+}
+
+TEST(input_mode_must_get_a_global_name_and_local_name_appropriately_in_the_constructor, headless_local_name_given)
+{
+    mock::MockApplication application;
+    yli::ontology::InputModeStruct input_mode_struct;
+    input_mode_struct.local_name = "foo";
+    yli::ontology::InputMode* const input_mode = application.get_abstract_entity_factory().create_input_mode(
+        input_mode_struct);
+    ASSERT_EQ(input_mode->get_global_name(), "foo");
+    ASSERT_EQ(input_mode->get_local_name(), "foo");
+}

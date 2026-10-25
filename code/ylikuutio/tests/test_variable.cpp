@@ -63,7 +63,32 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_varia
     ASSERT_EQ(application.get_universe().get_variable("foo"), nullptr);
 }
 
-TEST(variable_must_be_initialized_appropriately, headless_universe_named_variable_bool_true_no_activate_callback_no_read_callback)
+TEST(variable_must_be_initialized_appropriately, headless_universe_variable_with_global_name_bool_true_no_activate_callback_no_read_callback)
+{
+    mock::MockApplication application;
+
+    bool bool_true = true;
+    yli::ontology::VariableStruct variable_struct(application.get_universe(), &application.get_universe());
+    variable_struct.global_name = "foo";
+    application.get_universe().create_variable(variable_struct, yli::data::AnyValue(bool_true));
+    ASSERT_TRUE(application.get_universe().has_variable("foo"));
+    ASSERT_NE(application.get_universe().get_variable("foo"), nullptr);
+    ASSERT_FALSE(application.get_universe().has_variable("bar"));
+    ASSERT_EQ(application.get_universe().get_variable("bar"), nullptr);
+
+    yli::ontology::Variable* const variable = application.get_universe().get_variable("foo");
+    ASSERT_NE(variable, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(variable) % alignof(yli::ontology::Variable), 0);
+    ASSERT_NE(variable->get(), std::nullopt);
+    ASSERT_EQ(variable->variable_value, *variable->get());
+    std::optional<yli::data::AnyValue> variable_value = variable->get();
+    ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
+    ASSERT_TRUE(std::get<bool>(variable_value->data));
+    ASSERT_EQ(variable->get_global_name(), "foo");
+    ASSERT_EQ(variable->get_local_name(), "foo");
+}
+
+TEST(variable_must_be_initialized_appropriately, headless_universe_variable_with_local_name_bool_true_no_activate_callback_no_read_callback)
 {
     mock::MockApplication application;
 
@@ -84,6 +109,8 @@ TEST(variable_must_be_initialized_appropriately, headless_universe_named_variabl
     std::optional<yli::data::AnyValue> variable_value = variable->get();
     ASSERT_TRUE(std::holds_alternative<bool>(variable_value->data));
     ASSERT_TRUE(std::get<bool>(variable_value->data));
+    ASSERT_EQ(variable->get_global_name(), "foo");
+    ASSERT_EQ(variable->get_local_name(), "foo");
 }
 
 TEST(variable_must_be_initialized_appropriately, headless_universe_unnamed_variable_bool_false_no_activate_callback_no_read_callback)
