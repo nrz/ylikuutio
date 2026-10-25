@@ -155,6 +155,10 @@ namespace yli::ontology
             std::derived_from<T, Object>;
 
     template<typename T>
+    concept HolobiontOrHolobiontDerivative =
+            std::derived_from<T, Holobiont>;
+
+    template<typename T>
     concept SceneStructDerivativeOrSceneStruct =
             std::derived_from<T, SceneStruct>;
 
@@ -859,7 +863,7 @@ namespace yli::ontology
                 object_derivative_type, object_struct, std::forward<ModuleArgs>(module_args)...);
         }
 
-        template<EntityNotUniverse T,
+        template<HolobiontOrHolobiontDerivative T,
             typename HolobiontDerivativeMemoryAllocator,
             SceneOrSceneDerivative SceneType,
             HolobiontStructDerivativeOrHolobiontStruct HolobiontDerivativeStruct, typename... ModuleArgs>
