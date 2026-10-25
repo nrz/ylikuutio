@@ -48,7 +48,7 @@ namespace hirvi::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ObjectStruct& cat_struct,
-            yli::ontology::GenericParentModule* scene_parent,
+            yli::ontology::GenericParentModule* hirvi_scene_parent,
             yli::ontology::GenericMasterModule* movable_controller_master,
             yli::ontology::GenericMasterModule* species_master,
             const yli::ontology::LocomotionModuleStruct& walk_struct,
@@ -64,6 +64,7 @@ namespace hirvi::ontology
 
         std::string_view get_type() const override;
 
+        yli::ontology::ChildModule child_of_hirvi_scene;
         yli::snippets::locomotion::GaitModule walk;
         yli::snippets::locomotion::GaitModule trot;
         yli::snippets::locomotion::GaitModule canter;

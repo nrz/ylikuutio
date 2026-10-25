@@ -108,6 +108,7 @@ namespace hirvi::ontology
                                            police_control_center_structs);
 
         yli::ontology::GenericParentModule parent_of_police_control_centers;
+        yli::ontology::GenericParentModule parent_of_cats;
         yli::ontology::GenericParentModule parent_of_elks;
         yli::ontology::GenericParentModule parent_of_police_bears;
         yli::ontology::GenericParentModule parent_of_police_cars;
