@@ -18,6 +18,7 @@
 #include "train.hpp"
 
 // Include standard headers
+#include <string>      // std::string
 #include <string_view> // std::string_view
 
 namespace yli::core
@@ -41,7 +42,7 @@ namespace hirvi::ontology
         yli::core::Application& application,
         yli::ontology::Universe& universe,
         const yli::ontology::HolobiontStruct& train_struct,
-        yli::ontology::GenericParentModule* const scene_parent,
+        yli::ontology::GenericParentModule* const hirvi_scene_parent,
         yli::ontology::GenericMasterModule* const symbiosis_master,
         yli::ontology::GenericMasterModule* const movable_controller_master,
         const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct)
@@ -49,9 +50,10 @@ namespace hirvi::ontology
               application,
               universe,
               train_struct,
-              scene_parent,
-              symbiosis_master,
-              movable_controller_master),
+              nullptr,
+              movable_controller_master,
+              symbiosis_master),
+          child_of_hirvi_scene(hirvi_scene_parent, *this),
           rail_vehicle(rail_vehicle_struct)
     {
     }

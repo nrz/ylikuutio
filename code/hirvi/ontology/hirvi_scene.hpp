@@ -73,6 +73,7 @@ namespace hirvi::ontology
     class PoliceHorse;
     class PoliceTrain;
     class PoliceTram;
+    class Train;
     struct HirviSceneStruct;
     struct PoliceControlCenterStruct;
 
@@ -118,6 +119,7 @@ namespace hirvi::ontology
         yli::ontology::GenericParentModule parent_of_police_horses;
         yli::ontology::GenericParentModule parent_of_police_trains;
         yli::ontology::GenericParentModule parent_of_police_trams;
+        yli::ontology::GenericParentModule parent_of_trains;
     };
 
     template<>
@@ -250,6 +252,12 @@ namespace hirvi::ontology
     inline yli::ontology::GenericParentModule* HirviScene::get_generic_parent_module<PoliceTram>()
     {
         return &this->parent_of_police_trams;
+    }
+
+    template<>
+    inline yli::ontology::GenericParentModule* HirviScene::get_generic_parent_module<Train>()
+    {
+        return &this->parent_of_trains;
     }
 }
 

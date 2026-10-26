@@ -19,9 +19,11 @@
 #define HIRVI_ONTOLOGY_TRAIN_HPP_INCLUDED
 
 #include "code/ylikuutio/ontology/holobiont.hpp"
+#include "code/ylikuutio/ontology/child_module.hpp"
 #include "code/ylikuutio/snippets/locomotion/rail_vehicle_module.hpp"
 
 // Include standard headers
+#include <string>      // std::string
 #include <string_view> // std::string_view
 
 namespace yli::core
@@ -47,9 +49,9 @@ namespace hirvi::ontology
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::HolobiontStruct& train_struct,
-            yli::ontology::GenericParentModule* scene_parent,
-            yli::ontology::GenericMasterModule* symbiosis_master,
+            yli::ontology::GenericParentModule* hirvi_scene_parent,
             yli::ontology::GenericMasterModule* movable_controller_master,
+            yli::ontology::GenericMasterModule* symbiosis_master,
             const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct);
 
         Train(const Train&) = delete; // Delete copy constructor.
@@ -59,6 +61,7 @@ namespace hirvi::ontology
 
         std::string_view get_type() const override;
 
+        yli::ontology::ChildModule child_of_hirvi_scene;
         yli::snippets::locomotion::RailVehicleModule rail_vehicle;
     };
 }

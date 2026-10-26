@@ -88,7 +88,11 @@ namespace hirvi::ontology
           parent_of_police_trams(
               *this,
               this->registry,
-              "police_trams")
+              "police_trams"),
+          parent_of_trains(
+              *this,
+              this->registry,
+              "trains")
     {
         this->create_police_control_centers(hirvi_core, hirvi_scene_struct.police_control_center_structs);
     }
@@ -105,7 +109,8 @@ namespace hirvi::ontology
                this->parent_of_police_helicopters.get_number_of_children() +
                this->parent_of_police_horses.get_number_of_children() +
                this->parent_of_police_trains.get_number_of_children() +
-               this->parent_of_police_trams.get_number_of_children();
+               this->parent_of_police_trams.get_number_of_children() +
+               this->parent_of_trains.get_number_of_children();
     }
 
     std::size_t HirviScene::get_number_of_descendants() const
@@ -120,7 +125,8 @@ namespace hirvi::ontology
                ontology::get_number_of_descendants(this->parent_of_police_helicopters.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_police_horses.child_pointer_vector) +
                ontology::get_number_of_descendants(this->parent_of_police_trains.child_pointer_vector) +
-               ontology::get_number_of_descendants(this->parent_of_police_trams.child_pointer_vector);
+               ontology::get_number_of_descendants(this->parent_of_police_trams.child_pointer_vector) +
+               ontology::get_number_of_descendants(this->parent_of_trains.child_pointer_vector);
     }
 
     void HirviScene::create_police_control_centers(const core::HirviCore& hirvi_core,

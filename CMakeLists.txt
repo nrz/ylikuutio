@@ -1062,6 +1062,7 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/swim_ability.hpp
     code/hirvi/ontology/train.cpp
     code/hirvi/ontology/train.hpp
+    code/hirvi/ontology/train_struct.hpp
 )
 target_link_libraries(hirvi_lib PRIVATE snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
