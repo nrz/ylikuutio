@@ -18,9 +18,8 @@
 #ifndef YLIKUUTIO_MEMORY_CONSTRUCTIBLE_MODULE_HPP_INCLUDED
 #define YLIKUUTIO_MEMORY_CONSTRUCTIBLE_MODULE_HPP_INCLUDED
 
-// Include standard headers
-#include <cstddef>  // std::size_t
-#include <limits>   // std::numeric_limits
+#include "abstract_memory_allocator.hpp"
+#include "handle.hpp"
 
 namespace yli::memory
 {
@@ -30,13 +29,28 @@ namespace yli::memory
     {
         ConstructibleModule() = default;
 
-        ConstructibleModule(AbstractMemoryAllocator& generic_allocator, const std::size_t slot_i)
+        ConstructibleModule(AbstractMemoryAllocator& generic_allocator, const Handle& handle)
             : generic_allocator { &generic_allocator },
-              slot_i { slot_i }
+              handle { handle }
         { }
 
+        ConstructibleModule(const ConstructibleModule& other) = default;
+
+        ConstructibleModule& operator=(const ConstructibleModule& other)
+        {
+            this->generic_allocator = other.generic_allocator;
+
+            if (&other != this)
+            {
+                this->handle = other.handle;
+            }
+
+            this->alive = other.alive;
+            return *this;
+        }
+
         AbstractMemoryAllocator* generic_allocator { nullptr };
-        std::size_t slot_i { std::numeric_limits<std::size_t>::max() };
+        Handle handle {}; // Default value 0 means invalid handle.
         bool alive { true };
     };
 }

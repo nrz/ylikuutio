@@ -32,30 +32,22 @@ namespace yli::memory
         static constexpr std::uint32_t max_type { (1 << (n_type_bits)) - 1 };
         static constexpr std::uint32_t max_slot { (1 << (n_slot_bits)) - 1 };
 
+        Handle() = default;
+
         Handle(const std::uint32_t type, const std::uint32_t slot_i)
             : handle { type <= max_type && slot_i <= max_slot ? ((type << n_slot_bits) | slot_i) : 0 }
         { }
 
-        explicit Handle(const std::uint32_t handle)
-            : handle { handle }
-        { }
+        Handle(const Handle& other_handle) = default;
 
-        explicit Handle(const Handle& other_handle)
-            : handle { other_handle.handle }
-        { }
+        Handle& operator=(const Handle& other) = default;
 
-        Handle& operator=(const Handle& other)
-        {
-            this->handle = other.handle;
-            return *this;
-        }
-
-        std::uint32_t get_type() const
+        [[nodiscard]] std::uint32_t get_type() const
         {
             return this->handle >> n_slot_bits;
         }
 
-        std::uint32_t get_slot_i() const
+        [[nodiscard]] std::uint32_t get_slot_i() const
         {
             return this->handle & ((1 << n_slot_bits) - 1);
         }

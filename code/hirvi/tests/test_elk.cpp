@@ -178,6 +178,7 @@ TEST(elk_must_be_initialized_appropriately, hirvi_elk)
 
     const yli::memory::ConstructibleModule elk1_constructible_module =
             elk1->get_constructible_module();
-    ASSERT_EQ(elk1_constructible_module.slot_i, 0);
+    ASSERT_EQ(elk1_constructible_module.handle.get_type(), hirvi::data::ELK);
+    ASSERT_EQ(elk1_constructible_module.handle.get_slot_i(), 0);
     ASSERT_EQ(elk1_constructible_module.alive, true);
 }

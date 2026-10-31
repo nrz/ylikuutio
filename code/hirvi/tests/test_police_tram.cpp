@@ -188,6 +188,7 @@ TEST(police_tram_must_be_initialized_appropriately, hirvi_police_tram)
 
     const yli::memory::ConstructibleModule turbo_polizei1_constructible_module =
             turbo_polizei1->get_constructible_module();
-    ASSERT_EQ(turbo_polizei1_constructible_module.slot_i, 0);
+    ASSERT_EQ(turbo_polizei1_constructible_module.handle.get_type(), hirvi::data::POLICE_TRAM);
+    ASSERT_EQ(turbo_polizei1_constructible_module.handle.get_slot_i(), 0);
     ASSERT_EQ(turbo_polizei1_constructible_module.alive, true);
 }

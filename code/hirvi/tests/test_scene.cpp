@@ -45,7 +45,8 @@ TEST(scene_must_be_initialized_appropriately, hirvi_scene)
     ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::HIRVI_SCENE));
 
     const yli::memory::ConstructibleModule scene_constructible_module = helsinki_scene->get_constructible_module();
-    ASSERT_EQ(scene_constructible_module.slot_i, 0);
+    ASSERT_EQ(scene_constructible_module.handle.get_type(), hirvi::data::SCENE);
+    ASSERT_EQ(scene_constructible_module.handle.get_slot_i(), 0);
     ASSERT_EQ(scene_constructible_module.alive, true);
 
     yli::ontology::GenericParentModule* const movable_controller_parent_module = helsinki_scene->get_generic_parent_module<yli::ontology::MovableController>();

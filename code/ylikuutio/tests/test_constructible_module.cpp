@@ -19,6 +19,7 @@
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/handle.hpp"
 
 // Include standard headers
 #include <cstdint> // std::uint32_t
@@ -28,8 +29,11 @@ TEST(constructible_module_must_be_initialized_appropriately, constructible_modul
     yli::memory::MemoryAllocator memory_allocator(yli::data::Datatype::UNIVERSE);
 
     // Some arbitrary values.
+    constexpr std::uint32_t type = 404;
     constexpr std::uint32_t slot_i = 3003;
 
-    yli::memory::ConstructibleModule constructible_module(memory_allocator, slot_i);
-    ASSERT_EQ(constructible_module.slot_i, slot_i);
+    yli::memory::Handle handle { type, slot_i };
+    yli::memory::ConstructibleModule constructible_module { memory_allocator, handle };
+    ASSERT_EQ(constructible_module.handle.get_type(), type);
+    ASSERT_EQ(constructible_module.handle.get_slot_i(), slot_i);
 }

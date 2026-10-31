@@ -151,6 +151,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     ASSERT_EQ(cat_memory_allocator.get_number_of_instances(), 1);
 
     const yli::memory::ConstructibleModule cat1_constructible_module = cat1->get_constructible_module();
-    ASSERT_EQ(cat1_constructible_module.slot_i, 0);
+    ASSERT_EQ(cat1_constructible_module.handle.get_type(), hirvi::data::CAT);
+    ASSERT_EQ(cat1_constructible_module.handle.get_slot_i(), 0);
     ASSERT_EQ(cat1_constructible_module.alive, true);
 }

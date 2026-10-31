@@ -39,6 +39,7 @@ TEST(ecosystem_must_be_initialized_appropriately, hirvi_ecosystem)
     ASSERT_EQ(reinterpret_cast<uintptr_t>(earth_ecosystem) % alignof(yli::ontology::Ecosystem), 0);
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::ECOSYSTEM));
     const yli::memory::ConstructibleModule ecosystem_constructible_module = earth_ecosystem->get_constructible_module();
-    ASSERT_EQ(ecosystem_constructible_module.slot_i, 0);
+    ASSERT_EQ(ecosystem_constructible_module.handle.get_type(), hirvi::data::ECOSYSTEM);
+    ASSERT_EQ(ecosystem_constructible_module.handle.get_slot_i(), 0);
     ASSERT_EQ(ecosystem_constructible_module.alive, true);
 }

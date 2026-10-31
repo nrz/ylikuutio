@@ -20,12 +20,14 @@
 
 #include "abstract_memory_allocator.hpp"
 #include "constructible_module.hpp"
+#include "handle.hpp"
 #include "code/ylikuutio/data/queue.hpp"
 #include "code/ylikuutio/ontology/console_lisp_function_overload.hpp"
 
 // Include standard headers
 #include <array>      // std::array
 #include <cstddef>    // std::byte, std::size_t
+#include <cstdint>    // std::uint32_t
 #include <iostream>   // std::cerr
 #include <limits>     // std::numeric_limits
 #include <memory>     // std::make_unique, std::unique_ptr
@@ -134,7 +136,8 @@ namespace yli::memory
             }
 
             T1* instance = new(this->memory.data() + (slot_i * sizeof(T1))) T1(std::forward<Args>(args)...);
-            instance->constructible_module = ConstructibleModule(*this, slot_i);
+            const Handle handle { static_cast<std::uint32_t>(datatype), static_cast<std::uint32_t>(slot_i) };
+            instance->constructible_module = ConstructibleModule { *this, handle };
             ++this->number_of_instances;
             return instance;
         }
@@ -156,27 +159,29 @@ namespace yli::memory
 
         void destroy(const ConstructibleModule& constructible_module) override
         {
-            if (constructible_module.slot_i == std::numeric_limits<std::size_t>::max())
+            const std::uint32_t slot_i { constructible_module.handle.get_slot_i() };
+
+            if (slot_i == std::numeric_limits<std::uint32_t>::max()) [[unlikely]]
             {
                 std::cerr << "ERROR: `MemoryAllocator::destroy`: `constructible_module.slot_i` has invalid value!\n";
                 return;
             }
 
-            if (constructible_module.slot_i >= DataSize) [[unlikely]]
+            if (slot_i >= DataSize) [[unlikely]]
             {
                 throw std::runtime_error(
-                    "ERROR: `MemoryAllocator::destroy`: `slot_i` " + std::to_string(constructible_module.slot_i) +
+                    "ERROR: `MemoryAllocator::destroy`: `slot_i` " + std::to_string(slot_i) +
                     " is out of bounds, `DataSize` is " + std::to_string(DataSize));
             }
 
             // `slot_i` is not checked here (because it would make `destroy` O(n) operation instead of O(1)).
             // The caller must make sure that `slot_i` points to an existing instance.
             T1* data = std::launder(reinterpret_cast<T1*>(this->memory.data()));
-            T1* instance { &data[constructible_module.slot_i] };
+            T1* instance { &data[slot_i] };
             instance->~T1();
 
             // Push the freed index to the queue.
-            this->free_slot_id_queue.push(constructible_module.slot_i);
+            this->free_slot_id_queue.push(slot_i);
             --this->number_of_instances;
         }
 
@@ -214,16 +219,21 @@ namespace yli::memory
 
             if (this->free_slotID_queue.empty())
             {
-                function_overload->constructible_module = ConstructibleModule(
-                    *this, this->free_slotID_queue.size());
+                // Queue is empty.
+                // Use the current number of instances as the index.
+                const auto slot_i = static_cast<std::uint32_t>(this->free_slotID_queue.size());
+                const Handle handle { static_cast<std::uint32_t>(datatype), slot_i };
+                function_overload->constructible_module = ConstructibleModule { *this, handle };
                 this->instances.emplace_back(function_overload);
             }
             else
             {
-                const std::size_t slot_i = this->free_slotID_queue.front();
+                // Queue is not empty.
+                // Pop a free index from queue.
+                const std::uint32_t slot_i = this->free_slotID_queue.front();
                 this->free_slotID_queue.pop();
-                function_overload->constructible_module = ConstructibleModule(*this, slot_i);
-                this->instances.at(slot_i) = function_overload;
+                const Handle handle { static_cast<std::uint32_t>(datatype), slot_i };
+                function_overload->constructible_module = ConstructibleModule { *this, handle };
             }
 
             return function_overload;
@@ -241,15 +251,16 @@ namespace yli::memory
 
         void destroy(const ConstructibleModule& constructible_module) noexcept override
         {
-            delete this->instances.at(constructible_module.slot_i);
-            this->instances.at(constructible_module.slot_i) = nullptr;
-            this->free_slotID_queue.push(constructible_module.slot_i);
+            const std::uint32_t slot_i { constructible_module.handle.get_slot_i() };
+            delete this->instances.at(slot_i);
+            this->instances.at(slot_i) = nullptr;
+            this->free_slotID_queue.push(slot_i);
         }
 
     private:
         const int datatype;
         std::vector<ontology::AbstractConsoleLispFunctionOverload*> instances;
-        std::queue<std::size_t> free_slotID_queue;
+        std::queue<std::uint32_t> free_slotID_queue;
     };
 }
 

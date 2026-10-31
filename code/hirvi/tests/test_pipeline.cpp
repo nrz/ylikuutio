@@ -59,6 +59,7 @@ TEST(pipeline_must_be_initialized_appropriately, hirvi_pipeline)
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::PIPELINE));
     const yli::memory::ConstructibleModule pipeline_constructible_module =
             helsinki_pipeline->get_constructible_module();
-    ASSERT_EQ(pipeline_constructible_module.slot_i, 0);
+    ASSERT_EQ(pipeline_constructible_module.handle.get_type(), hirvi::data::PIPELINE);
+    ASSERT_EQ(pipeline_constructible_module.handle.get_slot_i(), 0);
     ASSERT_EQ(pipeline_constructible_module.alive, true);
 }

@@ -77,6 +77,7 @@ TEST(species_must_be_initialized_appropriately, hirvi_species)
     ASSERT_EQ(reinterpret_cast<uintptr_t>(cat_species) % alignof(Species), 0);
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::SPECIES));
     const yli::memory::ConstructibleModule cat_species_constructible_module = cat_species->get_constructible_module();
-    ASSERT_EQ(cat_species_constructible_module.slot_i, 0);
+    ASSERT_EQ(cat_species_constructible_module.handle.get_type(), hirvi::data::SPECIES);
+    ASSERT_EQ(cat_species_constructible_module.handle.get_slot_i(), 0);
     ASSERT_EQ(cat_species_constructible_module.alive, true);
 }

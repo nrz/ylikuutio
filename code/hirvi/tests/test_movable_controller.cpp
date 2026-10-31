@@ -64,6 +64,7 @@ TEST(movable_controller_must_be_initialized_appropriately, hirvi_movable_control
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::MOVABLE_CONTROLLER));
     const yli::memory::ConstructibleModule movable_controller_constructible_module =
             rest_movable_controller->get_constructible_module();
-    ASSERT_EQ(movable_controller_constructible_module.slot_i, 0);
+    ASSERT_EQ(movable_controller_constructible_module.handle.get_type(), hirvi::data::MOVABLE_CONTROLLER);
+    ASSERT_EQ(movable_controller_constructible_module.handle.get_slot_i(), 0);
     ASSERT_EQ(movable_controller_constructible_module.alive, true);
 }

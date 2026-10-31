@@ -190,6 +190,7 @@ TEST(police_dog_must_be_initialized_appropriately, hirvi_police_dog)
 
     const yli::memory::ConstructibleModule police_dog1_constructible_module =
             police_dog1->get_constructible_module();
-    ASSERT_EQ(police_dog1_constructible_module.slot_i, 0);
+    ASSERT_EQ(police_dog1_constructible_module.handle.get_type(), hirvi::data::POLICE_DOG);
+    ASSERT_EQ(police_dog1_constructible_module.handle.get_slot_i(), 0);
     ASSERT_EQ(police_dog1_constructible_module.alive, true);
 }
