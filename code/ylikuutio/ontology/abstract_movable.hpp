@@ -58,6 +58,11 @@ namespace yli::input
         enum class InputMethod;
 }
 
+namespace yli::memory
+{
+        struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
         class GenericMasterModule;
@@ -78,6 +83,7 @@ namespace yli::ontology
 
         protected:
                 AbstractMovable(
+                        memory::ConstructibleModule&& constructible_module,
                         core::Application& application,
                         Universe& universe,
                         const MovableStruct& movable_struct,

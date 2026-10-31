@@ -20,10 +20,16 @@
 
 // Include standard headers
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -36,11 +42,12 @@ namespace yli::ontology
 namespace hirvi::ontology
 {
     FlyAbility::FlyAbility(
+        yli::memory::ConstructibleModule&& constructible_module,
         yli::core::Application& application,
         yli::ontology::Universe& universe,
         const yli::ontology::AbilityStruct& ability_struct,
         yli::ontology::GenericParentModule* const parent_module)
-        : Ability(application, universe, ability_struct, parent_module)
+        : Ability(std::move(constructible_module), application, universe, ability_struct, parent_module)
     {
     }
 

@@ -20,10 +20,16 @@
 
 // Include standard headers
 #include <cstddef> // std::size_t
+#include <utility> // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -32,10 +38,11 @@ namespace yli::ontology
     class Universe;
 
     AbstractCapability::AbstractCapability(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const CapabilityStruct& capability_struct)
-        : Entity(application, universe, capability_struct)
+        : Entity(std::move(constructible_module), application, universe, capability_struct)
     {
     }
 }

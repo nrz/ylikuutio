@@ -18,9 +18,17 @@
 #include "abstract_callback_engine.hpp"
 #include "abstract_callback_engine_struct.hpp"
 
+// Include standard headers
+#include <utility> // std::move
+
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -29,10 +37,11 @@ namespace yli::ontology
     class Universe;
 
     AbstractCallbackEngine::AbstractCallbackEngine(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const AbstractCallbackEngineStruct& abstract_callback_engine_struct)
-        : Entity(application, universe, abstract_callback_engine_struct)
+        : Entity(std::move(constructible_module), application, universe, abstract_callback_engine_struct)
     {
     }
 }

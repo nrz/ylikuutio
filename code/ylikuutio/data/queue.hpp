@@ -70,6 +70,11 @@ namespace yli::data
             return value;
         }
 
+        bool empty() const
+        {
+            return this->size() == 0;
+        }
+
         std::size_t size() const
         {
             return this->queue_size;

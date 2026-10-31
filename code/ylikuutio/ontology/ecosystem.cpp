@@ -22,10 +22,16 @@
 // Include standard headers
 #include <cstddef>  // std::size_t
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -34,11 +40,12 @@ namespace yli::ontology
     class Scene;
 
     Ecosystem::Ecosystem(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const EcosystemStruct& ecosystem_struct,
         GenericParentModule* const universe_parent_module)
-        : Entity(application, universe, ecosystem_struct),
+        : Entity(std::move(constructible_module), application, universe, ecosystem_struct),
           child_of_universe(universe_parent_module, *this),
           parent_of_pipelines(
               *this,

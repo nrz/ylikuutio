@@ -36,6 +36,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -51,6 +53,7 @@ namespace yli::ontology
     {
     private:
         Biont(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const BiontStruct& biont_struct,

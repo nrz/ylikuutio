@@ -27,12 +27,19 @@
 // Include standard headers
 #include <cstdint>  // std::uint32_t
 #include <iostream> // std::cerr
+#include <utility>  // std::move
 #include <vector>   // std::vector
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
 
 namespace yli::input
 {
-    InputSystem::InputSystem(ontology::Universe& universe)
-        : universe { universe }
+    InputSystem::InputSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe)
+        : constructible_module { std::move(constructible_module) },
+          universe { universe }
     { }
 
     void InputSystem::process_keys(const InputMethod& input_method, const ontology::InputMode& input_mode)

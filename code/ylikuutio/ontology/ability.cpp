@@ -22,10 +22,16 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -51,11 +57,12 @@ namespace yli::ontology
     }
 
     Ability::Ability(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const AbilityStruct& ability_struct,
         GenericParentModule* const parent_module)
-        : AbstractCapability(application, universe, ability_struct),
+        : AbstractCapability(std::move(constructible_module), application, universe, ability_struct),
           child_of_symbiosis(parent_module, *this)
     {
     }

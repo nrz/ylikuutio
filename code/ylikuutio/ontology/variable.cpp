@@ -34,6 +34,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -42,12 +47,13 @@ namespace yli::ontology
     class Scene;
 
     Variable::Variable(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const VariableStruct& variable_struct,
         GenericParentModule* const entity_parent_module,
         data::AnyValue&& any_value)
-        : Entity(application, universe, variable_struct),
+        : Entity(std::move(constructible_module), application, universe, variable_struct),
           child_of_entity(entity_parent_module, *this),
           variable_value { std::move(any_value) },
           activate_callback { variable_struct.activate_callback },

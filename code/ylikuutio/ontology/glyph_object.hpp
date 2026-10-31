@@ -31,6 +31,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -44,6 +49,7 @@ namespace yli::ontology
     {
     public:
         GlyphObject(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const GlyphObjectStruct& glyph_object_struct,

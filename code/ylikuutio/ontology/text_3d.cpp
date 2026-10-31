@@ -27,10 +27,16 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -101,6 +107,7 @@ namespace yli::ontology
     }
 
     Text3d::Text3d(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const Text3dStruct& text_3d_struct,
@@ -108,6 +115,7 @@ namespace yli::ontology
         GenericMasterModule* const movable_controller_master_module,
         GenericMasterModule* const vector_font_master_module)
         : AbstractMovable(
+              std::move(constructible_module),
               application,
               universe,
               text_3d_struct,

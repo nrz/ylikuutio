@@ -18,12 +18,17 @@
 #include "train.hpp"
 
 // Include standard headers
-#include <string>      // std::string
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -39,6 +44,7 @@ namespace yli::ontology
 namespace hirvi::ontology
 {
     Train::Train(
+        yli::memory::ConstructibleModule&& constructible_module,
         yli::core::Application& application,
         yli::ontology::Universe& universe,
         const yli::ontology::HolobiontStruct& train_struct,
@@ -47,6 +53,7 @@ namespace hirvi::ontology
         yli::ontology::GenericMasterModule* const movable_controller_master,
         const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct)
         : Holobiont(
+              std::move(constructible_module),
               application,
               universe,
               train_struct,

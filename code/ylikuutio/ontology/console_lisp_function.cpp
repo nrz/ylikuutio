@@ -28,11 +28,17 @@
 #include <optional> // std::optional
 #include <string>   // std::string
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 #include <vector>   // std::vector
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -58,11 +64,12 @@ namespace yli::ontology
     }
 
     ConsoleLispFunction::ConsoleLispFunction(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const ConsoleLispFunctionStruct& console_lisp_function_struct,
         GenericParentModule* const console_parent_module)
-        : LispFunction(application, universe, console_lisp_function_struct),
+        : LispFunction(std::move(constructible_module), application, universe, console_lisp_function_struct),
           child_of_console(console_parent_module, *this),
           parent_of_generic_console_lisp_function_overloads(
               *this,

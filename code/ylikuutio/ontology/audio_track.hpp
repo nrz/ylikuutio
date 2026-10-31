@@ -31,6 +31,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -42,6 +47,7 @@ namespace yli::ontology
     {
     public:
         AudioTrack(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const AudioTrackStruct& audio_track_struct,

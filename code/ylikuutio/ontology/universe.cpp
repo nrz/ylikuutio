@@ -90,6 +90,11 @@
 #include <utility>   // std::move
 #include <vector>    // std::vector
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -127,9 +132,10 @@ namespace yli::ontology
     }
 
     Universe::Universe(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         const UniverseStruct& universe_struct)
-        : Entity(application, *this, universe_struct), // `Universe` has no parent.
+        : Entity(std::move(constructible_module), application, *this, universe_struct), // `Universe` has no parent.
           parent_of_ecosystems(
               *this,
               this->registry,

@@ -20,10 +20,16 @@
 // Include standard headers
 #include <stdexcept> // std::runtime_error
 #include <cstddef>   // std::size_t
+#include <utility>   // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -35,10 +41,11 @@ namespace yli::ontology
     class Scene;
 
     AbstractConsoleLispFunctionOverload::AbstractConsoleLispFunctionOverload(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         GenericParentModule* const console_lisp_function_parent_module)
-        : AbstractLispFunctionOverload(application, universe),
+        : AbstractLispFunctionOverload(std::move(constructible_module), application, universe),
           child_of_console_lisp_function(console_lisp_function_parent_module, *this)
     {
     }

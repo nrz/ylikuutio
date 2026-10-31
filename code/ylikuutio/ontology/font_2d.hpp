@@ -40,6 +40,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -55,6 +57,7 @@ namespace yli::ontology
     class Font2d final : public Entity
     {
         Font2d(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const FontStruct& font_struct,

@@ -22,10 +22,16 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -46,6 +52,7 @@ namespace yli::ontology
     }
 
     GlyphObject::GlyphObject(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const GlyphObjectStruct& glyph_object_struct,
@@ -53,6 +60,7 @@ namespace yli::ontology
         GenericMasterModule* const glyph_master_module,
         GenericMasterModule* const text_3d_master_module)
         : AbstractMovable(
+              std::move(constructible_module),
               application,
               universe,
               glyph_object_struct,

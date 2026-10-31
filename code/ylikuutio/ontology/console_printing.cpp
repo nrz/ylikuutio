@@ -23,6 +23,11 @@
 #include <string> // std::string
 #include <vector> // std::vector
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     void print_to_console(

@@ -40,12 +40,18 @@
 #include <iostream> // std::cerr
 #include <numbers>  // std::numbers::pi
 #include <optional> // std::optional
+#include <utility>  // std::move
 
 // `AbstractMovable` is a mixin class, not intended to be instantiated.
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -82,11 +88,12 @@ namespace yli::ontology
     }
 
     AbstractMovable::AbstractMovable(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const MovableStruct& movable_struct,
         GenericMasterModule* const movable_controller_master_module)
-        : Entity(application, universe, movable_struct),
+        : Entity(std::move(constructible_module), application, universe, movable_struct),
           apprentice_of_movable_controller(movable_controller_master_module, this),
           rigid_body_module(
               movable_struct.rigid_body_module_struct,

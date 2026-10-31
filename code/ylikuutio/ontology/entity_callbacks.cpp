@@ -26,6 +26,11 @@
 #include <optional> // std::optional
 #include <string>   // std::string
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class Console;

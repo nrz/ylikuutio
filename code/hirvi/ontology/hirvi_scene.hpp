@@ -35,6 +35,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryStorage;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -81,6 +83,7 @@ namespace hirvi::ontology
     {
     public:
         HirviScene(
+            yli::memory::ConstructibleModule&& constructible_module,
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const HirviSceneStruct& hirvi_scene_struct,

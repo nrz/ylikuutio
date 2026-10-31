@@ -30,6 +30,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -37,7 +42,7 @@ namespace yli::ontology
     class AbstractLispFunctionOverload : public Entity
     {
     protected:
-        AbstractLispFunctionOverload(core::Application& application, Universe& universe);
+        AbstractLispFunctionOverload(memory::ConstructibleModule&& constructible_module, core::Application& application, Universe& universe);
 
     public:
         AbstractLispFunctionOverload(const AbstractLispFunctionOverload&) = delete; // Delete copy constructor.

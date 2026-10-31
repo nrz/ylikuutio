@@ -37,6 +37,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -50,6 +52,7 @@ namespace yli::ontology
     class SymbiontMaterial final : public Entity
     {
         SymbiontMaterial(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const SymbiontMaterialStruct& symbiont_material_struct,

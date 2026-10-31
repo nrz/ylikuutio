@@ -27,6 +27,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -42,7 +44,7 @@ namespace yli::input
     class InputSystem
     {
     public:
-        explicit InputSystem(ontology::Universe& universe);
+        InputSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe);
 
         void process_keys(const InputMethod& input_method, const ontology::InputMode& input_mode);
 

@@ -33,6 +33,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -45,7 +47,7 @@ namespace yli::audio
     class AudioSystem final
     {
     public:
-        explicit AudioSystem(ontology::Universe& universe);
+        AudioSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe);
 
         AudioSystem(const AudioSystem&) = delete;            // Delete copy constructor.
         AudioSystem& operator=(const AudioSystem&) = delete; // Delete copy assignment.

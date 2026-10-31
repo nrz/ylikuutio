@@ -36,11 +36,17 @@
 #include <optional>  // std::optional
 #include <string>    // std::string
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 #include <vector>    // std::vector
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -79,12 +85,13 @@ namespace yli::ontology
     }
 
     Console::Console(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const ConsoleStruct& console_struct,
         GenericParentModule* const universe_parent_module,
         GenericMasterModule* const font_2d_master_module)
-        : LispContext(application, universe, console_struct),
+        : LispContext(std::move(constructible_module), application, universe, console_struct),
           child_of_universe(universe_parent_module, *this),
           parent_of_console_callback_engines(
               *this,

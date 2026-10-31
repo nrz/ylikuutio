@@ -51,6 +51,12 @@
 #include <iostream>  // std::cerr
 #include <stdexcept> // std::runtime_error
 #include <string_view> // std::string_view
+#include <utility>     // std::move
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
 
 namespace yli::ontology
 {
@@ -58,11 +64,12 @@ namespace yli::ontology
     class RigidBodyModule;
 
     Scene::Scene(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const SceneStruct& scene_struct,
         GenericParentModule* const universe_parent_module)
-        : Entity(application, universe, scene_struct),
+        : Entity(std::move(constructible_module), application, universe, scene_struct),
           child_of_universe(universe_parent_module, *this),
           parent_of_movable_controllers(
               *this,

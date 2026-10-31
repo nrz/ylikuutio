@@ -30,6 +30,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -40,6 +45,7 @@ namespace yli::ontology
     class Mission final : public Entity
     {
             Mission(
+                    memory::ConstructibleModule&& constructible_module,
                     core::Application& application,
                     Universe& universe,
                     const MissionStruct& mission_struct,

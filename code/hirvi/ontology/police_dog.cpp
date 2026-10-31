@@ -20,10 +20,16 @@
 
 // Include standard headers
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -40,6 +46,7 @@ namespace yli::ontology
 namespace hirvi::ontology
 {
     PoliceDog::PoliceDog(
+        yli::memory::ConstructibleModule&& constructible_module,
         yli::core::Application& application,
         yli::ontology::Universe& universe,
         const PoliceDogStruct& police_dog_struct,
@@ -52,6 +59,7 @@ namespace hirvi::ontology
         const yli::ontology::LocomotionModuleStruct& canter_struct,
         const yli::ontology::LocomotionModuleStruct& gallop_struct)
         : Holobiont(
+              std::move(constructible_module),
               application,
               universe,
               police_dog_struct,

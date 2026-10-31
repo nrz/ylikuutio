@@ -24,6 +24,7 @@
 #include <cstddef>  // std::size_t
 #include <string>   // std::string
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
@@ -35,6 +36,11 @@ namespace yli::data
     class AnyValue;
 }
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class Entity;
@@ -43,12 +49,13 @@ namespace yli::ontology
     struct EntityStruct;
 
     ConsoleCallbackParameter::ConsoleCallbackParameter(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const ConsoleCallbackParameterStruct& console_callback_parameter_struct,
         GenericParentModule* const console_callback_object_parent_module,
         const data::AnyValue& any_value)
-        : Entity(application, universe, console_callback_parameter_struct),
+        : Entity(std::move(constructible_module), application, universe, console_callback_parameter_struct),
           child_of_console_callback_object(console_callback_object_parent_module, *this),
           any_value { any_value }
     {

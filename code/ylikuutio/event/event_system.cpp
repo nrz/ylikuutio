@@ -26,11 +26,18 @@
 
 // Include standard headers
 #include <cstdint> // std::uint32_t
+#include <utility> // std::move
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
 
 namespace yli::event
 {
-    EventSystem::EventSystem(ontology::Universe& universe)
-        : universe { universe }
+    EventSystem::EventSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe)
+        : constructible_module { std::move(constructible_module) },
+          universe { universe }
     { }
 
     void EventSystem::poll_events(const ontology::InputMode& input_mode) const

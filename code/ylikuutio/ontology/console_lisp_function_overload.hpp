@@ -33,6 +33,7 @@
 #include <string>     // std::string
 #include <string_view> // std::string_view
 #include <tuple>      // std::apply, std::tuple, std::tuple_cat
+#include <utility>    // std::move
 #include <vector>     // std::vector
 
 // This is a bit complicated, as the callback may receive different kinds of arguments.
@@ -55,6 +56,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -68,11 +71,12 @@ namespace yli::ontology
     class ConsoleLispFunctionOverload final : public AbstractConsoleLispFunctionOverload
     {
         ConsoleLispFunctionOverload(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             GenericParentModule* const console_lisp_function_parent_module,
             std::optional<data::AnyValue> (*callback)(Types...))
-            : AbstractConsoleLispFunctionOverload(application, universe, console_lisp_function_parent_module),
+            : AbstractConsoleLispFunctionOverload(std::move(constructible_module), application, universe, console_lisp_function_parent_module),
               callback(callback)
         {
         }

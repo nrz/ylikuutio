@@ -26,10 +26,16 @@
 #include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -41,12 +47,13 @@ namespace yli::ontology
     class Pipeline;
 
     Glyph::Glyph(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const GlyphStruct& glyph_struct,
         GenericParentModule* const vector_font_parent_module,
         GenericMasterModule* const material_master_module)
-        : Entity(application, universe, glyph_struct),
+        : Entity(std::move(constructible_module), application, universe, glyph_struct),
           child_of_vector_font(vector_font_parent_module, *this),
           apprentice_of_material(material_master_module, this),
           master_of_glyph_objects(*this, &this->registry, "glyph_objects"),

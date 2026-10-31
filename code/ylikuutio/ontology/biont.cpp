@@ -52,10 +52,16 @@
 #include <cstdint>   // std::uint32_t
 #include <stdexcept> // std::runtime_error
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -66,12 +72,14 @@ namespace yli::ontology
     class Scene;
 
     Biont::Biont(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const BiontStruct& biont_struct,
         GenericParentModule* const holobiont_parent_module,
         GenericMasterModule* const symbiont_species_master_module)
         : AbstractMovable(
+              std::move(constructible_module),
               application,
               universe,
               biont_struct,

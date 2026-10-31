@@ -31,6 +31,12 @@
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string_view> // std::string_view
+#include <utility>     // std::move
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
 
 namespace yli::ontology
 {
@@ -39,11 +45,12 @@ namespace yli::ontology
     struct ConsoleCallbackEngineStruct;
 
     ConsoleCallbackEngine::ConsoleCallbackEngine(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const ConsoleCallbackEngineStruct&,
         GenericParentModule* const console_parent_module)
-        : AbstractCallbackEngine(application, universe, AbstractCallbackEngineStruct()),
+        : AbstractCallbackEngine(std::move(constructible_module), application, universe, AbstractCallbackEngineStruct()),
           child_of_console(console_parent_module, *this),
           parent_of_console_callback_objects(
               *this,

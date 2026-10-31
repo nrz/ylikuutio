@@ -19,10 +19,16 @@
 
 // Include standard headers
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -38,6 +44,7 @@ namespace yli::ontology
 namespace hirvi::ontology
 {
     Cat::Cat(
+        yli::memory::ConstructibleModule&& constructible_module,
         yli::core::Application& application,
         yli::ontology::Universe& universe,
         const yli::ontology::ObjectStruct& cat_struct,
@@ -50,6 +57,7 @@ namespace hirvi::ontology
         const yli::ontology::LocomotionModuleStruct& gallop_struct,
         const yli::ontology::LocomotionModuleStruct& climb_struct)
         : Object(
+              std::move(constructible_module),
               application,
               universe,
               cat_struct,

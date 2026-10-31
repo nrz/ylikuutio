@@ -85,7 +85,7 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::SYMBIOSIS));
     ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_ufbx_meshes(), 5);
 
-    const yli::memory::ConstructibleModule symbiosis_constructible_module =
+    const yli::memory::ConstructibleModule& symbiosis_constructible_module =
             turbo_polizei_png_symbiosis->get_constructible_module();
     ASSERT_EQ(symbiosis_constructible_module.handle.get_type(), hirvi::data::SYMBIOSIS);
     ASSERT_EQ(symbiosis_constructible_module.handle.get_slot_i(), 0);

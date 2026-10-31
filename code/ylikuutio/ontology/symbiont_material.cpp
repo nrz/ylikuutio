@@ -28,10 +28,16 @@
 #include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -42,11 +48,12 @@ namespace yli::ontology
     class Scene;
 
     SymbiontMaterial::SymbiontMaterial(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const SymbiontMaterialStruct& symbiont_material_struct,
         GenericParentModule* const symbiosis_parent_module) // Parent is a `Symbiosis`.
-        : Entity(application, universe, symbiont_material_struct),
+        : Entity(std::move(constructible_module), application, universe, symbiont_material_struct),
           child_of_symbiosis(symbiosis_parent_module, *this),
           parent_of_symbiont_species(
               *this,

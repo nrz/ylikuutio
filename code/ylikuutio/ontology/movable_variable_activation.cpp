@@ -36,6 +36,11 @@
 #include <stdexcept>  // std::runtime_error
 #include <variant>    // std::holds_alternative
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class Entity;

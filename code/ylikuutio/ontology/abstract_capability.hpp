@@ -25,6 +25,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class Universe;
@@ -34,6 +39,7 @@ namespace yli::ontology
     {
         public:
             AbstractCapability(
+                    memory::ConstructibleModule&& constructible_module,
                     core::Application& application,
                     Universe& universe,
                     const CapabilityStruct& capability_struct);

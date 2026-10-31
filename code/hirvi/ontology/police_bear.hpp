@@ -32,6 +32,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -50,6 +55,7 @@ namespace hirvi::ontology
     {
     public:
         explicit PoliceBear(
+            yli::memory::ConstructibleModule&& constructible_module,
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const PoliceBearStruct& police_bear_struct,

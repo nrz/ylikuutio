@@ -60,6 +60,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
         class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -74,6 +76,7 @@ namespace yli::ontology
     class MovableController final : public Entity
     {
             MovableController(
+                    memory::ConstructibleModule&& constructible_module,
                     core::Application& application,
                     Universe& universe,
                     const MovableControllerStruct& movable_controller_struct,

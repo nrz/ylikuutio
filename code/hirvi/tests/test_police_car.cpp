@@ -186,7 +186,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
         hirvi::data::BIONT);
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 5);
 
-    const yli::memory::ConstructibleModule turbo_polizei1_constructible_module =
+    const yli::memory::ConstructibleModule& turbo_polizei1_constructible_module =
             turbo_polizei1->get_constructible_module();
     ASSERT_EQ(turbo_polizei1_constructible_module.handle.get_type(), hirvi::data::POLICE_CAR);
     ASSERT_EQ(turbo_polizei1_constructible_module.handle.get_slot_i(), 0);

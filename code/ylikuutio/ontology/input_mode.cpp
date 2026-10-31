@@ -28,11 +28,17 @@
 #include <cstddef>  // std::size_t
 #include <cstdint>  // std::uint32_t
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 #include <vector>   // std::vector
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -41,12 +47,13 @@ namespace yli::ontology
     class Scene;
 
     InputMode::InputMode(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const InputModeStruct& input_mode_struct,
         ParentOfInputModesModule* const parent_module,
         GenericMasterModule* const console_master_module)
-        : Entity(application, universe, input_mode_struct),
+        : Entity(std::move(constructible_module), application, universe, input_mode_struct),
           child_of_universe(parent_module, *this),
           apprentice_of_console(static_cast<MasterOfInputModesModule*>(console_master_module), this),
           is_text_input_mode { input_mode_struct.is_text_input_mode }

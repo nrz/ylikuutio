@@ -36,21 +36,8 @@ namespace yli::memory
 
         ConstructibleModule(const ConstructibleModule& other) = default;
 
-        ConstructibleModule& operator=(const ConstructibleModule& other)
-        {
-            this->generic_allocator = other.generic_allocator;
-
-            if (&other != this)
-            {
-                this->handle = other.handle;
-            }
-
-            this->alive = other.alive;
-            return *this;
-        }
-
         AbstractMemoryAllocator* generic_allocator { nullptr };
-        Handle handle {}; // Default value 0 means invalid handle.
+        const Handle handle; // Default value 0 means invalid handle.
         bool alive { true };
     };
 }

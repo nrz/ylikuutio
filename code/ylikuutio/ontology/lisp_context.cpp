@@ -19,9 +19,17 @@
 #include "universe.hpp"
 #include "lisp_context_struct.hpp"
 
+// Include standard headers
+#include <utility> // std::move
+
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -29,10 +37,11 @@ namespace yli::ontology
     class Entity;
 
     LispContext::LispContext(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const LispContextStruct& lisp_context_struct)
-        : Entity(application, universe, lisp_context_struct)
+        : Entity(std::move(constructible_module), application, universe, lisp_context_struct)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->can_be_erased = true;

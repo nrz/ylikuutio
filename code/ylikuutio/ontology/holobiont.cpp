@@ -42,7 +42,13 @@
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 #include <vector>    // std::vector
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
 
 namespace yli::ontology
 {
@@ -52,6 +58,7 @@ namespace yli::ontology
     class SymbiontSpecies;
 
     Holobiont::Holobiont(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const HolobiontStruct& holobiont_struct,
@@ -59,6 +66,7 @@ namespace yli::ontology
         GenericMasterModule* const movable_controller_master_module,
         GenericMasterModule* const symbiosis_master_module)
         : AbstractMovable(
+              std::move(constructible_module),
               application,
               universe,
               holobiont_struct,

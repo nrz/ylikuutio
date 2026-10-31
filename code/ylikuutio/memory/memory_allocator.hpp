@@ -34,7 +34,7 @@
 #include <new>        // std::launder
 #include <stdexcept>  // std::runtime_error
 #include <string>     // std::to_string
-#include <utility>    // std::forward
+#include <utility>    // std::forward, std::move
 
 namespace yli::ontology
 {
@@ -120,7 +120,7 @@ namespace yli::memory
                 return nullptr;
             }
 
-            std::size_t slot_i;
+            std::uint32_t slot_i {};
 
             if (this->free_slot_id_queue.size() == 0) [[unlikely]]
             {
@@ -135,9 +135,10 @@ namespace yli::memory
                 slot_i = this->free_slot_id_queue.pop();
             }
 
-            T1* instance = new(this->memory.data() + (slot_i * sizeof(T1))) T1(std::forward<Args>(args)...);
-            const Handle handle { static_cast<std::uint32_t>(datatype), static_cast<std::uint32_t>(slot_i) };
-            instance->constructible_module = ConstructibleModule { *this, handle };
+            const Handle handle { static_cast<std::uint32_t>(datatype), slot_i };;
+            T1* instance = new(this->memory.data() + (slot_i * sizeof(T1))) T1(
+                std::move(ConstructibleModule { *this, handle }),
+                std::forward<Args>(args)...);
             ++this->number_of_instances;
             return instance;
         }
@@ -188,7 +189,7 @@ namespace yli::memory
     private:
         const int datatype;
         alignas(T1) std::array<std::byte, DataSize * sizeof(T1)> memory {};
-        data::Queue<DataSize> free_slot_id_queue;
+        data::Queue<DataSize> free_slot_id_queue {};
         std::size_t number_of_instances { 0 };
     };
 
@@ -202,9 +203,14 @@ namespace yli::memory
 
         ~MemoryAllocator() override
         {
-            for (auto* const instance : this->instances)
+            for (auto it = this->instances.begin(); it != this->instances.end(); ++it)
             {
-                delete instance;
+                if (*it != nullptr)
+                {
+                    delete *it;
+                    --this->number_of_instances;
+                    *it = nullptr;
+                }
             }
         }
 
@@ -214,28 +220,27 @@ namespace yli::memory
         template<typename... Args>
         ontology::AbstractConsoleLispFunctionOverload* build_in(Args&&... args)
         {
-            ontology::AbstractConsoleLispFunctionOverload* function_overload =
-                    new ontology::ConsoleLispFunctionOverload(std::forward<Args>(args)...);
+            std::uint32_t slot_i {};
 
-            if (this->free_slotID_queue.empty())
+            if (this->free_slot_id_queue.empty())
             {
                 // Queue is empty.
                 // Use the current number of instances as the index.
-                const auto slot_i = static_cast<std::uint32_t>(this->free_slotID_queue.size());
-                const Handle handle { static_cast<std::uint32_t>(datatype), slot_i };
-                function_overload->constructible_module = ConstructibleModule { *this, handle };
-                this->instances.emplace_back(function_overload);
+                slot_i = static_cast<std::uint32_t>(this->free_slot_id_queue.size());
             }
             else
             {
                 // Queue is not empty.
                 // Pop a free index from queue.
-                const std::uint32_t slot_i = this->free_slotID_queue.front();
-                this->free_slotID_queue.pop();
-                const Handle handle { static_cast<std::uint32_t>(datatype), slot_i };
-                function_overload->constructible_module = ConstructibleModule { *this, handle };
+                slot_i = this->free_slot_id_queue.pop();
             }
 
+            const Handle handle { static_cast<std::uint32_t>(datatype), slot_i };
+            ontology::AbstractConsoleLispFunctionOverload* function_overload =
+                    new ontology::ConsoleLispFunctionOverload(
+                        std::move(ConstructibleModule { *this, handle }),
+                        std::forward<Args>(args)...);
+            ++this->number_of_instances;
             return function_overload;
         }
 
@@ -246,21 +251,49 @@ namespace yli::memory
 
         [[nodiscard]] std::size_t get_number_of_instances() const override
         {
-            return this->instances.size();
+            return this->number_of_instances;
         }
 
         void destroy(const ConstructibleModule& constructible_module) noexcept override
         {
-            const std::uint32_t slot_i { constructible_module.handle.get_slot_i() };
-            delete this->instances.at(slot_i);
-            this->instances.at(slot_i) = nullptr;
-            this->free_slotID_queue.push(slot_i);
+            if (const std::uint32_t slot_i = constructible_module.handle.get_slot_i();
+                this->instances.at(slot_i) != nullptr) [[likely]]
+            {
+                delete this->instances.at(slot_i);
+                this->instances.at(slot_i) = nullptr;
+                this->free_slot_id_queue.push(slot_i);
+                --this->number_of_instances;
+            }
+        }
+
+        void mark_destroyed(const Handle& handle) override
+        {
+            const std::uint32_t slot_i { handle.get_slot_i() };
+
+            if (slot_i == std::numeric_limits<std::uint32_t>::max()) [[unlikely]]
+            {
+                std::cerr << "ERROR: `MemoryAllocator::mark_destroyed`: `slot_i` has invalid value!\n";
+                return;
+            }
+
+            if (slot_i >= DataSize)
+            {
+                std::cerr << "ERROR: `MemoryAllocator::mark_destroyed`: `slot_i` has invalid value!\n";
+                return;
+            }
+
+            if (this->instances.at(slot_i) != nullptr)
+            {
+                this->instances.at(slot_i) = nullptr;
+                --this->number_of_instances;
+            }
         }
 
     private:
         const int datatype;
-        std::vector<ontology::AbstractConsoleLispFunctionOverload*> instances;
-        std::queue<std::uint32_t> free_slotID_queue;
+        std::array<ontology::AbstractConsoleLispFunctionOverload*, DataSize> instances {};
+        data::Queue<DataSize> free_slot_id_queue {};
+        std::size_t number_of_instances { 0 };
     };
 }
 

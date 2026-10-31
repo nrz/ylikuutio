@@ -27,6 +27,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -40,7 +42,7 @@ namespace yli::event
     class EventSystem
     {
     public:
-        explicit EventSystem(ontology::Universe& universe);
+        EventSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe);
 
         void poll_events(const ontology::InputMode& input_mode) const;
 

@@ -26,11 +26,18 @@
 #include <iostream> // std::cerr
 #include <list>     // std::list
 #include <string>   // std::string
+#include <utility>  // std::move
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
 
 namespace yli::audio
 {
-    AudioSystem::AudioSystem(yli::ontology::Universe& universe)
-        : universe { universe }
+    AudioSystem::AudioSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe)
+        : constructible_module { std::move(constructible_module) },
+          universe { universe }
     {
         this->init();
         this->current_playlist = ""; // no current playlist.

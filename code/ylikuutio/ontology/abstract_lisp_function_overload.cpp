@@ -20,17 +20,28 @@
 #include "entity_struct.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
 
+// Include standard headers
+#include <utility> // std::move
+
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
 {
     class Universe;
 
-    AbstractLispFunctionOverload::AbstractLispFunctionOverload(core::Application& application, Universe& universe)
-        : Entity(application, universe, EntityStruct())
+    AbstractLispFunctionOverload::AbstractLispFunctionOverload(
+            memory::ConstructibleModule&& constructible_module,
+            core::Application& application,
+            Universe& universe)
+        : Entity(std::move(constructible_module), application, universe, EntityStruct())
     {
     }
 }

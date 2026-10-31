@@ -25,10 +25,16 @@
 #include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -40,11 +46,12 @@ namespace yli::ontology
     class Pipeline;
 
     ShapeshifterSequence::ShapeshifterSequence(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const ShapeshifterSequenceStruct& shapeshifter_sequence_struct,
         GenericParentModule* const shapeshifter_transformation_parent_module)
-        : Entity(application, universe, shapeshifter_sequence_struct),
+        : Entity(std::move(constructible_module), application, universe, shapeshifter_sequence_struct),
           child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
           master_of_shapeshifters(*this, &this->registry, "shapeshifters")
     {

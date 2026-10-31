@@ -25,10 +25,16 @@
 #include <cstddef>  // std::size_t
 #include <optional> // std::optional
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -38,11 +44,12 @@ namespace yli::ontology
     class Universe;
 
     ConsoleCallbackObject::ConsoleCallbackObject(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const ConsoleCallbackObjectStruct& console_callback_object_struct,
         GenericParentModule* const console_callback_engine_parent_module)
-        : Entity(application, universe, console_callback_object_struct),
+        : Entity(std::move(constructible_module), application, universe, console_callback_object_struct),
           child_of_console_callback_engine(console_callback_engine_parent_module, *this),
           parent_of_console_callback_parameters(
               *this,

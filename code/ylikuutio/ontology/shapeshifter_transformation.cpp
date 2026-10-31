@@ -31,10 +31,16 @@
 #include <optional>  // std::optional
 #include <stdexcept> // std::runtime_error
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -73,11 +79,12 @@ namespace yli::ontology
     }
 
     ShapeshifterTransformation::ShapeshifterTransformation(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
         GenericParentModule* const material_parent_module)
-        : Entity(application, universe, shapeshifter_transformation_struct),
+        : Entity(std::move(constructible_module), application, universe, shapeshifter_transformation_struct),
           child_of_material(material_parent_module, *this),
           parent_of_shapeshifter_forms(
               *this,

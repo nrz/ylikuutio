@@ -23,10 +23,16 @@
 #include <cstddef>   // std::size_t
 #include <stdexcept> // std::runtime_error
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -37,11 +43,12 @@ namespace yli::ontology
     class Pipeline;
 
     ShapeshifterForm::ShapeshifterForm(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const ShapeshifterFormStruct& shapeshifter_form_struct,
         GenericParentModule* const shapeshifter_transformation_parent_module)
-        : Entity(application, universe, shapeshifter_form_struct),
+        : Entity(std::move(constructible_module), application, universe, shapeshifter_form_struct),
           child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
           mesh(universe, shapeshifter_form_struct, this->get_pipeline())
     {

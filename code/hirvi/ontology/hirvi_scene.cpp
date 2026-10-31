@@ -25,10 +25,16 @@
 
 // Include standard headers
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -40,15 +46,17 @@ namespace yli::ontology
 namespace hirvi::ontology
 {
     using namespace yli::core;
+    using namespace yli::memory;
     using namespace yli::ontology;
 
     HirviScene::HirviScene(
+        ConstructibleModule&& constructible_module,
         Application& application,
         Universe& universe,
         const HirviSceneStruct& hirvi_scene_struct,
         GenericParentModule* const universe_parent_module,
         const core::HirviCore& hirvi_core)
-        : Scene(application, universe, hirvi_scene_struct, universe_parent_module),
+        : Scene(std::move(constructible_module), application, universe, hirvi_scene_struct, universe_parent_module),
           parent_of_police_control_centers(
               *this,
               this->registry,

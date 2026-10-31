@@ -28,10 +28,16 @@
 #include <cstddef>  // std::size_t
 #include <iostream> // std::cout, std::cerr
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -41,12 +47,13 @@ namespace yli::ontology
     class Entity;
 
     MovableController::MovableController(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const MovableControllerStruct& movable_controller_struct,
             GenericParentModule* const scene_parent_module,
             GenericMasterModule* const callback_engine_master_module)
-        : Entity(application, universe, movable_controller_struct),
+        : Entity(std::move(constructible_module), application, universe, movable_controller_struct),
         child_of_scene(scene_parent_module, *this),
         apprentice_of_callback_engine(callback_engine_master_module, this),
         master_of_movables(*this, &this->registry, "movables")

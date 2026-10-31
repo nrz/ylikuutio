@@ -35,6 +35,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -71,6 +76,7 @@ namespace yli::ontology
             VectorFont& new_master);
 
         Text3d(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const Text3dStruct& text_3d_struct,

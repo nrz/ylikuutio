@@ -33,6 +33,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -46,6 +48,7 @@ namespace yli::ontology
     {
     public:
         AbstractConsoleLispFunctionOverload(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             GenericParentModule* console_lisp_function_parent_module);

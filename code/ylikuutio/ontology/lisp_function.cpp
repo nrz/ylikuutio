@@ -22,10 +22,16 @@
 
 // Include standard headers
 #include <string>     // std::string
+#include <utility>    // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -33,10 +39,11 @@ namespace yli::ontology
     class Entity;
 
     LispFunction::LispFunction(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const LispFunctionStruct& lisp_function_struct)
-        : Entity(application, universe, lisp_function_struct)
+        : Entity(std::move(constructible_module), application, universe, lisp_function_struct)
     {
     }
 }

@@ -40,12 +40,17 @@
 #include <sstream>   // std::stringstream
 #include <stdexcept> // std::runtime_error
 #include <string_view> // std::string_view
-#include <utility>   // std::swap etc.
+#include <utility>     // std::swap, std::move
 #include <vector>    // std::vector
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -55,11 +60,12 @@ namespace yli::ontology
     class Scene;
 
     ComputeTask::ComputeTask(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const ComputeTaskStruct& compute_task_struct,
         GenericParentModule* const pipeline_parent_module)
-        : Entity(application, universe, compute_task_struct),
+        : Entity(std::move(constructible_module), application, universe, compute_task_struct),
           child_of_pipeline(pipeline_parent_module, *this),
           texture_file_format { compute_task_struct.texture_file_format },
           texture_filename { compute_task_struct.texture_filename },

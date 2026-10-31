@@ -30,6 +30,11 @@ namespace yli::core
     class Application;
 }
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class GenericParentModule;
@@ -45,6 +50,7 @@ namespace hirvi::ontology
     {
     public:
         explicit Cat(
+            yli::memory::ConstructibleModule&& constructible_module,
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::ObjectStruct& cat_struct,

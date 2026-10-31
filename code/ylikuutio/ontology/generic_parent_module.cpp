@@ -94,8 +94,8 @@ namespace yli::ontology
             {
                 this->GenericParentModule::unbind_child(child->get_childID());
 
-                if (auto constructible_module = child->get_constructible_module();
-                    constructible_module.alive && constructible_module.generic_allocator != nullptr)
+                if (const auto& constructible_module = child->get_constructible_module();
+                    constructible_module.alive)
                 {
                     constructible_module.generic_allocator->destroy(constructible_module);
                 }

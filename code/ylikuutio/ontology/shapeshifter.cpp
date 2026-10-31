@@ -22,10 +22,16 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -46,6 +52,7 @@ namespace yli::ontology
     }
 
     Shapeshifter::Shapeshifter(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const ShapeshifterStruct& shapeshifter_struct,
@@ -53,6 +60,7 @@ namespace yli::ontology
         GenericMasterModule* const movable_controller_master_module,
         GenericMasterModule* const shapeshifter_sequence_master_module)
         : AbstractMovable(
+              std::move(constructible_module),
               application,
               universe,
               shapeshifter_struct,

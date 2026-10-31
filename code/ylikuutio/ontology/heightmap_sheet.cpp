@@ -22,10 +22,16 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -52,12 +58,14 @@ namespace yli::ontology
     }
 
     HeightmapSheet::HeightmapSheet(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const HeightmapSheetStruct& heightmap_sheet_struct,
         GenericParentModule* scene_parent_module,
         GenericMasterModule* movable_controller_master_module)
         : AbstractMovable(
+              std::move(constructible_module),
               application,
               universe,
               heightmap_sheet_struct,

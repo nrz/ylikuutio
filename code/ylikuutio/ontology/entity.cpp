@@ -56,10 +56,12 @@ namespace yli::ontology
     }
 
     Entity::Entity(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const EntityStruct& entity_struct)
-        : application { application },
+        : constructible_module { std::move(constructible_module) },
+          application { application },
           parent_of_variables(
               *this,
               this->registry,
@@ -125,7 +127,7 @@ namespace yli::ontology
         this->constructible_module.alive = false;
     }
 
-    memory::ConstructibleModule Entity::get_constructible_module() const
+    const memory::ConstructibleModule& Entity::get_constructible_module() const
     {
         return this->constructible_module;
     }

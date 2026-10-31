@@ -21,10 +21,16 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -45,11 +51,12 @@ namespace yli::ontology
     }
 
     Mission::Mission(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const MissionStruct& mission_struct,
             GenericParentModule* const universe_parent_module)
-        : Entity(application, universe, mission_struct),
+        : Entity(std::move(constructible_module), application, universe, mission_struct),
         child_of_universe(universe_parent_module, *this)
     {
     }

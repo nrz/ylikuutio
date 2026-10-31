@@ -38,10 +38,16 @@
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -143,12 +149,13 @@ namespace yli::ontology
     }
 
     Material::Material(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const MaterialStruct& material_struct,
         GenericParentModule* const ecosystem_or_scene_parent_module,
         GenericMasterModule* const pipeline_master_module)
-        : Entity(application, universe, material_struct),
+        : Entity(std::move(constructible_module), application, universe, material_struct),
           child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
           parent_of_shapeshifter_transformations(
               *this,

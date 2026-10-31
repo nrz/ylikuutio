@@ -36,16 +36,22 @@
 #include <string_view> // std::string_view
 #include <utility>  // std::move
 
+namespace yli::memory
+{
+    struct ConstructibleModule;
+}
+
 namespace yli::ontology
 {
     class Universe;
 
     CallbackObject::CallbackObject(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const CallbackObjectStruct& callback_object_struct,
         GenericParentModule* const callback_engine_parent_module)
-        : Entity(application, universe, callback_object_struct),
+        : Entity(std::move(constructible_module), application, universe, callback_object_struct),
           child_of_callback_engine(callback_engine_parent_module, *this),
           parent_of_callback_parameters(
               *this,
@@ -55,12 +61,13 @@ namespace yli::ontology
     }
 
     CallbackObject::CallbackObject(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const CallbackObjectStruct& callback_object_struct,
         const InputParametersAndAnyValueToAnyValueCallbackWithUniverse callback,
         GenericParentModule* const callback_engine_parent_module)
-        : Entity(application, universe, callback_object_struct),
+        : Entity(std::move(constructible_module), application, universe, callback_object_struct),
           child_of_callback_engine(callback_engine_parent_module, *this),
           parent_of_callback_parameters(
               *this,

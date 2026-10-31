@@ -22,10 +22,16 @@
 // Include standard headers
 #include <cstddef> // std::size_t
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -43,11 +49,12 @@ namespace hirvi::ontology
     }
 
     PoliceControlCenter::PoliceControlCenter(
+        yli::memory::ConstructibleModule&& constructible_module,
         yli::core::Application& application,
         yli::ontology::Universe& universe,
         const PoliceControlCenterStruct& police_control_center_struct,
         yli::ontology::GenericParentModule* const hirvi_scene_parent_module)
-        : Entity(application, universe, police_control_center_struct),
+        : Entity(std::move(constructible_module), application, universe, police_control_center_struct),
           child_of_hirvi_scene(hirvi_scene_parent_module, *this),
           master_of_polices(*this, &this->registry, "polices")
     {

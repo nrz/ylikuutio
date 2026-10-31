@@ -37,6 +37,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -53,6 +55,7 @@ namespace yli::ontology
     class InputMode final : public Entity
     {
         InputMode(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const InputModeStruct& input_mode_struct,

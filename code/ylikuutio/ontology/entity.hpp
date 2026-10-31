@@ -39,6 +39,8 @@ namespace yli::memory
 {
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
+
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -64,6 +66,7 @@ namespace yli::ontology
 
     protected:
         Entity(
+            memory::ConstructibleModule&& constructible_module,
             core::Application& application,
             Universe& universe,
             const EntityStruct& entity_struct);
@@ -78,7 +81,7 @@ namespace yli::ontology
 
         void terminate();
 
-        memory::ConstructibleModule get_constructible_module() const;
+        const memory::ConstructibleModule& get_constructible_module() const;
 
         void set_childID(std::size_t childID);
 

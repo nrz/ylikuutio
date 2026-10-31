@@ -29,10 +29,16 @@
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
 #include <string_view> // std::string_view
+#include <utility>     // std::move
 
 namespace yli::core
 {
     class Application;
+}
+
+namespace yli::memory
+{
+    struct ConstructibleModule;
 }
 
 namespace yli::ontology
@@ -65,11 +71,12 @@ namespace yli::ontology
     }
 
     Text2d::Text2d(
+        memory::ConstructibleModule&& constructible_module,
         core::Application& application,
         Universe& universe,
         const TextStruct& text_struct,
         GenericParentModule* const font_2d_parent_module)
-        : Entity(application, universe, text_struct),
+        : Entity(std::move(constructible_module), application, universe, text_struct),
           child_of_font_2d(font_2d_parent_module, *this)
     {
         this->text = text_struct.text;
