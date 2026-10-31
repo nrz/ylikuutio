@@ -18,6 +18,8 @@
 #ifndef YLIKUUTIO_DATA_DATATYPE_HPP_INCLUDED
 #define YLIKUUTIO_DATA_DATATYPE_HPP_INCLUDED
 
+#include "code/ylikuutio/memory/handle.hpp"
+
 // `yli::data::Datatype` defines the canonical order of datatypes
 // that should be followed throughout Ylikuutio code.
 //
@@ -138,8 +140,10 @@ namespace yli::data
         CONSOLE_LISP_FUNCTION_OVERLOAD         = 267,
         // `yli::ontology` datatypes, 'compute' path.
         COMPUTE_TASK                = 280,
-        MAX_VALUE                   = COMPUTE_TASK + 1
+        MAX_VALUE                   = COMPUTE_TASK
     };
+
+    static_assert(MAX_VALUE < (1 << memory::Handle::n_type_bits));
 }
 
 #endif

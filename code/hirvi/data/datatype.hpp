@@ -18,6 +18,8 @@
 #ifndef HIRVI_DATA_DATATYPE_HPP_INCLUDED
 #define HIRVI_DATA_DATATYPE_HPP_INCLUDED
 
+#include "code/ylikuutio/memory/handle.hpp"
+
 // `yli::data::Datatype` defines the canonical order of datatypes
 // that should be followed throughout Ylikuutio code.
 //
@@ -151,8 +153,10 @@ namespace hirvi::data
         POLICE_TRAIN      = 525,
         POLICE_TRAM       = 526,
         TRAIN             = 530,
-        MAX_VALUE         = TRAIN + 1
+        MAX_VALUE         = TRAIN
     };
+
+    static_assert(MAX_VALUE < (1 << yli::memory::Handle::n_type_bits));
 }
 
 #endif
