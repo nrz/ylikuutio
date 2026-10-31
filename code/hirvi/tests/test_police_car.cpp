@@ -109,7 +109,7 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
 
     SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request<Scene>(helsinki_scene), Request(helsinki_pipeline) };
     turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
-    turbo_polizei_png_symbiosis_struct.model_filename ="turbo_polizei_png_textures.fbx";
+    turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
     Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.get_entity_factory().
             create_symbiosis(turbo_polizei_png_symbiosis_struct);
     ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_ufbx_meshes(), 5); // To ensure proper loading of `Symbiosis`.
@@ -152,7 +152,8 @@ TEST(police_car_must_be_initialized_appropriately, hirvi_police_car)
     ASSERT_NE(parent_of_bionts, nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(hirvi_application.get_universe().get_number_of_non_variable_children(), 2); // Helsinki `Scene`, `CallbackEngine`.
+    ASSERT_EQ(hirvi_application.get_universe().get_number_of_non_variable_children(),
+              2); // Helsinki `Scene`, `CallbackEngine`.
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(helsinki_scene->get_scene(), helsinki_scene);

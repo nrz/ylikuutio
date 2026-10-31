@@ -158,7 +158,8 @@ TEST(police_horse_must_be_initialized_appropriately, hirvi_police_horse)
     ASSERT_NE(parent_of_bionts, nullptr);
 
     // `Entity` member functions of `Universe`.
-    ASSERT_EQ(hirvi_application.get_universe().get_number_of_non_variable_children(), 2); // Helsinki `Scene`, `CallbackEngine`.
+    ASSERT_EQ(hirvi_application.get_universe().get_number_of_non_variable_children(),
+              2); // Helsinki `Scene`, `CallbackEngine`.
 
     // `Entity` member functions of `Scene`.
     ASSERT_EQ(helsinki_scene->get_scene(), helsinki_scene);

@@ -79,7 +79,9 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
         rest_callback_engine_struct);
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
 
-    MovableControllerStruct rest_movable_controller_struct { Request<Scene>(helsinki_scene), Request(rest_callback_engine) };
+    MovableControllerStruct rest_movable_controller_struct {
+        Request<Scene>(helsinki_scene), Request(rest_callback_engine)
+    };
     rest_movable_controller_struct.global_name = "rest_movable_controller";
     rest_movable_controller_struct.local_name = "rest";
     MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(
@@ -107,7 +109,9 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     cat_species_struct.model_loader_struct.model_filename = "cat.fbx";
     Species* const cat_species = hirvi_application.get_entity_factory().create_species(cat_species_struct);
 
-    ObjectStruct cat1_object_struct { Request<Scene>(helsinki_scene), Request(rest_movable_controller), Request(cat_species) };
+    ObjectStruct cat1_object_struct {
+        Request<Scene>(helsinki_scene), Request(rest_movable_controller), Request(cat_species)
+    };
     cat1_object_struct.global_name = "cat1";
     cat1_object_struct.local_name = "kissa1";
     cat1_object_struct.initial_rotate_vectors = { glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f) };

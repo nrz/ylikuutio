@@ -66,8 +66,7 @@ namespace hirvi::ontology
           child_of_hirvi_scene(hirvi_scene_parent, *this),
           police(police_control_center_master, this),
           road_vehicle(road_vehicle_struct)
-    {
-    }
+    { }
 
     std::string_view PoliceCar::get_type() const
     {
