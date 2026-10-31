@@ -32,8 +32,8 @@ TEST(constructible_module_must_be_initialized_appropriately, constructible_modul
     constexpr std::uint32_t type = 404;
     constexpr std::uint32_t slot_i = 3003;
 
-    yli::memory::Handle handle { type, slot_i };
-    yli::memory::ConstructibleModule constructible_module { memory_allocator, handle };
+    const yli::memory::Handle handle { type, slot_i };
+    const yli::memory::ConstructibleModule constructible_module { memory_allocator, handle };
     ASSERT_EQ(constructible_module.handle.get_type(), type);
     ASSERT_EQ(constructible_module.handle.get_slot_i(), slot_i);
 }

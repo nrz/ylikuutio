@@ -88,7 +88,7 @@ namespace yli::ontology
 
     GenericParentModule::~GenericParentModule()
     {
-        for (Entity* const child : this->child_pointer_vector)
+        for (const Entity* const child : this->child_pointer_vector)
         {
             if (child != nullptr)
             {
