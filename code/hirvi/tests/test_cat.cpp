@@ -142,6 +142,7 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
     ASSERT_NE(cat1, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(cat1) % alignof(hirvi::ontology::Cat), 0);
 
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::OBJECT));
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::CAT));
 
     // Even though `Cat` is derived from `Object`. `Cat` should be allocated using its own allocator.

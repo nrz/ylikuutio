@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
+#include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
@@ -70,9 +71,11 @@ TEST(species_must_be_initialized_appropriately, hirvi_species)
     cat_species_struct.local_name = "cat";
     cat_species_struct.model_loader_struct.model_file_format = "fbx";
     cat_species_struct.model_loader_struct.model_filename = "cat.fbx";
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::SPECIES));
     Species* const cat_species = hirvi_application.get_entity_factory().create_species(cat_species_struct);
     ASSERT_NE(cat_species, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(cat_species) % alignof(Species), 0);
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::SPECIES));
     const yli::memory::ConstructibleModule cat_species_constructible_module = cat_species->get_constructible_module();
     ASSERT_EQ(cat_species_constructible_module.slot_i, 0);
     ASSERT_EQ(cat_species_constructible_module.alive, true);

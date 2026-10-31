@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
+#include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
@@ -55,10 +56,12 @@ TEST(movable_controller_must_be_initialized_appropriately, hirvi_movable_control
     MovableControllerStruct rest_movable_controller_struct { Request(helsinki_scene), Request(rest_callback_engine) };
     rest_movable_controller_struct.global_name = "rest_movable_controller";
     rest_movable_controller_struct.local_name = "rest";
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::MOVABLE_CONTROLLER));
     MovableController* const rest_movable_controller = hirvi_application.get_entity_factory().create_movable_controller(
         rest_movable_controller_struct);
     ASSERT_NE(rest_movable_controller, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_movable_controller) % alignof(MovableController), 0);
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::MOVABLE_CONTROLLER));
     const yli::memory::ConstructibleModule movable_controller_constructible_module =
             rest_movable_controller->get_constructible_module();
     ASSERT_EQ(movable_controller_constructible_module.slot_i, 0);

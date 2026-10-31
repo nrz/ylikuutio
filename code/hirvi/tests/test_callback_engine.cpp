@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
+#include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
@@ -31,9 +32,16 @@ TEST(callback_engine_must_be_initialized_appropriately, hirvi_callback_engine)
     hirvi::HirviApplication hirvi_application(argc, argv);
 
     yli::ontology::CallbackEngineStruct rest_callback_engine_struct;
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::CALLBACK_ENGINE));
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::CALLBACK_OBJECT));
     yli::ontology::CallbackEngine* const rest_callback_engine =
             hirvi_application.get_entity_factory().create_callback_engine(rest_callback_engine_struct);
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::CALLBACK_ENGINE));
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::CALLBACK_OBJECT));
+
     rest_callback_engine->create_callback_object(&yli::snippets::rest);
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::CALLBACK_ENGINE));
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::CALLBACK_OBJECT));
     ASSERT_NE(rest_callback_engine, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_callback_engine) % alignof(yli::ontology::CallbackEngine), 0);
     const yli::memory::ConstructibleModule callback_engine_constructible_module =

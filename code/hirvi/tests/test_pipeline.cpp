@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
+#include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
@@ -50,10 +51,12 @@ TEST(pipeline_must_be_initialized_appropriately, hirvi_pipeline)
     helsinki_pipeline_struct.local_name = "helsinki_regular_pipeline";
     helsinki_pipeline_struct.vertex_shader = "standard_shading.vert";
     helsinki_pipeline_struct.fragment_shader = "standard_shading.frag";
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::PIPELINE));
     Pipeline* const helsinki_pipeline =
             hirvi_application.get_entity_factory().create_pipeline(helsinki_pipeline_struct);
     ASSERT_NE(helsinki_pipeline, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(helsinki_pipeline) % alignof(Pipeline), 0);
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::PIPELINE));
     const yli::memory::ConstructibleModule pipeline_constructible_module =
             helsinki_pipeline->get_constructible_module();
     ASSERT_EQ(pipeline_constructible_module.slot_i, 0);

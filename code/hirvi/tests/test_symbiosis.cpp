@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
+#include "code/hirvi/data/datatype.hpp"
 #include "code/hirvi/ontology/hirvi_scene.hpp"
 #include "code/hirvi/ontology/hirvi_scene_struct.hpp"
 #include "code/hirvi/ontology/police_control_center_struct.hpp"
@@ -76,10 +77,12 @@ TEST(symbiosis_must_be_initialized_appropriately, hirvi_symbiosis)
     SymbiosisStruct turbo_polizei_png_symbiosis_struct { Request<Scene>(helsinki_scene), Request(helsinki_pipeline) };
     turbo_polizei_png_symbiosis_struct.model_file_format = "fbx";
     turbo_polizei_png_symbiosis_struct.model_filename = "turbo_polizei_png_textures.fbx";
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::SYMBIOSIS));
     Symbiosis* const turbo_polizei_png_symbiosis = hirvi_application.get_entity_factory().create_symbiosis(
         turbo_polizei_png_symbiosis_struct);
     ASSERT_NE(turbo_polizei_png_symbiosis, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(turbo_polizei_png_symbiosis) % alignof(Symbiosis), 0);
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::SYMBIOSIS));
     ASSERT_EQ(turbo_polizei_png_symbiosis->get_number_of_ufbx_meshes(), 5);
 
     const yli::memory::ConstructibleModule symbiosis_constructible_module =

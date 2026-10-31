@@ -17,6 +17,7 @@
 
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
+#include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/memory/constructible_module.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
@@ -60,10 +61,12 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
         Request(helsinki_scene), Request(helsinki_pipeline), TextureFileFormat::PNG
     };
     orange_fur_material_struct.texture_filename = "orange_fur_texture.png";
+    ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::MATERIAL));
     Material* const orange_fur_material = hirvi_application.get_entity_factory().create_material(
         orange_fur_material_struct);
     ASSERT_NE(orange_fur_material, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(orange_fur_material) % alignof(Material), 0);
+    ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::MATERIAL));
     const yli::memory::ConstructibleModule orange_fur_material_constructible_module =
             orange_fur_material->get_constructible_module();
     ASSERT_EQ(orange_fur_material_constructible_module.slot_i, 0);
