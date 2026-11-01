@@ -15,44 +15,15 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_MEMORY_CONSTRUCTIBLE_MODULE_HPP_INCLUDED
-#define YLIKUUTIO_MEMORY_CONSTRUCTIBLE_MODULE_HPP_INCLUDED
-
 #include "constructible_module.hpp"
-#include "abstract_memory_allocator.hpp"
-#include "handle.hpp"
 
 namespace yli::memory
 {
-    struct ConstructibleModule
-    {
-        ConstructibleModule(AbstractMemoryAllocator& generic_allocator, const Handle& handle)
-            : generic_allocator { &generic_allocator },
-              handle { handle }
-        { }
+    class AbstractMemoryAllocator;
+    struct Handle;
 
-        ConstructibleModule(const ConstructibleModule& other)
-            : generic_allocator { other.generic_allocator },
-              handle { other.handle }
-        { }
-
-        ~ConstructibleModule()
-        {
-            this->generic_allocator->mark_destroyed(handle);
-        }
-
-        ConstructibleModule& operator=(const ConstructibleModule& other)
-        {
-            this->generic_allocator = other.generic_allocator;
-            this->handle = other.handle;
-            this->alive = other.alive;
-            return *this;
-        }
-
-        AbstractMemoryAllocator* generic_allocator { nullptr };
-        Handle handle; // Default value 0 means invalid handle.
-        bool alive { true };
-    };
-}
-
-#endif
+    ConstructibleModule::ConstructibleModule(AbstractMemoryAllocator& generic_allocator, const Handle& handle)
+        : generic_allocator { generic_allocator },
+          handle { handle }
+    { }
+};

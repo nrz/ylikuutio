@@ -27,10 +27,7 @@ namespace yli::memory
 
     struct ConstructibleModule
     {
-        ConstructibleModule(AbstractMemoryAllocator& generic_allocator, const Handle& handle)
-            : generic_allocator { generic_allocator },
-              handle { handle }
-        { }
+        ConstructibleModule(AbstractMemoryAllocator& generic_allocator, const Handle& handle);
 
         ConstructibleModule(const ConstructibleModule& other) = default;
 
