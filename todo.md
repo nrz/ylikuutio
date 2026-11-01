@@ -5,8 +5,14 @@
 - [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
-- [ ] ONTOLOGY/DATA Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
-- [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
+- [ ] VULKAN/RENDERING Add Vulkan support.
+- [ ] OPENGL/RENDERING Remove OpenGL support.
+- [ ] ONTOLOGY/DATA/RENDERING Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+- [ ] DATA/VULKAN/RENDERING/TERRAIN Use displacement fields for height map rendering, like in Far Cry 5: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
+- [ ] DATA/VULKAN/RENDERING/TERRAIN Implement GPU terrain quad tree.
+- [ ] DATA/VULKAN/RENDERING/TERRAIN Implement GPU terrain node list.
+- [ ] DATA/VULKAN/RENDERING/TERRAIN Implement GPU terrain LOP map.
+- [ ] DATA/VULKAN/RENDERING/TERRAIN Implement GPU visible render patch list.
 - [ ] CAMERA/VARIABLE/RENDERING Add a support for defining the FOV angle of each camera.
 - [ ] CAMERA/VARIABLE/RENDERING Add a support for defining the aspect ratio of each camera.
 - [ ] ONTOLOGY/MEMORY Design and implement 'handle to index'-based system for parent-child and master-apprentice relationships of derived classes of `Entity`.
@@ -32,8 +38,6 @@
 - [ ] YLILISP Create a basic implementation of YliLisp interpreter (YliLisp is a statically typed Lisp-1 type multiparadigm scripting language).
 - [ ] YLILISP/CONSOLE Convert `Console` into a proper YliLisp REPL that supports S-expressions like a proper Lisp REPL.
 - [ ] CONSOLE/UI Add support for Tab complete for local names in `Console`.
-- [ ] VULKAN/RENDERING Add Vulkan support.
-- [ ] OPENGL/RENDERING Remove OpenGL support.
 - [ ] TEXT/UI Implement proper bitmap font rendering: https://learnopengl.com/In-Practice/Text-Rendering
 - [ ] TEXT/UI Implement proper vector font rendering using FreeType and HarfBuzz: https://learnopengl.com/In-Practice/Text-Rendering
 - [ ] TEXT/UI Change terminal font to APL385. https://apl385.com/fonts/index.htm
