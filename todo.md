@@ -5,6 +5,8 @@
 - [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] ONTOLOGY/DATA Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+- [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 - [ ] CAMERA/VARIABLE/RENDERING Add a support for defining the FOV angle of each camera.
 - [ ] CAMERA/VARIABLE/RENDERING Add a support for defining the aspect ratio of each camera.
 - [ ] ONTOLOGY/MEMORY Design and implement 'handle to index'-based system for parent-child and master-apprentice relationships of derived classes of `Entity`.
@@ -38,7 +40,6 @@
 - [ ] TEXT/UI Change general purpose font to Canada1500. http://typodermicfonts.com/canada1500/
 - [ ] TOOLS Make YliEdit and HirviEdit editors start with an empty scene.
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
-- [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 - [ ] TEXT/RENDERING Add support of setting text colors in `Text2d`.
 - [ ] TEXT/RENDERING Add support of setting text transparency in `Text2d`.
 - [ ] TEXT/RENDERING Add support of setting text background transparency in `Text2d`.
@@ -85,7 +86,6 @@
 - [ ] ONTOLOGY/RENDERING/GRAPHICS Add support for decals.
 
 ## Tasks which are necessary for the third stage
-- [ ] ONTOLOGY/DATA Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 - [ ] ONTOLOGY/MATH Add support for setting `Biont`-specific coordinate adjustments with `coordinates_adjustments` vector in `HolobiontStruct`.
 - [ ] GUI Add support for multiple displays.
 - [ ] MATH/RENDERING Implement support for multiple light sources in each `Scene`.
