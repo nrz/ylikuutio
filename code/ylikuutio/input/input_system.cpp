@@ -32,13 +32,13 @@
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::input
 {
-    InputSystem::InputSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe)
-        : constructible_module { std::move(constructible_module) },
+    InputSystem::InputSystem(memory::AllocationData&& allocation_data, ontology::Universe& universe)
+        : allocation_data { std::move(allocation_data) },
           universe { universe }
     { }
 

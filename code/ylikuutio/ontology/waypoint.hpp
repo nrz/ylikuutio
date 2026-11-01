@@ -32,7 +32,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -48,7 +48,7 @@ namespace yli::ontology
     {
     public:
         Waypoint(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const WaypointStruct& waypoint_struct,

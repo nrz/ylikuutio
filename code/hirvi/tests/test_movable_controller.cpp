@@ -19,7 +19,7 @@
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/movable_controller.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
@@ -62,9 +62,9 @@ TEST(movable_controller_must_be_initialized_appropriately, hirvi_movable_control
     ASSERT_NE(rest_movable_controller, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_movable_controller) % alignof(MovableController), 0);
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::MOVABLE_CONTROLLER));
-    const yli::memory::ConstructibleModule movable_controller_constructible_module =
-            rest_movable_controller->get_constructible_module();
-    ASSERT_EQ(movable_controller_constructible_module.handle.get_type(), hirvi::data::MOVABLE_CONTROLLER);
-    ASSERT_EQ(movable_controller_constructible_module.handle.get_slot_i(), 0);
-    ASSERT_EQ(movable_controller_constructible_module.alive, true);
+    const yli::memory::AllocationData movable_controller_allocation_data =
+            rest_movable_controller->get_allocation_data();
+    ASSERT_EQ(movable_controller_allocation_data.handle.get_type(), hirvi::data::MOVABLE_CONTROLLER);
+    ASSERT_EQ(movable_controller_allocation_data.handle.get_slot_i(), 0);
+    ASSERT_EQ(movable_controller_allocation_data.alive, true);
 }

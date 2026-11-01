@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/data/datatype.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
@@ -76,8 +76,8 @@ TEST(species_must_be_initialized_appropriately, hirvi_species)
     ASSERT_NE(cat_species, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(cat_species) % alignof(Species), 0);
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::SPECIES));
-    const yli::memory::ConstructibleModule cat_species_constructible_module = cat_species->get_constructible_module();
-    ASSERT_EQ(cat_species_constructible_module.handle.get_type(), hirvi::data::SPECIES);
-    ASSERT_EQ(cat_species_constructible_module.handle.get_slot_i(), 0);
-    ASSERT_EQ(cat_species_constructible_module.alive, true);
+    const yli::memory::AllocationData cat_species_allocation_data = cat_species->get_allocation_data();
+    ASSERT_EQ(cat_species_allocation_data.handle.get_type(), hirvi::data::SPECIES);
+    ASSERT_EQ(cat_species_allocation_data.handle.get_slot_i(), 0);
+    ASSERT_EQ(cat_species_allocation_data.alive, true);
 }

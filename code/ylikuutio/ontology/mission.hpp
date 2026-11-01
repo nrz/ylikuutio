@@ -32,7 +32,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -45,7 +45,7 @@ namespace yli::ontology
     class Mission final : public Entity
     {
             Mission(
-                    memory::ConstructibleModule&& constructible_module,
+                    memory::AllocationData&& allocation_data,
                     core::Application& application,
                     Universe& universe,
                     const MissionStruct& mission_struct,

@@ -30,7 +30,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -51,12 +51,12 @@ namespace yli::ontology
     }
 
     Mission::Mission(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const MissionStruct& mission_struct,
             GenericParentModule* const universe_parent_module)
-        : Entity(std::move(constructible_module), application, universe, mission_struct),
+        : Entity(std::move(allocation_data), application, universe, mission_struct),
         child_of_universe(universe_parent_module, *this)
     {
     }

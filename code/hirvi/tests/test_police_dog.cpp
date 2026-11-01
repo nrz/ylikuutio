@@ -188,9 +188,9 @@ TEST(police_dog_must_be_initialized_appropriately, hirvi_police_dog)
         hirvi::data::BIONT);
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 5);
 
-    const yli::memory::ConstructibleModule& police_dog1_constructible_module =
-            police_dog1->get_constructible_module();
-    ASSERT_EQ(police_dog1_constructible_module.handle.get_type(), hirvi::data::POLICE_DOG);
-    ASSERT_EQ(police_dog1_constructible_module.handle.get_slot_i(), 0);
-    ASSERT_EQ(police_dog1_constructible_module.alive, true);
+    const yli::memory::AllocationData& police_dog1_allocation_data =
+            police_dog1->get_allocation_data();
+    ASSERT_EQ(police_dog1_allocation_data.handle.get_type(), hirvi::data::POLICE_DOG);
+    ASSERT_EQ(police_dog1_allocation_data.handle.get_slot_i(), 0);
+    ASSERT_EQ(police_dog1_allocation_data.alive, true);
 }

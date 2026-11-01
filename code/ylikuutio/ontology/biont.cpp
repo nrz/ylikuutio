@@ -61,7 +61,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -72,14 +72,14 @@ namespace yli::ontology
     class Scene;
 
     Biont::Biont(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const BiontStruct& biont_struct,
         GenericParentModule* const holobiont_parent_module,
         GenericMasterModule* const symbiont_species_master_module)
         : AbstractMovable(
-              std::move(constructible_module),
+              std::move(allocation_data),
               application,
               universe,
               biont_struct,

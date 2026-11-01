@@ -187,9 +187,9 @@ TEST(police_train_must_be_initialized_appropriately, hirvi_police_train)
         hirvi::data::BIONT);
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 5);
 
-    const yli::memory::ConstructibleModule& turbo_polizei1_constructible_module =
-            turbo_polizei1->get_constructible_module();
-    ASSERT_EQ(turbo_polizei1_constructible_module.handle.get_type(), hirvi::data::POLICE_TRAIN);
-    ASSERT_EQ(turbo_polizei1_constructible_module.handle.get_slot_i(), 0);
-    ASSERT_EQ(turbo_polizei1_constructible_module.alive, true);
+    const yli::memory::AllocationData& turbo_polizei1_allocation_data =
+            turbo_polizei1->get_allocation_data();
+    ASSERT_EQ(turbo_polizei1_allocation_data.handle.get_type(), hirvi::data::POLICE_TRAIN);
+    ASSERT_EQ(turbo_polizei1_allocation_data.handle.get_slot_i(), 0);
+    ASSERT_EQ(turbo_polizei1_allocation_data.alive, true);
 }

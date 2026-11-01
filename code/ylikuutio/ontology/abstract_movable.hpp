@@ -60,7 +60,7 @@ namespace yli::input
 
 namespace yli::memory
 {
-        struct ConstructibleModule;
+        struct AllocationData;
 }
 
 namespace yli::ontology
@@ -83,7 +83,7 @@ namespace yli::ontology
 
         protected:
                 AbstractMovable(
-                        memory::ConstructibleModule&& constructible_module,
+                        memory::AllocationData&& allocation_data,
                         core::Application& application,
                         Universe& universe,
                         const MovableStruct& movable_struct,

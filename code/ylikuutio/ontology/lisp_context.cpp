@@ -29,7 +29,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -37,11 +37,11 @@ namespace yli::ontology
     class Entity;
 
     LispContext::LispContext(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const LispContextStruct& lisp_context_struct)
-        : Entity(std::move(constructible_module), application, universe, lisp_context_struct)
+        : Entity(std::move(allocation_data), application, universe, lisp_context_struct)
     {
         // `yli::ontology::Entity` member variables begin here.
         this->can_be_erased = true;

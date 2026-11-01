@@ -30,7 +30,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -42,7 +42,7 @@ namespace yli::ontology
     {
         public:
             LispFunction(
-                    memory::ConstructibleModule&& constructible_module,
+                    memory::AllocationData&& allocation_data,
                     core::Application& application,
                     Universe& universe,
                     const LispFunctionStruct& lisp_function_struct);

@@ -31,7 +31,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -40,12 +40,12 @@ namespace yli::ontology
     class Scene;
 
     Ecosystem::Ecosystem(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const EcosystemStruct& ecosystem_struct,
         GenericParentModule* const universe_parent_module)
-        : Entity(std::move(constructible_module), application, universe, ecosystem_struct),
+        : Entity(std::move(allocation_data), application, universe, ecosystem_struct),
           child_of_universe(universe_parent_module, *this),
           parent_of_pipelines(
               *this,

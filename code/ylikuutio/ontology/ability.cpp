@@ -31,7 +31,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -57,12 +57,12 @@ namespace yli::ontology
     }
 
     Ability::Ability(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const AbilityStruct& ability_struct,
         GenericParentModule* const parent_module)
-        : AbstractCapability(std::move(constructible_module), application, universe, ability_struct),
+        : AbstractCapability(std::move(allocation_data), application, universe, ability_struct),
           child_of_symbiosis(parent_module, *this)
     {
     }

@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/data/datatype.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 #include "code/ylikuutio/ontology/ecosystem.hpp"
 #include "code/ylikuutio/ontology/ecosystem_struct.hpp"
 
@@ -38,8 +38,8 @@ TEST(ecosystem_must_be_initialized_appropriately, hirvi_ecosystem)
     ASSERT_NE(earth_ecosystem, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(earth_ecosystem) % alignof(yli::ontology::Ecosystem), 0);
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::ECOSYSTEM));
-    const yli::memory::ConstructibleModule ecosystem_constructible_module = earth_ecosystem->get_constructible_module();
-    ASSERT_EQ(ecosystem_constructible_module.handle.get_type(), hirvi::data::ECOSYSTEM);
-    ASSERT_EQ(ecosystem_constructible_module.handle.get_slot_i(), 0);
-    ASSERT_EQ(ecosystem_constructible_module.alive, true);
+    const yli::memory::AllocationData ecosystem_allocation_data = earth_ecosystem->get_allocation_data();
+    ASSERT_EQ(ecosystem_allocation_data.handle.get_type(), hirvi::data::ECOSYSTEM);
+    ASSERT_EQ(ecosystem_allocation_data.handle.get_slot_i(), 0);
+    ASSERT_EQ(ecosystem_allocation_data.alive, true);
 }

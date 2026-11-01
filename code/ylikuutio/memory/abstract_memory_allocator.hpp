@@ -23,7 +23,7 @@
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 
     struct Handle;
 
@@ -39,7 +39,7 @@ namespace yli::memory
 
         [[nodiscard]] virtual std::size_t get_number_of_instances() const = 0;
 
-        virtual void destroy(const ConstructibleModule& constructible_module) = 0;
+        virtual void destroy(const AllocationData& allocation_data) = 0;
 
         virtual void mark_destroyed(const Handle&)
         {

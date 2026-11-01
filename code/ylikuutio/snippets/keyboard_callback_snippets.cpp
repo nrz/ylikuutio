@@ -357,7 +357,7 @@ namespace yli::snippets
         }
 
         // Destroy the `Entity`.
-        universe.get_application().get_abstract_memory_system().destroy(entity->get_constructible_module());
+        universe.get_application().get_abstract_memory_system().destroy(entity->get_allocation_data());
 
         return std::nullopt;
     }

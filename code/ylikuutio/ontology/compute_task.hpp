@@ -54,7 +54,7 @@ namespace yli::memory
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
 
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -68,7 +68,7 @@ namespace yli::ontology
     class ComputeTask final : public Entity
     {
         ComputeTask(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const ComputeTaskStruct& compute_task_struct,

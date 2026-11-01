@@ -50,7 +50,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -60,12 +60,12 @@ namespace yli::ontology
     class Scene;
 
     ComputeTask::ComputeTask(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const ComputeTaskStruct& compute_task_struct,
         GenericParentModule* const pipeline_parent_module)
-        : Entity(std::move(constructible_module), application, universe, compute_task_struct),
+        : Entity(std::move(allocation_data), application, universe, compute_task_struct),
           child_of_pipeline(pipeline_parent_module, *this),
           texture_file_format { compute_task_struct.texture_file_format },
           texture_filename { compute_task_struct.texture_filename },

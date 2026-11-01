@@ -40,7 +40,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -79,12 +79,12 @@ namespace yli::ontology
     }
 
     ShapeshifterTransformation::ShapeshifterTransformation(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const ShapeshifterTransformationStruct& shapeshifter_transformation_struct,
         GenericParentModule* const material_parent_module)
-        : Entity(std::move(constructible_module), application, universe, shapeshifter_transformation_struct),
+        : Entity(std::move(allocation_data), application, universe, shapeshifter_transformation_struct),
           child_of_material(material_parent_module, *this),
           parent_of_shapeshifter_forms(
               *this,

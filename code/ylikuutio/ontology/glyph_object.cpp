@@ -31,7 +31,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -52,7 +52,7 @@ namespace yli::ontology
     }
 
     GlyphObject::GlyphObject(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const GlyphObjectStruct& glyph_object_struct,
@@ -60,7 +60,7 @@ namespace yli::ontology
         GenericMasterModule* const glyph_master_module,
         GenericMasterModule* const text_3d_master_module)
         : AbstractMovable(
-              std::move(constructible_module),
+              std::move(allocation_data),
               application,
               universe,
               glyph_object_struct,

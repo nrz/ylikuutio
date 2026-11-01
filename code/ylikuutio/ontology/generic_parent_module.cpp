@@ -94,10 +94,10 @@ namespace yli::ontology
             {
                 this->GenericParentModule::unbind_child(child->get_childID());
 
-                if (const auto& constructible_module = child->get_constructible_module();
-                    constructible_module.alive)
+                if (const auto& allocation_data = child->get_allocation_data();
+                    allocation_data.alive)
                 {
-                    constructible_module.generic_allocator.destroy(constructible_module);
+                    allocation_data.generic_allocator.destroy(allocation_data);
                 }
             }
         }

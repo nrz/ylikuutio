@@ -38,7 +38,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -71,12 +71,12 @@ namespace yli::ontology
     }
 
     Text2d::Text2d(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const TextStruct& text_struct,
         GenericParentModule* const font_2d_parent_module)
-        : Entity(std::move(constructible_module), application, universe, text_struct),
+        : Entity(std::move(allocation_data), application, universe, text_struct),
           child_of_font_2d(font_2d_parent_module, *this)
     {
         this->text = text_struct.text;

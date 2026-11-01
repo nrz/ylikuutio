@@ -31,7 +31,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -56,12 +56,12 @@ namespace yli::ontology
     }
 
     AudioTrack::AudioTrack(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const AudioTrackStruct& audio_track_struct,
         GenericParentModule* const universe_parent_module)
-        : Entity(std::move(constructible_module), application, universe, audio_track_struct),
+        : Entity(std::move(allocation_data), application, universe, audio_track_struct),
           child_of_universe(universe_parent_module, *this),
           filename { audio_track_struct.filename }
     {

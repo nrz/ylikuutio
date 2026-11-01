@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/data/datatype.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 #include "code/ylikuutio/ontology/scene.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
 
@@ -44,10 +44,10 @@ TEST(scene_must_be_initialized_appropriately, hirvi_scene)
         ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::SCENE));
         ASSERT_FALSE(hirvi_application.has_memory_allocator(hirvi::data::HIRVI_SCENE));
 
-        const yli::memory::ConstructibleModule scene_constructible_module = helsinki_scene->get_constructible_module();
-        ASSERT_EQ(scene_constructible_module.handle.get_type(), hirvi::data::SCENE);
-        ASSERT_EQ(scene_constructible_module.handle.get_slot_i(), 0);
-        ASSERT_EQ(scene_constructible_module.alive, true);
+        const yli::memory::AllocationData scene_allocation_data = helsinki_scene->get_allocation_data();
+        ASSERT_EQ(scene_allocation_data.handle.get_type(), hirvi::data::SCENE);
+        ASSERT_EQ(scene_allocation_data.handle.get_slot_i(), 0);
+        ASSERT_EQ(scene_allocation_data.alive, true);
 
         yli::ontology::GenericParentModule* const movable_controller_parent_module = helsinki_scene->
                         get_generic_parent_module<yli::ontology::MovableController>();

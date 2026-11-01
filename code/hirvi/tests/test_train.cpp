@@ -170,8 +170,8 @@ TEST(train_must_be_initialized_appropriately, hirvi_train)
         hirvi::data::BIONT);
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 4);
 
-    const yli::memory::ConstructibleModule train1_constructible_module =
-            train1->get_constructible_module();
-    ASSERT_EQ(train1_constructible_module.slot_i, 0);
-    ASSERT_EQ(train1_constructible_module.alive, true);
+    const yli::memory::AllocationData train1_allocation_data =
+            train1->get_allocation_data();
+    ASSERT_EQ(train1_allocation_data.slot_i, 0);
+    ASSERT_EQ(train1_allocation_data.alive, true);
 }

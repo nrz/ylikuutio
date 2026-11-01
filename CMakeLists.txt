@@ -632,10 +632,10 @@ add_library(ylikuutio STATIC
     code/ylikuutio/map/ylikuutio_map.hpp
 
     # memory, in alphabetical order
-    code/ylikuutio/memory/constructible_module.cpp
-    code/ylikuutio/memory/constructible_module.hpp
     code/ylikuutio/memory/abstract_memory_allocator.hpp
     code/ylikuutio/memory/abstract_memory_system.hpp
+    code/ylikuutio/memory/allocation_data.cpp
+    code/ylikuutio/memory/allocation_data.hpp
     code/ylikuutio/memory/handle.hpp
     code/ylikuutio/memory/memory_allocator.hpp
     code/ylikuutio/memory/memory_allocator_types.hpp

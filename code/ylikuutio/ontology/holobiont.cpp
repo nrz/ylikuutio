@@ -47,7 +47,7 @@
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -58,7 +58,7 @@ namespace yli::ontology
     class SymbiontSpecies;
 
     Holobiont::Holobiont(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const HolobiontStruct& holobiont_struct,
@@ -66,7 +66,7 @@ namespace yli::ontology
         GenericMasterModule* const movable_controller_master_module,
         GenericMasterModule* const symbiosis_master_module)
         : AbstractMovable(
-              std::move(constructible_module),
+              std::move(allocation_data),
               application,
               universe,
               holobiont_struct,

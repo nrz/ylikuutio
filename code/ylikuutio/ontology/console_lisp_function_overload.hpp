@@ -57,7 +57,7 @@ namespace yli::memory
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
 
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -71,12 +71,12 @@ namespace yli::ontology
     class ConsoleLispFunctionOverload final : public AbstractConsoleLispFunctionOverload
     {
         ConsoleLispFunctionOverload(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             GenericParentModule* const console_lisp_function_parent_module,
             std::optional<data::AnyValue> (*callback)(Types...))
-            : AbstractConsoleLispFunctionOverload(std::move(constructible_module), application, universe, console_lisp_function_parent_module),
+            : AbstractConsoleLispFunctionOverload(std::move(allocation_data), application, universe, console_lisp_function_parent_module),
               callback(callback)
         {
         }

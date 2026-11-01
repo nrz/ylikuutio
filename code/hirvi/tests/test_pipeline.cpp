@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/data/datatype.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 #include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/scene_struct.hpp"
@@ -57,9 +57,9 @@ TEST(pipeline_must_be_initialized_appropriately, hirvi_pipeline)
     ASSERT_NE(helsinki_pipeline, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(helsinki_pipeline) % alignof(Pipeline), 0);
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::PIPELINE));
-    const yli::memory::ConstructibleModule pipeline_constructible_module =
-            helsinki_pipeline->get_constructible_module();
-    ASSERT_EQ(pipeline_constructible_module.handle.get_type(), hirvi::data::PIPELINE);
-    ASSERT_EQ(pipeline_constructible_module.handle.get_slot_i(), 0);
-    ASSERT_EQ(pipeline_constructible_module.alive, true);
+    const yli::memory::AllocationData pipeline_allocation_data =
+            helsinki_pipeline->get_allocation_data();
+    ASSERT_EQ(pipeline_allocation_data.handle.get_type(), hirvi::data::PIPELINE);
+    ASSERT_EQ(pipeline_allocation_data.handle.get_slot_i(), 0);
+    ASSERT_EQ(pipeline_allocation_data.alive, true);
 }

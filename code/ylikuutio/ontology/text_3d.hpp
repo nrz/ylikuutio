@@ -37,7 +37,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -76,7 +76,7 @@ namespace yli::ontology
             VectorFont& new_master);
 
         Text3d(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const Text3dStruct& text_3d_struct,

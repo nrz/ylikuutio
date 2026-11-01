@@ -33,7 +33,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -50,7 +50,7 @@ namespace yli::ontology
     {
     public:
         HeightmapSheet(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const HeightmapSheetStruct& heightmap_sheet_struct,

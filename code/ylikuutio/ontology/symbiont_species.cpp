@@ -31,7 +31,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -43,12 +43,12 @@ namespace yli::ontology
     class Scene;
 
     SymbiontSpecies::SymbiontSpecies(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const SymbiontSpeciesStruct& symbiont_species_struct,
         GenericParentModule* const symbiont_material_parent_module)
-        : Entity(std::move(constructible_module), application, universe, symbiont_species_struct),
+        : Entity(std::move(allocation_data), application, universe, symbiont_species_struct),
           child_of_symbiont_material(symbiont_material_parent_module, *this),
           master_of_bionts(*this, &this->registry, "bionts"),
           mesh(universe, symbiont_species_struct, this->get_pipeline())

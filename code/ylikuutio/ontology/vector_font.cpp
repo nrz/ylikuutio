@@ -45,7 +45,7 @@
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -93,12 +93,12 @@ namespace yli::ontology
     }
 
     VectorFont::VectorFont(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const VectorFontStruct& vector_font_struct,
         GenericParentModule* const material_parent_module)
-        : Entity(std::move(constructible_module), application, universe, vector_font_struct),
+        : Entity(std::move(allocation_data), application, universe, vector_font_struct),
           child_of_material(material_parent_module, *this),
           parent_of_glyphs(
               *this,
@@ -126,7 +126,7 @@ namespace yli::ontology
         // Requirements for further actions:
         // `this->parent` must not be `nullptr`.
 
-        Material* const material_parent = static_cast<Material*>(this->get_parent());
+        const auto material_parent = static_cast<Material*>(this->get_parent());
 
         if (material_parent == nullptr)
         {

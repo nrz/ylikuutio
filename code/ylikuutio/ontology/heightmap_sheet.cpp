@@ -31,7 +31,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -58,14 +58,14 @@ namespace yli::ontology
     }
 
     HeightmapSheet::HeightmapSheet(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const HeightmapSheetStruct& heightmap_sheet_struct,
         GenericParentModule* scene_parent_module,
         GenericMasterModule* movable_controller_master_module)
         : AbstractMovable(
-              std::move(constructible_module),
+              std::move(allocation_data),
               application,
               universe,
               heightmap_sheet_struct,

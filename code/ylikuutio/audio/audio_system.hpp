@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
 #define YLIKUUTIO_AUDIO_AUDIO_SYSTEM_HPP_INCLUDED
 
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 
 #include <SDL3/SDL.h>
 #include <SDL3_mixer/SDL_mixer.h>
@@ -34,7 +34,7 @@ namespace yli::memory
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
 
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -47,7 +47,7 @@ namespace yli::audio
     class AudioSystem final
     {
     public:
-        AudioSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe);
+        AudioSystem(memory::AllocationData&& allocation_data, ontology::Universe& universe);
 
         AudioSystem(const AudioSystem&) = delete;            // Delete copy constructor.
         AudioSystem& operator=(const AudioSystem&) = delete; // Delete copy assignment.
@@ -82,7 +82,7 @@ namespace yli::audio
         friend class memory::MemoryAllocator;
 
     private:
-        memory::ConstructibleModule constructible_module;
+        memory::AllocationData allocation_data;
 
         ontology::Universe& universe;
 

@@ -28,7 +28,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -40,7 +40,7 @@ namespace yli::ontology
     {
     public:
         AbstractCallbackEngine(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const AbstractCallbackEngineStruct& abstract_callback_engine_struct);

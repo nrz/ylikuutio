@@ -92,7 +92,7 @@
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -132,10 +132,10 @@ namespace yli::ontology
     }
 
     Universe::Universe(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         const UniverseStruct& universe_struct)
-        : Entity(std::move(constructible_module), application, *this, universe_struct), // `Universe` has no parent.
+        : Entity(std::move(allocation_data), application, *this, universe_struct), // `Universe` has no parent.
           parent_of_ecosystems(
               *this,
               this->registry,

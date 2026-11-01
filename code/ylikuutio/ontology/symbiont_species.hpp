@@ -40,7 +40,7 @@ namespace yli::memory
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
 
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -56,7 +56,7 @@ namespace yli::ontology
     class SymbiontSpecies final : public Entity
     {
         SymbiontSpecies(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const SymbiontSpeciesStruct& symbiont_species_struct,

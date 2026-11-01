@@ -18,13 +18,13 @@
 #include "gtest/gtest.h"
 #include "code/ylikuutio/data/datatype.hpp"
 #include "code/ylikuutio/memory/memory_allocator.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 #include "code/ylikuutio/memory/handle.hpp"
 
 // Include standard headers
 #include <cstdint> // std::uint32_t
 
-TEST(constructible_module_must_be_initialized_appropriately, constructible_module)
+TEST(allocation_data_must_be_initialized_appropriately, allocation_data)
 {
     yli::memory::MemoryAllocator memory_allocator(yli::data::Datatype::UNIVERSE);
 
@@ -33,7 +33,7 @@ TEST(constructible_module_must_be_initialized_appropriately, constructible_modul
     constexpr std::uint32_t slot_i = 3003;
 
     const yli::memory::Handle handle { type, slot_i };
-    const yli::memory::ConstructibleModule constructible_module { memory_allocator, handle };
-    ASSERT_EQ(constructible_module.handle.get_type(), type);
-    ASSERT_EQ(constructible_module.handle.get_slot_i(), slot_i);
+    const yli::memory::AllocationData allocation_data { memory_allocator, handle };
+    ASSERT_EQ(allocation_data.handle.get_type(), type);
+    ASSERT_EQ(allocation_data.handle.get_slot_i(), slot_i);
 }

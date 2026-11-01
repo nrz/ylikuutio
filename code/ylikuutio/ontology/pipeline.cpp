@@ -42,7 +42,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -122,12 +122,12 @@ namespace yli::ontology
     }
 
     Pipeline::Pipeline(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const PipelineStruct& pipeline_struct,
         GenericParentModule* const ecosystem_or_scene_parent_module)
-        : Entity(std::move(constructible_module), application, universe, pipeline_struct),
+        : Entity(std::move(allocation_data), application, universe, pipeline_struct),
           child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
           parent_of_compute_tasks(
               *this,

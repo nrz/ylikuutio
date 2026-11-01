@@ -31,7 +31,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -52,7 +52,7 @@ namespace yli::ontology
     }
 
     Shapeshifter::Shapeshifter(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const ShapeshifterStruct& shapeshifter_struct,
@@ -60,7 +60,7 @@ namespace yli::ontology
         GenericMasterModule* const movable_controller_master_module,
         GenericMasterModule* const shapeshifter_sequence_master_module)
         : AbstractMovable(
-              std::move(constructible_module),
+              std::move(allocation_data),
               application,
               universe,
               shapeshifter_struct,

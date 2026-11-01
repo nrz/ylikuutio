@@ -32,7 +32,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -43,12 +43,12 @@ namespace yli::ontology
     class Pipeline;
 
     ShapeshifterForm::ShapeshifterForm(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const ShapeshifterFormStruct& shapeshifter_form_struct,
         GenericParentModule* const shapeshifter_transformation_parent_module)
-        : Entity(std::move(constructible_module), application, universe, shapeshifter_form_struct),
+        : Entity(std::move(allocation_data), application, universe, shapeshifter_form_struct),
           child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
           mesh(universe, shapeshifter_form_struct, this->get_pipeline())
     {

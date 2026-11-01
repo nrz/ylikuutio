@@ -22,7 +22,7 @@
 #include "code/hirvi/ontology/cat.hpp"
 #include "code/hirvi/ontology/hirvi_scene_struct.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 #include "code/ylikuutio/ontology/cartesian_coordinates_module.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
@@ -154,8 +154,8 @@ TEST(cat_must_be_initialized_appropriately, hirvi_cat)
             hirvi_application.get_memory_allocator<hirvi::ontology::Cat*>(hirvi::data::CAT);
     ASSERT_EQ(cat_memory_allocator.get_number_of_instances(), 1);
 
-    const yli::memory::ConstructibleModule cat1_constructible_module = cat1->get_constructible_module();
-    ASSERT_EQ(cat1_constructible_module.handle.get_type(), hirvi::data::CAT);
-    ASSERT_EQ(cat1_constructible_module.handle.get_slot_i(), 0);
-    ASSERT_EQ(cat1_constructible_module.alive, true);
+    const yli::memory::AllocationData cat1_allocation_data = cat1->get_allocation_data();
+    ASSERT_EQ(cat1_allocation_data.handle.get_type(), hirvi::data::CAT);
+    ASSERT_EQ(cat1_allocation_data.handle.get_slot_i(), 0);
+    ASSERT_EQ(cat1_allocation_data.alive, true);
 }

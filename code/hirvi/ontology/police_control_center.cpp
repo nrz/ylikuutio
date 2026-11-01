@@ -31,7 +31,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -49,12 +49,12 @@ namespace hirvi::ontology
     }
 
     PoliceControlCenter::PoliceControlCenter(
-        yli::memory::ConstructibleModule&& constructible_module,
+        yli::memory::AllocationData&& allocation_data,
         yli::core::Application& application,
         yli::ontology::Universe& universe,
         const PoliceControlCenterStruct& police_control_center_struct,
         yli::ontology::GenericParentModule* const hirvi_scene_parent_module)
-        : Entity(std::move(constructible_module), application, universe, police_control_center_struct),
+        : Entity(std::move(allocation_data), application, universe, police_control_center_struct),
           child_of_hirvi_scene(hirvi_scene_parent_module, *this),
           master_of_polices(*this, &this->registry, "polices")
     {

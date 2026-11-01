@@ -19,7 +19,7 @@
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/data/datatype.hpp"
 #include "code/ylikuutio/snippets/movable_controller_snippets.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 #include "code/ylikuutio/ontology/callback_engine.hpp"
 
 // Include standard headers
@@ -44,9 +44,9 @@ TEST(callback_engine_must_be_initialized_appropriately, hirvi_callback_engine)
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::CALLBACK_OBJECT));
     ASSERT_NE(rest_callback_engine, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(rest_callback_engine) % alignof(yli::ontology::CallbackEngine), 0);
-    const yli::memory::ConstructibleModule& callback_engine_constructible_module =
-            rest_callback_engine->get_constructible_module();
-    ASSERT_EQ(callback_engine_constructible_module.handle.get_type(), hirvi::data::CALLBACK_ENGINE);
-    ASSERT_EQ(callback_engine_constructible_module.handle.get_slot_i(), 0);
-    ASSERT_EQ(callback_engine_constructible_module.alive, true);
+    const yli::memory::AllocationData& callback_engine_allocation_data =
+            rest_callback_engine->get_allocation_data();
+    ASSERT_EQ(callback_engine_allocation_data.handle.get_type(), hirvi::data::CALLBACK_ENGINE);
+    ASSERT_EQ(callback_engine_allocation_data.handle.get_slot_i(), 0);
+    ASSERT_EQ(callback_engine_allocation_data.alive, true);
 }

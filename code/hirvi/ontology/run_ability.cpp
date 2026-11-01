@@ -29,7 +29,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -42,12 +42,12 @@ namespace yli::ontology
 namespace hirvi::ontology
 {
     RunAbility::RunAbility(
-        yli::memory::ConstructibleModule&& constructible_module,
+        yli::memory::AllocationData&& allocation_data,
         yli::core::Application& application,
         yli::ontology::Universe& universe,
         const yli::ontology::AbilityStruct& ability_struct,
         yli::ontology::GenericParentModule* const parent_module)
-        : Ability(std::move(constructible_module), application, universe, ability_struct, parent_module)
+        : Ability(std::move(allocation_data), application, universe, ability_struct, parent_module)
     {
     }
 

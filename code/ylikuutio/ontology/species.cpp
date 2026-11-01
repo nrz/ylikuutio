@@ -40,7 +40,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -146,13 +146,13 @@ namespace yli::ontology
     }
 
     Species::Species(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const SpeciesStruct& species_struct,
         GenericParentModule* const ecosystem_or_scene_parent_module,
         GenericMasterModule* const material_master_module)
-        : Entity(std::move(constructible_module), application, universe, species_struct),
+        : Entity(std::move(allocation_data), application, universe, species_struct),
           child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
           master_of_objects(*this, &this->registry, "objects"),
           apprentice_of_material(material_master_module, this),

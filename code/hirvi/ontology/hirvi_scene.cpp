@@ -34,7 +34,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -50,13 +50,13 @@ namespace hirvi::ontology
     using namespace yli::ontology;
 
     HirviScene::HirviScene(
-        ConstructibleModule&& constructible_module,
+        AllocationData&& allocation_data,
         Application& application,
         Universe& universe,
         const HirviSceneStruct& hirvi_scene_struct,
         GenericParentModule* const universe_parent_module,
         const core::HirviCore& hirvi_core)
-        : Scene(std::move(constructible_module), application, universe, hirvi_scene_struct, universe_parent_module),
+        : Scene(std::move(allocation_data), application, universe, hirvi_scene_struct, universe_parent_module),
           parent_of_police_control_centers(
               *this,
               this->registry,

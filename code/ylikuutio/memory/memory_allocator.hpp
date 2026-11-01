@@ -19,7 +19,7 @@
 #define YLIKUUTIO_MEMORY_MEMORY_ALLOCATOR_HPP_INCLUDED
 
 #include "abstract_memory_allocator.hpp"
-#include "constructible_module.hpp"
+#include "allocation_data.hpp"
 #include "handle.hpp"
 #include "code/ylikuutio/data/queue.hpp"
 #include "code/ylikuutio/ontology/console_lisp_function_overload.hpp"
@@ -137,7 +137,7 @@ namespace yli::memory
 
             const Handle handle { static_cast<std::uint32_t>(datatype), slot_i };;
             T1* instance = new(this->memory.data() + (slot_i * sizeof(T1))) T1(
-                std::move(ConstructibleModule { *this, handle }),
+                std::move(AllocationData { *this, handle }),
                 std::forward<Args>(args)...);
             ++this->number_of_instances;
             return instance;
@@ -158,13 +158,13 @@ namespace yli::memory
             return DataSize;
         }
 
-        void destroy(const ConstructibleModule& constructible_module) override
+        void destroy(const AllocationData& allocation_data) override
         {
-            const std::uint32_t slot_i { constructible_module.handle.get_slot_i() };
+            const std::uint32_t slot_i { allocation_data.handle.get_slot_i() };
 
             if (slot_i == std::numeric_limits<std::uint32_t>::max()) [[unlikely]]
             {
-                std::cerr << "ERROR: `MemoryAllocator::destroy`: `constructible_module.slot_i` has invalid value!\n";
+                std::cerr << "ERROR: `MemoryAllocator::destroy`: `allocation_data.slot_i` has invalid value!\n";
                 return;
             }
 
@@ -238,7 +238,7 @@ namespace yli::memory
             const Handle handle { static_cast<std::uint32_t>(datatype), slot_i };
             ontology::AbstractConsoleLispFunctionOverload* function_overload =
                     new ontology::ConsoleLispFunctionOverload(
-                        std::move(ConstructibleModule { *this, handle }),
+                        std::move(AllocationData { *this, handle }),
                         std::forward<Args>(args)...);
             ++this->number_of_instances;
             return function_overload;
@@ -254,9 +254,9 @@ namespace yli::memory
             return this->number_of_instances;
         }
 
-        void destroy(const ConstructibleModule& constructible_module) noexcept override
+        void destroy(const AllocationData& allocation_data) noexcept override
         {
-            if (const std::uint32_t slot_i = constructible_module.handle.get_slot_i();
+            if (const std::uint32_t slot_i = allocation_data.handle.get_slot_i();
                 this->instances.at(slot_i) != nullptr) [[likely]]
             {
                 delete this->instances.at(slot_i);

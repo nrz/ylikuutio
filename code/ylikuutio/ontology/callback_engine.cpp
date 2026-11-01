@@ -34,7 +34,7 @@
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -43,12 +43,12 @@ namespace yli::ontology
     struct CallbackEngineStruct;
 
     CallbackEngine::CallbackEngine(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const CallbackEngineStruct&,
         GenericParentModule* const entity_parent_module)
-        : AbstractCallbackEngine(std::move(constructible_module), application, universe, AbstractCallbackEngineStruct()),
+        : AbstractCallbackEngine(std::move(allocation_data), application, universe, AbstractCallbackEngineStruct()),
           child_of_entity(entity_parent_module, *this),
           parent_of_callback_objects(
               *this,

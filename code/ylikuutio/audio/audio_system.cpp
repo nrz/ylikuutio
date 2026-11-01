@@ -30,13 +30,13 @@
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::audio
 {
-    AudioSystem::AudioSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe)
-        : constructible_module { std::move(constructible_module) },
+    AudioSystem::AudioSystem(memory::AllocationData&& allocation_data, ontology::Universe& universe)
+        : allocation_data { std::move(allocation_data) },
           universe { universe }
     {
         this->init();
@@ -86,7 +86,7 @@ namespace yli::audio
 
     void AudioSystem::terminate()
     {
-        this->constructible_module.alive = false;
+        this->allocation_data.alive = false;
     }
 
     bool AudioSystem::load_and_play(const std::string& audio_file)

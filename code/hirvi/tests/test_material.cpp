@@ -18,7 +18,7 @@
 #include "gtest/gtest.h"
 #include "code/hirvi/hirvi.hpp"
 #include "code/hirvi/data/datatype.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 #include "code/ylikuutio/ontology/material.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
 #include "code/ylikuutio/ontology/texture_file_format.hpp"
@@ -67,9 +67,9 @@ TEST(material_must_be_initialized_appropriately, hirvi_material)
     ASSERT_NE(orange_fur_material, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(orange_fur_material) % alignof(Material), 0);
     ASSERT_TRUE(hirvi_application.has_memory_allocator(hirvi::data::MATERIAL));
-    const yli::memory::ConstructibleModule orange_fur_material_constructible_module =
-            orange_fur_material->get_constructible_module();
-    ASSERT_EQ(orange_fur_material_constructible_module.handle.get_type(), hirvi::data::MATERIAL);
-    ASSERT_EQ(orange_fur_material_constructible_module.handle.get_slot_i(), 0);
-    ASSERT_EQ(orange_fur_material_constructible_module.alive, true);
+    const yli::memory::AllocationData orange_fur_material_allocation_data =
+            orange_fur_material->get_allocation_data();
+    ASSERT_EQ(orange_fur_material_allocation_data.handle.get_type(), hirvi::data::MATERIAL);
+    ASSERT_EQ(orange_fur_material_allocation_data.handle.get_slot_i(), 0);
+    ASSERT_EQ(orange_fur_material_allocation_data.alive, true);
 }

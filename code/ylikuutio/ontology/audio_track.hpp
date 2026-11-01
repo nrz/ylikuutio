@@ -33,7 +33,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -47,7 +47,7 @@ namespace yli::ontology
     {
     public:
         AudioTrack(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const AudioTrackStruct& audio_track_struct,

@@ -35,7 +35,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -47,13 +47,13 @@ namespace yli::ontology
     class Pipeline;
 
     Glyph::Glyph(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const GlyphStruct& glyph_struct,
         GenericParentModule* const vector_font_parent_module,
         GenericMasterModule* const material_master_module)
-        : Entity(std::move(constructible_module), application, universe, glyph_struct),
+        : Entity(std::move(allocation_data), application, universe, glyph_struct),
           child_of_vector_font(vector_font_parent_module, *this),
           apprentice_of_material(material_master_module, this),
           master_of_glyph_objects(*this, &this->registry, "glyph_objects"),

@@ -26,7 +26,7 @@
 #include "variable_struct.hpp"
 #include "code/ylikuutio/core/application.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -56,11 +56,11 @@ namespace yli::ontology
     }
 
     Entity::Entity(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const EntityStruct& entity_struct)
-        : constructible_module { std::move(constructible_module) },
+        : allocation_data { std::move(allocation_data) },
           application { application },
           parent_of_variables(
               *this,
@@ -124,12 +124,12 @@ namespace yli::ontology
 
     void Entity::terminate()
     {
-        this->constructible_module.alive = false;
+        this->allocation_data.alive = false;
     }
 
-    const memory::ConstructibleModule& Entity::get_constructible_module() const
+    const memory::AllocationData& Entity::get_allocation_data() const
     {
-        return this->constructible_module;
+        return this->allocation_data;
     }
 
     void Entity::set_childID(const std::size_t childID)

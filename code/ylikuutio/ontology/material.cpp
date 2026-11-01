@@ -47,7 +47,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -149,13 +149,13 @@ namespace yli::ontology
     }
 
     Material::Material(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const MaterialStruct& material_struct,
         GenericParentModule* const ecosystem_or_scene_parent_module,
         GenericMasterModule* const pipeline_master_module)
-        : Entity(std::move(constructible_module), application, universe, material_struct),
+        : Entity(std::move(allocation_data), application, universe, material_struct),
           child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
           parent_of_shapeshifter_transformations(
               *this,

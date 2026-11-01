@@ -38,7 +38,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -64,12 +64,12 @@ namespace yli::ontology
     }
 
     ConsoleLispFunction::ConsoleLispFunction(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const ConsoleLispFunctionStruct& console_lisp_function_struct,
         GenericParentModule* const console_parent_module)
-        : LispFunction(std::move(constructible_module), application, universe, console_lisp_function_struct),
+        : LispFunction(std::move(allocation_data), application, universe, console_lisp_function_struct),
           child_of_console(console_parent_module, *this),
           parent_of_generic_console_lisp_function_overloads(
               *this,

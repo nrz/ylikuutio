@@ -71,7 +71,7 @@ namespace yli::memory
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
 
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::render
@@ -98,7 +98,7 @@ namespace yli::ontology
 
     private:
         Universe(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             const UniverseStruct& universe_struct);
 

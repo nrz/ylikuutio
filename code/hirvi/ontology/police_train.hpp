@@ -33,7 +33,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -53,7 +53,7 @@ namespace hirvi::ontology
     {
     public:
         explicit PoliceTrain(
-            yli::memory::ConstructibleModule&& constructible_module,
+            yli::memory::AllocationData&& allocation_data,
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const yli::ontology::HolobiontStruct& police_train_struct,

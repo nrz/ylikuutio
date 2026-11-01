@@ -52,7 +52,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -62,14 +62,14 @@ namespace yli::ontology
     class Entity;
 
     Camera::Camera(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const CameraStruct& camera_struct,
         GenericParentModule* const scene_parent_module,
         GenericMasterModule* const movable_controller_master_module)
         : AbstractMovable(
-              std::move(constructible_module),
+              std::move(allocation_data),
               application,
               universe,
               camera_struct,

@@ -37,7 +37,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -47,13 +47,13 @@ namespace yli::ontology
     class Entity;
 
     MovableController::MovableController(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const MovableControllerStruct& movable_controller_struct,
             GenericParentModule* const scene_parent_module,
             GenericMasterModule* const callback_engine_master_module)
-        : Entity(std::move(constructible_module), application, universe, movable_controller_struct),
+        : Entity(std::move(allocation_data), application, universe, movable_controller_struct),
         child_of_scene(scene_parent_module, *this),
         apprentice_of_callback_engine(callback_engine_master_module, this),
         master_of_movables(*this, &this->registry, "movables")

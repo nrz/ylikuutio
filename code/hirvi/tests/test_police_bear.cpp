@@ -192,9 +192,9 @@ TEST(police_bear_must_be_initialized_appropriately, hirvi_police_bear)
         hirvi::data::BIONT);
     ASSERT_EQ(biont_memory_allocator.get_number_of_instances(), 3);
 
-    const yli::memory::ConstructibleModule& police_bear1_constructible_module =
-            police_bear1->get_constructible_module();
-    ASSERT_EQ(police_bear1_constructible_module.handle.get_type(), hirvi::data::POLICE_BEAR);
-    ASSERT_EQ(police_bear1_constructible_module.handle.get_slot_i(), 0);
-    ASSERT_EQ(police_bear1_constructible_module.alive, true);
+    const yli::memory::AllocationData& police_bear1_allocation_data =
+            police_bear1->get_allocation_data();
+    ASSERT_EQ(police_bear1_allocation_data.handle.get_type(), hirvi::data::POLICE_BEAR);
+    ASSERT_EQ(police_bear1_allocation_data.handle.get_slot_i(), 0);
+    ASSERT_EQ(police_bear1_allocation_data.alive, true);
 }

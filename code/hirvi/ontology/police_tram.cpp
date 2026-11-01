@@ -28,7 +28,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -46,7 +46,7 @@ namespace yli::ontology
 namespace hirvi::ontology
 {
     PoliceTram::PoliceTram(
-        yli::memory::ConstructibleModule&& constructible_module,
+        yli::memory::AllocationData&& allocation_data,
         yli::core::Application& application,
         yli::ontology::Universe& universe,
         const yli::ontology::HolobiontStruct& police_tram_struct,
@@ -56,7 +56,7 @@ namespace hirvi::ontology
         yli::ontology::GenericMasterModule* police_control_center_master,
         const yli::ontology::LocomotionModuleStruct& rail_vehicle_struct)
         : Holobiont(
-              std::move(constructible_module),
+              std::move(allocation_data),
               application,
               universe,
               police_tram_struct,

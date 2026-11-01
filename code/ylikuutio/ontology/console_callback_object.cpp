@@ -34,7 +34,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -44,12 +44,12 @@ namespace yli::ontology
     class Universe;
 
     ConsoleCallbackObject::ConsoleCallbackObject(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const ConsoleCallbackObjectStruct& console_callback_object_struct,
         GenericParentModule* const console_callback_engine_parent_module)
-        : Entity(std::move(constructible_module), application, universe, console_callback_object_struct),
+        : Entity(std::move(allocation_data), application, universe, console_callback_object_struct),
           child_of_console_callback_engine(console_callback_engine_parent_module, *this),
           parent_of_console_callback_parameters(
               *this,

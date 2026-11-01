@@ -31,7 +31,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -52,14 +52,14 @@ namespace yli::ontology
     }
 
     Waypoint::Waypoint(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const WaypointStruct& waypoint_struct,
         GenericParentModule* const parent_module,
         GenericMasterModule* const movable_controller_master_module)
         : AbstractMovable(
-              std::move(constructible_module),
+              std::move(allocation_data),
               application,
               universe,
               waypoint_struct,

@@ -58,7 +58,7 @@
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -161,13 +161,13 @@ namespace yli::ontology
     }
 
     Symbiosis::Symbiosis(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const SymbiosisStruct& symbiosis_struct,
         GenericParentModule* const ecosystem_or_scene_parent_module,
         GenericMasterModule* const pipeline_master_module)
-        : Entity(std::move(constructible_module), application, universe, symbiosis_struct),
+        : Entity(std::move(allocation_data), application, universe, symbiosis_struct),
           child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
           parent_of_symbiont_materials(
               *this,

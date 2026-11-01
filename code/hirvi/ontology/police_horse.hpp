@@ -34,7 +34,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -54,7 +54,7 @@ namespace hirvi::ontology
     {
     public:
         explicit PoliceHorse(
-            yli::memory::ConstructibleModule&& constructible_module,
+            yli::memory::AllocationData&& allocation_data,
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const PoliceHorseStruct& police_horse_struct,

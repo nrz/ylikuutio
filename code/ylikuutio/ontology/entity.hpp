@@ -21,7 +21,7 @@
 #include "registry.hpp"
 #include "generic_parent_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 
 // Include standard headers
 #include <cstddef>       // std::size_t
@@ -40,7 +40,7 @@ namespace yli::memory
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
 
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -66,7 +66,7 @@ namespace yli::ontology
 
     protected:
         Entity(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const EntityStruct& entity_struct);
@@ -81,7 +81,7 @@ namespace yli::ontology
 
         void terminate();
 
-        const memory::ConstructibleModule& get_constructible_module() const;
+        const memory::AllocationData& get_allocation_data() const;
 
         void set_childID(std::size_t childID);
 
@@ -180,7 +180,7 @@ namespace yli::ontology
         friend class memory::MemoryAllocator;
 
     private:
-        memory::ConstructibleModule constructible_module;
+        memory::AllocationData allocation_data;
 
         core::Application& application;
 

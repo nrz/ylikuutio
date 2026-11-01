@@ -29,7 +29,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -41,11 +41,11 @@ namespace yli::ontology
     class Scene;
 
     AbstractConsoleLispFunctionOverload::AbstractConsoleLispFunctionOverload(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         GenericParentModule* const console_lisp_function_parent_module)
-        : AbstractLispFunctionOverload(std::move(constructible_module), application, universe),
+        : AbstractLispFunctionOverload(std::move(allocation_data), application, universe),
           child_of_console_lisp_function(console_lisp_function_parent_module, *this)
     {
     }

@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_EVENT_EVENT_SYSTEM_HPP_INCLUDED
 #define YLIKUUTIO_EVENT_EVENT_SYSTEM_HPP_INCLUDED
 
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -28,7 +28,7 @@ namespace yli::memory
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
 
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -42,7 +42,7 @@ namespace yli::event
     class EventSystem
     {
     public:
-        EventSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe);
+        EventSystem(memory::AllocationData&& allocation_data, ontology::Universe& universe);
 
         void poll_events(const ontology::InputMode& input_mode) const;
 
@@ -52,7 +52,7 @@ namespace yli::event
         friend class memory::MemoryAllocator;
 
     private:
-        memory::ConstructibleModule constructible_module;
+        memory::AllocationData allocation_data;
 
         ontology::Universe& universe;
     };

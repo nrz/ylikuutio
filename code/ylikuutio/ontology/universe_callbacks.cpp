@@ -59,7 +59,7 @@ namespace yli::ontology
             universe.registry.erase_entity(entity.get_global_name());
 
             // Destroy the `Entity`.
-            universe.application.get_abstract_memory_system().destroy(entity.get_constructible_module());
+            universe.application.get_abstract_memory_system().destroy(entity.get_allocation_data());
         }
 
         return std::nullopt;

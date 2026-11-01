@@ -36,7 +36,7 @@ namespace yli::memory
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
 
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -49,7 +49,7 @@ namespace yli::ontology
     class CallbackParameter final : public Entity
     {
         CallbackParameter(
-            memory::ConstructibleModule&& constructible_module,
+            memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
             const CallbackParameterStruct& callback_parameter_struct,

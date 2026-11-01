@@ -51,7 +51,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -88,12 +88,12 @@ namespace yli::ontology
     }
 
     AbstractMovable::AbstractMovable(
-        memory::ConstructibleModule&& constructible_module,
+        memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
         const MovableStruct& movable_struct,
         GenericMasterModule* const movable_controller_master_module)
-        : Entity(std::move(constructible_module), application, universe, movable_struct),
+        : Entity(std::move(allocation_data), application, universe, movable_struct),
           apprentice_of_movable_controller(movable_controller_master_module, this),
           rigid_body_module(
               movable_struct.rigid_body_module_struct,

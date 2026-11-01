@@ -18,7 +18,7 @@
 #ifndef YLIKUUTIO_INPUT_INPUT_SYSTEM_HPP_INCLUDED
 #define YLIKUUTIO_INPUT_INPUT_SYSTEM_HPP_INCLUDED
 
-#include "code/ylikuutio/memory/constructible_module.hpp"
+#include "code/ylikuutio/memory/allocation_data.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -28,7 +28,7 @@ namespace yli::memory
     template<typename T1, std::size_t DataSize>
     class MemoryAllocator;
 
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -44,7 +44,7 @@ namespace yli::input
     class InputSystem
     {
     public:
-        InputSystem(memory::ConstructibleModule&& constructible_module, ontology::Universe& universe);
+        InputSystem(memory::AllocationData&& allocation_data, ontology::Universe& universe);
 
         void process_keys(const InputMethod& input_method, const ontology::InputMode& input_mode);
 
@@ -54,7 +54,7 @@ namespace yli::input
         friend class memory::MemoryAllocator;
 
     private:
-        memory::ConstructibleModule constructible_module;
+        memory::AllocationData allocation_data;
 
         ontology::Universe& universe;
     };

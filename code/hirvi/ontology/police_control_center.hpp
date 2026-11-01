@@ -33,7 +33,7 @@ namespace yli::core
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 }
 
 namespace yli::ontology
@@ -54,7 +54,7 @@ namespace hirvi::ontology
     {
     public:
         PoliceControlCenter(
-            yli::memory::ConstructibleModule&& constructible_module,
+            yli::memory::AllocationData&& allocation_data,
             yli::core::Application& application,
             yli::ontology::Universe& universe,
             const PoliceControlCenterStruct& police_control_center_struct,

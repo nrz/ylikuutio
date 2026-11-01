@@ -32,7 +32,7 @@
 
 namespace yli::memory
 {
-    struct ConstructibleModule;
+    struct AllocationData;
 
     // `GetTypeEnumFunction` is a function template that return `TypeEnumType` values for different types.
     template<typename TypeEnumType = data::Datatype>
@@ -138,12 +138,12 @@ namespace yli::memory
                 " does not exist!");
         }
 
-        void destroy(const ConstructibleModule& constructible_module) override
+        void destroy(const AllocationData& allocation_data) override
         {
-            if (constructible_module.alive)
+            if (allocation_data.alive)
             {
-                AbstractMemoryAllocator& allocator = constructible_module.generic_allocator;
-                allocator.destroy(constructible_module);
+                AbstractMemoryAllocator& allocator = allocation_data.generic_allocator;
+                allocator.destroy(allocation_data);
             }
         }
 
