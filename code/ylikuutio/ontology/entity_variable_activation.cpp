@@ -24,11 +24,6 @@
 #include <optional> // std::optional
 #include <variant>  // std::holds_alternative
 
-namespace yli::memory
-{
-    struct AllocationData;
-}
-
 namespace yli::ontology
 {
     std::optional<data::AnyValue> activate_should_render(

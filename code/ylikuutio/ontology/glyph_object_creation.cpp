@@ -34,11 +34,6 @@
 #include <stdexcept> // std::runtime_error
 #include <string>    // std::string
 
-namespace yli::memory
-{
-    struct AllocationData;
-}
-
 namespace yli::ontology
 {
     class Glyph;

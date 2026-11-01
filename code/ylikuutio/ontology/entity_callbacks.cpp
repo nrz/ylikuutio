@@ -26,11 +26,6 @@
 #include <optional> // std::optional
 #include <string>   // std::string
 
-namespace yli::memory
-{
-    struct AllocationData;
-}
-
 namespace yli::ontology
 {
     class Console;
