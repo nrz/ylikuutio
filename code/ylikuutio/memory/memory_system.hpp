@@ -140,9 +140,9 @@ namespace yli::memory
 
         void destroy(const ConstructibleModule& constructible_module) override
         {
-            if (constructible_module.alive && constructible_module.generic_allocator != nullptr)
+            if (constructible_module.alive)
             {
-                AbstractMemoryAllocator& allocator = *constructible_module.generic_allocator;
+                AbstractMemoryAllocator& allocator = constructible_module.generic_allocator;
                 allocator.destroy(constructible_module);
             }
         }

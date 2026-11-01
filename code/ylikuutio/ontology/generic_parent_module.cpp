@@ -97,7 +97,7 @@ namespace yli::ontology
                 if (const auto& constructible_module = child->get_constructible_module();
                     constructible_module.alive)
                 {
-                    constructible_module.generic_allocator->destroy(constructible_module);
+                    constructible_module.generic_allocator.destroy(constructible_module);
                 }
             }
         }
