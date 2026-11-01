@@ -68,11 +68,11 @@ namespace yli::core
 namespace yli::hierarchy
 {
     template<typename T1>
-        void bind_apprentice_to_master(
-                T1& apprentice,
-                std::vector<T1*>& apprentice_pointer_vector,
-                std::queue<std::size_t>& free_apprenticeID_queue,
-                std::size_t& number_of_apprentices) noexcept;
+    void bind_apprentice_to_master(
+        T1& apprentice,
+        std::vector<T1*>& apprentice_pointer_vector,
+        std::queue<std::size_t>& free_apprenticeID_queue,
+        std::size_t& number_of_apprentices) noexcept;
 }
 
 namespace yli::memory
