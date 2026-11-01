@@ -38,28 +38,30 @@ namespace yli::ontology
     class Scene;
 
     MeshModule::MeshModule(
-            Universe& universe,
-            const MeshProviderStruct& mesh_provider_struct,
-            Pipeline* const pipeline)
+        Universe& universe,
+        const MeshProviderStruct& mesh_provider_struct,
+        Pipeline* const pipeline)
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
         const bool should_load_vertices_uvs_and_normals =
-            universe.get_is_opengl_in_use() ||
-            universe.get_is_vulkan_in_use() ||
-            universe.get_is_software_rendering_in_use();
+                universe.get_is_opengl_in_use() ||
+                universe.get_is_vulkan_in_use() ||
+                universe.get_is_software_rendering_in_use();
 
         if (should_load_vertices_uvs_and_normals &&
-                universe.get_is_opengl_in_use() &&
-                pipeline != nullptr)
+            universe.get_is_opengl_in_use() &&
+            pipeline != nullptr)
         {
             // VAO.
             glGenVertexArrays(1, &this->vao);
 
             // Get a handle for our buffers.
-            this->vertex_position_modelspace_id = glGetAttribLocation(pipeline->get_program_id(), "vertex_position_modelspace");
+            this->vertex_position_modelspace_id = glGetAttribLocation(pipeline->get_program_id(),
+                                                                      "vertex_position_modelspace");
             this->vertex_uv_id = glGetAttribLocation(pipeline->get_program_id(), "vertex_uv");
-            this->vertex_normal_modelspace_id = glGetAttribLocation(pipeline->get_program_id(), "vertex_normal_modelspace");
+            this->vertex_normal_modelspace_id = glGetAttribLocation(pipeline->get_program_id(),
+                                                                    "vertex_normal_modelspace");
 
             load::ModelLoaderStruct model_loader_struct = mesh_provider_struct.model_loader_struct;
             load::LoadFbxStruct load_fbx_struct = mesh_provider_struct.load_fbx_struct;
@@ -67,21 +69,21 @@ namespace yli::ontology
             model_loader_struct.image_height_pointer = &this->image_height;
 
             yli::load::load_model(
-                    model_loader_struct,
-                    this->vertices,
-                    this->uvs,
-                    this->normals,
-                    this->indices,
-                    this->indexed_vertices,
-                    this->indexed_uvs,
-                    this->indexed_normals,
-                    this->vao,
-                    this->vertex_buffer,
-                    this->uv_buffer,
-                    this->normal_buffer,
-                    this->element_buffer,
-                    load_fbx_struct,
-                    universe.get_graphics_api_backend());
+                model_loader_struct,
+                this->vertices,
+                this->uvs,
+                this->normals,
+                this->indices,
+                this->indexed_vertices,
+                this->indexed_uvs,
+                this->indexed_normals,
+                this->vao,
+                this->vertex_buffer,
+                this->uv_buffer,
+                this->normal_buffer,
+                this->element_buffer,
+                load_fbx_struct,
+                universe.get_graphics_api_backend());
 
             this->are_opengl_buffers_initialized = true;
         }
