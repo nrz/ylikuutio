@@ -38,7 +38,7 @@
 - [ ] TEXT/UI Change general purpose font to Canada1500. http://typodermicfonts.com/canada1500/
 - [ ] TOOLS Make YliEdit and HirviEdit editors start with an empty scene.
 - [ ] TOOLS Implement YliEdit and HirviEdit editors' prototype.
-- [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5.
+- [ ] DATA/VULKAN/RENDERING Use displacement fields for height map rendering, like in Far Cry 5: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 - [ ] TEXT/RENDERING Add support of setting text colors in `Text2d`.
 - [ ] TEXT/RENDERING Add support of setting text transparency in `Text2d`.
 - [ ] TEXT/RENDERING Add support of setting text background transparency in `Text2d`.
@@ -67,7 +67,6 @@
 - [ ] ONTOLOGY Enable support for referring to master in the factory functions by using master's global name instead of master's memory address.
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::AudioTrack` class that inherits `Entity`.
 - [ ] ONTOLOGY/AUDIO Create `yli::ontology::PlayList` class that inherits `Entity`.
-- [ ] ONTOLOGY/DATA/EVALUATE Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 - [ ] ONTOLOGY Implement `yli::ontology::Mission` class that is a child of `Universe` and has programmable logic for evaluating the success.
 - [ ] LIBRARIES Integrate libjpeg-turbo into Ylikuutio. https://github.com/libjpeg-turbo
 - [ ] UI/TESTS Write unit tests for keyboard callback snippets.
@@ -417,3 +416,4 @@
 - [x] LIBRARIES Replace OpenFBX with ufbx. https://github.com/ufbx/ufbx
 - [x] BUG Fix unit tests on a debug build. "ofbx.cpp:3575: ofbx::Object* ofbx::Object::getParent() const: Assertion `parent == nullptr' failed."
 - [x] HIRVI/AI Implement `PoliceControlCenter` class that inherits `GenericMasterModule` class.
+- [x] ONTOLOGY/DATA/EVALUATE Evaluate Far Cry 5 terrain rendering talk: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
