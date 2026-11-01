@@ -646,6 +646,18 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/ability.cpp
     code/ylikuutio/ontology/ability.hpp
     code/ylikuutio/ontology/ability_struct.hpp
+    code/ylikuutio/ontology/abstract_callback_engine.cpp
+    code/ylikuutio/ontology/abstract_callback_engine.hpp
+    code/ylikuutio/ontology/abstract_callback_engine_struct.hpp
+    code/ylikuutio/ontology/abstract_capability.cpp
+    code/ylikuutio/ontology/abstract_capability.hpp
+    code/ylikuutio/ontology/abstract_console_lisp_function_overload.cpp
+    code/ylikuutio/ontology/abstract_console_lisp_function_overload.hpp
+    code/ylikuutio/ontology/abstract_entity_factory.hpp
+    code/ylikuutio/ontology/abstract_movable.cpp
+    code/ylikuutio/ontology/abstract_movable.hpp
+    code/ylikuutio/ontology/abstract_lisp_function_overload.cpp
+    code/ylikuutio/ontology/abstract_lisp_function_overload.hpp
     code/ylikuutio/ontology/activate_callback.hpp
     code/ylikuutio/ontology/apprentice_iterator.hpp
     code/ylikuutio/ontology/apprentice_module.cpp
@@ -670,8 +682,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/camera.cpp
     code/ylikuutio/ontology/camera.hpp
     code/ylikuutio/ontology/camera_struct.hpp
-    code/ylikuutio/ontology/abstract_capability.cpp
-    code/ylikuutio/ontology/abstract_capability.hpp
     code/ylikuutio/ontology/capability_struct.hpp
     code/ylikuutio/ontology/cartesian_coordinates_module.cpp
     code/ylikuutio/ontology/cartesian_coordinates_module.hpp
@@ -717,14 +727,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/framebuffer_module.cpp
     code/ylikuutio/ontology/framebuffer_module.hpp
     code/ylikuutio/ontology/framebuffer_module_struct.hpp
-    code/ylikuutio/ontology/abstract_callback_engine.cpp
-    code/ylikuutio/ontology/abstract_callback_engine.hpp
-    code/ylikuutio/ontology/abstract_callback_engine_struct.hpp
-    code/ylikuutio/ontology/abstract_console_lisp_function_overload.cpp
-    code/ylikuutio/ontology/abstract_console_lisp_function_overload.hpp
-    code/ylikuutio/ontology/abstract_entity_factory.hpp
-    code/ylikuutio/ontology/abstract_lisp_function_overload.cpp
-    code/ylikuutio/ontology/abstract_lisp_function_overload.hpp
     code/ylikuutio/ontology/generic_master_module.cpp
     code/ylikuutio/ontology/generic_master_module.hpp
     code/ylikuutio/ontology/generic_parent_module.cpp
@@ -783,8 +785,6 @@ add_library(ylikuutio STATIC
     code/ylikuutio/ontology/mission.cpp
     code/ylikuutio/ontology/mission.hpp
     code/ylikuutio/ontology/mission_struct.hpp
-    code/ylikuutio/ontology/abstract_movable.cpp
-    code/ylikuutio/ontology/abstract_movable.hpp
     code/ylikuutio/ontology/movable_controller.cpp
     code/ylikuutio/ontology/movable_controller.hpp
     code/ylikuutio/ontology/movable_controller_struct.hpp
@@ -1004,10 +1004,6 @@ add_library(hirvi_lib STATIC
     code/hirvi/core/hirvi_core.hpp
     code/hirvi/core/hirvi_earth_ecosystem.cpp
     code/hirvi/core/hirvi_helsinki_east_downtown_scene.cpp
-    code/hirvi/ontology/cat.cpp
-    code/hirvi/ontology/cat.hpp
-    code/hirvi/ontology/climb_ability.cpp
-    code/hirvi/ontology/climb_ability.hpp
     code/hirvi/data/datatype.hpp
     code/hirvi/data/data_analyzer.cpp
     code/hirvi/data/data_analyzer.hpp
@@ -1016,6 +1012,10 @@ add_library(hirvi_lib STATIC
     code/hirvi/data/spatial_data.hpp
     code/hirvi/data/trivial_data_analyzer.cpp
     code/hirvi/data/trivial_data_analyzer.hpp
+    code/hirvi/ontology/cat.cpp
+    code/hirvi/ontology/cat.hpp
+    code/hirvi/ontology/climb_ability.cpp
+    code/hirvi/ontology/climb_ability.hpp
     code/hirvi/ontology/elk.cpp
     code/hirvi/ontology/elk.hpp
     code/hirvi/ontology/elk_struct.hpp
@@ -1028,17 +1028,19 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/hirvi_scene_struct.hpp
     code/hirvi/ontology/jump_ability.cpp
     code/hirvi/ontology/jump_ability.hpp
+    code/hirvi/ontology/master_of_polices.cpp
+    code/hirvi/ontology/master_of_polices.hpp
     code/hirvi/ontology/moo_ability.cpp
     code/hirvi/ontology/moo_ability.hpp
     code/hirvi/ontology/police_bear.cpp
     code/hirvi/ontology/police_bear.hpp
     code/hirvi/ontology/police_bear_struct.hpp
-    code/hirvi/ontology/police_control_center.cpp
-    code/hirvi/ontology/police_control_center.hpp
-    code/hirvi/ontology/police_control_center_struct.hpp
     code/hirvi/ontology/police_car.cpp
     code/hirvi/ontology/police_car.hpp
     code/hirvi/ontology/police_car_struct.hpp
+    code/hirvi/ontology/police_control_center.cpp
+    code/hirvi/ontology/police_control_center.hpp
+    code/hirvi/ontology/police_control_center_struct.hpp
     code/hirvi/ontology/police_dog.cpp
     code/hirvi/ontology/police_dog.hpp
     code/hirvi/ontology/police_dog_struct.hpp
@@ -1050,8 +1052,6 @@ add_library(hirvi_lib STATIC
     code/hirvi/ontology/police_horse.hpp
     code/hirvi/ontology/police_module.cpp
     code/hirvi/ontology/police_module.hpp
-    code/hirvi/ontology/master_of_polices.cpp
-    code/hirvi/ontology/master_of_polices.hpp
     code/hirvi/ontology/police_train.cpp
     code/hirvi/ontology/police_train.hpp
     code/hirvi/ontology/police_train_struct.hpp
