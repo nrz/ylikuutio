@@ -78,6 +78,8 @@
 - [ ] ONTOLOGY/DATA Implement support for multiple water levels within a `Scene`.
 - [ ] ONTOLOGY/DATA Plan data structures suitable for 3D model loading with zones with different LOD levels (at any given time).
 - [ ] ONTOLOGY/DATA Add support for OpenStreetMap data: https://www.openstreetmap.org/ (needed for roads, rail network, tram network, road names)
+- [ ] ONTOLOGY/RENDERING/TEXT Add support for billboards.
+- [ ] ONTOLOGY/RENDERING/GRAPHICS Add support for decals.
 
 ## Tasks which are necessary for the third stage
 - [ ] ONTOLOGY/DATA Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
