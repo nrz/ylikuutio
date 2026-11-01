@@ -8,6 +8,10 @@
 - [ ] CAMERA/VARIABLE/RENDERING Add a support for defining the FOV angle of each camera.
 - [ ] CAMERA/VARIABLE/RENDERING Add a support for defining the aspect ratio of each camera.
 - [ ] ONTOLOGY/MEMORY Design and implement 'handle to index'-based system for parent-child and master-apprentice relationships of derived classes of `Entity`.
+- [ ] SERIALIZATION Design and implement serialization.
+- [ ] SERIALIZATION Design and implement deserialization.
+- [ ] SERIALIZATION Design and implement saving games.
+- [ ] SERIALIZATION Design and implement loading games.
 - [ ] HIRVI/AI Implement `Emancipable` class.
 - [ ] HIRVI/AI Make `PoliceHorse`, `PoliceDog`, and `PoliceBear` inherit `Emancipable`.
 - [ ] AI/YLILISP Implement new `GenericLispModule` class that supports YliLisp.
