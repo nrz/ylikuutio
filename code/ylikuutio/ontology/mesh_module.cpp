@@ -38,9 +38,9 @@ namespace yli::ontology
     class Scene;
 
     MeshModule::MeshModule(
-        Universe& universe,
+        const Universe& universe,
         const MeshProviderStruct& mesh_provider_struct,
-        Pipeline* const pipeline)
+        const Pipeline* const pipeline)
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
@@ -64,7 +64,7 @@ namespace yli::ontology
                                                                     "vertex_normal_modelspace");
 
             load::ModelLoaderStruct model_loader_struct = mesh_provider_struct.model_loader_struct;
-            load::LoadFbxStruct load_fbx_struct = mesh_provider_struct.load_fbx_struct;
+            const load::LoadFbxStruct load_fbx_struct = mesh_provider_struct.load_fbx_struct;
             model_loader_struct.image_width_pointer = &this->image_width;
             model_loader_struct.image_height_pointer = &this->image_height;
 
