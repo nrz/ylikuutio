@@ -34,46 +34,54 @@ namespace yli::ontology
 
     class Registry final
     {
-        public:
-            Registry() = default;
+    public:
+        Registry() = default;
 
-            Registry(const Registry&) = delete;            // Delete copy constructor.
-            Registry& operator=(const Registry&) = delete; // Delete copy assignment.
+        Registry(const Registry&) = delete;            // Delete copy constructor.
+        Registry& operator=(const Registry&) = delete; // Delete copy assignment.
 
-            ~Registry() = default;
+        ~Registry() = default;
 
-            bool is_name(const std::string& name) const;
-            bool is_indexable(const std::string& name) const;
-            bool is_entity(const std::string& name) const;
+        bool is_name(const std::string& name) const;
 
-            void add_indexable(Indexable& indexable, const std::string& name);
-            void add_entity(Entity& entity, const std::string& name);
+        bool is_indexable(const std::string& name) const;
 
-            void erase_entity(const std::string& name);
+        bool is_entity(const std::string& name) const;
 
-            std::size_t get_number_of_completions(const std::string& input) const;
-            std::string complete(const std::string& input) const;
-            std::vector<std::string> get_completions(const std::string& input) const;
+        void add_indexable(Indexable& indexable, const std::string& name);
 
-            Entity* get_indexed_entity(const std::string& indexable_name, std::size_t index) const;
-            Entity* get_entity(const std::string& name) const;
+        void add_entity(Entity& entity, const std::string& name);
 
-            std::string get_entity_name(const Entity& entity) const;
-            std::string get_entity_names() const;
+        void erase_entity(const std::string& name);
 
-            const std::unordered_map<std::string, Indexable*>& get_indexable_map() const;
-            const std::unordered_map<std::string, Entity*>& get_entity_map() const;
+        std::size_t get_number_of_completions(const std::string& input) const;
 
-        private:
-            // Completable modules are stored here.
-            // Everything stored in `indexable_map` or `entity_map` can be completed.
-            string::StringSet completable_string_set;
+        std::string complete(const std::string& input) const;
 
-            // Indexable modules are stored here.
-            std::unordered_map<std::string, Indexable*> indexable_map;
+        std::vector<std::string> get_completions(const std::string& input) const;
 
-            // Named entities are stored here so that they can be recalled, if needed.
-            std::unordered_map<std::string, Entity*> entity_map;
+        Entity* get_indexed_entity(const std::string& indexable_name, std::size_t index) const;
+
+        Entity* get_entity(const std::string& name) const;
+
+        std::string get_entity_name(const Entity& entity) const;
+
+        std::string get_entity_names() const;
+
+        const std::unordered_map<std::string, Indexable*>& get_indexable_map() const;
+
+        const std::unordered_map<std::string, Entity*>& get_entity_map() const;
+
+    private:
+        // Completable modules are stored here.
+        // Everything stored in `indexable_map` or `entity_map` can be completed.
+        string::StringSet completable_string_set;
+
+        // Indexable modules are stored here.
+        std::unordered_map<std::string, Indexable*> indexable_map;
+
+        // Named entities are stored here so that they can be recalled, if needed.
+        std::unordered_map<std::string, Entity*> entity_map;
     };
 }
 
