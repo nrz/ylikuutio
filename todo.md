@@ -5,6 +5,7 @@
 - [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
 
 ## Tasks which are necessary for the first stage (Hirvi-Demo)
+- [ ] VULKAN/RENDERING/TRIANGLE Render Vulkan triangle.
 - [ ] UI/UNIVERSE Move hardcoded debug output (coordinates, angles, time, FPS rate) out of `yli::ontology::Universe`.
 - [ ] UI/UNIVERSE Move hardcoded info text out of `yli::ontology::Universe`.
 - [ ] VULKAN/RENDERING Add Vulkan support.
