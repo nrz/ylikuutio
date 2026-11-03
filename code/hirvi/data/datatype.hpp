@@ -55,91 +55,91 @@ namespace hirvi::data
         GLM_VEC3            = 21,
         GLM_VEC4            = 22,
         // Systems.
-        EVENT_SYSTEM        = 30,
-        INPUT_SYSTEM        = 40,
-        AUDIO_SYSTEM        = 50,
+        EVENT_SYSTEM        = 30, // ESYS
+        INPUT_SYSTEM        = 40, // ISYS
+        AUDIO_SYSTEM        = 50, // ASYS
         // `yli::ontology` datatypes, interfaces.
-        ENTITY              = 110,
-        LISP_CONTEXT        = 111,
-        LISP_FUNCTION                  = 112,
-        GENERIC_LISP_FUNCTION_OVERLOAD = 113,
-        CAPABILITY                     = 114,
-        MESH_PROVIDER       = 116,
-        ABSTRACT_MOVABLE    = 117,
+        ENTITY              = 110, // ENTY
+        LISP_CONTEXT        = 111, // LCTX
+        LISP_FUNCTION                  = 112, // LFUN
+        GENERIC_LISP_FUNCTION_OVERLOAD = 113, // GLFO
+        CAPABILITY                     = 114, // CAPB
+        MESH_PROVIDER       = 116, // MPRO
+        ABSTRACT_MOVABLE    = 117, // AMOV
         // `yli::ontology` datatypes, 'universe' path.
-        UNIVERSE            = 119,
+        UNIVERSE            = 119, // UNIV
         // `yli::ontology` datatypes, 'variable' path.
-        VARIABLE            = 120,
+        VARIABLE            = 120, // VARI
         // `yli::ontology` datatypes, 'callback' path.
-        ABSTRACT_CALLBACK_ENGINE = 121,
-        CALLBACK_ENGINE     = 124,
-        CALLBACK_OBJECT     = 125,
-        CALLBACK_PARAMETER  = 126,
+        ABSTRACT_CALLBACK_ENGINE = 121, // ACEN
+        CALLBACK_ENGINE     = 124, // CENG
+        CALLBACK_OBJECT     = 125, // COBJ
+        CALLBACK_PARAMETER  = 126, // CPAR
         // `yli::ontology` datatypes, 'window' path.
-        WINDOW              = 130,
-        WIDGET              = 131,
+        WINDOW              = 130, // WNDW
+        WIDGET              = 131, // WDGT
         // `yli::ontology` datatypes, 'ecosystem' path.
-        ECOSYSTEM             = 150,
+        ECOSYSTEM             = 150, // ECOS
         // `yli::ontology` datatypes, 'scene' path.
-        SCENE                 = 160,
+        SCENE                 = 160, // SCEN
         // `yli::ontology` datatypes, 'movable_controller' path.
-        MOVABLE_CONTROLLER                   = 161,
-        MOVABLE_CONTROLLER_LISP_FUNCTION                  = 162,
-        GENERIC_MOVABLE_CONTROLLER_LISP_FUNCTION_OVERLOAD = 163,
-        MOVABLE_CONTROLLER_LISP_FUNCTION_OVERLOAD         = 164,
-        WAYPOINT                             = 165,
+        MOVABLE_CONTROLLER                   = 161, // MCTL
+        MOVABLE_CONTROLLER_LISP_FUNCTION                  = 162, // MCLF
+        GENERIC_MOVABLE_CONTROLLER_LISP_FUNCTION_OVERLOAD = 163, // GMCL
+        MOVABLE_CONTROLLER_LISP_FUNCTION_OVERLOAD         = 164, // MCFO
+        WAYPOINT                             = 165, // WAYP
         // `yli::ontology` datatypes, 'camera' path.
-        CAMERA                = 166,
-        CAMERA_WIDGET         = 167,
+        CAMERA                = 166, // CAMR
+        CAMERA_WIDGET         = 167, // CAMW
         // `yli::ontology` datatypes, 'simple' path.
-        PIPELINE              = 170,
-        MATERIAL              = 171,
-        SPECIES               = 172,
-        OBJECT                = 173,
+        PIPELINE              = 170, // PIPE
+        MATERIAL              = 171, // MATE
+        SPECIES               = 172, // SPEC
+        OBJECT                = 173, // OBJE
         // `yli::ontology` datatypes, 'heightmap' path.
-        HEIGHTMAP             = 175,
-        HEIGHTMAP_SHEET       = 176,
+        HEIGHTMAP             = 175, // HMAP
+        HEIGHTMAP_SHEET       = 176, // HMST
         // `yli::ontology` datatypes, 'symbiont' path.
-        SYMBIOSIS             = 180,
-        SYMBIONT_MATERIAL     = 181,
-        SYMBIONT_SPECIES      = 182,
+        SYMBIOSIS             = 180, // SYMB
+        SYMBIONT_MATERIAL     = 181, // SYMM
+        SYMBIONT_SPECIES      = 182, // SYMS
         // `yli::ontology` datatypes, 'ability' path.
-        ABILITY               = 185,
+        ABILITY               = 185, // ABIL
         // `yli::ontology` datatypes, 'holobiont' path.
-        HOLOBIONT             = 190,
-        BIONT                 = 191,
+        HOLOBIONT             = 190, // HBNT
+        BIONT                 = 191, // BION
         // `yli::ontology` datatypes, 'skill' path.
-        SKILL                 = 195,
+        SKILL                 = 195, // SKIL
         // `yli::ontology` datatypes, 'shapeshifter' path.
-        SHAPESHIFTER_TRANSFORMATION = 200,
-        SHAPESHIFTER_SEQUENCE       = 201,
-        SHAPESHIFTER_FORM           = 202,
-        SHAPESHIFTER                = 203,
+        SHAPESHIFTER_TRANSFORMATION = 200, // SSTR
+        SHAPESHIFTER_SEQUENCE       = 201, // SSSQ
+        SHAPESHIFTER_FORM           = 202, // SSFR
+        SHAPESHIFTER                = 203, // SSHF
         // `yli::ontology` datatypes, 'text 2D' path.
-        FONT_2D                     = 210,
-        TEXT_2D                     = 211,
+        FONT_2D                     = 210, // FO2D
+        TEXT_2D                     = 211, // TX2D
         // `yli::ontology` datatypes, 'text 3D' path.
-        VECTOR_FONT                 = 220,
-        GLYPH                       = 221,
-        TEXT_3D                     = 222,
-        GLYPH_OBJECT                = 223,
+        VECTOR_FONT                 = 220, // VFNT
+        GLYPH                       = 221, // GLYP
+        TEXT_3D                     = 222, // TX3D
+        GLYPH_OBJECT                = 223, // GLOB
         // `yli::ontology` datatypes, 'input' path.
-        INPUT_MODE                  = 230,
-        KEY_BINDING                 = 231,
+        INPUT_MODE                  = 230, // IMOD
+        KEY_BINDING                 = 231, // KBND
         // `yli::ontology` datatypes, 'track' path.
-        PLAYLIST                    = 240,
+        PLAYLIST                    = 240, // PLIS
         // `yli::ontology` datatypes, 'audio' path.
-        AUDIO_TRACK                 = 250,
+        AUDIO_TRACK                 = 250, // ATRK
         // `yli::ontology` datatypes, 'console' path.
-        CONSOLE                     = 261,
-        CONSOLE_CALLBACK_ENGINE     = 262,
-        CONSOLE_CALLBACK_OBJECT     = 263,
-        CONSOLE_CALLBACK_PARAMETER  = 264,
-        CONSOLE_LISP_FUNCTION                  = 265,
-        GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD = 266,
-        CONSOLE_LISP_FUNCTION_OVERLOAD         = 267,
+        CONSOLE                     = 261, // CONS
+        CONSOLE_CALLBACK_ENGINE     = 262, // CCEN
+        CONSOLE_CALLBACK_OBJECT     = 263, // CCOB
+        CONSOLE_CALLBACK_PARAMETER  = 264, // CCPR
+        CONSOLE_LISP_FUNCTION                  = 265, // CLFU
+        GENERIC_CONSOLE_LISP_FUNCTION_OVERLOAD = 266, // GCLF
+        CONSOLE_LISP_FUNCTION_OVERLOAD         = 267, // CLFO
         // `yli::ontology` datatypes, 'compute' path.
-        COMPUTE_TASK                = 280,
+        COMPUTE_TASK                = 280, // CTSK
         // Custom datatypes of Hirvi.
         HIRVI_SCENE       = 500,
         POLICE_CONTROL_CENTER = 501,
