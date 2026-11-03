@@ -1,11 +1,37 @@
+Vulkan plan:
+* Bindless
+* Vulkan 1.3
+* Dynamic Rendering
+* Synchronization 2
+* Timeline Semaphores
+* Mesh shaders?
+* BDA (buffer device address)?
+* Radeon RX 6000 series as the baseline
+* Raytracing support later on, not yet
+
+#####
+
+Tutorials:
+
 Vulkan
 https://vkguide.dev/
 
 Vulkan Tutorial
 https://vulkan-tutorial.com/
 
+How to Vulkan in 2026:
+https://www.howtovulkan.com/
+
+#####
+
 Vulkan Documentation
 https://docs.vulkan.org/
+
+No Graphics API:
+https://sebastianaaltonen.com/blog/no-graphics-api/
+
+A case for learning GPU programming with a compute-first mindset:
+https://themaister.net/blog/2025/10/05/a-case-for-learning-gpu-programming-with-a-compute-first-mindset/
 
 Bindless:
 https://henriquegois.dev/posts/bindless-resources-in-vulkan/
@@ -52,3 +78,6 @@ https://vulkan.gpuinfo.org/
 
 Writing an efficient Vulkan renderer
 https://zeux.io/2020/02/27/writing-an-efficient-vulkan-renderer/
+
+Niagara streams:
+https://www.youtube.com/playlist?list=PL0JVLUVCkk-l7CWCn3-cdftR0oajugYvd
