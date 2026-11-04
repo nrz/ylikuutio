@@ -10,13 +10,13 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 project(ylikuutio VERSION 0.0.10)
 
 # Set the build type if it isn't already
-if(NOT CMAKE_BUILD_TYPE)
+if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
-endif()
+endif ()
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
+if (CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR CMAKE_SYSTEM_NAME STREQUAL "Windows")
     project(ylikuutio LANGUAGES C CXX)
-endif()
+endif ()
 
 #-------------------------------------------------------+
 # the options part intended to be modified begins here. |
@@ -41,21 +41,21 @@ set(COMPILE_LIBPNG_FROM_SOURCE false)
 find_package(OpenGL REQUIRED)
 
 # Build config should be in the following order: Linux, Darwin, Windows.
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     # Use Vulkan on Linux.
     find_package(Vulkan REQUIRED)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     # TODO: implement MoltenVK support for MacOS.
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # TODO: implement Vulkan support for Windows.
-endif()
+endif ()
 
 find_package(Threads REQUIRED)
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     # Compile unit tests when compiling natively on Linux.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST true)
-elseif(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
+elseif (CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Crosscompiling from Linux to Windows must compile SDL and libpng from source.
     # Dynamic linking of SDL when crosscompiling from Linux to Windows is not supported.
     set(COMPILE_SDL_FROM_SOURCE true)
@@ -69,7 +69,7 @@ elseif(CMAKE_CROSSCOMPILING AND CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
     # Do not compile unit tests when crosscompiling from Linux to Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     # Native compiling on MacOS must compile SDL from source.
     set(COMPILE_SDL_FROM_SOURCE true)
     set(COMPILE_SDL_MIXER_FROM_SOURCE true)
@@ -82,7 +82,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 
     # Do not compile unit tests when building on MacOS.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     # Native compiling on Windows must compile SDL from source.
     set(COMPILE_SDL_FROM_SOURCE true)
     set(COMPILE_SDL_MIXER_FROM_SOURCE true)
@@ -95,188 +95,188 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
     # Do not compile unit tests when building on Windows.
     set(DO_UNIT_TESTS_WITH_GOOGLE_TEST false)
-endif()
+endif ()
 
 # When doing a regular build on Linux, SDL can be linked either statically or dynamically.
-if(NOT(COMPILE_SDL_FROM_SOURCE))
+if (NOT (COMPILE_SDL_FROM_SOURCE))
     set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
     find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3)
-endif()
+endif ()
 
 # Compile external dependencies
-add_subdirectory (external)
+add_subdirectory(external)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     # Command line arguments not supported by Visual Studio.
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wextra -Wuninitialized -Werror=return-type -Werror=nonnull")
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /DNOMINMAX")
-endif()
+endif ()
 
-if(CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
+if (CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
     message(FATAL_ERROR "ERROR: in-source builds are not supported! Please create a build directory and build from there!")
-endif()
-if(CMAKE_SOURCE_DIR MATCHES " ")
+endif ()
+if (CMAKE_SOURCE_DIR MATCHES " ")
     message("WARNING: Your source directory contains spaces. If you experience problems when compiling, this can be the cause.")
-endif()
-if(CMAKE_BINARY_DIR MATCHES " ")
+endif ()
+if (CMAKE_BINARY_DIR MATCHES " ")
     message("WARNING: Your build directory contains spaces. If you experience problems when compiling, this can be the cause.")
-endif()
+endif ()
 
-if(COMPILE_SDL_FROM_SOURCE)
+if (COMPILE_SDL_FROM_SOURCE)
     include_directories(
-        external/SDL/include/
-        )
-endif()
-
-if(COMPILE_SDL_MIXER_FROM_SOURCE)
-    include_directories(
-        external/SDL_mixer/include/
+            external/SDL/include/
     )
-endif()
+endif ()
 
-if(COMPILE_ZLIB_FROM_SOURCE)
+if (COMPILE_SDL_MIXER_FROM_SOURCE)
     include_directories(
-        external/zlib/
+            external/SDL_mixer/include/
     )
-else()
+endif ()
+
+if (COMPILE_ZLIB_FROM_SOURCE)
+    include_directories(
+            external/zlib/
+    )
+else ()
     # Use zlib shipped with the GNU/Linux distribution.
     find_package(ZLIB REQUIRED)
 
     if (DEFINED "ZLIB_INCLUDE_DIRS")
         include_directories(
-            ${ZLIB_INCLUDE_DIRS}
-            )
-    else()
-        include_directories(
-            ${ZLIB_INCLUDE_DIR}
-            )
-    endif()
-endif()
-
-if(COMPILE_LIBPNG_FROM_SOURCE)
-    include_directories(
-        external/libpng-1.6.44/
+                ${ZLIB_INCLUDE_DIRS}
         )
-else()
+    else ()
+        include_directories(
+                ${ZLIB_INCLUDE_DIR}
+        )
+    endif ()
+endif ()
+
+if (COMPILE_LIBPNG_FROM_SOURCE)
+    include_directories(
+            external/libpng-1.6.44/
+    )
+else ()
     # Use libpng shipped with the GNU/Linux distribution.
     find_package(PNG REQUIRED)
 
     if (DEFINED "PNG_INCLUDE_DIRS")
         include_directories(
-            ${PNG_INCLUDE_DIRS}
-            )
-    else()
+                ${PNG_INCLUDE_DIRS}
+        )
+    else ()
         include_directories(
-            ${PNG_INCLUDE_DIR}
-            )
-    endif()
-endif()
+                ${PNG_INCLUDE_DIR}
+        )
+    endif ()
+endif ()
 
 include_directories(
-    external/FastNoiseSIMD/
-    external/glew-2.0.0/include/
-    external/glm/
-    external/ufbx/
-    external/pugixml/src/
-    .
-    )
+        external/FastNoiseSIMD/
+        external/glew-2.0.0/include/
+        external/glm/
+        external/ufbx/
+        external/pugixml/src/
+        .
+)
 
-if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
+if (DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     # for Google Test.
     include(FetchContent)
     FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip
-        )
+            googletest
+            URL https://github.com/google/googletest/archive/refs/tags/v1.15.2.zip
+    )
 
     FetchContent_MakeAvailable(googletest)
 
-    if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
         # For Windows: Prevent overriding the parent project's compiler/linker settings
         set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    endif()
-endif()
+    endif ()
+endif ()
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
     set(THREAD_LIBS
     )
-else()
+else ()
     set(THREAD_LIBS
-        pthread
+            pthread
     )
-endif()
+endif ()
 
 set(ALL_LIBS
-    ${OPENGL_LIBRARY}
-    GLEW_200
-    pugixml
-    ufbx
-    )
+        ${OPENGL_LIBRARY}
+        GLEW_200
+        pugixml
+        ufbx
+)
 
 if (COMPILE_SDL_MIXER_FROM_SOURCE)
     set(ALL_LIBS
-        ${ALL_LIBS}
-        SDL3_mixer-static
-        )
-endif()
+            ${ALL_LIBS}
+            SDL3_mixer-static
+    )
+endif ()
 
 if (COMPILE_SDL_FROM_SOURCE)
     set(ALL_LIBS
-        ${ALL_LIBS}
-        SDL3-static
-        )
-    else()
-        set(ALL_LIBS
+            ${ALL_LIBS}
+            SDL3-static
+    )
+else ()
+    set(ALL_LIBS
             ${ALL_LIBS}
             SDL3
-        )
-endif()
+    )
+endif ()
 
 if (COMPILE_ZLIB_FROM_SOURCE)
     set(ALL_LIBS
-        ${ALL_LIBS}
-        zlib
-        )
-else()
+            ${ALL_LIBS}
+            zlib
+    )
+else ()
     if (DEFINED "ZLIB_LIBRARIES")
         set(ALL_LIBS
-            ${ALL_LIBS}
-            ${ZLIB_LIBRARIES}
-            )
-    else()
+                ${ALL_LIBS}
+                ${ZLIB_LIBRARIES}
+        )
+    else ()
         set(ALL_LIBS
-            ${ALL_LIBS}
-            ${ZLIB_LIBRARY}
-            )
-    endif()
-endif()
+                ${ALL_LIBS}
+                ${ZLIB_LIBRARY}
+        )
+    endif ()
+endif ()
 
 if (COMPILE_LIBPNG_FROM_SOURCE)
     set(ALL_LIBS
-        ${ALL_LIBS}
-        png_static
-        )
-else()
+            ${ALL_LIBS}
+            png_static
+    )
+else ()
     if (DEFINED "PNG_LIBRARIES")
         set(ALL_LIBS
-            ${ALL_LIBS}
-            ${PNG_LIBRARIES}
-            )
-    else()
+                ${ALL_LIBS}
+                ${PNG_LIBRARIES}
+        )
+    else ()
         set(ALL_LIBS
-            ${ALL_LIBS}
-            ${PNG_LIBRARY}
-            )
-    endif()
-endif()
+                ${ALL_LIBS}
+                ${PNG_LIBRARY}
+        )
+    endif ()
+endif ()
 
 add_definitions(
-    -DGLEW_STATIC
-    -D_CRT_SECURE_NO_WARNINGS
-    )
+        -DGLEW_STATIC
+        -D_CRT_SECURE_NO_WARNINGS
+)
 
 # Shaders.
 configure_file(code/ylikuutio/shaders/floyd_warshall.frag floyd_warshall.frag COPYONLY)
@@ -384,687 +384,687 @@ configure_file(res/textures/test3x3.png test3x3.png COPYONLY)
 
 # Ylikuutio
 add_library(ylikuutio STATIC
-    # audio, in alphabetical order
-    code/ylikuutio/audio/audio_system.cpp
-    code/ylikuutio/audio/audio_system.hpp
+        # audio, in alphabetical order
+        code/ylikuutio/audio/audio_system.cpp
+        code/ylikuutio/audio/audio_system.hpp
 
-    # command_line, in alphabetical order
-    code/ylikuutio/command_line/command_line_master.cpp
-    code/ylikuutio/command_line/command_line_master.hpp
+        # command_line, in alphabetical order
+        code/ylikuutio/command_line/command_line_master.cpp
+        code/ylikuutio/command_line/command_line_master.hpp
 
-    # console, in alphabetical order
-    code/ylikuutio/console/completion_module.cpp
-    code/ylikuutio/console/completion_module.hpp
-    code/ylikuutio/console/console_logic_module.cpp
-    code/ylikuutio/console/console_logic_module.hpp
-    code/ylikuutio/console/console_state.hpp
-    code/ylikuutio/console/scrollback_buffer.cpp
-    code/ylikuutio/console/scrollback_buffer.hpp
-    code/ylikuutio/console/scrollback_buffer_const_iterator.hpp
-    code/ylikuutio/console/scrollback_buffer_iterator.hpp
-    code/ylikuutio/console/text_input.cpp
-    code/ylikuutio/console/text_input.hpp
-    code/ylikuutio/console/text_input_const_iterator.hpp
-    code/ylikuutio/console/text_input_iterator.hpp
-    code/ylikuutio/console/text_input_history.cpp
-    code/ylikuutio/console/text_input_history.hpp
-    code/ylikuutio/console/text_input_history_const_iterator.hpp
-    code/ylikuutio/console/text_input_history_iterator.hpp
-    code/ylikuutio/console/text_input_type.hpp
+        # console, in alphabetical order
+        code/ylikuutio/console/completion_module.cpp
+        code/ylikuutio/console/completion_module.hpp
+        code/ylikuutio/console/console_logic_module.cpp
+        code/ylikuutio/console/console_logic_module.hpp
+        code/ylikuutio/console/console_state.hpp
+        code/ylikuutio/console/scrollback_buffer.cpp
+        code/ylikuutio/console/scrollback_buffer.hpp
+        code/ylikuutio/console/scrollback_buffer_const_iterator.hpp
+        code/ylikuutio/console/scrollback_buffer_iterator.hpp
+        code/ylikuutio/console/text_input.cpp
+        code/ylikuutio/console/text_input.hpp
+        code/ylikuutio/console/text_input_const_iterator.hpp
+        code/ylikuutio/console/text_input_iterator.hpp
+        code/ylikuutio/console/text_input_history.cpp
+        code/ylikuutio/console/text_input_history.hpp
+        code/ylikuutio/console/text_input_history_const_iterator.hpp
+        code/ylikuutio/console/text_input_history_iterator.hpp
+        code/ylikuutio/console/text_input_type.hpp
 
-    # core, in alphabetical order
-    code/ylikuutio/core/application.cpp
-    code/ylikuutio/core/application.hpp
-    code/ylikuutio/core/application_core.cpp
-    code/ylikuutio/core/application_core.hpp
-    code/ylikuutio/core/entrypoint.cpp
-    code/ylikuutio/core/entrypoint.hpp
-    code/ylikuutio/core/system_factory.hpp
+        # core, in alphabetical order
+        code/ylikuutio/core/application.cpp
+        code/ylikuutio/core/application.hpp
+        code/ylikuutio/core/application_core.cpp
+        code/ylikuutio/core/application_core.hpp
+        code/ylikuutio/core/entrypoint.cpp
+        code/ylikuutio/core/entrypoint.hpp
+        code/ylikuutio/core/system_factory.hpp
 
-    # data, in alphabetical order
-    code/ylikuutio/data/any_value.cpp
-    code/ylikuutio/data/any_value.hpp
-    code/ylikuutio/data/codepoint.hpp
-    code/ylikuutio/data/data_templates.hpp
-    code/ylikuutio/data/datatype.hpp
-    code/ylikuutio/data/queue.hpp
-    code/ylikuutio/data/queue_iterator.hpp
-    code/ylikuutio/data/type_enum_provider.hpp
-    code/ylikuutio/data/variant_templates.hpp
-    code/ylikuutio/data/wrap.hpp
+        # data, in alphabetical order
+        code/ylikuutio/data/any_value.cpp
+        code/ylikuutio/data/any_value.hpp
+        code/ylikuutio/data/codepoint.hpp
+        code/ylikuutio/data/data_templates.hpp
+        code/ylikuutio/data/datatype.hpp
+        code/ylikuutio/data/queue.hpp
+        code/ylikuutio/data/queue_iterator.hpp
+        code/ylikuutio/data/type_enum_provider.hpp
+        code/ylikuutio/data/variant_templates.hpp
+        code/ylikuutio/data/wrap.hpp
 
-    # event, in alphabetical order
-    code/ylikuutio/event/event_system.cpp
-    code/ylikuutio/event/event_system.hpp
+        # event, in alphabetical order
+        code/ylikuutio/event/event_system.cpp
+        code/ylikuutio/event/event_system.hpp
 
-    # file, in alphabetical order.
-    code/ylikuutio/file/file_loader.cpp
-    code/ylikuutio/file/file_loader.hpp
-    code/ylikuutio/file/file_writer.hpp
+        # file, in alphabetical order.
+        code/ylikuutio/file/file_loader.cpp
+        code/ylikuutio/file/file_loader.hpp
+        code/ylikuutio/file/file_writer.hpp
 
-    # geometry, in alphabetical order.
-    code/ylikuutio/geometry/degrees_to_radians.cpp
-    code/ylikuutio/geometry/degrees_to_radians.hpp
-    code/ylikuutio/geometry/line.cpp
-    code/ylikuutio/geometry/line.hpp
-    code/ylikuutio/geometry/line_2d.cpp
-    code/ylikuutio/geometry/line_2d.hpp
-    code/ylikuutio/geometry/line_3d.cpp
-    code/ylikuutio/geometry/line_3d.hpp
-    code/ylikuutio/geometry/line_line_intersection.cpp
-    code/ylikuutio/geometry/line_line_intersection.hpp
-    code/ylikuutio/geometry/line_segment.cpp
-    code/ylikuutio/geometry/line_segment.hpp
-    code/ylikuutio/geometry/line_segment_2d.cpp
-    code/ylikuutio/geometry/line_segment_2d.hpp
-    code/ylikuutio/geometry/line_segment_3d.cpp
-    code/ylikuutio/geometry/line_segment_3d.hpp
-    code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
-    code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
-    code/ylikuutio/geometry/radians_to_degrees.cpp
-    code/ylikuutio/geometry/radians_to_degrees.hpp
+        # geometry, in alphabetical order.
+        code/ylikuutio/geometry/degrees_to_radians.cpp
+        code/ylikuutio/geometry/degrees_to_radians.hpp
+        code/ylikuutio/geometry/line.cpp
+        code/ylikuutio/geometry/line.hpp
+        code/ylikuutio/geometry/line_2d.cpp
+        code/ylikuutio/geometry/line_2d.hpp
+        code/ylikuutio/geometry/line_3d.cpp
+        code/ylikuutio/geometry/line_3d.hpp
+        code/ylikuutio/geometry/line_line_intersection.cpp
+        code/ylikuutio/geometry/line_line_intersection.hpp
+        code/ylikuutio/geometry/line_segment.cpp
+        code/ylikuutio/geometry/line_segment.hpp
+        code/ylikuutio/geometry/line_segment_2d.cpp
+        code/ylikuutio/geometry/line_segment_2d.hpp
+        code/ylikuutio/geometry/line_segment_3d.cpp
+        code/ylikuutio/geometry/line_segment_3d.hpp
+        code/ylikuutio/geometry/line_segment_line_segment_intersection.cpp
+        code/ylikuutio/geometry/line_segment_line_segment_intersection.hpp
+        code/ylikuutio/geometry/radians_to_degrees.cpp
+        code/ylikuutio/geometry/radians_to_degrees.hpp
 
-    # graph, in alphabetical order.
-    code/ylikuutio/graph/shortest_paths.cpp
-    code/ylikuutio/graph/shortest_paths.hpp
+        # graph, in alphabetical order.
+        code/ylikuutio/graph/shortest_paths.cpp
+        code/ylikuutio/graph/shortest_paths.hpp
 
-    # hierarchy, in alphabetical order.
-    code/ylikuutio/hierarchy/bind_apprentice_to_master.hpp
-    code/ylikuutio/hierarchy/get_first_child.hpp
-    code/ylikuutio/hierarchy/request_childID.hpp
-    code/ylikuutio/hierarchy/set_child_pointer.hpp
-    code/ylikuutio/hierarchy/unbind_child_from_parent.hpp
+        # hierarchy, in alphabetical order.
+        code/ylikuutio/hierarchy/bind_apprentice_to_master.hpp
+        code/ylikuutio/hierarchy/get_first_child.hpp
+        code/ylikuutio/hierarchy/request_childID.hpp
+        code/ylikuutio/hierarchy/set_child_pointer.hpp
+        code/ylikuutio/hierarchy/unbind_child_from_parent.hpp
 
-    # input, in alphabetical order
-    code/ylikuutio/input/input.cpp
-    code/ylikuutio/input/input.hpp
-    code/ylikuutio/input/input_system.cpp
-    code/ylikuutio/input/input_system.hpp
+        # input, in alphabetical order
+        code/ylikuutio/input/input.cpp
+        code/ylikuutio/input/input.hpp
+        code/ylikuutio/input/input_system.cpp
+        code/ylikuutio/input/input_system.hpp
 
-    # interpolation, in alphabetical order
-    code/ylikuutio/interpolation/bilinear_interpolation.hpp
-    code/ylikuutio/interpolation/bilinear_interpolation_struct.hpp
+        # interpolation, in alphabetical order
+        code/ylikuutio/interpolation/bilinear_interpolation.hpp
+        code/ylikuutio/interpolation/bilinear_interpolation_struct.hpp
 
-    # linear algebra, in alphabetical order.
-    code/ylikuutio/linear_algebra/matrix.cpp
-    code/ylikuutio/linear_algebra/matrix.hpp
-    code/ylikuutio/linear_algebra/matrix_functions.cpp
-    code/ylikuutio/linear_algebra/matrix_functions.hpp
-    code/ylikuutio/linear_algebra/tensor3.cpp
-    code/ylikuutio/linear_algebra/tensor3.hpp
-    code/ylikuutio/linear_algebra/vector_functions.hpp
+        # linear algebra, in alphabetical order.
+        code/ylikuutio/linear_algebra/matrix.cpp
+        code/ylikuutio/linear_algebra/matrix.hpp
+        code/ylikuutio/linear_algebra/matrix_functions.cpp
+        code/ylikuutio/linear_algebra/matrix_functions.hpp
+        code/ylikuutio/linear_algebra/tensor3.cpp
+        code/ylikuutio/linear_algebra/tensor3.hpp
+        code/ylikuutio/linear_algebra/vector_functions.hpp
 
-    # lisp, in alphabetical order.
-    code/ylikuutio/lisp/bool_expr.cpp
-    code/ylikuutio/lisp/bool_expr.hpp
-    code/ylikuutio/lisp/defun_expr.cpp
-    code/ylikuutio/lisp/defun_expr.hpp
-    code/ylikuutio/lisp/error.cpp
-    code/ylikuutio/lisp/error.hpp
-    code/ylikuutio/lisp/error_log.cpp
-    code/ylikuutio/lisp/error_log.hpp
-    code/ylikuutio/lisp/error_type.hpp
-    code/ylikuutio/lisp/expr.cpp
-    code/ylikuutio/lisp/expr.hpp
-    code/ylikuutio/lisp/expr_type.hpp
-    code/ylikuutio/lisp/expr_visitor.hpp
-    code/ylikuutio/lisp/floating_point_expr.cpp
-    code/ylikuutio/lisp/floating_point_expr.hpp
-    code/ylikuutio/lisp/function_arg_extractor.hpp
-    code/ylikuutio/lisp/function_call_expr.cpp
-    code/ylikuutio/lisp/function_call_expr.hpp
-    code/ylikuutio/lisp/identifier.cpp
-    code/ylikuutio/lisp/identifier.hpp
-    code/ylikuutio/lisp/identifier_expr.cpp
-    code/ylikuutio/lisp/identifier_expr.hpp
-    code/ylikuutio/lisp/lambda_expr.cpp
-    code/ylikuutio/lisp/lambda_expr.hpp
-    code/ylikuutio/lisp/legacy_executor.cpp
-    code/ylikuutio/lisp/legacy_executor.hpp
-    code/ylikuutio/lisp/legacy_parser.cpp
-    code/ylikuutio/lisp/legacy_parser.hpp
-    code/ylikuutio/lisp/lisp_templates.hpp
-    code/ylikuutio/lisp/literal_expr.cpp
-    code/ylikuutio/lisp/literal_expr.hpp
-    code/ylikuutio/lisp/number_expr.cpp
-    code/ylikuutio/lisp/number_expr.hpp
-    code/ylikuutio/lisp/number_literal.cpp
-    code/ylikuutio/lisp/number_literal.hpp
-    code/ylikuutio/lisp/parser.cpp
-    code/ylikuutio/lisp/parser.hpp
-    code/ylikuutio/lisp/scanner.cpp
-    code/ylikuutio/lisp/scanner.hpp
-    code/ylikuutio/lisp/signed_integer_expr.cpp
-    code/ylikuutio/lisp/signed_integer_expr.hpp
-    code/ylikuutio/lisp/string_expr.cpp
-    code/ylikuutio/lisp/string_expr.hpp
-    code/ylikuutio/lisp/string_literal.cpp
-    code/ylikuutio/lisp/string_literal.hpp
-    code/ylikuutio/lisp/syntax_tree_list.cpp
-    code/ylikuutio/lisp/syntax_tree_list.hpp
-    code/ylikuutio/lisp/text_position.cpp
-    code/ylikuutio/lisp/text_position.hpp
-    code/ylikuutio/lisp/token.cpp
-    code/ylikuutio/lisp/token.hpp
-    code/ylikuutio/lisp/token_list.cpp
-    code/ylikuutio/lisp/token_list.hpp
-    code/ylikuutio/lisp/token_type.hpp
-    code/ylikuutio/lisp/unsigned_integer_expr.cpp
-    code/ylikuutio/lisp/unsigned_integer_expr.hpp
+        # lisp, in alphabetical order.
+        code/ylikuutio/lisp/bool_expr.cpp
+        code/ylikuutio/lisp/bool_expr.hpp
+        code/ylikuutio/lisp/defun_expr.cpp
+        code/ylikuutio/lisp/defun_expr.hpp
+        code/ylikuutio/lisp/error.cpp
+        code/ylikuutio/lisp/error.hpp
+        code/ylikuutio/lisp/error_log.cpp
+        code/ylikuutio/lisp/error_log.hpp
+        code/ylikuutio/lisp/error_type.hpp
+        code/ylikuutio/lisp/expr.cpp
+        code/ylikuutio/lisp/expr.hpp
+        code/ylikuutio/lisp/expr_type.hpp
+        code/ylikuutio/lisp/expr_visitor.hpp
+        code/ylikuutio/lisp/floating_point_expr.cpp
+        code/ylikuutio/lisp/floating_point_expr.hpp
+        code/ylikuutio/lisp/function_arg_extractor.hpp
+        code/ylikuutio/lisp/function_call_expr.cpp
+        code/ylikuutio/lisp/function_call_expr.hpp
+        code/ylikuutio/lisp/identifier.cpp
+        code/ylikuutio/lisp/identifier.hpp
+        code/ylikuutio/lisp/identifier_expr.cpp
+        code/ylikuutio/lisp/identifier_expr.hpp
+        code/ylikuutio/lisp/lambda_expr.cpp
+        code/ylikuutio/lisp/lambda_expr.hpp
+        code/ylikuutio/lisp/legacy_executor.cpp
+        code/ylikuutio/lisp/legacy_executor.hpp
+        code/ylikuutio/lisp/legacy_parser.cpp
+        code/ylikuutio/lisp/legacy_parser.hpp
+        code/ylikuutio/lisp/lisp_templates.hpp
+        code/ylikuutio/lisp/literal_expr.cpp
+        code/ylikuutio/lisp/literal_expr.hpp
+        code/ylikuutio/lisp/number_expr.cpp
+        code/ylikuutio/lisp/number_expr.hpp
+        code/ylikuutio/lisp/number_literal.cpp
+        code/ylikuutio/lisp/number_literal.hpp
+        code/ylikuutio/lisp/parser.cpp
+        code/ylikuutio/lisp/parser.hpp
+        code/ylikuutio/lisp/scanner.cpp
+        code/ylikuutio/lisp/scanner.hpp
+        code/ylikuutio/lisp/signed_integer_expr.cpp
+        code/ylikuutio/lisp/signed_integer_expr.hpp
+        code/ylikuutio/lisp/string_expr.cpp
+        code/ylikuutio/lisp/string_expr.hpp
+        code/ylikuutio/lisp/string_literal.cpp
+        code/ylikuutio/lisp/string_literal.hpp
+        code/ylikuutio/lisp/syntax_tree_list.cpp
+        code/ylikuutio/lisp/syntax_tree_list.hpp
+        code/ylikuutio/lisp/text_position.cpp
+        code/ylikuutio/lisp/text_position.hpp
+        code/ylikuutio/lisp/token.cpp
+        code/ylikuutio/lisp/token.hpp
+        code/ylikuutio/lisp/token_list.cpp
+        code/ylikuutio/lisp/token_list.hpp
+        code/ylikuutio/lisp/token_type.hpp
+        code/ylikuutio/lisp/unsigned_integer_expr.cpp
+        code/ylikuutio/lisp/unsigned_integer_expr.hpp
 
-    # load, in alphabetical order.
-    code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
-    code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
-    code/ylikuutio/load/common_texture_loader.cpp
-    code/ylikuutio/load/common_texture_loader.hpp
-    code/ylikuutio/load/convert_ufbx_matrix_to_glm_mat4.cpp
-    code/ylikuutio/load/convert_ufbx_matrix_to_glm_mat4.hpp
-    code/ylikuutio/load/create_fbx_scene.cpp
-    code/ylikuutio/load/create_fbx_scene.hpp
-    code/ylikuutio/load/csv_loader.hpp
-    code/ylikuutio/load/csv_texture_loader.cpp
-    code/ylikuutio/load/csv_texture_loader.hpp
-    code/ylikuutio/load/fbx_anim.hpp
-    code/ylikuutio/load/fbx_blend_channel.hpp
-    code/ylikuutio/load/fbx_blend_channel_anim.hpp
-    code/ylikuutio/load/fbx_buffer_resource.hpp
-    code/ylikuutio/load/fbx_context_resource.hpp
-    code/ylikuutio/load/fbx_image.hpp
-    code/ylikuutio/load/fbx_image_resource.hpp
-    code/ylikuutio/load/fbx_material.hpp
-    code/ylikuutio/load/fbx_mesh.hpp
-    code/ylikuutio/load/fbx_mesh_part.hpp
-    code/ylikuutio/load/fbx_mesh_vertex.hpp
-    code/ylikuutio/load/fbx_model_loader.cpp
-    code/ylikuutio/load/fbx_model_loader.hpp
-    code/ylikuutio/load/fbx_node.hpp
-    code/ylikuutio/load/fbx_node_anim.hpp
-    code/ylikuutio/load/fbx_pass_resource.hpp
-    code/ylikuutio/load/fbx_pipeline_resource.hpp
-    code/ylikuutio/load/fbx_pixel_16.hpp
-    code/ylikuutio/load/fbx_scene.hpp
-    code/ylikuutio/load/fbx_shader_resource.hpp
-    code/ylikuutio/load/fbx_skin_vertex.hpp
-    code/ylikuutio/load/fbx_symbiosis_loader.cpp
-    code/ylikuutio/load/fbx_symbiosis_loader.hpp
-    code/ylikuutio/load/fbx_texture.hpp
-    code/ylikuutio/load/fbx_texture_loader.cpp
-    code/ylikuutio/load/fbx_texture_loader.hpp
-    code/ylikuutio/load/fbx_triangle.hpp
-    code/ylikuutio/load/fbx_triangle_info.hpp
-    code/ylikuutio/load/heightmap_loader_struct.hpp
-    code/ylikuutio/load/image_file_loader.cpp
-    code/ylikuutio/load/image_file_loader.hpp
-    code/ylikuutio/load/image_loader_struct.hpp
-    code/ylikuutio/load/load_fbx_struct.hpp
-    code/ylikuutio/load/model_loader.cpp
-    code/ylikuutio/load/model_loader.hpp
-    code/ylikuutio/load/model_loader_struct.hpp
-    code/ylikuutio/load/obj_loader.cpp
-    code/ylikuutio/load/obj_loader.hpp
-    code/ylikuutio/load/png_heightmap_loader.cpp
-    code/ylikuutio/load/png_heightmap_loader.hpp
-    code/ylikuutio/load/png_loader.cpp
-    code/ylikuutio/load/png_loader.hpp
-    code/ylikuutio/load/read_fbx_anim_stack.cpp
-    code/ylikuutio/load/read_fbx_anim_stack.hpp
-    code/ylikuutio/load/read_fbx_blend_channel.cpp
-    code/ylikuutio/load/read_fbx_blend_channel.hpp
-    code/ylikuutio/load/read_fbx_blend_channel_anim.cpp
-    code/ylikuutio/load/read_fbx_blend_channel_anim.hpp
-    code/ylikuutio/load/read_fbx_mesh.cpp
-    code/ylikuutio/load/read_fbx_mesh.hpp
-    code/ylikuutio/load/read_fbx_node.cpp
-    code/ylikuutio/load/read_fbx_node.hpp
-    code/ylikuutio/load/read_fbx_node_anim.cpp
-    code/ylikuutio/load/read_fbx_node_anim.hpp
-    code/ylikuutio/load/setup_fbx_texture.cpp
-    code/ylikuutio/load/setup_fbx_texture.hpp
-    code/ylikuutio/load/shader_loader.cpp
-    code/ylikuutio/load/shader_loader.hpp
-    code/ylikuutio/load/srtm_heightmap_loader.cpp
-    code/ylikuutio/load/srtm_heightmap_loader.hpp
-    code/ylikuutio/load/symbiosis_loader.cpp
-    code/ylikuutio/load/symbiosis_loader.hpp
-    code/ylikuutio/load/symbiosis_loader_struct.hpp
+        # load, in alphabetical order.
+        code/ylikuutio/load/ascii_grid_heightmap_loader.cpp
+        code/ylikuutio/load/ascii_grid_heightmap_loader.hpp
+        code/ylikuutio/load/common_texture_loader.cpp
+        code/ylikuutio/load/common_texture_loader.hpp
+        code/ylikuutio/load/convert_ufbx_matrix_to_glm_mat4.cpp
+        code/ylikuutio/load/convert_ufbx_matrix_to_glm_mat4.hpp
+        code/ylikuutio/load/create_fbx_scene.cpp
+        code/ylikuutio/load/create_fbx_scene.hpp
+        code/ylikuutio/load/csv_loader.hpp
+        code/ylikuutio/load/csv_texture_loader.cpp
+        code/ylikuutio/load/csv_texture_loader.hpp
+        code/ylikuutio/load/fbx_anim.hpp
+        code/ylikuutio/load/fbx_blend_channel.hpp
+        code/ylikuutio/load/fbx_blend_channel_anim.hpp
+        code/ylikuutio/load/fbx_buffer_resource.hpp
+        code/ylikuutio/load/fbx_context_resource.hpp
+        code/ylikuutio/load/fbx_image.hpp
+        code/ylikuutio/load/fbx_image_resource.hpp
+        code/ylikuutio/load/fbx_material.hpp
+        code/ylikuutio/load/fbx_mesh.hpp
+        code/ylikuutio/load/fbx_mesh_part.hpp
+        code/ylikuutio/load/fbx_mesh_vertex.hpp
+        code/ylikuutio/load/fbx_model_loader.cpp
+        code/ylikuutio/load/fbx_model_loader.hpp
+        code/ylikuutio/load/fbx_node.hpp
+        code/ylikuutio/load/fbx_node_anim.hpp
+        code/ylikuutio/load/fbx_pass_resource.hpp
+        code/ylikuutio/load/fbx_pipeline_resource.hpp
+        code/ylikuutio/load/fbx_pixel_16.hpp
+        code/ylikuutio/load/fbx_scene.hpp
+        code/ylikuutio/load/fbx_shader_resource.hpp
+        code/ylikuutio/load/fbx_skin_vertex.hpp
+        code/ylikuutio/load/fbx_symbiosis_loader.cpp
+        code/ylikuutio/load/fbx_symbiosis_loader.hpp
+        code/ylikuutio/load/fbx_texture.hpp
+        code/ylikuutio/load/fbx_texture_loader.cpp
+        code/ylikuutio/load/fbx_texture_loader.hpp
+        code/ylikuutio/load/fbx_triangle.hpp
+        code/ylikuutio/load/fbx_triangle_info.hpp
+        code/ylikuutio/load/heightmap_loader_struct.hpp
+        code/ylikuutio/load/image_file_loader.cpp
+        code/ylikuutio/load/image_file_loader.hpp
+        code/ylikuutio/load/image_loader_struct.hpp
+        code/ylikuutio/load/load_fbx_struct.hpp
+        code/ylikuutio/load/model_loader.cpp
+        code/ylikuutio/load/model_loader.hpp
+        code/ylikuutio/load/model_loader_struct.hpp
+        code/ylikuutio/load/obj_loader.cpp
+        code/ylikuutio/load/obj_loader.hpp
+        code/ylikuutio/load/png_heightmap_loader.cpp
+        code/ylikuutio/load/png_heightmap_loader.hpp
+        code/ylikuutio/load/png_loader.cpp
+        code/ylikuutio/load/png_loader.hpp
+        code/ylikuutio/load/read_fbx_anim_stack.cpp
+        code/ylikuutio/load/read_fbx_anim_stack.hpp
+        code/ylikuutio/load/read_fbx_blend_channel.cpp
+        code/ylikuutio/load/read_fbx_blend_channel.hpp
+        code/ylikuutio/load/read_fbx_blend_channel_anim.cpp
+        code/ylikuutio/load/read_fbx_blend_channel_anim.hpp
+        code/ylikuutio/load/read_fbx_mesh.cpp
+        code/ylikuutio/load/read_fbx_mesh.hpp
+        code/ylikuutio/load/read_fbx_node.cpp
+        code/ylikuutio/load/read_fbx_node.hpp
+        code/ylikuutio/load/read_fbx_node_anim.cpp
+        code/ylikuutio/load/read_fbx_node_anim.hpp
+        code/ylikuutio/load/setup_fbx_texture.cpp
+        code/ylikuutio/load/setup_fbx_texture.hpp
+        code/ylikuutio/load/shader_loader.cpp
+        code/ylikuutio/load/shader_loader.hpp
+        code/ylikuutio/load/srtm_heightmap_loader.cpp
+        code/ylikuutio/load/srtm_heightmap_loader.hpp
+        code/ylikuutio/load/symbiosis_loader.cpp
+        code/ylikuutio/load/symbiosis_loader.hpp
+        code/ylikuutio/load/symbiosis_loader_struct.hpp
 
-    # map, in alphabetical order
-    code/ylikuutio/map/ylikuutio_map.hpp
+        # map, in alphabetical order
+        code/ylikuutio/map/ylikuutio_map.hpp
 
-    # memory, in alphabetical order
-    code/ylikuutio/memory/abstract_memory_allocator.hpp
-    code/ylikuutio/memory/abstract_memory_system.hpp
-    code/ylikuutio/memory/allocation_data.cpp
-    code/ylikuutio/memory/allocation_data.hpp
-    code/ylikuutio/memory/handle.hpp
-    code/ylikuutio/memory/memory_allocator.hpp
-    code/ylikuutio/memory/memory_allocator_types.hpp
-    code/ylikuutio/memory/memory_system.hpp
-    code/ylikuutio/memory/memory_templates.hpp
+        # memory, in alphabetical order
+        code/ylikuutio/memory/abstract_memory_allocator.hpp
+        code/ylikuutio/memory/abstract_memory_system.hpp
+        code/ylikuutio/memory/allocation_data.cpp
+        code/ylikuutio/memory/allocation_data.hpp
+        code/ylikuutio/memory/handle.hpp
+        code/ylikuutio/memory/memory_allocator.hpp
+        code/ylikuutio/memory/memory_allocator_types.hpp
+        code/ylikuutio/memory/memory_system.hpp
+        code/ylikuutio/memory/memory_templates.hpp
 
-    # ontology, in alphabetical order
-    code/ylikuutio/ontology/ability.cpp
-    code/ylikuutio/ontology/ability.hpp
-    code/ylikuutio/ontology/ability_struct.hpp
-    code/ylikuutio/ontology/abstract_callback_engine.cpp
-    code/ylikuutio/ontology/abstract_callback_engine.hpp
-    code/ylikuutio/ontology/abstract_callback_engine_struct.hpp
-    code/ylikuutio/ontology/abstract_capability.cpp
-    code/ylikuutio/ontology/abstract_capability.hpp
-    code/ylikuutio/ontology/abstract_console_lisp_function_overload.cpp
-    code/ylikuutio/ontology/abstract_console_lisp_function_overload.hpp
-    code/ylikuutio/ontology/abstract_entity_factory.hpp
-    code/ylikuutio/ontology/abstract_movable.cpp
-    code/ylikuutio/ontology/abstract_movable.hpp
-    code/ylikuutio/ontology/abstract_lisp_function_overload.cpp
-    code/ylikuutio/ontology/abstract_lisp_function_overload.hpp
-    code/ylikuutio/ontology/activate_callback.hpp
-    code/ylikuutio/ontology/apprentice_iterator.hpp
-    code/ylikuutio/ontology/apprentice_module.cpp
-    code/ylikuutio/ontology/apprentice_module.hpp
-    code/ylikuutio/ontology/audio_track.cpp
-    code/ylikuutio/ontology/audio_track.hpp
-    code/ylikuutio/ontology/audio_track_struct.hpp
-    code/ylikuutio/ontology/bind_child_to_parent.hpp
-    code/ylikuutio/ontology/biont.cpp
-    code/ylikuutio/ontology/biont.hpp
-    code/ylikuutio/ontology/biont_struct.hpp
-    code/ylikuutio/ontology/callback_engine.cpp
-    code/ylikuutio/ontology/callback_engine.hpp
-    code/ylikuutio/ontology/callback_engine_struct.hpp
-    code/ylikuutio/ontology/callback_magic_numbers.hpp
-    code/ylikuutio/ontology/callback_object.cpp
-    code/ylikuutio/ontology/callback_object.hpp
-    code/ylikuutio/ontology/callback_object_struct.hpp
-    code/ylikuutio/ontology/callback_parameter.cpp
-    code/ylikuutio/ontology/callback_parameter.hpp
-    code/ylikuutio/ontology/callback_parameter_struct.hpp
-    code/ylikuutio/ontology/camera.cpp
-    code/ylikuutio/ontology/camera.hpp
-    code/ylikuutio/ontology/camera_struct.hpp
-    code/ylikuutio/ontology/capability_struct.hpp
-    code/ylikuutio/ontology/cartesian_coordinates_module.cpp
-    code/ylikuutio/ontology/cartesian_coordinates_module.hpp
-    code/ylikuutio/ontology/child_iterator.hpp
-    code/ylikuutio/ontology/child_module.cpp
-    code/ylikuutio/ontology/child_module.hpp
-    code/ylikuutio/ontology/compute_task.cpp
-    code/ylikuutio/ontology/compute_task.hpp
-    code/ylikuutio/ontology/compute_task_struct.hpp
-    code/ylikuutio/ontology/console.cpp
-    code/ylikuutio/ontology/console.hpp
-    code/ylikuutio/ontology/console_callback_engine.cpp
-    code/ylikuutio/ontology/console_callback_engine.hpp
-    code/ylikuutio/ontology/console_callback_engine_struct.hpp
-    code/ylikuutio/ontology/console_callback_object.cpp
-    code/ylikuutio/ontology/console_callback_object.hpp
-    code/ylikuutio/ontology/console_callback_object_struct.hpp
-    code/ylikuutio/ontology/console_callback_parameter.cpp
-    code/ylikuutio/ontology/console_callback_parameter.hpp
-    code/ylikuutio/ontology/console_callback_parameter_struct.hpp
-    code/ylikuutio/ontology/console_lisp_function.cpp
-    code/ylikuutio/ontology/console_lisp_function.hpp
-    code/ylikuutio/ontology/console_lisp_function_overload.hpp
-    code/ylikuutio/ontology/console_lisp_function_struct.hpp
-    code/ylikuutio/ontology/console_printing.cpp
-    code/ylikuutio/ontology/console_printing.hpp
-    code/ylikuutio/ontology/console_struct.hpp
-    code/ylikuutio/ontology/ecosystem.cpp
-    code/ylikuutio/ontology/ecosystem.hpp
-    code/ylikuutio/ontology/ecosystem_struct.hpp
-    code/ylikuutio/ontology/entity.cpp
-    code/ylikuutio/ontology/entity.hpp
-    code/ylikuutio/ontology/entity_callbacks.cpp
-    code/ylikuutio/ontology/entity_factory.hpp
-    code/ylikuutio/ontology/entity_struct.hpp
-    code/ylikuutio/ontology/entity_variable_activation.cpp
-    code/ylikuutio/ontology/entity_variable_activation.hpp
-    code/ylikuutio/ontology/entity_variable_read.cpp
-    code/ylikuutio/ontology/entity_variable_read.hpp
-    code/ylikuutio/ontology/font_2d.cpp
-    code/ylikuutio/ontology/font_2d.hpp
-    code/ylikuutio/ontology/font_struct.hpp
-    code/ylikuutio/ontology/framebuffer_module.cpp
-    code/ylikuutio/ontology/framebuffer_module.hpp
-    code/ylikuutio/ontology/framebuffer_module_struct.hpp
-    code/ylikuutio/ontology/generic_master_module.cpp
-    code/ylikuutio/ontology/generic_master_module.hpp
-    code/ylikuutio/ontology/generic_parent_module.cpp
-    code/ylikuutio/ontology/generic_parent_module.hpp
-    code/ylikuutio/ontology/get_content_callback.hpp
-    code/ylikuutio/ontology/get_number_of_descendants.hpp
-    code/ylikuutio/ontology/gl_attrib_locations.cpp
-    code/ylikuutio/ontology/gl_attrib_locations.hpp
-    code/ylikuutio/ontology/glyph.cpp
-    code/ylikuutio/ontology/glyph.hpp
-    code/ylikuutio/ontology/glyph_object.cpp
-    code/ylikuutio/ontology/glyph_object.hpp
-    code/ylikuutio/ontology/glyph_object_creation.cpp
-    code/ylikuutio/ontology/glyph_object_creation.hpp
-    code/ylikuutio/ontology/glyph_object_struct.hpp
-    code/ylikuutio/ontology/glyph_struct.hpp
-    code/ylikuutio/ontology/heightmap.cpp
-    code/ylikuutio/ontology/heightmap.hpp
-    code/ylikuutio/ontology/heightmap_sheet.cpp
-    code/ylikuutio/ontology/heightmap_sheet.hpp
-    code/ylikuutio/ontology/heightmap_sheet_struct.hpp
-    code/ylikuutio/ontology/heightmap_struct.hpp
-    code/ylikuutio/ontology/holobiont.cpp
-    code/ylikuutio/ontology/holobiont.hpp
-    code/ylikuutio/ontology/holobiont_struct.hpp
-    code/ylikuutio/ontology/horizontal_alignment.hpp
-    code/ylikuutio/ontology/indexable.hpp
-    code/ylikuutio/ontology/input_mode.cpp
-    code/ylikuutio/ontology/input_mode.hpp
-    code/ylikuutio/ontology/input_mode_apprentice_module.cpp
-    code/ylikuutio/ontology/input_mode_apprentice_module.hpp
-    code/ylikuutio/ontology/input_mode_child_module.cpp
-    code/ylikuutio/ontology/input_mode_child_module.hpp
-    code/ylikuutio/ontology/input_mode_struct.hpp
-    code/ylikuutio/ontology/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp
-    code/ylikuutio/ontology/input_parameters_to_any_value_callback_with_console.hpp
-    code/ylikuutio/ontology/lisp_context.cpp
-    code/ylikuutio/ontology/lisp_context.hpp
-    code/ylikuutio/ontology/lisp_context_struct.hpp
-    code/ylikuutio/ontology/lisp_function.cpp
-    code/ylikuutio/ontology/lisp_function.hpp
-    code/ylikuutio/ontology/lisp_function_struct.hpp
-    code/ylikuutio/ontology/locomotion_environment.hpp
-    code/ylikuutio/ontology/locomotion_module.cpp
-    code/ylikuutio/ontology/locomotion_module.hpp
-    code/ylikuutio/ontology/locomotion_module_struct.hpp
-    code/ylikuutio/ontology/master_module.hpp
-    code/ylikuutio/ontology/master_of_input_modes_module.cpp
-    code/ylikuutio/ontology/master_of_input_modes_module.hpp
-    code/ylikuutio/ontology/material.cpp
-    code/ylikuutio/ontology/material.hpp
-    code/ylikuutio/ontology/material_struct.hpp
-    code/ylikuutio/ontology/mesh_module.cpp
-    code/ylikuutio/ontology/mesh_module.hpp
-    code/ylikuutio/ontology/mesh_provider_struct.hpp
-    code/ylikuutio/ontology/mission.cpp
-    code/ylikuutio/ontology/mission.hpp
-    code/ylikuutio/ontology/mission_struct.hpp
-    code/ylikuutio/ontology/movable_controller.cpp
-    code/ylikuutio/ontology/movable_controller.hpp
-    code/ylikuutio/ontology/movable_controller_struct.hpp
-    code/ylikuutio/ontology/movable_struct.hpp
-    code/ylikuutio/ontology/movable_variable_activation.cpp
-    code/ylikuutio/ontology/movable_variable_activation.hpp
-    code/ylikuutio/ontology/movable_variable_read.cpp
-    code/ylikuutio/ontology/movable_variable_read.hpp
-    code/ylikuutio/ontology/object.cpp
-    code/ylikuutio/ontology/object.hpp
-    code/ylikuutio/ontology/object_struct.hpp
-    code/ylikuutio/ontology/orientation_module.cpp
-    code/ylikuutio/ontology/orientation_module.hpp
-    code/ylikuutio/ontology/parent_of_input_modes_module.cpp
-    code/ylikuutio/ontology/parent_of_input_modes_module.hpp
-    code/ylikuutio/ontology/parent_of_pipelines_module.cpp
-    code/ylikuutio/ontology/parent_of_pipelines_module.hpp
-    code/ylikuutio/ontology/parent_of_skills_module.cpp
-    code/ylikuutio/ontology/parent_of_skills_module.hpp
-    code/ylikuutio/ontology/position_struct.hpp
-    code/ylikuutio/ontology/read_callback.hpp
-    code/ylikuutio/ontology/registry.cpp
-    code/ylikuutio/ontology/registry.hpp
-    code/ylikuutio/ontology/request.hpp
-    code/ylikuutio/ontology/request_resolver.hpp
-    code/ylikuutio/ontology/result.hpp
-    code/ylikuutio/ontology/rigid_body_module.cpp
-    code/ylikuutio/ontology/rigid_body_module.hpp
-    code/ylikuutio/ontology/rigid_body_module_struct.hpp
-    code/ylikuutio/ontology/scene.cpp
-    code/ylikuutio/ontology/scene.hpp
-    code/ylikuutio/ontology/scene_struct.hpp
-    code/ylikuutio/ontology/skill.cpp
-    code/ylikuutio/ontology/skill.hpp
-    code/ylikuutio/ontology/skill_struct.hpp
-    code/ylikuutio/ontology/texture_file_format.hpp
-    code/ylikuutio/ontology/unbind_child_from_parent.hpp
-    code/ylikuutio/ontology/variable.cpp
-    code/ylikuutio/ontology/variable.hpp
-    code/ylikuutio/ontology/variable_callbacks.cpp
-    code/ylikuutio/ontology/variable_struct.hpp
-    code/ylikuutio/ontology/pipeline.cpp
-    code/ylikuutio/ontology/pipeline.hpp
-    code/ylikuutio/ontology/pipeline_compare.cpp
-    code/ylikuutio/ontology/pipeline_compare.hpp
-    code/ylikuutio/ontology/pipeline_priority_queue.cpp
-    code/ylikuutio/ontology/pipeline_priority_queue.hpp
-    code/ylikuutio/ontology/pipeline_struct.hpp
-    code/ylikuutio/ontology/print_console_struct.hpp
-    code/ylikuutio/ontology/print_text_struct.hpp
-    code/ylikuutio/ontology/shapeshifter.cpp
-    code/ylikuutio/ontology/shapeshifter.hpp
-    code/ylikuutio/ontology/shapeshifter_form.cpp
-    code/ylikuutio/ontology/shapeshifter_form.hpp
-    code/ylikuutio/ontology/shapeshifter_form_struct.hpp
-    code/ylikuutio/ontology/shapeshifter_sequence.cpp
-    code/ylikuutio/ontology/shapeshifter_sequence.hpp
-    code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp
-    code/ylikuutio/ontology/shapeshifter_struct.hpp
-    code/ylikuutio/ontology/shapeshifter_transformation.cpp
-    code/ylikuutio/ontology/shapeshifter_transformation.hpp
-    code/ylikuutio/ontology/shapeshifter_transformation_struct.hpp
-    code/ylikuutio/ontology/species.cpp
-    code/ylikuutio/ontology/species.hpp
-    code/ylikuutio/ontology/species_struct.hpp
-    code/ylikuutio/ontology/symbiont_material.cpp
-    code/ylikuutio/ontology/symbiont_material.hpp
-    code/ylikuutio/ontology/symbiont_material_struct.hpp
-    code/ylikuutio/ontology/symbiont_species.cpp
-    code/ylikuutio/ontology/symbiont_species.hpp
-    code/ylikuutio/ontology/symbiosis.cpp
-    code/ylikuutio/ontology/symbiosis.hpp
-    code/ylikuutio/ontology/symbiosis_struct.hpp
-    code/ylikuutio/ontology/terrain_generation_callbacks.cpp
-    code/ylikuutio/ontology/terrain_generation_callbacks.hpp
-    code/ylikuutio/ontology/texture_module.cpp
-    code/ylikuutio/ontology/texture_module.hpp
-    code/ylikuutio/ontology/text_2d.hpp
-    code/ylikuutio/ontology/text_2d.cpp
-    code/ylikuutio/ontology/text_3d.hpp
-    code/ylikuutio/ontology/text_3d.cpp
-    code/ylikuutio/ontology/text_3d_struct.hpp
-    code/ylikuutio/ontology/text_struct.hpp
-    code/ylikuutio/ontology/universe.cpp
-    code/ylikuutio/ontology/universe.hpp
-    code/ylikuutio/ontology/universe_callbacks.cpp
-    code/ylikuutio/ontology/universe_struct.hpp
-    code/ylikuutio/ontology/vector_font.cpp
-    code/ylikuutio/ontology/vector_font.hpp
-    code/ylikuutio/ontology/vector_font_struct.hpp
-    code/ylikuutio/ontology/vertical_alignment.hpp
-    code/ylikuutio/ontology/waypoint.cpp
-    code/ylikuutio/ontology/waypoint.hpp
-    code/ylikuutio/ontology/waypoint_struct.hpp
+        # ontology, in alphabetical order
+        code/ylikuutio/ontology/ability.cpp
+        code/ylikuutio/ontology/ability.hpp
+        code/ylikuutio/ontology/ability_struct.hpp
+        code/ylikuutio/ontology/abstract_callback_engine.cpp
+        code/ylikuutio/ontology/abstract_callback_engine.hpp
+        code/ylikuutio/ontology/abstract_callback_engine_struct.hpp
+        code/ylikuutio/ontology/abstract_capability.cpp
+        code/ylikuutio/ontology/abstract_capability.hpp
+        code/ylikuutio/ontology/abstract_console_lisp_function_overload.cpp
+        code/ylikuutio/ontology/abstract_console_lisp_function_overload.hpp
+        code/ylikuutio/ontology/abstract_entity_factory.hpp
+        code/ylikuutio/ontology/abstract_movable.cpp
+        code/ylikuutio/ontology/abstract_movable.hpp
+        code/ylikuutio/ontology/abstract_lisp_function_overload.cpp
+        code/ylikuutio/ontology/abstract_lisp_function_overload.hpp
+        code/ylikuutio/ontology/activate_callback.hpp
+        code/ylikuutio/ontology/apprentice_iterator.hpp
+        code/ylikuutio/ontology/apprentice_module.cpp
+        code/ylikuutio/ontology/apprentice_module.hpp
+        code/ylikuutio/ontology/audio_track.cpp
+        code/ylikuutio/ontology/audio_track.hpp
+        code/ylikuutio/ontology/audio_track_struct.hpp
+        code/ylikuutio/ontology/bind_child_to_parent.hpp
+        code/ylikuutio/ontology/biont.cpp
+        code/ylikuutio/ontology/biont.hpp
+        code/ylikuutio/ontology/biont_struct.hpp
+        code/ylikuutio/ontology/callback_engine.cpp
+        code/ylikuutio/ontology/callback_engine.hpp
+        code/ylikuutio/ontology/callback_engine_struct.hpp
+        code/ylikuutio/ontology/callback_magic_numbers.hpp
+        code/ylikuutio/ontology/callback_object.cpp
+        code/ylikuutio/ontology/callback_object.hpp
+        code/ylikuutio/ontology/callback_object_struct.hpp
+        code/ylikuutio/ontology/callback_parameter.cpp
+        code/ylikuutio/ontology/callback_parameter.hpp
+        code/ylikuutio/ontology/callback_parameter_struct.hpp
+        code/ylikuutio/ontology/camera.cpp
+        code/ylikuutio/ontology/camera.hpp
+        code/ylikuutio/ontology/camera_struct.hpp
+        code/ylikuutio/ontology/capability_struct.hpp
+        code/ylikuutio/ontology/cartesian_coordinates_module.cpp
+        code/ylikuutio/ontology/cartesian_coordinates_module.hpp
+        code/ylikuutio/ontology/child_iterator.hpp
+        code/ylikuutio/ontology/child_module.cpp
+        code/ylikuutio/ontology/child_module.hpp
+        code/ylikuutio/ontology/compute_task.cpp
+        code/ylikuutio/ontology/compute_task.hpp
+        code/ylikuutio/ontology/compute_task_struct.hpp
+        code/ylikuutio/ontology/console.cpp
+        code/ylikuutio/ontology/console.hpp
+        code/ylikuutio/ontology/console_callback_engine.cpp
+        code/ylikuutio/ontology/console_callback_engine.hpp
+        code/ylikuutio/ontology/console_callback_engine_struct.hpp
+        code/ylikuutio/ontology/console_callback_object.cpp
+        code/ylikuutio/ontology/console_callback_object.hpp
+        code/ylikuutio/ontology/console_callback_object_struct.hpp
+        code/ylikuutio/ontology/console_callback_parameter.cpp
+        code/ylikuutio/ontology/console_callback_parameter.hpp
+        code/ylikuutio/ontology/console_callback_parameter_struct.hpp
+        code/ylikuutio/ontology/console_lisp_function.cpp
+        code/ylikuutio/ontology/console_lisp_function.hpp
+        code/ylikuutio/ontology/console_lisp_function_overload.hpp
+        code/ylikuutio/ontology/console_lisp_function_struct.hpp
+        code/ylikuutio/ontology/console_printing.cpp
+        code/ylikuutio/ontology/console_printing.hpp
+        code/ylikuutio/ontology/console_struct.hpp
+        code/ylikuutio/ontology/ecosystem.cpp
+        code/ylikuutio/ontology/ecosystem.hpp
+        code/ylikuutio/ontology/ecosystem_struct.hpp
+        code/ylikuutio/ontology/entity.cpp
+        code/ylikuutio/ontology/entity.hpp
+        code/ylikuutio/ontology/entity_callbacks.cpp
+        code/ylikuutio/ontology/entity_factory.hpp
+        code/ylikuutio/ontology/entity_struct.hpp
+        code/ylikuutio/ontology/entity_variable_activation.cpp
+        code/ylikuutio/ontology/entity_variable_activation.hpp
+        code/ylikuutio/ontology/entity_variable_read.cpp
+        code/ylikuutio/ontology/entity_variable_read.hpp
+        code/ylikuutio/ontology/font_2d.cpp
+        code/ylikuutio/ontology/font_2d.hpp
+        code/ylikuutio/ontology/font_struct.hpp
+        code/ylikuutio/ontology/framebuffer_module.cpp
+        code/ylikuutio/ontology/framebuffer_module.hpp
+        code/ylikuutio/ontology/framebuffer_module_struct.hpp
+        code/ylikuutio/ontology/generic_master_module.cpp
+        code/ylikuutio/ontology/generic_master_module.hpp
+        code/ylikuutio/ontology/generic_parent_module.cpp
+        code/ylikuutio/ontology/generic_parent_module.hpp
+        code/ylikuutio/ontology/get_content_callback.hpp
+        code/ylikuutio/ontology/get_number_of_descendants.hpp
+        code/ylikuutio/ontology/gl_attrib_locations.cpp
+        code/ylikuutio/ontology/gl_attrib_locations.hpp
+        code/ylikuutio/ontology/glyph.cpp
+        code/ylikuutio/ontology/glyph.hpp
+        code/ylikuutio/ontology/glyph_object.cpp
+        code/ylikuutio/ontology/glyph_object.hpp
+        code/ylikuutio/ontology/glyph_object_creation.cpp
+        code/ylikuutio/ontology/glyph_object_creation.hpp
+        code/ylikuutio/ontology/glyph_object_struct.hpp
+        code/ylikuutio/ontology/glyph_struct.hpp
+        code/ylikuutio/ontology/heightmap.cpp
+        code/ylikuutio/ontology/heightmap.hpp
+        code/ylikuutio/ontology/heightmap_sheet.cpp
+        code/ylikuutio/ontology/heightmap_sheet.hpp
+        code/ylikuutio/ontology/heightmap_sheet_struct.hpp
+        code/ylikuutio/ontology/heightmap_struct.hpp
+        code/ylikuutio/ontology/holobiont.cpp
+        code/ylikuutio/ontology/holobiont.hpp
+        code/ylikuutio/ontology/holobiont_struct.hpp
+        code/ylikuutio/ontology/horizontal_alignment.hpp
+        code/ylikuutio/ontology/indexable.hpp
+        code/ylikuutio/ontology/input_mode.cpp
+        code/ylikuutio/ontology/input_mode.hpp
+        code/ylikuutio/ontology/input_mode_apprentice_module.cpp
+        code/ylikuutio/ontology/input_mode_apprentice_module.hpp
+        code/ylikuutio/ontology/input_mode_child_module.cpp
+        code/ylikuutio/ontology/input_mode_child_module.hpp
+        code/ylikuutio/ontology/input_mode_struct.hpp
+        code/ylikuutio/ontology/input_parameters_and_any_value_to_any_value_callback_with_universe.hpp
+        code/ylikuutio/ontology/input_parameters_to_any_value_callback_with_console.hpp
+        code/ylikuutio/ontology/lisp_context.cpp
+        code/ylikuutio/ontology/lisp_context.hpp
+        code/ylikuutio/ontology/lisp_context_struct.hpp
+        code/ylikuutio/ontology/lisp_function.cpp
+        code/ylikuutio/ontology/lisp_function.hpp
+        code/ylikuutio/ontology/lisp_function_struct.hpp
+        code/ylikuutio/ontology/locomotion_environment.hpp
+        code/ylikuutio/ontology/locomotion_module.cpp
+        code/ylikuutio/ontology/locomotion_module.hpp
+        code/ylikuutio/ontology/locomotion_module_struct.hpp
+        code/ylikuutio/ontology/master_module.hpp
+        code/ylikuutio/ontology/master_of_input_modes_module.cpp
+        code/ylikuutio/ontology/master_of_input_modes_module.hpp
+        code/ylikuutio/ontology/material.cpp
+        code/ylikuutio/ontology/material.hpp
+        code/ylikuutio/ontology/material_struct.hpp
+        code/ylikuutio/ontology/mesh_module.cpp
+        code/ylikuutio/ontology/mesh_module.hpp
+        code/ylikuutio/ontology/mesh_provider_struct.hpp
+        code/ylikuutio/ontology/mission.cpp
+        code/ylikuutio/ontology/mission.hpp
+        code/ylikuutio/ontology/mission_struct.hpp
+        code/ylikuutio/ontology/movable_controller.cpp
+        code/ylikuutio/ontology/movable_controller.hpp
+        code/ylikuutio/ontology/movable_controller_struct.hpp
+        code/ylikuutio/ontology/movable_struct.hpp
+        code/ylikuutio/ontology/movable_variable_activation.cpp
+        code/ylikuutio/ontology/movable_variable_activation.hpp
+        code/ylikuutio/ontology/movable_variable_read.cpp
+        code/ylikuutio/ontology/movable_variable_read.hpp
+        code/ylikuutio/ontology/object.cpp
+        code/ylikuutio/ontology/object.hpp
+        code/ylikuutio/ontology/object_struct.hpp
+        code/ylikuutio/ontology/orientation_module.cpp
+        code/ylikuutio/ontology/orientation_module.hpp
+        code/ylikuutio/ontology/parent_of_input_modes_module.cpp
+        code/ylikuutio/ontology/parent_of_input_modes_module.hpp
+        code/ylikuutio/ontology/parent_of_pipelines_module.cpp
+        code/ylikuutio/ontology/parent_of_pipelines_module.hpp
+        code/ylikuutio/ontology/parent_of_skills_module.cpp
+        code/ylikuutio/ontology/parent_of_skills_module.hpp
+        code/ylikuutio/ontology/position_struct.hpp
+        code/ylikuutio/ontology/read_callback.hpp
+        code/ylikuutio/ontology/registry.cpp
+        code/ylikuutio/ontology/registry.hpp
+        code/ylikuutio/ontology/request.hpp
+        code/ylikuutio/ontology/request_resolver.hpp
+        code/ylikuutio/ontology/result.hpp
+        code/ylikuutio/ontology/rigid_body_module.cpp
+        code/ylikuutio/ontology/rigid_body_module.hpp
+        code/ylikuutio/ontology/rigid_body_module_struct.hpp
+        code/ylikuutio/ontology/scene.cpp
+        code/ylikuutio/ontology/scene.hpp
+        code/ylikuutio/ontology/scene_struct.hpp
+        code/ylikuutio/ontology/skill.cpp
+        code/ylikuutio/ontology/skill.hpp
+        code/ylikuutio/ontology/skill_struct.hpp
+        code/ylikuutio/ontology/texture_file_format.hpp
+        code/ylikuutio/ontology/unbind_child_from_parent.hpp
+        code/ylikuutio/ontology/variable.cpp
+        code/ylikuutio/ontology/variable.hpp
+        code/ylikuutio/ontology/variable_callbacks.cpp
+        code/ylikuutio/ontology/variable_struct.hpp
+        code/ylikuutio/ontology/pipeline.cpp
+        code/ylikuutio/ontology/pipeline.hpp
+        code/ylikuutio/ontology/pipeline_compare.cpp
+        code/ylikuutio/ontology/pipeline_compare.hpp
+        code/ylikuutio/ontology/pipeline_priority_queue.cpp
+        code/ylikuutio/ontology/pipeline_priority_queue.hpp
+        code/ylikuutio/ontology/pipeline_struct.hpp
+        code/ylikuutio/ontology/print_console_struct.hpp
+        code/ylikuutio/ontology/print_text_struct.hpp
+        code/ylikuutio/ontology/shapeshifter.cpp
+        code/ylikuutio/ontology/shapeshifter.hpp
+        code/ylikuutio/ontology/shapeshifter_form.cpp
+        code/ylikuutio/ontology/shapeshifter_form.hpp
+        code/ylikuutio/ontology/shapeshifter_form_struct.hpp
+        code/ylikuutio/ontology/shapeshifter_sequence.cpp
+        code/ylikuutio/ontology/shapeshifter_sequence.hpp
+        code/ylikuutio/ontology/shapeshifter_sequence_struct.hpp
+        code/ylikuutio/ontology/shapeshifter_struct.hpp
+        code/ylikuutio/ontology/shapeshifter_transformation.cpp
+        code/ylikuutio/ontology/shapeshifter_transformation.hpp
+        code/ylikuutio/ontology/shapeshifter_transformation_struct.hpp
+        code/ylikuutio/ontology/species.cpp
+        code/ylikuutio/ontology/species.hpp
+        code/ylikuutio/ontology/species_struct.hpp
+        code/ylikuutio/ontology/symbiont_material.cpp
+        code/ylikuutio/ontology/symbiont_material.hpp
+        code/ylikuutio/ontology/symbiont_material_struct.hpp
+        code/ylikuutio/ontology/symbiont_species.cpp
+        code/ylikuutio/ontology/symbiont_species.hpp
+        code/ylikuutio/ontology/symbiosis.cpp
+        code/ylikuutio/ontology/symbiosis.hpp
+        code/ylikuutio/ontology/symbiosis_struct.hpp
+        code/ylikuutio/ontology/terrain_generation_callbacks.cpp
+        code/ylikuutio/ontology/terrain_generation_callbacks.hpp
+        code/ylikuutio/ontology/texture_module.cpp
+        code/ylikuutio/ontology/texture_module.hpp
+        code/ylikuutio/ontology/text_2d.hpp
+        code/ylikuutio/ontology/text_2d.cpp
+        code/ylikuutio/ontology/text_3d.hpp
+        code/ylikuutio/ontology/text_3d.cpp
+        code/ylikuutio/ontology/text_3d_struct.hpp
+        code/ylikuutio/ontology/text_struct.hpp
+        code/ylikuutio/ontology/universe.cpp
+        code/ylikuutio/ontology/universe.hpp
+        code/ylikuutio/ontology/universe_callbacks.cpp
+        code/ylikuutio/ontology/universe_struct.hpp
+        code/ylikuutio/ontology/vector_font.cpp
+        code/ylikuutio/ontology/vector_font.hpp
+        code/ylikuutio/ontology/vector_font_struct.hpp
+        code/ylikuutio/ontology/vertical_alignment.hpp
+        code/ylikuutio/ontology/waypoint.cpp
+        code/ylikuutio/ontology/waypoint.hpp
+        code/ylikuutio/ontology/waypoint_struct.hpp
 
-    # opengl, in alphabetical order
-    code/ylikuutio/opengl/opengl.cpp
-    code/ylikuutio/opengl/opengl.hpp
-    code/ylikuutio/opengl/opengl_texture.cpp
-    code/ylikuutio/opengl/opengl_texture.hpp
-    code/ylikuutio/opengl/ubo_block_enums.hpp
-    code/ylikuutio/opengl/vbo_indexer.cpp
-    code/ylikuutio/opengl/vbo_indexer.hpp
-    code/ylikuutio/opengl/ylikuutio_glew.hpp
+        # opengl, in alphabetical order
+        code/ylikuutio/opengl/opengl.cpp
+        code/ylikuutio/opengl/opengl.hpp
+        code/ylikuutio/opengl/opengl_texture.cpp
+        code/ylikuutio/opengl/opengl_texture.hpp
+        code/ylikuutio/opengl/ubo_block_enums.hpp
+        code/ylikuutio/opengl/vbo_indexer.cpp
+        code/ylikuutio/opengl/vbo_indexer.hpp
+        code/ylikuutio/opengl/ylikuutio_glew.hpp
 
-    # render, in alphabetical order
-    code/ylikuutio/render/graphics_api_backend.hpp
-    code/ylikuutio/render/render_model.hpp
-    code/ylikuutio/render/render_struct.hpp
-    code/ylikuutio/render/render_system.cpp
-    code/ylikuutio/render/render_system.hpp
-    code/ylikuutio/render/render_system_struct.hpp
-    code/ylikuutio/render/render_templates.hpp
-    code/ylikuutio/render/render_text.cpp
-    code/ylikuutio/render/render_text.hpp
+        # render, in alphabetical order
+        code/ylikuutio/render/graphics_api_backend.hpp
+        code/ylikuutio/render/render_model.hpp
+        code/ylikuutio/render/render_struct.hpp
+        code/ylikuutio/render/render_system.cpp
+        code/ylikuutio/render/render_system.hpp
+        code/ylikuutio/render/render_system_struct.hpp
+        code/ylikuutio/render/render_templates.hpp
+        code/ylikuutio/render/render_text.cpp
+        code/ylikuutio/render/render_text.hpp
 
-    # sdl, in alphabetical order
-    code/ylikuutio/sdl/ylikuutio_sdl.cpp
-    code/ylikuutio/sdl/ylikuutio_sdl.hpp
+        # sdl, in alphabetical order
+        code/ylikuutio/sdl/ylikuutio_sdl.cpp
+        code/ylikuutio/sdl/ylikuutio_sdl.hpp
 
-    # shaders, in alphabetical order
-    code/ylikuutio/shaders/standard_shading.frag
-    code/ylikuutio/shaders/standard_shading.vert
-    code/ylikuutio/shaders/text_vertex_shader.frag
-    code/ylikuutio/shaders/text_vertex_shader.vert
+        # shaders, in alphabetical order
+        code/ylikuutio/shaders/standard_shading.frag
+        code/ylikuutio/shaders/standard_shading.vert
+        code/ylikuutio/shaders/text_vertex_shader.frag
+        code/ylikuutio/shaders/text_vertex_shader.vert
 
-    # string, in alphabetical order
-    code/ylikuutio/string/convert_string_to_value.hpp
-    code/ylikuutio/string/extract_string.hpp
-    code/ylikuutio/string/extract_value.hpp
-    code/ylikuutio/string/hexdump.cpp
-    code/ylikuutio/string/hexdump.hpp
-    code/ylikuutio/string/match_string.hpp
-    code/ylikuutio/string/string_set.cpp
-    code/ylikuutio/string/string_set.hpp
-    code/ylikuutio/string/unicode.cpp
-    code/ylikuutio/string/unicode.hpp
-    code/ylikuutio/string/ylikuutio_string.hpp
+        # string, in alphabetical order
+        code/ylikuutio/string/convert_string_to_value.hpp
+        code/ylikuutio/string/extract_string.hpp
+        code/ylikuutio/string/extract_value.hpp
+        code/ylikuutio/string/hexdump.cpp
+        code/ylikuutio/string/hexdump.hpp
+        code/ylikuutio/string/match_string.hpp
+        code/ylikuutio/string/string_set.cpp
+        code/ylikuutio/string/string_set.hpp
+        code/ylikuutio/string/unicode.cpp
+        code/ylikuutio/string/unicode.hpp
+        code/ylikuutio/string/ylikuutio_string.hpp
 
-    # time, in alphabetical order
-    code/ylikuutio/time/time.cpp
-    code/ylikuutio/time/time.hpp
+        # time, in alphabetical order
+        code/ylikuutio/time/time.cpp
+        code/ylikuutio/time/time.hpp
 
-    # triangulation, in alphabetical order
-    code/ylikuutio/triangulation/face_normals.cpp
-    code/ylikuutio/triangulation/face_normals.hpp
-    code/ylikuutio/triangulation/indexing.hpp
-    code/ylikuutio/triangulation/polygon_triangulation.cpp
-    code/ylikuutio/triangulation/polygon_triangulation.hpp
-    code/ylikuutio/triangulation/quad_triangulation.hpp
-    code/ylikuutio/triangulation/triangulate_polygons_struct.hpp
-    code/ylikuutio/triangulation/triangulate_quads_struct.hpp
-    code/ylikuutio/triangulation/triangulation_enums.hpp
-    code/ylikuutio/triangulation/triangulation_templates.hpp
-    code/ylikuutio/triangulation/vertex_normals.cpp
-    code/ylikuutio/triangulation/vertex_normals.hpp
-    code/ylikuutio/triangulation/vertices.cpp
-    code/ylikuutio/triangulation/vertices.hpp
-    )
+        # triangulation, in alphabetical order
+        code/ylikuutio/triangulation/face_normals.cpp
+        code/ylikuutio/triangulation/face_normals.hpp
+        code/ylikuutio/triangulation/indexing.hpp
+        code/ylikuutio/triangulation/polygon_triangulation.cpp
+        code/ylikuutio/triangulation/polygon_triangulation.hpp
+        code/ylikuutio/triangulation/quad_triangulation.hpp
+        code/ylikuutio/triangulation/triangulate_polygons_struct.hpp
+        code/ylikuutio/triangulation/triangulate_quads_struct.hpp
+        code/ylikuutio/triangulation/triangulation_enums.hpp
+        code/ylikuutio/triangulation/triangulation_templates.hpp
+        code/ylikuutio/triangulation/vertex_normals.cpp
+        code/ylikuutio/triangulation/vertex_normals.hpp
+        code/ylikuutio/triangulation/vertices.cpp
+        code/ylikuutio/triangulation/vertices.hpp
+)
 
 # Snippets (can be used by applications but these are not core Ylikuutio functionality)
 add_library(snippets STATIC
-    # snippets, in alphabetical order
-    code/ylikuutio/snippets/action_mode_keyboard_callback_creation_snippets.cpp
-    code/ylikuutio/snippets/action_mode_keyboard_callback_creation_snippets.hpp
-    code/ylikuutio/snippets/background_color_snippets.cpp
-    code/ylikuutio/snippets/background_color_snippets.hpp
-    code/ylikuutio/snippets/callback_snippets.cpp
-    code/ylikuutio/snippets/callback_snippets.hpp
-    code/ylikuutio/snippets/console_callback_snippets.cpp
-    code/ylikuutio/snippets/console_callback_snippets.hpp
-    code/ylikuutio/snippets/console_mode_keyboard_callback_creation_snippets.cpp
-    code/ylikuutio/snippets/console_mode_keyboard_callback_creation_snippets.hpp
-    code/ylikuutio/snippets/debug_snippets.cpp
-    code/ylikuutio/snippets/debug_snippets.hpp
-    code/ylikuutio/snippets/framebuffer_snippets.cpp
-    code/ylikuutio/snippets/framebuffer_snippets.hpp
-    code/ylikuutio/snippets/keyboard_callback_snippets.cpp
-    code/ylikuutio/snippets/keyboard_callback_snippets.hpp
-    code/ylikuutio/snippets/lisp_function_overload_creation_snippets.hpp
-    code/ylikuutio/snippets/location_and_orientation_snippets.cpp
-    code/ylikuutio/snippets/location_and_orientation_snippets.hpp
-    code/ylikuutio/snippets/movable_controller_snippets.cpp
-    code/ylikuutio/snippets/movable_controller_snippets.hpp
-    code/ylikuutio/snippets/movement_snippets.cpp
-    code/ylikuutio/snippets/movement_snippets.hpp
-    code/ylikuutio/snippets/wireframe_snippets.cpp
-    code/ylikuutio/snippets/wireframe_snippets.hpp
+        # snippets, in alphabetical order
+        code/ylikuutio/snippets/action_mode_keyboard_callback_creation_snippets.cpp
+        code/ylikuutio/snippets/action_mode_keyboard_callback_creation_snippets.hpp
+        code/ylikuutio/snippets/background_color_snippets.cpp
+        code/ylikuutio/snippets/background_color_snippets.hpp
+        code/ylikuutio/snippets/callback_snippets.cpp
+        code/ylikuutio/snippets/callback_snippets.hpp
+        code/ylikuutio/snippets/console_callback_snippets.cpp
+        code/ylikuutio/snippets/console_callback_snippets.hpp
+        code/ylikuutio/snippets/console_mode_keyboard_callback_creation_snippets.cpp
+        code/ylikuutio/snippets/console_mode_keyboard_callback_creation_snippets.hpp
+        code/ylikuutio/snippets/debug_snippets.cpp
+        code/ylikuutio/snippets/debug_snippets.hpp
+        code/ylikuutio/snippets/framebuffer_snippets.cpp
+        code/ylikuutio/snippets/framebuffer_snippets.hpp
+        code/ylikuutio/snippets/keyboard_callback_snippets.cpp
+        code/ylikuutio/snippets/keyboard_callback_snippets.hpp
+        code/ylikuutio/snippets/lisp_function_overload_creation_snippets.hpp
+        code/ylikuutio/snippets/location_and_orientation_snippets.cpp
+        code/ylikuutio/snippets/location_and_orientation_snippets.hpp
+        code/ylikuutio/snippets/movable_controller_snippets.cpp
+        code/ylikuutio/snippets/movable_controller_snippets.hpp
+        code/ylikuutio/snippets/movement_snippets.cpp
+        code/ylikuutio/snippets/movement_snippets.hpp
+        code/ylikuutio/snippets/wireframe_snippets.cpp
+        code/ylikuutio/snippets/wireframe_snippets.hpp
 
-    # locomotion snippets, in alphabetical order
-    # These provide different locomotion modalities.
-    # TODO: implement locomotion modules!
-    code/ylikuutio/snippets/locomotion/climb_module.cpp
-    code/ylikuutio/snippets/locomotion/climb_module.hpp
-    code/ylikuutio/snippets/locomotion/dive_module.cpp
-    code/ylikuutio/snippets/locomotion/dive_module.hpp
-    code/ylikuutio/snippets/locomotion/fly_module.cpp
-    code/ylikuutio/snippets/locomotion/fly_module.hpp
-    code/ylikuutio/snippets/locomotion/gait_module.cpp
-    code/ylikuutio/snippets/locomotion/gait_module.hpp
-    code/ylikuutio/snippets/locomotion/rail_vehicle_module.cpp
-    code/ylikuutio/snippets/locomotion/rail_vehicle_module.hpp
-    code/ylikuutio/snippets/locomotion/road_vehicle_module.cpp
-    code/ylikuutio/snippets/locomotion/road_vehicle_module.hpp
-    code/ylikuutio/snippets/locomotion/ship_module.cpp
-    code/ylikuutio/snippets/locomotion/ship_module.hpp
-    code/ylikuutio/snippets/locomotion/swim_module.cpp
-    code/ylikuutio/snippets/locomotion/swim_module.hpp
-    )
+        # locomotion snippets, in alphabetical order
+        # These provide different locomotion modalities.
+        # TODO: implement locomotion modules!
+        code/ylikuutio/snippets/locomotion/climb_module.cpp
+        code/ylikuutio/snippets/locomotion/climb_module.hpp
+        code/ylikuutio/snippets/locomotion/dive_module.cpp
+        code/ylikuutio/snippets/locomotion/dive_module.hpp
+        code/ylikuutio/snippets/locomotion/fly_module.cpp
+        code/ylikuutio/snippets/locomotion/fly_module.hpp
+        code/ylikuutio/snippets/locomotion/gait_module.cpp
+        code/ylikuutio/snippets/locomotion/gait_module.hpp
+        code/ylikuutio/snippets/locomotion/rail_vehicle_module.cpp
+        code/ylikuutio/snippets/locomotion/rail_vehicle_module.hpp
+        code/ylikuutio/snippets/locomotion/road_vehicle_module.cpp
+        code/ylikuutio/snippets/locomotion/road_vehicle_module.hpp
+        code/ylikuutio/snippets/locomotion/ship_module.cpp
+        code/ylikuutio/snippets/locomotion/ship_module.hpp
+        code/ylikuutio/snippets/locomotion/swim_module.cpp
+        code/ylikuutio/snippets/locomotion/swim_module.hpp
+)
 
 ### Hirvi libraries ###
 
 # hirvi_lib (most of Hirvi code is here)
 add_library(hirvi_lib STATIC
-    code/hirvi/core/hirvi_application_callback.hpp
-    code/hirvi/core/hirvi_core.cpp
-    code/hirvi/core/hirvi_core.hpp
-    code/hirvi/core/hirvi_earth_ecosystem.cpp
-    code/hirvi/core/hirvi_helsinki_east_downtown_scene.cpp
-    code/hirvi/data/datatype.hpp
-    code/hirvi/data/data_analyzer.cpp
-    code/hirvi/data/data_analyzer.hpp
-    code/hirvi/data/position_report.hpp
-    code/hirvi/data/spatial_data.cpp
-    code/hirvi/data/spatial_data.hpp
-    code/hirvi/data/trivial_data_analyzer.cpp
-    code/hirvi/data/trivial_data_analyzer.hpp
-    code/hirvi/ontology/cat.cpp
-    code/hirvi/ontology/cat.hpp
-    code/hirvi/ontology/climb_ability.cpp
-    code/hirvi/ontology/climb_ability.hpp
-    code/hirvi/ontology/elk.cpp
-    code/hirvi/ontology/elk.hpp
-    code/hirvi/ontology/elk_struct.hpp
-    code/hirvi/ontology/emancipation_module.cpp
-    code/hirvi/ontology/emancipation_module.hpp
-    code/hirvi/ontology/fly_ability.cpp
-    code/hirvi/ontology/fly_ability.hpp
-    code/hirvi/ontology/hirvi_scene.cpp
-    code/hirvi/ontology/hirvi_scene.hpp
-    code/hirvi/ontology/hirvi_scene_struct.hpp
-    code/hirvi/ontology/jump_ability.cpp
-    code/hirvi/ontology/jump_ability.hpp
-    code/hirvi/ontology/master_of_polices.cpp
-    code/hirvi/ontology/master_of_polices.hpp
-    code/hirvi/ontology/moo_ability.cpp
-    code/hirvi/ontology/moo_ability.hpp
-    code/hirvi/ontology/police_bear.cpp
-    code/hirvi/ontology/police_bear.hpp
-    code/hirvi/ontology/police_bear_struct.hpp
-    code/hirvi/ontology/police_car.cpp
-    code/hirvi/ontology/police_car.hpp
-    code/hirvi/ontology/police_car_struct.hpp
-    code/hirvi/ontology/police_control_center.cpp
-    code/hirvi/ontology/police_control_center.hpp
-    code/hirvi/ontology/police_control_center_struct.hpp
-    code/hirvi/ontology/police_dog.cpp
-    code/hirvi/ontology/police_dog.hpp
-    code/hirvi/ontology/police_dog_struct.hpp
-    code/hirvi/ontology/police_helicopter.cpp
-    code/hirvi/ontology/police_helicopter.hpp
-    code/hirvi/ontology/police_helicopter_struct.hpp
-    code/hirvi/ontology/police_horse.cpp
-    code/hirvi/ontology/police_horse_struct.hpp
-    code/hirvi/ontology/police_horse.hpp
-    code/hirvi/ontology/police_module.cpp
-    code/hirvi/ontology/police_module.hpp
-    code/hirvi/ontology/police_train.cpp
-    code/hirvi/ontology/police_train.hpp
-    code/hirvi/ontology/police_train_struct.hpp
-    code/hirvi/ontology/police_tram.cpp
-    code/hirvi/ontology/police_tram.hpp
-    code/hirvi/ontology/police_tram_struct.hpp
-    code/hirvi/ontology/run_ability.cpp
-    code/hirvi/ontology/run_ability.hpp
-    code/hirvi/ontology/swim_ability.cpp
-    code/hirvi/ontology/swim_ability.hpp
-    code/hirvi/ontology/train.cpp
-    code/hirvi/ontology/train.hpp
-    code/hirvi/ontology/train_struct.hpp
+        code/hirvi/core/hirvi_application_callback.hpp
+        code/hirvi/core/hirvi_core.cpp
+        code/hirvi/core/hirvi_core.hpp
+        code/hirvi/core/hirvi_earth_ecosystem.cpp
+        code/hirvi/core/hirvi_helsinki_east_downtown_scene.cpp
+        code/hirvi/data/datatype.hpp
+        code/hirvi/data/data_analyzer.cpp
+        code/hirvi/data/data_analyzer.hpp
+        code/hirvi/data/position_report.hpp
+        code/hirvi/data/spatial_data.cpp
+        code/hirvi/data/spatial_data.hpp
+        code/hirvi/data/trivial_data_analyzer.cpp
+        code/hirvi/data/trivial_data_analyzer.hpp
+        code/hirvi/ontology/cat.cpp
+        code/hirvi/ontology/cat.hpp
+        code/hirvi/ontology/climb_ability.cpp
+        code/hirvi/ontology/climb_ability.hpp
+        code/hirvi/ontology/elk.cpp
+        code/hirvi/ontology/elk.hpp
+        code/hirvi/ontology/elk_struct.hpp
+        code/hirvi/ontology/emancipation_module.cpp
+        code/hirvi/ontology/emancipation_module.hpp
+        code/hirvi/ontology/fly_ability.cpp
+        code/hirvi/ontology/fly_ability.hpp
+        code/hirvi/ontology/hirvi_scene.cpp
+        code/hirvi/ontology/hirvi_scene.hpp
+        code/hirvi/ontology/hirvi_scene_struct.hpp
+        code/hirvi/ontology/jump_ability.cpp
+        code/hirvi/ontology/jump_ability.hpp
+        code/hirvi/ontology/master_of_polices.cpp
+        code/hirvi/ontology/master_of_polices.hpp
+        code/hirvi/ontology/moo_ability.cpp
+        code/hirvi/ontology/moo_ability.hpp
+        code/hirvi/ontology/police_bear.cpp
+        code/hirvi/ontology/police_bear.hpp
+        code/hirvi/ontology/police_bear_struct.hpp
+        code/hirvi/ontology/police_car.cpp
+        code/hirvi/ontology/police_car.hpp
+        code/hirvi/ontology/police_car_struct.hpp
+        code/hirvi/ontology/police_control_center.cpp
+        code/hirvi/ontology/police_control_center.hpp
+        code/hirvi/ontology/police_control_center_struct.hpp
+        code/hirvi/ontology/police_dog.cpp
+        code/hirvi/ontology/police_dog.hpp
+        code/hirvi/ontology/police_dog_struct.hpp
+        code/hirvi/ontology/police_helicopter.cpp
+        code/hirvi/ontology/police_helicopter.hpp
+        code/hirvi/ontology/police_helicopter_struct.hpp
+        code/hirvi/ontology/police_horse.cpp
+        code/hirvi/ontology/police_horse_struct.hpp
+        code/hirvi/ontology/police_horse.hpp
+        code/hirvi/ontology/police_module.cpp
+        code/hirvi/ontology/police_module.hpp
+        code/hirvi/ontology/police_train.cpp
+        code/hirvi/ontology/police_train.hpp
+        code/hirvi/ontology/police_train_struct.hpp
+        code/hirvi/ontology/police_tram.cpp
+        code/hirvi/ontology/police_tram.hpp
+        code/hirvi/ontology/police_tram_struct.hpp
+        code/hirvi/ontology/run_ability.cpp
+        code/hirvi/ontology/run_ability.hpp
+        code/hirvi/ontology/swim_ability.cpp
+        code/hirvi/ontology/swim_ability.hpp
+        code/hirvi/ontology/train.cpp
+        code/hirvi/ontology/train.hpp
+        code/hirvi/ontology/train_struct.hpp
 )
 target_link_libraries(hirvi_lib PRIVATE snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
@@ -1072,11 +1072,11 @@ target_link_libraries(hirvi_lib PRIVATE snippets ylikuutio ${ALL_LIBS} ${THREAD_
 
 # Hirvi (game application)
 add_executable(hirvi
-    # hirvi, in alphabetical order
-    code/hirvi/hirvi.cpp
-    code/hirvi/hirvi.hpp
-    code/hirvi/lisp/hirvi_console_callbacks.cpp
-    code/hirvi/lisp/hirvi_console_callbacks.hpp
+        # hirvi, in alphabetical order
+        code/hirvi/hirvi.cpp
+        code/hirvi/hirvi.hpp
+        code/hirvi/lisp/hirvi_console_callbacks.cpp
+        code/hirvi/lisp/hirvi_console_callbacks.hpp
 )
 target_link_libraries(hirvi PRIVATE hirvi_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
@@ -1084,8 +1084,8 @@ target_link_libraries(hirvi PRIVATE hirvi_lib snippets ylikuutio ${ALL_LIBS} ${T
 
 # EditLib
 add_library(edit_lib
-    code/ylikuutio/edit/edit_core.cpp
-    code/ylikuutio/edit/edit_core.hpp
+        code/ylikuutio/edit/edit_core.cpp
+        code/ylikuutio/edit/edit_core.hpp
 )
 target_link_libraries(edit_lib PRIVATE ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
@@ -1093,21 +1093,21 @@ target_link_libraries(edit_lib PRIVATE ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # HirviEdit (editor for Hirvi)
 add_executable(hirvi_edit
-    # hirvi_edit, in alphabetical order
-    code/hirvi/hirvi_edit.cpp
-    code/hirvi/hirvi_edit.hpp
-    code/hirvi/lisp/hirvi_edit_console_callbacks.cpp
-    code/hirvi/lisp/hirvi_edit_console_callbacks.hpp
+        # hirvi_edit, in alphabetical order
+        code/hirvi/hirvi_edit.cpp
+        code/hirvi/hirvi_edit.hpp
+        code/hirvi/lisp/hirvi_edit_console_callbacks.cpp
+        code/hirvi/lisp/hirvi_edit_console_callbacks.hpp
 )
 target_link_libraries(hirvi_edit PRIVATE hirvi_lib edit_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # YliEdit (generic editor for Ylikuutio applications)
 add_executable(yli_edit
-    # yli_edit, in alphabetical order
-    code/edit/yli_edit.cpp
-    code/edit/yli_edit.hpp
-    code/edit/yli_edit_console_callbacks.cpp
-    code/edit/yli_edit_console_callbacks.hpp
+        # yli_edit, in alphabetical order
+        code/edit/yli_edit.cpp
+        code/edit/yli_edit.hpp
+        code/edit/yli_edit_console_callbacks.cpp
+        code/edit/yli_edit_console_callbacks.hpp
 )
 target_link_libraries(yli_edit PRIVATE edit_lib snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
@@ -1115,27 +1115,27 @@ target_link_libraries(yli_edit PRIVATE edit_lib snippets ylikuutio ${ALL_LIBS} $
 
 # Ajokki (sandbox application for testing Ylikuutio features)
 add_executable(ajokki
-    # ajokki, in alphabetical order
-    code/ajokki/ajokki.cpp
-    code/ajokki/ajokki.hpp
-    code/ajokki/lisp/ajokki_console_callbacks.cpp
-    code/ajokki/lisp/ajokki_console_callbacks.hpp
-    code/ajokki/ecosystem/ajokki_earth_ecosystem.cpp
-    code/ajokki/scene/ajokki_helsinki_east_downtown_scene.cpp
-    code/ajokki/scene/ajokki_joensuu_center_west_scene.cpp
+        # ajokki, in alphabetical order
+        code/ajokki/ajokki.cpp
+        code/ajokki/ajokki.hpp
+        code/ajokki/lisp/ajokki_console_callbacks.cpp
+        code/ajokki/lisp/ajokki_console_callbacks.hpp
+        code/ajokki/ecosystem/ajokki_earth_ecosystem.cpp
+        code/ajokki/scene/ajokki_helsinki_east_downtown_scene.cpp
+        code/ajokki/scene/ajokki_joensuu_center_west_scene.cpp
 )
 target_link_libraries(ajokki PRIVATE snippets ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
 # GPGPU test (for testing GPGPU functionality)
 add_executable(gpgpu_test
-    # gpgpu_test, in alphabetical order
-    code/gpgpu_test/gpgpu_test.cpp
-    code/gpgpu_test/gpgpu_test.hpp
-    code/gpgpu_test/gpgpu_test_scene.cpp
+        # gpgpu_test, in alphabetical order
+        code/gpgpu_test/gpgpu_test.cpp
+        code/gpgpu_test/gpgpu_test.hpp
+        code/gpgpu_test/gpgpu_test_scene.cpp
 
-    # snippets, in alphabetical order
-    code/ylikuutio/snippets/keyboard_callback_snippets.cpp
-    code/ylikuutio/snippets/keyboard_callback_snippets.hpp
+        # snippets, in alphabetical order
+        code/ylikuutio/snippets/keyboard_callback_snippets.cpp
+        code/ylikuutio/snippets/keyboard_callback_snippets.hpp
 )
 target_link_libraries(gpgpu_test PRIVATE ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
@@ -1143,152 +1143,152 @@ target_link_libraries(gpgpu_test PRIVATE ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 # `mock` executable is not needed for testing but it also works to as an example
 # of the bare minimum of what is needed from an `Application` using Ylikuutio.
 add_executable(mock
-    # mock, in alphabetical order
-    code/mock/mock_application.cpp
-    code/mock/mock_application.hpp
+        # mock, in alphabetical order
+        code/mock/mock_application.cpp
+        code/mock/mock_application.hpp
 )
 target_link_libraries(mock PRIVATE ylikuutio ${ALL_LIBS} ${THREAD_LIBS})
 
-if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
+if (DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     enable_testing()
 
     set(YLIKUUTIO_UNIT_TESTS
-        code/mock/mock_application.cpp
-        code/mock/mock_application.hpp
-        code/ylikuutio/tests/test_any_value.cpp
-        code/ylikuutio/tests/test_ascii_grid_heightmap_loader.cpp
-        code/ylikuutio/tests/test_audio_track.cpp
-        code/ylikuutio/tests/test_bilinear_interpolation.cpp
-        code/ylikuutio/tests/test_callback_engine.cpp
-        code/ylikuutio/tests/test_callback_object.cpp
-        code/ylikuutio/tests/test_callback_object_struct.cpp
-        code/ylikuutio/tests/test_callback_parameter.cpp
-        code/ylikuutio/tests/test_callback_parameter_struct.cpp
-        code/ylikuutio/tests/test_callback_system.cpp
-        code/ylikuutio/tests/test_camera.cpp
-        code/ylikuutio/tests/test_cartesian_coordinates_module.cpp
-        code/ylikuutio/tests/test_check_and_report_if_some_string_matches.cpp
-        code/ylikuutio/tests/test_command_line_master.cpp
-        code/ylikuutio/tests/test_compute_task.cpp
-        code/ylikuutio/tests/test_compute_task_struct.cpp
-        code/ylikuutio/tests/test_console.cpp
-        code/ylikuutio/tests/test_console_callback_engine.cpp
-        code/ylikuutio/tests/test_console_callback_object.cpp
-        code/ylikuutio/tests/test_console_callback_object_struct.cpp
-        code/ylikuutio/tests/test_console_callback_parameter.cpp
-        code/ylikuutio/tests/test_console_callback_parameter_struct.cpp
-        code/ylikuutio/tests/test_console_lisp_function.cpp
-        code/ylikuutio/tests/test_console_lisp_function_overload.cpp
-        code/ylikuutio/tests/test_console_lisp_function_struct.cpp
-        code/ylikuutio/tests/test_console_logic_module.cpp
-        code/ylikuutio/tests/test_constructible_module.cpp
-        code/ylikuutio/tests/test_csv_loader.cpp
-        code/ylikuutio/tests/test_ecosystem.cpp
-        code/ylikuutio/tests/test_extract_last_part_of_string.cpp
-        code/ylikuutio/tests/test_extract_string.cpp
-        code/ylikuutio/tests/test_extract_string_with_several_endings.cpp
-        code/ylikuutio/tests/test_extract_unicode_value_from_string.cpp
-        code/ylikuutio/tests/test_fbx_loader.cpp
-        code/ylikuutio/tests/test_file_loader.cpp
-        code/ylikuutio/tests/test_font_2d.cpp
-        code/ylikuutio/tests/test_glyph.cpp
-        code/ylikuutio/tests/test_graph.cpp
-        code/ylikuutio/tests/test_handle.cpp
-        code/ylikuutio/tests/test_heightmap.cpp
-        code/ylikuutio/tests/test_heightmap_sheet.cpp
-        code/ylikuutio/tests/test_heightmap_sheet_struct.cpp
-        code/ylikuutio/tests/test_heightmap_struct.cpp
-        code/ylikuutio/tests/test_holobiont.cpp
-        code/ylikuutio/tests/test_indexing.cpp
-        code/ylikuutio/tests/test_input_method.cpp
-        code/ylikuutio/tests/test_input_mode.cpp
-        code/ylikuutio/tests/test_line_2d.cpp
-        code/ylikuutio/tests/test_line_line_intersection.cpp
-        code/ylikuutio/tests/test_line_segment_line_segment_intersection.cpp
-        code/ylikuutio/tests/test_linear_algebra.cpp
-        code/ylikuutio/tests/test_material.cpp
-        code/ylikuutio/tests/test_material_struct.cpp
-        code/ylikuutio/tests/test_memory_allocator.cpp
-        code/ylikuutio/tests/test_memory_system.cpp
-        code/ylikuutio/tests/test_memory_templates.cpp
-        code/ylikuutio/tests/test_model_struct.cpp
-        code/ylikuutio/tests/test_movable_controller.cpp
-        code/ylikuutio/tests/test_movable_controller_snippets.cpp
-        code/ylikuutio/tests/test_movable_controller_struct.cpp
-        code/ylikuutio/tests/test_obj_loader.cpp
-        code/ylikuutio/tests/test_object.cpp
-        code/ylikuutio/tests/test_object_struct.cpp
-        code/ylikuutio/tests/test_orientation_module.cpp
-        code/ylikuutio/tests/test_parser.cpp
-        code/ylikuutio/tests/test_png_heightmap_loader.cpp
-        code/ylikuutio/tests/test_png_loader.cpp
-        code/ylikuutio/tests/test_pugixml.cpp
-        code/ylikuutio/tests/test_quad_triangulation.cpp
-        code/ylikuutio/tests/test_queue.cpp
-        code/ylikuutio/tests/test_registry.cpp
-        code/ylikuutio/tests/test_request.cpp
-        code/ylikuutio/tests/test_scene.cpp
-        code/ylikuutio/tests/test_pipeline.cpp
-        code/ylikuutio/tests/test_pipeline_struct.cpp
-        code/ylikuutio/tests/test_scanner.cpp
-        code/ylikuutio/tests/test_scrollback_buffer.cpp
-        code/ylikuutio/tests/test_shapeshifter.cpp
-        code/ylikuutio/tests/test_species.cpp
-        code/ylikuutio/tests/test_symbiont_material.cpp
-        code/ylikuutio/tests/test_symbiont_material_struct.cpp
-        code/ylikuutio/tests/test_symbiont_species.cpp
-        code/ylikuutio/tests/test_symbiosis.cpp
-        code/ylikuutio/tests/test_symbiosis_loader_struct.cpp
-        code/ylikuutio/tests/test_symbiosis_struct.cpp
-        code/ylikuutio/tests/test_text_2d.cpp
-        code/ylikuutio/tests/test_text_3d.cpp
-        code/ylikuutio/tests/test_text_input.cpp
-        code/ylikuutio/tests/test_text_input_history.cpp
-        code/ylikuutio/tests/test_text_position.cpp
-        code/ylikuutio/tests/test_token.cpp
-        code/ylikuutio/tests/test_triangulation.cpp
-        code/ylikuutio/tests/test_unicode.cpp
-        code/ylikuutio/tests/test_universe.cpp
-        code/ylikuutio/tests/test_universe_callbacks.cpp
-        code/ylikuutio/tests/test_universe_struct.cpp
-        code/ylikuutio/tests/test_variable.cpp
-        code/ylikuutio/tests/test_variable_struct.cpp
-        code/ylikuutio/tests/test_vector_font.cpp
-        code/ylikuutio/tests/test_vector_font_struct.cpp
-        code/ylikuutio/tests/test_waypoint.cpp
-        code/ylikuutio/tests/test_ylikuutio_map.cpp)
+            code/mock/mock_application.cpp
+            code/mock/mock_application.hpp
+            code/ylikuutio/tests/test_any_value.cpp
+            code/ylikuutio/tests/test_ascii_grid_heightmap_loader.cpp
+            code/ylikuutio/tests/test_audio_track.cpp
+            code/ylikuutio/tests/test_bilinear_interpolation.cpp
+            code/ylikuutio/tests/test_callback_engine.cpp
+            code/ylikuutio/tests/test_callback_object.cpp
+            code/ylikuutio/tests/test_callback_object_struct.cpp
+            code/ylikuutio/tests/test_callback_parameter.cpp
+            code/ylikuutio/tests/test_callback_parameter_struct.cpp
+            code/ylikuutio/tests/test_callback_system.cpp
+            code/ylikuutio/tests/test_camera.cpp
+            code/ylikuutio/tests/test_cartesian_coordinates_module.cpp
+            code/ylikuutio/tests/test_check_and_report_if_some_string_matches.cpp
+            code/ylikuutio/tests/test_command_line_master.cpp
+            code/ylikuutio/tests/test_compute_task.cpp
+            code/ylikuutio/tests/test_compute_task_struct.cpp
+            code/ylikuutio/tests/test_console.cpp
+            code/ylikuutio/tests/test_console_callback_engine.cpp
+            code/ylikuutio/tests/test_console_callback_object.cpp
+            code/ylikuutio/tests/test_console_callback_object_struct.cpp
+            code/ylikuutio/tests/test_console_callback_parameter.cpp
+            code/ylikuutio/tests/test_console_callback_parameter_struct.cpp
+            code/ylikuutio/tests/test_console_lisp_function.cpp
+            code/ylikuutio/tests/test_console_lisp_function_overload.cpp
+            code/ylikuutio/tests/test_console_lisp_function_struct.cpp
+            code/ylikuutio/tests/test_console_logic_module.cpp
+            code/ylikuutio/tests/test_constructible_module.cpp
+            code/ylikuutio/tests/test_csv_loader.cpp
+            code/ylikuutio/tests/test_ecosystem.cpp
+            code/ylikuutio/tests/test_extract_last_part_of_string.cpp
+            code/ylikuutio/tests/test_extract_string.cpp
+            code/ylikuutio/tests/test_extract_string_with_several_endings.cpp
+            code/ylikuutio/tests/test_extract_unicode_value_from_string.cpp
+            code/ylikuutio/tests/test_fbx_loader.cpp
+            code/ylikuutio/tests/test_file_loader.cpp
+            code/ylikuutio/tests/test_font_2d.cpp
+            code/ylikuutio/tests/test_glyph.cpp
+            code/ylikuutio/tests/test_graph.cpp
+            code/ylikuutio/tests/test_handle.cpp
+            code/ylikuutio/tests/test_heightmap.cpp
+            code/ylikuutio/tests/test_heightmap_sheet.cpp
+            code/ylikuutio/tests/test_heightmap_sheet_struct.cpp
+            code/ylikuutio/tests/test_heightmap_struct.cpp
+            code/ylikuutio/tests/test_holobiont.cpp
+            code/ylikuutio/tests/test_indexing.cpp
+            code/ylikuutio/tests/test_input_method.cpp
+            code/ylikuutio/tests/test_input_mode.cpp
+            code/ylikuutio/tests/test_line_2d.cpp
+            code/ylikuutio/tests/test_line_line_intersection.cpp
+            code/ylikuutio/tests/test_line_segment_line_segment_intersection.cpp
+            code/ylikuutio/tests/test_linear_algebra.cpp
+            code/ylikuutio/tests/test_material.cpp
+            code/ylikuutio/tests/test_material_struct.cpp
+            code/ylikuutio/tests/test_memory_allocator.cpp
+            code/ylikuutio/tests/test_memory_system.cpp
+            code/ylikuutio/tests/test_memory_templates.cpp
+            code/ylikuutio/tests/test_model_struct.cpp
+            code/ylikuutio/tests/test_movable_controller.cpp
+            code/ylikuutio/tests/test_movable_controller_snippets.cpp
+            code/ylikuutio/tests/test_movable_controller_struct.cpp
+            code/ylikuutio/tests/test_obj_loader.cpp
+            code/ylikuutio/tests/test_object.cpp
+            code/ylikuutio/tests/test_object_struct.cpp
+            code/ylikuutio/tests/test_orientation_module.cpp
+            code/ylikuutio/tests/test_parser.cpp
+            code/ylikuutio/tests/test_png_heightmap_loader.cpp
+            code/ylikuutio/tests/test_png_loader.cpp
+            code/ylikuutio/tests/test_pugixml.cpp
+            code/ylikuutio/tests/test_quad_triangulation.cpp
+            code/ylikuutio/tests/test_queue.cpp
+            code/ylikuutio/tests/test_registry.cpp
+            code/ylikuutio/tests/test_request.cpp
+            code/ylikuutio/tests/test_scene.cpp
+            code/ylikuutio/tests/test_pipeline.cpp
+            code/ylikuutio/tests/test_pipeline_struct.cpp
+            code/ylikuutio/tests/test_scanner.cpp
+            code/ylikuutio/tests/test_scrollback_buffer.cpp
+            code/ylikuutio/tests/test_shapeshifter.cpp
+            code/ylikuutio/tests/test_species.cpp
+            code/ylikuutio/tests/test_symbiont_material.cpp
+            code/ylikuutio/tests/test_symbiont_material_struct.cpp
+            code/ylikuutio/tests/test_symbiont_species.cpp
+            code/ylikuutio/tests/test_symbiosis.cpp
+            code/ylikuutio/tests/test_symbiosis_loader_struct.cpp
+            code/ylikuutio/tests/test_symbiosis_struct.cpp
+            code/ylikuutio/tests/test_text_2d.cpp
+            code/ylikuutio/tests/test_text_3d.cpp
+            code/ylikuutio/tests/test_text_input.cpp
+            code/ylikuutio/tests/test_text_input_history.cpp
+            code/ylikuutio/tests/test_text_position.cpp
+            code/ylikuutio/tests/test_token.cpp
+            code/ylikuutio/tests/test_triangulation.cpp
+            code/ylikuutio/tests/test_unicode.cpp
+            code/ylikuutio/tests/test_universe.cpp
+            code/ylikuutio/tests/test_universe_callbacks.cpp
+            code/ylikuutio/tests/test_universe_struct.cpp
+            code/ylikuutio/tests/test_variable.cpp
+            code/ylikuutio/tests/test_variable_struct.cpp
+            code/ylikuutio/tests/test_vector_font.cpp
+            code/ylikuutio/tests/test_vector_font_struct.cpp
+            code/ylikuutio/tests/test_waypoint.cpp
+            code/ylikuutio/tests/test_ylikuutio_map.cpp)
 
     set(HIRVI_UNIT_TESTS
-        # Tests for Hirvi.
-        code/hirvi/hirvi.cpp
-        code/hirvi/hirvi.hpp
-        code/hirvi/lisp/hirvi_console_callbacks.cpp
-        code/hirvi/lisp/hirvi_console_callbacks.hpp
-        code/hirvi/tests/test_hirvi_application.cpp
-        code/hirvi/tests/test_hirvi_scene.cpp
-        code/hirvi/tests/test_hirvi_scene_struct.cpp
-        code/hirvi/tests/test_callback_engine.cpp
-        code/hirvi/tests/test_cat.cpp
-        code/hirvi/tests/test_console_lisp_function.cpp
-        code/hirvi/tests/test_console_lisp_function_overload.cpp
-        code/hirvi/tests/test_elk.cpp
-        code/hirvi/tests/test_ecosystem.cpp
-        code/hirvi/tests/test_material.cpp
-        code/hirvi/tests/test_memory.cpp
-        code/hirvi/tests/test_movable_controller.cpp
-        code/hirvi/tests/test_pipeline.cpp
-        code/hirvi/tests/test_police_bear.cpp
-        code/hirvi/tests/test_police_car.cpp
-        code/hirvi/tests/test_police_control_center.cpp
-        code/hirvi/tests/test_police_control_center_struct.cpp
-        code/hirvi/tests/test_police_dog.cpp
-        code/hirvi/tests/test_police_helicopter.cpp
-        code/hirvi/tests/test_police_horse.cpp
-        code/hirvi/tests/test_police_train.cpp
-        code/hirvi/tests/test_police_tram.cpp
-        code/hirvi/tests/test_scene.cpp
-        code/hirvi/tests/test_species.cpp
-        code/hirvi/tests/test_symbiosis.cpp)
+            # Tests for Hirvi.
+            code/hirvi/hirvi.cpp
+            code/hirvi/hirvi.hpp
+            code/hirvi/lisp/hirvi_console_callbacks.cpp
+            code/hirvi/lisp/hirvi_console_callbacks.hpp
+            code/hirvi/tests/test_hirvi_application.cpp
+            code/hirvi/tests/test_hirvi_scene.cpp
+            code/hirvi/tests/test_hirvi_scene_struct.cpp
+            code/hirvi/tests/test_callback_engine.cpp
+            code/hirvi/tests/test_cat.cpp
+            code/hirvi/tests/test_console_lisp_function.cpp
+            code/hirvi/tests/test_console_lisp_function_overload.cpp
+            code/hirvi/tests/test_elk.cpp
+            code/hirvi/tests/test_ecosystem.cpp
+            code/hirvi/tests/test_material.cpp
+            code/hirvi/tests/test_memory.cpp
+            code/hirvi/tests/test_movable_controller.cpp
+            code/hirvi/tests/test_pipeline.cpp
+            code/hirvi/tests/test_police_bear.cpp
+            code/hirvi/tests/test_police_car.cpp
+            code/hirvi/tests/test_police_control_center.cpp
+            code/hirvi/tests/test_police_control_center_struct.cpp
+            code/hirvi/tests/test_police_dog.cpp
+            code/hirvi/tests/test_police_helicopter.cpp
+            code/hirvi/tests/test_police_horse.cpp
+            code/hirvi/tests/test_police_train.cpp
+            code/hirvi/tests/test_police_tram.cpp
+            code/hirvi/tests/test_scene.cpp
+            code/hirvi/tests/test_species.cpp
+            code/hirvi/tests/test_symbiosis.cpp)
 
     set(MAIN_FILE code/ylikuutio/tests/main.cpp)
 
@@ -1299,44 +1299,44 @@ if(DO_UNIT_TESTS_WITH_GOOGLE_TEST)
     set_property(TARGET test_hirvi PROPERTY COMPILE_FLAGS "-DGOOGLE_TEST")
 
     if (DEFINED "PNG_LIBRARIES")
-        if(COMPILE_SDL_FROM_SOURCE)
+        if (COMPILE_SDL_FROM_SOURCE)
             target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio ufbx SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
             target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio ufbx SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
-        else()
+        else ()
             target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio ufbx SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
             target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio ufbx SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARIES} ${THREAD_LIBS})
-        endif()
-    else()
-        if(COMPILE_SDL_FROM_SOURCE)
+        endif ()
+    else ()
+        if (COMPILE_SDL_FROM_SOURCE)
             target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio ufbx SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
             target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio ufbx SDL3_mixer-static SDL3-static GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
-        else()
+        else ()
             target_link_libraries(test_ylikuutio PRIVATE gtest_main snippets ylikuutio ufbx SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
             target_link_libraries(test_hirvi PRIVATE gtest_main hirvi_lib snippets ylikuutio ufbx SDL3_mixer-static SDL3 GLEW_200 ${PNG_LIBRARY} ${THREAD_LIBS})
-        endif()
-    endif()
+        endif ()
+    endif ()
 
     include(GoogleTest)
     gtest_discover_tests(test_ylikuutio)
-endif()
+endif ()
 
 ### Code samples for future development ###
 
 # future-test (an example of `std::async`, `std::launch`, and `std::future` use)
 add_executable(future_test
-    code/thread_test/future_test.cpp
-    )
+        code/thread_test/future_test.cpp
+)
 target_link_libraries(future_test PRIVATE ${THREAD_LIBS})
 
 # thread-test (an example of `std::thread` use)
 add_executable(thread_test
-    code/thread_test/thread_test.cpp
-    )
+        code/thread_test/thread_test.cpp
+)
 target_link_libraries(thread_test PRIVATE ${THREAD_LIBS})
 
 # dining philosophers (an example of `std::mutex` and `std::scoped_lock` use)
 # https://en.wikipedia.org/wiki/Dining_philosophers_problem
 add_executable(dining_philosophers
-    code/thread_test/dining_philosophers.cpp
-    )
+        code/thread_test/dining_philosophers.cpp
+)
 target_link_libraries(dining_philosophers PRIVATE ${THREAD_LIBS})

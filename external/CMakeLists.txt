@@ -1,123 +1,123 @@
 add_definitions(
-    -DGLEW_STATIC
-    -D_CRT_SECURE_NO_WARNINGS
-    )
+        -DGLEW_STATIC
+        -D_CRT_SECURE_NO_WARNINGS
+)
 
-if(COMPILE_LIBPNG_FROM_SOURCE)
+if (COMPILE_LIBPNG_FROM_SOURCE)
     include_directories(SDL/include/)
-endif()
+endif ()
 
-if(COMPILE_LIBPNG_FROM_SOURCE)
+if (COMPILE_LIBPNG_FROM_SOURCE)
     include_directories(SDL_mixer/include/)
-endif()
+endif ()
 
-if(COMPILE_LIBPNG_FROM_SOURCE)
+if (COMPILE_LIBPNG_FROM_SOURCE)
     include_directories(zlib/)
-endif()
+endif ()
 
-if(COMPILE_LIBPNG_FROM_SOURCE)
+if (COMPILE_LIBPNG_FROM_SOURCE)
     include_directories(libpng-1.6.44/)
-endif()
+endif ()
 
 include_directories(
-    glew-2.0.0/include/
-    glm/
-    pugixml/src/
-    ufbx/
-    )
+        glew-2.0.0/include/
+        glm/
+        pugixml/src/
+        ufbx/
+)
 
 # Compile external dependencies
 
 # pugixml
 add_subdirectory(pugixml)
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    if(NOT CROSS_COMPILE_FOR_WINDOWS)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    if (NOT CROSS_COMPILE_FOR_WINDOWS)
         set(OPENGL_LIBRARY
-            ${OPENGL_LIBRARY}
-            -lGL -lGLU -lXrandr -lXext -lX11 -lrt
-            ${CMAKE_DL_LIBS}
-            )
-    endif()
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    set(OPENGL_LIBRARY
-        ${OPENGL_LIBRARY}
-        ${CMAKE_DL_LIBS}
+                ${OPENGL_LIBRARY}
+                -lGL -lGLU -lXrandr -lXext -lX11 -lrt
+                ${CMAKE_DL_LIBS}
         )
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    endif ()
+elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(OPENGL_LIBRARY
+            ${OPENGL_LIBRARY}
+            ${CMAKE_DL_LIBS}
+    )
+endif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
 ### GLEW ###
 
 add_library(GLEW_200 STATIC)
 target_sources(GLEW_200 PRIVATE
-    glew-2.0.0/src/glew.c)
+        glew-2.0.0/src/glew.c)
 target_link_libraries(GLEW_200
-    ${OPENGL_LIBRARY}
-    ${EXTRA_LIBS}
+        ${OPENGL_LIBRARY}
+        ${EXTRA_LIBS}
 )
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows" AND NOT CMAKE_CROSSCOMPILING)
     include(FetchContent)
     set(ZLIB_BUILD_TESTING CACHE INTERNAL OFF)
     set(ZLIB_INSTALL_COMPAT_DLL CACHE INTERNAL OFF)
     set(ZLIB_CONF_WRITTEN FALSE)
     FetchContent_Declare(
-        zlib
-        SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/zlib
-        OVERRIDE_FIND_PACKAGE
+            zlib
+            SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/zlib
+            OVERRIDE_FIND_PACKAGE
     )
     FetchContent_MakeAvailable(zlib)
 
     # Make the ALIAS that libpng expects, if necessary
-    if(NOT TARGET ZLIB::ZLIB)
+    if (NOT TARGET ZLIB::ZLIB)
         add_library(ZLIB::ZLIB UNKNOWN IMPORTED)
         set(ZLIB_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/zlib)
         set_target_properties(ZLIB::ZLIB PROPERTIES INTERFACE_INCLUDE_DIRECTORIES
-            "${ZLIB_INCLUDE_DIRS}")
+                "${ZLIB_INCLUDE_DIRS}")
 
         if (ZLIB_VERSION)
             set_target_properties(ZLIB::ZLIB PROPERTIES VERSION "${ZLIB_VERSION}")
-        endif()
+        endif ()
         set_target_properties(ZLIB::ZLIB PROPERTIES IMPORTED_LOCATION "${ZLIB_LIBRARIES}" LINK_LIBRARIES "${ZLIB_LIBRARIES}")
         add_dependencies(ZLIB::ZLIB zlib)
-    endif()
+    endif ()
 
     set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:${CMAKE_SOURCE_DIR}/external/zlib/lib/pkgconfig")
 
     set(PNG_SHARED CACHE INTERNAL OFF)
     set(PNG_TESTS CACHE INTERNAL OFF)
     set(PNG_TOOLS CACHE INTERNAL OFF)
-elseif(COMPILE_ZLIB_FROM_SOURCE)
+elseif (COMPILE_ZLIB_FROM_SOURCE)
     # Make the ALIAS that libpng expects, if necessary
-    if(NOT TARGET ZLIB::ZLIB)
-        if(TARGET zlibstatic)
+    if (NOT TARGET ZLIB::ZLIB)
+        if (TARGET zlibstatic)
             add_library(ZLIB::ZLIB ALIAS zlibstatic)
-        elseif(TARGET zlib)
+        elseif (TARGET zlib)
             add_library(ZLIB::ZLIB ALIAS zlib)
-        endif()
-    endif()
+        endif ()
+    endif ()
 
     add_subdirectory(zlib)
-endif()
+endif ()
 
-if(COMPILE_LIBPNG_FROM_SOURCE)
+if (COMPILE_LIBPNG_FROM_SOURCE)
     add_subdirectory(libpng-1.6.44)
-endif()
+endif ()
 
 add_library(ufbx STATIC)
 target_sources(ufbx PRIVATE
-    ufbx/ufbx.c
-    ufbx/ufbx.h
-    )
+        ufbx/ufbx.c
+        ufbx/ufbx.h
+)
 set_property(TARGET ufbx PROPERTY CPP_STANDARD 11)
 
-if(COMPILE_SDL_FROM_SOURCE)
+if (COMPILE_SDL_FROM_SOURCE)
     set(BUILD_SHARED_LIBS OFF)
     set(SDL_X11_XTEST OFF)
     set(SDL_X11_XSCRNSAVER OFF)
     add_subdirectory(SDL)
-endif()
+endif ()
 
-if(COMPILE_SDL_MIXER_FROM_SOURCE)
+if (COMPILE_SDL_MIXER_FROM_SOURCE)
     add_subdirectory(SDL_mixer)
-endif()
+endif ()
