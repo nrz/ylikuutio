@@ -10,6 +10,10 @@
 - [ ] UI/UNIVERSE Move hardcoded info text out of `yli::ontology::Universe`.
 - [ ] VULKAN/RENDERING Add Vulkan support.
 - [ ] OPENGL/RENDERING Remove OpenGL support.
+- [ ] LIBRARIES/DATA/TERRAIN Use libgeotiff to load GeoTIFF elevation model 2 m heightmaps of the National Land Survey of Finland. https://github.com/OSGeo/libgeotiff
+- [ ] TOOLS Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
+- [ ] TOOLS/DATA/TERRAIN Convert heightmaps into a custom format with precomputed vertices, UVs, and normals, ready to be loaded into GPU.
+- [ ] Write code to convert ASCII grid files (height maps) to binary GLTF files, storing also interpolated vertices, UVs, and normals.
 - [ ] ONTOLOGY/DATA/RENDERING Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
 - [ ] DATA/VULKAN/RENDERING/TERRAIN Use displacement fields for height map rendering, like in Far Cry 5: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 - [ ] DATA/VULKAN/RENDERING/TERRAIN Implement GPU terrain quad tree.
@@ -53,9 +57,7 @@
 - [ ] TEXT/RENDERING Add support of setting text transparency in `Text2d`.
 - [ ] TEXT/RENDERING Add support of setting text background transparency in `Text2d`.
 - [ ] CONSOLE/RENDERING Add support of filling lines shorter than `n\_columns` in `Console`.
-- [ ] LIBRARIES/DATA/TERRAIN Use libgeotiff to load GeoTIFF elevation model 2 m heightmaps of the National Land Survey of Finland. https://github.com/OSGeo/libgeotiff
 - [ ] MATH/TERRAIN Add bicubic interpolation.
-- [ ] TOOLS/DATA/TERRAIN Convert heightmaps into a custom format with precomputed vertices, UVs, and normals, ready to be loaded into GPU.
 - [ ] MATH/RENDERING Implement shadows.
 - [ ] RENDERING Implement skybox.
 - [ ] RENDERING Add support for screenspace effects.
@@ -83,7 +85,6 @@
 - [ ] CONSOLE/UI Add support in `Console` for indexing the children of an `Entity` through the `Registry` and `ParentModule`, e.g. `foo_entity.bar_children[0]`.
 - [ ] CONSOLE/UI Add support in `Console` for indexing the apprentices of an `Entity` through the `Registry` and `MasterModule`, e.g. `foo_entity.bar_apprentices[0]`.
 - [ ] DISPLAY/UI Add support for high DPI displays.
-- [ ] TOOLS Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
 - [ ] ONTOLOGY/DATA Implement `yli::ontology::HeightmapStruct` that inherits `yli::ontology::EntityStruct`, to support heightmaps consisting of several sheets.
 - [ ] ONTOLOGY/DATA Implement `yli::ontology::Heightmap` class that inherits `yli::ontology::Entity`, to support heightmaps consisting of several sheets.
 - [ ] ONTOLOGY/DATA Implement `yli::ontology::HeightmapSheet` class that inherits `yli::ontology::Species`, to handle each sheet of a multisheet heightmap.
@@ -183,7 +184,6 @@
 - [ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (e.g. 1, 2, 4, 8, 16, 32, 64, 128).
 - [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
 - [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
-- [ ] Write code to convert ASCII grid files (height maps) to binary GLTF files, storing also interpolated vertices, UVs, and normals.
 - [ ] Implement scene loading which works in the background.
 - [ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
 - [ ] Add support for `help` command in console (a container class with the command callback together with the `help` text for the command).
