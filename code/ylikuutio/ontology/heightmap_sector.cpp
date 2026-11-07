@@ -15,9 +15,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "heightmap_sheet.hpp"
+#include "heightmap_sector.hpp"
 #include "heightmap.hpp"
-#include "heightmap_sheet_struct.hpp"
+#include "heightmap_sector_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -42,49 +42,49 @@ namespace yli::ontology
     class Universe;
     class Scene;
 
-    Heightmap* HeightmapSheet::get_heightmap() const
+    Heightmap* HeightmapSector::get_heightmap() const
     {
         return static_cast<Heightmap*>(this->get_parent());
     }
 
-    std::string_view HeightmapSheet::get_type() const
+    std::string_view HeightmapSector::get_type() const
     {
-        return "yli::ontology::HeightmapSheet*";
+        return "yli::ontology::HeightmapSector*";
     }
 
-    Entity* HeightmapSheet::get_parent() const
+    Entity* HeightmapSector::get_parent() const
     {
         return this->child_of_heightmap.get_parent();
     }
 
-    HeightmapSheet::HeightmapSheet(
+    HeightmapSector::HeightmapSector(
         memory::AllocationData&& allocation_data,
         core::Application& application,
         Universe& universe,
-        const HeightmapSheetStruct& heightmap_sheet_struct,
+        const HeightmapSectorStruct& heightmap_sector_struct,
         GenericParentModule* scene_parent_module,
         GenericMasterModule* movable_controller_master_module)
         : AbstractMovable(
               std::move(allocation_data),
               application,
               universe,
-              heightmap_sheet_struct,
+              heightmap_sector_struct,
               movable_controller_master_module),
           child_of_heightmap(scene_parent_module, *this)
     {
     }
 
-    std::size_t HeightmapSheet::get_number_of_children() const
+    std::size_t HeightmapSector::get_number_of_children() const
     {
-        return 0; // `HeightmapSheet` has no children.
+        return 0; // `HeightmapSector` has no children.
     }
 
-    std::size_t HeightmapSheet::get_number_of_descendants() const
+    std::size_t HeightmapSector::get_number_of_descendants() const
     {
-        return 0; // `HeightmapSheet` has no children.
+        return 0; // `HeightmapSector` has no children.
     }
 
-    Scene* HeightmapSheet::get_scene() const
+    Scene* HeightmapSector::get_scene() const
     {
         return this->child_of_heightmap.get_scene();
     }

@@ -745,9 +745,9 @@ add_library(ylikuutio STATIC
         code/ylikuutio/ontology/glyph_struct.hpp
         code/ylikuutio/ontology/heightmap.cpp
         code/ylikuutio/ontology/heightmap.hpp
-        code/ylikuutio/ontology/heightmap_sheet.cpp
-        code/ylikuutio/ontology/heightmap_sheet.hpp
-        code/ylikuutio/ontology/heightmap_sheet_struct.hpp
+        code/ylikuutio/ontology/heightmap_sector.cpp
+        code/ylikuutio/ontology/heightmap_sector.hpp
+        code/ylikuutio/ontology/heightmap_sector_struct.hpp
         code/ylikuutio/ontology/heightmap_struct.hpp
         code/ylikuutio/ontology/holobiont.cpp
         code/ylikuutio/ontology/holobiont.hpp
@@ -1195,8 +1195,8 @@ if (DO_UNIT_TESTS_WITH_GOOGLE_TEST)
             code/ylikuutio/tests/test_graph.cpp
             code/ylikuutio/tests/test_handle.cpp
             code/ylikuutio/tests/test_heightmap.cpp
-            code/ylikuutio/tests/test_heightmap_sheet.cpp
-            code/ylikuutio/tests/test_heightmap_sheet_struct.cpp
+            code/ylikuutio/tests/test_heightmap_sector.cpp
+            code/ylikuutio/tests/test_heightmap_sector_struct.cpp
             code/ylikuutio/tests/test_heightmap_struct.cpp
             code/ylikuutio/tests/test_holobiont.cpp
             code/ylikuutio/tests/test_indexing.cpp

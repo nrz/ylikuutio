@@ -16,12 +16,12 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "gtest/gtest.h"
-#include "code/ylikuutio/ontology/heightmap_sheet_struct.hpp"
+#include "code/ylikuutio/ontology/heightmap_sector_struct.hpp"
 
-TEST(heightmap_sheet_struct_must_be_initialized_appropriately, heightmap_provided_as_valid_pointer)
+TEST(heightmap_sector_struct_must_be_initialized_appropriately, heightmap_provided_as_valid_pointer)
 {
 }
 
-TEST(heightmap_sheet_struct_must_be_initialized_appropriately, heightmap_provided_as_valid_global_name)
+TEST(heightmap_sector_struct_must_be_initialized_appropriately, heightmap_provided_as_valid_global_name)
 {
 }

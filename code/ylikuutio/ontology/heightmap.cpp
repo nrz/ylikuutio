@@ -56,10 +56,10 @@ namespace yli::ontology
               heightmap_struct,
               movable_controller_master_module),
           child_of_scene(scene_parent_module, *this),
-          parent_of_heightmap_sheets(
+          parent_of_heightmap_sectors(
               *this,
               this->registry,
-              "heightmap_sheets")
+              "heightmap_sectors")
     {
         // `yli::ontology::Entity` member variables begin here.
         this->can_be_erased = true;
@@ -82,11 +82,11 @@ namespace yli::ontology
 
     std::size_t Heightmap::get_number_of_children() const
     {
-        return this->parent_of_heightmap_sheets.get_number_of_children();
+        return this->parent_of_heightmap_sectors.get_number_of_children();
     }
 
     std::size_t Heightmap::get_number_of_descendants() const
     {
-        return ontology::get_number_of_descendants(this->parent_of_heightmap_sheets.child_pointer_vector);
+        return ontology::get_number_of_descendants(this->parent_of_heightmap_sectors.child_pointer_vector);
     }
 }

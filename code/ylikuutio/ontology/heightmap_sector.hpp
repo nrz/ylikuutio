@@ -15,12 +15,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLI_ONTOLOGY_HEIGHTMAP_SHEET_HPP_INCLUDED
-#define YLI_ONTOLOGY_HEIGHTMAP_SHEET_HPP_INCLUDED
+#ifndef YLI_ONTOLOGY_HEIGHTMAP_SECTOR_HPP_INCLUDED
+#define YLI_ONTOLOGY_HEIGHTMAP_SECTOR_HPP_INCLUDED
 
 #include "child_module.hpp"
 #include "abstract_movable.hpp"
-#include "heightmap_sheet_struct.hpp"
+#include "heightmap_sector_struct.hpp"
 
 // Include standard headers
 #include <cstddef> // std::size_t
@@ -44,23 +44,23 @@ namespace yli::ontology
     class Universe;
     class Scene;
     class Heightmap;
-    struct HeightmapSheetStruct;
+    struct HeightmapSectorStruct;
 
-    class HeightmapSheet final : public AbstractMovable
+    class HeightmapSector final : public AbstractMovable
     {
     public:
-        HeightmapSheet(
+        HeightmapSector(
             memory::AllocationData&& allocation_data,
             core::Application& application,
             Universe& universe,
-            const HeightmapSheetStruct& heightmap_sheet_struct,
+            const HeightmapSectorStruct& heightmap_sector_struct,
             GenericParentModule* scene_parent_module,
             GenericMasterModule* movable_controller_master_module);
 
-        HeightmapSheet(const HeightmapSheet&) = delete;            // Delete copy constructor.
-        HeightmapSheet& operator=(const HeightmapSheet&) = delete; // Delete copy assignment.
+        HeightmapSector(const HeightmapSector&) = delete;            // Delete copy constructor.
+        HeightmapSector& operator=(const HeightmapSector&) = delete; // Delete copy assignment.
 
-        virtual ~HeightmapSheet() = default;
+        virtual ~HeightmapSector() = default;
 
         Heightmap* get_heightmap() const;
 

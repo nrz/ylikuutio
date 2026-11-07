@@ -18,16 +18,16 @@
 #include "gtest/gtest.h"
 #include "code/mock/mock_application.hpp"
 #include "code/ylikuutio/ontology/heightmap.hpp"
-#include "code/ylikuutio/ontology/heightmap_sheet.hpp"
+#include "code/ylikuutio/ontology/heightmap_sector.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
-#include "code/ylikuutio/ontology/heightmap_sheet_struct.hpp"
+#include "code/ylikuutio/ontology/heightmap_sector_struct.hpp"
 #include "code/ylikuutio/ontology/heightmap_struct.hpp"
 
 // Include standard headers
 #include <cstdint> // uintptr_t
 #include <limits>  // std::numeric_limits
 
-TEST(heightmap_sheet_must_be_initialized_appropriately, heightmap_provided_as_valid_pointer)
+TEST(heightmap_sector_must_be_initialized_appropriately, heightmap_provided_as_valid_pointer)
 {
     const mock::MockApplication application;
     const yli::ontology::SceneStruct scene_struct;
@@ -40,29 +40,29 @@ TEST(heightmap_sheet_must_be_initialized_appropriately, heightmap_provided_as_va
     ASSERT_NE(heightmap, nullptr);
 
     ASSERT_EQ(reinterpret_cast<uintptr_t>(heightmap) % alignof(yli::ontology::Heightmap), 0);
-    yli::ontology::HeightmapSheetStruct heightmap_sheet_struct {
+    yli::ontology::HeightmapSectorStruct heightmap_sector_struct {
         yli::ontology::Request(heightmap),
         yli::ontology::Request<yli::ontology::Scene>("foo"),
     };
-    yli::ontology::HeightmapSheet* const heightmap_sheet = application.get_abstract_entity_factory().
-            create_heightmap_sheet(
-                heightmap_sheet_struct);
-    ASSERT_NE(heightmap_sheet, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(heightmap_sheet) % alignof(yli::ontology::HeightmapSheet), 0);
+    yli::ontology::HeightmapSector* const heightmap_sector = application.get_abstract_entity_factory().
+            create_heightmap_sector(
+                heightmap_sector_struct);
+    ASSERT_NE(heightmap_sector, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(heightmap_sector) % alignof(yli::ontology::HeightmapSector), 0);
 
     // `Entity` member functions of `Heightmap`.
     ASSERT_EQ(heightmap->get_number_of_non_variable_children(), 1);
 
     // `Entity` member functions.
-    ASSERT_EQ(heightmap_sheet->get_childID(), 0);
-    ASSERT_EQ(heightmap_sheet->get_type(), "yli::ontology::HeightmapSheet*");
-    ASSERT_FALSE(heightmap_sheet->get_can_be_erased());
-    ASSERT_EQ(heightmap_sheet->get_scene(), scene);
-    ASSERT_EQ(heightmap_sheet->get_parent(), heightmap);
-    ASSERT_EQ(heightmap_sheet->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(heightmap_sector->get_childID(), 0);
+    ASSERT_EQ(heightmap_sector->get_type(), "yli::ontology::HeightmapSector*");
+    ASSERT_FALSE(heightmap_sector->get_can_be_erased());
+    ASSERT_EQ(heightmap_sector->get_scene(), scene);
+    ASSERT_EQ(heightmap_sector->get_parent(), heightmap);
+    ASSERT_EQ(heightmap_sector->get_number_of_non_variable_children(), 0);
 }
 
-TEST(heightmap_sheet_must_be_initialized_appropriately, heightmap_provided_as_valid_global_name)
+TEST(heightmap_sector_must_be_initialized_appropriately, heightmap_provided_as_valid_global_name)
 {
     const mock::MockApplication application;
     const yli::ontology::SceneStruct scene_struct;
@@ -75,29 +75,29 @@ TEST(heightmap_sheet_must_be_initialized_appropriately, heightmap_provided_as_va
         heightmap_struct);
     ASSERT_NE(heightmap, nullptr);
 
-    yli::ontology::HeightmapSheetStruct heightmap_sheet_struct {
+    yli::ontology::HeightmapSectorStruct heightmap_sector_struct {
         yli::ontology::Request<yli::ontology::Heightmap>("foo"),
         yli::ontology::Request(scene)
     };
-    yli::ontology::HeightmapSheet* const heightmap_sheet = application.get_abstract_entity_factory().
-            create_heightmap_sheet(
-                heightmap_sheet_struct);
-    ASSERT_NE(heightmap_sheet, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(heightmap_sheet) % alignof(yli::ontology::HeightmapSheet), 0);
+    yli::ontology::HeightmapSector* const heightmap_sector = application.get_abstract_entity_factory().
+            create_heightmap_sector(
+                heightmap_sector_struct);
+    ASSERT_NE(heightmap_sector, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(heightmap_sector) % alignof(yli::ontology::HeightmapSector), 0);
 
     // `Entity` member functions of `Heightmap`.
     ASSERT_EQ(heightmap->get_number_of_non_variable_children(), 1);
 
     // `Entity` member functions.
-    ASSERT_EQ(heightmap_sheet->get_childID(), 0);
-    ASSERT_EQ(heightmap_sheet->get_type(), "yli::ontology::HeightmapSheet*");
-    ASSERT_FALSE(heightmap_sheet->get_can_be_erased());
-    ASSERT_EQ(heightmap_sheet->get_scene(), scene);
-    ASSERT_EQ(heightmap_sheet->get_parent(), heightmap);
-    ASSERT_EQ(heightmap_sheet->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(heightmap_sector->get_childID(), 0);
+    ASSERT_EQ(heightmap_sector->get_type(), "yli::ontology::HeightmapSector*");
+    ASSERT_FALSE(heightmap_sector->get_can_be_erased());
+    ASSERT_EQ(heightmap_sector->get_scene(), scene);
+    ASSERT_EQ(heightmap_sector->get_parent(), heightmap);
+    ASSERT_EQ(heightmap_sector->get_number_of_non_variable_children(), 0);
 }
 
-TEST(heightmap_sheet_must_be_initialized_appropriately, heightmap_provided_as_invalid_global_name)
+TEST(heightmap_sector_must_be_initialized_appropriately, heightmap_provided_as_invalid_global_name)
 {
     const mock::MockApplication application;
     const yli::ontology::SceneStruct scene_struct;
@@ -109,24 +109,24 @@ TEST(heightmap_sheet_must_be_initialized_appropriately, heightmap_provided_as_in
     yli::ontology::Heightmap* const heightmap = application.get_abstract_entity_factory().create_heightmap(
         heightmap_struct);
     ASSERT_NE(heightmap, nullptr);
-    yli::ontology::HeightmapSheetStruct heightmap_sheet_struct {
+    yli::ontology::HeightmapSectorStruct heightmap_sector_struct {
         yli::ontology::Request<yli::ontology::Heightmap>("bar"),
         yli::ontology::Request(scene)
     };
-    yli::ontology::HeightmapSheet* const heightmap_sheet = application.get_abstract_entity_factory().
-            create_heightmap_sheet(
-                heightmap_sheet_struct);
-    ASSERT_NE(heightmap_sheet, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(heightmap_sheet) % alignof(yli::ontology::HeightmapSheet), 0);
+    yli::ontology::HeightmapSector* const heightmap_sector = application.get_abstract_entity_factory().
+            create_heightmap_sector(
+                heightmap_sector_struct);
+    ASSERT_NE(heightmap_sector, nullptr);
+    ASSERT_EQ(reinterpret_cast<uintptr_t>(heightmap_sector) % alignof(yli::ontology::HeightmapSector), 0);
 
     // `Entity` member functions of `Heightmap`.
     ASSERT_EQ(heightmap->get_number_of_non_variable_children(), 0);
 
     // `Entity` member functions.
-    ASSERT_EQ(heightmap_sheet->get_childID(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(heightmap_sheet->get_type(), "yli::ontology::HeightmapSheet*");
-    ASSERT_FALSE(heightmap_sheet->get_can_be_erased());
-    ASSERT_EQ(heightmap_sheet->get_scene(), nullptr);
-    ASSERT_EQ(heightmap_sheet->get_parent(), nullptr);
-    ASSERT_EQ(heightmap_sheet->get_number_of_non_variable_children(), 0);
+    ASSERT_EQ(heightmap_sector->get_childID(), std::numeric_limits<std::size_t>::max());
+    ASSERT_EQ(heightmap_sector->get_type(), "yli::ontology::HeightmapSector*");
+    ASSERT_FALSE(heightmap_sector->get_can_be_erased());
+    ASSERT_EQ(heightmap_sector->get_scene(), nullptr);
+    ASSERT_EQ(heightmap_sector->get_parent(), nullptr);
+    ASSERT_EQ(heightmap_sector->get_number_of_non_variable_children(), 0);
 }

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLI_ONTOLOGY_HEIGHTMAP_SHEET_STRUCT_HPP_INCLUDED
-#define YLI_ONTOLOGY_HEIGHTMAP_SHEET_STRUCT_HPP_INCLUDED
+#ifndef YLI_ONTOLOGY_HEIGHTMAP_SECTOR_STRUCT_HPP_INCLUDED
+#define YLI_ONTOLOGY_HEIGHTMAP_SECTOR_STRUCT_HPP_INCLUDED
 
 #include "movable_struct.hpp"
 #include "heightmap.hpp"
@@ -25,9 +25,9 @@ namespace yli::ontology
 {
     class Scene;
 
-    struct HeightmapSheetStruct final : MovableStruct
+    struct HeightmapSectorStruct final : MovableStruct
     {
-        HeightmapSheetStruct(Request<Heightmap>&& heightmap_parent,
+        HeightmapSectorStruct(Request<Heightmap>&& heightmap_parent,
                              Request<Scene>&& scene_master)
             : MovableStruct(std::move(scene_master)),
               heightmap_parent { std::move(heightmap_parent) }

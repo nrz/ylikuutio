@@ -33,7 +33,7 @@
 #include "code/ylikuutio/ontology/species.hpp"
 #include "code/ylikuutio/ontology/object.hpp"
 #include "code/ylikuutio/ontology/heightmap.hpp"
-#include "code/ylikuutio/ontology/heightmap_sheet.hpp"
+#include "code/ylikuutio/ontology/heightmap_sector.hpp"
 #include "code/ylikuutio/ontology/symbiosis.hpp"
 #include "code/ylikuutio/ontology/symbiont_material.hpp"
 #include "code/ylikuutio/ontology/symbiont_species.hpp"
@@ -78,7 +78,7 @@ namespace yli::memory
     using SpeciesMemoryAllocator                     = MemoryAllocator<ontology::Species, 256>;
     using ObjectMemoryAllocator                      = MemoryAllocator<ontology::Object, 256>;
     using HeightmapMemoryAllocator                   = MemoryAllocator<ontology::Heightmap, 256>;
-    using HeightmapSheetMemoryAllocator              = MemoryAllocator<ontology::HeightmapSheet, 256>;
+    using HeightmapSectorMemoryAllocator             = MemoryAllocator<ontology::HeightmapSector, 256>;
     using SymbiosisMemoryAllocator                   = MemoryAllocator<ontology::Symbiosis, 256>;
     using SymbiontMaterialMemoryAllocator            = MemoryAllocator<ontology::SymbiontMaterial, 256>;
     using SymbiontSpeciesMemoryAllocator             = MemoryAllocator<ontology::SymbiontSpecies, 256>;

@@ -37,7 +37,7 @@
 #include "species.hpp"
 #include "object.hpp"
 #include "heightmap.hpp"
-#include "heightmap_sheet.hpp"
+#include "heightmap_sector.hpp"
 #include "symbiosis.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species.hpp"
@@ -80,7 +80,7 @@
 #include "species_struct.hpp"
 #include "object_struct.hpp"
 #include "heightmap_struct.hpp"
-#include "heightmap_sheet_struct.hpp"
+#include "heightmap_sector_struct.hpp"
 #include "symbiosis_struct.hpp"
 #include "symbiont_material_struct.hpp"
 #include "symbiont_species_struct.hpp"
@@ -478,16 +478,16 @@ namespace yli::ontology
                     MovableController>(heightmap_struct.movable_controller_master)));
         }
 
-        HeightmapSheet* create_heightmap_sheet(const HeightmapSheetStruct& heightmap_sheet_struct) const final
+        HeightmapSector* create_heightmap_sector(const HeightmapSectorStruct& heightmap_sector_struct) const final
         {
-            return static_cast<HeightmapSheet*>(this->template create_child_of_known_parent_type<
-                HeightmapSheet, HeightmapSheet, Heightmap, memory::HeightmapSheetMemoryAllocator, HeightmapSheetStruct>(
-                TypeEnumType::HEIGHTMAP_SHEET,
-                heightmap_sheet_struct.heightmap_parent,
-                heightmap_sheet_struct,
+            return static_cast<HeightmapSector*>(this->template create_child_of_known_parent_type<
+                HeightmapSector, HeightmapSector, Heightmap, memory::HeightmapSectorMemoryAllocator, HeightmapSectorStruct>(
+                TypeEnumType::HEIGHTMAP_SECTOR,
+                heightmap_sector_struct.heightmap_parent,
+                heightmap_sector_struct,
                 // `MovableController` master.
                 this->get_generic_master_module<AbstractMovable,
-                    MovableController>(heightmap_sheet_struct.movable_controller_master)));
+                    MovableController>(heightmap_sector_struct.movable_controller_master)));
         }
 
         Symbiosis* create_symbiosis(const SymbiosisStruct& symbiosis_struct) const final

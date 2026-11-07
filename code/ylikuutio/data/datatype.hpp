@@ -98,7 +98,7 @@ namespace yli::data
         OBJECT                = 173, // OBJE
         // `yli::ontology` datatypes, 'heightmap' path.
         HEIGHTMAP             = 175, // HMAP
-        HEIGHTMAP_SHEET       = 176, // HMST
+        HEIGHTMAP_SECTOR      = 176, // HSEC
         // `yli::ontology` datatypes, 'symbiont' path.
         SYMBIOSIS             = 180, // SYMB
         SYMBIONT_MATERIAL     = 181, // SYMM

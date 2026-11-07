@@ -45,7 +45,7 @@ namespace yli::ontology
     class Entity;
     class Universe;
     class Scene;
-    class HeightmapSheet;
+    class HeightmapSector;
     struct HeightmapStruct;
 
     class Heightmap final : public AbstractMovable
@@ -81,13 +81,13 @@ namespace yli::ontology
         friend class memory::MemoryAllocator;
 
         ChildModule child_of_scene;
-        GenericParentModule parent_of_heightmap_sheets;
+        GenericParentModule parent_of_heightmap_sectors;
     };
 
     template<>
-    inline GenericParentModule* Heightmap::get_generic_parent_module<HeightmapSheet>()
+    inline GenericParentModule* Heightmap::get_generic_parent_module<HeightmapSector>()
     {
-        return &this->parent_of_heightmap_sheets;
+        return &this->parent_of_heightmap_sectors;
     }
 }
 
