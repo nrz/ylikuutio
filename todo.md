@@ -1,6 +1,16 @@
 # TODO list
 * Tasks in priority order in descending priority, the most urgent ones first. Check when ready and move to the section Ready, when ready.
 
+## Identified task dependencies
+- Vulkan implementation is needed for Vulkan data structures
+- Vulkan data structures are needed for heightmap rendering to avoid creating more OpenGL code that adds more work for Vulkan port
+- Vulkan data structures are needed for 3D city model to avoid creating more OpenGL code that adds more work for Vulkan port
+- Vulkan data structures are needed for shapeshifters to avoid creating more OpenGL code that adds more work for Vulkan port
+- Vulkan data structures are needed for vector fonts to avoid creating more OpenGL code that adds more work for Vulkan port
+- Vulkan data structures are needed to inform what are the requirements for the custom 3D data model
+- Custom 3D data model is needed for 'final' implementation of 3D city model loading and rendering
+- Custom 3D data model is needed for 'final' implementation of heightmap loading and rendering
+
 ## Fixes needed
 - [ ] BUG/CONSOLE/UI Ajokki: `miniactivate my_console` in `mini_console` and then exiting `my_console` leaves console text on screen, which it should not.
 
