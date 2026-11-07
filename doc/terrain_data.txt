@@ -49,6 +49,9 @@ Digital Elevation Data (by Jonathan de Ferranti,
 whole world data available at 3 and 15 arc second resolutions):
 http://www.viewfinderpanoramas.org/dem3.html
 
+About coordinate systems used in Finland and conversions between them:
+https://www.maanmittauslaitos.fi/en/asioi-verkossa/palveluiden-kayttoohjeet/paikkatietoikkuna/koordinaattimuunnos
+
 About coordinate systems used in Finland and conversions between them (in Finnish):
 https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/koordinaatit-ja-paikannus/koordinaattijarjestelmat
 https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/koordinaatit-ja-paikannus/epsg-koodit-ja-proj-muunnosohjelma
