@@ -20,11 +20,10 @@
 - [ ] UI/UNIVERSE Move hardcoded info text out of `yli::ontology::Universe`.
 - [ ] VULKAN/RENDERING Add Vulkan support.
 - [ ] OPENGL/RENDERING Remove OpenGL support.
-- [ ] LIBRARIES/DATA/TERRAIN Use libgeotiff to load GeoTIFF elevation model 2 m heightmaps of the National Land Survey of Finland. https://github.com/OSGeo/libgeotiff
-- [ ] TOOLS Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
-- [ ] TOOLS/DATA/TERRAIN Convert heightmaps into a custom format with precomputed vertices, UVs, and normals, ready to be loaded into GPU.
-- [ ] Write code to convert ASCII grid files (height maps) to binary GLTF files, storing also interpolated vertices, UVs, and normals.
+- [ ] LIBRARIES/DATA/TERRAIN/TOOLS Use libgeotiff to load GeoTIFF elevation model 2 m data of the National Land Survey of Finland (`yli_convert`). https://github.com/OSGeo/libgeotiff
+- [ ] TERRAIN/TOOLS Implement new `yli_convert` program that converts ASCII files of elevation model of National Land Survey of Finland into custom `.yli` binary format.
 - [ ] ONTOLOGY/DATA/RENDERING Add support for 3D model of Helsinki: http://www.hri.fi/en/dataset/helsingin-3d-kaupunkimalli http://www.hri.fi/fi/dataset/helsingin-3d-kaupunkimalli
+- [ ] TERRAIN/TOOLS Implement support for 3D model of Helsinki in `yli_convert`.
 - [ ] DATA/VULKAN/RENDERING/TERRAIN Use displacement fields for height map rendering, like in Far Cry 5: https://www.gdcvault.com/play/1025261/Terrain-Rendering-in-Far-Cry
 - [ ] DATA/VULKAN/RENDERING/TERRAIN Implement GPU terrain quad tree.
 - [ ] DATA/VULKAN/RENDERING/TERRAIN Implement GPU terrain node list.
