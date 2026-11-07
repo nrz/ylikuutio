@@ -1,3 +1,36 @@
+Terraing rendering plan:
+
+3D model of Helsinki
+* Use 3D model of Helsinki ("Helsingin 3D-kaupunkimalli" in Finnish) as the reference for coordinate systems
+* 3D model of Helsinki has 2-level spatial hierarchy:
+  * 2 km x 2 km map sheets ("karttalehti" in Finnish)
+  * 250 m x 250 m map sheets that belong to a single 2 km x 2 km map sheet
+* Origin of OBJ files: (x=25490000, y=6668000, z=0)
+  * https://www.hel.fi/hel2/tietokeskus/data/helsinki/kaupunginkanslia/3D-malli/Karttaliite1.pdf
+* ETRS-GK25/N2000
+* Example of ETRS-GK25 coordinates: Helsinki central railway station: N=6673232, E=25496750 (https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/koordinaatit-ja-paikannus/koordinaattijarjestelmat)
+* Implementation plan: get 670498x2
+* Keep original grid
+* Make the above mentioned point (Helsinki central railway station: N = 6673232, E = 25496750) the origin (0, 0, 0) of Ylikuutio Helsinki coordinate system.
+* Use meter (m) as the unit in Ylikuutio Helsinki coordinate system.
+
+National Land Survey of Finland heightmap 2 m
+* 2 m x 2 m grid
+* ETRS89 / TM35FIN(E,N) (EPSG:3067)
+* N2000 height (EPSG:3900)
+* Reindex to use the same indices as 3D model of Helsinki
+* ETRS-TM35FIN: East coordinate E gets value 500'000 on the middle meridian of ETRS-TM35FIN (the middle meridian is 27 E)
+* ETRS-TM35FIN: North coordinates N is the distance from the equator in meters
+* Order of coordinates: east, north (E, N)
+* L413 HELSINKI south border is 6666 km from the equator (https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/kartat/osta-kartta/nain-loydat-oikean-karttalehden)
+* L413 HELSINKI east border is 27 E (https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/kartat/osta-kartta/nain-loydat-oikean-karttalehden)
+* K4 north border is 6666 km from the equator (https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/kartat/osta-kartta/nain-loydat-oikean-karttalehden)
+* L5 HELSINKI west border is 27 E (https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/kartat/osta-kartta/nain-loydat-oikean-karttalehden)
+* Map tiles of like "V3133" are 1:25000 maps and they are subdivided into 8 parts: from A to H
+* Map tiles of 1:25000 are 12 km x 24 km (12 km south-north and 24 km west-east), each part is 6 km x 6 km
+* Make the above mentioned point (Helsinki central railway station: N = 6673232, E = 25496750) the origin (0, 0, 0) of Ylikuutio Helsinki coordinate system.
+* Use meter (m) as the unit in Ylikuutio Helsinki coordinate system.
+
 Kansallisen maastotietokannan laatumalli - Korkeusmallit
 * in Finnish, the quality document of Elevation model (2 m and 10 m) of the National Land Survey of Finland)
 https://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2017/05/KMTK_korkeusmallit_laatukasikirja_2017-01-02.pdf
@@ -12,3 +45,5 @@ Digital Elevation Data (by Jonathan de Ferranti,
 whole world data available at 3 and 15 arc second resolutions):
 http://www.viewfinderpanoramas.org/dem3.html
 
+About coordinate systems used in Finland and conversions between them (in Finnish):
+https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/koordinaatit-ja-paikannus/epsg-koodit-ja-proj-muunnosohjelma
