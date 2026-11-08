@@ -141,18 +141,18 @@ namespace hirvi::data
         // `yli::ontology` datatypes, 'compute' path.
         COMPUTE_TASK                = 280, // CTSK
         // Custom datatypes of Hirvi.
-        HIRVI_SCENE       = 500,
-        POLICE_CONTROL_CENTER = 501,
-        CAT               = 511,
-        ELK               = 512,
-        POLICE_BEAR       = 520,
-        POLICE_CAR        = 521,
-        POLICE_DOG        = 522,
-        POLICE_HELICOPTER = 523,
-        POLICE_HORSE      = 524,
-        POLICE_TRAIN      = 525,
-        POLICE_TRAM       = 526,
-        TRAIN             = 530,
+        HIRVI_SCENE       = 500, // HSCE
+        POLICE_CONTROL_CENTER = 501, // PCON
+        CAT               = 511, // CAT!
+        ELK               = 512, // ELK!
+        POLICE_BEAR       = 520, // PBEA
+        POLICE_CAR        = 521, // PCAR
+        POLICE_DOG        = 522, // PDOG
+        POLICE_HELICOPTER = 523, // PHEL
+        POLICE_HORSE      = 524, // PHRS
+        POLICE_TRAIN      = 525, // PTRN
+        POLICE_TRAM       = 526, // PTRM
+        TRAIN             = 530, // TRAN
         MAX_VALUE         = TRAIN
     };
 
