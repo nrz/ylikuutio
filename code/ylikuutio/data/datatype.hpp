@@ -97,8 +97,13 @@ namespace yli::data
         SPECIES               = 172, // SPEC
         OBJECT                = 173, // OBJE
         // `yli::ontology` datatypes, 'heightmap' path.
-        HEIGHTMAP             = 175, // HMAP
-        HEIGHTMAP_SECTOR      = 176, // HSEC
+        HEIGHTMAP             = 174, // HMAP
+        HEIGHTMAP_SECTOR      = 175, // HSEC
+        // `yli::ontology` datatypes, 'citymodel' path.
+        CITYMODEL             = 176, // CMOD
+        CITYMODEL_SECTOR      = 177, // CSEC
+        CITYMODEL_MATERIAL    = 178, // CMAT
+        CITYMODEL_MESH        = 189, // CMSH
         // `yli::ontology` datatypes, 'symbiont' path.
         SYMBIOSIS             = 180, // SYMB
         SYMBIONT_MATERIAL     = 181, // SYMM
