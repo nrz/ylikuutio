@@ -34,6 +34,7 @@ National Land Survey of Finland heightmap 2 m
 * Use meter (m) as the unit in Ylikuutio Helsinki coordinate system.
 * https://www.maanmittauslaitos.fi/en/maps-and-spatial-data/datasets-and-interfaces/product-descriptions/map-sheet-division
 * https://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/kartat/osta-kartta/nain-loydat-oikean-karttalehden
+* Downloads: https://asiointi.maanmittauslaitos.fi/karttapaikka/tiedostopalvelu/korkeusmalli?lang=fi
 
 Kansallisen maastotietokannan laatumalli - Korkeusmallit
 * in Finnish, the quality document of Elevation model (2 m and 10 m) of the National Land Survey of Finland)
