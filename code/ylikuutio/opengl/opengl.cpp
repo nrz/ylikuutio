@@ -16,8 +16,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "opengl.hpp"
+#include "ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/file/file_writer.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>   // std::size_t
