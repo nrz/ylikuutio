@@ -266,8 +266,8 @@ namespace yli::ontology
         // Create angles and cartesian coordinates text, on bottom left corner.
         TextStruct angles_and_coordinates_text_struct;
         angles_and_coordinates_text_struct.font_2d_parent = Request(font_2d);
-        angles_and_coordinates_text_struct.position.x = 0;
-        angles_and_coordinates_text_struct.position.y = 0;
+        angles_and_coordinates_text_struct.position.x = 0.0f;
+        angles_and_coordinates_text_struct.position.y = 0.0f;
         angles_and_coordinates_text_struct.text_size = this->text_size;
         angles_and_coordinates_text_struct.font_size = this->font_size;
         angles_and_coordinates_text_struct.position.horizontal_alignment = LEFT;
@@ -281,8 +281,8 @@ namespace yli::ontology
 
         // Create time data text, on top left corner.
         TextStruct time_text_struct { Request(font_2d) };
-        time_text_struct.position.x = 0;
-        time_text_struct.position.y = this->window_height;
+        time_text_struct.position.x = 0.0f;
+        time_text_struct.position.y = static_cast<float>(this->window_height);
         time_text_struct.text_size = this->text_size;
         time_text_struct.font_size = this->font_size;
         time_text_struct.position.horizontal_alignment = LEFT;
@@ -296,8 +296,8 @@ namespace yli::ontology
 
         // Create help text.
         TextStruct help_text_struct { Request(font_2d) };
-        help_text_struct.position.x = 0;
-        help_text_struct.position.y = this->window_height - (3 * this->text_size);
+        help_text_struct.position.x = 0.0f;
+        help_text_struct.position.y = static_cast<float>(this->window_height - (3 * this->text_size));
         help_text_struct.text_size = this->text_size;
         help_text_struct.font_size = this->font_size;
         help_text_struct.position.horizontal_alignment = LEFT;
@@ -311,8 +311,8 @@ namespace yli::ontology
 
         // Print frame rate data on top right corner.
         TextStruct frame_rate_text_struct { Request(font_2d) };
-        frame_rate_text_struct.position.x = this->window_width;
-        frame_rate_text_struct.position.y = this->window_height;
+        frame_rate_text_struct.position.x = static_cast<float>(this->window_width);
+        frame_rate_text_struct.position.y = static_cast<float>(this->window_height);
         frame_rate_text_struct.text_size = this->text_size;
         frame_rate_text_struct.font_size = this->font_size;
         frame_rate_text_struct.position.horizontal_alignment = RIGHT;
@@ -373,13 +373,13 @@ namespace yli::ontology
                 // Clear the screen.
                 if (this->graphics_api_backend == render::GraphicsApiBackend::OPENGL)
                 {
-                    this->get_render_system().clear_color_and_depth_buffers();
+                    render::RenderSystem::clear_color_and_depth_buffers();
                 }
 
                 this->compute_delta_time();
 
-                this->mouse_x = this->window_width / 2;
-                this->mouse_y = this->window_height / 2;
+                this->mouse_x = static_cast<int32_t>(this->window_width / 2);
+                this->mouse_y = static_cast<int32_t>(this->window_height / 2);
 
                 const InputMode* const input_mode = this->parent_of_input_modes.get_active_input_mode();
 
@@ -393,8 +393,8 @@ namespace yli::ontology
                 this->get_event_system().poll_events(*input_mode);
 
                 // mouse position.
-                const float xpos = static_cast<float>(this->mouse_x);
-                const float ypos = static_cast<float>(this->mouse_y);
+                const auto xpos = static_cast<float>(this->mouse_x);
+                const auto ypos = static_cast<float>(this->mouse_y);
 
                 // Reset mouse position for next frame.
                 if (has_mouse_focus)
@@ -431,10 +431,10 @@ namespace yli::ontology
                     // Up vector.
                     this->set_up(glm::cross(right, direction));
 
-                    this->set_direction(std::move(direction));
+                    this->set_direction(direction);
 
                     // Right vector.
-                    this->set_right(std::move(right));
+                    this->set_right(right);
                 }
 
                 if (!this->in_console)
@@ -1062,8 +1062,8 @@ namespace yli::ontology
                 continue;
             }
 
-            const std::size_t resolution = current_display_mode.pixel_density * current_display_mode.w *
-                                           (current_display_mode.pixel_density * current_display_mode.h);
+            const auto resolution = static_cast<std::size_t>(current_display_mode.pixel_density * static_cast<float>(current_display_mode.w) *
+                                           (current_display_mode.pixel_density * static_cast<float>(current_display_mode.h)));
             std::cout << "Resolution:    " << resolution << "\n";
 
             if ((!preferred_display_mode_i.has_value()) || resolution > max_resolution)
@@ -1105,8 +1105,8 @@ namespace yli::ontology
                 // Create a window.
                 this->window = sdl::create_window(
                     this->display_mode->displayID,
-                    static_cast<int>(this->display_mode->pixel_density * this->window_width),
-                    static_cast<int>(this->display_mode->pixel_density * this->window_height),
+                    static_cast<int>(this->display_mode->pixel_density * static_cast<float>(this->window_width)),
+                    static_cast<int>(this->display_mode->pixel_density * static_cast<float>(this->window_height)),
                     this->window_title.c_str(),
                     flags | SDL_WINDOW_OPENGL);
             }
@@ -1115,8 +1115,8 @@ namespace yli::ontology
                 // Create a window.
                 this->window = sdl::create_window(
                     this->display_mode->displayID,
-                    static_cast<int>(this->display_mode->pixel_density * this->window_width),
-                    static_cast<int>(this->display_mode->pixel_density * this->window_height),
+                    static_cast<int>(this->display_mode->pixel_density * static_cast<float>(this->window_width)),
+                    static_cast<int>(this->display_mode->pixel_density * static_cast<float>(this->window_height)),
                     this->window_title.c_str(),
                     flags | SDL_WINDOW_VULKAN);
             }
@@ -1423,7 +1423,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Universe::set_view_matrix`: `camera` is `nullptr`!");
         }
 
-        camera->set_view_matrix(std::move(view_matrix));
+        camera->set_view_matrix(view_matrix);
     }
 
     float Universe::get_aspect_ratio() const
