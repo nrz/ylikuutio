@@ -182,7 +182,7 @@ namespace yli::sdl
 
     [[nodiscard]] SDL_GLContext create_context(SDL_Window* const window)
     {
-        if (SDL_GLContext context = SDL_GL_CreateContext(window); context != nullptr)
+        if (const SDL_GLContext context = SDL_GL_CreateContext(window); context != nullptr)
         {
             std::cout << "OpenGL context created successfully.\n";
             return context;
@@ -199,7 +199,7 @@ namespace yli::sdl
 
     [[nodiscard]] bool set_window_windowed(SDL_Window* window)
     {
-        if (SDL_SetWindowFullscreen(window, 0))
+        if (SDL_SetWindowFullscreen(window, false))
         {
             std::cout << "Window set to windowed successfully.\n";
             return true; // Success.
