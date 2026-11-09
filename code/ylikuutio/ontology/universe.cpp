@@ -378,8 +378,8 @@ namespace yli::ontology
 
                 this->compute_delta_time();
 
-                this->mouse_x = static_cast<int32_t>(this->window_width / 2);
-                this->mouse_y = static_cast<int32_t>(this->window_height / 2);
+                this->mouse_x = static_cast<std::int32_t>(this->window_width / 2);
+                this->mouse_y = static_cast<std::int32_t>(this->window_height / 2);
 
                 const InputMode* const input_mode = this->parent_of_input_modes.get_active_input_mode();
 
