@@ -133,7 +133,7 @@ namespace yli::snippets
         }
     }
 
-    void create_action_mode_keyrelease_callbacks(yli::ontology::AbstractEntityFactory& entity_factory)
+    void create_action_mode_keyrelease_callbacks(ontology::AbstractEntityFactory& entity_factory)
     {
         {
             // Callback code for left Control release: release first turbo.
@@ -172,7 +172,7 @@ namespace yli::snippets
         }
     }
 
-    void set_action_mode_keypress_callback_engines_or_throw(yli::ontology::InputMode& action_mode_input_mode)
+    void set_action_mode_keypress_callback_engines_or_throw(ontology::InputMode& action_mode_input_mode)
     {
         // Keypress callbacks for action mode.
         action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_GRAVE, Request<AbstractCallbackEngine>("enter_console_callback_engine"));
@@ -184,7 +184,7 @@ namespace yli::snippets
         action_mode_input_mode.set_keypress_callback_engine(SDL_SCANCODE_F1, Request<AbstractCallbackEngine>("toggle_help_mode_callback_engine"));
     }
 
-    void set_action_mode_keyrelease_callback_engines_or_throw(yli::ontology::InputMode& action_mode_input_mode)
+    void set_action_mode_keyrelease_callback_engines_or_throw(ontology::InputMode& action_mode_input_mode)
     {
         // Keyrelease callbacks for action mode.
         action_mode_input_mode.set_keyrelease_callback_engine(SDL_SCANCODE_LCTRL, Request<AbstractCallbackEngine>("release_first_turbo_callback_engine"));
