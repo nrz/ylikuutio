@@ -17,7 +17,7 @@
 
 #include "opengl_texture.hpp"
 #include "opengl.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>  // std::size_t
