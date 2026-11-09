@@ -382,6 +382,14 @@ configure_file(res/textures/test3x3.png test3x3.png COPYONLY)
 
 ### Ylikuutio libraries ###
 
+# YliFile
+add_library(yli_file STATIC
+        # yli_file, in alphabetical order.
+        code/ylikuutio/file/file_loader.cpp
+        code/ylikuutio/file/file_loader.hpp
+        code/ylikuutio/file/file_writer.hpp
+)
+
 # Ylikuutio
 add_library(ylikuutio STATIC
         # audio, in alphabetical order
@@ -436,11 +444,6 @@ add_library(ylikuutio STATIC
         # event, in alphabetical order
         code/ylikuutio/event/event_system.cpp
         code/ylikuutio/event/event_system.hpp
-
-        # file, in alphabetical order.
-        code/ylikuutio/file/file_loader.cpp
-        code/ylikuutio/file/file_loader.hpp
-        code/ylikuutio/file/file_writer.hpp
 
         # geometry, in alphabetical order.
         code/ylikuutio/geometry/degrees_to_radians.cpp
@@ -944,6 +947,7 @@ add_library(ylikuutio STATIC
         code/ylikuutio/triangulation/vertices.cpp
         code/ylikuutio/triangulation/vertices.hpp
 )
+target_link_libraries(ylikuutio PRIVATE yli_file)
 
 # Snippets (can be used by applications but these are not core Ylikuutio functionality)
 add_library(snippets STATIC
