@@ -268,7 +268,7 @@ namespace yli::opengl
 
         if (type == GL_BYTE)
         {
-            std::vector<std::int8_t> data_vector = opengl::copy_data_from_gpu_texture_to_cpu_array<std::int8_t>(
+            const std::vector<std::int8_t> data_vector = opengl::copy_data_from_gpu_texture_to_cpu_array<std::int8_t>(
                 get_base_format(format),
                 type,
                 texture_width,
@@ -373,9 +373,6 @@ namespace yli::opengl
             std::cerr << "ERROR: `yli::opengl::save_data_from_gpu_texture_into_file`: unknown or unsupported type: " <<
                     type << "\n";
         }
-
-        // Unknown or unsupported type.
-        return;
     }
 
     void save_data_from_gpu_texture_into_file(
@@ -386,7 +383,7 @@ namespace yli::opengl
         const std::string& filename,
         const bool should_flip_texture)
     {
-        const std::size_t texture_depth = 1;
+        constexpr std::size_t texture_depth = 1;
         save_data_from_gpu_texture_into_file(
             format,
             type,
