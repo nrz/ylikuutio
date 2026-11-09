@@ -18,8 +18,8 @@
 #ifndef YLIKUUTIO_OPENGL_OPENGL_HPP_INCLUDED
 #define YLIKUUTIO_OPENGL_OPENGL_HPP_INCLUDED
 
+#include "ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 #include "code/ylikuutio/memory/memory_templates.hpp"
-#include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include standard headers
 #include <cstddef>  // std::size_t
