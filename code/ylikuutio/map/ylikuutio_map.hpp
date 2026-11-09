@@ -73,7 +73,7 @@ namespace yli::map
     template<typename T1>
     void print_keys_to_console(const std::unordered_map<std::string, T1>& unordered_map, ontology::Console& console)
     {
-        std::vector<std::string> key_vector = map::get_keys(unordered_map);
+        const std::vector<std::string> key_vector = map::get_keys(unordered_map);
         yli::ontology::print_words_to_console(console, key_vector);
     }
 
@@ -81,9 +81,8 @@ namespace yli::map
     void print_keys_of_specific_type_to_console(const std::unordered_map<std::string, T1>& unordered_map,
                                                 ontology::Console& console)
     {
-        std::vector<std::pair<std::string, T1>> keys_and_values = get_keys_and_values(unordered_map);
-
-        for (auto& [key, value] : keys_and_values)
+        for (std::vector<std::pair<std::string, T1>> keys_and_values = get_keys_and_values(unordered_map);
+             auto& [key, value] : keys_and_values)
         {
             T2 inherited_type = dynamic_cast<T2>(value);
 
@@ -97,15 +96,13 @@ namespace yli::map
     template<typename T1>
     void print_keys_and_values(const std::unordered_map<std::string, T1>& unordered_map)
     {
-        if (unordered_map.size() == 0)
+        if (unordered_map.empty())
         {
             std::cout << "no keys.\n";
             return;
         }
 
-        std::vector<std::string> key_vector = map::get_keys(unordered_map);
-
-        for (std::string key : key_vector)
+        for (const std::vector<std::string> key_vector = map::get_keys(unordered_map); std::string key : key_vector)
         {
             if (unordered_map.at(key).empty())
             {
