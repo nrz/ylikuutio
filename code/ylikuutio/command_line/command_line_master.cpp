@@ -41,13 +41,11 @@ namespace yli::command_line
         this->arg_vector.assign(argv + 1, argv + argc); // Copy all arguments except the executable name.
         this->are_arguments_valid = true;               // Arguments are valid if their syntax is valid.
         bool is_previous_argument_available = false;
-        std::string previous_argument = ""; // dummy value.
+        std::string previous_argument; // dummy value.
 
         // Go through the command line arguments and store the keys and values.
-        for (std::vector<std::string>::const_iterator it = this->arg_vector.begin(); it != this->arg_vector.end(); ++it)
+        for (const auto& argument : this->arg_vector)
         {
-            const std::string argument = *it;
-
             // The following rules apply to the arguments (excluding the executable name which is in `argv[0]`):
             //
             // If the argument begins with 3 or more dashes (`---`), then ignore that argument, and mark arguments as invalid.
@@ -205,13 +203,13 @@ namespace yli::command_line
 
         const std::vector<std::string> args = yli::map::get_keys(this->arg_map);
 
-        for (auto arg_it = args.begin(); arg_it != args.end(); ++arg_it)
+        for (const auto & arg : args)
         {
             bool is_valid_key = false;
 
-            for (auto valid_keys_it = valid_keys.begin(); valid_keys_it != valid_keys.end(); ++valid_keys_it)
+            for (const auto & valid_key : valid_keys)
             {
-                if (*arg_it == *valid_keys_it)
+                if (arg == valid_key)
                 {
                     is_valid_key = true;
                     break;
@@ -220,7 +218,7 @@ namespace yli::command_line
 
             if (!is_valid_key)
             {
-                invalid_keys.emplace_back(*arg_it);
+                invalid_keys.emplace_back(arg);
             }
         }
 
@@ -248,7 +246,7 @@ namespace yli::command_line
         {
             // Print command line arguments (without the executable name string).
 
-            for (std::string argument : arg_vector)
+            for (const std::string& argument : arg_vector)
             {
                 std::cout << argument << "\n";
             }
