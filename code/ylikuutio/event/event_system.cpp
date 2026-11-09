@@ -48,8 +48,8 @@ namespace yli::event
         {
             if (sdl_event.type == SDL_EVENT_MOUSE_MOTION)
             {
-                this->universe.update_mouse_x(sdl_event.motion.xrel);
-                this->universe.update_mouse_y(sdl_event.motion.yrel);
+                this->universe.update_mouse_x(static_cast<std::int32_t>(sdl_event.motion.xrel));
+                this->universe.update_mouse_y(static_cast<std::int32_t>(sdl_event.motion.yrel));
             }
             else if (sdl_event.type == SDL_EVENT_KEY_DOWN)
             {
