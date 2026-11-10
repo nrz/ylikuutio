@@ -51,33 +51,33 @@ namespace yli::ontology
 
         ~MeshModule();
 
-        std::size_t get_number_of_vertices() const;
+        [[nodiscard]] std::size_t get_number_of_vertices() const;
 
-        const std::vector<glm::vec3>& get_vertices() const;
+        [[nodiscard]] const std::vector<glm::vec3>& get_vertices() const;
 
-        const std::vector<glm::vec2>& get_uvs() const;
+        [[nodiscard]] const std::vector<glm::vec2>& get_uvs() const;
 
-        const std::vector<glm::vec3>& get_normals() const;
+        [[nodiscard]] const std::vector<glm::vec3>& get_normals() const;
 
-        const std::vector<std::uint32_t>& get_indices() const;
+        [[nodiscard]] const std::vector<std::uint32_t>& get_indices() const;
 
-        std::size_t get_indices_size() const;
+        [[nodiscard]] std::size_t get_indices_size() const;
 
-        GLint get_vertex_position_modelspace_id() const;
+        [[nodiscard]] GLint get_vertex_position_modelspace_id() const;
 
-        GLint get_vertex_uv_id() const;
+        [[nodiscard]] GLint get_vertex_uv_id() const;
 
-        GLint get_vertex_normal_modelspace_id() const;
+        [[nodiscard]] GLint get_vertex_normal_modelspace_id() const;
 
-        GLuint get_vao() const;
+        [[nodiscard]] GLuint get_vao() const;
 
-        GLuint get_vertex_buffer() const;
+        [[nodiscard]] GLuint get_vertex_buffer() const;
 
-        GLuint get_uv_buffer() const;
+        [[nodiscard]] GLuint get_uv_buffer() const;
 
-        GLuint get_normal_buffer() const;
+        [[nodiscard]] GLuint get_normal_buffer() const;
 
-        GLuint get_element_buffer() const;
+        [[nodiscard]] GLuint get_element_buffer() const;
 
         void set_vertex_position_modelspace_id(GLint vertex_position_modelspace_id);
 
