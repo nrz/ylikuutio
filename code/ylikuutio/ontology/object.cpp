@@ -17,7 +17,6 @@
 
 #include "object.hpp"
 #include "universe.hpp"
-#include "mesh_module.hpp"
 #include "cartesian_coordinates_module.hpp"
 #include "orientation_module.hpp"
 #include "pipeline.hpp"
@@ -32,6 +31,7 @@
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/mesh_module.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -236,7 +236,7 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `Object::render_this_object`: Vulkan is not supported yet!");
         }
 
-        const MeshModule* master_model = nullptr;
+        const render::MeshModule* master_model = nullptr;
 
         const Species* const master_species = static_cast<Species*>(this->apprentice_of_species.get_master());
 

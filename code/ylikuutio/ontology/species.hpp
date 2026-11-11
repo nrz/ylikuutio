@@ -22,8 +22,8 @@
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
 #include "apprentice_module.hpp"
-#include "mesh_module.hpp"
 #include "code/ylikuutio/data/any_value.hpp"
+#include "code/ylikuutio/render/mesh_module.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -123,7 +123,7 @@ namespace yli::ontology
     public:
         GenericMasterModule master_of_objects;
         ApprenticeModule apprentice_of_material;
-        MeshModule mesh;
+        render::MeshModule mesh;
     };
 
     template<>

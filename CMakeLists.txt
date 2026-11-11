@@ -782,8 +782,6 @@ add_library(ylikuutio STATIC
         code/ylikuutio/ontology/material.cpp
         code/ylikuutio/ontology/material.hpp
         code/ylikuutio/ontology/material_struct.hpp
-        code/ylikuutio/ontology/mesh_module.cpp
-        code/ylikuutio/ontology/mesh_module.hpp
         code/ylikuutio/ontology/mesh_provider_struct.hpp
         code/ylikuutio/ontology/mission.cpp
         code/ylikuutio/ontology/mission.hpp
@@ -895,6 +893,8 @@ add_library(ylikuutio STATIC
 
         # render, in alphabetical order
         code/ylikuutio/render/graphics_api_backend.hpp
+        code/ylikuutio/render/mesh_module.cpp
+        code/ylikuutio/render/mesh_module.hpp
         code/ylikuutio/render/render_model.hpp
         code/ylikuutio/render/render_struct.hpp
         code/ylikuutio/render/render_system.cpp

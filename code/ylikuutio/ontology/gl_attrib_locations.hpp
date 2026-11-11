@@ -18,12 +18,16 @@
 #ifndef YLIKUUTIO_ONTOLOGY_GL_ATTRIB_LOCATIONS_HPP_INCLUDED
 #define YLIKUUTIO_ONTOLOGY_GL_ATTRIB_LOCATIONS_HPP_INCLUDED
 
+namespace yli::render
+{
+    class MeshModule;
+}
+
 namespace yli::ontology
 {
     class Pipeline;
-    class MeshModule;
 
-    void set_gl_attrib_locations(Pipeline* pipeline, MeshModule* mesh_module);
+    void set_gl_attrib_locations(Pipeline* pipeline, render::MeshModule* mesh_module);
 }
 
 #endif

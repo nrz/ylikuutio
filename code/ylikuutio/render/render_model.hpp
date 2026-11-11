@@ -19,7 +19,7 @@
 #define YLIKUUTIO_RENDER_RENDER_MODEL_HPP_INCLUDED
 
 #include "render_templates.hpp"
-#include "code/ylikuutio/ontology/mesh_module.hpp"
+#include "mesh_module.hpp"
 #include "code/ylikuutio/opengl/opengl.hpp"
 
 namespace yli::ontology
@@ -32,7 +32,7 @@ namespace yli::render
     // ContainerType = container type, CastType = type in which to cast the stored type into.
     template<typename ContainerType, typename CastType>
     void render_model(
-        const ontology::MeshModule& mesh,
+        const MeshModule& mesh,
         ContainerType& renderables_container,
         const ontology::Scene* const scene)
     {

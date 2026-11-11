@@ -20,7 +20,7 @@
 
 #include "entity.hpp"
 #include "child_module.hpp"
-#include "mesh_module.hpp"
+#include "code/ylikuutio/render/mesh_module.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -72,7 +72,7 @@ namespace yli::ontology
 
     private:
         ChildModule child_of_shapeshifter_transformation;
-        MeshModule mesh;
+        render::MeshModule mesh;
 
     public:
         Scene* get_scene() const override;

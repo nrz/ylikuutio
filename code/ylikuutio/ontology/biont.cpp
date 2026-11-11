@@ -16,7 +16,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "biont.hpp"
-#include "mesh_module.hpp"
 #include "universe.hpp"
 #include "holobiont.hpp"
 #include "symbiosis.hpp"
@@ -25,6 +24,7 @@
 #include "code/ylikuutio/opengl/opengl.hpp"
 #include "code/ylikuutio/opengl/ubo_block_enums.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/mesh_module.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -200,7 +200,7 @@ namespace yli::ontology
 
             // '`Species`' part begins here.
 
-            const MeshModule& mesh = symbiont_species_master->mesh;
+            const render::MeshModule& mesh = symbiont_species_master->mesh;
 
             // 1st attribute buffer : vertices.
             opengl::enable_vertex_attrib_array(mesh.get_vertex_position_modelspace_id());

@@ -22,7 +22,7 @@
 #include "child_module.hpp"
 #include "apprentice_module.hpp"
 #include "generic_master_module.hpp"
-#include "mesh_module.hpp"
+#include "code/ylikuutio/render/mesh_module.hpp"
 
 // Include GLM
 #ifndef GLM_GLM_HPP_INCLUDED
@@ -110,7 +110,7 @@ namespace yli::ontology
         GenericMasterModule master_of_glyph_objects;
 
     public:
-        MeshModule mesh;
+        render::MeshModule mesh;
 
     private:
         std::vector<std::vector<glm::vec2>>* glyph_vertex_data { nullptr };

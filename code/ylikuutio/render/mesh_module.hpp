@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#ifndef YLIKUUTIO_ONTOLOGY_MESH_MODULE_HPP_INCLUDED
-#define YLIKUUTIO_ONTOLOGY_MESH_MODULE_HPP_INCLUDED
+#ifndef YLIKUUTIO_RENDER_MESH_MODULE_HPP_INCLUDED
+#define YLIKUUTIO_RENDER_MESH_MODULE_HPP_INCLUDED
 
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -37,14 +37,17 @@ namespace yli::ontology
     class Ecosystem;
     class Pipeline;
     struct MeshProviderStruct;
+}
 
+namespace yli::render
+{
     class MeshModule final
     {
     public:
         MeshModule(
-            const Universe& universe,
-            const MeshProviderStruct& mesh_provider_struct,
-            const Pipeline* pipeline);
+            const ontology::Universe& universe,
+            const ontology::MeshProviderStruct& mesh_provider_struct,
+            const ontology::Pipeline* pipeline);
 
         MeshModule(const MeshModule&) = delete;            // Delete copy constructor.
         MeshModule& operator=(const MeshModule&) = delete; // Delete copy assignment.

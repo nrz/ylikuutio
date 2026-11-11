@@ -17,12 +17,12 @@
 
 #include "gl_attrib_locations.hpp"
 #include "pipeline.hpp"
-#include "mesh_module.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
+#include "code/ylikuutio/render/mesh_module.hpp"
 
 namespace yli::ontology
 {
-    void set_gl_attrib_locations(Pipeline* const pipeline, MeshModule* const mesh_module)
+    void set_gl_attrib_locations(Pipeline* const pipeline, render::MeshModule* const mesh_module)
     {
         if (pipeline != nullptr && mesh_module != nullptr)
         {

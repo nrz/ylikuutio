@@ -16,11 +16,11 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "mesh_module.hpp"
-#include "universe.hpp"
-#include "pipeline.hpp"
-#include "mesh_provider_struct.hpp"
 #include "code/ylikuutio/load/model_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
+#include "code/ylikuutio/ontology/universe.hpp"
+#include "code/ylikuutio/ontology/pipeline.hpp"
+#include "code/ylikuutio/ontology/mesh_provider_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
@@ -36,11 +36,14 @@
 namespace yli::ontology
 {
     class Scene;
+}
 
+namespace yli::render
+{
     MeshModule::MeshModule(
-        const Universe& universe,
-        const MeshProviderStruct& mesh_provider_struct,
-        const Pipeline* const pipeline)
+        const ontology::Universe& universe,
+        const ontology::MeshProviderStruct& mesh_provider_struct,
+        const ontology::Pipeline* const pipeline)
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.

@@ -21,7 +21,7 @@
 #include "entity.hpp"
 #include "child_module.hpp"
 #include "generic_master_module.hpp"
-#include "mesh_module.hpp"
+#include "code/ylikuutio/render/mesh_module.hpp"
 
 // Include standard headers
 #include <cstddef>  // std::size_t
@@ -92,7 +92,7 @@ namespace yli::ontology
 
         ChildModule child_of_symbiont_material;
         GenericMasterModule master_of_bionts;
-        MeshModule mesh;
+        render::MeshModule mesh;
 
     private:
         std::string model_file_format; // Type of the model file, eg. `"png"`.
