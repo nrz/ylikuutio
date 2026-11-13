@@ -80,7 +80,7 @@ namespace yli::ontology
 
     Pipeline* ShapeshifterForm::get_pipeline() const
     {
-        if (auto* const shapeshifter_transformation_parent = static_cast<ShapeshifterTransformation*>(this->
+        if (const auto* const shapeshifter_transformation_parent = static_cast<ShapeshifterTransformation*>(this->
             get_parent()); shapeshifter_transformation_parent != nullptr)
         {
             return shapeshifter_transformation_parent->get_pipeline();
