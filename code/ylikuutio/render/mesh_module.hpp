@@ -33,7 +33,6 @@
 
 namespace yli::ontology
 {
-    class Universe;
     class Ecosystem;
     class Pipeline;
     struct MeshProviderStruct;
@@ -41,11 +40,13 @@ namespace yli::ontology
 
 namespace yli::render
 {
+    enum class GraphicsApiBackend;
+
     class MeshModule final
     {
     public:
         MeshModule(
-            const ontology::Universe& universe,
+            GraphicsApiBackend graphics_api_backend,
             const ontology::MeshProviderStruct& mesh_provider_struct,
             const ontology::Pipeline* pipeline);
 

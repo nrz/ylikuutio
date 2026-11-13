@@ -17,6 +17,7 @@
 
 #include "species.hpp"
 #include "entity.hpp"
+#include "universe.hpp"
 #include "ecosystem.hpp"
 #include "scene.hpp"
 #include "material.hpp"
@@ -47,7 +48,6 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class GenericMasterModule;
-    class Universe;
     class Pipeline;
 
     std::optional<data::AnyValue> Species::bind_to_new_ecosystem_parent(
@@ -156,7 +156,7 @@ namespace yli::ontology
           child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
           master_of_objects(*this, &this->registry, "objects"),
           apprentice_of_material(material_master_module, this),
-          mesh(universe, species_struct, this->get_pipeline())
+          mesh(universe.get_graphics_api_backend(), species_struct, this->get_pipeline())
     {
         // `Entity` member variables begin here.
         this->can_be_erased = true;

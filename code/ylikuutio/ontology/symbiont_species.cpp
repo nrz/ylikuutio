@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "symbiont_species.hpp"
+#include "universe.hpp"
 #include "symbiont_material.hpp"
 #include "symbiont_species_struct.hpp"
 
@@ -39,7 +40,6 @@ namespace yli::ontology
     class GenericParentModule;
     class GenericMasterModule;
     class Entity;
-    class Universe;
     class Scene;
 
     SymbiontSpecies::SymbiontSpecies(
@@ -51,7 +51,7 @@ namespace yli::ontology
         : Entity(std::move(allocation_data), application, universe, symbiont_species_struct),
           child_of_symbiont_material(symbiont_material_parent_module, *this),
           master_of_bionts(*this, &this->registry, "bionts"),
-          mesh(universe, symbiont_species_struct, this->get_pipeline())
+          mesh(universe.get_graphics_api_backend(), symbiont_species_struct, this->get_pipeline())
     {
     }
 

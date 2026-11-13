@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "shapeshifter_form.hpp"
+#include "universe.hpp"
 #include "shapeshifter_transformation.hpp"
 #include "shapeshifter_form_struct.hpp"
 
@@ -39,7 +40,6 @@ namespace yli::ontology
 {
     class GenericParentModule;
     class Entity;
-    class Universe;
     class Scene;
     class Pipeline;
 
@@ -51,7 +51,7 @@ namespace yli::ontology
         GenericParentModule* const shapeshifter_transformation_parent_module)
         : Entity(std::move(allocation_data), application, universe, shapeshifter_form_struct),
           child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
-          mesh(universe, shapeshifter_form_struct, this->get_pipeline())
+          mesh(universe.get_graphics_api_backend(), shapeshifter_form_struct, this->get_pipeline())
     {
     }
 

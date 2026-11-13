@@ -16,6 +16,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "mesh_module.hpp"
+#include "graphics_api_backend.hpp"
 #include "code/ylikuutio/load/model_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
 #include "code/ylikuutio/ontology/universe.hpp"
@@ -31,6 +32,7 @@
 
 // Include standard headers
 #include <cstddef>  // std::size_t
+#include <cstdint>  // std::uint32_t
 #include <vector>   // std::vector
 
 namespace yli::ontology
@@ -41,19 +43,19 @@ namespace yli::ontology
 namespace yli::render
 {
     MeshModule::MeshModule(
-        const ontology::Universe& universe,
+        const GraphicsApiBackend graphics_api_backend,
         const ontology::MeshProviderStruct& mesh_provider_struct,
         const ontology::Pipeline* const pipeline)
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
         const bool should_load_vertices_uvs_and_normals =
-                universe.get_is_opengl_in_use() ||
-                universe.get_is_vulkan_in_use() ||
-                universe.get_is_software_rendering_in_use();
+                graphics_api_backend == GraphicsApiBackend::OPENGL ||
+                graphics_api_backend == GraphicsApiBackend::VULKAN ||
+                graphics_api_backend == GraphicsApiBackend::SOFTWARE;
 
         if (should_load_vertices_uvs_and_normals &&
-            universe.get_is_opengl_in_use() &&
+            graphics_api_backend == GraphicsApiBackend::OPENGL &&
             pipeline != nullptr)
         {
             // VAO.
@@ -86,7 +88,7 @@ namespace yli::render
                 this->normal_buffer,
                 this->element_buffer,
                 load_fbx_struct,
-                universe.get_graphics_api_backend());
+                graphics_api_backend);
 
             this->are_opengl_buffers_initialized = true;
         }
