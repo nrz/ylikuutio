@@ -38,8 +38,8 @@ namespace yli::memory
 namespace yli::ontology
 {
     class GenericParentModule;
-    class Universe;
     class Entity;
+    class Universe;
     class Scene;
     class Pipeline;
 
