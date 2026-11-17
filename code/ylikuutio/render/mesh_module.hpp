@@ -82,11 +82,11 @@ namespace yli::render
 
         [[nodiscard]] GLuint get_element_buffer() const;
 
-        void set_vertex_position_modelspace_id(GLint vertex_position_modelspace_id);
+        void set_vertex_position_modelspace_id(GLint new_vertex_position_modelspace_id);
 
-        void set_vertex_uv_id(GLint vertex_uv_id);
+        void set_vertex_uv_id(GLint new_vertex_uv_id);
 
-        void set_vertex_normal_modelspace_id(GLint vertex_normal_modelspace_id);
+        void set_vertex_normal_modelspace_id(GLint new_vertex_normal_modelspace_id);
 
         std::uint32_t image_width { 0 };
         std::uint32_t image_height { 0 };

@@ -172,18 +172,18 @@ namespace yli::render
         return this->element_buffer;
     }
 
-    void MeshModule::set_vertex_position_modelspace_id(const GLint vertex_position_modelspace_id)
+    void MeshModule::set_vertex_position_modelspace_id(const GLint new_vertex_position_modelspace_id)
     {
-        this->vertex_position_modelspace_id = vertex_position_modelspace_id;
+        this->vertex_position_modelspace_id = new_vertex_position_modelspace_id;
     }
 
-    void MeshModule::set_vertex_uv_id(const GLint vertex_uv_id)
+    void MeshModule::set_vertex_uv_id(const GLint new_vertex_uv_id)
     {
-        this->vertex_uv_id = vertex_uv_id;
+        this->vertex_uv_id = new_vertex_uv_id;
     }
 
-    void MeshModule::set_vertex_normal_modelspace_id(const GLint vertex_normal_modelspace_id)
+    void MeshModule::set_vertex_normal_modelspace_id(const GLint new_vertex_normal_modelspace_id)
     {
-        this->vertex_normal_modelspace_id = vertex_normal_modelspace_id;
+        this->vertex_normal_modelspace_id = new_vertex_normal_modelspace_id;
     }
 }
