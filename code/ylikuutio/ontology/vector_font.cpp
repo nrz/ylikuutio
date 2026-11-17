@@ -231,7 +231,7 @@ namespace yli::ontology
     Pipeline& VectorFont::get_pipeline() const
     {
         if (const auto* const material_parent = static_cast<Material*>(this->get_parent());
-            material_parent == nullptr) [[likely]]
+            material_parent != nullptr) [[likely]]
         {
             return material_parent->get_pipeline();
         }
