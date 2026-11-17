@@ -104,7 +104,7 @@ namespace yli::ontology
 
         Scene* get_scene() const override;
 
-        Pipeline* get_pipeline() const;
+        Pipeline& get_pipeline() const;
 
         template<typename ChildType>
         GenericParentModule* get_generic_parent_module() = delete;

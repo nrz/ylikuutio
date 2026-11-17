@@ -179,15 +179,12 @@ namespace yli::ontology
             return;
         }
 
-        this->render_this_object(this->get_pipeline());
+        this->render_this_object();
     }
 
-    void Object::render_this_object(const Pipeline* const pipeline)
+    void Object::render_this_object()
     {
-        if (pipeline == nullptr) [[unlikely]]
-        {
-            return;
-        }
+        // `Object` must always have a valid `Pipeline` master.
 
         this->model_matrix = glm::mat4(1.0f);
 
@@ -321,7 +318,7 @@ namespace yli::ontology
         return static_cast<Scene*>(this->child_of_scene.get_parent());
     }
 
-    Pipeline* Object::get_pipeline() const
+    Pipeline& Object::get_pipeline() const
     {
         if (const auto* const species = static_cast<Species*>(this->apprentice_of_species.get_master());
             species != nullptr) [[likely]]

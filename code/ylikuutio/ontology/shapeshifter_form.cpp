@@ -17,6 +17,7 @@
 
 #include "shapeshifter_form.hpp"
 #include "universe.hpp"
+#include "pipeline.hpp"
 #include "shapeshifter_transformation.hpp"
 #include "shapeshifter_form_struct.hpp"
 
@@ -41,7 +42,6 @@ namespace yli::ontology
     class GenericParentModule;
     class Entity;
     class Scene;
-    class Pipeline;
 
     ShapeshifterForm::ShapeshifterForm(
         memory::AllocationData&& allocation_data,
@@ -51,9 +51,8 @@ namespace yli::ontology
         GenericParentModule* const shapeshifter_transformation_parent_module)
         : Entity(std::move(allocation_data), application, universe, shapeshifter_form_struct),
           child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
-          mesh(universe.get_graphics_api_backend(), shapeshifter_form_struct, this->get_pipeline())
-    {
-    }
+          mesh(universe.get_graphics_api_backend(), shapeshifter_form_struct, this->get_pipeline().get_program_id())
+    { }
 
     std::string_view ShapeshifterForm::get_type() const
     {
@@ -78,15 +77,17 @@ namespace yli::ontology
         return shapeshifter_transformation_parent->get_scene();
     }
 
-    Pipeline* ShapeshifterForm::get_pipeline() const
+    Pipeline& ShapeshifterForm::get_pipeline() const
     {
-        if (const auto* const shapeshifter_transformation_parent = static_cast<ShapeshifterTransformation*>(this->
-            get_parent()); shapeshifter_transformation_parent != nullptr)
+        if (const auto* const shapeshifter_transformation_parent =
+                    static_cast<ShapeshifterTransformation*>(this->get_parent());
+            shapeshifter_transformation_parent != nullptr) [[likely]]
         {
             return shapeshifter_transformation_parent->get_pipeline();
         }
 
-        return nullptr;
+        throw std::runtime_error(
+            "ERROR: `ShapeshifterForm::get_pipeline`: `shapeshifter_transformation_parent` is `nullptr`!");
     }
 
     std::size_t ShapeshifterForm::get_number_of_children() const

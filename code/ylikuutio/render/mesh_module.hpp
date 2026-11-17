@@ -34,7 +34,6 @@
 namespace yli::ontology
 {
     class Ecosystem;
-    class Pipeline;
     struct MeshProviderStruct;
 }
 
@@ -48,7 +47,7 @@ namespace yli::render
         MeshModule(
             GraphicsApiBackend graphics_api_backend,
             const ontology::MeshProviderStruct& mesh_provider_struct,
-            const ontology::Pipeline* pipeline);
+            GLuint program_id);
 
         MeshModule(const MeshModule&) = delete;            // Delete copy constructor.
         MeshModule& operator=(const MeshModule&) = delete; // Delete copy assignment.

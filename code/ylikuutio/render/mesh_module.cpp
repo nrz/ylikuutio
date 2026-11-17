@@ -19,7 +19,6 @@
 #include "graphics_api_backend.hpp"
 #include "code/ylikuutio/load/model_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
-#include "code/ylikuutio/ontology/pipeline.hpp"
 #include "code/ylikuutio/ontology/mesh_provider_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
@@ -44,7 +43,7 @@ namespace yli::render
     MeshModule::MeshModule(
         const GraphicsApiBackend graphics_api_backend,
         const ontology::MeshProviderStruct& mesh_provider_struct,
-        const ontology::Pipeline* const pipeline)
+        const GLuint program_id)
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
         // but they can still be loaded into CPU memory to be used by the software rendering.
@@ -54,17 +53,16 @@ namespace yli::render
                 graphics_api_backend == GraphicsApiBackend::SOFTWARE;
 
         if (should_load_vertices_uvs_and_normals &&
-            graphics_api_backend == GraphicsApiBackend::OPENGL &&
-            pipeline != nullptr)
+            graphics_api_backend == GraphicsApiBackend::OPENGL)
         {
             // VAO.
             glGenVertexArrays(1, &this->vao);
 
             // Get a handle for our buffers.
-            this->vertex_position_modelspace_id = glGetAttribLocation(pipeline->get_program_id(),
+            this->vertex_position_modelspace_id = glGetAttribLocation(program_id,
                                                                       "vertex_position_modelspace");
-            this->vertex_uv_id = glGetAttribLocation(pipeline->get_program_id(), "vertex_uv");
-            this->vertex_normal_modelspace_id = glGetAttribLocation(pipeline->get_program_id(),
+            this->vertex_uv_id = glGetAttribLocation(program_id, "vertex_uv");
+            this->vertex_normal_modelspace_id = glGetAttribLocation(program_id,
                                                                     "vertex_normal_modelspace");
 
             load::ModelLoaderStruct model_loader_struct = mesh_provider_struct.model_loader_struct;

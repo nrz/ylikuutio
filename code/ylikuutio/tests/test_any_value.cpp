@@ -582,12 +582,30 @@ TEST(any_value_must_be_initialized_appropriately, material)
 
 TEST(any_value_must_be_initialized_appropriately, species)
 {
-    const mock::MockApplication application;
+    mock::MockApplication application;
+    const yli::ontology::EcosystemStruct ecosystem_struct;
+    yli::ontology::Ecosystem* const ecosystem = application.get_abstract_entity_factory().create_ecosystem(
+        ecosystem_struct);
+
+    const yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(ecosystem) };
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
+        pipeline_struct);
+
+    const yli::ontology::MaterialStruct material_struct {
+        yli::ontology::Request(ecosystem),
+        yli::ontology::Request(pipeline),
+        yli::ontology::TextureFileFormat::PNG
+    };
+    yli::ontology::Material* const material = application.get_abstract_entity_factory().create_material(
+        material_struct);
+
     const yli::ontology::SpeciesStruct species_struct {
-            yli::ontology::Request<yli::ontology::Ecosystem>(nullptr),
-            yli::ontology::Request<yli::ontology::Material>(nullptr) };
+        yli::ontology::Request(ecosystem),
+        yli::ontology::Request(material)
+    };
     yli::ontology::Species* const species = application.get_abstract_entity_factory().create_species(
-            species_struct);
+        species_struct);
+    ASSERT_NE(species, nullptr);
 
     const auto species_any_value = yli::data::AnyValue(*species);
     ASSERT_TRUE(std::holds_alternative<std::reference_wrapper<yli::ontology::Species>>(species_any_value.data));

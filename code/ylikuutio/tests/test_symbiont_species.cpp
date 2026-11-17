@@ -71,20 +71,3 @@ TEST(symbiont_species_must_be_initialized_appropriately, symbiont_material_provi
     ASSERT_EQ(symbiont_species->get_parent(), symbiont_material);
     ASSERT_EQ(symbiont_species->get_number_of_non_variable_children(), 0);
 }
-
-TEST(symbiont_species_must_be_initialized_appropriately, symbiont_material_provided_as_nullptr)
-{
-    mock::MockApplication application;
-    yli::ontology::SymbiontSpeciesStruct symbiont_species_struct { yli::ontology::Request<yli::ontology::SymbiontMaterial>(nullptr) };
-    yli::ontology::SymbiontSpecies* const symbiont_species = application.get_abstract_entity_factory().create_symbiont_species(
-            symbiont_species_struct);
-    ASSERT_NE(symbiont_species, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(symbiont_species) % alignof(yli::ontology::SymbiontSpecies), 0);
-
-    // `Entity` member functions.
-    ASSERT_EQ(symbiont_species->get_childID(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(symbiont_species->get_type(), "yli::ontology::SymbiontSpecies*");
-    ASSERT_FALSE(symbiont_species->get_can_be_erased());
-    ASSERT_EQ(symbiont_species->get_parent(), nullptr);
-    ASSERT_EQ(symbiont_species->get_number_of_non_variable_children(), 0);
-}

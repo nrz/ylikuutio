@@ -228,16 +228,15 @@ namespace yli::ontology
         return material_parent->get_scene();
     }
 
-    Pipeline* VectorFont::get_pipeline() const
+    Pipeline& VectorFont::get_pipeline() const
     {
-        const Material* const material_parent = static_cast<Material*>(this->get_parent());
-
-        if (material_parent == nullptr) [[unlikely]]
+        if (const auto* const material_parent = static_cast<Material*>(this->get_parent());
+            material_parent == nullptr) [[likely]]
         {
-            throw std::runtime_error("ERROR: `VectorFont::get_pipeline`: `material_parent` is `nullptr`!");
+            return material_parent->get_pipeline();
         }
 
-        return material_parent->get_pipeline();
+        throw std::runtime_error("ERROR: `VectorFont::get_pipeline`: `material_parent` is `nullptr`!");
     }
 
     std::size_t VectorFont::get_number_of_children() const

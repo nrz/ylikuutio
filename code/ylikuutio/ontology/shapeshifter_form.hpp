@@ -77,7 +77,7 @@ namespace yli::ontology
     public:
         Scene* get_scene() const override;
 
-        Pipeline* get_pipeline() const;
+        Pipeline& get_pipeline() const;
 
         std::size_t get_number_of_children() const override;
 

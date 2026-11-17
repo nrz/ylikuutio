@@ -68,10 +68,7 @@ namespace yli::ontology
     {
         if (this->texture.get_is_texture_loaded())
         {
-            if (const Pipeline* const pipeline = this->get_pipeline(); pipeline != nullptr)
-            {
-                this->opengl_texture_id = glGetUniformLocation(pipeline->get_program_id(), "texture_sampler");
-            }
+            this->opengl_texture_id = glGetUniformLocation(this->get_pipeline().get_program_id(), "texture_sampler");
         }
     }
 
@@ -97,7 +94,7 @@ namespace yli::ontology
         return this->child_of_symbiosis.get_parent();
     }
 
-    Pipeline* SymbiontMaterial::get_pipeline() const
+    Pipeline& SymbiontMaterial::get_pipeline() const
     {
         const Symbiosis* const symbiosis_parent = static_cast<Symbiosis*>(this->get_parent());
 
@@ -106,7 +103,13 @@ namespace yli::ontology
             throw std::runtime_error("ERROR: `SymbiontMaterial::get_pipeline`: `symbiosis_parent` is `nullptr`!");
         }
 
-        return static_cast<Pipeline*>(symbiosis_parent->apprentice_of_pipeline.get_master());
+        if (auto* const pipeline = static_cast<Pipeline*>(symbiosis_parent->apprentice_of_pipeline.get_master());
+            pipeline != nullptr) [[likely]]
+        {
+            return *pipeline;
+        }
+
+        throw std::runtime_error("ERROR: `SymbiontMaterial::get_pipeline`: `pipeline` is `nullptr`!");
     }
 
     std::size_t SymbiontMaterial::get_number_of_children() const

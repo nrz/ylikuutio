@@ -153,16 +153,15 @@ namespace yli::ontology
         return static_cast<Scene*>(this->get_parent());
     }
 
-    Pipeline* Text3d::get_pipeline() const
+    Pipeline& Text3d::get_pipeline() const
     {
-        const VectorFont* const vector_font_master = this->get_vector_font_master();
-
-        if (vector_font_master == nullptr) [[unlikely]]
+        if (const auto* const vector_font_master = this->get_vector_font_master();
+            vector_font_master != nullptr) [[likely]]
         {
-            throw std::runtime_error("ERROR: `Text3d::get_pipeline`: `vector_font_parent` is `nullptr`!");
+            return vector_font_master->get_pipeline();
         }
 
-        return vector_font_master->get_pipeline();
+        throw std::runtime_error("ERROR: `Text3d::get_pipeline`: `vector_font_parent` is `nullptr`!");
     }
 
     VectorFont* Text3d::get_vector_font_master() const

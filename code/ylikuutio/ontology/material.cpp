@@ -177,11 +177,10 @@ namespace yli::ontology
               load::ImageLoaderStruct(),
               "texture")
     {
-        if (this->texture.get_is_texture_loaded() && this->get_pipeline() != nullptr)
+        if (this->texture.get_is_texture_loaded())
         {
             // Get a handle for our "texture_sampler" uniform.
-            const Pipeline* const pipeline = this->get_pipeline();
-            this->opengl_texture_id = glGetUniformLocation(pipeline->get_program_id(), "texture_sampler");
+            this->opengl_texture_id = glGetUniformLocation(this->get_pipeline().get_program_id(), "texture_sampler");
         }
 
         // `Entity` member variables begin here.
@@ -228,9 +227,15 @@ namespace yli::ontology
         return this->child_of_ecosystem_or_scene.get_parent();
     }
 
-    Pipeline* Material::get_pipeline() const
+    Pipeline& Material::get_pipeline() const
     {
-        return static_cast<Pipeline*>(this->apprentice_of_pipeline.get_master());
+        if (auto* const pipeline = static_cast<Pipeline*>(this->apprentice_of_pipeline.get_master());
+            pipeline != nullptr) [[likely]]
+        {
+            return *pipeline;
+        }
+
+        throw std::runtime_error("ERROR: `Material::get_pipeline`: `pipeline` is `nullptr`!");
     }
 
     Scene* Material::get_scene() const

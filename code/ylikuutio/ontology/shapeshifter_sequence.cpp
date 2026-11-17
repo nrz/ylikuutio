@@ -88,18 +88,17 @@ namespace yli::ontology
         return shapeshifter_transformation_parent->get_scene();
     }
 
-    Pipeline* ShapeshifterSequence::get_pipeline() const
+    Pipeline& ShapeshifterSequence::get_pipeline() const
     {
-        const ShapeshifterTransformation* const shapeshifter_transformation_parent =
-                static_cast<ShapeshifterTransformation*>(this->get_parent());
-
-        if (shapeshifter_transformation_parent == nullptr) [[unlikely]]
+        if (const auto* const shapeshifter_transformation_parent =
+                    static_cast<ShapeshifterTransformation*>(this->get_parent());
+            shapeshifter_transformation_parent != nullptr) [[likely]]
         {
-            throw std::runtime_error(
-                "ERROR: `ShapeshifterSequence::get_pipeline`: `shapeshifter_transformation_parent` is `nullptr`!");
+            return shapeshifter_transformation_parent->get_pipeline();
         }
 
-        return shapeshifter_transformation_parent->get_pipeline();
+        throw std::runtime_error(
+            "ERROR: `ShapeshifterSequence::get_pipeline`: `shapeshifter_transformation_parent` is `nullptr`!");
     }
 
     std::size_t ShapeshifterSequence::get_number_of_children() const

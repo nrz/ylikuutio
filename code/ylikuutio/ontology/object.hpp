@@ -123,7 +123,7 @@ namespace yli::ontology
 
         Scene* get_scene() const final;
 
-        Pipeline* get_pipeline() const;
+        Pipeline& get_pipeline() const;
 
         std::size_t get_number_of_children() const final;
 
@@ -133,7 +133,7 @@ namespace yli::ontology
         void render(const Scene* target_scene);
 
     private:
-        void render_this_object(const Pipeline* pipeline);
+        void render_this_object();
 
         template<typename T1, std::size_t DataSize>
         friend class memory::MemoryAllocator;

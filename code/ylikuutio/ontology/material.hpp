@@ -109,7 +109,7 @@ namespace yli::ontology
 
         std::size_t get_number_of_apprentices() const;
 
-        Pipeline* get_pipeline() const;
+        Pipeline& get_pipeline() const;
 
         TextureFileFormat get_texture_file_format() const;
 

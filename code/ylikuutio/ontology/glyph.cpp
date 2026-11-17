@@ -17,6 +17,7 @@
 
 #include "glyph.hpp"
 #include "universe.hpp"
+#include "pipeline.hpp"
 #include "material.hpp"
 #include "glyph_struct.hpp"
 #include "gl_attrib_locations.hpp"
@@ -57,7 +58,7 @@ namespace yli::ontology
           child_of_vector_font(vector_font_parent_module, *this),
           apprentice_of_material(material_master_module, this),
           master_of_glyph_objects(*this, &this->registry, "glyph_objects"),
-          mesh(universe.get_graphics_api_backend(), glyph_struct, this->get_pipeline()),
+          mesh(universe.get_graphics_api_backend(), glyph_struct, this->get_pipeline().get_program_id()),
           glyph_vertex_data { glyph_struct.glyph_vertex_data },
           glyph_name_pointer { glyph_struct.glyph_name_pointer },
           unicode_char_pointer { glyph_struct.unicode_char_pointer }
@@ -94,17 +95,15 @@ namespace yli::ontology
         return vector_font_parent->get_scene();
     }
 
-    Pipeline* Glyph::get_pipeline() const
+    Pipeline& Glyph::get_pipeline() const
     {
-        const Material* const material = static_cast<Material*>(
-            this->apprentice_of_material.get_master());
-
-        if (material != nullptr)
+        if (const auto* const material = static_cast<Material*>(this->apprentice_of_material.get_master());
+            material != nullptr) [[likely]]
         {
             return material->get_pipeline();
         }
 
-        return nullptr;
+        throw std::runtime_error("ERROR: `Glyph::get_pipeline`: `material` is `nullptr`!");
     }
 
     std::size_t Glyph::get_number_of_children() const

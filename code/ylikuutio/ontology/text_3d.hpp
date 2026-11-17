@@ -95,7 +95,7 @@ namespace yli::ontology
 
         Scene* get_scene() const override;
 
-        Pipeline* get_pipeline() const;
+        Pipeline& get_pipeline() const;
 
         VectorFont* get_vector_font_master() const;
 

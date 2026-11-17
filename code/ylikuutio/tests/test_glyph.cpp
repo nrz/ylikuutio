@@ -20,6 +20,10 @@
 #include "code/ylikuutio/ontology/vector_font.hpp"
 #include "code/ylikuutio/ontology/glyph.hpp"
 #include "code/ylikuutio/ontology/request.hpp"
+#include "code/ylikuutio/ontology/scene_struct.hpp"
+#include "code/ylikuutio/ontology/texture_file_format.hpp"
+#include "code/ylikuutio/ontology/pipeline_struct.hpp"
+#include "code/ylikuutio/ontology/material_struct.hpp"
 #include "code/ylikuutio/ontology/glyph_struct.hpp"
 
 // Include standard headers
@@ -28,6 +32,8 @@
 
 namespace yli::ontology
 {
+    class Scene;
+    class Pipeline;
     class Material;
     class GlyphObject;
 }
@@ -35,14 +41,31 @@ namespace yli::ontology
 TEST(glyph_must_be_initialized_appropriately, vector_font_provided_as_valid_pointer)
 {
     mock::MockApplication application;
+    const yli::ontology::SceneStruct scene_struct;
+    yli::ontology::Scene* const scene = application.get_abstract_entity_factory().create_scene(
+        scene_struct);
+
+    const yli::ontology::PipelineStruct pipeline_struct { yli::ontology::Request(scene) };
+    yli::ontology::Pipeline* const pipeline = application.get_abstract_entity_factory().create_pipeline(
+        pipeline_struct);
+
+    const yli::ontology::MaterialStruct material_struct {
+        yli::ontology::Request(scene),
+        yli::ontology::Request(pipeline),
+        yli::ontology::TextureFileFormat::PNG
+    };
+    yli::ontology::Material* const material = application.get_abstract_entity_factory().create_material(
+        material_struct);
+
     yli::ontology::VectorFontStruct vector_font_struct { yli::ontology::Request<yli::ontology::Material>(nullptr) };
     yli::ontology::VectorFont* const vector_font = application.get_abstract_entity_factory().create_vector_font(
-            vector_font_struct);
+        vector_font_struct);
     yli::ontology::GlyphStruct glyph_struct {
-            yli::ontology::Request(vector_font),
-            yli::ontology::Request<yli::ontology::Material>(nullptr) };
+        yli::ontology::Request(vector_font),
+        yli::ontology::Request(material)
+    };
     yli::ontology::Glyph* const glyph = application.get_abstract_entity_factory().create_glyph(
-            glyph_struct);
+        glyph_struct);
     ASSERT_NE(glyph, nullptr);
     ASSERT_EQ(reinterpret_cast<uintptr_t>(glyph) % alignof(yli::ontology::Glyph), 0);
 
@@ -56,24 +79,5 @@ TEST(glyph_must_be_initialized_appropriately, vector_font_provided_as_valid_poin
     ASSERT_EQ(glyph->get_type(), "yli::ontology::Glyph*");
     ASSERT_FALSE(glyph->get_can_be_erased());
     ASSERT_EQ(glyph->get_parent(), vector_font);
-    ASSERT_EQ(glyph->get_number_of_non_variable_children(), 0);
-}
-
-TEST(glyph_must_be_initialized_appropriately, vector_font_provided_as_nullptr)
-{
-    mock::MockApplication application;
-    yli::ontology::GlyphStruct glyph_struct {
-            yli::ontology::Request<yli::ontology::VectorFont>(nullptr),
-            yli::ontology::Request<yli::ontology::Material>(nullptr) };
-    yli::ontology::Glyph* const glyph = application.get_abstract_entity_factory().create_glyph(
-            glyph_struct);
-    ASSERT_NE(glyph, nullptr);
-    ASSERT_EQ(reinterpret_cast<uintptr_t>(glyph) % alignof(yli::ontology::Glyph), 0);
-
-    // `Entity` member functions.
-    ASSERT_EQ(glyph->get_childID(), std::numeric_limits<std::size_t>::max());
-    ASSERT_EQ(glyph->get_type(), "yli::ontology::Glyph*");
-    ASSERT_FALSE(glyph->get_can_be_erased());
-    ASSERT_EQ(glyph->get_parent(), nullptr);
     ASSERT_EQ(glyph->get_number_of_non_variable_children(), 0);
 }
