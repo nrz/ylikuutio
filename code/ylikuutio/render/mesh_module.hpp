@@ -95,13 +95,6 @@ namespace yli::render
         std::vector<glm::vec3> vertices; // Vertices of the `MeshModule`.
         std::vector<glm::vec2> uvs;      // UVs of the `MeshModule`.
         std::vector<glm::vec3> normals;  // Normals of the `MeshModule`.
-
-    public:
-        GLint vertex_position_modelspace_id { 0 }; // Dummy value.
-        GLint vertex_uv_id { 0 };                  // Dummy value.
-        GLint vertex_normal_modelspace_id { 0 };   // Dummy value.
-
-    private:
         std::vector<std::uint32_t> indices;
         std::vector<glm::vec3> indexed_vertices;
         std::vector<glm::vec2> indexed_uvs;
@@ -115,6 +108,11 @@ namespace yli::render
 
         bool use_real_texture_coordinates { true };
         bool are_opengl_buffers_initialized { false };
+
+    public:
+        GLint vertex_position_modelspace_id { 0 }; // Dummy value.
+        GLint vertex_uv_id { 0 };                  // Dummy value.
+        GLint vertex_normal_modelspace_id { 0 };   // Dummy value.
     };
 }
 
