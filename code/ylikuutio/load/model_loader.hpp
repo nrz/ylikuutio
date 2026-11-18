@@ -30,11 +30,6 @@
 #include <cstdint>  // std::uint32_t
 #include <vector>   // std::vector
 
-namespace yli::render
-{
-    enum class GraphicsApiBackend;
-}
-
 namespace yli::load
 {
     struct ModelLoaderStruct;
@@ -54,8 +49,7 @@ namespace yli::load
             GLuint& uv_buffer,
             GLuint& normal_buffer,
             GLuint& element_buffer,
-            const LoadFbxStruct& load_fbx_struct,
-            render::GraphicsApiBackend graphics_api_backend);
+            const LoadFbxStruct& load_fbx_struct);
 }
 
 #endif

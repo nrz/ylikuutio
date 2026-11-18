@@ -87,8 +87,7 @@ namespace yli::render
                 this->uv_buffer,
                 this->normal_buffer,
                 this->element_buffer,
-                load_fbx_struct,
-                graphics_api_backend);
+                load_fbx_struct);
 
             this->are_opengl_buffers_initialized = true;
         }

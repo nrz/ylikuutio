@@ -26,7 +26,6 @@
 #include "model_loader_struct.hpp"
 #include "code/ylikuutio/opengl/vbo_indexer.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
-#include "code/ylikuutio/render/graphics_api_backend.hpp"
 
 // Include GLM
 #ifndef __GLM_GLM_HPP_INCLUDED
@@ -57,8 +56,7 @@ namespace yli::load
             GLuint& uv_buffer,
             GLuint& normal_buffer,
             GLuint& element_buffer,
-            const LoadFbxStruct& load_fbx_struct,
-            const render::GraphicsApiBackend graphics_api_backend)
+            const LoadFbxStruct& load_fbx_struct)
     {
         bool model_loading_result = false;
 
@@ -169,29 +167,28 @@ namespace yli::load
 
         std::cout << "Indexing completed successfully.\n";
 
-        if (graphics_api_backend == render::GraphicsApiBackend::OPENGL)
-        {
-            glGenVertexArrays(1, &vao);
-            glGenBuffers(1, &vertex_buffer);
-            glGenBuffers(1, &uv_buffer);
-            glGenBuffers(1, &normal_buffer);
-            glGenBuffers(1, &element_buffer);
+        glGenVertexArrays(1, &vao);
+        glGenBuffers(1, &vertex_buffer);
+        glGenBuffers(1, &uv_buffer);
+        glGenBuffers(1, &normal_buffer);
+        glGenBuffers(1, &element_buffer);
 
-            glBindVertexArray(vao);
+        glBindVertexArray(vao);
 
-            // Load it into a VBO.
-            glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-            glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices.at(0), GL_STATIC_DRAW);
+        // Load it into a VBO.
+        glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
+        glBufferData(GL_ARRAY_BUFFER, indexed_vertices.size() * sizeof(glm::vec3), &indexed_vertices.at(0),
+                     GL_STATIC_DRAW);
 
-            glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
-            glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs.at(0), GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, uv_buffer);
+        glBufferData(GL_ARRAY_BUFFER, indexed_uvs.size() * sizeof(glm::vec2), &indexed_uvs.at(0), GL_STATIC_DRAW);
 
-            glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
-            glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals.at(0), GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, normal_buffer);
+        glBufferData(GL_ARRAY_BUFFER, indexed_normals.size() * sizeof(glm::vec3), &indexed_normals.at(0),
+                     GL_STATIC_DRAW);
 
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(std::uint32_t), &indices.at(0), GL_STATIC_DRAW);
-        }
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(std::uint32_t), &indices.at(0), GL_STATIC_DRAW);
 
         return model_loading_result;
     }
