@@ -51,7 +51,10 @@ namespace yli::ontology
         GenericParentModule* const shapeshifter_transformation_parent_module)
         : Entity(std::move(allocation_data), application, universe, shapeshifter_form_struct),
           child_of_shapeshifter_transformation(shapeshifter_transformation_parent_module, *this),
-          mesh(universe.get_graphics_api_backend(), shapeshifter_form_struct, this->get_pipeline().get_program_id())
+          mesh(universe.get_graphics_api_backend(),
+               shapeshifter_form_struct.model_loader_struct,
+               shapeshifter_form_struct.load_fbx_struct,
+               this->get_pipeline().get_program_id())
     { }
 
     std::string_view ShapeshifterForm::get_type() const

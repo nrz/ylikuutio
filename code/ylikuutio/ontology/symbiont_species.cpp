@@ -53,7 +53,10 @@ namespace yli::ontology
         : Entity(std::move(allocation_data), application, universe, symbiont_species_struct),
           child_of_symbiont_material(symbiont_material_parent_module, *this),
           master_of_bionts(*this, &this->registry, "bionts"),
-          mesh(universe.get_graphics_api_backend(), symbiont_species_struct, this->get_pipeline().get_program_id())
+          mesh(universe.get_graphics_api_backend(),
+               symbiont_species_struct.model_loader_struct,
+               symbiont_species_struct.load_fbx_struct,
+               this->get_pipeline().get_program_id())
     { }
 
     std::string_view SymbiontSpecies::get_type() const

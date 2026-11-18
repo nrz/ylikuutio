@@ -158,7 +158,10 @@ namespace yli::ontology
           child_of_ecosystem_or_scene(ecosystem_or_scene_parent_module, *this),
           master_of_objects(*this, &this->registry, "objects"),
           apprentice_of_material(material_master_module, this),
-          mesh(universe.get_graphics_api_backend(), species_struct, this->get_pipeline().get_program_id())
+          mesh(universe.get_graphics_api_backend(),
+               species_struct.model_loader_struct,
+               species_struct.load_fbx_struct,
+               this->get_pipeline().get_program_id())
     {
         // `Entity` member variables begin here.
         this->can_be_erased = true;

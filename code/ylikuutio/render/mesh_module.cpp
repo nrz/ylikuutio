@@ -19,7 +19,6 @@
 #include "graphics_api_backend.hpp"
 #include "code/ylikuutio/load/model_loader.hpp"
 #include "code/ylikuutio/load/model_loader_struct.hpp"
-#include "code/ylikuutio/ontology/mesh_provider_struct.hpp"
 #include "code/ylikuutio/opengl/ylikuutio_glew.hpp" // GLfloat, GLuint etc.
 
 // Include GLM
@@ -33,6 +32,11 @@
 #include <cstdint>  // std::uint32_t
 #include <vector>   // std::vector
 
+namespace yli::load
+{
+    struct LoadFbxStruct;
+}
+
 namespace yli::ontology
 {
     class Scene;
@@ -42,7 +46,8 @@ namespace yli::render
 {
     MeshModule::MeshModule(
         const GraphicsApiBackend graphics_api_backend,
-        const ontology::MeshProviderStruct& mesh_provider_struct,
+        const load::ModelLoaderStruct& model_loader_struct,
+        const load::LoadFbxStruct& load_fbx_struct,
         const GLuint program_id)
     {
         // If software rendering is in use, the vertices, UVs, and normals can not be loaded into GPU memory,
@@ -64,14 +69,12 @@ namespace yli::render
             this->vertex_uv_id = glGetAttribLocation(program_id, "vertex_uv");
             this->vertex_normal_modelspace_id = glGetAttribLocation(program_id,
                                                                     "vertex_normal_modelspace");
-
-            load::ModelLoaderStruct model_loader_struct = mesh_provider_struct.model_loader_struct;
-            const load::LoadFbxStruct load_fbx_struct = mesh_provider_struct.load_fbx_struct;
-            model_loader_struct.image_width_pointer = &this->image_width;
-            model_loader_struct.image_height_pointer = &this->image_height;
+            load::ModelLoaderStruct new_model_loader_struct = model_loader_struct;
+            new_model_loader_struct.image_width_pointer = &this->image_width;
+            new_model_loader_struct.image_height_pointer = &this->image_height;
 
             yli::load::load_model(
-                model_loader_struct,
+                new_model_loader_struct,
                 this->vertices,
                 this->uvs,
                 this->normals,

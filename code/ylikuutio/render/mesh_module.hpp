@@ -31,10 +31,15 @@
 #include <cstdint>  // std::uint32_t
 #include <vector>   // std::vector
 
+namespace yli::load
+{
+    struct ModelLoaderStruct;
+    struct LoadFbxStruct;
+}
+
 namespace yli::ontology
 {
     class Ecosystem;
-    struct MeshProviderStruct;
 }
 
 namespace yli::render
@@ -46,7 +51,8 @@ namespace yli::render
     public:
         MeshModule(
             GraphicsApiBackend graphics_api_backend,
-            const ontology::MeshProviderStruct& mesh_provider_struct,
+            const load::ModelLoaderStruct& model_loader_struct,
+            const load::LoadFbxStruct& load_fbx_struct,
             GLuint program_id);
 
         MeshModule(const MeshModule&) = delete;            // Delete copy constructor.
