@@ -1,0 +1,3 @@
+Lengyel: 
+Voxel-based Terrain For Real-Time Virtual Simulations
+https://transvoxel.org/Lengyel-VoxelTerrain.pdf
