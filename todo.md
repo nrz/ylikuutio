@@ -128,7 +128,6 @@
 - [ ] ANIMATION Implement skeletal animation.
 - [ ] CONSOLE/YLILISP/ONTOLOGY Implement creating new named `Variable`s using `Console`.
 - [ ] MATH Plan coordinate systems and physics for interplanetary/interstellar/intergalactic travel.
-- [ ] TERRAIN/VOXELS Implement voxel world (`yli::ontology::ChunkMaster`, `yli::ontology::Chunk`).
 - [ ] TEXT/UI Add support for changing font size.
 - [ ] RENDERING Implement transparent rendering of 3D objects.
 - [ ] RENDERING Implement transparent rendering of 4D objects.
@@ -194,7 +193,6 @@
 - [ ] Implement modifying of vertices.
 - [ ] Implement generation of terrain meshes in different levels of detail (LOD) using different `x_step`s and `z_step`s (e.g. 1, 2, 4, 8, 16, 32, 64, 128).
 - [ ] Implement terrain mesh LOD selection based on the distance between the camera and the terrain.
-- [ ] Implement marching cubes algorithm for voxel terrain as described in https://transvoxel.org/Lengyel-VoxelTerrain.pdf .
 - [ ] Implement scene loading which works in the background.
 - [ ] Evaluate AppVeyor: https://github.com/marketplace/appveyor
 - [ ] Add support for `help` command in console (a container class with the command callback together with the `help` text for the command).
